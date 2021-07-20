@@ -35,6 +35,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    " Startify
+    Plug 'mhinz/vim-startify'
+    " Floaterm
+    Plug 'voldikss/vim-floaterm'
+    " Which Key
+    Plug 'liuchengxu/vim-which-key'
 
 
 call plug#end()
@@ -103,8 +109,52 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
+" Startify
+let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_lists = [
+    \ { 'type': 'files',     'header': ['   Files']            },
+    \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
+    \ { 'type': 'sessions',  'header': ['   Sessions']       },
+    \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+    \ ]
+let g:startify_bookmarks = [
+    \ { 'c': '~/.config/nvim' },
+    \ { 'd': '~/dev' },
+    \ { 'z': '~/.zshrc' },
+    \ '~/Blog',
+    \ '~/Code',
+    \ '~/Pics',
+    \ ]
+let g:startify_session_persistence = 1
 
 
+" Floaterm
+let g:floaterm_keymap_toggle = '<F1>'
+let g:floaterm_keymap_next   = '<F2>'
+let g:floaterm_keymap_prev   = '<F3>'
+let g:floaterm_keymap_new    = '<F4>'
+
+let g:loaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+let g:floaterm_wintitle=0
+let g:floaterm_autoclose=1
+
+" let g:which_key_map.t = {
+"       \ 'name' : '+terminal' ,
+"       \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+"       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
+"       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
+"       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
+"       \ 'n' : [':FloatermNew node'                              , 'node'],
+"       \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
+"       \ 'p' : [':FloatermNew python'                            , 'python'],
+"       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+"       \ 't' : [':FloatermToggle'                                , 'toggle'],
+"       \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
+"       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
+"       \ }
 
 
 

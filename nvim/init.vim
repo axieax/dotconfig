@@ -29,3 +29,10 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 
+" buffer edit
+set hidden
+nmap <TAB> :bnext<CR>
+nmap <S-TAB> :bprevious<CR>
+
+" source
+command! R :so %

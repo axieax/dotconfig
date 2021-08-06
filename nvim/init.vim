@@ -1,48 +1,20 @@
-set mouse=a
-
-set termguicolors
-syntax on
-set number
-set ruler
-set tabstop=4
-set autoindent
-set showmatch
-
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-set cursorline
-set cursorbind
-set scrollbind
-set splitbelow splitright
-
-" Hybrid relative numbers for normal mode, absolute for insert
-set number relativenumber
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-
-" buffer edit
-set hidden
-nmap <TAB> :bnext<CR>
-nmap <S-TAB> :bprevious<CR>
-
-" yank line
-nnoremap Y y$
-
-command! R :so $MYVIMRC
-
-" WSL clipboard (https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl)
-
+" General
+source $HOME/.config/nvim/general/general.vim
+source $HOME/.config/nvim/general/keymaps.vim
 " Plugins
-source $HOME/.config/nvim/vim-plug/plugins.vim
+source $HOME/.config/nvim/plugins/plugins.vim
+" Themes
+source $HOME/.config/nvim/themes/onedark.vim
 source $HOME/.config/nvim/themes/airline.vim
 
+
+" NOTES:
+" TODO NOTE highlight / quick finder?
+" Need something for interpreter warnings - coc-diagnostic?
+" Find better pairs plugin - auto-pairs too greedy, coc-pairs not greedy enough + no indent
+" Code folding
+" Spellchecker
+" PlugInstall and CocInstall to vim which key?
+" lazygit / git status
+" need a linter for js
+" python black doesn't work

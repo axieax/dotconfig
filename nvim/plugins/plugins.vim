@@ -43,6 +43,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 		Plug 'nvim-telescope/telescope.nvim'
 	endif
 
+	" Git
+	Plug 'tpope/vim-fugitive'
+
 " }}}
 
 
@@ -50,7 +53,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 	" Conquer of Completion
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	
+
 	" Syntax Highlighting
 	if (has('nvim-0.5.0'))
 		" Tree Sitter

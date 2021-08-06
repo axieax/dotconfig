@@ -1,9 +1,6 @@
-" Plugins
-source $HOME/.config/nvim/vim-plug/plugins.vim
-source $HOME/.config/nvim/themes/airline.vim
-
 set mouse=a
 
+set termguicolors
 syntax on
 set number
 set ruler
@@ -16,9 +13,13 @@ set incsearch
 set ignorecase
 set smartcase
 
+set cursorline
+set cursorbind
+set scrollbind
+set splitbelow splitright
+
 " Hybrid relative numbers for normal mode, absolute for insert
 set number relativenumber
-
 :augroup numbertoggle
 :  autocmd!
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
@@ -34,5 +35,14 @@ set hidden
 nmap <TAB> :bnext<CR>
 nmap <S-TAB> :bprevious<CR>
 
-" source
-command! R :so %
+" yank line
+nnoremap Y y$
+
+command! R :so $MYVIMRC
+
+" WSL clipboard (https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl)
+
+" Plugins
+source $HOME/.config/nvim/vim-plug/plugins.vim
+source $HOME/.config/nvim/themes/airline.vim
+

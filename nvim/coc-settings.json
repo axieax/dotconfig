@@ -1,3 +1,6 @@
 {
-  "clangd.path": "/Users/axie/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd"
+  "clangd.path": "/Users/axie/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
+  "coc.preferences.formatOnSaveFiletypes": ["py", "python", "html", "css", "markdown", "json"],
+  "python.formatting.blackPath": "black",
+  "python.formatting.provider": "black"
 }

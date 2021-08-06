@@ -3,8 +3,9 @@
 set mouse=a
 set tabstop=4
 set autoindent
-set showmatch
+set splitbelow splitright
 
+set showmatch
 set hlsearch
 set incsearch
 set ignorecase
@@ -31,9 +32,5 @@ set ruler
 set cursorline
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-set cursorbind
-set scrollbind
-set splitbelow splitright
 
 " }}}

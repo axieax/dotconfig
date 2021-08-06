@@ -18,3 +18,5 @@ source $HOME/.config/nvim/themes/airline.vim
 " lazygit / git status
 " need a linter for js
 " python black doesn't work
+" vimscript diagnostics don't work either
+" gitignore autoload and sessions

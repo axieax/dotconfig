@@ -116,24 +116,31 @@ nmap <silent> gp :Prettier <cr>
 " nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 " nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-
 " Startify
 let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_session_persistence = 1
+let g:startify_session_delete_buffers = 1
+let g:startify_enable_special = 0
+autocmd VimLeave * :SSave! recent
+
 let g:startify_lists = [
 	\ { 'type': 'files',     'header': ['   Files']            },
 	\ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
 	\ { 'type': 'sessions',  'header': ['   Sessions']       },
 	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+	\ { 'type': 'commands',  'header': ['   Commands'] },
 	\ ]
-" project option?
+
+let g:startify_commands = [
+	\ { 's': 'SLoad! recent' },
+	\ ]
+
 let g:startify_bookmarks = [
 	\ { 'c': '~/.config/nvim' },
 	\ { 'd': '~/dev' },
 	\ { 'z': '~/.zshrc' },
-	\ '~/Blog',
-	\ '~/Code',
+	\ '~/test',
 	\ ]
-let g:startify_session_persistence = 1
 
 
 " Floaterm
@@ -171,27 +178,31 @@ highlight default link WhichKeyDesc      Function
 " Hide status line
 autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
-	\| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+	\| autocmd  BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 
 " Single mappings
-let g:which_key_map['S'] = [ ':Startify', 'start screen' ]
+let g:which_key_map['s'] = [ ':Startify'          , 'start' ]
 " Splits
 " let g:which_key_map['t'] = [ ':Telescope' ]
 
+" Codi toggle
+let g:which_key_map.c = {
+	\ 'name' : '+codi',
+	\ 'y'    : [ ':Codi'                           , 'enable' ],
+	\ 'n'    : [ ':Codi!'                          , 'disable' ],
+	\ }
+
 " Floaterm options
 let g:which_key_map.t = {
-	\ 'name' : '+terminal' ,
-	\ '<CR>' : [':FloatermNew'                                   , 'terminal'],
-	\ 'g'    : [':FloatermNew lazygit'                           , 'git'],
-	\ 'd'    : [':FloatermNew lazydocker'                        , 'docker'],
-	\ 'n'    : [':FloatermNew node'                              , 'node'],
-	\ 'N'    : [':FloatermNew nnn'                               , 'nnn'],
-	\ 'p'    : [':FloatermNew python3'                           , 'python'],
-	\ 'r'    : [':FloatermNew ranger'                            , 'ranger'],
-	\ 't'    : [':FloatermToggle'                                , 'toggle'],
-	\ 'y'    : [':FloatermNew ytop'                              , 'ytop'],
-	\ 's'    : [':FloatermNew ncdu'                              , 'ncdu'],
+	\ 'name' : '+terminal',
+	\ ';'    : [ ':FloatermNew'                    , 'New Terminal' ],
+	\ 't'    : [ ':FloatermToggle'                 , 'Toggle Terminal' ],
+	\ 'g'    : [ ':FloatermNew lazygit'            , 'git' ],
+	\ 'd'    : [ ':FloatermNew lazydocker'         , 'docker' ],
+	\ 'p'    : [ ':FloatermNew python3'            , 'python' ],
+	\ 'n'    : [ ':FloatermNew node'               , 'node' ],
+	\ 'N'    : [ ':FloatermNew nnn'                , 'nnn' ],
 	\ }
 
 call which_key#register(' ', 'g:which_key_map')

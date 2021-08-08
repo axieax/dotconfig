@@ -1,6 +1,7 @@
 " General {{{
 
 set mouse=a
+set scrolloff=1
 set tabstop=4
 set autoindent
 set splitbelow splitright

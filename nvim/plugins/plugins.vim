@@ -44,7 +44,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	endif
 
 	" Git
-	Plug 'tpope/vim-fugitive'
+	Plug 'jesseduffield/lazygit'
+	if (has('nvim-0.5.0'))
+		" Git Signs
+		Plug 'lewis6991/gitsigns.nvim'
+		Plug 'nvim-lua/plenary.nvim'
+	endif
+
+	" Project Scope
+	Plug 'airblade/vim-rooter'
 
 " }}}
 
@@ -66,8 +74,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	" Comment/uncomment: gcc for line, gc for selected
 	Plug 'tpope/vim-commentary'
 
-	" Auto Pairs
-	Plug 'jiangmiao/auto-pairs'
+	" Auto Closing Pairs
+	Plug 'raimondi/delimitMate'
 	" Surround with Pairs
 	Plug 'tpope/vim-surround'
 
@@ -91,4 +99,5 @@ source $HOME/.config/nvim/plugins/coc.vim
 source $HOME/.config/nvim/plugins/startify.vim
 source $HOME/.config/nvim/plugins/floaterm.vim
 " source $HOME/.config/nvim/plugins/telescope.vim
+" source $HOME/.config/nvim/plugins/treesitter.vim
 source $HOME/.config/nvim/plugins/whichkey.vim

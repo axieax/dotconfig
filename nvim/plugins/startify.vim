@@ -32,7 +32,7 @@ let g:startify_bookmarks = [
 " 	\ '    /(__)\  )  (  _)(_  )__)  /(__)\  )  ( ',
 " 	\ '   (__)(__)(_/\_)(____)(____)(__)(__)(_/\_)',
 " 	\ '   ',
-" 	\ '   ! Press [s] to restore your last session',
+" 	\ '   > Press [s] to restore your last session',
 " 	\ ]
 
 let s:axieax_2 = [
@@ -43,7 +43,7 @@ let s:axieax_2 = [
 	\ '   \____|__  /___/\  \|___/_______  /\____|__  /___/\  \',
 	\ '           \/      \_/            \/         \/      \_/',
 	\ '   ',
-	\ '   ! Press [s] to restore your last session',
+	\ '       > Press [s] to restore your last session <     ',
 	\ ]
 
 let g:startify_custom_header = s:axieax_2

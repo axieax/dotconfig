@@ -20,3 +20,8 @@ source $HOME/.config/nvim/themes/airline.vim
 " python black doesn't work
 " vimscript diagnostics don't work either
 " gitignore autoload and sessions
+" auto format - lsp stuff
+" moving - leave space at the bottom
+" lsp signature
+" change startify to dashboard
+" debugger

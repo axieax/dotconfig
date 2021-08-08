@@ -31,6 +31,7 @@ let g:which_key_map.c = {
 	\ 'd'    : [ ':CocList diagnostics'            , 'list diagnostics' ],
 	\ 'o'    : [ ':CocList outline'                , 'list outline' ],
 	\ 's'    : [ ':CocList -I symbols'             , 'list symbols' ],
+	\ 'y'    : [ ':CocList -A --normal yank'       , 'list yanks'],
 	\ }
 
 " Floaterm mappings
@@ -48,28 +49,6 @@ let g:which_key_map.t = {
 	\ 'N'    : [ ':FloatermNew nnn'                , 'nnn' ],
 	\ }
 " TODO: create mappings for quick single file compilation 'c' based on file type
-
-" Fugitive mappings (most don't work)
-" let g:which_key_map.g = {
-" 	\ 'name' : '+git',
-" 	\ 'a'    : [ ':Git add %'                      , 'add' ],
-" 	\ 'c'    : [ ':Git commit'                     , 'commit' ],
-" 	\ 'd'    : [ ':Gdiffsplit'                     , 'diff' ],
-" 	\ 'b'    : [ ':Git branch'                     , 'branch' ],
-" 	\ 'm'    : [ ':Git merge'                      , 'merge' ],
-" 	\ 'l'    : [ ':Git log'                        , 'log' ],
-" 	\ 's'    : [ ':Git'                            , 'status' ],
-" 	\ 'B'    : [ ':GBrowse'                        , 'Browse' ],
-" 	\ 'g'    : [ ':Ggrep'                          , 'grep' ],
-" 	\ }
-
-let g:which_key_map.g = { 'name': '+git' }
-
-nnoremap <nowait><space>ga :Git add 
-let g:which_key_map.g.a = 'add'
-
-nnoremap <nowait><space>gc :Git commit
-let g:which_key_map.g.c = 'commit'
 
 
 " Splits

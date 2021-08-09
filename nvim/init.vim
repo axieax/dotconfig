@@ -25,3 +25,4 @@ source $HOME/.config/nvim/themes/airline.vim
 " lsp signature
 " change startify to dashboard
 " debugger
+" coloured pairs?

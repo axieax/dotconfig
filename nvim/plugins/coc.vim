@@ -19,6 +19,8 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-floaterm',
   \ 'coc-markdownlint',
+  \ 'coc-lua',
+  \ 'coc-go',
   \ 'coc-sh',
   \ 'coc-xml',
   \ 'coc-yaml',

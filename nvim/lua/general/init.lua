@@ -1,3 +1,5 @@
+-- TODO: see if there is a setting for keeping cursor position despite scroll
+
 -- Variables
 
 -- Global variables
@@ -22,6 +24,7 @@ vim_apply(vim.env, {})
 vim_apply(vim.o, {
 	-- General options
   mouse = "a",
+	spell = true,
   scrolloff = 1,
   cursorline = true,
   splitbelow = true,
@@ -32,6 +35,7 @@ vim_apply(vim.o, {
   colorcolumn = "80",
   termguicolors = true,
 	-- showmode = false,
+	swapfile = false,
 
   showmatch = true,
   hlsearch = true,

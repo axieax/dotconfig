@@ -1,6 +1,4 @@
 -- https://github.com/glepnir/galaxyline.nvim --
--- TODO: insert control characters for block modes
--- https://elianiva.my.id/post/neovim-lua-statusline
 -- TODO: gap at beginning and end
 -- File indent size?
 -- https://github.com/glepnir/galaxyline.nvim/issues/12#issuecomment-771211490
@@ -21,11 +19,11 @@ return function()
 					-- Visual
 					v = { "Visual", colours.magenta },
 					V = { "Visual Line", colours.magenta },
-					[""] = { "Visual Block" , colours.magenta },
+					[""] = { "Visual Block" , colours.magenta },
 					-- Select
 					s = { "Select", colours.blue },
 					S = { "Select Line", colours.blue },
-					[""] = { "Select Block", colours.blue },
+					[""] = { "Select Block", colours.blue },
 					-- Replace
 					R = { "Replace", colours.red },
 					Rv = { "Virtual Replace", colours.red },

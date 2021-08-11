@@ -1,3 +1,4 @@
+
 -- https://github.com/rockerBOO/awesome-neovim --
 -- https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules --
 -- TODO: lazy loading
@@ -5,12 +6,19 @@
 -- TODO: linter (ALE?) - https://github.com/mfussenegger/nvim-lint - coc? efm?
 -- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 -- TODO: compiler
--- TODO: set up galaxy line - I/N/V/VL mode as single symbol
+-- TODO: set up galaxy line - I/N/V/VL/t mode as single symbol
 -- NOTE: Python indent issue (set indentexpr=)
 -- NOTE: reorder packer? compile error if package not installed yet
+-- https://www.reddit.com/r/neovim/comments/khk335/lua_configuration_global_vim_is_undefined/
+-- plugin for shift click to highlight multiple
+-- snippets
+-- TODO: file type formatting and linter
+-- TODO: auto lspinstall for file types without language server - may also fail without sudo
+-- NOTE: lsp not working atm
 
 
 -- https://github.com/wbthomason/packer.nvim --
+-- NOTE: config function is run after plugin loaded
 
 -- Autoinstall packer
 local install_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
@@ -21,8 +29,7 @@ end
 -- vim.cmd [[ packadd packer.nvim ]]
 -- vim.cmd([[ autocmd BufWritePost plugins.lua source <afile> | PackerCompile ]])
 
-return require("packer").startup(
-function()
+return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use "wbthomason/packer.nvim"
 
@@ -30,13 +37,10 @@ function()
 	-- General Utilities
 	-----------------------------------------------------------
 
-	-- Floating terminal
-	-- TODO: check out https://github.com/akinsho/nvim-toggleterm.lua
+	-- Terminal
 	use {
-    "voldikss/vim-floaterm",
-    config = function()
-      require("plugins.floaterm")
-    end
+    "akinsho/nvim-toggleterm.lua",
+    config = require("plugins.toggleterm"),
   }
 
 	-- Fuzzy finder
@@ -84,14 +88,15 @@ function()
 }
 
 		-- Underline word
+		-- NOTE: interferes with highlight search
 		use "xiyaowong/nvim-cursorword"
 
 		-- package.json dependency manager
 		use {
 				"vuki656/package-info.nvim",
 				config = function()
-require('package-info').setup()
-end
+					require('package-info').setup()
+				end
 		}
 
 		-- Smooth scrolling: check out https://github.com/karb94/neoscroll.nvim
@@ -128,7 +133,8 @@ end
 	-----------------------------------------------------------
 
 	-- Commenting
-	use "b3nj5m1n/kommentary"
+	use "tpope/vim-commentary"
+	
 
 	-- Auto closing pairs
 	use "raimondi/delimitMate"
@@ -151,87 +157,24 @@ end
 	-- LSP config
 	use {
     "neovim/nvim-lspconfig",
-    config = function()
-      local nvim_lsp = require('lspconfig')
-
-      -- Use an on_attach function to only map the following keys
-      -- after the language server attaches to the current buffer
-      local on_attach = function(client, bufnr)
-        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-        local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-        --Enable completion triggered by <c-x><c-o>
-        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-        -- Mappings.
-        local opts = { noremap=true, silent=true }
-
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-        buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-        buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-        buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-        buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-        buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-        buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-        buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-        buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-        buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-        buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-        buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-        buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-        buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-        buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-      end
-
-      -- Use a loop to conveniently call 'setup' on multiple servers and
-      -- map buffer local keybindings when the language server attaches
-      local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
-      for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup {
-          on_attach = on_attach,
-          flags = {
-            debounce_text_changes = 150,
-          }
-        }
-      end
-    end
+		config = require("lsp.lspconfig"),
   }
 
   -- LSP install
   use {
     "kabouzeid/nvim-lspinstall",
-    event = "VimEnter",
-    config = function()
-      local function setup_servers()
-        require'lspinstall'.setup()
-        local servers = require'lspinstall'.installed_servers()
-        for _, server in pairs(servers) do
-          require'lspconfig'[server].setup{}
-        end
-      end
-
-      setup_servers()
-
-      -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-      require'lspinstall'.post_install_hook = function ()
-        setup_servers() -- reload installed servers
-        vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-      end
-    end
+    event = "VimEnter", -- change to buf enter?
+		config = require("lsp.lspinstall"),
   }
 
 	-- LSP saga
 	use "glepnir/lspsaga.nvim"
 
-		-- Symbols
-		use "simrat39/symbols-outline.nvim"
+	-- Symbols
+	use "simrat39/symbols-outline.nvim"
 
 	-- Indenting
-    -- use "sheerun/vim-polyglot"
+	-- use "sheerun/vim-polyglot"
 
 	-- Syntax highlighting
   -- TODO: install parsers for new file types
@@ -242,10 +185,11 @@ end
       require'nvim-treesitter.configs'.setup {
         ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
         highlight = {
-          enable = true,              -- false will disable the whole extension
+          enable = true,
+					additional_vim_regex_highlighting = false,
         },
         indent = {
-          indent = true,
+          indent = false,
         },
       }
     end
@@ -254,14 +198,12 @@ end
 	-- Auto completion
 	use {
     "hrsh7th/nvim-compe",
-    config = function()
-      require("plugins.compe")
-    end
+    config = require("lsp.compe"),
   }
 
-		-- Snippets
-		-- TODO: check out https://github.com/L3MON4D3/LuaSnip
-		-- TODO: check out https://github.com/rafamadriz/friendly-snippets
+	-- Snippets
+	-- TODO: check out https://github.com/L3MON4D3/LuaSnip
+	-- TODO: check out https://github.com/rafamadriz/friendly-snippets
 
 	-- Function signature
 	use "ray-x/lsp_signature.nvim"
@@ -315,8 +257,23 @@ end
 	-- TODO: see if this integrates https://github.com/rmagatti/auto-session
 
     -- Indent lines
-	-- TODO: customise this - custom background highlight or context indent highlighted
-    use "lukas-reineke/indent-blankline.nvim"
+    use {
+			"lukas-reineke/indent-blankline.nvim",
+			requires = { "nvim-treesitter/nvim-treesitter" },
+			config = function()
+				require("indent_blankline").setup {
+					char = "▏",
+					show_current_context = true,
+					-- exclude vim which key
+					filetype_exclude = {
+						"dashboard",
+						"terminal",
+						"packer",
+						"help",
+					},
+				}
+			end,
+		}
 
 	-- CSS colours
 	use "norcalli/nvim-colorizer.lua"

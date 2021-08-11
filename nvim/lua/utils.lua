@@ -13,6 +13,7 @@ local default_options = {
   silent = true,
 }
 
+-- TODO: split options into optional keyword arguments for noremap, silent, expr etc.
 function map(mode, before, after, options)
   if options == nil then
     options = default_options

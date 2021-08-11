@@ -31,6 +31,7 @@ vim_apply(vim.o, {
   ruler = true,
   colorcolumn = "80",
   termguicolors = true,
+	-- showmode = false,
 
   showmatch = true,
   hlsearch = true,
@@ -39,8 +40,12 @@ vim_apply(vim.o, {
   smartcase = true,
 
   -- Coding options
-  tabstop = 4,
+  -- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+  tabstop = 2,
+  shiftwidth = 2,
+  softtabstop = 2,
   autoindent = true,
+	smartindent = true,
 })
 
 -- Global options (:setglobal)

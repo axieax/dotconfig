@@ -2,6 +2,6 @@
 
 -- Load settings
 require('utils')
-require('plugins')
 require('general')
+require('plugins')
 

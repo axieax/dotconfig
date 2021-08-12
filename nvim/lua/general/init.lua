@@ -34,7 +34,7 @@ vim_apply(vim.o, {
   ruler = true,
   colorcolumn = "80",
   termguicolors = true,
-	-- showmode = false,
+	showmode = false,
 	swapfile = false,
 
   showmatch = true,

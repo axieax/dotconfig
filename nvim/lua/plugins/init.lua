@@ -243,6 +243,7 @@ return require("packer").startup(function(use)
 	}
 
 	-- CSS colours
+	-- NOTE: doesn't highlight lower case names
 	use {
 		"norcalli/nvim-colorizer.lua",
 		config = function()

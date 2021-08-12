@@ -25,11 +25,11 @@ return function()
 						-- Visual
 						v = { "Visual", colours.magenta },
 						V = { "Visual Line", colours.magenta },
-						[""] = { "Visual Block" , colours.magenta },
+						[""] = { "Visual Block" , colours.magenta },
 						-- Select
 						s = { "Select", colours.blue },
 						S = { "Select Line", colours.blue },
-						[""] = { "Select Block", colours.blue },
+						[""] = { "Select Block", colours.blue },
 						-- Replace
 						R = { "Replace", colours.red },
 						Rv = { "Virtual Replace", colours.red },

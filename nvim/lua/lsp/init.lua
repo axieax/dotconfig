@@ -47,6 +47,7 @@ _G.auto_lsp_install = function()
 	if is_installable_language(language) then
 		-- print("Please type :LspInstall "..language)
 		-- vim.cmd("LspInstall " .. language)
+		-- NOTE: binary may not be executable
 	end
 end
 

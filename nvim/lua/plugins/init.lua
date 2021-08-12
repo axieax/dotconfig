@@ -85,41 +85,14 @@ return require("packer").startup(function(use)
 		end,
 	}
 
-	-- Smooth scrolling: check out https://github.com/karb94/neoscroll.nvim
+	-- Which key
 	use {
-		"karb94/neoscroll.nvim",
-		disable = true,
-		config = function()
-			require('neoscroll').setup()
-		end
+		"folke/which-key.nvim",
+		config = require("plugins.whichkey"),
 	}
 
-	-- Which key
-	-- TODO: check out https://github.com/AckslD/nvim-whichkey-setup.lua
-	-- TODO: check out https://github.com/folke/which-key.nvim
-
 	-- TODO list (put on dashboard) - neorg vs vimwiki?
-	-- use { 
-	-- 	"vhyrro/neorg",
-	-- 	requires = "nvim-lua/plenary.nvim"
-	-- 	config = function()
-	-- 		require('neorg').setup {
-	-- 			-- Tell Neorg what modules to load
-	-- 			load = {
-	-- 				["core.defaults"] = {}, -- Load all the default modules
-	-- 				["core.norg.concealer"] = {}, -- Allows for use of icons
-	-- 				["core.norg.dirman"] = { -- Manage your directories with Neorg
-	-- 					config = {
-	-- 						workspaces = {
-	-- 							my_workspace = "~/neorg"
-	-- 						}
-	-- 					}
-	-- 				}
-	-- 			},
-	-- 		}
-	-- 	end,
-	-- }
-
+	-- Get Treesitter parser
 
 	-----------------------------------------------------------
 	-- Coding Utilities
@@ -131,7 +104,22 @@ return require("packer").startup(function(use)
 	-- Auto closing pairs
 	use "raimondi/delimitMate"
 	-- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
+
+
 	-- Coloured pairs
+	use {
+		"p00f/nvim-ts-rainbow",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require'nvim-treesitter.configs'.setup {
+				rainbow = {
+					enable = true,
+					extended_mode = true, -- Also highlight non-bracket delimiters like html tags
+					max_file_lines = 1000,
+				}
+			}
+		end,
+	}
 
 	-- Surround with pairs
 	use "tpope/vim-surround"

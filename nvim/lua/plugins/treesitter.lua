@@ -11,4 +11,7 @@ return function()
 			indent = true,
 		},
 	}
+	-- Folding (need to set foldminlines and foldnestmax)
+	-- set foldmethod=expr
+	-- set foldexpr=nvim_treesitter#foldexpr()
 end

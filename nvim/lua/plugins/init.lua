@@ -8,11 +8,13 @@
 -- NOTE: Python indent issue (set indentexpr=)
 -- plugin for shift click to highlight multiple?
 -- snippets
--- TODO: file type formatting and linter
+-- TODO: file type formatting and linter (prettier)
 -- TODO: auto lspinstall for file types without language server - may also fail without sudo
 -- TODO: faded unused variables/imports
 -- TODO: gradual undo
 -- TODO: automatic backups?
+-- TODO: js LSP
+-- TODO: emmet, autoclose html
 
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -24,8 +26,8 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.api.nvim_command("!git clone https://github.com/wbthomason/packer.nvim "..install_path)
 end
 
--- vim.cmd [[ packadd packer.nvim ]]
--- vim.cmd([[ autocmd BufWritePost plugins.lua source <afile> | PackerCompile ]])
+-- Automatically PackerCompile with changes
+vim.cmd([[ autocmd BufWritePost plugins.lua source <afile> | PackerCompile ]])
 
 return require("packer").startup(function(use)
 	-- Packer can manage itself
@@ -153,7 +155,10 @@ return require("packer").startup(function(use)
 	-- LSP install
 	use {
 		"kabouzeid/nvim-lspinstall",
-		config = require("lsp.lspinstall"),
+		config = function()
+			require("lsp").pre_install()
+			require("lsp.lspinstall")()
+		end,
 		after = "nvim-lspconfig",
 	}
 

@@ -45,13 +45,36 @@ return function()
 		};
 	}
 
-	vim.cmd([[
-	inoremap <silent><expr> <C-Space> compe#complete()
-	inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })
-	inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-	inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-	inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-	]])
+	map({"i", "<C-Space>", "compe#complete()", expr=true})
+	map({"i", "<C-e>", "compe#close('<C-e>')", expr=true})
+	map({"i", "<C-f>", "compe#scroll({ 'delta': +4 })", expr=true})
+	map({"i", "<C-d>", "compe#scroll({ 'delta': -4 })", expr=true})
+	map({"i", "<CR>", [[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]], expr=true})
+	-- vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true }) -- auto-import?
 
+	local t = function(str)
+		return vim.api.nvim_replace_termcodes(str, true, true, true)
+	end
+
+	_G.tab_complete = function()
+		if vim.fn.pumvisible() == 1 then
+			return t "<C-n>"
+		else
+			return t "<Tab>"
+		end
+	end
+	_G.s_tab_complete = function()
+		if vim.fn.pumvisible() == 1 then
+			return t "<C-p>"
+		else
+			-- If <S-Tab> is not working in your terminal, change it to <C-h>
+			return t "<S-Tab>"
+		end
+	end
+
+	map({"i", "<Tab>", "v:lua.tab_complete()", expr=true})
+	map({"s", "<Tab>", "v:lua.tab_complete()", expr=true})
+	map({"i", "<S-Tab>", "v:lua.s_tab_complete()", expr=true})
+	map({"s", "<S-Tab>", "v:lua.s_tab_complete()", expr=true})
 
 end

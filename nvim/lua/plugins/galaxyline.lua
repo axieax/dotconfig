@@ -15,7 +15,7 @@ return function()
 	section.left = {
 		{
 			ViMode = {
-				provider = function ()
+				provider = function()
 					local modes = {
 						-- Normal
 						n = { "Normal", colours.violet },

@@ -15,6 +15,8 @@
 -- TODO: automatic backups?
 -- TODO: js LSP
 -- TODO: emmet, autoclose html
+-- TODO: code runner (Codi, https://github.com/dccsillag/magma-nvim)
+-- TODO: Markdown HTML treesitter
 
 
 -- https://github.com/wbthomason/packer.nvim --

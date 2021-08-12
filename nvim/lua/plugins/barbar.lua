@@ -8,7 +8,7 @@ return function()
 	map({"n", "<A-W>", ":BufferClose!<CR>"})
 	map({"n", "<A-p>", ":BufferPin<CR>"})
 
-	-- B{uffer shortcut}s
+	-- Buffer shortcuts
 	map({"n", "<A-;>", ":BufferPick<CR>"})
 	map({"n", "<A-1>", ":BufferGoto 1<CR>"})
 	map({"n", "<A-2>", ":BufferGoto 2<CR>"})
@@ -21,7 +21,7 @@ return function()
 	map({"n", "<A-9>", ":BufferGoto 9<CR>"})
 	map({"n", "<A-0>", ":BufferLast<CR>"})
 
-	-- B{uffer re-order / sor}t
+	-- Buffer re-order / sort
 	map({"n", "<A-,>", ":BufferMovePrevious<CR>"})
 	map({"n", "<A-.>", ":BufferMoveNext<CR>"})
 	map({"n", "<leader>bb", ":BufferOrderByBufferNumber<CR>"})
@@ -32,7 +32,7 @@ return function()
 	-- Set barbar's options
 	vim.g.bufferline = {
 		-- Enable/disable animations
-		animation = false,
+		animation = true,
 
 		-- Enable/disable auto-hiding the tab bar when there is a single buffer
 		auto_hide = false,
@@ -41,7 +41,7 @@ return function()
 		tabpages = true,
 
 		-- Enable/disable close button
-		closable = false,
+		closable = true,
 
 		-- Enables/disable clickable tabs
 		--  - left-click: go to buffer

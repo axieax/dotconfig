@@ -1,26 +1,41 @@
--- https://github.com/rockerBOO/awesome-neovim --
--- https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules --
--- TODO: lazy loading
--- TODO: move treesitter to top
--- TODO: linter (ALE?) - https://github.com/mfussenegger/nvim-lint - coc? efm?
--- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
--- TODO: compiler, quick code runner?
--- NOTE: Python indent issue (set indentexpr=)
--- plugin for shift click to highlight multiple?
--- snippets
--- TODO: file type formatting and linter (prettier)
--- TODO: auto lspinstall for file types without language server - may also fail without sudo
--- TODO: faded unused variables/imports
--- TODO: gradual undo
--- TODO: automatic backups?
--- TODO: js LSP
--- TODO: emmet, autoclose html
--- TODO: code runner (Codi, https://github.com/dccsillag/magma-nvim)
--- TODO: Markdown HTML treesitter
+--[[ Inspiration
+-- https://github.com/rockerBOO/awesome-neovim
+-- https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules
+-- https://github.com/siduck76/NvChad theme
+--]]
+
+--[[ TODO
+-- Move treesitter to top?
+-- Update keymaps for treesitter incremental selection
+-- Set up JS LSP - no root dir (or put config in test folder)
+-- Set up Dashboard session manager
+-- Set up lspsaga
+-- Set up formatter (Prettier, Black), linter (efm, ale, nvim-lint, coc?)
+	-- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
+-- Set up snippets (emmet)
+-- Automatic lspinstall and treesitter parsers
+--]]
+
+--[[ Features/plugins
+-- Faded unused variables/imports
+-- Lazy loading
+-- Gradual undo
+-- Autosave
+-- Hop
+-- Emmet / autoclose HTML
+-- Markdown HTML treesitter highlighting
+-- Set up quick compiler
+-- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
+-- Use es_lintd for js/ts
+-- Minimap preview
+--]]
+
+--[[ Notes
+-- Python indent issue (set indentexpr=)
+--]]
 
 
 -- https://github.com/wbthomason/packer.nvim --
--- NOTE: config function is run after plugin loaded
 
 -- Autoinstall packer
 local packer_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
@@ -107,6 +122,8 @@ return require("packer").startup(function(use)
 	-- Auto closing pairs
 	use "raimondi/delimitMate"
 	-- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
+	-- and https://github.com/windwp/nvim-ts-autotag
+	-- NOTE: remember to update compe <CR> map
 
 	-- Surround with pairs
 	use "tpope/vim-surround"
@@ -138,6 +155,7 @@ return require("packer").startup(function(use)
 	}
 
 	-- LSP saga
+	-- NOTE: alternative https://github.com/ray-x/navigator.lua
 	use {
 		"glepnir/lspsaga.nvim",
 		config = require("lsp.lspsaga"),
@@ -147,7 +165,7 @@ return require("packer").startup(function(use)
 	use "simrat39/symbols-outline.nvim"
 
 	-- Syntax highlighting
-	-- TODO: install parsers for new file types
+	-- TODO: install parsers for new file types (don't download all)
 	use {
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
@@ -162,7 +180,10 @@ return require("packer").startup(function(use)
 
 	-- Snippets
 	-- TODO: check out https://github.com/L3MON4D3/LuaSnip
-	-- TODO: check out https://github.com/rafamadriz/friendly-snippets
+	-- Default snippets
+	use "rafamadriz/friendly-snippets"
+	-- Definable snippets
+	use "hrsh7th/vim-vsnip"
 
 	-- Function signature
 	use "ray-x/lsp_signature.nvim"
@@ -172,7 +193,15 @@ return require("packer").startup(function(use)
 	-- ft = { jsx, tsx, html, php, md } ?
 
 	-- Formatter
-	-- TODO: check out https://github.com/lukas-reineke/format.nvim
+	-- NOTE: use efm langserver instead
+	-- https://www.reddit.com/r/neovim/comments/l3xm4f/how_to_format_python_code_when_using_pyright/
+	-- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/init.lua#L247
+	-- https://gist.github.com/benfrain/97f2b91087121b2d4ba0dcc4202d252f#file-init-lua-L507
+	-- Prettier for everything, unless other more prefered?
+	use {
+		"mhartington/formatter.nvim",
+		config = require("plugins.formatter"),
+	}
 
 
 	-----------------------------------------------------------
@@ -197,6 +226,7 @@ return require("packer").startup(function(use)
 	}
 
 	-- Tabline
+	-- TODO: check out https://github.com/akinsho/nvim-bufferline.lua
 	use {
 		"romgrk/barbar.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
@@ -241,9 +271,6 @@ return require("packer").startup(function(use)
 			require'colorizer'.setup()
 		end,
 	}
-
-	-- Minimap
-	-- use "wfxr/minimap.vim"
 
 end)
 

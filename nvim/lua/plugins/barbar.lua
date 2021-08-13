@@ -1,4 +1,7 @@
 -- https://github.com/romgrk/barbar.nvim --
+-- BUG: https://github.com/romgrk/barbar.nvim/issues/82#issuecomment-748498951
+-- TODO: see if empty buffers bring up Dashboard instead
+-- TODO: see if new buffers can be open in tabs by default
 
 return function()
 	local map = require('utils').map

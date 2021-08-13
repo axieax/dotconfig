@@ -41,8 +41,8 @@ return function()
 
 			-- External plugins
 			vsnip = true;
-			ultisnips = true;
-			luasnip = true;
+			-- ultisnips = true;
+			-- luasnip = true;
 		};
 	}
 

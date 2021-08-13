@@ -1,3 +1,4 @@
+-- Helper functions
 local M = {}
 
 -- Applies options to a meta-accessor

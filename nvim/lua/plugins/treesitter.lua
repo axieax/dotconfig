@@ -10,6 +10,15 @@ return function()
 		indent = {
 			indent = true,
 		},
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "gnn",
+				scope_incremental = "grc",
+				node_incremental = "grn",
+				node_decremental = "grm",
+			},
+		}
 	}
 	-- Folding (need to set foldminlines and foldnestmax)
 	-- set foldmethod=expr

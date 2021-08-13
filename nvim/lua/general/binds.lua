@@ -7,7 +7,7 @@ local map = require('utils').map
 -- map("t", "<Esc>", "<C-\\><C-n>", opts)
 
 -- Source
-vim.cmd("command! R :so $MYVIMRC")
+vim.cmd("command! R :luafile $MYVIMRC")
 
 -- Move line - NOTE: doesn't work for multiple lines
 map({"n", "<A-k>", ":move -2<CR>=="})

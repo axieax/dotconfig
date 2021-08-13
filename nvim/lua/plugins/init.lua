@@ -6,7 +6,6 @@
 
 --[[ TODO
 -- Move treesitter to top?
--- Update keymaps for treesitter incremental selection
 -- Set up JS LSP - no root dir (or put config in test folder)
 -- Set up Dashboard session manager
 -- Set up lspsaga
@@ -28,10 +27,12 @@
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
 -- Use es_lintd for js/ts
 -- Minimap preview
+-- https://github.com/ThePrimeagen/refactoring.nvim
 --]]
 
 --[[ Notes
 -- Python indent issue (set indentexpr=)
+-- More efficient to packer install devicons instead?
 --]]
 
 
@@ -66,10 +67,6 @@ return require("packer").startup(function(use)
 		requires = "nvim-lua/plenary.nvim",
 		config = require("plugins.telescope"),
 	}
-
-	-- Tree file explorer
-	-- https://github.com/kevinhwang91/rnvimr
-	-- https://github.com/kyazdani42/nvim-tree.lua
 
 	-- Git signs
 	use {

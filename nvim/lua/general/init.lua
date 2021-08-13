@@ -72,6 +72,14 @@ vim.cmd([[
 :augroup END
 ]])
 
+-- netrw settings (for directory tree view)
+vim_apply(vim.g, {
+	loaded_netrw = 1,
+	-- netrw_liststyle = 3, -- tree style
+	-- netrw_preview = 1, -- vertical splits for previews
+	-- netrw_altv = true,
+})
+
 -- Apply keybindings
 require "general.binds"
 

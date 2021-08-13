@@ -1,6 +1,7 @@
 -- https://github.com/romgrk/barbar.nvim --
 
 return function()
+	local map = require('utils').map
 	-- Buffer navigation
 	map({"n", "<TAB>", ":BufferNext<CR>"})
 	map({"n", "<S-TAB>", ":BufferPrevious<CR>"})

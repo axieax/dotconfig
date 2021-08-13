@@ -1,5 +1,7 @@
+local M = {}
+
 -- Icons
-_G.lsp_diagnostics_icons = {
+M.lsp_diagnostics_icons = {
 	Error = "",
 	Warning = "",
 	Hint = "",
@@ -7,5 +9,6 @@ _G.lsp_diagnostics_icons = {
 	VirtualText = "",
 }
 
--- Colours?
+-- Colourscheme?
 
+return M

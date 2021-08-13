@@ -23,9 +23,9 @@
 -- NOTE: config function is run after plugin loaded
 
 -- Autoinstall packer
-local install_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.api.nvim_command("!git clone https://github.com/wbthomason/packer.nvim "..install_path)
+local packer_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
+	vim.api.nvim_command("!git clone https://github.com/wbthomason/packer.nvim "..packer_path)
 end
 
 -- Automatically PackerCompile with changes
@@ -49,6 +49,7 @@ return require("packer").startup(function(use)
 	use {
 		"nvim-telescope/telescope.nvim",
 		requires = "nvim-lua/plenary.nvim",
+		config = require("plugins.telescope"),
 	}
 
 	-- Tree file explorer
@@ -106,22 +107,6 @@ return require("packer").startup(function(use)
 	-- Auto closing pairs
 	use "raimondi/delimitMate"
 	-- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
-
-
-	-- Coloured pairs
-	use {
-		"p00f/nvim-ts-rainbow",
-		requires = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			require'nvim-treesitter.configs'.setup {
-				rainbow = {
-					enable = true,
-					extended_mode = true, -- Also highlight non-bracket delimiters like html tags
-					max_file_lines = 1000,
-				}
-			}
-		end,
-	}
 
 	-- Surround with pairs
 	use "tpope/vim-surround"
@@ -198,7 +183,7 @@ return require("packer").startup(function(use)
 	use {
 		"navarasu/onedark.nvim",
 		config = function()
-			-- vim.g.onedark_transparent_background = true
+			vim.g.onedark_transparent_background = true
 			require("onedark").setup()
 		end,
 	}
@@ -230,6 +215,22 @@ return require("packer").startup(function(use)
 		"lukas-reineke/indent-blankline.nvim",
 		requires = "nvim-treesitter/nvim-treesitter",
 		config = require("plugins.indentline"),
+	}
+
+	-- Coloured pairs
+	-- TODO: change colourscheme, esp red
+	use {
+		"p00f/nvim-ts-rainbow",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require'nvim-treesitter.configs'.setup {
+				rainbow = {
+					enable = true,
+					extended_mode = true, -- Also highlight non-bracket delimiters like html tags
+					max_file_lines = 1000,
+				}
+			}
+		end,
 	}
 
 	-- CSS colours

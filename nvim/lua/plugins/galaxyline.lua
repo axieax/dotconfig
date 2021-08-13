@@ -9,6 +9,8 @@
 -- TODO: group linecol and percentage ()
 
 return function()
+	local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons
+
 	local colours = require('galaxyline.theme').default
 	local section = require('galaxyline').section
 	-- LEFT --

@@ -1,6 +1,9 @@
 -- https://github.com/neovim/nvim-lspconfig --
 
 return function()
+	local map = require('utils').map
+	local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons
+
 	-- Keymaps (see `:help vim.lsp.*`)
 	map({'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>'})
 	map({'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>'})
@@ -24,7 +27,7 @@ return function()
 	map({'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'})
 
 	-- Gutter diagnostic symbols
-	for type, icon in pairs(_G.lsp_diagnostics_icons) do
+	for type, icon in pairs(lsp_diagnostics_icons) do
 		local hl = "LspDiagnosticsSign" .. type
 		vim.fn.sign_define(hl,	{ text = icon, texthl = hl, numhl = hl })
 	end
@@ -35,7 +38,7 @@ return function()
 		local config = {
 			underline = true,
 			virtual_text = {
-				prefix = _G.lsp_diagnostics_icons.VirtualText,
+				prefix = lsp_diagnostics_icons.VirtualText,
 				spacing = 4,
 			},
 			signs = true,

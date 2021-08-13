@@ -1,6 +1,7 @@
 -- https://github.com/hrsh7th/nvim-compe --
 
 return function()
+	local map = require('utils').map
 	vim.o.completeopt = "menuone,noselect"
 
 	require'compe'.setup {

@@ -6,6 +6,7 @@
 -- clap-floaterm
 
 return function()
+	local vim_apply = require('utils').vim_apply
 	vim_apply(vim.g, {
 		-- Floaterm settings
 		floaterm_wintitle = 0,

@@ -1,10 +1,9 @@
--- TODO: fix style: _G.global_name OR require this file every time (later preferred)
-require("utils.config")
+local M = {}
 
 -- Applies options to a meta-accessor
 -- @param meta_accessor table: vim meta-accessor such as vim.opt
 -- @param options table: key-value table for settings to be applied
-function vim_apply(meta_accessor, options)
+function M.vim_apply(meta_accessor, options)
   for k,v in pairs(options) do
     meta_accessor[k] = v
   end
@@ -28,7 +27,7 @@ local default_options = {
 -- 	expr,
 -- }
 
-function map( bind )
+function M.map( bind )
 	-- Set defaults
 	local mode = bind[1]
 	local before = bind[2]
@@ -54,3 +53,4 @@ function map( bind )
 	})
 end
 
+return M

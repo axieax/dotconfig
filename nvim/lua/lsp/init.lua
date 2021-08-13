@@ -31,7 +31,7 @@ local pre_install_languages = {
 	'python',
 }
 
-M.pre_install = function()
+function M.pre_install()
 	for _, language in pairs(pre_install_languages) do
 		if is_installable_language(language) then
 			lsp_install.install_server(language)

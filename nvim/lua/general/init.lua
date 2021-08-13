@@ -1,4 +1,5 @@
 -- TODO: see if there is a setting for keeping cursor position despite scroll
+local vim_apply = require('utils').vim_apply
 
 -- Variables
 
@@ -23,32 +24,32 @@ vim_apply(vim.env, {})
 -- Options (:set)
 vim_apply(vim.o, {
 	-- General options
-  mouse = "a",
+	mouse = "a",
 	spell = true,
-  scrolloff = 1,
-  cursorline = true,
-  splitbelow = true,
-  splitright = true,
-  hidden = true,
-  number = true,
-  ruler = true,
-  colorcolumn = "80",
-  termguicolors = true,
+	scrolloff = 1,
+	cursorline = true,
+	splitbelow = true,
+	splitright = true,
+	hidden = true,
+	number = true,
+	ruler = true,
+	colorcolumn = "80",
+	termguicolors = true,
 	showmode = false,
 	swapfile = false,
 
-  showmatch = true,
-  hlsearch = true,
-  incsearch = true,
-  ignorecase = true,
-  smartcase = true,
+	showmatch = true,
+	hlsearch = true,
+	incsearch = true,
+	ignorecase = true,
+	smartcase = true,
 
-  -- Coding options
-  -- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
-  tabstop = 2,
-  shiftwidth = 2,
-  softtabstop = 2,
-  autoindent = true,
+	-- Coding options
+	-- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+	tabstop = 2,
+	shiftwidth = 2,
+	softtabstop = 2,
+	autoindent = true,
 	smartindent = true,
 })
 

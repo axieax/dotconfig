@@ -5,7 +5,8 @@
 --]]
 
 --[[ TODO
--- Move treesitter to top?
+-- Move treesitter, devicons to top?
+-- Telescope setup, find_files wrapper if buffer is directory
 -- Set up JS LSP - no root dir (or put config in test folder)
 -- Set up Dashboard session manager
 -- Set up lspsaga
@@ -66,6 +67,18 @@ return require("packer").startup(function(use)
 		"nvim-telescope/telescope.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = require("plugins.telescope"),
+	}
+
+	-- Tree file explorer
+	use {
+		"preservim/nerdtree",
+		config = require("plugins.tree"),
+	}
+
+	-- Undo history
+	use {
+		"mbbill/undotree",
+		config = require("plugins.undo"),
 	}
 
 	-- Git signs
@@ -268,6 +281,8 @@ return require("packer").startup(function(use)
 			require'colorizer'.setup()
 		end,
 	}
+
+	-- use 'kyazdani42/nvim-web-devicons'
 
 end)
 

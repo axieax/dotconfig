@@ -74,10 +74,10 @@ vim.cmd([[
 
 -- netrw settings (for directory tree view)
 vim_apply(vim.g, {
-	loaded_netrw = 1,
+	loaded_netrw = 1, -- disables netrw
 	-- netrw_liststyle = 3, -- tree style
 	-- netrw_preview = 1, -- vertical splits for previews
-	-- netrw_altv = true,
+	-- netrw_altv = true, -- opens vsplit to right
 })
 
 -- Apply keybindings

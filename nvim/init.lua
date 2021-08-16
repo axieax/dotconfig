@@ -9,3 +9,5 @@ require('plugins')
 -- -- BUG: calling LspInstall brings up another prompt (buffer)..
 -- vim.cmd("autocmd BufEnter * lua auto_lsp_install()")
 
+-- Need sudo apt install ripgrep for Telescope grep_string
+

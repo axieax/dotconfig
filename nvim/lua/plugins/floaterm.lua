@@ -3,6 +3,7 @@
 -- Set up keybinds for different orientations
 -- [[C-\]]
 -- TODO: set up floaterm list - https://github.com/voldikss/vim-floaterm#use-with-other-plugins
+-- TODO: set up keybinding for lazygit etc
 -- clap-floaterm
 
 return function()

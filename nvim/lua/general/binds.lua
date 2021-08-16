@@ -7,7 +7,7 @@ local map = require('utils').map
 -- map("t", "<Esc>", "<C-\\><C-n>", opts)
 
 -- Source
-vim.cmd("command! R :luafile $MYVIMRC")
+vim.cmd("command! R :luafile $MYVIMRC<CR>:PackerCompile<CR>")
 
 -- Move line(s) up/down
 map({"n", "<A-j>", ":move .+1<CR>=="})

@@ -181,6 +181,11 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 		config = require("plugins.treesitter"),
 	}
+	use {
+		"nvim-treesitter/playground",
+		requires = "nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate query",
+	}
 
 	-- Auto completion
 	use {

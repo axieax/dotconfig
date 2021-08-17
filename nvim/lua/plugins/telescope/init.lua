@@ -20,7 +20,7 @@ return function()
 	map({"n", "<Space>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>"})
 	map({"n", "<Space>fe", "<cmd>lua require('plugins.telescope.helpers').explorer()<cr>"})
 	vim.cmd("autocmd VimEnter * lua require('plugins.telescope.helpers').file_search(true)")
-	map({"n", ";", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>"})
+	map({"n", "<Space>fd", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>"})
 	-- NOTE: file browser currently can't go into folders? fzf?
 	map({"n", "<C-_>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>"}) -- control slash NOTE: inverse order
 	-- TODO: config/bookmark search

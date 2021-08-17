@@ -76,8 +76,8 @@ return require("packer").startup(function(use)
 
 	-- Tree file explorer
 	use {
-		"preservim/nerdtree",
-		disable = true,
+		"kyazdani42/nvim-tree.lua",
+		requires = "kyazdani42/nvim-web-devicons",
 		config = require("plugins.tree"),
 	}
 

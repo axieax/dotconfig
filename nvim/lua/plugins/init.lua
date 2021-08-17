@@ -5,6 +5,7 @@
 --]]
 
 --[[ TODO
+-- LSP compe fuzzy strategy
 -- Move treesitter, devicons to top?
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up JS LSP - no root dir (or put config in test folder)
@@ -14,6 +15,7 @@
 	-- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 -- Set up snippets (emmet)
 -- Automatic lspinstall and treesitter parsers
+-- Add auto packer clean, install, compile under autoinstall packer
 --]]
 
 --[[ Features/plugins
@@ -65,13 +67,17 @@ return require("packer").startup(function(use)
 	-- Fuzzy finder
 	use {
 		"nvim-telescope/telescope.nvim",
-		requires = "nvim-lua/plenary.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			{"nvim-telescope/telescope-fzf-native.nvim", run = 'make'},
+		},
 		config = require("plugins.telescope"),
 	}
 
 	-- Tree file explorer
 	use {
 		"preservim/nerdtree",
+		disable = true,
 		config = require("plugins.tree"),
 	}
 

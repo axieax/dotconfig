@@ -20,4 +20,11 @@ return function()
 	vim.g.dashboard_custom_footer = {
 		' https://github.com/axieax/',
 	}
+
+	-- space f r for find recent
+	-- Telescope frecency for recent
+	
+	-- Session persistence
+	-- NOTE: barbar weird lol
+	vim.cmd("autocmd VimLeave * :SessionSave")
 end

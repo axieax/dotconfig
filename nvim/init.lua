@@ -10,4 +10,4 @@ require('plugins')
 -- vim.cmd("autocmd BufEnter * lua auto_lsp_install()")
 
 -- Need sudo apt install ripgrep for Telescope grep_string
-
+-- JAVA: https://github.com/mfussenegger/nvim-jdtls

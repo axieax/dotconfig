@@ -1,5 +1,6 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter --
 -- https://github.com/nvim-treesitter/playground --
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects --
 
 return function()
 	local vim_apply = require("utils").vim_apply
@@ -22,6 +23,11 @@ return function()
 				scope_incremental = "gs",
 			},
 		},
+		-- Autotags
+		autotag = {
+			enable = true,
+			-- md
+		},
 		-- Playground
 		playground = {
 			enable = true,
@@ -30,6 +36,26 @@ return function()
 			enable = true,
 			use_virtual_text = true,
 			-- lint_events = {"BuffWrite", "CursorHold"},
+		},
+		-- Textobjects
+		textobjects = {
+			select = {
+				enable = true,
+				lookahead = true,
+				keymaps = {
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+					["ac"] = "@class.outer",
+					["ic"] = "@class.inner",
+					["al"] = "@loop.outer",
+					["il"] = "@loop.inner",
+					["ab"] = "@block.outer",
+					["ib"] = "@block.inner",
+					["ai"] = "@conditional.outer",
+					["iq"] = "@conditional.inner",
+					["cq"] = "@comment.outer",
+				}
+			}
 		}
 	}
 

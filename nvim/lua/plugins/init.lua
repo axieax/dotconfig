@@ -31,6 +31,8 @@
 -- Use es_lintd for js/ts
 -- Minimap preview
 -- https://github.com/ThePrimeagen/refactoring.nvim
+-- yank list (https://github.com/AckslD/nvim-neoclip.lua)
+-- zen mode
 --]]
 
 --[[ Notes
@@ -97,7 +99,7 @@ return require("packer").startup(function(use)
 	}
 
 	-- Project scope
-	-- TODO: check out https://github.com/ahmedkhalf/lsp-rooter.nvim
+	-- TODO: check out https://github.com/ahmedkhalf/project.nvim
 	-- and its support for non-LSP projects?
 	-- https://github.com/ahmedkhalf/project.nvim
 	use "airblade/vim-rooter"
@@ -138,7 +140,6 @@ return require("packer").startup(function(use)
 	-- Auto closing pairs
 	use "raimondi/delimitMate"
 	-- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
-	-- and https://github.com/windwp/nvim-ts-autotag
 	-- NOTE: remember to update compe <CR> map
 
 	-- Surround with pairs
@@ -163,15 +164,16 @@ return require("packer").startup(function(use)
 	-- LSP install
 	use {
 		"kabouzeid/nvim-lspinstall",
+		after = "nvim-lspconfig",
 		config = function()
 			require("lsp").pre_install()
 			require("lsp.lspinstall")()
 		end,
-		after = "nvim-lspconfig",
 	}
 
 	-- LSP saga
 	-- NOTE: alternative https://github.com/ray-x/navigator.lua
+	-- Use Telescope instead?
 	use {
 		"glepnir/lspsaga.nvim",
 		config = require("lsp.lspsaga"),
@@ -192,6 +194,10 @@ return require("packer").startup(function(use)
 		requires = "nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate query",
 	}
+	use {
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "0.5-compat",
+	}
 
 	-- Auto completion
 	use {
@@ -201,7 +207,7 @@ return require("packer").startup(function(use)
 
 	-- Snippets
 	-- TODO: check out https://github.com/L3MON4D3/LuaSnip
-	-- Default snippets
+	-- Snippet collection
 	use "rafamadriz/friendly-snippets"
 	-- Definable snippets
 	use "hrsh7th/vim-vsnip"
@@ -210,8 +216,10 @@ return require("packer").startup(function(use)
 	use "ray-x/lsp_signature.nvim"
 
 	-- Autoclose and autorename html tag
-	-- TODO: check out https://github.com/windwp/nvim-ts-autotag
-	-- ft = { jsx, tsx, html, php, md } ?
+	use {
+		"windwp/nvim-ts-autotag",
+		requires = "nvim-treesitter/nvim-treesitter",
+	}
 
 	-- Formatter
 	-- NOTE: use efm langserver instead

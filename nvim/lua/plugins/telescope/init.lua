@@ -45,16 +45,10 @@ return function()
 				}
 			}
 		},
-		extensions = {
-			fzf = {
-				fuzzy = true,
-				override_generic_sorter = true,
-			}
-		}
 	}
 
 	-- Extensions
-	-- require('telescope').load_extension('fzf')
+	require('telescope').load_extension('fzf')
 
 	-- NOTE: remove NERDTree? - can file browser create/move/delete files?
 

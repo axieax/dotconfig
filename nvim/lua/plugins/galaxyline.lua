@@ -131,12 +131,6 @@ return function()
 			}
 		},
 		{
-			FileSize = {
-				provider = "FileSize",
-				separator = " "
-			}
-		},
-		{
 			LineColumn = {
 				provider = "LineColumn",
 				separator = " "
@@ -150,6 +144,8 @@ return function()
 		},
 	}
 
+
+	-- short_line_list section
 
 	-- Just a whitespace
 	-- {w = {provider = "WhiteSpace", separator = " "}},

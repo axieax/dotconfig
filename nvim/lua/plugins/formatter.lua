@@ -48,12 +48,6 @@ return function()
 		}
 	}
 	-- Format on save
-	-- vim.api.nvim_exec([[
-	-- augroup FormatAutogroup
-	-- autocmd!
-	-- autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
-	-- augroup END
-	-- ]], true)
 	vim.api.nvim_exec([[
 	augroup FormatAutogroup
 	autocmd!

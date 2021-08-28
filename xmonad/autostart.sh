@@ -17,12 +17,13 @@ function run {
 #xrandr --output LVDS1 --mode 1366x768 --output DP3 --mode 1920x1080 --right-of LVDS1
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 
+xrandr --output HDMI-0 --auto --output DP-0 --auto --right-of HDMI-0
+
+
+(sleep 2; run $HOME/.config/polybar/launch.sh) &
 
 #change your keyboard if you need it
 #setxkbmap -layout be
-
- # Desktop resolution
-xrandr --output HDMI-0 --auto --output DP-0 --auto --right-of HDMI-0
 
 #cursor active at boot
 xsetroot -cursor_name left_ptr &
@@ -40,12 +41,14 @@ feh --bg-fill /usr/share/backgrounds/arcolinux/arco-login.jpg &
 run nm-applet &
 run pamac-tray &
 run xfce4-power-manager &
-#run volumeicon &
+# run volumeicon &
 numlockx on &
 blueberry-tray &
 picom --config $HOME/.xmonad/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+copyq &
 
 #starting user applications at boot time
 #nitrogen --restore &

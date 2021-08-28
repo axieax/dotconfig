@@ -58,7 +58,7 @@ winType  = "#c678dd"
 
 myModMask = mod4Mask
 encodeCChar = map fromIntegral . B.unpack
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 myBorderWidth = 2
 myWorkspaces    = ["\61612","\61899","\61947","\61635","\61502","\61501","\61705","\61564","\62150","\61872"]
 --myWorkspaces    = ["1","2","3","4","5","6","7","8","9","10"]
@@ -223,7 +223,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   --SCREENSHOTS
 
   , ((0, xK_Print), spawn $ "scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")
-  , ((controlMask, xK_Print), spawn $ "xfce4-screenshooter" )
+  , ((modMask .|. shiftMask, xK_s), spawn $ "xfce4-screenshooter" )
   , ((controlMask .|. shiftMask , xK_Print ), spawn $ "gnome-screenshot -i")
 
 
@@ -263,15 +263,17 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   --Focus selected desktop
   , ((mod1Mask, xK_Tab), nextWS)
+  , ((mod1Mask .|. shiftMask , xK_Tab), prevWS)
 
   --Focus selected desktop
   , ((modMask, xK_Tab), nextWS)
+  , ((modMask .|. shiftMask , xK_Tab), prevWS)
 
   --Focus selected desktop
-  , ((controlMask .|. mod1Mask , xK_Left ), prevWS)
+  -- , ((mod1Mask .|. shiftMask , xK_Left ), prevWS)
 
   --Focus selected desktop
-  , ((controlMask .|. mod1Mask , xK_Right ), nextWS)
+  -- , ((mod1Mask .|. shiftMask , xK_Right ), nextWS)
 
   --  Reset the layouts on the current workspace to default.
   , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
@@ -298,10 +300,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((controlMask .|. modMask, xK_Up), windows W.swapUp  )
 
   -- Shrink the master area.
-  , ((controlMask .|. shiftMask , xK_h), sendMessage Shrink)
+  , ((modMask .|. shiftMask , xK_h), sendMessage Shrink)
 
   -- Expand the master area.
-  , ((controlMask .|. shiftMask , xK_l), sendMessage Expand)
+  , ((modMask .|. shiftMask , xK_l), sendMessage Expand)
 
   -- Push window back into tiling.
   -- , ((controlMask .|. shiftMask , xK_t), withFocused $ windows . W.sink)

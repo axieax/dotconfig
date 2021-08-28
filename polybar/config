@@ -669,7 +669,7 @@ separator = |
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 2
+line-size = 1.5
 line-color = #f00
 
 ;border-size = 2
@@ -696,7 +696,7 @@ font-2 = "Noto Sans:size=10;0"
 font-3 = "Noto Sans Mono:size=10;0"
 font-4 = "FontAwesome5Brands:size=13;0"
 
-modules-left = ewmh
+modules-left = ewmh xwindow
 modules-center = date
 modules-right = pavolume memory2 cpu2
 

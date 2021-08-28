@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The name of polybar bar which houses the main spotify module and the control modules.
-PARENT_BAR="mainbar-i3"
+PARENT_BAR="mainbar-xmonad"
 
 # Set the source audio player here.
 # Players supporting the MPRIS spec are supported.

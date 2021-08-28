@@ -654,7 +654,7 @@ scroll-down = herbstclient use_index +1
 
 [bar/mainbar-xmonad]
 monitor = ${env:MONITOR}
-;monitor-fallback = HDMI-0
+monitor-fallback = HDMI-0
 monitor-strict = false
 override-redirect = false
 width = 100%
@@ -664,7 +664,7 @@ height = 30
 radius = 0.0
 fixed-center = true
 bottom = true
-separator = |
+;separator = |
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -682,8 +682,8 @@ border-color = #00000000
 padding-left = 0
 padding-right = 1
 
-module-margin-left = 3
-module-margin-right = 3
+module-margin-left = 2
+module-margin-right = 2
 
 ; Enable support for inter-process messaging
 ; See the Messaging wiki page for more details.
@@ -697,7 +697,7 @@ font-3 = "Noto Sans Mono:size=10;0"
 font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh xwindow
-modules-center = spotify2 spotify-prev spotify-play-pause spotify-next date
+modules-center = spotify-prev spotify2 spotify-next date
 modules-right = pavolume memory2 cpu2
 
 tray-detached = false
@@ -1481,9 +1481,9 @@ type = internal/cpu
 interval = 1
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
-format-prefix = "  "
+format-prefix = "  "
 format-prefix-foreground = #cd1f3f
-format-underline = #cd1f3f
+;format-underline = #cd1f3f
 
 label-font = 3
 
@@ -1500,7 +1500,7 @@ format-padding = 2
 ;   %percentage% (default) - total cpu load
 ;   %percentage-cores% - load percentage for each core
 ;   %percentage-core[1-9]% - load percentage for specific core
-label = Cpu %percentage:3%%
+label = %percentage:3%%
 
 ################################################################################
 
@@ -1517,7 +1517,7 @@ time = %I:%M:%S %p
 time-alt = %H:%M:%S
 format-prefix = " "
 format-prefix-foreground = #c1941a
-format-underline = #c1941a
+;format-underline = #c1941a
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 label = %date% %time%
@@ -1722,12 +1722,12 @@ interval = 1
 ;   %mb_used%
 ;   %mb_free%
 ;   %mb_total%
-label = %percentage_used%%
+label = %gb_used%
 
-format = Mem <label>
-format-prefix = "  "
+format = <label>
+format-prefix = "  "
 format-prefix-foreground = #3384d0
-format-underline = #3384d0
+;format-underline = #3384d0
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
@@ -1826,7 +1826,7 @@ format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 format-prefix = "  "
 format-prefix-foreground = #FFBB00
-format-underline = #FFBB00
+;format-underline = #FFBB00
 
 ################################################################################
 
@@ -1839,7 +1839,7 @@ tail = true
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 format-prefix-foreground = #738adb
-format-underline = #738adb
+;format-underline = #738adb
 click-right = pamac-manager &
 click-left = pamac-manager &
 format-prefix = " "
@@ -1855,7 +1855,7 @@ click-right = exec pavucontrol
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
 scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
 scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
-format-underline = #3EC13F
+;format-underline = #3EC13F
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
@@ -1928,6 +1928,9 @@ format = <label>
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 exec = ~/.config/polybar/scripts/scroll_spotify_status.sh
+click-left = playerctl play-pause spotify
+click-right = spotify
+; scroll to change volume (playerctl not supported)
 
 
 [module/spotify-prev]
@@ -1957,6 +1960,8 @@ format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 click-left = playerctl next spotify
 click-right = spotify
+
+
 
 ################################################################################
 

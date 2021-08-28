@@ -663,7 +663,7 @@ height = 30
 ;offset-y = 1%
 radius = 0.0
 fixed-center = true
-bottom = true
+bottom = false
 ;separator = |
 
 background = ${colors.background}
@@ -1559,9 +1559,10 @@ format = <label-state>
 label-monitor = %name%
 
 label-active = %name%
-label-active-foreground = ${colors.foreground}
+;label-active-foreground = #6790eb
+label-active-foreground = #FFA500
 label-active-background = ${colors.background}
-label-active-underline= #6790eb
+;label-active-underline= #6790eb
 label-active-padding = 2
 
 label-occupied = %name%
@@ -1571,12 +1572,12 @@ label-occupied-padding = 2
 label-urgent = %name%
 label-urgent-foreground = ${colors.foreground}
 label-urgent-background = ${colors.alert}
-label-urgent-underline = ${colors.alert}
+;label-urgent-underline = ${colors.alert}
 label-urgent-padding = 2
 
 
 label-empty = %name%
-label-empty-foreground = ${colors.foreground}
+label-empty-foreground = #80BBBBBB
 label-empty-padding = 2
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}

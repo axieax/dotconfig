@@ -48,19 +48,18 @@ picom --config $HOME/.xmonad/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
-copyq &
-
 #starting user applications at boot time
 #nitrogen --restore &
 #run caffeine &
 #run vivaldi-stable &
 #run firefox &
 #run thunar &
-#run spotify &
+run copyq &
+run spotify & #hide?
 #run atom &
 
 #run telegram-desktop &
-#run discord &
+run discord &
 #run dropbox &
 #run insync start &
 #run ckb-next -b &

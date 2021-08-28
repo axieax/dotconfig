@@ -654,7 +654,7 @@ scroll-down = herbstclient use_index +1
 
 [bar/mainbar-xmonad]
 monitor = ${env:MONITOR}
-;monitor-fallback = HDMI1
+;monitor-fallback = HDMI-0
 monitor-strict = false
 override-redirect = false
 width = 100%
@@ -663,7 +663,7 @@ height = 30
 ;offset-y = 1%
 radius = 0.0
 fixed-center = true
-bottom = false
+bottom = true
 separator = |
 
 background = ${colors.background}
@@ -697,7 +697,7 @@ font-3 = "Noto Sans Mono:size=10;0"
 font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh xwindow
-modules-center = date
+modules-center = spotify2 spotify-prev spotify-play-pause spotify-next date
 modules-right = pavolume memory2 cpu2
 
 tray-detached = false
@@ -1508,13 +1508,13 @@ label = Cpu %percentage:3%%
 ;https://github.com/jaagr/polybar/wiki/Module:-date
 type = internal/date
 ; Seconds to sleep between updates
-interval = 5
+interval = 0.5
 ; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
 ; NOTE: if you want to use syntax tags here you need to use %%{...}
-date = " %Y-%m-%d%"
-date-alt = " %d-%m-%Y"
-time = %H:%M
-time-alt = %H:%M
+date = " %a %d %b"
+date-alt = " %d/%m/%Y"
+time = %I:%M:%S %p
+time-alt = %H:%M:%S
 format-prefix = " "
 format-prefix-foreground = #c1941a
 format-underline = #c1941a

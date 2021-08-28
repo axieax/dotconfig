@@ -136,7 +136,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_c), spawn $ "conky-toggle" )
   , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
   , ((modMask, xK_h), spawn $ "alacritty -e htop" )
-  , ((modMask, xK_m), spawn $ "pragha" )
   , ((modMask, xK_q), kill )
   , ((modMask, xK_r), spawn $ "rofi -show run" )
   , ((modMask, xK_t), spawn $ "alacritty" )
@@ -306,7 +305,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. shiftMask , xK_l), sendMessage Expand)
 
   -- Push window back into tiling.
-  -- , ((controlMask .|. shiftMask , xK_t), withFocused $ windows . W.sink)
+  , ((modMask .|. shiftMask , xK_t), withFocused $ windows . W.sink)
 
   -- Increment the number of windows in the master area.
   , ((controlMask .|. modMask, xK_Left), sendMessage (IncMasterN 1))
@@ -361,7 +360,7 @@ main = do
             --myBaseConfig { keys = belgianKeys <+> keys belgianConfig }
 
                 {startupHook = myStartupHook
-, layoutHook = gaps [(U,35), (D,5), (R,5), (L,5)] $ myLayout ||| layoutHook myBaseConfig
+, layoutHook = gaps [(U,5), (D,35), (R,5), (L,5)] $ myLayout ||| layoutHook myBaseConfig
 , manageHook = manageSpawn <+> myManageHook <+> manageHook myBaseConfig
 , modMask = myModMask
 , borderWidth = myBorderWidth

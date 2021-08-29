@@ -23,7 +23,7 @@ return function()
 	map({"n", "<Space>fd", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>"})
 	-- NOTE: file browser currently can't go into folders? fzf?
 	map({"n", "<C-_>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>"}) -- control slash NOTE: inverse order
-	-- TODO: config/bookmark search
+	-- TODO: config/bookmark search (~/dotconfig)
 
 	-- If find files opened from a directory buffer, change path to the directory instead (NERDTree)
 	-- :Telescope file_browser (git repo, dir of current buffer if possible, normal) - better (can also do cwd=)

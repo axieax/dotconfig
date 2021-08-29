@@ -199,7 +199,7 @@ return require("packer").startup(function(use)
 		branch = "0.5-compat",
 	}
 
-	-- Auto completion
+	-- Auto completion (replace with hrsh7th/nvim-cmp)
 	use {
 		"hrsh7th/nvim-compe",
 		config = require("lsp.compe"),

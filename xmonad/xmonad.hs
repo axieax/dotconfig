@@ -4,6 +4,7 @@ import System.Exit
 import XMonad
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
+import XMonad.ManageHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isFullscreen, isDialog)
@@ -30,6 +31,7 @@ import XMonad.Layout.IndependentScreens
 
 
 import XMonad.Layout.CenteredMaster(centerMaster)
+import XMonad.Util.Scratchpad
 
 import Graphics.X11.ExtraTypes.XF86
 import qualified XMonad.StackSet as W
@@ -67,7 +69,7 @@ myWorkspaces    = ["\62057","\61728","\61635","\61872","\61716","\61926","\61501
 
 myBaseConfig = desktopConfig
 
--- window manipulations
+-- window manipulations (use xprop to get app name/class)
 myManageHook = composeAll . concat $
     [ [isDialog --> doCenterFloat]
     , [className =? c --> doCenterFloat | c <- myCFloats]
@@ -77,30 +79,30 @@ myManageHook = composeAll . concat $
     -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61612" | x <- my1Shifts]
     -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61899" | x <- my2Shifts]
     -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61947" | x <- my3Shifts]
-    -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61635" | x <- my4Shifts]
-    -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61502" | x <- my5Shifts]
-    -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61501" | x <- my6Shifts]
-    -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61705" | x <- my7Shifts]
-    -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61564" | x <- my8Shifts]
-    -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\62150" | x <- my9Shifts]
-    -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61872" | x <- my10Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 3) | x <- my4Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 4) | x <- my5Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 5) | x <- my6Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 6) | x <- my7Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 7) | x <- my8Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 8) | x <- my9Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 9) | x <- my10Shifts]
     ]
     where
-    -- doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
-    myCFloats = ["Arandr", "Arcolinux-calamares-tool.py", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal"]
-    myTFloats = ["Downloads", "Save As..."]
+    doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
+    myCFloats = ["Arandr", "Arcolinux-calamares-tool.py", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal", "zoom"]
+    myTFloats = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
     myRFloats = []
     myIgnores = ["desktop_window"]
     -- my1Shifts = ["Chromium", "Vivaldi-stable", "Firefox"]
     -- my2Shifts = []
     -- my3Shifts = ["Inkscape"]
-    -- my4Shifts = []
-    -- my5Shifts = ["Gimp", "feh"]
-    -- my6Shifts = ["vlc", "mpv"]
-    -- my7Shifts = ["Virtualbox"]
-    -- my8Shifts = ["Thunar"]
-    -- my9Shifts = []
-    -- my10Shifts = ["discord"]
+    my4Shifts = ["Gimp", "Lutris"]
+    my5Shifts = []
+    my6Shifts = ["spotify", "Spotify", "Spotify Premium"] -- doesn't work
+    my7Shifts = ["zoom", "obs"]
+    my8Shifts = ["typora"]
+    my9Shifts = ["discord"]
+    my10Shifts = ["Thunderbird"]
 
 
 
@@ -340,6 +342,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- [((m .|. controlMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
   --     | (key, sc) <- zip [xK_w, xK_e] [0..]
   --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
+
+
+-- Scratchpad
+--
+
 
 
 main :: IO ()

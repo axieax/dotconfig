@@ -31,7 +31,7 @@ import XMonad.Layout.IndependentScreens
 
 
 import XMonad.Layout.CenteredMaster(centerMaster)
-import XMonad.Util.Scratchpad
+import XMonad.Util.NamedScratchpad
 
 import Graphics.X11.ExtraTypes.XF86
 import qualified XMonad.StackSet as W
@@ -79,30 +79,30 @@ myManageHook = composeAll . concat $
     -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61612" | x <- my1Shifts]
     -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61899" | x <- my2Shifts]
     -- , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo "\61947" | x <- my3Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 3) | x <- my4Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 4) | x <- my5Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 5) | x <- my6Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 6) | x <- my7Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 7) | x <- my8Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 8) | x <- my9Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftandGo (myWorkspaces !! 9) | x <- my10Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 3) | x <- my4Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 4) | x <- my5Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 5) | x <- my6Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 6) | x <- my7Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 7) | x <- my8Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 8) | x <- my9Shifts]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 9) | x <- my10Shifts]
     ]
     where
-    doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
-    myCFloats = ["Arandr", "Arcolinux-calamares-tool.py", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal", "zoom"]
-    myTFloats = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
-    myRFloats = []
-    myIgnores = ["desktop_window"]
-    -- my1Shifts = ["Chromium", "Vivaldi-stable", "Firefox"]
-    -- my2Shifts = []
-    -- my3Shifts = ["Inkscape"]
-    my4Shifts = ["Gimp", "Lutris"]
-    my5Shifts = []
-    my6Shifts = ["spotify", "Spotify", "Spotify Premium"] -- doesn't work
-    my7Shifts = ["zoom", "obs"]
-    my8Shifts = ["typora"]
-    my9Shifts = ["discord"]
-    my10Shifts = ["Thunderbird"]
+      doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
+      myCFloats = ["Arandr", "Arcolinux-calamares-tool.py", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal", "zoom"]
+      myTFloats = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
+      myRFloats = []
+      myIgnores = ["desktop_window"]
+      -- my1Shifts = ["Chromium", "Vivaldi-stable", "Firefox"]
+      -- my2Shifts = []
+      -- my3Shifts = ["Inkscape"]
+      my4Shifts = ["Gimp", "Lutris"]
+      my5Shifts = []
+      my6Shifts = ["Spotify Premium", "spotify", "Spotify"] -- need SpotifyWM (Electron apps set class name too late)
+      my7Shifts = ["zoom", "obs"]
+      my8Shifts = ["typora"]
+      my9Shifts = ["discord"]
+      my10Shifts = ["Thunderbird"]
 
 
 
@@ -136,12 +136,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- SUPER + FUNCTION KEYS
 
   [ ((modMask, xK_e), spawn $ "thunderbird" )
-  , ((modMask, xK_c), spawn $ "conky-toggle" )
+  , ((modMask, xK_c), namedScratchpadAction myScratchPads "calculator" )
   , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
   , ((modMask, xK_h), spawn $ "alacritty -e htop" )
   , ((modMask, xK_q), kill )
   , ((modMask, xK_r), spawn $ "rofi -show run" )
-  , ((modMask, xK_t), spawn $ "alacritty" )
+  , ((modMask, xK_t), namedScratchpadAction myScratchPads "terminal" )
+  , ((modMask, xK_s), namedScratchpadAction myScratchPads "spotify" )
   , ((modMask, xK_v), spawn $ "pavucontrol" )
   , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle" )
   , ((modMask, xK_x), spawn $ "arcolinux-logout" )
@@ -346,8 +347,36 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 
 -- Scratchpad
---
-
+myScratchPads :: [NamedScratchpad]
+myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
+                , NS "calculator" spawnCalc findCalc manageCalc
+                , NS "spotify" spawnSpotify findSpotify manageSpotify
+                ]
+  where
+    spawnTerm = "alacritty -t scratchterm"
+    findTerm = title =? "scratchterm"
+    manageTerm = customFloating $ W.RationalRect l t w h
+      where
+        h = 0.9
+        w = 0.9
+        t = 0.95 - h
+        l = 0.95 - w
+    spawnCalc = "qalculate-gtk"
+    findCalc = className =? "Qalculate-gtk"
+    manageCalc = customFloating $ W.RationalRect l t w h
+      where
+        h = 0.5
+        w = 0.4
+        t = 0.75 - h
+        l = 0.70 - w
+    spawnSpotify = "spotify"
+    findSpotify = className =? "Spotify"
+    manageSpotify = customFloating $ W.RationalRect l t w h
+      where
+        h = 0.9
+        w = 0.9
+        t = 0.95 - h
+        l = 0.95 - w
 
 
 main :: IO ()
@@ -370,7 +399,7 @@ main = do
 
                 {startupHook = myStartupHook
 , layoutHook = gaps [(U,35), (D,5), (R,5), (L,5)] $ myLayout ||| layoutHook myBaseConfig
-, manageHook = manageSpawn <+> myManageHook <+> manageHook myBaseConfig
+, manageHook = manageSpawn <+> myManageHook <+> namedScratchpadManageHook myScratchPads <+> manageHook myBaseConfig
 , modMask = myModMask
 , borderWidth = myBorderWidth
 , handleEventHook    = handleEventHook myBaseConfig <+> fullscreenEventHook

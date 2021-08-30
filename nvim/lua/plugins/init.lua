@@ -112,13 +112,14 @@ return require("packer").startup(function(use)
 	})
 
 	-- Debugger installer
-	use("Pocco81/DAPInstall.nvim")
+	-- use("Pocco81/DAPInstall.nvim")
 
 	-- Python debugger
-	-- use("mfussenegger/nvim-dap-python")
+	use("mfussenegger/nvim-dap-python")
 
 	-- Java debugger
 	use("mfussenegger/nvim-jdtls")
+	-- use("microsoft/java-debug")
 
 	-- Underline word
 	-- NOTE: interferes with highlight search

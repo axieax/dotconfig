@@ -6,6 +6,13 @@ return function()
 	local lsp_utils = require("lspconfig.util")
 
 	-- Manual overrides for language server settings
+	-- https://github.com/microsoft/java-debug
+	-- https://github.com/microsoft/vscode-java-test
+	local java_bundles = {
+		vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
+	}
+	vim.list_extend(java_bundles, vim.split(vim.fn.glob("~/java/vscode-java-test/server/*.jar"), "\n"))
+
 	local language_server_overrides = {
 		lua = {
 			settings = {
@@ -15,6 +22,11 @@ return function()
 						globals = { "vim" },
 					},
 				},
+			},
+		},
+		java = {
+			init_options = {
+				bundles = java_bundles,
 			},
 		},
 		-- haskell = {

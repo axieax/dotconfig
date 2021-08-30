@@ -4,7 +4,7 @@ local M = {}
 -------------
 -- Helpers --
 -------------
-local lsp_install = require('lspinstall')
+local lsp_install = require("lspinstall")
 local installed_servers = lsp_install.installed_servers()
 local available_servers = lsp_install.available_servers()
 
@@ -28,7 +28,8 @@ end
 -- Pre-install languages --
 ---------------------------
 local pre_install_languages = {
-	'python',
+	"python",
+	"typescript",
 }
 
 function M.pre_install()
@@ -52,4 +53,3 @@ _G.auto_lsp_install = function()
 end
 
 return M
-

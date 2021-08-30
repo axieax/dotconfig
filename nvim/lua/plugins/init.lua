@@ -237,7 +237,7 @@ return require("packer").startup(function(use)
 
 	-- Formatter
 	use({
-		"sbdchd/neoformat",
+		"mhartington/formatter.nvim",
 		config = require("lsp.formatter"),
 	})
 

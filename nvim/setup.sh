@@ -18,5 +18,5 @@ yarn run build-plugin
 
 # Formatters
 # TODO: replace local installations with nvim wrapper plugins
-
+# also install prettier extensions
 

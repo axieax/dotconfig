@@ -31,14 +31,8 @@ return function()
 		lsp_install.setup()
 		local servers = lsp_install.installed_servers()
 		for _, server in pairs(servers) do
-			local override = language_server_overrides[server]
-			if override ~= nil then
-				lsp_config[server].setup(override)
-			else
-				lsp_config[server].setup({
-					-- root_dir = vim.loop.cwd, -- NOTE: may override default root_dir
-				})
-			end
+			local override = language_server_overrides[server] or {}
+			lsp_config[server].setup(override)
 		end
 	end
 

@@ -50,6 +50,7 @@ return function()
 
 	-- Extensions
 	require("telescope").load_extension("fzf")
+	require("telescope").load_extension("dap")
 
 	-- NOTE: remove NERDTree? - can file browser create/move/delete files?
 end

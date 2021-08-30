@@ -45,265 +45,268 @@
 -- Autoinstall packer
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
-  vim.api.nvim_command("!git clone https://github.com/wbthomason/packer.nvim " .. packer_path)
+	vim.api.nvim_command("!git clone https://github.com/wbthomason/packer.nvim " .. packer_path)
 end
 
 -- Automatically PackerCompile with changes
 vim.cmd([[ autocmd BufWritePost plugins.lua source <afile> | PackerCompile ]])
 
 return require("packer").startup(function(use)
-  -- Packer can manage itself
-  use("wbthomason/packer.nvim")
+	-- Packer can manage itself
+	use("wbthomason/packer.nvim")
 
-  -----------------------
-  -- General Utilities --
-  -----------------------
+	-----------------------
+	-- General Utilities --
+	-----------------------
 
-  -- Floating terminal
-  use({
-    "voldikss/vim-floaterm",
-    config = require("plugins.floaterm"),
-  })
+	-- Floating terminal
+	use({
+		"voldikss/vim-floaterm",
+		config = require("plugins.floaterm"),
+	})
 
-  -- Fuzzy finder
-  use({
-    "nvim-telescope/telescope.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    },
-    config = require("plugins.telescope"),
-  })
+	-- Fuzzy finder
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+			"nvim-telescope/telescope-dap.nvim",
+		},
+		config = require("plugins.telescope"),
+	})
 
-  -- Tree file explorer
-  use({
-    "kyazdani42/nvim-tree.lua",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = require("plugins.tree"),
-  })
+	-- Tree file explorer
+	use({
+		"kyazdani42/nvim-tree.lua",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = require("plugins.tree"),
+	})
 
-  -- Undo history
-  use({
-    "mbbill/undotree",
-    config = require("plugins.undo"),
-  })
+	-- Undo history
+	use({
+		"mbbill/undotree",
+		config = require("plugins.undo"),
+	})
 
-  -- Git signs
-  use({
-    "lewis6991/gitsigns.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("gitsigns").setup()
-    end,
-  })
+	-- Git signs
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	})
 
-  -- Project scope
-  -- TODO: check out https://github.com/ahmedkhalf/project.nvim
-  -- and its support for non-LSP projects?
-  -- https://github.com/ahmedkhalf/project.nvim
-  use("airblade/vim-rooter")
+	-- Project scope
+	-- TODO: check out https://github.com/ahmedkhalf/project.nvim
+	-- and its support for non-LSP projects?
+	-- https://github.com/ahmedkhalf/project.nvim
+	use("airblade/vim-rooter")
 
-  -- Debugger
-  use("mfussenegger/nvim-dap")
+	-- Debugger
+	use({
+		"rcarriga/nvim-dap-ui",
+		requires = "mfussenegger/nvim-dap",
+		config = require("lsp.debug"),
+	})
 
-  -- Underline word
-  -- NOTE: interferes with highlight search
-  use("xiyaowong/nvim-cursorword")
+	-- Debugger installer
+	use("Pocco81/DAPInstall.nvim")
 
-  -- package.json dependency manager
-  -- TODO: can it check vulnerabilities?
-  use({
-    "vuki656/package-info.nvim",
-    ft = { "json" },
-    config = function()
-      require("package-info").setup()
-    end,
-  })
+	-- Python debugger
+	-- use("mfussenegger/nvim-dap-python")
 
-  -- Which key
-  use({
-    "folke/which-key.nvim",
-    config = require("plugins.whichkey"),
-  })
+	-- Java debugger
+	use("mfussenegger/nvim-jdtls")
 
-  -- TODO list (put on dashboard) - neorg vs vimwiki?
-  -- Get Treesitter parser
+	-- Underline word
+	-- NOTE: interferes with highlight search
+	use("xiyaowong/nvim-cursorword")
 
-  -----------------------------------------------------------
-  -- Coding Utilities
-  -----------------------------------------------------------
+	-- package.json dependency manager
+	-- TODO: can it check vulnerabilities?
+	use({
+		"vuki656/package-info.nvim",
+		ft = { "json" },
+		config = function()
+			require("package-info").setup()
+		end,
+	})
 
-  -- Commenting
-  use("tpope/vim-commentary")
+	-- Which key
+	use({
+		"folke/which-key.nvim",
+		config = require("plugins.whichkey"),
+	})
 
-  -- Auto closing pairs
-  use("raimondi/delimitMate")
-  -- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
-  -- NOTE: remember to update compe <CR> map
+	-- TODO list (put on dashboard) - neorg vs vimwiki?
+	-- Get Treesitter parser
 
-  -- Surround with pairs
-  use("tpope/vim-surround")
+	-----------------------------------------------------------
+	-- Coding Utilities
+	-----------------------------------------------------------
 
-  -- Multiple cursors
-  use("mg979/vim-visual-multi")
+	-- Commenting
+	use("tpope/vim-commentary")
 
-  -- Interactive scratchpad with virtual text
-  -- TODO: check out https://github.com/michaelb/sniprun
-  -- use "metakirby5/codi.vim"
+	-- Auto closing pairs
+	use("raimondi/delimitMate")
+	-- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
+	-- NOTE: remember to update compe <CR> map
 
-  -- Search highlights
-  use("romainl/vim-cool")
+	-- Surround with pairs
+	use("tpope/vim-surround")
 
-  -- LSP config
-  use({
-    "neovim/nvim-lspconfig",
-    config = require("lsp.lspconfig"),
-  })
+	-- Multiple cursors
+	use("mg979/vim-visual-multi")
 
-  -- LSP install
-  use({
-    "kabouzeid/nvim-lspinstall",
-    after = "nvim-lspconfig",
-    config = function()
-      require("lsp").pre_install()
-      require("lsp.lspinstall")()
-    end,
-  })
+	-- Interactive scratchpad with virtual text
+	-- TODO: check out https://github.com/michaelb/sniprun
+	-- use "metakirby5/codi.vim"
 
-  -- LSP saga
-  -- NOTE: alternative https://github.com/ray-x/navigator.lua
-  -- Use Telescope instead?
-  use({
-    "glepnir/lspsaga.nvim",
-    config = require("lsp.lspsaga"),
-  })
+	-- Search highlights
+	use("romainl/vim-cool")
 
-  -- Symbols
-  use("simrat39/symbols-outline.nvim")
+	-- LSP config
+	use({
+		"neovim/nvim-lspconfig",
+		config = require("lsp.lspconfig"),
+	})
 
-  -- Syntax highlighting
-  -- TODO: install parsers for new file types (don't download all)
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = require("plugins.treesitter"),
-  })
-  use({
-    "nvim-treesitter/playground",
-    requires = "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate query",
-  })
-  use({
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    branch = "0.5-compat",
-  })
+	-- LSP install
+	use({
+		"kabouzeid/nvim-lspinstall",
+		after = "nvim-lspconfig",
+		config = function()
+			require("lsp").pre_install()
+			require("lsp.lspinstall")()
+		end,
+	})
 
-  -- Auto completion (replace with hrsh7th/nvim-cmp)
-  use({
-    "hrsh7th/nvim-compe",
-    config = require("lsp.compe"),
-  })
+	-- LSP saga
+	-- NOTE: alternative https://github.com/ray-x/navigator.lua
+	-- Use Telescope instead?
+	use({
+		"glepnir/lspsaga.nvim",
+		config = require("lsp.lspsaga"),
+	})
 
-  -- Snippets
-  -- TODO: check out https://github.com/L3MON4D3/LuaSnip
-  -- Snippet collection
-  use("rafamadriz/friendly-snippets")
-  -- Definable snippets
-  use("hrsh7th/vim-vsnip")
+	-- Symbols
+	use("simrat39/symbols-outline.nvim")
 
-  -- Function signature
-  use("ray-x/lsp_signature.nvim")
+	-- Syntax highlighting
+	-- TODO: install parsers for new file types (don't download all)
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = require("plugins.treesitter"),
+	})
+	use({
+		"nvim-treesitter/playground",
+		requires = "nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate query",
+	})
+	use({
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "0.5-compat",
+	})
 
-  -- Autoclose and autorename html tag
-  use({
-    "windwp/nvim-ts-autotag",
-    requires = "nvim-treesitter/nvim-treesitter",
-  })
+	-- Auto completion (replace with hrsh7th/nvim-cmp)
+	use({
+		"hrsh7th/nvim-compe",
+		config = require("lsp.compe"),
+	})
 
-  -- Formatter
-  -- NOTE: use efm langserver instead
-  -- https://www.reddit.com/r/neovim/comments/l3xm4f/how_to_format_python_code_when_using_pyright/
-  -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/init.lua#L247
-  -- https://gist.github.com/benfrain/97f2b91087121b2d4ba0dcc4202d252f#file-init-lua-L507
-  -- Prettier for everything, unless other more prefered?
-  use({
-    "mhartington/formatter.nvim",
-    disable = true,
-    config = require("plugins.formatter"),
-  })
+	-- Snippets
+	-- TODO: check out https://github.com/L3MON4D3/LuaSnip
+	-- Snippet collection
+	use("rafamadriz/friendly-snippets")
+	-- Definable snippets
+	use("hrsh7th/vim-vsnip")
 
-  use({
-    "sbdchd/neoformat",
-		config = require"plugins.formatter",
-  })
+	-- Function signature
+	use("ray-x/lsp_signature.nvim")
 
-  -----------------------------------------------------------
-  -- Customisations
-  -----------------------------------------------------------
+	-- Autoclose and autorename html tag
+	use({
+		"windwp/nvim-ts-autotag",
+		requires = "nvim-treesitter/nvim-treesitter",
+	})
 
-  -- Theme
-  use({
-    "navarasu/onedark.nvim",
-    config = function()
-      vim.g.onedark_transparent_background = true
-      require("onedark").setup()
-    end,
-  })
+	-- Formatter
+	use({
+		"sbdchd/neoformat",
+		config = require("lsp.formatter"),
+	})
 
-  -- Statusline
-  use({
-    "glepnir/galaxyline.nvim",
-    branch = "main",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = require("plugins.galaxyline"),
-  })
+	-----------------------------------------------------------
+	-- Customisations
+	-----------------------------------------------------------
 
-  -- Tabline
-  -- TODO: check out https://github.com/akinsho/nvim-bufferline.lua
-  use({
-    "romgrk/barbar.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = require("plugins.barbar"),
-  })
+	-- Theme
+	use({
+		"navarasu/onedark.nvim",
+		config = function()
+			vim.g.onedark_transparent_background = true
+			require("onedark").setup()
+		end,
+	})
 
-  -- Startup screen
-  -- TODO: see if this integrates https://github.com/rmagatti/auto-session
-  use({
-    "glepnir/dashboard-nvim",
-    config = require("plugins.dashboard"),
-  })
+	-- Statusline
+	use({
+		"glepnir/galaxyline.nvim",
+		branch = "main",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = require("plugins.galaxyline"),
+	})
 
-  -- Indent blank lines
-  use({
-    "lukas-reineke/indent-blankline.nvim",
-    requires = "nvim-treesitter/nvim-treesitter",
-    config = require("plugins.indentline"),
-  })
+	-- Tabline
+	-- TODO: check out https://github.com/akinsho/nvim-bufferline.lua
+	use({
+		"romgrk/barbar.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = require("plugins.barbar"),
+	})
 
-  -- Coloured pairs
-  -- TODO: change colourscheme, esp red
-  use({
-    "p00f/nvim-ts-rainbow",
-    requires = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        rainbow = {
-          enable = true,
-          extended_mode = true, -- Also highlight non-bracket delimiters like html tags
-          max_file_lines = 1000,
-        },
-      })
-    end,
-  })
+	-- Startup screen
+	-- TODO: see if this integrates https://github.com/rmagatti/auto-session
+	use({
+		"glepnir/dashboard-nvim",
+		config = require("plugins.dashboard"),
+	})
 
-  -- CSS colours
-  -- NOTE: doesn't highlight lower case names
-  use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-  })
+	-- Indent blank lines
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = require("plugins.indentline"),
+	})
 
-  -- use 'kyazdani42/nvim-web-devicons'
+	-- Coloured pairs
+	-- TODO: change colourscheme, esp red
+	use({
+		"p00f/nvim-ts-rainbow",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				rainbow = {
+					enable = true,
+					extended_mode = true, -- Also highlight non-bracket delimiters like html tags
+					max_file_lines = 1000,
+				},
+			})
+		end,
+	})
+
+	-- CSS colours
+	-- NOTE: doesn't highlight lower case names
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	})
+
+	-- use 'kyazdani42/nvim-web-devicons'
 end)

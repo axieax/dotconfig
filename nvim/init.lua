@@ -3,11 +3,11 @@
 -- Load settings
 -- require('utils')
 -- require('utils.config')
-require('general')
-require('plugins')
+require("general")
+require("plugins")
 -- -- Need better Vim event since currently this may result in an infinite loop
 -- -- BUG: calling LspInstall brings up another prompt (buffer)..
 -- vim.cmd("autocmd BufEnter * lua auto_lsp_install()")
 
 -- Need sudo apt install ripgrep for Telescope grep_string
--- JAVA: https://github.com/mfussenegger/nvim-jdtls
+-- JAVA: https://github.com/mfussenegger/nvim-jdtls -- needs jdtls installed

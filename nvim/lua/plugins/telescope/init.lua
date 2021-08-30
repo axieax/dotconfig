@@ -12,17 +12,18 @@
 --]]
 
 return function()
-	local map = require('utils').map
+	local map = require("utils").map
 	-- map({"n", "<Space>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>"})
-	map({"n", "<Space>ff", "<cmd>lua require('plugins.telescope.helpers').file_search(false)<cr>"})
-	map({"n", "<Space>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>"}) -- fw?
-	map({"n", "<Space>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>"}) -- ft?
-	map({"n", "<Space>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>"})
-	map({"n", "<Space>fe", "<cmd>lua require('plugins.telescope.helpers').explorer()<cr>"})
+	map({ "n", "<Space>ff", "<cmd>lua require('plugins.telescope.helpers').file_search(false)<cr>" })
+	map({ "n", "<Space>fc", "<cmd>lua require('plugins.telescope.helpers').dotconfig()<cr>" })
+	map({ "n", "<Space>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>" }) -- fw?
+	map({ "n", "<Space>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>" }) -- ft?
+	map({ "n", "<Space>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
+	map({ "n", "<Space>fe", "<cmd>lua require('plugins.telescope.helpers').explorer()<cr>" })
 	vim.cmd("autocmd VimEnter * lua require('plugins.telescope.helpers').file_search(true)")
-	map({"n", "<Space>fd", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>"})
+	map({ "n", "<Space>fd", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>" })
 	-- NOTE: file browser currently can't go into folders? fzf?
-	map({"n", "<C-_>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>"}) -- control slash NOTE: inverse order
+	map({ "n", "<C-_>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>" }) -- control slash NOTE: inverse order
 	-- TODO: config/bookmark search (~/dotconfig)
 
 	-- If find files opened from a directory buffer, change path to the directory instead (NERDTree)
@@ -32,7 +33,7 @@ return function()
 
 	-- telescope setup mappings table - inside telescope overlay
 	-- TODO: overwrite dotfiles? action for opening current file in native file explorer?
-	require('telescope').setup {
+	require("telescope").setup({
 		defaults = {
 			sorting_strategy = "ascending",
 			layout_config = {
@@ -42,14 +43,13 @@ return function()
 				},
 				vertical = {
 					prompt_position = "top",
-				}
-			}
+				},
+			},
 		},
-	}
+	})
 
 	-- Extensions
-	require('telescope').load_extension('fzf')
+	require("telescope").load_extension("fzf")
 
 	-- NOTE: remove NERDTree? - can file browser create/move/delete files?
-
 end

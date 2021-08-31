@@ -4,8 +4,6 @@
 -- NOTE: suggested formatters - https://github.com/sbdchd/neoformat#supported-filetypes
 
 return function()
-  local bufname = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-
   local function prettier()
     -- INSTALL: yarn global add prettier
     -- PLUGINS:
@@ -14,7 +12,11 @@ return function()
     -- @prettier/plugin-php @prettier/plugin-ruby @prettier/plugin-xml @prettier/plugin-pug
     return {
       exe = "prettier",
-      args = { "--stdin-filepath", bufname, "--single-quote" },
+      args = {
+        "--stdin-filepath",
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+        "--single-quote",
+      },
       stdin = true,
     }
   end
@@ -23,7 +25,12 @@ return function()
     -- INSTALL: yarn global add eslint_d
     return {
       exe = "eslint_d",
-      args = { "--stdin", "--stdin-filename", bufname, "--fix-to-stdout" },
+      args = {
+        "--stdin",
+        "--stdin-filename",
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+        "--fix-to-stdout",
+      },
       stdin = true,
     }
   end
@@ -34,7 +41,7 @@ return function()
       exe = "stylua",
       args = {
         "--stdin-filepath",
-        bufname,
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
         "--indent-type",
         "Spaces",
         "--indent-width",
@@ -49,7 +56,10 @@ return function()
     -- INSTALL: yarn global add clang_format
     return {
       exe = "clang-format",
-      args = { "--assume-filename", bufname },
+      args = {
+        "--assume-filename",
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+      },
       stdin = true,
       cwd = vim.fn.expand("%:p:h"), -- Run clang-format in cwd of the file.
     }
@@ -59,7 +69,11 @@ return function()
     -- INSTALL: pip install black
     return {
       exe = "python -m black",
-      args = { "--stdin-filename", bufname, "-" },
+      args = {
+        "--stdin-filename",
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+        "-",
+      },
       stdin = true,
     }
   end

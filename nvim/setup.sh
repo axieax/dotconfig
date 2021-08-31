@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+pip install neovim
 
 # Setup Java
 # JRE, JDK, Java (sudo pacman -S jre-openjdk)

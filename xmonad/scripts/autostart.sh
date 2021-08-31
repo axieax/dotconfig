@@ -1,9 +1,8 @@
 #!/bin/bash
 
-function run {
-  if ! pgrep $1 ;
-  then
-    $@&
+function run() {
+  if ! pgrep $1; then
+    $@ &
   fi
 }
 
@@ -19,8 +18,10 @@ function run {
 
 xrandr --output HDMI-0 --auto --output DP-0 --auto --right-of HDMI-0
 
-
-(sleep 2; run $HOME/.config/polybar/launch.sh) &
+(
+  sleep 2
+  run $HOME/.config/polybar/launch.sh
+) &
 
 #change your keyboard if you need it
 #setxkbmap -layout be
@@ -47,6 +48,7 @@ blueberry-tray &
 picom --config $HOME/.xmonad/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
+xfce4-clipman &
 
 #starting user applications at boot time
 #nitrogen --restore &

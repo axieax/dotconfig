@@ -249,6 +249,9 @@ return require("packer").startup(function(use)
     config = require("lsp.formatter"),
   })
 
+  -- Make
+  use("neomake/neomake")
+
   -----------------------------------------------------------
   -- Customisations
   -----------------------------------------------------------

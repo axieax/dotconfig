@@ -16,4 +16,6 @@ return function()
 
   map({ "n", "]t", "<cmd>:call ultest#positions#next()<CR>" })
   map({ "n", "[t", "<cmd>:call ultest#positions#prev()<CR>" })
+
+  -- vim.g["test#java#runner"] = "gradlerunner"
 end

@@ -1,20 +1,29 @@
 -- https://github.com/mhartington/formatter.nvim --
 -- SETUP: add (yarn global bin) to path
--- LUA: sudo pacman -S stylua
--- PRETTIER: yarn global add prettier
--- CLANG_FORMAT: yarn global add clang_format
--- PYTHON: pip install black
 -- yarn global or project dev dependency
 -- NOTE: suggested formatters - https://github.com/sbdchd/neoformat#supported-filetypes
 
 return function()
-  local bufname = vim.api.nvim_buf_get_name(0)
+  local bufname = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
 
   local function prettier()
     -- INSTALL: yarn global add prettier
+    -- PLUGINS:
+    -- prettier-plugin-sh prettier-plugin-java prettier-plugin-toml
+    -- prettier-plugin-apex prettier-plugin-elm prettier-plugin-svelte prettier-plugin-kotlin
+    -- @prettier/plugin-php @prettier/plugin-ruby @prettier/plugin-xml @prettier/plugin-pug
     return {
       exe = "prettier",
       args = { "--stdin-filepath", bufname, "--single-quote" },
+      stdin = true,
+    }
+  end
+
+  local function eslint_d()
+    -- INSTALL: yarn global add eslint_d
+    return {
+      exe = "eslint_d",
+      args = { "--stdin", "--stdin-filename", bufname, "--fix-to-stdout" },
       stdin = true,
     }
   end
@@ -55,21 +64,54 @@ return function()
     }
   end
 
+  local function brittany()
+    -- INSTALL: sudo pacman -S haskell-brittany
+    return {
+      exe = "brittany",
+      stdin = true,
+    }
+  end
+
+  local function gofmt()
+    return {
+      exe = "gofmt",
+      stdin = true,
+    }
+  end
+
+  local function rustfmt()
+    return {
+      exe = "rustfmt",
+      args = { "--emit=stdout" },
+      stdin = true,
+    }
+  end
+
+  local function cmake_format()
+    -- INSTALL: pip install cmakelang
+    return {
+      exe = "cmake-format", -- ~/.local/bin/cmake-format
+      args = { "-" },
+      stdin = true,
+    }
+  end
+
+  -- NOTE: keys refer to vim.bo.filetype
   require("formatter").setup({
     logging = false,
     filetype = {
       ["*"] = {},
       -- general remove whitespace
-      javascript = { prettier, clang_format }, -- TODO: eslint_d
-      typescript = { prettier },
-      javascriptreact = { prettier },
-      typescriptreact = { prettier },
-      json = { prettier, clang_format },
+      javascript = { prettier, eslint_d },
+      typescript = { prettier, eslint_d },
+      javascriptreact = { prettier, eslint_d },
+      typescriptreact = { prettier, eslint_d },
+      json = { prettier },
+      -- json = { clang_format }, -- NOTE: fallback
       html = { prettier },
-      vue = { prettier },
       css = { prettier },
       less = { prettier },
-      scss = { prettier }, -- NOTE: no sass support
+      scss = { prettier },
       graphql = { prettier },
       markdown = { prettier },
       yaml = { prettier },
@@ -79,18 +121,29 @@ return function()
       cpp = { clang_format },
       objc = { clang_format }, -- TODO: check if this is the correct ft
       proto = { clang_format },
-      -- TODO: cmake? csv? go? rust? erlang? haskell? matlab? pandoc for pandoc markdown? R? sass? shell/bash (use prettier-plugin-sh)? zsh?
+      -- TODO: csv? erlang? matlab? pandoc for pandoc markdown? R? sass? latex?
       python = { black },
-      apex = { prettier }, -- SETUP: yarn global add prettier-plugin-apex
-      elm = { prettier }, -- SETUP: yarn global add prettier-plugin-elm
-      java = { prettier, clang_format }, -- SETUP: yarn global add prettier-plugin-java
-      php = { prettier }, -- SETUP: yarn global add @prettier/plugin-php
-      ruby = { prettier }, -- SETUP: yarn global add @prettier/plugin-ruby
-      toml = { prettier }, -- SETUP: yarn global add prettier-plugin-toml
-      xml = { prettier }, -- SETUP: yarn global add @prettier/plugin-xml
-      svelte = { prettier }, -- SETUP: yarn global add prettier-plugin-svelte
-      kotlin = { prettier }, -- SETUP: yarn global add prettier-plugin-kotlin
-      -- prettier-plugin-sh for shellscript, Dockerfile, properties, gitignore, dotenv, hosts, jvmoptions...
+      go = { gofmt },
+      rust = { rustfmt },
+      apex = { prettier },
+      elm = { prettier },
+      java = { prettier },
+      -- java = { clang_format }, -- NOTE: fallback
+      php = { prettier },
+      ruby = { prettier },
+      toml = { prettier },
+      xml = { prettier },
+      svelte = { prettier },
+      kotlin = { prettier },
+      pug = { prettier },
+      haskell = { brittany },
+      sh = { prettier },
+      dockerfile = { prettier },
+      jproperties = { prettier },
+      conf = { prettier },
+      zsh = { prettier },
+      [""] = { prettier }, -- .gitignore
+      make = { cmake_format },
     },
   })
   -- Format on save

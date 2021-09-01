@@ -5,52 +5,49 @@
 -- fzf native https://github.com/nvim-telescope/telescope-fzf-native.nvim
 -- image preview https://github.com/nvim-telescope/telescope-media-files.nvim
 -- recent https://github.com/nvim-telescope/telescope-frecency.nvim
--- dap https://github.com/nvim-telescope/telescope-dap.nvim
 -- lsp maps
--- current_buffer_fuzzy_find - control slash (<C-_>)
 -- move top prompt above results, and all results ascending
 --]]
 
 return function()
-	local map = require("utils").map
-	-- map({"n", "<Space>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>"})
-	map({ "n", "<Space>ff", "<cmd>lua require('plugins.telescope.helpers').file_search(false)<cr>" })
-	map({ "n", "<Space>fc", "<cmd>lua require('plugins.telescope.helpers').dotconfig()<cr>" })
-	map({ "n", "<Space>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>" }) -- fw?
-	map({ "n", "<Space>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>" }) -- ft?
-	map({ "n", "<Space>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
-	map({ "n", "<Space>fe", "<cmd>lua require('plugins.telescope.helpers').explorer()<cr>" })
-	vim.cmd("autocmd VimEnter * lua require('plugins.telescope.helpers').file_search(true)")
-	map({ "n", "<Space>fd", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>" })
-	-- NOTE: file browser currently can't go into folders? fzf?
-	map({ "n", "<C-_>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>" }) -- control slash NOTE: inverse order
-	-- TODO: config/bookmark search (~/dotconfig)
+  local map = require("utils").map
+  map({ "n", "<Space>ff", "<cmd>lua require('plugins.telescope.helpers').file_search(false)<cr>" })
+  map({ "n", "<Space>fc", "<cmd>lua require('plugins.telescope.helpers').dotconfig()<cr>" })
+  map({ "n", "<Space>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>" })
+  map({ "n", "<Space>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>" })
+  map({ "n", "<Space>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
+  map({ "n", "<Space>fe", "<cmd>lua require('plugins.telescope.helpers').explorer()<cr>" })
+  vim.cmd("autocmd VimEnter * lua require('plugins.telescope.helpers').file_search(true)")
+  map({ "n", "<Space>fo", "<cmd>lua require('telescope.builtin').vim_options()<cr>" })
+  map({ "n", "<C-_>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>" }) -- control slash NOTE: inverse order
+  map({ "n", "<Space>fr", "<cmd>lua require('telescope.builtin').old_files()<cr>" })
+  map({ "n", "<Space>ft", "<cmd>lua require('telescope.builtin').colorscheme()<cr>" })
+  map({ "n", "<Space>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>" })
+  map({ "n", "<Space>fs", "<cmd>lua require('telescope.builtin').spell_suggest()<cr>" })
+  map({ "n", "<Space>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>" })
+  map({ "n", "<Space>f/", "<cmd>lua require('telescope.builtin').search_history()<cr>" })
+  map({ "n", "<Space>f;", "<cmd>lua require('telescope.builtin').command_history()<cr>" })
 
-	-- If find files opened from a directory buffer, change path to the directory instead (NERDTree)
-	-- :Telescope file_browser (git repo, dir of current buffer if possible, normal) - better (can also do cwd=)
-	-- space fe or fb?
-	-- :Telescope find_files cwd=~/.config
+  -- telescope setup mappings table - inside telescope overlay
+  -- TODO: overwrite dotfiles? action for opening current file in native file explorer?
+  require("telescope").setup({
+    defaults = {
+      sorting_strategy = "ascending",
+      layout_config = {
+        horizontal = {
+          prompt_position = "top",
+          preview_width = 0.7,
+        },
+        vertical = {
+          prompt_position = "top",
+        },
+      },
+    },
+  })
 
-	-- telescope setup mappings table - inside telescope overlay
-	-- TODO: overwrite dotfiles? action for opening current file in native file explorer?
-	require("telescope").setup({
-		defaults = {
-			sorting_strategy = "ascending",
-			layout_config = {
-				horizontal = {
-					prompt_position = "top",
-					preview_width = 0.7,
-				},
-				vertical = {
-					prompt_position = "top",
-				},
-			},
-		},
-	})
+  -- Extensions
+  require("telescope").load_extension("fzf")
+  require("telescope").load_extension("dap")
 
-	-- Extensions
-	require("telescope").load_extension("fzf")
-	require("telescope").load_extension("dap")
-
-	-- NOTE: remove NERDTree? - can file browser create/move/delete files?
+  -- Can Telescope file browser create/move/delete files?
 end

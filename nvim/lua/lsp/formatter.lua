@@ -171,5 +171,6 @@ return function()
     true
   )
   -- Save without formatting
-  vim.cmd("command W :noautocmd w")
+  vim.cmd("command! W :noautocmd w")
+  vim.cmd("command! Wq :noautocmd wq")
 end

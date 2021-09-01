@@ -23,8 +23,8 @@ return function()
   map({ "n", "gQ", "<cmd>:Telescope lsp_range_code_actions<CR>" })
 
   -- Diagnostics
-  map({ "n", "gv", "<cmd>:Telescope lsp_document_diagnostics<CR>" })
-  map({ "n", "gV", "<cmd>:Telescope lsp_workspace_diagnostics<CR>" })
+  map({ "n", "<Space>fd", "<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>" })
+  map({ "n", "<Space>fD", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>" })
   map({ "n", "<space>v", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" })
   map({ "n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" })
   map({ "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" })

@@ -14,8 +14,11 @@ return function()
   map({ "n", "<space>tp", "<cmd>:UltestOutput<CR>" })
   map({ "n", "<space>t;", "<cmd>:UltestSummary<CR>" })
 
+  map({ "n", "<space>tv", "<cmd>:TestVisit<CR>" })
+
   map({ "n", "]t", "<cmd>:call ultest#positions#next()<CR>" })
   map({ "n", "[t", "<cmd>:call ultest#positions#prev()<CR>" })
 
+  vim.g["test#python#runner"] = "pytest"
   -- vim.g["test#java#runner"] = "gradlerunner"
 end

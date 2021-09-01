@@ -15,10 +15,10 @@ return function()
   -- map({ "n", "gS", "<cmd>:Telescope lsp_workspace_symbols<CR>" })
 
   map({ "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>" })
-  map({ "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" })
+  -- map({ "n", "<C-k>", "<cmd>:Lspsaga preview_definition<CR>" })
 
   -- Actions
-  map({ "n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" }) -- only buf?
+  map({ "n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" })
   map({ "n", "gq", "<cmd>:Telescope lsp_code_actions<CR>" })
   map({ "n", "gQ", "<cmd>:Telescope lsp_range_code_actions<CR>" })
 

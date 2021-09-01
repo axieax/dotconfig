@@ -179,7 +179,7 @@ return require("packer").startup(function(use)
   -- LSP config
   use({
     "neovim/nvim-lspconfig",
-    config = require("lsp.lspconfig"),
+    config = require("lsp.config"),
   })
 
   -- LSP install
@@ -188,7 +188,7 @@ return require("packer").startup(function(use)
     after = "nvim-lspconfig",
     config = function()
       require("lsp").pre_install()
-      require("lsp.lspinstall")()
+      require("lsp.install")()
     end,
   })
 
@@ -226,7 +226,10 @@ return require("packer").startup(function(use)
   use("hrsh7th/vim-vsnip")
 
   -- Function signature
-  use("ray-x/lsp_signature.nvim")
+  use({
+    "ray-x/lsp_signature.nvim",
+    config = require("lsp.signature"),
+  })
 
   -- Autoclose and autorename html tag
   use({

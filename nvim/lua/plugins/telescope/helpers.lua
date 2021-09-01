@@ -12,7 +12,7 @@ function M.file_search(from_autocmd)
 	if current_buffer and is_directory(current_buffer) then
 		-- Current buffer is a directory
 		require("telescope.builtin").find_files({
-			search_dirs = { current_buffer, cwd },
+			search_dirs = { cwd },
 			hidden = true,
 			file_ignore_patterns = { ".git" },
 		})

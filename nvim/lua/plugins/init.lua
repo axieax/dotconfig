@@ -10,7 +10,6 @@
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up JS LSP - no root dir (or put config in test folder)
 -- Set up Dashboard session manager
--- Set up lspsaga
 -- Set up formatter (Prettier, Black), linter (efm, ale, nvim-lint, coc?)
 	-- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 -- Set up snippets (emmet)
@@ -191,14 +190,6 @@ return require("packer").startup(function(use)
       require("lsp").pre_install()
       require("lsp.lspinstall")()
     end,
-  })
-
-  -- LSP saga
-  -- NOTE: alternative https://github.com/ray-x/navigator.lua
-  -- Use Telescope instead?
-  use({
-    "glepnir/lspsaga.nvim",
-    config = require("lsp.lspsaga"),
   })
 
   -- Symbols

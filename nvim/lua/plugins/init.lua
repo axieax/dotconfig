@@ -174,6 +174,24 @@ return require("packer").startup(function(use)
       }
       -- Github buffers are Markdown
       vim.cmd("au BufEnter github.com_*.txt set filetype=markdown")
+      -- Set up nerd fonts
+      -- vim.cmd([[
+      -- function! g:IsFirenvimActive(event) abort
+      -- if !exists('*nvim_get_chan_info')
+      -- return 0
+      -- endif
+      -- let l:ui = nvim_get_chan_info(a:event.chan)
+      -- return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') && l:ui.client.name =~? 'Firenvim'
+      -- endfunction
+
+      -- function! OnUIEnter(event) abort
+      -- if g:IsFirenvimActive(a:event)
+      -- " set laststatus=0
+      -- set guifont=Symbols\ Nerd\ Font
+      -- endif
+      -- endfunction
+      -- autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+      -- ]])
     end,
   })
 

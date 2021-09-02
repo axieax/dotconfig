@@ -28,6 +28,12 @@ return function()
   map({ "n", "<Space>f/", "<cmd>lua require('telescope.builtin').search_history()<cr>" })
   map({ "n", "<Space>f;", "<cmd>lua require('telescope.builtin').command_history()<cr>" })
 
+  map({ "n", "<Space>gs", "<cmd>lua require('telescope.builtin').git_stash()<cr>" })
+  map({ "n", "<Space>gb", "<cmd>lua require('telescope.builtin').git_branches()<cr>" })
+  map({ "n", "<Space>g?", "<cmd>lua require('telescope.builtin').git_status()<cr>" })
+  map({ "n", "<Space>gc", "<cmd>lua require('telescope.builtin').git_bcommits()<cr>" })
+  map({ "n", "<Space>gC", "<cmd>lua require('telescope.builtin').git_commits()<cr>" })
+
   -- telescope setup mappings table - inside telescope overlay
   -- TODO: overwrite dotfiles? action for opening current file in native file explorer?
   require("telescope").setup({

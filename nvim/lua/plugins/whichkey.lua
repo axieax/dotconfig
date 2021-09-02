@@ -47,13 +47,18 @@ return function()
       -- TODO: set up g for Telescope git_*
       g = {
         name = "+git",
-        b = { "git blame toggle" },
+        [";"] = { "git blame toggle" },
         g = { "<cmd>:FloatermNew lazygit<CR>", "lazygit" },
-        s = { "git stage hunk" },
+        h = { "git stage hunk" },
         r = { "git reset hunk" },
         R = { "git reset buffer" },
         d = { "git diff preview" },
         u = { "git stage hunk undo" },
+        s = { "git stash" },
+        b = { "git branches" },
+        c = { "git buffer commits" },
+        C = { "git repo commits" },
+        ["?"] = { "git status" },
       },
     },
     ["["] = {

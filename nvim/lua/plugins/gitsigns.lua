@@ -16,12 +16,13 @@ return function()
   })
   -- Toggle Git blame
   -- TODO: customise virtual text colour. angry prefix
-  map({ "n", "<space>gb", "<cmd>lua require'gitsigns'.toggle_current_line_blame()<CR>" })
-  map({ "n", "<space>gs", "<cmd>lua require'gitsigns'.stage_hunk()<CR>" })
-  map({ "v", "<space>gs", "<cmd>lua require'gitsigns'.stage_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>" })
+  map({ "n", "<space>g;", "<cmd>lua require'gitsigns'.toggle_current_line_blame()<CR>" })
+  map({ "n", "<space>gh", "<cmd>lua require'gitsigns'.stage_hunk()<CR>" })
+  map({ "v", "<space>gh", "<cmd>lua require'gitsigns'.stage_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>" })
   map({ "n", "<space>gu", "<cmd>lua require'gitsigns'.undo_stage_hunk()<CR>" })
   map({ "n", "<space>gr", "<cmd>lua require'gitsigns'.reset_hunk()<CR>" })
   map({ "v", "<space>gr", "<cmd>lua require'gitsigns'.reset_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>" })
   map({ "n", "<space>gR", "<cmd>lua require'gitsigns'.reset_buffer()<CR>" })
   map({ "n", "<space>gd", "<cmd>lua require'gitsigns'.preview_hunk()<CR>" })
+  -- TODO: Git browse <space>gw
 end

@@ -120,7 +120,8 @@ font-5 = "MesloLGS NF"
 
 modules-left = ewmh xwindow
 modules-center = spotify-prev spotify2 spotify-next date
-modules-right = wireless-network networkspeeddown pavolume memory2 cpu2
+modules-right = wireless-network networkspeeddown pavolume memory2 cpu2 arch-updates aur-updates
+; can't change xkeyboard
 
 tray-detached = false
 tray-offset-x = 0
@@ -205,24 +206,24 @@ modules-right = filesystem
 [module/arch-updates]
 type = custom/script
 exec = ~/.config/polybar/scripts/check-arch-updates.sh
-interval = 1000
-label = Arch: %output%
+interval = 3600
+label = %output%
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 format-prefix = "  "
 format-prefix-foreground = #FFBB00
-format-underline = #FFBB00
+;format-underline = #FFBB00
 
 [module/aur-updates]
 type = custom/script
 exec = ~/.config/polybar/scripts/check-aur-updates.sh
-interval = 1000
-label = Aur: %output%
+interval = 3600
+label = %output%
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 format-prefix = "  "
 format-prefix-foreground = #FFBB00
-format-underline = #FFBB00
+;format-underline = #FFBB00
 
 ################################################################################
 

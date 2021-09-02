@@ -23,6 +23,7 @@ import           XMonad.Util.EZConfig           ( additionalKeys
                                                 )
 import           XMonad.Util.Run                ( spawnPipe )
 
+-- TODO: More layouts
 import           XMonad.Layout.Cross            ( simpleCross )
 ---import XMonad.Layout.NoBorders
 import           XMonad.Layout.Fullscreen       ( fullscreenFull )
@@ -34,6 +35,9 @@ import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Spacing
 import           XMonad.Layout.Spiral           ( spiral )
 import           XMonad.Layout.ThreeColumns
+
+-- import XMonad.Layout.Minimize
+-- import XMonad.Actions.Minimize
 
 
 import           XMonad.Layout.CenteredMaster   ( centerMaster )
@@ -204,7 +208,8 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
     $
   ----------------------------------------------------------------------
   -- SUPER + FUNCTION KEYS
-       [ ((modMask, xK_e), spawn $ "thunderbird")
+       [ ((modMask, xK_b), spawn $ "thunderbird")
+       , ((modMask, xK_n), spawn $ "chromium")
        , ((modMask, xK_c), namedScratchpadAction myScratchPads "calculator")
        , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
        , ((modMask, xK_h), spawn $ "alacritty -e htop")
@@ -212,8 +217,8 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_r), spawn $ "rofi -show run")
        , ((modMask, xK_t), namedScratchpadAction myScratchPads "terminal")
        , ((modMask, xK_s), namedScratchpadAction myScratchPads "spotify")
-       , ((modMask, xK_v), spawn $ "pavucontrol")
-       , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle")
+       , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle") -- and resize XMonad as well?
+       , ((modMask, xK_v), spawn $ "xfce4-popup-clipman")
        , ((modMask, xK_x), spawn $ "arcolinux-logout")
        , ((modMask, xK_Escape), spawn $ "xkill")
        , ((modMask, xK_Return), spawn $ "alacritty")
@@ -234,7 +239,8 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((0, xK_F12), spawn $ "xfce4-terminal --drop-down")
 
   -- SUPER + SHIFT KEYS
-       , ((modMask .|. shiftMask, xK_w), spawn $ "chromium")
+       , ((modMask .|. shiftMask, xK_c), spawn $ "chromium")
+       , ((modMask .|. shiftMask, xK_v), spawn $ "pavucontrol")
        , ((modMask .|. shiftMask, xK_Return), spawn $ "nemo")
        , ( (modMask .|. shiftMask, xK_d)
          , spawn
@@ -430,12 +436,15 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
          ]
        ]
 
-  -- ++
-  -- ctrl-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-  -- ctrl-shift-{w,e,r}, Move client to screen 1, 2, or 3
-  -- [((m .|. controlMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-  --     | (key, sc) <- zip [xK_w, xK_e] [0..]
-  --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    ++
+  -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
+  -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+       [ ( (m .|. modMask, key)
+         , screenWorkspace sc >>= flip whenJust (windows . f)
+         )
+       | (key, sc) <- zip [xK_w, xK_e] [0 ..]
+       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+       ]
 
 
 

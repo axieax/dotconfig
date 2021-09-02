@@ -158,6 +158,7 @@ return function()
       zsh = { prettier },
       [""] = { prettier }, -- .gitignore
       make = { cmake_format },
+      txt = {},
     },
   })
   -- Format on save

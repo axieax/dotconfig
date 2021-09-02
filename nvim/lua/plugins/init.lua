@@ -156,6 +156,27 @@ return require("packer").startup(function(use)
   -- TODO list (put on dashboard) - neorg vs vimwiki?
   -- Get Treesitter parser
 
+  -- Browser integration
+  use({
+    "glacambre/firenvim",
+    run = function()
+      vim.fn["firenvim#install"](0)
+    end,
+    config = function()
+      vim.g.firenvim_config = {
+        localSettings = {
+          [".*"] = {
+            takeover = "never", -- Autostart
+            sync = "change", -- Autosave
+            -- cmdline = "neovim",
+          },
+        },
+      }
+      -- Github buffers are Markdown
+      vim.cmd("au BufEnter github.com_*.txt set filetype=markdown")
+    end,
+  })
+
   -----------------------------------------------------------
   -- Coding Utilities
   -----------------------------------------------------------

@@ -146,6 +146,13 @@ return require("packer").startup(function(use)
     config = require("plugins.whichkey"),
   })
 
+  -- Easy motion
+  use({
+    "phaazon/hop.nvim",
+    as = "hop",
+    config = require("plugins.hop"),
+  })
+
   -- TODO list (put on dashboard) - neorg vs vimwiki?
   -- Get Treesitter parser
 

@@ -42,13 +42,39 @@ return function()
         k = { "find keymaps" },
         ["/"] = { "search history" },
         [";"] = { "command history" },
+        -- TODO: grep_string
       },
       -- TODO: set up g for Telescope git_*
+      g = {
+        name = "+git",
+        b = { "git blame toggle" },
+        g = { "<cmd>:FloatermNew lazygit<CR>", "lazygit" },
+        s = { "git stage hunk" },
+        r = { "git reset hunk" },
+        R = { "git reset buffer" },
+        d = { "git diff preview" },
+        u = { "git stage hunk undo" },
+      },
     },
-    -- TODO: g, ][]
-    ["%["] = {
+    ["["] = {
       name = "+previous",
-      g = { "git hunk" },
+      g = { "Previous Git hunk" },
+      d = { "Previous diagnostic" },
+      t = { "Previous test" },
+    },
+    ["]"] = {
+      name = "+next",
+      g = { "Next Git hunk" },
+      d = { "Next diagnostic" },
+      t = { "Next test" },
+    },
+    h = {
+      name = "+hop",
+      c = { "<cmd>:HopChar1<CR>", "char 1" },
+      C = { "<cmd>:HopChar2<CR>", "Char 2" },
+      w = { "<cmd>:HopWord<CR>", "word" },
+      l = { "<cmd>:HopLine<CR>", "line" },
+      h = { "<cmd>:HopPattern<CR>", "pattern" },
     },
   })
 end

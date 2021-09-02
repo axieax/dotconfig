@@ -5,9 +5,23 @@ return function()
     keymaps = {
       ["n ]g"] = { expr = true, "&diff ? ']g' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
       ["n [g"] = { expr = true, "&diff ? '[g' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
+      -- Text objects
+      -- ["o ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+      -- ["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
     },
+    -- Alternative mode (highlight numbers instead of column)
+    numhl = true,
+    signcolumn = false,
+    -- current_line_blame = true,
   })
   -- Toggle Git blame
   -- TODO: customise virtual text colour. angry prefix
-  map({ "n", "<space>gb", "<cmd>:Gitsigns toggle_current_line_blame<CR>" })
+  map({ "n", "<space>gb", "<cmd>lua require'gitsigns'.toggle_current_line_blame()<CR>" })
+  map({ "n", "<space>gs", "<cmd>lua require'gitsigns'.stage_hunk()<CR>" })
+  map({ "v", "<space>gs", "<cmd>lua require'gitsigns'.stage_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>" })
+  map({ "n", "<space>gu", "<cmd>lua require'gitsigns'.undo_stage_hunk()<CR>" })
+  map({ "n", "<space>gr", "<cmd>lua require'gitsigns'.reset_hunk()<CR>" })
+  map({ "v", "<space>gr", "<cmd>lua require'gitsigns'.reset_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>" })
+  map({ "n", "<space>gR", "<cmd>lua require'gitsigns'.reset_buffer()<CR>" })
+  map({ "n", "<space>gd", "<cmd>lua require'gitsigns'.preview_hunk()<CR>" })
 end

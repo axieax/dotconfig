@@ -63,13 +63,13 @@ return function()
     },
     ["["] = {
       name = "+previous",
-      g = { "Previous Git hunk" },
+      g = { "Previous git hunk" },
       d = { "Previous diagnostic" },
       t = { "Previous test" },
     },
     ["]"] = {
       name = "+next",
-      g = { "Next Git hunk" },
+      g = { "Next git hunk" },
       d = { "Next diagnostic" },
       t = { "Next test" },
     },

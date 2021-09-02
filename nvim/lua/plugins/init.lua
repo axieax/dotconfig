@@ -319,5 +319,12 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- Zen mode
+  use({
+    "folke/zen-mode.nvim",
+    requires = "folke/twilight.nvim",
+    config = require("plugins.zen"),
+  })
+
   -- use 'kyazdani42/nvim-web-devicons'
 end)

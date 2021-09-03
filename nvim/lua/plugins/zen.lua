@@ -7,7 +7,7 @@ return function()
   -- Zen mode
   require("zen-mode").setup({
     plugins = {
-      twilight = { enabled = false },
+      twilight = { enabled = true },
       gitsigns = { enabled = false },
     },
     -- TODO: disable line blame and numhl
@@ -16,17 +16,12 @@ return function()
       require("gitsigns").toggle_numhl()
     end,
     on_close = function()
-      -- require("gitsigns").toggle_current_line_blame()
       require("gitsigns").toggle_numhl()
     end,
   })
   map({ "n", "<space>z", "<cmd>:ZenMode<CR>" })
 
   -- Twilight
-  require("twilight").setup({
-    dimming = {
-      alpha = 0.9,
-      color = { "#282c34" },
-    },
-  })
+  require("twilight").setup()
+  -- NOTE: https://github.com/folke/twilight.nvim/issues/15#issuecomment-912146776
 end

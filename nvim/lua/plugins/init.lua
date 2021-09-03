@@ -95,6 +95,13 @@ return require("packer").startup(function(use)
     config = require("plugins.gitsigns"),
   })
 
+  -- Git repo link
+  use({
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = require("plugins.gitlinker"),
+  })
+
   -- Project scope
   -- TODO: check out https://github.com/ahmedkhalf/project.nvim
   -- and its support for non-LSP projects?

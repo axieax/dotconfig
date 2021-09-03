@@ -209,7 +209,7 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
   ----------------------------------------------------------------------
   -- SUPER + FUNCTION KEYS
        [ ((modMask, xK_b), spawn $ "thunderbird")
-       , ((modMask, xK_n), spawn $ "chromium")
+       -- , ((modMask, xK_n), spawn $ "chromium")
        , ((modMask, xK_c), namedScratchpadAction myScratchPads "calculator")
        , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
        , ((modMask, xK_h), spawn $ "alacritty -e htop")

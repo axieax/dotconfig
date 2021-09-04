@@ -202,6 +202,16 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- Align lines by character
+  use({
+    "godlygeek/tabular",
+    config = function()
+      -- NOTE: Prettier removes this automatic alignment
+      local map = require("utils").map
+      map({ "i", "|", "|<esc>:lua require('plugins.tabular')()<CR>a" })
+    end,
+  })
+
   -----------------------------------------------------------
   -- Coding Utilities
   -----------------------------------------------------------

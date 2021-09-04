@@ -27,6 +27,7 @@ end
 -- File explorer wrapper which shows hidden files by default,
 -- and opens the file explorer to the directory that the
 -- current buffer points to if it is a directory
+-- NOTE: press <C-e> after query to create new file/directory
 function M.explorer()
 	if current_buffer and is_directory(current_buffer) then
 		require("telescope.builtin").file_browser({

@@ -33,9 +33,10 @@ return function()
         e = { "file explorer" },
         f = { "find files" },
         h = { "help" },
-        o = { "vim options" },
+        H = { "vim options" },
+        o = { "old files" },
         g = { "live grep" },
-        r = { "old_files" },
+        r = { "registers" },
         t = { "theme" },
         m = { "search manual" },
         s = { "spelling" },
@@ -64,6 +65,14 @@ return function()
         W = { "git browse repo url" },
         ["?"] = { "git status" },
       },
+      h = {
+        name = "+hop",
+        c = { "<cmd>:HopChar1<CR>", "char 1" },
+        C = { "<cmd>:HopChar2<CR>", "Char 2" },
+        w = { "<cmd>:HopWord<CR>", "word" },
+        l = { "<cmd>:HopLine<CR>", "line" },
+        h = { "<cmd>:HopPattern<CR>", "pattern" },
+      },
     },
     ["["] = {
       name = "+previous",
@@ -76,14 +85,6 @@ return function()
       g = { "Next git hunk" },
       d = { "Next diagnostic" },
       t = { "Next test" },
-    },
-    h = {
-      name = "+hop",
-      c = { "<cmd>:HopChar1<CR>", "char 1" },
-      C = { "<cmd>:HopChar2<CR>", "Char 2" },
-      w = { "<cmd>:HopWord<CR>", "word" },
-      l = { "<cmd>:HopLine<CR>", "line" },
-      h = { "<cmd>:HopPattern<CR>", "pattern" },
     },
   })
 end

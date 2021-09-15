@@ -20,5 +20,5 @@ return function()
   map({ "n", "[t", "<cmd>:call ultest#positions#prev()<CR>" })
 
   vim.g["test#python#runner"] = "pytest"
-  -- vim.g["test#java#runner"] = "gradlerunner"
+  vim.g["test#java#runner"] = "gradletest"
 end

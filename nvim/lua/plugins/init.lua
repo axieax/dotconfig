@@ -126,12 +126,14 @@ return require("packer").startup(function(use)
   -- Debugger installer
   -- use("Pocco81/DAPInstall.nvim")
 
+  -- Debugger virtual text
+  use("theHamsta/nvim-dap-virtual-text")
+
   -- Python debugger
   use("mfussenegger/nvim-dap-python")
 
   -- Java debugger
   use("mfussenegger/nvim-jdtls")
-  -- use("microsoft/java-debug")
 
   -- Underline word
   -- NOTE: interferes with highlight search
@@ -141,10 +143,9 @@ return require("packer").startup(function(use)
   -- TODO: can it check vulnerabilities?
   use({
     "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
     ft = { "json" },
-    config = function()
-      require("package-info").setup()
-    end,
+    config = require("plugins.package"),
   })
 
   -- Which key
@@ -175,7 +176,7 @@ return require("packer").startup(function(use)
           [".*"] = {
             takeover = "never", -- Autostart
             sync = "change", -- Autosave
-            -- cmdline = "neovim",
+            cmdline = "neovim",
           },
         },
       }
@@ -281,6 +282,7 @@ return require("packer").startup(function(use)
 
   -- Snippets
   -- TODO: check out https://github.com/L3MON4D3/LuaSnip
+  -- Ultisnips
   -- Snippet collection
   use("rafamadriz/friendly-snippets")
   -- Definable snippets
@@ -381,6 +383,9 @@ return require("packer").startup(function(use)
     requires = "folke/twilight.nvim",
     config = require("plugins.zen"),
   })
+
+  -- Substitution preview
+  use("markonm/traces.vim")
 
   -- use 'kyazdani42/nvim-web-devicons'
 end)

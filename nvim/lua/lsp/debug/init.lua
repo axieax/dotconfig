@@ -35,4 +35,7 @@ return function()
   -- https://github.com/microsoft/vscode-java-test
   require("jdtls").setup_dap({ hotcodereplace = "auto" })
   require("jdtls.dap").setup_dap_main_class_configs()
+
+  -- Virtual text
+  vim.g.dap_virtual_text = true
 end

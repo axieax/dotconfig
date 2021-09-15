@@ -61,7 +61,7 @@ fi
 #run firefox &
 #run thunar &
 # run copyq &
-run spotify & #hide?
+# run spotify & # wrapper?
 #run atom &
 
 #run telegram-desktop &
@@ -69,3 +69,7 @@ run discord &
 #run dropbox &
 #run insync start &
 #run ckb-next -b &
+run thunderbird &
+
+# Set keyboard repeat delay
+xset r rate 200 25

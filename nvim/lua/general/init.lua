@@ -1,5 +1,5 @@
 -- TODO: see if there is a setting for keeping cursor position despite scroll
-local vim_apply = require('utils').vim_apply
+local vim_apply = require("utils").vim_apply
 
 -- Variables
 
@@ -23,34 +23,35 @@ vim_apply(vim.env, {})
 
 -- Options (:set)
 vim_apply(vim.o, {
-	-- General options
-	mouse = "a",
-	spell = true,
-	scrolloff = 1,
-	cursorline = true,
-	splitbelow = true,
-	splitright = true,
-	hidden = true,
-	number = true,
-	ruler = true,
-	colorcolumn = "80",
-	termguicolors = true,
-	showmode = false,
-	swapfile = false,
+  -- General options
+  mouse = "a",
+  spell = true,
+  scrolloff = 1,
+  cursorline = true,
+  splitbelow = true,
+  splitright = true,
+  hidden = true,
+  number = true,
+  ruler = true,
+  colorcolumn = "80",
+  termguicolors = true,
+  showmode = false,
+  swapfile = false,
 
-	showmatch = true,
-	hlsearch = true,
-	incsearch = true,
-	ignorecase = true,
-	smartcase = true,
+  showmatch = true,
+  hlsearch = true,
+  incsearch = true,
+  ignorecase = true,
+  smartcase = true,
 
-	-- Coding options
-	-- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
-	tabstop = 2,
-	shiftwidth = 2,
-	softtabstop = 2,
-	autoindent = true,
-	smartindent = true,
+  -- Coding options
+  -- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+  expandtab = true,
+  shiftwidth = 2,
+  softtabstop = 2,
+  tabstop = 2,
+  autoindent = true,
+  smartindent = true,
 })
 
 -- Global options (:setglobal)
@@ -74,12 +75,11 @@ vim.cmd([[
 
 -- netrw settings (for directory tree view)
 vim_apply(vim.g, {
-	loaded_netrw = 1, -- disables netrw
-	netrw_liststyle = 3, -- tree style
-	netrw_preview = 1, -- vertical splits for previews
-	netrw_altv = true, -- opens vsplit to right
+  loaded_netrw = 1, -- disables netrw
+  netrw_liststyle = 3, -- tree style
+  netrw_preview = 1, -- vertical splits for previews
+  netrw_altv = true, -- opens vsplit to right
 })
 
 -- Apply keybindings
-require "general.binds"
-
+require("general.binds")

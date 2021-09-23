@@ -13,11 +13,11 @@ return function()
     return {
       exe = "prettier",
       args = {
-        "--config-precedence",
-        "prefer-file",
+        -- "--config-precedence",
+        -- "prefer-file",
         "--stdin-filepath",
         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-        "--single-quote",
+        -- "--single-quote",
       },
       stdin = true,
     }

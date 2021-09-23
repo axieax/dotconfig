@@ -160,7 +160,7 @@ myManageHook =
   my6Shifts  = ["Spotify Premium", "spotify", "Spotify"] -- need SpotifyWM (Electron apps set class name too late)
   my7Shifts  = ["zoom", "obs"]
   my8Shifts  = ["typora"]
-  my9Shifts  = ["discord"]
+  my9Shifts  = ["discord", "slack"]
   my10Shifts = ["Thunderbird"]
 
 

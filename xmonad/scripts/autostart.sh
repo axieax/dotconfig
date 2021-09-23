@@ -61,11 +61,13 @@ fi
 #run firefox &
 #run thunar &
 # run copyq &
-# run spotify & # wrapper?
+run spotify & # wrapper?
 #run atom &
 
+# Communications
 #run telegram-desktop &
 run discord &
+run slack &
 #run dropbox &
 #run insync start &
 #run ckb-next -b &

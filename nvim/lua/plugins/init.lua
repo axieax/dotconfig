@@ -2,6 +2,7 @@
 -- https://github.com/rockerBOO/awesome-neovim
 -- https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules
 -- https://github.com/siduck76/NvChad theme
+-- https://bluz71.github.io/2021/09/10/vim-tips-revisited.html
 --]]
 
 --[[ TODO
@@ -15,6 +16,8 @@
 -- Set up snippets (emmet)
 -- Automatic lspinstall and treesitter parsers
 -- Add auto packer clean, install, compile under autoinstall packer
+-- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
+-- tpope vim-repeat (https://github.com/tpope/vim-repeat)
 --]]
 
 --[[ Features/plugins
@@ -37,6 +40,7 @@
 --[[ Notes
 -- Python indent issue (set indentexpr=)
 -- More efficient to packer install devicons instead?
+-- Formatter.nvim prettier doesn't pick up .prettierrc -> use null-ls instead? (has builtins and integrates with lsp)
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -233,7 +237,7 @@ return require("packer").startup(function(use)
 
   -- Interactive scratchpad with virtual text
   -- TODO: check out https://github.com/michaelb/sniprun
-  -- use "metakirby5/codi.vim"
+  use("metakirby5/codi.vim")
 
   -- Search highlights
   use("romainl/vim-cool")

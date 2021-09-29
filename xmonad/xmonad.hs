@@ -211,7 +211,7 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        [ ((modMask, xK_b), spawn $ "thunderbird")
        -- , ((modMask, xK_n), spawn $ "chromium")
        , ((modMask, xK_c), namedScratchpadAction myScratchPads "calculator")
-       , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
+       , ((modMask, xK_f), sendMessage $ Toggle NBFULL) -- toggle fullscreen
        , ((modMask, xK_h), spawn $ "alacritty -e htop")
        , ((modMask, xK_q), kill)
        , ((modMask, xK_r), spawn $ "rofi -show run")

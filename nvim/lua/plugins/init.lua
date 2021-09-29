@@ -35,6 +35,7 @@
 -- https://github.com/ThePrimeagen/refactoring.nvim
 -- yank list (https://github.com/AckslD/nvim-neoclip.lua)
 -- zen mode
+-- distant nvim / remote ssh
 --]]
 
 --[[ Notes

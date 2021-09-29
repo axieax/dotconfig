@@ -14,3 +14,7 @@ ln -s ~/dotconfig/polybar ~/.config/polybar
 # sddm setup
 
 
+# pavucontrol
+# https://community.spotify.com/t5/Desktop-Linux/Microsoft-teams-mutes-Spotify/td-p/5061607
+
+

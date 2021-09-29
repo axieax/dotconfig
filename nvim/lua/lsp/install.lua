@@ -4,7 +4,7 @@ return function()
   local lsp_install = require("lspinstall")
   local lsp_config = require("lspconfig")
   -- local lsp_utils = require("lspconfig.util")
-	local language_server_overrides = require('lsp.utils').language_server_overrides
+  local language_server_overrides = require("lsp.utils").language_server_overrides
 
   -- Manual overrides for language server settings
   -- https://github.com/microsoft/java-debug
@@ -15,6 +15,7 @@ return function()
     local servers = lsp_install.installed_servers()
     for _, server in pairs(servers) do
       local override = language_server_overrides[server] or {}
+      -- lsp_config[server].setup(override)
       if server ~= "java" then
         lsp_config[server].setup(override)
       end

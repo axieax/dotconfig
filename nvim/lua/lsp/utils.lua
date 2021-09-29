@@ -69,7 +69,7 @@ M.language_server_overrides = {
         }):find()
       end
     end,
-    root_dir = require("jdtls.setup").find_root({ ".git", "gradle.build", "pom.xml", "gradlew" }),
+    -- root_dir = require("jdtls.setup").find_root({ ".git", "gradle.build", "pom.xml", "gradlew" }),
   },
   -- haskell = {
   -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/hls.lua

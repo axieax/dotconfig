@@ -6,13 +6,13 @@ return function()
   local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons
 
   -- Navigation and info
-  map({ "n", "gd", "<cmd>:Telescope lsp_definitions<CR>" })
+  map({ "n", "gd", "<cmd>Telescope lsp_definitions<CR>" })
   map({ "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>" })
-  map({ "n", "gr", "<cmd>:Telescope lsp_references<CR>" })
-  map({ "n", "gi", "<cmd>:Telescope lsp_implementations<CR>" })
+  map({ "n", "gr", "<cmd>Telescope lsp_references<CR>" })
+  map({ "n", "gi", "<cmd>Telescope lsp_implementations<CR>" })
   map({ "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>" })
-  map({ "n", "gs", "<cmd>:Telescope lsp_document_symbols<CR>" })
-  map({ "n", "gS", "<cmd>:Telescope lsp_dynamic_workspace_symbols<CR>" })
+  map({ "n", "gs", "<cmd>Telescope lsp_document_symbols<CR>" })
+  map({ "n", "gS", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>" })
   -- map({ "n", "gS", "<cmd>:Telescope lsp_workspace_symbols<CR>" })
 
   map({ "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>" })
@@ -20,12 +20,12 @@ return function()
 
   -- Actions
   map({ "n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" })
-  map({ "n", "gq", "<cmd>:Telescope lsp_code_actions<CR>" })
-  map({ "n", "gQ", "<cmd>:Telescope lsp_range_code_actions<CR>" })
+  map({ "n", "gq", "<cmd>Telescope lsp_code_actions<CR>" })
+  map({ "n", "gQ", "<cmd>Telescope lsp_range_code_actions<CR>" })
 
   -- Diagnostics
-  map({ "n", "<Space>fd", "<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>" })
-  map({ "n", "<Space>fD", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>" })
+  map({ "n", "<Space>fd", "<cmd>Telescope lsp_document_diagnostics<CR>" })
+  map({ "n", "<Space>fD", "<cmd>Telescope lsp_workspace_diagnostics<CR>" })
   map({ "n", "<space>v", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" })
   map({ "n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" })
   map({ "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" })

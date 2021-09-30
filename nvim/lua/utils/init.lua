@@ -53,4 +53,8 @@ function M.map(bind)
   })
 end
 
+function M.display(...)
+  print(vim.inspect(...))
+end
+
 return M

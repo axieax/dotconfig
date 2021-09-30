@@ -1,23 +1,65 @@
--- https://github.com/nvim-telescope/telescope.nvim --
--- https://github.com/whatsthatsmell/dots/blob/master/public%20dots/vim-nvim/lua/joel/telescope/init.lua
+-- NOTE: even .gitignore ignored now
 
---[[TODO
--- fzf native https://github.com/nvim-telescope/telescope-fzf-native.nvim
--- image preview https://github.com/nvim-telescope/telescope-media-files.nvim
--- recent https://github.com/nvim-telescope/telescope-frecency.nvim
--- lsp maps
--- move top prompt above results, and all results ascending
---]]
+local M = {}
 
-return function()
+local current_buffer = vim.api.nvim_buf_get_name(0)
+local is_directory = function(buf)
+  return vim.fn.isdirectory(buf) == 1
+end
+local cwd = vim.fn.getcwd()
+
+function M.file_search(from_autocmd)
+  if current_buffer and is_directory(current_buffer) then
+    -- Current buffer is a directory
+    require("telescope.builtin").find_files({
+      search_dirs = { cwd },
+      hidden = true,
+      file_ignore_patterns = { ".git" },
+    })
+  elseif not from_autocmd then
+    -- Vim rooter sets Git project scope anyways
+    require("telescope.builtin").find_files({
+      hidden = true,
+    })
+  end
+end
+
+-- File explorer wrapper which shows hidden files by default,
+-- and opens the file explorer to the directory that the
+-- current buffer points to if it is a directory
+-- NOTE: press <C-e> after query to create new file/directory
+function M.explorer()
+  if current_buffer and is_directory(current_buffer) then
+    require("telescope.builtin").file_browser({
+      cwd = current_buffer,
+      hidden = true,
+      file_ignore_patterns = { ".git" },
+    })
+  else
+    require("telescope.builtin").file_browser({
+      hidden = true,
+      file_ignore_patterns = { ".git" },
+    })
+  end
+end
+
+function M.dotconfig()
+  require("telescope.builtin").find_files({
+    search_dirs = { "~/dotconfig" },
+    hidden = true,
+    file_ignore_patterns = { ".git" },
+  })
+end
+
+function M.setup()
   local map = require("utils").map
-  map({ "n", "<Space>ff", "<cmd>lua require('plugins.telescope.helpers').file_search(false)<cr>" })
-  map({ "n", "<Space>fc", "<cmd>lua require('plugins.telescope.helpers').dotconfig()<cr>" })
+  map({ "n", "<Space>ff", "<cmd>lua require('plugins.telescope').file_search(false)<cr>" })
+  map({ "n", "<Space>fc", "<cmd>lua require('plugins.telescope').dotconfig()<cr>" })
   map({ "n", "<Space>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>" })
   map({ "n", "<Space>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>" })
   map({ "n", "<Space>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
-  map({ "n", "<Space>fe", "<cmd>lua require('plugins.telescope.helpers').explorer()<cr>" })
-  vim.cmd("autocmd VimEnter * lua require('plugins.telescope.helpers').file_search(true)")
+  map({ "n", "<Space>fe", "<cmd>lua require('plugins.telescope').explorer()<cr>" })
+  vim.cmd("autocmd VimEnter * lua require('plugins.telescope').file_search(true)")
   map({ "n", "<Space>fH", "<cmd>lua require('telescope.builtin').vim_options()<cr>" })
   map({ "n", "<C-_>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>" }) -- control slash NOTE: inverse order
   map({ "n", "<Space>fo", "<cmd>lua require('telescope.builtin').oldfiles()<cr>" })
@@ -58,3 +100,5 @@ return function()
 
   -- Can Telescope file browser create/move/delete files?
 end
+
+return M

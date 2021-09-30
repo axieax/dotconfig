@@ -77,7 +77,7 @@ return require("packer").startup(function(use)
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       "nvim-telescope/telescope-dap.nvim",
     },
-    config = require("plugins.telescope"),
+    config = require("plugins.telescope").setup,
   })
 
   -- Tree file explorer
@@ -117,7 +117,7 @@ return require("packer").startup(function(use)
   use({
     "rcarriga/vim-ultest",
     requires = "vim-test/vim-test",
-    config = require("lsp.test"),
+    config = require("lsp.test").setup,
     run = ":UpdateRemotePlugins",
   })
 

@@ -4,7 +4,7 @@
 
 return function()
   local map = require("utils").map
-  require("dapui").setup()
+  require("dapui").setup({})
 
   -- Keymaps
   map({ "n", "<Space>dp", "<cmd>lua require'dap'.run_last()<CR>" })

@@ -112,6 +112,19 @@ return function()
     }
   end
 
+  local function google_java_format()
+    -- INSTALL: yay google-java-format
+    return {
+      exe = "google-java-format",
+      args = {
+        "--assume-filename",
+        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+        "-",
+      },
+      stdin = true,
+    }
+  end
+
   -- NOTE: keys refer to vim.bo.filetype
   require("formatter").setup({
     logging = false,
@@ -144,6 +157,7 @@ return function()
       apex = { prettier },
       elm = { prettier },
       java = { prettier },
+      -- java = { google_java_format }, -- NOTE: alternative
       -- java = { clang_format }, -- NOTE: fallback
       php = { prettier },
       ruby = { prettier },

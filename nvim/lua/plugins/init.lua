@@ -6,6 +6,8 @@
 --]]
 
 --[[ TODO
+-- switch to nvim-cmp
+-- switch to nvim-autopairs
 -- LSP compe fuzzy strategy
 -- Move treesitter, devicons to top?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -18,6 +20,7 @@
 -- Add auto packer clean, install, compile under autoinstall packer
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
 -- tpope vim-repeat (https://github.com/tpope/vim-repeat)
+-- Merge conflict resolver (like vscode)
 --]]
 
 --[[ Features/plugins
@@ -40,6 +43,7 @@
 
 --[[ Notes
 -- Python indent issue (set indentexpr=)
+-- Galaxyline gap background not transparent
 -- More efficient to packer install devicons instead?
 -- Formatter.nvim prettier doesn't pick up .prettierrc -> use null-ls instead? (has builtins and integrates with lsp)
 --]]

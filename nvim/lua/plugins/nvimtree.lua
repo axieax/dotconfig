@@ -5,6 +5,7 @@ return function()
   local utils = require("utils")
 
   require("nvim-tree").setup({
+    -- lsp_diagnostics = true, -- colour instead of signcolumn
     view = {
       width = "30%",
       side = "right",

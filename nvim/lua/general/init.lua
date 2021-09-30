@@ -4,7 +4,9 @@ local vim_apply = require("utils").vim_apply
 -- Variables
 
 -- Global variables
-vim_apply(vim.g, {})
+vim_apply(vim.g, {
+  onedark_style = "dark", -- for galaxyline colour picker
+})
 
 -- Buffer variables
 vim_apply(vim.b, {})
@@ -80,6 +82,9 @@ vim_apply(vim.g, {
   netrw_preview = 1, -- vertical splits for previews
   netrw_altv = true, -- opens vsplit to right
 })
+
+-- Auto-resize
+vim.cmd("autocmd VimResized * wincmd =")
 
 -- Apply keybindings
 require("general.binds")

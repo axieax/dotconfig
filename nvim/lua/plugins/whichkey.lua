@@ -35,7 +35,7 @@ return function()
         F = { "<cmd>gF<CR>", "goto file (with line number)" },
         l = { "<cmd>Telescope lsp_document_diagnostics<CR>", "show document diagnostics" },
         L = { "<cmd>Telescope lsp_workspace_diagnostics<CR>", "show workspace diagnostics" },
-        [";"] = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
+        K = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
         q = { "<cmd>Telescope lsp_code_actions<CR>", "code actions" },
         Q = { "<cmd>Telescope lsp_range_code_actions<CR>", "code actions (range)" },
       },

@@ -1,11 +1,7 @@
 -- https://github.com/glepnir/galaxyline.nvim --
--- TODO: insert control characters for block modes
 -- https://elianiva.my.id/post/neovim-lua-statusline
--- TODO: gap at beginning and end
 -- File indent size? mixed indent warning
--- https://github.com/glepnir/galaxyline.nvim/issues/12#issuecomment-771211490
 -- TODO: venv
--- TODO: icon only to indicate LSP active?
 -- TODO: group linecol and percentage ()
 
 -- BUG: highlight https://github.com/glepnir/galaxyline.nvim/issues/215

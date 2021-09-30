@@ -22,7 +22,6 @@ return function()
       },
       l = {
         name = "+lsp",
-        -- TODO
         d = { "<cmd>Telescope lsp_definitions<CR>", "goto definition" },
         D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "goto Definition" },
         r = { "<cmd>Telescope lsp_references<CR>", "list references" },
@@ -36,7 +35,7 @@ return function()
         l = { "<cmd>Telescope lsp_document_diagnostics<CR>", "show document diagnostics" },
         L = { "<cmd>Telescope lsp_workspace_diagnostics<CR>", "show workspace diagnostics" },
         K = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
-        q = { "<cmd>Telescope lsp_code_actions<CR>", "code actions" },
+        q = { "<cmd>lua require('plugins.telescope').code_action()<CR>", "code actions" },
         Q = { "<cmd>Telescope lsp_range_code_actions<CR>", "code actions (range)" },
       },
       f = {

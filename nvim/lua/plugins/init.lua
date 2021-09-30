@@ -8,6 +8,7 @@
 --[[ TODO
 -- switch to nvim-cmp
 -- switch to nvim-autopairs
+-- set up nvim-lightbulb with weilbith/nvim-code-action-menu to get CA diff
 -- LSP compe fuzzy strategy
 -- Move treesitter, devicons to top?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -21,6 +22,7 @@
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
 -- tpope vim-repeat (https://github.com/tpope/vim-repeat)
 -- Merge conflict resolver (like vscode)
+-- CursorHold lsp hover or line diagnostic?
 --]]
 
 --[[ Features/plugins
@@ -30,7 +32,7 @@
 -- Autosave
 -- Hop
 -- Emmet / autoclose HTML
--- Markdown HTML treesitter highlighting
+-- Markdown HTML Treesitter highlighting + Autotag support
 -- Set up quick compiler
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
 -- Use es_lintd for js/ts
@@ -39,6 +41,7 @@
 -- yank list (https://github.com/AckslD/nvim-neoclip.lua)
 -- zen mode
 -- distant nvim / remote ssh
+-- Markdown preview - ellisonleao/glow.nvim
 --]]
 
 --[[ Notes
@@ -265,6 +268,12 @@ return require("packer").startup(function(use)
 
   -- Symbols
   use("simrat39/symbols-outline.nvim")
+
+  -- Code action menu
+  use({
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+  })
 
   -- Syntax highlighting
   -- TODO: install parsers for new file types (don't download all)

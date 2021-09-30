@@ -51,6 +51,15 @@ function M.dotconfig()
   })
 end
 
+function M.code_action()
+  local ft = vim.bo.filetype
+  if ft == "java" then
+    require("jdtls").code_action()
+  else
+    require("telescope.builtin").lsp_code_actions()
+  end
+end
+
 function M.setup()
   local map = require("utils").map
   map({ "n", "<Space>ff", "<cmd>lua require('plugins.telescope').file_search(false)<cr>" })

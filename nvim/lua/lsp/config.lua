@@ -20,8 +20,9 @@ return function()
 
   -- Actions
   map({ "n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" })
-  map({ "n", "gq", "<cmd>Telescope lsp_code_actions<CR>" })
-  map({ "n", "gQ", "<cmd>Telescope lsp_range_code_actions<CR>" })
+  -- map({ "n", "gq", "<cmd>Telescope lsp_code_actions<CR>" })
+  map({ "n", "gq", "<cmd>lua require('plugins.telescope').code_action()<CR>" })
+  -- map({ "n", "gQ", "<cmd>Telescope lsp_range_code_actions<CR>" })
 
   -- Diagnostics
   map({ "n", "gl", "<cmd>Telescope lsp_document_diagnostics<CR>" })

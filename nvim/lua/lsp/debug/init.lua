@@ -30,12 +30,6 @@ return function()
   dap_python.setup("/usr/bin/python")
   dap_python.test_runner = "pytest"
 
-  -- Java setup
-  -- https://github.com/microsoft/java-debug
-  -- https://github.com/microsoft/vscode-java-test
-  require("jdtls").setup_dap({ hotcodereplace = "auto" })
-  require("jdtls.dap").setup_dap_main_class_configs()
-
   -- Virtual text
   vim.g.dap_virtual_text = true
 end

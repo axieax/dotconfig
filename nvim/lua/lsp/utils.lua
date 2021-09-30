@@ -30,6 +30,10 @@ M.language_server_overrides = {
       -- require("jdtls.setup").find_root({ ".git" }),
     },
     on_attach = function(client, bufnr)
+      -- Java setup
+      -- https://github.com/microsoft/java-debug
+      -- https://github.com/microsoft/vscode-java-test
+
       -- require("lsp").on_attach(client, bufnr)
       require("jdtls.setup").add_commands()
       require("jdtls").setup_dap({ hotcodereplace = "auto" })
@@ -41,6 +45,7 @@ M.language_server_overrides = {
       local sorters = require("telescope.sorters")
       local actions = require("telescope.actions")
       local pickers = require("telescope.pickers")
+
       require("jdtls.ui").pick_one_async = function(items, prompt, label_fn, cb)
         local opts = {}
         pickers.new(opts, {

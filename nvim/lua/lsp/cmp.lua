@@ -9,6 +9,7 @@ return function()
   end
 
   cmp.setup({
+    -- preselect = cmp.PreselectMode.None,
     snippet = {
       expand = function(args)
         -- Vsnip
@@ -20,7 +21,7 @@ return function()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm({ select = true }),
+      -- ["<CR>"] = cmp.mapping.confirm({ select = false }), -- overwritten in pairs.lua
       ["<Tab>"] = function(fallback)
         if vim.fn.pumvisible() == 1 then
           return feedkey("<C-n>", "n")

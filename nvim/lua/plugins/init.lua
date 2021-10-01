@@ -241,6 +241,9 @@ return require("packer").startup(function(use)
   -- Surround with pairs
   use("tpope/vim-surround")
 
+  -- "." repeat for some commands
+  use("tpope/vim-repeat")
+
   -- Multiple cursors
   use("mg979/vim-visual-multi")
 

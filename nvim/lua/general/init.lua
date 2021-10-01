@@ -66,9 +66,17 @@ vim_apply(vim.wo, {})
 -- Misc
 -- Hybrid relative numbers for normal mode, absolute for insert mode
 vim.cmd([[
+fun! SetRelativeNumber()
+  " dashboard\|nvimtree
+  if &ft =~ 'dashboard'
+    return
+  endif
+  set relativenumber
+endfun
+
 :augroup numbertoggle
 :  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufEnter,FocusGained,InsertLeave * call SetRelativeNumber()
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
 ]])

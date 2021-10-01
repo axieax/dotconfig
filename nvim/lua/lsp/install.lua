@@ -6,15 +6,18 @@ return function()
   -- local lsp_utils = require("lspconfig.util")
   local language_server_overrides = require("lsp.utils").language_server_overrides
 
-  -- Manual overrides for language server settings
-  -- https://github.com/microsoft/java-debug
-  -- https://github.com/microsoft/vscode-java-test
+  -- default config
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  local default_config = {
+    capabilities = capabilities,
+  }
 
   local function setup_servers()
     lsp_install.setup()
     local servers = lsp_install.installed_servers()
     for _, server in pairs(servers) do
-      local override = language_server_overrides[server] or {}
+      local override = language_server_overrides[server] or default_config
       -- lsp_config[server].setup(override)
       if server ~= "java" then
         lsp_config[server].setup(override)

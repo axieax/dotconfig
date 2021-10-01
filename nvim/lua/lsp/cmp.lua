@@ -26,14 +26,14 @@ return function()
         if vim.fn.pumvisible() == 1 then
           return feedkey("<C-n>", "n")
         else
-          return fallback
+          return fallback()
         end
       end,
       ["<S-Tab>"] = function(fallback)
         if vim.fn.pumvisible() == 1 then
           return feedkey("<C-p>", "n")
         else
-          return fallback
+          return fallback()
         end
       end,
     },

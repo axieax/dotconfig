@@ -342,6 +342,12 @@ return require("packer").startup(function(use)
   -- Make
   use("neomake/neomake")
 
+  -- Docstring generator
+  use({
+    "kkoomen/vim-doge",
+    run = ":call doge#install()",
+  })
+
   -----------------------------------------------------------
   -- Customisations
   -----------------------------------------------------------

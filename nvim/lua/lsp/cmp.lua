@@ -47,6 +47,8 @@ return function()
       { name = "emoji" },
       { name = "spell" },
       { name = "latex_symbols" },
+      -- { name = "treesitter" },
+      -- { name = "vim-dadbod-completion" },
     },
     formatting = {
       deprecated = true,
@@ -63,6 +65,8 @@ return function()
           emoji = "[Emoji]",
           spell = "[Spell]",
           latex_symbols = "[LaTeX]",
+          -- treesitter = "[TS]",
+          -- ["vim-dadbod-completion"] = "[DB]",
         })[entry.source.name]
 
         return vim_item

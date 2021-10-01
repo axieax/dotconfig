@@ -6,6 +6,7 @@
 --]]
 
 --[[ TODO
+-- Try https://github.com/b3nj5m1n/kommentary?
 -- set up nvim-lightbulb with weilbith/nvim-code-action-menu to get CA diff
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up linter? (efm, ale, nvim-lint, coc?)
@@ -35,6 +36,7 @@
 --]]
 
 --[[ Notes
+-- Prettier config not picked up
 -- Galaxyline gap background not transparent
 -- Formatter.nvim prettier doesn't pick up .prettierrc -> use null-ls instead? (has builtins and integrates with lsp)
 -- nvim-cmp treesitter completion source vs buffer source?
@@ -266,14 +268,18 @@ return require("packer").startup(function(use)
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-vsnip",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-emoji",
       "f3fora/cmp-spell",
       "kdheepak/cmp-latex-symbols",
+      -- "ray-x/cmp-treesitter",
       -- "quangnguyen30192/cmp-nvim-tags",
+      -- "tpope/vim-dadbod",
+      -- "kristijanhusak/vim-dadbod-ui",
+      -- "kristijanhusak/vim-dadbod-completion",
     },
     config = require("lsp.cmp"),
   })

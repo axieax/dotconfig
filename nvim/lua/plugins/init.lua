@@ -7,46 +7,37 @@
 
 --[[ TODO
 -- set up nvim-lightbulb with weilbith/nvim-code-action-menu to get CA diff
--- LSP compe fuzzy strategy
--- Move treesitter, devicons to top?
 -- Telescope setup, find_files wrapper if buffer is directory
--- Set up JS LSP - no root dir (or put config in test folder)
--- Set up Dashboard session manager
--- Set up formatter (Prettier, Black), linter (efm, ale, nvim-lint, coc?)
+-- Set up linter? (efm, ale, nvim-lint, coc?)
 	-- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
--- Set up snippets (emmet)
+-- Set up snippets (custom and emmet)
 -- Automatic lspinstall and treesitter parsers
 -- Add auto packer clean, install, compile under autoinstall packer
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
--- tpope vim-repeat (https://github.com/tpope/vim-repeat)
 -- Merge conflict resolver (like vscode)
 -- CursorHold lsp hover or line diagnostic?
 --]]
 
 --[[ Features/plugins
--- Faded unused variables/imports
+-- Faded unused variables/imports?
 -- Lazy loading
 -- Gradual undo
--- Autosave
--- Hop
+-- Autosave and swapfiles?
 -- Emmet / autoclose HTML
 -- Markdown HTML Treesitter highlighting + Autotag support
 -- Set up quick compiler
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
--- Use es_lintd for js/ts
 -- Minimap preview
 -- https://github.com/ThePrimeagen/refactoring.nvim
 -- yank list (https://github.com/AckslD/nvim-neoclip.lua)
--- zen mode
 -- distant nvim / remote ssh
 -- Markdown preview - ellisonleao/glow.nvim
 --]]
 
 --[[ Notes
--- Python indent issue (set indentexpr=)
 -- Galaxyline gap background not transparent
--- More efficient to packer install devicons instead?
 -- Formatter.nvim prettier doesn't pick up .prettierrc -> use null-ls instead? (has builtins and integrates with lsp)
+-- nvim-cmp treesitter completion source vs buffer source?
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -134,7 +125,7 @@ return require("packer").startup(function(use)
   })
 
   -- Debugger installer
-  -- use("Pocco81/DAPInstall.nvim")
+  use("Pocco81/DAPInstall.nvim")
 
   -- Debugger virtual text
   use("theHamsta/nvim-dap-virtual-text")
@@ -146,8 +137,13 @@ return require("packer").startup(function(use)
   use("mfussenegger/nvim-jdtls")
 
   -- Underline word
-  -- NOTE: interferes with highlight search
-  use("xiyaowong/nvim-cursorword")
+  use({
+    "yamatsum/nvim-cursorline",
+    -- disable = true,
+    config = function()
+      vim.g.cursorline_timeout = 0 -- time before cursorline appears
+    end,
+  })
 
   -- package.json dependency manager
   -- TODO: can it check vulnerabilities?
@@ -180,47 +176,13 @@ return require("packer").startup(function(use)
     run = function()
       vim.fn["firenvim#install"](0)
     end,
-    config = function()
-      vim.g.firenvim_config = {
-        localSettings = {
-          [".*"] = {
-            takeover = "never", -- Autostart
-            sync = "change", -- Autosave
-            cmdline = "neovim",
-          },
-        },
-      }
-      -- Github buffers are Markdown
-      vim.cmd("au BufEnter github.com_*.txt set filetype=markdown")
-      -- Set up nerd fonts
-      -- vim.cmd([[
-      -- function! g:IsFirenvimActive(event) abort
-      -- if !exists('*nvim_get_chan_info')
-      -- return 0
-      -- endif
-      -- let l:ui = nvim_get_chan_info(a:event.chan)
-      -- return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') && l:ui.client.name =~? 'Firenvim'
-      -- endfunction
-
-      -- function! OnUIEnter(event) abort
-      -- if g:IsFirenvimActive(a:event)
-      -- " set laststatus=0
-      -- set guifont=Symbols\ Nerd\ Font
-      -- endif
-      -- endfunction
-      -- autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-      -- ]])
-    end,
+    config = require("plugins.firenvim"),
   })
 
   -- Align lines by character
   use({
     "godlygeek/tabular",
-    config = function()
-      -- NOTE: Prettier removes this automatic alignment
-      local map = require("utils").map
-      map({ "i", "|", "|<esc>:lua require('plugins.tabular')()<CR>a" })
-    end,
+    config = require("plugins.tabular").setup,
   })
 
   -----------------------------------------------------------
@@ -264,10 +226,7 @@ return require("packer").startup(function(use)
   use({
     "kabouzeid/nvim-lspinstall",
     after = "nvim-lspconfig",
-    config = function()
-      require("lsp").pre_install()
-      require("lsp.install")()
-    end,
+    config = require("lsp.install"),
   })
 
   -- Symbols
@@ -295,6 +254,9 @@ return require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "0.5-compat",
   })
+
+  -- Python indenting issues
+  use("Vimjas/vim-python-pep8-indent")
 
   -- Auto completion (replace with hrsh7th/nvim-cmp)
   use({
@@ -350,6 +312,9 @@ return require("packer").startup(function(use)
     "kkoomen/vim-doge",
     run = ":call doge#install()",
   })
+
+  -- Incrementor/decrementor
+  use("monaqa/dial.nvim")
 
   -----------------------------------------------------------
   -- Customisations

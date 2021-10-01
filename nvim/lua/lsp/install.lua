@@ -1,6 +1,9 @@
 -- https://github.com/kabouzeid/nvim-lspinstall --
 
 return function()
+  -- lsp setup
+  require("lsp").pre_install()
+
   local lsp_install = require("lspinstall")
   local lsp_config = require("lspconfig")
   -- local lsp_utils = require("lspconfig.util")

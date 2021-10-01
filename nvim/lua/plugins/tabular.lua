@@ -1,8 +1,17 @@
 -- https://github.com/godlygeek/tabular --
 
+local M = {}
+
+function M.setup()
+  -- NOTE: Prettier removes this automatic alignment
+  -- USE: <!-- prettier-ignore -->
+  local map = require("utils").map
+  map({ "i", "|", "|<esc>:lua require('plugins.tabular').md_cucumber_table()<CR>a" })
+end
+
 -- Auto align for markdown cucumber table
 -- https://gist.github.com/tpope/287147#gistcomment-3637398
-return function()
+function M.md_cucumber_table()
   if vim.bo.filetype ~= "markdown" then
     return
   end
@@ -28,3 +37,5 @@ return function()
     fn.search(("[^|]*|"):rep(column) .. ("\\s\\{-\\}"):rep(position), "ce", lineNumber)
   end
 end
+
+return M

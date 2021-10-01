@@ -21,5 +21,5 @@ map({ "n", "<A-d>", ":co .<CR>==" })
 map({ "v", "<A-d>", ":co '><CR>gv=gv" })
 
 -- Select all
-map({ "n", "<c-a>", "ggVG" })
+-- map({ "n", "<c-a>", "ggVG" })
 -- map({ "n", "<C-A>", "<cmd>%+y<CR>" })

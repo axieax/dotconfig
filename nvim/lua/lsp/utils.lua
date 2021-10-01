@@ -25,6 +25,7 @@ M.language_server_overrides = {
       bundles = java_bundles,
       extendedClientCapabilities = extendedClientCapabilities,
     },
+    filetypes = { "java" },
     cmd = {
       -- jdtls start script
       vim.fn.expand("~/.local/share/nvim/lspinstall/java/jdtls.sh"),

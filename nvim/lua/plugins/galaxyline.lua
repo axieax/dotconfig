@@ -23,7 +23,9 @@ return function()
         return require("galaxyline.provider_extensions").scrollbar_instance(scrollbar_chars)
       end,
       -- separator = " ",
-      highlight = { onedark_colours.orange, colours.yellow },
+      -- highlight = { onedark_colours.orange, colours.yellow },
+      highlight = { colours.yellow, onedark_colours.orange },
+      -- highlight = { onedark_colours.bg_yellow, onedark_colours.yellow },
       -- highlight = { colours.red },
     },
   }

@@ -6,8 +6,6 @@
 --]]
 
 --[[ TODO
--- switch to nvim-cmp
--- switch to nvim-autopairs
 -- set up nvim-lightbulb with weilbith/nvim-code-action-menu to get CA diff
 -- LSP compe fuzzy strategy
 -- Move treesitter, devicons to top?
@@ -233,9 +231,12 @@ return require("packer").startup(function(use)
   use("tpope/vim-commentary")
 
   -- Auto closing pairs
-  use("raimondi/delimitMate")
   -- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
-  -- NOTE: remember to update compe <CR> map
+  use({
+    "windwp/nvim-autopairs",
+    after = "nvim-cmp",
+    config = require("plugins.pairs"),
+  })
 
   -- Surround with pairs
   use("tpope/vim-surround")
@@ -294,8 +295,22 @@ return require("packer").startup(function(use)
 
   -- Auto completion (replace with hrsh7th/nvim-cmp)
   use({
-    "hrsh7th/nvim-compe",
-    config = require("lsp.compe"),
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "onsails/lspkind-nvim",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-calc",
+      "hrsh7th/cmp-emoji",
+      "f3fora/cmp-spell",
+      "kdheepak/cmp-latex-symbols",
+      -- "quangnguyen30192/cmp-nvim-tags",
+    },
+    config = require("lsp.cmp"),
   })
 
   -- Snippets
@@ -345,6 +360,7 @@ return require("packer").startup(function(use)
     "glepnir/galaxyline.nvim",
     branch = "main",
     requires = "kyazdani42/nvim-web-devicons",
+    after = "onedark.nvim",
     config = require("plugins.galaxyline"),
   })
 

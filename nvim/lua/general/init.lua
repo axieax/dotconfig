@@ -4,9 +4,7 @@ local vim_apply = require("utils").vim_apply
 -- Variables
 
 -- Global variables
-vim_apply(vim.g, {
-  onedark_style = "dark", -- for galaxyline colour picker
-})
+vim_apply(vim.g, {})
 
 -- Buffer variables
 vim_apply(vim.b, {})

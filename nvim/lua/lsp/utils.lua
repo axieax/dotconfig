@@ -6,6 +6,9 @@ local java_bundles = {
 }
 vim.list_extend(java_bundles, vim.split(vim.fn.glob("~/java/vscode-java-test/server/*.jar"), "\n"))
 
+local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
 M.language_server_overrides = {
   lua = {
     settings = {
@@ -20,6 +23,7 @@ M.language_server_overrides = {
   java = {
     init_options = {
       bundles = java_bundles,
+      extendedClientCapabilities = extendedClientCapabilities,
     },
     cmd = {
       -- jdtls start script

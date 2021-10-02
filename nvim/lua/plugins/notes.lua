@@ -11,7 +11,7 @@ return function()
       WARN = {
         icon = " ",
         color = "error",
-        alt = { "WARNING", "XXX" },
+        alt = { "WARNING", "XXX", "BAD", "ERROR" },
       },
       TODO = {
         icon = " ",

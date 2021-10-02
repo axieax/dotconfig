@@ -264,6 +264,7 @@ return require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "0.5-compat",
   })
+  use("JoosepAlviste/nvim-ts-context-commentstring")
 
   -- Python indenting issues
   use("Vimjas/vim-python-pep8-indent")

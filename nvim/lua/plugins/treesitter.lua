@@ -67,6 +67,10 @@ return function()
         },
       },
     },
+    -- Comment string
+    context_commentstring = {
+      enable = true,
+    },
   })
 
   -- Folding (zopen/zclose, zReveal/zMinimise)

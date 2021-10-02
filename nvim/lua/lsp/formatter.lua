@@ -13,11 +13,8 @@ return function()
     return {
       exe = "prettier",
       args = {
-        -- "--config-precedence",
-        -- "prefer-file",
         "--stdin-filepath",
         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-        -- "--single-quote",
       },
       stdin = true,
     }
@@ -44,10 +41,7 @@ return function()
       args = {
         "--stdin-filepath",
         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-        "--indent-type",
-        "Spaces",
-        "--indent-width",
-        "2",
+        "--search-parent-directories",
         "-",
       },
       stdin = true,

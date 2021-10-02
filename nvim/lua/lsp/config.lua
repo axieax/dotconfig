@@ -2,7 +2,6 @@
 -- TODO: Toggle Diagnostics (https://www.reddit.com/r/neovim/comments/ng0dj0/lsp_diagnostics_query_is_there_an_way_to_toggle/)
 
 return function()
-  local map = require("utils").map
   local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons
 
   -- Gutter diagnostic symbols

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Stylua config
+ln -s ~/dotconfig/stylua.toml ~/.config/stylua.toml
+
 # need to install dependencies first
 
 # NeoVim setup

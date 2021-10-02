@@ -165,6 +165,8 @@ function M.which_key()
       },
       s = { "<cmd>Dashboard<CR>", "Dashboard" },
       z = { "<cmd>ZenMode<CR>", "Zen Mode" },
+      O = { "O<Esc>", "Create new line above" },
+      o = { "o<Esc>", "Create new line below" },
       ["?"] = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
     },
     ["["] = {

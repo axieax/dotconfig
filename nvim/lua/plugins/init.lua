@@ -7,7 +7,6 @@
 
 --[[ TODO
 -- Try https://github.com/b3nj5m1n/kommentary?
--- set up nvim-lightbulb with weilbith/nvim-code-action-menu to get CA diff
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up linter? (efm, ale, nvim-lint, coc?)
 	-- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
@@ -244,6 +243,14 @@ return require("packer").startup(function(use)
   use({
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
+  })
+
+  -- Code action prompt
+  use({
+    "kosayoda/nvim-lightbulb",
+    config = function()
+      vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'plugins.lightbulb'()]])
+    end,
   })
 
   -- Syntax highlighting

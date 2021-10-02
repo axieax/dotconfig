@@ -70,7 +70,7 @@ return function()
   })
 
   -- Folding (zopen/zclose, zReveal/zMinimise)
-  -- TODO: fold function keybind (use TS to parse and fold to function)
+  -- TODO: use TS query to find all functions/methods - vifzc, repeat with classes, then zR
   vim_apply(vim.o, {
     foldmethod = "expr",
     foldexpr = "nvim_treesitter#foldexpr()",

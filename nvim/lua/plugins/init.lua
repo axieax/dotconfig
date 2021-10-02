@@ -138,13 +138,8 @@ return require("packer").startup(function(use)
   use("mfussenegger/nvim-jdtls")
 
   -- Underline word
-  use({
-    "yamatsum/nvim-cursorline",
-    -- disable = true,
-    config = function()
-      vim.g.cursorline_timeout = 0 -- time before cursorline appears
-    end,
-  })
+  -- TODO: check out https://github.com/RRethy/vim-illuminate LSP highlight
+  use("itchyny/vim-cursorword")
 
   -- package.json dependency manager
   -- TODO: can it check vulnerabilities?

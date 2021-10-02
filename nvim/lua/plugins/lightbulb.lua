@@ -14,6 +14,7 @@ return function()
   })
   -- print status
   -- hl groups: https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/
+  -- NOTE: this currently does not disappear after a while :(
   local status = require("nvim-lightbulb").get_status_text()
   vim.api.nvim_echo({ { status, "Question" } }, false, {})
 end

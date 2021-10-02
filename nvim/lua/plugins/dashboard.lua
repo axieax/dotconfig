@@ -1,8 +1,6 @@
 -- https://github.com/glepnir/dashboard-nvim --
 
 return function()
-  local map = require("utils").map
-
   vim.g.dashboard_default_executive = "telescope"
   -- Telescope bindings
   -- vim.g.dashboard_custom_shortcut = {
@@ -29,5 +27,4 @@ return function()
   -- Session persistence
   -- NOTE: barbar weird lol
   vim.cmd("autocmd VimLeave * :SessionSave")
-  map({ "n", "<space>s", "<cmd>:Dashboard<CR>" })
 end

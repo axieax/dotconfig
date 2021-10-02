@@ -159,7 +159,7 @@ return require("packer").startup(function(use)
   -- Which key
   use({
     "folke/which-key.nvim",
-    config = require("plugins.whichkey"),
+    config = require("plugins.binds").which_key,
   })
 
   -- Easy motion

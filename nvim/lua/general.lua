@@ -1,28 +1,20 @@
--- TODO: see if there is a setting for keeping cursor position despite scroll
 local vim_apply = require("utils").vim_apply
 
--- Variables
+---------------
+-- Variables --
+---------------
+-- Global variables - vim.g
+-- Buffer variables - vim.b
+-- Window variables - vim.w
+-- Tabpage variables - vim.t
+-- Predefined Vim variables - vim.v
+-- Environment variables - vim.env
+-- Options (:set) - vim.o
+-- Global options (:setglobal) - vim.go
+-- Buffer options (:setlocal for buffer-local options) - vim.bo
+-- Window options (:setlocal for window-local options) - vim.wo
 
--- Global variables
-vim_apply(vim.g, {})
-
--- Buffer variables
-vim_apply(vim.b, {})
-
--- Window variables
-vim_apply(vim.w, {})
-
--- Tabpage variables
-vim_apply(vim.t, {})
-
--- Predefined Vim variables
-vim_apply(vim.v, {})
-
--- Environment variables
-vim_apply(vim.env, {})
-
--- Options (:set)
-vim_apply(vim.o, {
+vim_apply(vim.opt, {
   -- General options
   mouse = "a",
   spell = true,
@@ -54,16 +46,10 @@ vim_apply(vim.o, {
   smartindent = true,
 })
 
--- Global options (:setglobal)
-vim_apply(vim.go, {})
+----------
+-- Misc --
+----------
 
--- Buffer options (:setlocal for buffer-local options)
-vim_apply(vim.bo, {})
-
--- Window options (:setlocal for window-local options)
-vim_apply(vim.wo, {})
-
--- Misc
 -- Hybrid relative numbers for normal mode, absolute for insert mode
 vim.cmd([[
 fun! SetRelativeNumber()
@@ -93,4 +79,4 @@ vim_apply(vim.g, {
 vim.cmd("autocmd VimResized * wincmd =")
 
 -- Apply keybindings
-require("general.binds")
+require("plugins.binds").general()

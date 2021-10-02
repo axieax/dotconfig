@@ -1,4 +1,3 @@
--- TODO: Java code actions from https://github.com/mfussenegger/nvim-jdtls#usage
 local M = {}
 
 local java_bundles = {

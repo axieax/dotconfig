@@ -14,12 +14,12 @@ return function()
     on_open = function(win)
       -- require("gitsigns").toggle_current_line_blame()
       require("gitsigns").toggle_numhl()
+      -- TODO: hide todo-comments sidebar
     end,
     on_close = function()
       require("gitsigns").toggle_numhl()
     end,
   })
-  map({ "n", "<space>z", "<cmd>:ZenMode<CR>" })
 
   -- Twilight
   require("twilight").setup()

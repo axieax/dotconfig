@@ -1,5 +1,6 @@
 -- https://github.com/hrsh7th/nvim-cmp --
 
+-- TODO: add toggle tabnine
 -- BUG: no function signatures, conflicts with autopairs
 local TABNINE_ENABLED = false
 local DEFAULT_PRIORITY = 2

@@ -5,32 +5,6 @@ return function()
   local map = require("utils").map
   local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons
 
-  -- Navigation and info
-  map({ "n", "gd", "<cmd>Telescope lsp_definitions<CR>" })
-  map({ "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>" })
-  map({ "n", "gr", "<cmd>Telescope lsp_references<CR>" })
-  map({ "n", "gi", "<cmd>Telescope lsp_implementations<CR>" })
-  map({ "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>" })
-  map({ "n", "gs", "<cmd>Telescope lsp_document_symbols<CR>" })
-  map({ "n", "gS", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>" })
-  -- map({ "n", "gS", "<cmd>:Telescope lsp_workspace_symbols<CR>" })
-
-  map({ "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>" })
-  -- map({ "n", "<C-k>", "<cmd>:Lspsaga preview_definition<CR>" })
-
-  -- Actions
-  map({ "n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" })
-  -- map({ "n", "gq", "<cmd>Telescope lsp_code_actions<CR>" })
-  map({ "n", "gq", "<cmd>lua require('plugins.telescope').code_action()<CR>" })
-  -- map({ "n", "gQ", "<cmd>Telescope lsp_range_code_actions<CR>" })
-
-  -- Diagnostics
-  map({ "n", "gl", "<cmd>Trouble lsp_document_diagnostics<CR>" })
-  map({ "n", "gL", "<cmd>Trouble lsp_workspace_diagnostics<CR>" })
-  map({ "n", "gK", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" })
-  map({ "n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" })
-  map({ "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" })
-
   -- Gutter diagnostic symbols
   for type, icon in pairs(lsp_diagnostics_icons) do
     local hl = "LspDiagnosticsSign" .. type
@@ -69,35 +43,6 @@ return function()
 
     vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
   end
-
-  -- Completion types
-  vim.lsp.protocol.CompletionItemKind = {
-    "  ", -- Text
-    "  ", -- Method
-    "  ", -- Function
-    "  ", -- Constructor
-    " ﴲ ", -- Field
-    "[]", -- Variable
-    "  ", -- Class
-    " ﰮ ", -- Interface
-    "  ", -- Module
-    " 襁", -- Property
-    "  ", -- Unit
-    "  ", -- Value
-    " 練", -- Enum
-    "  ", -- Keyword
-    "  ", -- Snippet
-    "  ", -- Colour
-    "  ", -- File
-    "  ", -- Reference
-    "  ", -- Folder
-    "  ", -- EnumMember
-    " ﲀ ", -- Constant
-    " ﳤ ", -- Struct
-    "  ", -- Event
-    "  ", -- Operator
-    "  ", -- TypeParameter
-  }
 
   -- Print diagnostics in status line
   -- function PrintDiagnostics(opts, bufnr, line_nr, client_id)

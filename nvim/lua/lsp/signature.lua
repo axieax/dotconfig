@@ -1,4 +1,5 @@
 -- https://github.com/ray-x/lsp_signature.nvim --
+
 return function()
   require("lsp_signature").setup({
     bind = true,

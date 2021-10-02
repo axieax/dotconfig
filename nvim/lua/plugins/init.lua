@@ -187,6 +187,13 @@ return require("packer").startup(function(use)
     config = require("plugins.tabular").setup,
   })
 
+  -- Search for TODO comments and Trouble pretty list
+  use({
+    "folke/todo-comments.nvim",
+    requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
+    config = require("plugins.notes"),
+  })
+
   -----------------------------------------------------------
   -- Coding Utilities
   -----------------------------------------------------------
@@ -195,7 +202,6 @@ return require("packer").startup(function(use)
   use("tpope/vim-commentary")
 
   -- Auto closing pairs
-  -- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
   use({
     "windwp/nvim-autopairs",
     after = "nvim-cmp",
@@ -275,6 +281,7 @@ return require("packer").startup(function(use)
       "hrsh7th/cmp-emoji",
       "f3fora/cmp-spell",
       "kdheepak/cmp-latex-symbols",
+      { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
       -- "ray-x/cmp-treesitter",
       -- "quangnguyen30192/cmp-nvim-tags",
       -- "tpope/vim-dadbod",
@@ -332,6 +339,13 @@ return require("packer").startup(function(use)
     config = function()
       vim.g.onedark_transparent_background = true
       require("onedark").setup()
+    end,
+  })
+  use({
+    "folke/tokyonight.nvim",
+    config = function()
+      vim.g.tokyonight_transparent = true
+      vim.g.tokyonight_transparent_sidebar = true
     end,
   })
 

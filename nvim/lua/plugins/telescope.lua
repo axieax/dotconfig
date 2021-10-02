@@ -79,6 +79,7 @@ function M.setup()
   map({ "n", "<Space>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>" })
   map({ "n", "<Space>f/", "<cmd>lua require('telescope.builtin').search_history()<cr>" })
   map({ "n", "<Space>f;", "<cmd>lua require('telescope.builtin').command_history()<cr>" })
+  map({ "n", "<Space>fq", "<cmd>:TodoTrouble<CR>" })
 
   map({ "n", "<Space>gs", "<cmd>lua require('telescope.builtin').git_stash()<cr>" })
   map({ "n", "<Space>gb", "<cmd>lua require('telescope.builtin').git_branches()<cr>" })

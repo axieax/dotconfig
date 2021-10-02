@@ -1,9 +1,10 @@
 -- https://github.com/windwp/nvim-autopairs --
+-- TODO: try https://github.com/windwp/nvim-autopairs#dont-add-pairs-if-the-next-char-is-alphanumeric
 
 return function()
   require("nvim-autopairs").setup({
     -- insert mode "alt-e"
-    -- NOTE: vim surround visual selection: S? as well
+    -- NOTE: vim surround visual selection: S_ as well
     fast_wrap = {},
   })
 

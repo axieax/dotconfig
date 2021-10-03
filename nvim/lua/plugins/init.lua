@@ -138,8 +138,16 @@ return require("packer").startup(function(use)
   use("mfussenegger/nvim-jdtls")
 
   -- Underline word
-  -- TODO: check out https://github.com/RRethy/vim-illuminate LSP highlight
-  use("itchyny/vim-cursorword")
+  use({
+    "osyo-manga/vim-brightest",
+    config = function()
+      -- Highlight group (e.g. BrighestUndercurl)
+      vim.g["brightest#highlight"] = { group = "BrightestUnderline" }
+    end,
+  })
+  -- itchyny/vim-cursorword: gd gets overwritten
+  -- xiyaowong/nvim-cursorword: search highlights get overriden
+  -- yamatsum/nvim-cursorline: cursorline delay cannot be turned off
 
   -- package.json dependency manager
   -- TODO: can it check vulnerabilities?

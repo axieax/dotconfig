@@ -77,11 +77,21 @@ function M.setup()
         },
       },
     },
+    extensions = {
+      media_files = {
+        -- pip install ueberzug for images
+        -- pdftoppm for pdf
+        -- ffmpegthumbnailer for videos
+        filetypes = { "png", "jpg", "mp4", "webm", "pdf" },
+        find_cmd = "rg",
+      },
+    },
   })
 
   -- Extensions
   require("telescope").load_extension("fzf")
   require("telescope").load_extension("dap")
+  require("telescope").load_extension("media_files")
 
   -- Can Telescope file browser create/move/delete files?
 end

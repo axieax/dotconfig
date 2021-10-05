@@ -32,6 +32,8 @@
 -- yank list (https://github.com/AckslD/nvim-neoclip.lua)
 -- distant nvim / remote ssh
 -- Markdown preview - ellisonleao/glow.nvim
+-- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
+-- Telescope-cheat.nvim
 --]]
 
 --[[ Notes
@@ -73,6 +75,7 @@ return require("packer").startup(function(use)
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       "nvim-telescope/telescope-dap.nvim",
+      "nvim-telescope/telescope-media-files.nvim",
     },
     config = require("plugins.telescope").setup,
   })
@@ -145,9 +148,6 @@ return require("packer").startup(function(use)
       vim.g["brightest#highlight"] = { group = "BrightestUnderline" }
     end,
   })
-  -- itchyny/vim-cursorword: gd gets overwritten
-  -- xiyaowong/nvim-cursorword: search highlights get overriden
-  -- yamatsum/nvim-cursorline: cursorline delay cannot be turned off
 
   -- package.json dependency manager
   -- TODO: can it check vulnerabilities?

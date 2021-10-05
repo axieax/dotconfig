@@ -121,6 +121,7 @@ function M.which_key()
         s = { "<cmd>Telescope spell_suggest<CR>", "spelling" },
         k = { "<cmd>Telescope keymaps<CR>", "find keymaps" },
         q = { "<cmd>TodoTrouble<CR>", "find notes" },
+        p = { "<cmd>Telescope media_files<CR>", "media files" },
         ["/"] = { "<cmd>Telescope search_history<CR>", "search history" },
         [";"] = { "<cmd>Telescope command_history<CR>", "command history" },
         -- TODO: grep_string

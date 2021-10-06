@@ -36,7 +36,6 @@ function M.misc()
   -- LSP
   map({ "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>" })
   -- Telescope
-  vim.cmd("autocmd VimEnter * lua require('plugins.telescope').file_search(true)")
   map({ "n", "<C-_>", "<cmd>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
 end
 
@@ -110,7 +109,7 @@ function M.which_key()
         b = { "<cmd>Telescope buffers<CR>", "search buffers" },
         c = { "<cmd>lua require'plugins.telescope'.dotconfig()<CR>", "search config" },
         e = { "<cmd>lua require'plugins.telescope'.explorer()<CR>", "file explorer" },
-        f = { "<cmd>lua require'plugins.telescope'.file_search(false)<CR>", "find files" },
+        f = { "<cmd>lua require'plugins.telescope'.file_search()<CR>", "find files" },
         h = { "<cmd>Telescope help_tags<CR>", "help" },
         H = { "<cmd>Telescope vim_options<CR>", "vim options" },
         o = { "<cmd>Telescope oldfiles<CR>", "old files" },

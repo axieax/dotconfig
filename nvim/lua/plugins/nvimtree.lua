@@ -5,7 +5,12 @@ return function()
   local utils = require("utils")
 
   require("nvim-tree").setup({
-    -- lsp_diagnostics = true, -- colour instead of signcolumn
+    hijack_netrw = true,
+    -- lsp_diagnostics = true, -- prefer colour instead of signcolumn
+    update_to_buf_dir = {
+      -- hijacks new directory buffers when they are opened
+      enable = true,
+    },
     view = {
       width = "30%",
       side = "right",

@@ -7,20 +7,12 @@ local is_directory = function(buf)
 end
 local cwd = vim.fn.getcwd()
 
-function M.file_search(from_autocmd)
-  if current_buffer and is_directory(current_buffer) then
-    -- Current buffer is a directory
-    require("telescope.builtin").find_files({
-      search_dirs = { cwd },
-      hidden = true,
-      file_ignore_patterns = { ".git" },
-    })
-  elseif not from_autocmd then
-    -- Vim rooter sets Git project scope anyways
-    require("telescope.builtin").find_files({
-      hidden = true,
-    })
-  end
+function M.file_search()
+  -- Vim rooter sets Git project scope anyways
+  require("telescope.builtin").find_files({
+    hidden = true,
+    file_ignore_patterns = { ".git" },
+  })
 end
 
 -- File explorer wrapper which shows hidden files by default,

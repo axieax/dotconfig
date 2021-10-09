@@ -10,10 +10,6 @@ return function()
   local lspkind = require("lspkind")
   vim.o.completeopt = "menu,menuone,noselect"
 
-  local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-  end
-
   local sources = {
     nvim_lsp = { label = "[LSP]" },
     nvim_lua = { label = "[Lua]" },
@@ -60,17 +56,17 @@ return function()
         select = true,
       }),
       ["<Tab>"] = function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          return feedkey("<C-n>", "n") -- n for next
+        if cmp.visible() then
+          cmp.select_next_item()
         else
-          return fallback()
+          fallback()
         end
       end,
       ["<S-Tab>"] = function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          return feedkey("<C-p>", "n") -- p for previous
+        if cmp.visible() then
+          cmp.select_prev_item()
         else
-          return fallback()
+          fallback()
         end
       end,
     },

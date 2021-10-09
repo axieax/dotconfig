@@ -167,6 +167,7 @@ function M.which_key()
       z = { "<cmd>ZenMode<CR>", "Zen Mode" },
       O = { "O<Esc>", "Create new line above" },
       o = { "o<Esc>", "Create new line below" },
+      ["_"] = { "<cmd>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
     },
     ["["] = {

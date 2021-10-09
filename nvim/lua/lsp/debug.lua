@@ -3,6 +3,10 @@
 -- TODO: setup (can use Telescope integration)
 
 return function()
+  -- Open to side
+  local dap = require("dap")
+  dap.defaults.fallback.terminal_win_cmd = "30vsplit new"
+
   require("dapui").setup({})
 
   -- Python setup (SETUP: pip install debugpy)

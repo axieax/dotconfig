@@ -78,7 +78,7 @@ return function()
   vim_apply(vim.o, {
     foldmethod = "expr",
     foldexpr = "nvim_treesitter#foldexpr()",
-    foldnestmax = 3, -- maximum nesting of folds
+    -- foldnestmax = 3, -- maximum nesting of folds
     -- foldminlines = 1, -- min lines required for a fold (default)
     foldlevel = 0, -- default levels folded
     foldenable = false, -- don't fold by default

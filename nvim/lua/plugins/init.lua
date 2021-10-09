@@ -34,6 +34,7 @@
 -- Markdown preview - ellisonleao/glow.nvim
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
+-- nnn (https://github.com/luukvbaal/nnn.nvim)
 --]]
 
 --[[ Notes
@@ -195,6 +196,9 @@ return require("packer").startup(function(use)
     requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
     config = require("plugins.notes"),
   })
+
+  -- Open with sudo
+  use("lambdalisue/suda.vim")
 
   -----------------------------------------------------------
   -- Coding Utilities

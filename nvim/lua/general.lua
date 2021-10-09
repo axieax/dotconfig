@@ -78,5 +78,13 @@ vim_apply(vim.g, {
 -- Auto-resize
 vim.cmd("autocmd VimResized * wincmd =")
 
+-- Highlight yank
+vim.cmd([[
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+augroup END
+]])
+
 -- Apply keybindings
 require("plugins.binds").general()

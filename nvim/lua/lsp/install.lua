@@ -35,11 +35,41 @@ return function()
 		]])
   end
 
+  local function setup_emmet()
+    -- https://github.com/aca/emmet-ls --
+    -- https://github.com/kozer/emmet-language-server --
+    local configs = require("lspconfig/configs")
+    local util = require("lspconfig/util")
+
+    if not lsp_config.emmet_language_server then
+      configs.emmet_language_server = {
+        default_config = {
+          cmd = { "emmet-language-server", "--stdio" },
+          filetypes = {
+            "html",
+            "typescriptreact",
+            "javascriptreact",
+            "javascript",
+            "typescript",
+            "javascript.jsx",
+            "typescript.tsx",
+            "css",
+          },
+          root_dir = util.root_pattern("package.json", ".git"),
+          settings = {},
+        },
+      }
+    end
+    lsp_config.emmet_language_server.setup({ capabilities = capabilities })
+  end
+
   setup_servers()
+  -- setup_emmet()
 
   -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
   lsp_install.post_install_hook = function()
     setup_servers() -- reload installed servers
+    -- setup_emmet()
     vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
   end
 end

@@ -37,6 +37,15 @@ function M.misc()
   map({ "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>" })
   -- Telescope
   map({ "n", "<C-_>", "<cmd>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
+  -- NvimTree
+  map({ "n", ";", "<cmd>NvimTreeToggle<CR>" })
+  -- Dial
+  map({ "n", "<C-a>", "<Plug>(dial-increment)", noremap = false })
+  map({ "n", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
+  map({ "v", "<C-a>", "<Plug>(dial-increment)", noremap = false })
+  map({ "v", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
+  map({ "v", "g<C-a>", "<Plug>(dial-increment-additional)", noremap = false })
+  map({ "v", "g<C-x>", "<Plug>(dial-decrement-additional)", noremap = false })
 end
 
 function M.which_key()
@@ -169,6 +178,7 @@ function M.which_key()
       o = { "o<Esc>", "Create new line below" },
       ["/"] = { "<cmd>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
+      [";"] = { "<cmd>MinimapToggle<CR>", "Minimap" },
     },
     ["["] = {
       name = "+previous",

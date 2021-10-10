@@ -35,6 +35,7 @@
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
 -- nnn (https://github.com/luukvbaal/nnn.nvim)
+-- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
 --]]
 
 --[[ Notes
@@ -429,6 +430,10 @@ return require("packer").startup(function(use)
 
   -- Substitution preview
   use("markonm/traces.vim")
+
+  -- Minimap
+  -- INSTALL: yay -S code-minimap
+  use("wfxr/minimap.vim")
 
   -- use 'kyazdani42/nvim-web-devicons'
 end)

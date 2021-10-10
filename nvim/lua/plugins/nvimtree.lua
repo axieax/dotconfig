@@ -28,6 +28,4 @@ return function()
     -- -- nvim_tree_auto_close = 1,
     -- nvim_tree_git_hl = 1,
   })
-
-  utils.map({ "n", ";", "<cmd>NvimTreeToggle<CR>" })
 end

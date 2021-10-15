@@ -350,6 +350,7 @@ return require("packer").startup(function(use)
   -----------------------------------------------------------
 
   -- Theme
+  -- https://github.com/ful1e5/onedark.nvim ?
   use({
     "navarasu/onedark.nvim",
     config = function()
@@ -364,6 +365,7 @@ return require("packer").startup(function(use)
       vim.g.tokyonight_transparent_sidebar = true
     end,
   })
+  -- Check out https://github.com/ozkanonur/nimda.vim
 
   -- Statusline
   use({

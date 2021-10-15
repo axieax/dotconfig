@@ -6,6 +6,10 @@ local TABNINE_ENABLED = false
 local DEFAULT_PRIORITY = 2
 
 return function()
+  -- setup vsnip directory
+  vim.g.vsnip_snippet_dir = "~/.config/nvim/lua/lsp/snippets"
+
+  -- setup cmp
   local cmp = require("cmp")
   local lspkind = require("lspkind")
   vim.o.completeopt = "menu,menuone,noselect"
@@ -50,7 +54,6 @@ return function()
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
       -- ["<CR>"] = cmp.mapping.confirm({ select = false }), -- overwritten in pairs.lua
-      -- Shift <CR> to replace instead of insert
       ["<S-CR>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,

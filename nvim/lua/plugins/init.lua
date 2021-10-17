@@ -6,9 +6,11 @@
 --]]
 
 --[[ TODO
--- Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
+-- TODO: Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
 -- Update lsp config for installation
 -- Resolve nvim 0.5.1 issue
+-- Use eslint LSP instead of eslint_d
+-- and use https://github.com/mjlbach/neovim/blob/667893dd1a27efdd55ab14479e148a4d3c8c024d/runtime/lua/vim/lsp/buf.lua#L187-L229
 -- Try https://github.com/b3nj5m1n/kommentary?
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up linter? (efm, ale, nvim-lint, coc?)
@@ -39,6 +41,7 @@
 -- Telescope-cheat.nvim
 -- nnn (https://github.com/luukvbaal/nnn.nvim)
 -- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
+-- https://github.com/zim0369/butcher string to array
 --]]
 
 --[[ Notes

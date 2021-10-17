@@ -6,6 +6,9 @@
 --]]
 
 --[[ TODO
+-- Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
+-- Update lsp config for installation
+-- Resolve nvim 0.5.1 issue
 -- Try https://github.com/b3nj5m1n/kommentary?
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up linter? (efm, ale, nvim-lint, coc?)

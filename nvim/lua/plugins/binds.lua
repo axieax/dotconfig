@@ -132,6 +132,7 @@ function M.which_key()
         p = { "<cmd>Telescope media_files<CR>", "media files" },
         ["/"] = { "<cmd>Telescope search_history<CR>", "search history" },
         [";"] = { "<cmd>Telescope command_history<CR>", "command history" },
+        ["."] = { "<cmd>Telescope resume<CR>", "resume last command" },
         -- TODO: grep_string
       },
       -- TODO: set up g for Telescope git_*

@@ -42,6 +42,7 @@
 -- nnn (https://github.com/luukvbaal/nnn.nvim)
 -- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
 -- https://github.com/zim0369/butcher string to array
+-- https://github.com/rcarriga/nvim-notify
 --]]
 
 --[[ Notes

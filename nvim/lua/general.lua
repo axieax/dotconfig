@@ -1,4 +1,5 @@
 local vim_apply = require("utils").vim_apply
+local map = require("utils").map
 
 ---------------
 -- Variables --
@@ -85,6 +86,13 @@ augroup highlight_yank
   au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
 augroup END
 ]])
+
+-- Paste last yanked
+map({ "n", "\\p", '"0p' })
+map({ "v", "\\p", '"0p' })
+
+-- Update (instead of write)
+map({ "n", "<space>w", "<cmd>up<CR>" })
 
 -- Apply keybindings
 require("plugins.binds").general()

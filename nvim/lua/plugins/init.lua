@@ -8,19 +8,19 @@
 --[[ TODO
 -- TODO: Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
 -- Update lsp config for installation
--- Resolve nvim 0.5.1 issue
 -- Use eslint LSP instead of eslint_d
--- and use https://github.com/mjlbach/neovim/blob/667893dd1a27efdd55ab14479e148a4d3c8c024d/runtime/lua/vim/lsp/buf.lua#L187-L229
+-- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Try https://github.com/b3nj5m1n/kommentary?
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up linter? (efm, ale, nvim-lint, coc?)
-	-- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
+-- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 -- Set up snippets (custom and emmet)
 -- Automatic lspinstall and treesitter parsers
 -- Add auto packer clean, install, compile under autoinstall packer
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
 -- Merge conflict resolver (like vscode)
 -- CursorHold lsp hover or line diagnostic?
+-- nvim cmp dadbod source
 --]]
 
 --[[ Features/plugins
@@ -32,23 +32,19 @@
 -- Markdown HTML Treesitter highlighting + Autotag support
 -- Set up quick compiler
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
--- Minimap preview
 -- https://github.com/ThePrimeagen/refactoring.nvim
 -- yank list (https://github.com/AckslD/nvim-neoclip.lua)
--- distant nvim / remote ssh
 -- Markdown preview - ellisonleao/glow.nvim
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
--- nnn (https://github.com/luukvbaal/nnn.nvim)
 -- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
 -- https://github.com/zim0369/butcher string to array
 -- https://github.com/rcarriga/nvim-notify
 --]]
 
 --[[ Notes
--- Prettier config not picked up
 -- Galaxyline gap background not transparent
--- Formatter.nvim prettier doesn't pick up .prettierrc -> use null-ls instead? (has builtins and integrates with lsp)
+-- use null-ls as formatter? (has builtins and integrates with lsp)
 -- nvim-cmp treesitter completion source vs buffer source?
 --]]
 
@@ -86,6 +82,7 @@ return require("packer").startup(function(use)
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-media-files.nvim",
     },
+    after = "nvim-neoclip.lua",
     config = require("plugins.telescope").setup,
   })
 
@@ -94,6 +91,14 @@ return require("packer").startup(function(use)
     "kyazdani42/nvim-tree.lua",
     requires = "kyazdani42/nvim-web-devicons",
     config = require("plugins.nvimtree"),
+  })
+
+  -- nnn file explorer
+  use({
+    "luukvbaal/nnn.nvim",
+    config = function()
+      require("nnn").setup()
+    end,
   })
 
   -- Undo history
@@ -208,6 +213,41 @@ return require("packer").startup(function(use)
   -- Open with sudo
   use("lambdalisue/suda.vim")
 
+  -- remote ssh
+  -- Without remote distant server: :DistantLaunch server mode=ssh ssh.user=<username>
+  use({
+    "chipsenkbeil/distant.nvim",
+    config = function()
+      require("distant").setup({
+        -- Applies Chip's personal settings to every machine you connect to
+        --
+        -- 1. Ensures that distant servers terminate with no connections
+        -- 2. Provides navigation bindings for remote directories
+        -- 3. Provides keybinding to jump into a remote file's parent directory
+        ["*"] = require("distant.settings").chip_default(),
+      })
+    end,
+  })
+
+  -- GitHub issues and pull requests
+  use({
+    "pwntester/octo.nvim",
+    config = function()
+      require("octo").setup()
+    end,
+  })
+
+  -- Clipboard manager
+  use({
+    "AckslD/nvim-neoclip.lua",
+    requires = { "tami5/sqlite.lua", module = "sqlite" },
+    config = function()
+      require("neoclip").setup({
+        enable_persistant_history = true,
+      })
+    end,
+  })
+
   -----------------------------------------------------------
   -- Coding Utilities
   -----------------------------------------------------------
@@ -249,6 +289,14 @@ return require("packer").startup(function(use)
     "kabouzeid/nvim-lspinstall",
     after = "nvim-lspconfig",
     config = require("lsp.install"),
+  })
+
+  -- LSP toggle
+  use({
+    "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+    config = function()
+      require("toggle_lsp_diagnostics").init()
+    end,
   })
 
   -- Symbols

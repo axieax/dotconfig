@@ -28,6 +28,7 @@ return function()
     -- treesitter = "[TS]",
     -- ["vim-dadbod-completion"] = "[DB]",
   }
+  -- TODO: https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/after/plugin/cmp_gh_source.lua
 
   local source_config = {}
   for source_name, source_settings in pairs(sources) do
@@ -82,6 +83,22 @@ return function()
         vim_item.menu = source.label
         return vim_item
       end,
+    },
+    sorting = {
+      comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        require("cmp-under-comparator").under,
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      },
+    },
+    experimental = {
+      -- preview
+      ghost_text = true,
     },
   })
 

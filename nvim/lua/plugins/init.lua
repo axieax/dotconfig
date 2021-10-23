@@ -293,6 +293,7 @@ return require("packer").startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
     requires = {
+      "lukas-reineke/cmp-under-comparator",
       "onsails/lspkind-nvim",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
@@ -443,6 +444,15 @@ return require("packer").startup(function(use)
   -- Minimap
   -- INSTALL: yay -S code-minimap
   use("wfxr/minimap.vim")
+
+  -- Stabilise buffers
+  -- TODO: trouble integration
+  use({
+    "luukvbaal/stabilize.nvim",
+    config = function()
+      require("stabilize").setup()
+    end,
+  })
 
   -- use 'kyazdani42/nvim-web-devicons'
 end)

@@ -154,6 +154,9 @@ return require("packer").startup(function(use)
   -- Java debugger
   use("mfussenegger/nvim-jdtls")
 
+  -- Compiler (e.g. :Dispatch python3.9 %)
+  use("tpope/vim-dispatch")
+
   -- Underline word
   use({
     "osyo-manga/vim-brightest",

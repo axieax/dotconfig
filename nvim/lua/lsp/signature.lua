@@ -9,5 +9,6 @@ return function()
     trigger_on_newline = true,
     padding = " ",
     transpancy = 20,
+    toggle_key = "<C-k>",
   })
 end

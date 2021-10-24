@@ -15,16 +15,16 @@ return function()
   vim.o.completeopt = "menu,menuone,noselect"
 
   local sources = {
-    nvim_lsp = { label = "[LSP]" },
-    nvim_lua = { label = "[Lua]" },
+    nvim_lsp = { label = "[LSP]", priority = 3 },
+    nvim_lua = { label = "[Lua]", priority = 3 },
     buffer = { label = "[Buffer]", priority = 1 },
-    vsnip = { label = "[Vsnip]", priority = 4 },
+    vsnip = { label = "[Vsnip]", priority = 5 },
     path = { label = "[Path]" },
     calc = { label = "[Calc]" },
     emoji = { label = "[Emoji]" },
     spell = { label = "[Spell]", priority = 1 },
     latex_symbols = { label = "[LaTeX]" },
-    cmp_tabnine = { label = "[T9]", kind = "", priority = 3 },
+    cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
     -- treesitter = "[TS]",
     -- ["vim-dadbod-completion"] = "[DB]",
   }

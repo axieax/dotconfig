@@ -21,7 +21,6 @@
 -- Merge conflict resolver (like vscode)
 -- CursorHold lsp hover or line diagnostic?
 -- nvim cmp dadbod source
--- nvim-dap test results -> nvim-notify
 --]]
 
 --[[ Features/plugins
@@ -254,6 +253,9 @@ return require("packer").startup(function(use)
       })
     end,
   })
+
+  -- Converter
+  use("simonefranza/nvim-conv")
 
   -----------------------------------------------------------
   -- Coding Utilities

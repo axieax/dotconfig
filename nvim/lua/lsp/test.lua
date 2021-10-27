@@ -20,6 +20,8 @@ function M.display()
 end
 
 function M.display_delayed()
+  -- NOTE: automatically activates after a fixed timeout (regardless of test time)
+  -- TODO: keep trying until [dap-repl] found?
   vim.defer_fn(M.display, 2000)
 end
 

@@ -97,7 +97,11 @@ return require("packer").startup(function(use)
   use({
     "luukvbaal/nnn.nvim",
     config = function()
-      require("nnn").setup()
+      require("nnn").setup({
+        explorer = {
+          side = "botright",
+        },
+      })
     end,
   })
 

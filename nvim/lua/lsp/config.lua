@@ -3,6 +3,10 @@
 -- TODO: filter/sort severity?
 -- Highlight line number instead of icons (https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#highlight-line-number-instead-of-having-icons-in-sign-column)
 
+-- NOTE: breaking change: vim.lsp.diagnostic -> vim.diagnostic
+-- vim.diagnostic.show_line_diagnostics() -> vim.diagnostic.open_float(0, {scope="line"})
+-- vim.diagnostic.show_position_diagnostics() -> vim.diagnostic.open_float(0, {scope="cursor"})
+
 return function()
   local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons
 

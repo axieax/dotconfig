@@ -21,6 +21,7 @@
 -- Merge conflict resolver (like vscode)
 -- CursorHold lsp hover or line diagnostic?
 -- nvim cmp dadbod source
+-- Use project indent? https://github.com/tpope/vim-sleuth
 --]]
 
 --[[ Features/plugins

@@ -2,6 +2,27 @@
 -- https://github.com/rcarriga/vim-ultest --
 local M = {}
 
+function M.display()
+  local notify = require("notify")
+  -- get buffers
+  local buffers = vim.api.nvim_list_bufs()
+  for _, bufnr in ipairs(buffers) do
+    -- find result buffer
+    local buf_name = vim.fn.bufname(bufnr)
+    if buf_name == "[dap-repl]" then
+      -- display notification
+      local buf_lines = vim.api.nvim_buf_get_lines(bufnr, 1, -1, false)
+      notify(table.concat(buf_lines, "\n"))
+      return
+    end
+  end
+  notify("No tests found 😢", "error")
+end
+
+function M.display_delayed()
+  vim.defer_fn(M.display, 2000)
+end
+
 function M.custom_test_method()
   local ft = vim.bo.filetype
   if ft == "python" then
@@ -9,6 +30,7 @@ function M.custom_test_method()
   elseif ft == "java" then
     require("jdtls").test_nearest_method()
   end
+  M.display_delayed()
 end
 
 function M.custom_test_class()
@@ -17,6 +39,17 @@ function M.custom_test_class()
     require("dap-python").test_class()
   elseif ft == "java" then
     require("jdtls").test_class()
+  end
+  M.display_delayed()
+end
+
+function M.custom_test_summary()
+  local ft = vim.bo.filetype
+  if ft == "java" then
+    -- NOTE: summary not persistent
+    M.display()
+  else
+    vim.cmd("<CMD>UltestSummary")
   end
 end
 

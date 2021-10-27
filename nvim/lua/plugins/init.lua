@@ -21,6 +21,7 @@
 -- Merge conflict resolver (like vscode)
 -- CursorHold lsp hover or line diagnostic?
 -- nvim cmp dadbod source
+-- nvim-dap test results -> nvim-notify
 --]]
 
 --[[ Features/plugins
@@ -39,7 +40,6 @@
 -- Telescope-cheat.nvim
 -- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
 -- https://github.com/zim0369/butcher string to array
--- https://github.com/rcarriga/nvim-notify
 --]]
 
 --[[ Notes
@@ -506,6 +506,16 @@ return require("packer").startup(function(use)
     "luukvbaal/stabilize.nvim",
     config = function()
       require("stabilize").setup()
+    end,
+  })
+
+  -- Notification
+  use({
+    "rcarriga/nvim-notify",
+    config = function()
+      require("notify").setup({
+        background_colour = "#000000",
+      })
     end,
   })
 

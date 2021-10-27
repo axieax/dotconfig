@@ -85,6 +85,7 @@ function M.setup()
   require("telescope").load_extension("dap")
   require("telescope").load_extension("media_files")
   require("telescope").load_extension("neoclip")
+  require("telescope").load_extension("notify")
 
   -- Can Telescope file browser create/move/delete files?
 end

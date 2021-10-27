@@ -34,7 +34,7 @@
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
 -- https://github.com/ThePrimeagen/refactoring.nvim
 -- yank list (https://github.com/AckslD/nvim-neoclip.lua)
--- Markdown preview - ellisonleao/glow.nvim
+-- Markdown preview - ellisonleao/glow.nvim, iamcco/markdown-preview.nvim
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
 -- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
@@ -80,6 +80,7 @@ return require("packer").startup(function(use)
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-media-files.nvim",
+      -- "nvim-telescope/telescope-node-modules.nvim",
     },
     after = "nvim-neoclip.lua",
     config = require("plugins.telescope").setup,
@@ -362,6 +363,8 @@ return require("packer").startup(function(use)
       "hrsh7th/cmp-emoji",
       "f3fora/cmp-spell",
       "kdheepak/cmp-latex-symbols",
+      { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
+      { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
       { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
       -- "ray-x/cmp-treesitter",
       -- "quangnguyen30192/cmp-nvim-tags",

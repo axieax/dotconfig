@@ -25,10 +25,11 @@ return function()
     spell = { label = "[Spell]", priority = 1 },
     latex_symbols = { label = "[LaTeX]" },
     cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
+    npm = { label = "[NPM]" },
+    cmp_git = { label = "[Git]" },
     -- treesitter = "[TS]",
     -- ["vim-dadbod-completion"] = "[DB]",
   }
-  -- TODO: https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/after/plugin/cmp_gh_source.lua
 
   local source_config = {}
   for source_name, source_settings in pairs(sources) do
@@ -113,6 +114,14 @@ return function()
       snippet_placeholder = "..",
     })
   end
+
+  -- npm
+  require("cmp-npm").setup({})
+
+  -- git
+  require("cmp_git").setup({
+    filetypes = { "*" },
+  })
 
   -- Setup lspconfig.
   -- require('lspconfig')[%YOUR_LSP_SERVER%].setup {

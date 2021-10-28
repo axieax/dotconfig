@@ -8,7 +8,9 @@
 
 return function()
   -- Colours
-  local colours = require("galaxyline.theme").default
+  -- ~/.local/share/nvim/site/pack/packer/opt/galaxyline.nvim/lua/galaxyline/theme.lua
+  local galaxyline_colours = require("galaxyline.theme").default
+  -- ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/lua/onedark/colors.lua
   local onedark_colours = require("onedark.colors")
 
   -- Structures
@@ -24,7 +26,7 @@ return function()
       end,
       -- separator = " ",
       -- highlight = { onedark_colours.orange, colours.yellow },
-      highlight = { colours.yellow, onedark_colours.orange },
+      highlight = { galaxyline_colours.yellow, onedark_colours.orange },
       -- highlight = { onedark_colours.bg_yellow, onedark_colours.yellow },
       -- highlight = { colours.red },
     },
@@ -38,35 +40,35 @@ return function()
         provider = function()
           local modes = {
             -- Normal
-            n = { "Normal", colours.violet },
-            no = { "Operator Pending", colours.violet },
+            n = { "Normal", galaxyline_colours.violet },
+            no = { "Operator Pending", galaxyline_colours.violet },
             -- Insert
-            i = { "Insert", colours.yellow },
+            i = { "Insert", galaxyline_colours.yellow },
             -- Visual
-            v = { "Visual", colours.magenta },
-            V = { "Visual Line", colours.magenta },
-            [""] = { "Visual Block", colours.magenta },
+            v = { "Visual", galaxyline_colours.magenta },
+            V = { "Visual Line", galaxyline_colours.magenta },
+            [""] = { "Visual Block", galaxyline_colours.magenta },
             -- Select
-            s = { "Select", colours.blue },
-            S = { "Select Line", colours.blue },
-            [""] = { "Select Block", colours.blue },
+            s = { "Select", galaxyline_colours.blue },
+            S = { "Select Line", galaxyline_colours.blue },
+            [""] = { "Select Block", galaxyline_colours.blue },
             -- Replace
-            R = { "Replace", colours.red },
-            Rv = { "Virtual Replace", colours.red },
+            R = { "Replace", galaxyline_colours.red },
+            Rv = { "Virtual Replace", galaxyline_colours.red },
             -- Exec
-            c = { "Command", colours.orange },
-            cv = { "Vim Ex", colours.green },
-            ce = { "Normal Ex", colours.green },
-            r = { "Hit-Enter Prompt", colours.cyan },
-            rm = { "More Prommpt", colours.cyan },
-            ["r?"] = { "Confirm Query", colours.green },
-            ["!"] = { "Shell", colours.orange },
-            t = { "Terminal", colours.green },
+            c = { "Command", galaxyline_colours.orange },
+            cv = { "Vim Ex", galaxyline_colours.green },
+            ce = { "Normal Ex", galaxyline_colours.green },
+            r = { "Hit-Enter Prompt", galaxyline_colours.cyan },
+            rm = { "More Prommpt", galaxyline_colours.cyan },
+            ["r?"] = { "Confirm Query", galaxyline_colours.green },
+            ["!"] = { "Shell", galaxyline_colours.orange },
+            t = { "Terminal", galaxyline_colours.green },
           }
           local mode_abbrev = vim.fn.mode()
           -- local mode_abbrev = vim.api.nvim_get_mode().mode
           local mode_text = "Unknown: " .. mode_abbrev
-          local mode_colour = colours.red
+          local mode_colour = galaxyline_colours.red
 
           local mode = modes[mode_abbrev]
           if mode ~= nil then
@@ -155,12 +157,22 @@ return function()
     {
       FileIcon = {
         provider = "FileIcon",
-        highlight = { onedark_colours.purple },
+        highlight = { onedark_colours.cyan },
       },
     },
     {
       LspClient = {
         provider = "GetLspClient",
+        highlight = { onedark_colours.cyan },
+      },
+    },
+    {
+      WordCount = {
+        provider = function()
+          return vim.fn.wordcount().words
+        end,
+        icon = " ",
+        separator = " ",
         highlight = { onedark_colours.purple },
       },
     },

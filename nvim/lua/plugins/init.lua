@@ -414,6 +414,9 @@ return require("packer").startup(function(use)
   -- Incrementor/decrementor
   use("monaqa/dial.nvim")
 
+  -- GitHub Copilot (NOTE: requires neovim 0.6)
+  use("github/copilot.vim")
+
   -----------------------------------------------------------
   -- Customisations
   -----------------------------------------------------------

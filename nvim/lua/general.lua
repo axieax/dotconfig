@@ -15,6 +15,7 @@ local map = require("utils").map
 -- Buffer options (:setlocal for buffer-local options) - vim.bo
 -- Window options (:setlocal for window-local options) - vim.wo
 
+-- TODO: vim.o instead of vim.opt?
 vim_apply(vim.opt, {
   -- General options
   mouse = "a",

@@ -1,4 +1,5 @@
 -- https://github.com/folke/which-key.nvim --
+-- TODO: separate bindings
 
 local M = {}
 local map = require("utils").map
@@ -175,7 +176,8 @@ function M.which_key()
         h = { "<CMD>:HopPattern<CR>", "pattern" },
       },
       r = {
-        n = { "<CMD>lua vim.lsp.buf.rename()<CR>", "rename symbol" },
+        -- n = { "<CMD>lua vim.lsp.buf.rename()<CR>", "rename symbol" },
+        n = { "<CMD>lua require'lsp.rename'()<CR>", "rename symbol" },
         r = { "<CMD>FloatermNew lazydocker<CR>", "lazydocker" },
       },
       s = { "<CMD>Dashboard<CR>", "Dashboard" },

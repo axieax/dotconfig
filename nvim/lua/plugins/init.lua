@@ -266,13 +266,6 @@ return require("packer").startup(function(use)
   -- Commenting
   use("tpope/vim-commentary")
 
-  -- Auto closing pairs
-  use({
-    "windwp/nvim-autopairs",
-    after = "nvim-cmp",
-    config = require("plugins.pairs"),
-  })
-
   -- Surround with pairs
   use("tpope/vim-surround")
 
@@ -352,6 +345,7 @@ return require("packer").startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
     requires = {
+      "windwp/nvim-autopairs",
       "lukas-reineke/cmp-under-comparator",
       "onsails/lspkind-nvim",
       "hrsh7th/cmp-nvim-lsp",

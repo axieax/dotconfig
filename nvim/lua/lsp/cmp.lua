@@ -55,11 +55,23 @@ return function()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
-      -- ["<CR>"] = cmp.mapping.confirm({ select = false }), -- overwritten in pairs.lua
+      ["<CR>"] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      }),
       ["<S-CR>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }),
+      ["<C-k>"] = function(fallback)
+        if cmp.visible() then
+          require("notify")("visible")
+          cmp.mapping.close()
+        else
+          require("notify")("not visible")
+          cmp.mapping.complete()
+        end
+      end,
       ["<Tab>"] = function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -127,4 +139,13 @@ return function()
   -- require('lspconfig')[%YOUR_LSP_SERVER%].setup {
   --   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- }
+
+  -- Setup autopairs
+  require("nvim-autopairs").setup({
+    -- insert mode "alt-e"
+    -- NOTE: vim surround visual selection: S_ as well
+    fast_wrap = {},
+  })
+  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end

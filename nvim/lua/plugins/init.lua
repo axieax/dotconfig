@@ -356,6 +356,7 @@ return require("packer").startup(function(use)
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-cmdline",
       "f3fora/cmp-spell",
       "kdheepak/cmp-latex-symbols",
       { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },

@@ -27,6 +27,7 @@ return function()
     cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
     npm = { label = "[NPM]" },
     cmp_git = { label = "[Git]" },
+    cmdline = { label = "[Cmd]" },
     -- treesitter = "[TS]",
     -- ["vim-dadbod-completion"] = "[DB]",
   }
@@ -42,6 +43,10 @@ return function()
     end
   end
 
+  local function cmp_map(...)
+    return cmp.mapping(..., { "i", "c" })
+  end
+
   cmp.setup({
     -- preselect = cmp.PreselectMode.None,
     snippet = {
@@ -51,41 +56,65 @@ return function()
       end,
     },
     mapping = {
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm({
+      ["<C-d>"] = cmp_map(cmp.mapping.scroll_docs(-4)),
+      ["<C-f>"] = cmp_map(cmp.mapping.scroll_docs(4)),
+      ["<C-Space>"] = cmp_map(cmp.mapping.complete()),
+      ["<C-e>"] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ["<CR>"] = cmp_map(cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
-      }),
-      ["<S-CR>"] = cmp.mapping.confirm({
+        select = false,
+      })),
+      ["<S-CR>"] = cmp_map(cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
+        select = false,
+      })),
+      -- ["<C-k>"] = function(fallback)
+      --   if cmp.visible() then
+      --     require("notify")("visible")
+      --     cmp.mapping.close()
+      --   else
+      --     require("notify")("not visible")
+      --     cmp.mapping.complete()
+      --   end
+      -- end,
+      -- NOTE: doesn't work properly
+      ["<C-k>"] = cmp.mapping({
+        i = function()
+          if cmp.visible() then
+            require("notify")("visible")
+            cmp.mapping.abort()
+          else
+            require("notify")("not visible")
+            cmp.mapping.complete()
+          end
+        end,
+        c = function()
+          if cmp.visible() then
+            require("notify")("visible")
+            cmp.mapping.close()
+          else
+            require("notify")("not visible")
+            cmp.mapping.complete()
+          end
+        end,
       }),
-      ["<C-k>"] = function(fallback)
-        if cmp.visible() then
-          require("notify")("visible")
-          cmp.mapping.close()
-        else
-          require("notify")("not visible")
-          cmp.mapping.complete()
-        end
-      end,
-      ["<Tab>"] = function(fallback)
+      ["<Tab>"] = cmp_map(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         else
           fallback()
         end
-      end,
-      ["<S-Tab>"] = function(fallback)
+      end),
+      ["<S-Tab>"] = cmp_map(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         else
           fallback()
         end
-      end,
+      end),
     },
     sources = source_config,
     formatting = {
@@ -148,4 +177,21 @@ return function()
   })
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+  -- Command mode completion
+  -- Use buffer source for `/`.
+  cmp.setup.cmdline("/", {
+    sources = {
+      { name = "buffer" },
+    },
+  })
+
+  -- Use cmdline & path source for ':'.
+  cmp.setup.cmdline(":", {
+    sources = cmp.config.sources({
+      { name = "path" },
+    }, {
+      -- { name = "cmdline" },
+    }),
+  })
 end

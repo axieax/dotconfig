@@ -71,33 +71,20 @@ return function()
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
       })),
-      -- ["<C-k>"] = function(fallback)
-      --   if cmp.visible() then
-      --     require("notify")("visible")
-      --     cmp.mapping.close()
-      --   else
-      --     require("notify")("not visible")
-      --     cmp.mapping.complete()
-      --   end
-      -- end,
-      -- NOTE: doesn't work properly
+      -- Toggle cmp menu
       ["<C-k>"] = cmp.mapping({
         i = function()
           if cmp.visible() then
-            require("notify")("visible")
-            cmp.mapping.abort()
+            cmp.abort()
           else
-            require("notify")("not visible")
-            cmp.mapping.complete()
+            cmp.complete()
           end
         end,
         c = function()
           if cmp.visible() then
-            require("notify")("visible")
-            cmp.mapping.close()
+            cmp.close()
           else
-            require("notify")("not visible")
-            cmp.mapping.complete()
+            cmp.complete()
           end
         end,
       }),
@@ -175,6 +162,7 @@ return function()
     -- NOTE: vim surround visual selection: S_ as well
     fast_wrap = {},
   })
+
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 

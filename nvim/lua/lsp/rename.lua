@@ -24,8 +24,8 @@ local function handler(...)
 
   -- prefer documentChanges over changes (under workspaceEdit)
   -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
-  -- https://youtu.be/tAVxxdFFYMU
   -- TODO: send to qflist?
+  -- https://youtu.be/tAVxxdFFYMU
   if result and result.documentChanges then
     local msg = ""
     local num_changes = 0

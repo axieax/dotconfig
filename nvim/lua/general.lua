@@ -95,5 +95,9 @@ map({ "v", "\\p", '"0p' })
 -- Update (instead of write)
 map({ "n", "<space>w", "<cmd>up<CR>" })
 
+-- Disable automatic comment insertion
+vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
+vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
+
 -- Apply keybindings
 require("plugins.binds").general()

@@ -21,21 +21,38 @@ local function handler(...)
     return
   end
   -- echo the resulting changes
-  if result and result.changes then
-    local num_changes = 0
-    local new_name = ""
+
+  -- prefer documentChanges over changes (under workspaceEdit)
+  -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
+  -- https://youtu.be/tAVxxdFFYMU
+  -- TODO: send to qflist?
+  if result and result.documentChanges then
     local msg = ""
-    for f, c in pairs(result.changes) do
-      f = vim.fn.fnamemodify(vim.fn.expand(f), ":~:.")
-      msg = msg .. ("%d changes -> %s"):format(#c, f) .. "\n"
-      num_changes = num_changes + #c
-      new_name = c.newText
+    local num_changes = 0
+    for _, entry in ipairs(result.documentChanges) do
+      local edits = entry.edits
+      local filename = vim.uri_to_fname(entry.textDocument.uri)
+      msg = msg .. ("%d changes in %s"):format(#edits, filename) .. "\n"
+      num_changes = num_changes + #edits
+    end
+    msg = msg:sub(1, #msg - 1)
+    notify(msg, "info", {
+      title = ("Succesfully renamed with %d changes"):format(num_changes),
+    })
+  elseif result and result.changes then
+    local msg = ""
+    local num_changes = 0
+    for uri, edits in pairs(result.changes) do
+      local filename = vim.uri_to_fname(uri)
+      msg = msg .. ("%d changes in %s"):format(#edits, filename) .. "\n"
+      num_changes = num_changes + #edits
     end
     msg = msg:sub(1, #msg - 1)
     notify(msg, "info", {
       title = ("Succesfully renamed with %d changes"):format(num_changes),
     })
   end
+
   vim.lsp.handlers[method](...)
 end
 
@@ -66,7 +83,7 @@ end
 ---
 ---@param new_name (string) If not provided, the user will be prompted for a new
 ---name using |input()|.
-function rename(new_name)
+local function rename(new_name)
   local params = vim.lsp.util.make_position_params()
   local function prepare_rename(err, result)
     if err == nil and result == nil then

@@ -189,6 +189,7 @@ function M.which_key()
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },
+      ["<space>"] = { "<CMD>lua require'nvim-biscuits'.toggle_biscuits()<CR>", "Toggle Biscuits" },
     },
     ["["] = {
       name = "+previous",

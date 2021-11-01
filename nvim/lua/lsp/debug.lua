@@ -15,5 +15,5 @@ return function()
   dap_python.test_runner = "pytest"
 
   -- Virtual text
-  vim.g.dap_virtual_text = true
+  require("nvim-dap-virtual-text").setup()
 end

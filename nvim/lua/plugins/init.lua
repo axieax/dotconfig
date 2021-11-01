@@ -21,7 +21,7 @@
 -- Merge conflict resolver (like vscode)
 -- CursorHold lsp hover or line diagnostic?
 -- nvim cmp dadbod source
--- Use project indent? https://github.com/tpope/vim-sleuth
+-- nvim cmp tzachar/cmp-fzy-buffer?
 --]]
 
 --[[ Features/plugins
@@ -34,10 +34,10 @@
 -- Set up quick compiler
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
 -- https://github.com/ThePrimeagen/refactoring.nvim
--- yank list (https://github.com/AckslD/nvim-neoclip.lua)
 -- Markdown preview - ellisonleao/glow.nvim, iamcco/markdown-preview.nvim
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
+-- mrjones2014/dash.nvim for linux?
 -- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
 -- https://github.com/zim0369/butcher string to array
 --]]
@@ -82,6 +82,7 @@ return require("packer").startup(function(use)
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-media-files.nvim",
       -- "nvim-telescope/telescope-node-modules.nvim",
+      "code-biscuits/nvim-biscuits",
     },
     after = "nvim-neoclip.lua",
     config = require("plugins.telescope").setup,
@@ -425,11 +426,31 @@ return require("packer").startup(function(use)
       require("onedark").setup()
     end,
   })
+
   use({
     "folke/tokyonight.nvim",
     config = function()
       vim.g.tokyonight_transparent = true
       vim.g.tokyonight_transparent_sidebar = true
+    end,
+  })
+
+  use({
+    "rmehri01/onenord.nvim",
+    config = function()
+      require("onenord").setup({
+        borders = true, -- Split window borders
+        italics = {
+          comments = false, -- Italic comments
+          strings = false, -- Italic strings
+          keywords = true, -- Italic keywords
+          functions = false, -- Italic functions
+          variables = false, -- Italic variables
+        },
+        disable = {
+          background = true,
+        },
+      })
     end,
   })
   -- Check out https://github.com/ozkanonur/nimda.vim
@@ -522,6 +543,9 @@ return require("packer").startup(function(use)
       })
     end,
   })
+
+  -- Project settings
+  use("tpope/vim-sleuth")
 
   -- use 'kyazdani42/nvim-web-devicons'
 end)

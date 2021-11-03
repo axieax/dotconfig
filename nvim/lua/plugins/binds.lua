@@ -186,6 +186,7 @@ function M.which_key()
       o = { "o<ESC>", "Create new line below" },
       p = { ":lua print(vim.inspect())<LEFT><LEFT>", "lua print", silent = false },
       P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },
+      q = { ":lua require'notify'.dismiss()<CR>", "dismiss notifications" },
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },

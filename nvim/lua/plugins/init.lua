@@ -22,6 +22,7 @@
 -- CursorHold lsp hover or line diagnostic?
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
+-- choose first spelling suggestion shortcut
 --]]
 
 --[[ Features/plugins
@@ -38,7 +39,6 @@
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
 -- mrjones2014/dash.nvim for linux?
--- Location / quick fix list (https://github.com/kevinhwang91/nvim-bqf)
 -- https://github.com/zim0369/butcher string to array
 --]]
 
@@ -567,6 +567,12 @@ return require("packer").startup(function(use)
       -- m[ and m] to navigate marks
       require("marks").setup({})
     end,
+  })
+
+  -- Better quickfix
+  use({
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
   })
 
   -- use 'kyazdani42/nvim-web-devicons'

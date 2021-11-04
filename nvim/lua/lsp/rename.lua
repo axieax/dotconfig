@@ -1,7 +1,38 @@
--- TODO: lspsaga prompt rename -> handler for notifying changes
+-- TODO: hover window: https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
+-- https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 
 -- LSP rename with notify handler --
 local notify = require("notify")
+
+local function popup(curr_name)
+  curr_name = "test"
+  local tshl = require("nvim-treesitter-playground.hl-info").get_treesitter_hl()
+  if tshl and #tshl > 0 then
+    local ind = tshl[#tshl]:match("^.*()%*%*.*%*%*")
+    tshl = tshl[#tshl]:sub(ind + 2, -3)
+  end
+
+  local win = require("plenary.popup").create(curr_name, {
+    title = "New Name",
+    style = "minimal",
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    relative = "cursor",
+    borderhighlight = "FloatBorder",
+    titlehighlight = "Title",
+    highlight = tshl,
+    focusable = true,
+    width = 25,
+    height = 1,
+    line = "cursor+2",
+    col = "cursor-1",
+  })
+
+  local map_opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(0, "i", "<ESC>", "<CMD>stopinsert | q!<CR>", map_opts)
+  vim.api.nvim_buf_set_keymap(0, "n", "<ESC>", "<CMD>stopinsert | q!<CR>", map_opts)
+end
+
+popup()
 
 -- handler from https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/theme/ui.lua#L47-L94
 local function handler(...)

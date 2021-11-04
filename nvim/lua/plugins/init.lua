@@ -368,6 +368,8 @@ return require("packer").startup(function(use)
       -- "tpope/vim-dadbod",
       -- "kristijanhusak/vim-dadbod-ui",
       -- "kristijanhusak/vim-dadbod-completion",
+      -- "tzachar/cmp-fzy-buffer",
+      -- "tzachar/cmp-fuzzy-path",
     },
     config = require("lsp.cmp"),
   })
@@ -411,7 +413,14 @@ return require("packer").startup(function(use)
   use("monaqa/dial.nvim")
 
   -- GitHub Copilot (NOTE: requires neovim 0.6)
-  use("github/copilot.vim")
+  use({
+    "github/copilot.vim",
+    -- disable = true,
+    config = function()
+      -- imap <silent><script><expr> <C-L> copilot#Accept()
+      vim.g.copilot_no_tab_map = true
+    end,
+  })
 
   -----------------------------------------------------------
   -- Customisations
@@ -546,6 +555,15 @@ return require("packer").startup(function(use)
 
   -- Project settings
   use("tpope/vim-sleuth")
+
+  -- Mark indicator
+  use({
+    "chentau/marks.nvim",
+    config = function()
+      -- m[ and m] to navigate marks
+      require("marks").setup({})
+    end,
+  })
 
   -- use 'kyazdani42/nvim-web-devicons'
 end)

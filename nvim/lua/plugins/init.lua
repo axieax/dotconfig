@@ -462,6 +462,10 @@ return require("packer").startup(function(use)
       })
     end,
   })
+
+  -- NOTE: transparent background with :hi Normal guibg=NONE ctermbg=NONE
+  use("Mofiqul/dracula.nvim")
+
   -- Check out https://github.com/ozkanonur/nimda.vim
 
   -- Statusline

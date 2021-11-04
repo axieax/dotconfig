@@ -32,6 +32,8 @@ vim_apply(vim.opt, {
   showmode = false,
   swapfile = false,
 
+  -- list and listchars for trailing whitespace / tabs
+
   showmatch = true,
   hlsearch = true,
   incsearch = true,

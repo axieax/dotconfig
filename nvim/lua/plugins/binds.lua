@@ -47,6 +47,9 @@ function M.misc()
   map({ "v", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
   map({ "v", "g<C-a>", "<Plug>(dial-increment-additional)", noremap = false })
   map({ "v", "g<C-x>", "<Plug>(dial-decrement-additional)", noremap = false })
+  -- Visual indent
+  map({ "v", "<", "<gv" })
+  map({ "v", ">", ">gv" })
 end
 
 function M.which_key()
@@ -218,6 +221,7 @@ function M.which_key()
       s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document symbols" },
       S = { "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", "Dynamic workspace symbols" },
       -- S = { "<CMD>Telescope lsp_workspace_symbols<CR>" },
+      F = { "<CMD>edit <cfile><CR>", "Open file reference" },
     },
   })
 end

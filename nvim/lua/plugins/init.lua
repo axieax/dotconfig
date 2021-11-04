@@ -22,7 +22,6 @@
 -- CursorHold lsp hover or line diagnostic?
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
--- choose first spelling suggestion shortcut
 --]]
 
 --[[ Features/plugins

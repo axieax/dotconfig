@@ -134,6 +134,7 @@ function M.which_key()
         n = { "<CMD>NnnExplorer<CR>", "nnn explorer" },
         N = { "<CMD>NnnPicker<CR>", "nnn picker" },
         s = { "<CMD>Telescope spell_suggest<CR>", "spelling" },
+        S = { "1z=", "spelling correct" },
         k = { "<CMD>Telescope keymaps<CR>", "find keymaps" },
         q = { "<CMD>TodoTrouble<CR>", "find todos (Trouble)" },
         Q = { "<CMD>TodoTelescope<CR>", "find todos (Telescope)" },

@@ -1,12 +1,9 @@
 -- https://github.com/mbbill/undotree --
 
 return function()
-	local map = require("utils").map
-	map({"n", "<C-U>", ":UndotreeToggle<CR>"})
-
-	-- Persistent undo
-	-- TODO: default undo limit up to buffer open
-	vim.cmd([[
+  -- Persistent undo
+  -- TODO: default undo limit up to buffer open
+  vim.cmd([[
 	if has("persistent_undo")
 		let target_path = expand('~/.undodir')
 
@@ -20,5 +17,4 @@ return function()
 		set undofile
 	endif
 	]])
-
 end

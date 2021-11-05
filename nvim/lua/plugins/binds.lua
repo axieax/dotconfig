@@ -186,11 +186,10 @@ function M.which_key()
       },
       s = { "<CMD>Dashboard<CR>", "Dashboard" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
-      O = { "O<ESC>", "Create new line above" },
-      o = { "o<ESC>", "Create new line below" },
       p = { ":lua print(vim.inspect())<LEFT><LEFT>", "lua print", silent = false },
       P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },
       q = { ":lua require'notify'.dismiss()<CR>", "dismiss notifications" },
+      u = { "<CMD>UndotreeToggle<CR>", "Undo Tree" },
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },
@@ -223,6 +222,11 @@ function M.which_key()
       S = { "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", "Dynamic workspace symbols" },
       -- S = { "<CMD>Telescope lsp_workspace_symbols<CR>" },
       F = { "<CMD>edit <cfile><CR>", "Open file reference" },
+    },
+    ["\\"] = {
+      -- tpope/unimpaired has [<Space> and ]<Space> as well
+      O = { "O<ESC>", "Create new line above" },
+      o = { "o<ESC>", "Create new line below" },
     },
   })
 end

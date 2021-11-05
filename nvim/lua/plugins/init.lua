@@ -162,6 +162,9 @@ return require("packer").startup(function(use)
   -- Compiler (e.g. :Dispatch python3.9 %)
   use("tpope/vim-dispatch")
 
+  -- Extra mappings
+  use("tpope/vim-unimpaired")
+
   -- Underline word
   use({
     "osyo-manga/vim-brightest",
@@ -219,6 +222,7 @@ return require("packer").startup(function(use)
   })
 
   -- Open with sudo
+  -- use("tpope/vim-eunuch")
   use("lambdalisue/suda.vim")
 
   -- remote ssh
@@ -462,8 +466,12 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- NOTE: transparent background with :hi Normal guibg=NONE ctermbg=NONE
-  use("Mofiqul/dracula.nvim")
+  use({
+    "Mofiqul/dracula.nvim",
+    config = function()
+      vim.g.dracula_transparent_bg = true
+    end,
+  })
 
   -- Check out https://github.com/ozkanonur/nimda.vim
 

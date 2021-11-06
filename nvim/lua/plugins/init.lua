@@ -19,7 +19,7 @@
 -- Add auto packer clean, install, compile under autoinstall packer
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
 -- Merge conflict resolver (like vscode)
--- CursorHold lsp hover or line diagnostic?
+-- Cursor hover lsp hover or line diagnostic?
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
 --]]
@@ -448,32 +448,31 @@ return require("packer").startup(function(use)
   })
 
   use({
-    "rmehri01/onenord.nvim",
-    config = function()
-      require("onenord").setup({
-        borders = true, -- Split window borders
-        italics = {
-          comments = false, -- Italic comments
-          strings = false, -- Italic strings
-          keywords = true, -- Italic keywords
-          functions = false, -- Italic functions
-          variables = false, -- Italic variables
-        },
-        disable = {
-          background = true,
-        },
-      })
-    end,
-  })
-
-  use({
     "Mofiqul/dracula.nvim",
     config = function()
       vim.g.dracula_transparent_bg = true
     end,
   })
 
-  -- Check out https://github.com/ozkanonur/nimda.vim
+  use({
+    "EdenEast/nightfox.nvim",
+    config = function()
+      local nightfox = require("nightfox")
+      nightfox.setup({
+        fox = "duskfox",
+        transparent = true,
+        alt_nc = true,
+      })
+      -- nightfox.load()
+    end,
+  })
+
+  use({
+    "bluz71/vim-nightfly-guicolors",
+    config = function()
+      vim.g.nightflyTransparent = 1
+    end,
+  })
 
   -- Statusline
   use({
@@ -580,6 +579,25 @@ return require("packer").startup(function(use)
   use({
     "kevinhwang91/nvim-bqf",
     ft = "qf",
+  })
+
+  -- Filetype config (faster startup and custom overrides)
+  use({
+    "nathom/filetype.nvim",
+    config = function()
+      -- NOTE: needed for versions prior to Neovim-0.6
+      vim.g.did_load_filetypes = 1
+    end,
+  })
+
+  -- Smooth scroll
+  -- TODO: configure animation duration
+  use({
+    "karb94/neoscroll.nvim",
+    disable = true,
+    config = function()
+      require("neoscroll").setup()
+    end,
   })
 
   -- use 'kyazdani42/nvim-web-devicons'

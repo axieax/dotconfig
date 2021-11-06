@@ -35,6 +35,10 @@ vim_apply(vim.opt, {
   list = true,
   listchars = [[tab:→→,trail:·,extends:▶,precedes:◀,nbsp:␣]],
 
+  wildmenu = true,
+  -- wildmode = "longest:list,full",
+  wildmode = "full",
+
   showmatch = true,
   hlsearch = true,
   incsearch = true,

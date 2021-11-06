@@ -7,6 +7,7 @@
 
 --[[ TODO
 -- TODO: Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
+-- TODO: find another floaterm (toggleterm) plugin, make sure it autoresizes
 -- Update lsp config for installation
 -- Use eslint LSP instead of eslint_d
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?

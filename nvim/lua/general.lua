@@ -36,8 +36,9 @@ vim_apply(vim.opt, {
   listchars = [[tab:→→,trail:·,extends:▶,precedes:◀,nbsp:␣]],
 
   wildmenu = true,
-  -- wildmode = "longest:list,full",
   wildmode = "full",
+  wildoptions = "tagfile",
+  autoread = true,
 
   showmatch = true,
   hlsearch = true,

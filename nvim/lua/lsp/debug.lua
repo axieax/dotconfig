@@ -5,7 +5,7 @@
 return function()
   -- Open to side
   local dap = require("dap")
-  dap.defaults.fallback.terminal_win_cmd = "30vsplit new"
+  dap.defaults.fallback.terminal_win_cmd = "10split new"
 
   require("dapui").setup({})
 

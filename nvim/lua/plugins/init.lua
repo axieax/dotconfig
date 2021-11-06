@@ -470,7 +470,9 @@ return require("packer").startup(function(use)
   use({
     "bluz71/vim-nightfly-guicolors",
     config = function()
+      -- TODO: Telescope border and text highlights
       vim.g.nightflyTransparent = 1
+      vim.cmd([[colorscheme nightfly]])
     end,
   })
 

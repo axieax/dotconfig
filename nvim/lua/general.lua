@@ -16,11 +16,14 @@ local map = require("utils").map
 -- Window options (:setlocal for window-local options) - vim.wo
 
 -- TODO: vim.o instead of vim.opt?
+-- TODO: t_Co = 16?
+-- https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim#L94-L99
 vim_apply(vim.opt, {
   -- General options
   mouse = "a",
   spell = true,
   scrolloff = 1,
+  sidescrolloff = 2,
   cursorline = true,
   splitbelow = true,
   splitright = true,
@@ -104,6 +107,7 @@ map({ "v", "\\p", '"0p' })
 map({ "n", "<space>w", "<cmd>up<CR>" })
 
 -- Disable automatic comment insertion
+-- TODO: shift CR continue comment, regular CR won't
 vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
 vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
 

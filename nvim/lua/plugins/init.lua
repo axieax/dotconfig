@@ -26,6 +26,7 @@
 --]]
 
 --[[ Features/plugins
+-- Coverage
 -- Faded unused variables/imports?
 -- Lazy loading
 -- Gradual undo
@@ -40,6 +41,8 @@
 -- Telescope-cheat.nvim
 -- mrjones2014/dash.nvim for linux?
 -- https://github.com/zim0369/butcher string to array
+-- https://github.com/ripxorip/aerojump.nvim
+-- orgmode.nvim
 --]]
 
 --[[ Notes
@@ -473,7 +476,20 @@ return require("packer").startup(function(use)
     config = function()
       -- TODO: Telescope border and text highlights
       vim.g.nightflyTransparent = 1
-      vim.cmd([[colorscheme nightfly]])
+    end,
+  })
+
+  use({
+    "marko-cerovac/material.nvim",
+    config = function()
+      vim.g.material_style = "palenight"
+      require("material").setup({
+        borders = true,
+        disable = {
+          background = true,
+        },
+      })
+      vim.cmd([[colorscheme material]])
     end,
   })
 
@@ -548,11 +564,13 @@ return require("packer").startup(function(use)
   use("wfxr/minimap.vim")
 
   -- Stabilise buffers
-  -- TODO: trouble integration
   use({
     "luukvbaal/stabilize.nvim",
     config = function()
-      require("stabilize").setup()
+      require("stabilize").setup({
+        -- for stabilising quickfix list (trouble.nvim)
+        nested = "QuickFixCmdPost,User LspDiagnosticsChanged",
+      })
     end,
   })
 

@@ -1,5 +1,6 @@
 -- TODO: hover window: https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 -- https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
+-- https://www.reddit.com/r/neovim/comments/qpns4g/renamernvim_vs_codelike_renaming_ui_for_neovim/
 
 -- LSP rename with notify handler --
 local notify = require("notify")

@@ -280,6 +280,16 @@ return require("packer").startup(function(use)
   -- "." repeat for some commands
   use("tpope/vim-repeat")
 
+  -- Text abbreviation / substitution / coercion
+  use("tpope/vim-abolish")
+  use({
+    "arthurxavierx/vim-caser",
+    config = function()
+      -- Works with motions, text objects and visual mode as well
+      vim.g.caser_prefix = "cR"
+    end,
+  })
+
   -- Multiple cursors
   use("mg979/vim-visual-multi")
 

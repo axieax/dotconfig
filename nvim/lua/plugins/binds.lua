@@ -130,6 +130,7 @@ function M.which_key()
         g = { "<CMD>Telescope live_grep<CR>", "live grep" },
         r = { "<CMD>Telescope registers<CR>", "registers" }, -- could be "
         t = { "<CMD>Telescope colorscheme<CR>", "theme" },
+        T = { "<CMD>Telescope colorscheme enable_preview=true<CR>", "theme" },
         m = { "<CMD>Telescope man_pages<CR>", "search manual" },
         n = { "<CMD>NnnExplorer<CR>", "nnn explorer" },
         N = { "<CMD>NnnPicker<CR>", "nnn picker" },

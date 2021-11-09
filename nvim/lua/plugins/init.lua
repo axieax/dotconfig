@@ -7,6 +7,7 @@
 
 --[[ TODO
 -- TODO: Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
+-- https://github.com/williamboman/nvim-lsp-installer/issues/177
 -- TODO: find another floaterm (toggleterm) plugin, make sure it autoresizes
 -- Update lsp config for installation
 -- Use eslint LSP instead of eslint_d
@@ -23,6 +24,7 @@
 -- Cursor hover lsp hover or line diagnostic?
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
+-- Telescope colorscheme preview
 --]]
 
 --[[ Features/plugins
@@ -166,7 +168,7 @@ return require("packer").startup(function(use)
   -- Compiler (e.g. :Dispatch python3.9 %)
   use("tpope/vim-dispatch")
 
-  -- Extra mappings
+  -- Extra mappings (with encoding/decoding)
   use("tpope/vim-unimpaired")
 
   -- Underline word
@@ -307,6 +309,7 @@ return require("packer").startup(function(use)
   })
 
   -- LSP install
+  -- use("williamboman/nvim-lsp-installer")
   use({
     "kabouzeid/nvim-lspinstall",
     after = "nvim-lspconfig",

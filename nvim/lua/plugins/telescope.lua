@@ -94,17 +94,15 @@ function M.setup()
   require("nvim-biscuits").setup({
     on_events = { "CursorMoved", "CursorMovedI" },
     -- cursor_line_only = true,
-    startup = false,
     default_config = {
       max_length = 24,
       min_distance = 4,
       prefix_string = " ﬌ ",
     },
   })
-  vim.cmd([[highlight BiscuitColor ctermfg=cyan]])
+  -- vim.cmd([[highlight BiscuitColor ctermfg=cyan]])
+  -- vim.cmd([[au BufEnter * hi default BiscuitColor ctermfg=cyan guifg=cyan]])
   -- vim.api.nvim_set_hl(0, "BiscuitColor", { ctermfg = "cyan" })
-  -- disable automatically
-  require("nvim-biscuits").toggle_biscuits()
 end
 
 return M

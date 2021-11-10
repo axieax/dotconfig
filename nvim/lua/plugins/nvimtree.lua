@@ -16,6 +16,9 @@ return function()
       side = "right",
       auto_resize = true,
     },
+    filters = {
+      custom = { ".git" },
+    },
   })
 
   utils.vim_apply(vim.g, {
@@ -25,7 +28,7 @@ return function()
     nvim_tree_add_trailing = 1,
     nvim_tree_quit_on_open = 1,
     -- nvim_tree_side = "right",
-    -- -- nvim_tree_auto_close = 1,
+    -- nvim_tree_auto_close = 1,
     -- nvim_tree_git_hl = 1,
   })
 end

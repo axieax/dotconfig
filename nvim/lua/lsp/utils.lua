@@ -49,6 +49,7 @@ M.language_server_overrides = {
       local sorters = require("telescope.sorters")
       local actions = require("telescope.actions")
       local pickers = require("telescope.pickers")
+      local action_state = require("telescope.actions.state")
 
       require("jdtls.ui").pick_one_async = function(items, prompt, label_fn, cb)
         local opts = {}
@@ -67,7 +68,8 @@ M.language_server_overrides = {
           sorter = sorters.get_generic_fuzzy_sorter(),
           attach_mappings = function(prompt_bufnr)
             actions.select_default:replace(function()
-              local selection = actions.get_selected_entry(prompt_bufnr)
+              local selection = action_state.get_selected_entry(prompt_bufnr)
+
               actions.close(prompt_bufnr)
 
               cb(selection.value)

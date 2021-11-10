@@ -9,6 +9,7 @@
 -- TODO: Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
 -- https://github.com/williamboman/nvim-lsp-installer/issues/177
 -- TODO: find another floaterm (toggleterm) plugin, make sure it autoresizes
+-- TODO: gradle plugin
 -- Update lsp config for installation
 -- Use eslint LSP instead of eslint_d
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
@@ -39,18 +40,22 @@
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
 -- https://github.com/ThePrimeagen/refactoring.nvim
 -- Markdown preview - ellisonleao/glow.nvim, iamcco/markdown-preview.nvim
+-- Markdown continue list on next line
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
 -- mrjones2014/dash.nvim for linux?
 -- https://github.com/zim0369/butcher string to array
 -- https://github.com/ripxorip/aerojump.nvim
 -- orgmode.nvim
+-- bufferline.nvim instead of barbar?
+-- nvimtree config migration
 --]]
 
 --[[ Notes
 -- Galaxyline gap background not transparent
 -- use null-ls as formatter? (has builtins and integrates with lsp)
 -- nvim-cmp treesitter completion source vs buffer source?
+-- Opening buffer for file (nvim-tree) replaces barbar buffers
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -62,7 +67,7 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 end
 
 -- Automatically PackerCompile with changes
-vim.cmd([[ autocmd BufWritePost plugins.lua source <afile> | PackerCompile ]])
+vim.cmd([[ autocmd BufWritePost plugins/init.lua source <afile> | PackerCompile ]])
 
 return require("packer").startup(function(use)
   -- Packer can manage itself
@@ -382,7 +387,7 @@ return require("packer").startup(function(use)
       "kdheepak/cmp-latex-symbols",
       { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
       { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
-      { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
+      -- { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
       -- "ray-x/cmp-treesitter",
       -- "quangnguyen30192/cmp-nvim-tags",
       -- "tpope/vim-dadbod",
@@ -519,8 +524,18 @@ return require("packer").startup(function(use)
   -- TODO: check out https://github.com/akinsho/nvim-bufferline.lua
   use({
     "romgrk/barbar.nvim",
+    -- disable = true,
     requires = "kyazdani42/nvim-web-devicons",
     config = require("plugins.barbar"),
+  })
+
+  use({
+    "akinsho/bufferline.nvim",
+    disable = true,
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("bufferline").setup({})
+    end,
   })
 
   -- Startup screen

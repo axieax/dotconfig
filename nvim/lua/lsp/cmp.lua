@@ -3,7 +3,6 @@
 -- TODO: add toggle tabnine
 -- BUG: tabnine: no function signatures, conflicts with autopairs
 -- BUG: command mode completion affects vim-cool search highlights
-local TABNINE_ENABLED = false
 local DEFAULT_PRIORITY = 2
 
 return function()
@@ -25,7 +24,7 @@ return function()
     emoji = { label = "[Emoji]" },
     spell = { label = "[Spell]", priority = 1 },
     latex_symbols = { label = "[LaTeX]" },
-    cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
+    -- cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
     npm = { label = "[NPM]" },
     cmp_git = { label = "[Git]" },
     cmdline = { label = "[Cmd]" },
@@ -35,13 +34,10 @@ return function()
 
   local source_config = {}
   for source_name, source_settings in pairs(sources) do
-    -- not (source_name == "cmp_tabnine" and not TABNINE_ENABLED)
-    if source_name ~= "cmp_tabnine" or TABNINE_ENABLED then
-      table.insert(source_config, {
-        name = source_name,
-        priority = source_settings.priority or DEFAULT_PRIORITY,
-      })
-    end
+    table.insert(source_config, {
+      name = source_name,
+      priority = source_settings.priority or DEFAULT_PRIORITY,
+    })
   end
 
   local function cmp_map(...)
@@ -139,16 +135,14 @@ return function()
   })
 
   -- tabnine setup
-  if TABNINE_ENABLED then
-    local tabnine = require("cmp_tabnine.config")
-    tabnine:setup({
-      max_lines = 1000,
-      max_num_results = 20,
-      sort = true,
-      run_on_every_keystroke = true,
-      snippet_placeholder = "..",
-    })
-  end
+  -- local tabnine = require("cmp_tabnine.config")
+  -- tabnine:setup({
+  --   max_lines = 1000,
+  --   max_num_results = 20,
+  --   sort = true,
+  --   run_on_every_keystroke = true,
+  --   snippet_placeholder = "..",
+  -- })
 
   -- npm
   require("cmp-npm").setup({})

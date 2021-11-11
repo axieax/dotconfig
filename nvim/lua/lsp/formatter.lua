@@ -174,11 +174,11 @@ return function()
   -- Format on save
   vim.api.nvim_exec(
     [[
-		augroup FormatAutogroup
-		autocmd!
-		autocmd BufWritePost * FormatWrite
-		augroup END
-		]],
+    augroup FormatAutogroup
+      autocmd!
+      autocmd BufWritePost * FormatWrite
+    augroup END
+    ]],
     true
   )
   -- Save without formatting

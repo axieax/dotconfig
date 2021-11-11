@@ -26,6 +26,8 @@
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
 -- Telescope colorscheme preview
+-- Plugin and config split into separate modules
+-- TODO list (put on dashboard) - neorg vs vimwiki?
 --]]
 
 --[[ Features/plugins
@@ -47,7 +49,7 @@
 -- https://github.com/zim0369/butcher string to array
 -- https://github.com/ripxorip/aerojump.nvim
 -- orgmode.nvim
--- bufferline.nvim instead of barbar?
+-- bufferline.nvim or cokeline.nvim instead of barbar?
 -- nvimtree config migration
 --]]
 
@@ -70,12 +72,85 @@ end
 vim.cmd([[ autocmd BufWritePost plugins/init.lua source <afile> | PackerCompile ]])
 
 return require("packer").startup(function(use)
+  ---------------------
+  -- Setup Utilities --
+  ---------------------
+
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
+
+  -- Filetype config (faster startup and custom overrides)
+  use({
+    "nathom/filetype.nvim",
+    config = function()
+      -- NOTE: needed for versions prior to Neovim-0.6
+      vim.g.did_load_filetypes = 1
+    end,
+  })
 
   -----------------------
   -- General Utilities --
   -----------------------
+
+  -- Fuzzy finder
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      { "nvim-telescope/telescope-dap.nvim" },
+      { "nvim-telescope/telescope-media-files.nvim" },
+      -- { "nvim-telescope/telescope-node-modules.nvim" },
+    },
+    after = "nvim-neoclip.lua",
+    config = require("plugins.telescope").setup,
+  })
+
+  -- Search for TODO comments and Trouble pretty list
+  use({
+    "folke/todo-comments.nvim",
+    requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
+    config = require("plugins.notes"),
+  })
+
+  -- Keybinds
+  use({
+    "folke/which-key.nvim",
+    config = require("plugins.binds").which_key,
+  })
+
+  -- Extra mappings (with encoding/decoding as well)
+  use("tpope/vim-unimpaired")
+
+  -- "." repeat for some commands
+  use("tpope/vim-repeat")
+
+  -- Statusline
+  use({
+    "glepnir/galaxyline.nvim",
+    branch = "main",
+    requires = "kyazdani42/nvim-web-devicons",
+    after = "onedark.nvim",
+    config = require("plugins.galaxyline"),
+  })
+
+  -- Tabline
+  -- TODO: check out https://github.com/akinsho/nvim-bufferline.lua
+  use({
+    "romgrk/barbar.nvim",
+    disable = false,
+    requires = "kyazdani42/nvim-web-devicons",
+    config = require("plugins.barbar"),
+  })
+
+  use({
+    "akinsho/bufferline.nvim",
+    disable = true,
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("bufferline").setup({})
+    end,
+  })
 
   -- Floating terminal
   use({
@@ -83,20 +158,91 @@ return require("packer").startup(function(use)
     config = require("plugins.floaterm"),
   })
 
-  -- Fuzzy finder
+  -- Startup screen
+  -- TODO: see if this integrates https://github.com/rmagatti/auto-session
   use({
-    "nvim-telescope/telescope.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-      "nvim-telescope/telescope-dap.nvim",
-      "nvim-telescope/telescope-media-files.nvim",
-      -- "nvim-telescope/telescope-node-modules.nvim",
-      "code-biscuits/nvim-biscuits",
-    },
-    after = "nvim-neoclip.lua",
-    config = require("plugins.telescope").setup,
+    "glepnir/dashboard-nvim",
+    config = require("plugins.dashboard"),
   })
+
+  -- Zen mode
+  use({
+    "folke/zen-mode.nvim",
+    requires = "folke/twilight.nvim",
+    config = require("plugins.zen"),
+  })
+
+  -- Minimap
+  -- INSTALL: yay -S code-minimap
+  use("wfxr/minimap.vim")
+
+  -- Undo history
+  use({
+    "mbbill/undotree",
+    config = require("plugins.undo"),
+  })
+
+  -- Clipboard manager
+  use({
+    "AckslD/nvim-neoclip.lua",
+    requires = { "tami5/sqlite.lua", module = "sqlite" },
+    config = function()
+      require("neoclip").setup({
+        enable_persistant_history = true,
+      })
+    end,
+  })
+
+  -- Notification
+  use({
+    "rcarriga/nvim-notify",
+    config = function()
+      require("notify").setup({
+        background_colour = "#000000",
+      })
+    end,
+  })
+
+  -- Better quickfix list
+  use({
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+  })
+
+  -- Stabilise buffers
+  use({
+    "luukvbaal/stabilize.nvim",
+    config = function()
+      require("stabilize").setup({
+        -- for stabilising quickfix list (trouble.nvim)
+        nested = "QuickFixCmdPost,User LspDiagnosticsChanged",
+      })
+    end,
+  })
+
+  -- Open with sudo
+  -- use("tpope/vim-eunuch")
+  use("lambdalisue/suda.vim")
+
+  -- Remote ssh
+  -- Without remote distant server: :DistantLaunch server mode=ssh ssh.user=<username>
+  use({
+    "chipsenkbeil/distant.nvim",
+    config = function()
+      require("distant").setup({
+        -- Applies Chip's personal settings to every machine you connect to
+        --
+        -- 1. Ensures that distant servers terminate with no connections
+        -- 2. Provides navigation bindings for remote directories
+        -- 3. Provides keybinding to jump into a remote file's parent directory
+        ["*"] = require("distant.settings").chip_default(),
+      })
+    end,
+  })
+
+  -------------------
+  -- File Explorer --
+  -------------------
 
   -- Tree file explorer
   use({
@@ -117,178 +263,14 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Undo history
-  use({
-    "mbbill/undotree",
-    config = require("plugins.undo"),
-  })
-
-  -- Git signs
-  use({
-    "lewis6991/gitsigns.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = require("plugins.gitsigns"),
-  })
-
-  -- Git repo link
-  use({
-    "ruifm/gitlinker.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = require("plugins.gitlinker"),
-  })
-
-  -- Project scope
-  -- TODO: check out https://github.com/ahmedkhalf/project.nvim
-  -- and its support for non-LSP projects?
-  -- https://github.com/ahmedkhalf/project.nvim
-  use("airblade/vim-rooter")
-
-  -- Unit test
-  use({
-    "rcarriga/vim-ultest",
-    requires = "vim-test/vim-test",
-    config = require("lsp.test").setup,
-    run = ":UpdateRemotePlugins",
-  })
-
-  -- Debugger
-  use({
-    "rcarriga/nvim-dap-ui",
-    requires = "mfussenegger/nvim-dap",
-    config = require("lsp.debug"),
-  })
-
-  -- Debugger installer
-  use("Pocco81/DAPInstall.nvim")
-
-  -- Debugger virtual text
-  use("theHamsta/nvim-dap-virtual-text")
-
-  -- Python debugger
-  use("mfussenegger/nvim-dap-python")
-
-  -- Java debugger
-  use("mfussenegger/nvim-jdtls")
-
-  -- Compiler (e.g. :Dispatch python3.9 %)
-  use("tpope/vim-dispatch")
-
-  -- Extra mappings (with encoding/decoding)
-  use("tpope/vim-unimpaired")
-
-  -- Underline word
-  use({
-    "osyo-manga/vim-brightest",
-    config = function()
-      -- Highlight group (e.g. BrighestUndercurl)
-      vim.g["brightest#highlight"] = { group = "BrightestUnderline" }
-    end,
-  })
-
-  -- package.json dependency manager
-  -- TODO: can it check vulnerabilities?
-  use({
-    "vuki656/package-info.nvim",
-    requires = "MunifTanjim/nui.nvim",
-    ft = { "json" },
-    config = require("plugins.package"),
-  })
-
-  -- Which key
-  use({
-    "folke/which-key.nvim",
-    config = require("plugins.binds").which_key,
-  })
-
-  -- Easy motion
-  use({
-    "phaazon/hop.nvim",
-    as = "hop",
-    config = require("plugins.hop"),
-  })
-
-  -- TODO list (put on dashboard) - neorg vs vimwiki?
-  -- Get Treesitter parser
-
-  -- Browser integration
-  use({
-    "glacambre/firenvim",
-    run = function()
-      vim.fn["firenvim#install"](0)
-    end,
-    config = require("plugins.firenvim"),
-  })
-
-  -- Align lines by character
-  use({
-    "godlygeek/tabular",
-    config = require("plugins.tabular").setup,
-  })
-
-  -- Search for TODO comments and Trouble pretty list
-  use({
-    "folke/todo-comments.nvim",
-    requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
-    config = require("plugins.notes"),
-  })
-
-  -- Open with sudo
-  -- use("tpope/vim-eunuch")
-  use("lambdalisue/suda.vim")
-
-  -- remote ssh
-  -- Without remote distant server: :DistantLaunch server mode=ssh ssh.user=<username>
-  use({
-    "chipsenkbeil/distant.nvim",
-    config = function()
-      require("distant").setup({
-        -- Applies Chip's personal settings to every machine you connect to
-        --
-        -- 1. Ensures that distant servers terminate with no connections
-        -- 2. Provides navigation bindings for remote directories
-        -- 3. Provides keybinding to jump into a remote file's parent directory
-        ["*"] = require("distant.settings").chip_default(),
-      })
-    end,
-  })
-
-  -- GitHub issues and pull requests
-  use({
-    "pwntester/octo.nvim",
-    config = function()
-      require("octo").setup()
-    end,
-  })
-
-  -- Clipboard manager
-  use({
-    "AckslD/nvim-neoclip.lua",
-    requires = { "tami5/sqlite.lua", module = "sqlite" },
-    config = function()
-      require("neoclip").setup({
-        enable_persistant_history = true,
-      })
-    end,
-  })
-
-  -- Converter
-  use("simonefranza/nvim-conv")
-
-  -----------------------------------------------------------
-  -- Coding Utilities
-  -----------------------------------------------------------
-
-  -- Commenting
-  use("tpope/vim-commentary")
-
-  -- Surround with pairs
-  use("tpope/vim-surround")
-
-  -- "." repeat for some commands
-  use("tpope/vim-repeat")
+  ------------------
+  -- Helper Tools --
+  ------------------
 
   -- Text abbreviation / substitution / coercion
   use("tpope/vim-abolish")
+
+  -- Case conversion
   use({
     "arthurxavierx/vim-caser",
     config = function()
@@ -297,161 +279,93 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Multiple cursors
-  use("mg979/vim-visual-multi")
+  -- Unit converter
+  use("simonefranza/nvim-conv")
 
-  -- Interactive scratchpad with virtual text
-  -- TODO: check out https://github.com/michaelb/sniprun
-  use("metakirby5/codi.vim")
+  -- Incrementor / decrementor
+  use("monaqa/dial.nvim")
+
+  ------------------
+  -- UI Utilities --
+  ------------------
+
+  -- Bracket coloured pairs
+  -- TODO: change colourscheme, esp red
+  use({
+    "p00f/nvim-ts-rainbow",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        rainbow = {
+          enable = true,
+          extended_mode = true, -- Also highlight non-bracket delimiters like html tags
+          max_file_lines = 1000,
+        },
+      })
+    end,
+  })
+
+  -- Indent context indicator
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = require("plugins.indentline"),
+  })
+
+  -- Scope context indicator
+  use({
+    "code-biscuits/nvim-biscuits",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = require("plugins.biscuits"),
+  })
+
+  -- Mark indicator
+  use({
+    "chentau/marks.nvim",
+    config = function()
+      -- m[ and m] to navigate marks
+      require("marks").setup({})
+    end,
+  })
+
+  -- Underline word under cursor
+  use({
+    "osyo-manga/vim-brightest",
+    config = function()
+      -- Highlight group (e.g. BrighestUndercurl)
+      vim.g["brightest#highlight"] = { group = "BrightestUnderline" }
+    end,
+  })
+
+  -- CSS colours
+  -- NOTE: doesn't highlight lower case names
+  use({
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
+  })
 
   -- Search highlights
   use("romainl/vim-cool")
 
-  -- LSP config
-  use({
-    "neovim/nvim-lspconfig",
-    config = require("lsp.config"),
-  })
+  -- Substitution preview
+  use("markonm/traces.vim")
 
-  -- LSP install
-  -- use("williamboman/nvim-lsp-installer")
+  -- Smooth scroll
+  -- TODO: configure animation duration
   use({
-    "kabouzeid/nvim-lspinstall",
-    after = "nvim-lspconfig",
-    config = require("lsp.install"),
-  })
-
-  -- LSP toggle
-  use({
-    "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+    "karb94/neoscroll.nvim",
+    disable = true,
     config = function()
-      require("toggle_lsp_diagnostics").init()
+      require("neoscroll").setup()
     end,
   })
 
-  -- Symbols
-  use("simrat39/symbols-outline.nvim")
+  -------------
+  -- Theming --
+  -------------
 
-  -- Code action menu
-  use({
-    "weilbith/nvim-code-action-menu",
-    cmd = "CodeActionMenu",
-  })
-
-  -- Code action prompt
-  use({
-    "kosayoda/nvim-lightbulb",
-    config = function()
-      vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'plugins.lightbulb'()]])
-    end,
-  })
-
-  -- Syntax highlighting
-  -- TODO: install parsers for new file types (don't download all)
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = require("plugins.treesitter"),
-  })
-  use({
-    "nvim-treesitter/playground",
-    requires = "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate query",
-  })
-  use({
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    branch = "0.5-compat",
-  })
-  use("JoosepAlviste/nvim-ts-context-commentstring")
-
-  -- Python indenting issues
-  use("Vimjas/vim-python-pep8-indent")
-
-  -- Auto completion (replace with hrsh7th/nvim-cmp)
-  use({
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "windwp/nvim-autopairs",
-      "lukas-reineke/cmp-under-comparator",
-      "onsails/lspkind-nvim",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/vim-vsnip",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-calc",
-      "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-cmdline",
-      "f3fora/cmp-spell",
-      "kdheepak/cmp-latex-symbols",
-      { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
-      { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
-      -- { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
-      -- "ray-x/cmp-treesitter",
-      -- "quangnguyen30192/cmp-nvim-tags",
-      -- "tpope/vim-dadbod",
-      -- "kristijanhusak/vim-dadbod-ui",
-      -- "kristijanhusak/vim-dadbod-completion",
-      -- "tzachar/cmp-fzy-buffer",
-      -- "tzachar/cmp-fuzzy-path",
-    },
-    config = require("lsp.cmp"),
-  })
-
-  -- Snippets
-  -- TODO: check out https://github.com/L3MON4D3/LuaSnip
-  -- Ultisnips
-  -- Snippet collection
-  use("rafamadriz/friendly-snippets")
-  -- Definable snippets
-  use("hrsh7th/vim-vsnip")
-
-  -- Function signature
-  use({
-    "ray-x/lsp_signature.nvim",
-    config = require("lsp.signature"),
-  })
-
-  -- Autoclose and autorename html tag
-  use({
-    "windwp/nvim-ts-autotag",
-    requires = "nvim-treesitter/nvim-treesitter",
-  })
-
-  -- Formatter
-  use({
-    "mhartington/formatter.nvim",
-    config = require("lsp.formatter"),
-  })
-
-  -- Make
-  use("neomake/neomake")
-
-  -- Docstring generator
-  use({
-    "kkoomen/vim-doge",
-    run = ":call doge#install()",
-  })
-
-  -- Incrementor/decrementor
-  use("monaqa/dial.nvim")
-
-  -- GitHub Copilot (NOTE: requires neovim 0.6)
-  use({
-    "github/copilot.vim",
-    -- disable = true,
-    config = function()
-      -- imap <silent><script><expr> <C-L> copilot#Accept()
-      vim.g.copilot_no_tab_map = true
-    end,
-  })
-
-  -----------------------------------------------------------
-  -- Customisations
-  -----------------------------------------------------------
-
-  -- Theme
   -- https://github.com/ful1e5/onedark.nvim ?
   use({
     "navarasu/onedark.nvim",
@@ -511,143 +425,277 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Statusline
+  ----------------------
+  -- Motion Utilities --
+  ----------------------
+
+  -- Multiple cursors
+  use("mg979/vim-visual-multi")
+
+  -- Easy motion
   use({
-    "glepnir/galaxyline.nvim",
-    branch = "main",
-    requires = "kyazdani42/nvim-web-devicons",
-    after = "onedark.nvim",
-    config = require("plugins.galaxyline"),
+    "phaazon/hop.nvim",
+    config = require("plugins.hop"),
   })
 
-  -- Tabline
-  -- TODO: check out https://github.com/akinsho/nvim-bufferline.lua
-  use({
-    "romgrk/barbar.nvim",
-    -- disable = true,
-    requires = "kyazdani42/nvim-web-devicons",
-    config = require("plugins.barbar"),
-  })
+  -----------------------------
+  -- Project / Git Utilities --
+  -----------------------------
 
-  use({
-    "akinsho/bufferline.nvim",
-    disable = true,
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("bufferline").setup({})
-    end,
-  })
-
-  -- Startup screen
-  -- TODO: see if this integrates https://github.com/rmagatti/auto-session
-  use({
-    "glepnir/dashboard-nvim",
-    config = require("plugins.dashboard"),
-  })
-
-  -- Indent blank lines
-  use({
-    "lukas-reineke/indent-blankline.nvim",
-    requires = "nvim-treesitter/nvim-treesitter",
-    config = require("plugins.indentline"),
-  })
-
-  -- Coloured pairs
-  -- TODO: change colourscheme, esp red
-  use({
-    "p00f/nvim-ts-rainbow",
-    requires = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        rainbow = {
-          enable = true,
-          extended_mode = true, -- Also highlight non-bracket delimiters like html tags
-          max_file_lines = 1000,
-        },
-      })
-    end,
-  })
-
-  -- CSS colours
-  -- NOTE: doesn't highlight lower case names
-  use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-  })
-
-  -- Zen mode
-  use({
-    "folke/zen-mode.nvim",
-    requires = "folke/twilight.nvim",
-    config = require("plugins.zen"),
-  })
-
-  -- Substitution preview
-  use("markonm/traces.vim")
-
-  -- Minimap
-  -- INSTALL: yay -S code-minimap
-  use("wfxr/minimap.vim")
-
-  -- Stabilise buffers
-  use({
-    "luukvbaal/stabilize.nvim",
-    config = function()
-      require("stabilize").setup({
-        -- for stabilising quickfix list (trouble.nvim)
-        nested = "QuickFixCmdPost,User LspDiagnosticsChanged",
-      })
-    end,
-  })
-
-  -- Notification
-  use({
-    "rcarriga/nvim-notify",
-    config = function()
-      require("notify").setup({
-        background_colour = "#000000",
-      })
-    end,
-  })
+  -- Project scope
+  -- TODO: check out https://github.com/ahmedkhalf/project.nvim
+  -- and its support for non-LSP projects?
+  -- https://github.com/ahmedkhalf/project.nvim
+  use("airblade/vim-rooter")
 
   -- Project settings
   use("tpope/vim-sleuth")
 
-  -- Mark indicator
+  -- Git signs
   use({
-    "chentau/marks.nvim",
+    "lewis6991/gitsigns.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = require("plugins.gitsigns"),
+  })
+
+  -- Git repo link
+  use({
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = require("plugins.gitlinker"),
+  })
+
+  -- GitHub issues and pull requests
+  use({
+    "pwntester/octo.nvim",
     config = function()
-      -- m[ and m] to navigate marks
-      require("marks").setup({})
+      require("octo").setup()
     end,
   })
 
-  -- Better quickfix
+  -----------------------------------
+  -- General Programming Utilities --
+  -----------------------------------
+
+  -- Language parser + syntax highlighting
+  -- TODO: install parsers for new file types (don't download all)
   use({
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = require("plugins.treesitter"),
   })
 
-  -- Filetype config (faster startup and custom overrides)
+  -- Treesitter parser info
   use({
-    "nathom/filetype.nvim",
+    "nvim-treesitter/playground",
+    run = ":TSUpdate query",
+    requires = "nvim-treesitter/nvim-treesitter",
+  })
+
+  -- Treesitter text objects
+  use({
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "0.5-compat",
+    requires = "nvim-treesitter",
+  })
+
+  -- GitHub Copilot (NOTE: requires neovim 0.6)
+  use({
+    "github/copilot.vim",
+    -- disable = true,
     config = function()
-      -- NOTE: needed for versions prior to Neovim-0.6
-      vim.g.did_load_filetypes = 1
+      -- imap <silent><script><expr> <C-L> copilot#Accept()
+      vim.g.copilot_no_tab_map = true
     end,
   })
 
-  -- Smooth scroll
-  -- TODO: configure animation duration
+  -- Interactive scratchpad with virtual text
+  -- TODO: check out https://github.com/michaelb/sniprun
+  use("metakirby5/codi.vim")
+
+  -- Code formatter
   use({
-    "karb94/neoscroll.nvim",
-    disable = true,
+    "mhartington/formatter.nvim",
+    config = require("lsp.formatter"),
+  })
+
+  -- Align lines by character
+  use({
+    "godlygeek/tabular",
+    config = require("plugins.tabular").setup,
+  })
+
+  -- Commenting
+  use("tpope/vim-commentary")
+
+  -- Better commentstring (for vim-commentary)
+  use({
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    requires = "nvim-treesitter",
+  })
+
+  -- Surround with brackets
+  use("tpope/vim-surround")
+
+  -- Snippets
+  -- TODO: check out https://github.com/L3MON4D3/LuaSnip and Ultisnips
+
+  -- Snippet collection
+  use("rafamadriz/friendly-snippets")
+
+  -- Definable snippets
+  use("hrsh7th/vim-vsnip")
+
+  -- Docstring generator
+  use({
+    "kkoomen/vim-doge",
+    run = ":call doge#install()",
+  })
+
+  -- Autoclose and autorename html tag
+  use({
+    "windwp/nvim-ts-autotag",
+    requires = "nvim-treesitter/nvim-treesitter",
+  })
+
+  -- package.json dependency manager
+  -- TODO: can it check vulnerabilities?
+  use({
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+    ft = { "json" },
+    config = require("plugins.package"),
+  })
+
+  -- Python indenting issues
+  use("Vimjas/vim-python-pep8-indent")
+
+  ---------------------------------
+  -- Compilation, Test and Debug --
+  ---------------------------------
+
+  -- Make
+  use("neomake/neomake")
+
+  -- Compiler (e.g. :Dispatch python3.9 %)
+  use("tpope/vim-dispatch")
+
+  -- Unit test
+  use({
+    "rcarriga/vim-ultest",
+    requires = "vim-test/vim-test",
+    config = require("lsp.test").setup,
+    run = ":UpdateRemotePlugins",
+  })
+
+  -- Debugger
+  use({
+    "rcarriga/nvim-dap-ui",
+    requires = {
+      "mfussenegger/nvim-dap",
+      "theHamsta/nvim-dap-virtual-text",
+      "mfussenegger/nvim-dap-python",
+    },
+    config = require("lsp.debug"),
+  })
+
+  -- Debugger installer
+  use("Pocco81/DAPInstall.nvim")
+
+  -------------------
+  -- LSP Utilities --
+  -------------------
+
+  -- LSP config
+  use({
+    "neovim/nvim-lspconfig",
+    config = require("lsp.config"),
+  })
+
+  -- LSP install
+  -- use("williamboman/nvim-lsp-installer")
+  use({
+    "kabouzeid/nvim-lspinstall",
+    after = "nvim-lspconfig",
+    config = require("lsp.install"),
+  })
+
+  -- Java LSP
+  use("mfussenegger/nvim-jdtls")
+
+  -- LSP diagnostics toggle
+  use({
+    "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
     config = function()
-      require("neoscroll").setup()
+      require("toggle_lsp_diagnostics").init()
     end,
   })
 
-  -- use 'kyazdani42/nvim-web-devicons'
+  -- Symbols outline
+  use("simrat39/symbols-outline.nvim")
+
+  -- Code action menu
+  use({
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+  })
+
+  -- Code action prompt
+  use({
+    "kosayoda/nvim-lightbulb",
+    config = function()
+      vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'plugins.lightbulb'()]])
+    end,
+  })
+
+  -- Completion menu
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      { "windwp/nvim-autopairs" },
+      { "lukas-reineke/cmp-under-comparator" },
+      { "onsails/lspkind-nvim" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/vim-vsnip" },
+      { "hrsh7th/cmp-vsnip" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-calc" },
+      { "hrsh7th/cmp-emoji" },
+      { "hrsh7th/cmp-cmdline" },
+      { "f3fora/cmp-spell" },
+      { "kdheepak/cmp-latex-symbols" },
+      { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
+      { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
+      -- { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
+      -- "ray-x/cmp-treesitter",
+      -- "quangnguyen30192/cmp-nvim-tags",
+      -- "tpope/vim-dadbod",
+      -- "kristijanhusak/vim-dadbod-ui",
+      -- "kristijanhusak/vim-dadbod-completion",
+      -- "tzachar/cmp-fzy-buffer",
+      -- "tzachar/cmp-fuzzy-path",
+    },
+    config = require("lsp.cmp"),
+  })
+
+  -- Function signature
+  use({
+    "ray-x/lsp_signature.nvim",
+    config = require("lsp.signature"),
+  })
+
+  -------------------
+  -- Miscellaneous --
+  -------------------
+
+  -- Browser integration
+  use({
+    "glacambre/firenvim",
+    run = function()
+      vim.fn["firenvim#install"](0)
+    end,
+    config = require("plugins.firenvim"),
+  })
 end)

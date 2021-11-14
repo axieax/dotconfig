@@ -1,4 +1,5 @@
 -- https://github.com/kabouzeid/nvim-lspinstall --
+-- NOTE: auto open install window: use nvim_open_win config option noautocmd
 
 return function()
   -- lsp setup

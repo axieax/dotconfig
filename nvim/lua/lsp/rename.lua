@@ -33,7 +33,7 @@ local function popup(curr_name)
   vim.api.nvim_buf_set_keymap(0, "n", "<ESC>", "<CMD>stopinsert | q!<CR>", map_opts)
 end
 
-popup()
+-- popup()
 
 -- handler from https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/theme/ui.lua#L47-L94
 local function handler(...)

@@ -186,6 +186,7 @@ function M.which_key()
         r = { "<CMD>FloatermNew lazydocker<CR>", "lazydocker" },
       },
       s = { "<CMD>Dashboard<CR>", "Dashboard" },
+      S = { "<CMD>PackerSync<CR>", "Update Plugins" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
       p = { ":lua print(vim.inspect())<LEFT><LEFT>", "lua print", silent = false },
       P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },

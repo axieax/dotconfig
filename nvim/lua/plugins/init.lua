@@ -28,6 +28,7 @@
 -- Telescope colorscheme preview
 -- Plugin and config split into separate modules
 -- TODO list (put on dashboard) - neorg vs vimwiki?
+-- gitsigns hunk preview
 --]]
 
 --[[ Features/plugins
@@ -50,6 +51,7 @@
 -- https://github.com/ripxorip/aerojump.nvim
 -- orgmode.nvim
 -- bufferline.nvim or cokeline.nvim instead of barbar?
+-- windline instead of galaxyline (deprecated)
 -- nvimtree config migration
 --]]
 
@@ -199,6 +201,12 @@ return require("packer").startup(function(use)
     config = function()
       require("notify").setup({
         background_colour = "#000000",
+        render = "minimal",
+        on_open = function(win)
+          -- transparent background
+          -- vim.api.nvim_win_set_option(win, "winblend", 25)
+          -- vim.api.nvim_win_set_config(win, { zindex = 100 })
+        end,
       })
     end,
   })

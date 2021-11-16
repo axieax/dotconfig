@@ -15,6 +15,7 @@ local default_options = {
   noremap = true,
   silent = true,
   expr = false,
+  script = false,
 }
 
 -- Sets nvim keybinds
@@ -25,6 +26,7 @@ local default_options = {
 -- 	noremap,
 -- 	silent,
 -- 	expr,
+-- 	script,
 -- }
 
 function M.map(bind)
@@ -32,24 +34,17 @@ function M.map(bind)
   local mode = bind[1]
   local before = bind[2]
   local after = bind[3]
-  local noremap = bind.noremap
-  local silent = bind.silent
-  local expr = bind.expr
+  local noremap = (bind.noremap == nil and default_options.noremap) or bind.noremap
+  local silent = (bind.silent == nil and default_options.silent) or bind.silent
+  local expr = (bind.expr == nil and default_options.expr) or bind.expr
+  local script = (bind.script == nil and default_options.script) or bind.script
 
-  if noremap == nil then
-    noremap = default_options.noremap
-  end
-  if silent == nil then
-    silent = default_options.silent
-  end
-  if expr == nil then
-    expr = default_options.expr
-  end
   -- Pass settings to keymap API call
   vim.api.nvim_set_keymap(mode, before, after, {
     noremap = noremap,
     silent = silent,
     expr = expr,
+    script = script,
   })
 end
 

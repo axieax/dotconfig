@@ -192,6 +192,8 @@ function M.which_key()
       P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },
       q = { ":lua require'notify'.dismiss()<CR>", "dismiss notifications" },
       u = { "<CMD>UndotreeToggle<CR>", "Undo Tree" },
+      v = { "ggVG", "select all" },
+      V = { 'ggVG"+Y', "copy all to clipboard" },
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },

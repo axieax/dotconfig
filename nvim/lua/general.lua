@@ -111,5 +111,8 @@ map({ "n", "<space>w", "<cmd>up<CR>" })
 vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
 vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
 
+-- Center search result jumps
+map({ "n", "n", "nzz" })
+
 -- Apply keybindings
 require("plugins.binds").general()

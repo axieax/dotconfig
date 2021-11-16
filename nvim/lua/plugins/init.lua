@@ -29,6 +29,7 @@
 -- Plugin and config split into separate modules
 -- TODO list (put on dashboard) - neorg vs vimwiki?
 -- gitsigns hunk preview
+-- TODO: gitlinker visual bindings
 --]]
 
 --[[ Features/plugins
@@ -513,6 +514,8 @@ return require("packer").startup(function(use)
     -- disable = true,
     config = function()
       -- imap <silent><script><expr> <C-L> copilot#Accept()
+      local map = require("utils").map
+      map({ "i", "<C-a>", "copilot#Accept()", script = true, expr = true, silent = true })
       vim.g.copilot_no_tab_map = true
     end,
   })

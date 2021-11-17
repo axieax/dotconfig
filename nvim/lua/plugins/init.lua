@@ -8,7 +8,7 @@
 --[[ TODO
 -- TODO: Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
 -- https://github.com/williamboman/nvim-lsp-installer/issues/177
--- TODO: find another floaterm (toggleterm) plugin, make sure it autoresizes
+-- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
 -- TODO: gradle plugin
 -- Update lsp config for installation
 -- Use eslint LSP instead of eslint_d
@@ -67,12 +67,13 @@
 
 -- Autoinstall packer
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
-  vim.api.nvim_command("!git clone https://github.com/wbthomason/packer.nvim " .. packer_path)
+local auto_install = vim.fn.empty(vim.fn.glob(packer_path)) > 0
+if auto_install then
+  vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
 end
 
 -- Automatically PackerCompile with changes
-vim.cmd([[ autocmd BufWritePost plugins/init.lua source <afile> | PackerCompile ]])
+vim.cmd([[ autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile> | PackerCompile ]])
 
 return require("packer").startup(function(use)
   ---------------------
@@ -159,6 +160,12 @@ return require("packer").startup(function(use)
   use({
     "voldikss/vim-floaterm",
     config = require("plugins.floaterm"),
+  })
+
+  -- Terminal
+  use({
+    "akinsho/toggleterm.nvim",
+    config = require("plugins.toggleterm").setup,
   })
 
   -- Startup screen
@@ -709,4 +716,9 @@ return require("packer").startup(function(use)
     end,
     config = require("plugins.firenvim"),
   })
+
+  -- Packer auto update + compile
+  if auto_install then
+    require("packer").sync()
+  end
 end)

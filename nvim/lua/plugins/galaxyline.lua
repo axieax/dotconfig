@@ -3,6 +3,7 @@
 -- File indent size? mixed indent warning
 -- TODO: venv
 -- TODO: group linecol and percentage ()
+-- TODO: short list
 
 -- BUG: highlight https://github.com/glepnir/galaxyline.nvim/issues/215
 
@@ -83,6 +84,21 @@ return function()
         -- highlight = { colours.green, colours.purple },
         separator = " ",
         -- separator_highlight = { colours.purple, colours.darkblue },
+      },
+    },
+    {
+      FileNameIcon = {
+        provider = function()
+          return " "
+        end,
+        highlight = { "#d9a3af" },
+      },
+    },
+    {
+      FileName = {
+        provider = "FileName",
+        -- separator = " ",
+        highlight = { "#debac3" },
       },
     },
     {

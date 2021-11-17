@@ -6,8 +6,6 @@
 --]]
 
 --[[ TODO
--- TODO: Change LSPInstall to https://github.com/williamboman/nvim-lsp-installer
--- https://github.com/williamboman/nvim-lsp-installer/issues/177
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
 -- TODO: gradle plugin
 -- Update lsp config for installation
@@ -631,11 +629,10 @@ return require("packer").startup(function(use)
   })
 
   -- LSP install
-  -- use("williamboman/nvim-lsp-installer")
   use({
-    "kabouzeid/nvim-lspinstall",
+    "williamboman/nvim-lsp-installer",
+    config = require("lsp.install").setup,
     after = "nvim-lspconfig",
-    config = require("lsp.install"),
   })
 
   -- Java LSP

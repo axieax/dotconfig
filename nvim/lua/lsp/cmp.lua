@@ -3,6 +3,7 @@
 -- TODO: add toggle tabnine
 -- BUG: tabnine: no function signatures, conflicts with autopairs
 -- BUG: command mode completion affects vim-cool search highlights
+
 local DEFAULT_PRIORITY = 2
 
 return function()

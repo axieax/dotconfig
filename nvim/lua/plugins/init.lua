@@ -52,6 +52,7 @@
 -- bufferline.nvim or cokeline.nvim instead of barbar?
 -- windline instead of galaxyline (deprecated)
 -- nvimtree config migration
+-- Calltree (https://github.com/ldelossa/calltree.nvim)
 --]]
 
 --[[ Notes
@@ -59,6 +60,8 @@
 -- use null-ls as formatter? (has builtins and integrates with lsp)
 -- nvim-cmp treesitter completion source vs buffer source?
 -- Opening buffer for file (nvim-tree) replaces barbar buffers
+-- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
+-- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --

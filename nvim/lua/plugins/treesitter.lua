@@ -6,6 +6,7 @@ return function()
   local vim_apply = require("utils").vim_apply
   require("nvim-treesitter.configs").setup({
     -- Treesitter
+    -- ensure_installed = require("utils.config").prepared_parsers,
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
       enable = true,
@@ -27,6 +28,7 @@ return function()
     autotag = {
       enable = true,
       -- https://github.com/windwp/nvim-ts-autotag#default-values
+      -- NOTE: markdown doesn't have a TS parser
       -- filetypes = {
       --   "html",
       --   "javascript",

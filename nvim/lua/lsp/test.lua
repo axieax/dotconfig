@@ -1,5 +1,7 @@
 -- https://github.com/vim-test/vim-test --
 -- https://github.com/rcarriga/vim-ultest --
+-- TODO: java functions separate keybindings in ftplugin or on_attach?
+
 local M = {}
 
 function M.display()

@@ -1,6 +1,7 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
--- TODO: auto install
 -- TODO: vim.tbl_extend default config with on_attach function (esp for jdtls)
+
+local notify = require("notify")
 
 local M = {}
 
@@ -19,8 +20,9 @@ extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
 local os = vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
+local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
-M.ls_overrides = function()
+function M.ls_overrides()
   return {
     -- lua: sumneko_lua
     sumneko_lua = {
@@ -32,7 +34,6 @@ M.ls_overrides = function()
           },
         },
       },
-      filetypes = { "lua" },
     },
     -- java: jdtls
     jdtls = {
@@ -54,7 +55,7 @@ M.ls_overrides = function()
         "-configuration",
         jdtls_path .. "/config_" .. os,
         "-data",
-        vim.fn.expand("~/java/workspaces/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")),
+        vim.fn.expand("~/java/workspaces/" .. workspace_dir),
         "--add-modules=ALL-SYSTEM",
         "--add-opens java.base/java.util=ALL-UNNAMED",
         "--add-opens java.base/java.lang=ALL-UNNAMED",
@@ -123,21 +124,45 @@ M.ls_overrides = function()
   }
 end
 
-M.setup_jdtls = function()
+-- Auto install required language servers defined in utils.config
+function M.prepare_language_servers()
+  local get_server = require("nvim-lsp-installer.servers").get_server
+  local required_servers = require("utils.config").prepared_language_servers()
+
+  for _, server_name in ipairs(required_servers) do
+    local available, server = get_server(server_name)
+    if not available then
+      notify("Could not install language server " .. server_name, "error")
+    elseif not server:is_installed() then
+      server:install()
+      notify("Installed language server " .. server_name, "info")
+    end
+  end
+end
+
+-- Setup language servers for installed servers
+function M.setup_language_servers()
+  local installed_servers = require("nvim-lsp-installer.servers").get_installed_servers()
+
+  for _, server in ipairs(installed_servers) do
+    if server.name ~= "jdtls" then
+      server:on_ready(function()
+        local ls_overrides = require("lsp.install").ls_overrides()
+        local opts = ls_overrides[server.name] or ls_overrides.default
+        server:setup(opts)
+      end)
+    end
+  end
+end
+
+-- Setup jdtls language server for java files
+function M.setup_jdtls()
   require("jdtls").start_or_attach(M.ls_overrides().jdtls)
 end
 
 function M.setup()
-  local lsp_installer = require("nvim-lsp-installer")
-
-  lsp_installer.on_server_ready(function(server)
-    if server.name == "jdtls" then
-      return
-    end
-    local ls_overrides = require("lsp.install").ls_overrides()
-    local opts = ls_overrides[server.name] or ls_overrides.default
-    server:setup(opts)
-  end)
+  require("lsp.install").prepare_language_servers()
+  require("lsp.install").setup_language_servers()
 
   -- setup jdtls for java files
   vim.cmd([[

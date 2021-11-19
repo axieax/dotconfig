@@ -182,7 +182,8 @@ function M.which_key()
       },
       r = {
         -- n = { "<CMD>lua vim.lsp.buf.rename()<CR>", "rename symbol" },
-        n = { "<CMD>lua require'lsp.rename'()<CR>", "rename symbol" },
+        -- n = { "<CMD>lua require'lsp.rename'.rename()<CR>", "rename symbol" },
+        n = { "<CMD>lua require'renamer'.rename()<CR>", "rename symbol" },
         r = { "<CMD>FloatermNew lazydocker<CR>", "lazydocker" },
       },
       s = { "<CMD>Dashboard<CR>", "Dashboard" },

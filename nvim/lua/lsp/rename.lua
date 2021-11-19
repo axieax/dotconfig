@@ -2,41 +2,13 @@
 -- https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 -- https://www.reddit.com/r/neovim/comments/qpns4g/renamernvim_vs_codelike_renaming_ui_for_neovim/
 
+local M = {}
+
 -- LSP rename with notify handler --
 local notify = require("notify")
 
-local function popup(curr_name)
-  curr_name = "test"
-  local tshl = require("nvim-treesitter-playground.hl-info").get_treesitter_hl()
-  if tshl and #tshl > 0 then
-    local ind = tshl[#tshl]:match("^.*()%*%*.*%*%*")
-    tshl = tshl[#tshl]:sub(ind + 2, -3)
-  end
-
-  local win = require("plenary.popup").create(curr_name, {
-    title = "New Name",
-    style = "minimal",
-    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    relative = "cursor",
-    borderhighlight = "FloatBorder",
-    titlehighlight = "Title",
-    highlight = tshl,
-    focusable = true,
-    width = 25,
-    height = 1,
-    line = "cursor+2",
-    col = "cursor-1",
-  })
-
-  local map_opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(0, "i", "<ESC>", "<CMD>stopinsert | q!<CR>", map_opts)
-  vim.api.nvim_buf_set_keymap(0, "n", "<ESC>", "<CMD>stopinsert | q!<CR>", map_opts)
-end
-
--- popup()
-
 -- handler from https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/theme/ui.lua#L47-L94
-local function handler(...)
+function M.lsp_rename_handler(...)
   local result
   local method
   local err = select(1, ...)
@@ -52,26 +24,38 @@ local function handler(...)
     vim.notify(("Error running LSP query '%s': %s"):format(method, err), vim.log.levels.ERROR)
     return
   end
+
   -- echo the resulting changes
+  require("lsp.rename").handler(result)
+
+  vim.lsp.handlers[method](...)
+end
+
+function M.handler(result)
+  -- display the resulting changes
+  if not result then
+    return
+  end
 
   -- prefer documentChanges over changes (under workspaceEdit)
   -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
-  -- TODO: send to qflist?
   -- https://youtu.be/tAVxxdFFYMU
-  if result and result.documentChanges then
+  if result.documentChanges then
     local msg = ""
     local num_changes = 0
     for _, entry in ipairs(result.documentChanges) do
       local edits = entry.edits
-      local filename = vim.uri_to_fname(entry.textDocument.uri)
-      msg = msg .. ("%d changes in %s"):format(#edits, filename) .. "\n"
-      num_changes = num_changes + #edits
+      if edits then
+        local filename = vim.uri_to_fname(entry.textDocument.uri)
+        msg = msg .. ("%d changes in %s"):format(#edits, filename) .. "\n"
+        num_changes = num_changes + #edits
+      end
     end
     msg = msg:sub(1, #msg - 1)
     notify(msg, "info", {
       title = ("Succesfully renamed with %d changes"):format(num_changes),
     })
-  elseif result and result.changes then
+  elseif result.changes then
     local msg = ""
     local num_changes = 0
     for uri, edits in pairs(result.changes) do
@@ -80,12 +64,10 @@ local function handler(...)
       num_changes = num_changes + #edits
     end
     msg = msg:sub(1, #msg - 1)
-    notify(msg, "info", {
+    require("notify")(msg, "info", {
       title = ("Succesfully renamed with %d changes"):format(num_changes),
     })
   end
-
-  vim.lsp.handlers[method](...)
 end
 
 -- from https://github.com/neovim/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L247-L280
@@ -115,7 +97,7 @@ end
 ---
 ---@param new_name (string) If not provided, the user will be prompted for a new
 ---name using |input()|.
-local function rename(new_name)
+function M.rename(new_name)
   local params = vim.lsp.util.make_position_params()
   local function prepare_rename(err, result)
     if err == nil and result == nil then
@@ -142,9 +124,15 @@ local function rename(new_name)
       return
     end
     params.newName = new_name
-    vim.lsp.buf_request(0, "textDocument/rename", params, handler) -- include handler
+    vim.lsp.buf_request(0, "textDocument/rename", params, M.lsp_rename_handler) -- include handler
   end
   vim.lsp.buf_request(0, "textDocument/prepareRename", params, prepare_rename)
 end
 
-return rename
+function M.renamer_setup()
+  require("renamer").setup({
+    handler = require("lsp.rename").handler,
+  })
+end
+
+return M

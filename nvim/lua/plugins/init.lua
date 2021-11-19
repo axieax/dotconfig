@@ -28,6 +28,7 @@
 -- TODO list (put on dashboard) - neorg vs vimwiki?
 -- gitsigns hunk preview
 -- TODO: gitlinker visual bindings
+-- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 --]]
 
 --[[ Features/plugins
@@ -636,6 +637,12 @@ return require("packer").startup(function(use)
     "williamboman/nvim-lsp-installer",
     config = require("lsp.install").setup,
     after = "nvim-lspconfig",
+  })
+
+  -- Rename
+  use({
+    "filipdutescu/renamer.nvim",
+    config = require("lsp.rename").renamer_setup,
   })
 
   -- Java LSP

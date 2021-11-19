@@ -1,6 +1,7 @@
 -- TODO: hover window: https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 -- https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 -- https://www.reddit.com/r/neovim/comments/qpns4g/renamernvim_vs_codelike_renaming_ui_for_neovim/
+-- TODO: renamer UI qflist documentChanges
 
 local M = {}
 
@@ -47,6 +48,7 @@ function M.handler(result)
       local edits = entry.edits
       if edits then
         local filename = vim.uri_to_fname(entry.textDocument.uri)
+        filename = vim.fn.fnamemodify(filename, ":.")
         msg = msg .. ("%d changes in %s"):format(#edits, filename) .. "\n"
         num_changes = num_changes + #edits
       end
@@ -60,6 +62,7 @@ function M.handler(result)
     local num_changes = 0
     for uri, edits in pairs(result.changes) do
       local filename = vim.uri_to_fname(uri)
+      filename = vim.fn.fnamemodify(filename, ":.")
       msg = msg .. ("%d changes in %s"):format(#edits, filename) .. "\n"
       num_changes = num_changes + #edits
     end

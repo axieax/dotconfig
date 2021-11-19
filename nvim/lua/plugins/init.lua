@@ -63,6 +63,7 @@
 -- Opening buffer for file (nvim-tree) replaces barbar buffers
 -- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
+-- Colorizer disabled on PackerCompile
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --

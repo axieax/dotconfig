@@ -15,7 +15,7 @@ function M.prepared_language_servers()
     "tsserver",
     "emmet_ls",
     "jsonls",
-    "eslint",
+    -- "eslint",
     "cssls",
     "html",
     -- "tailwindcss",

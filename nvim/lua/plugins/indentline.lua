@@ -51,12 +51,12 @@ return function()
 
   -- BUG: not working
   vim.cmd([[highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine]])
-  vim.cmd([[
-  augroup SetContextHighlights
-    autocmd User PackerComplete,PackerCompileDone lua require("indent_blankline.utils").reset_highlights()
-    autocmd User PackerComplete,PackerCompileDone highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine
-  augroup END
-  ]])
+  -- vim.cmd([[
+  -- augroup SetContextHighlights
+  --   autocmd User PackerComplete,PackerCompileDone lua require("indent_blankline.utils").reset_highlights()
+  --   autocmd User PackerComplete,PackerCompileDone highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine
+  -- augroup END
+  -- ]])
   -- vim.cmd(
   --   [[autocmd User PackerComplete,PackerCompileDone highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine]]
   -- )

@@ -25,7 +25,7 @@
 -- nvim cmp tzachar/cmp-fzy-buffer?
 -- Telescope colorscheme preview
 -- Plugin and config split into separate modules
--- TODO list (put on dashboard) - neorg vs vimwiki?
+-- TODO list (put on dashboard) - neorg vs vimwiki vs orgmode.nvim?
 -- gitsigns hunk preview
 -- TODO: gitlinker visual bindings
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)

@@ -1,5 +1,6 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
 -- TODO: vim.tbl_extend default config with on_attach function (esp for jdtls)
+-- TODO: common_on_attach
 
 local notify = require("notify")
 
@@ -117,7 +118,14 @@ function M.ls_overrides()
     -- 	or vim.fn.getcwd()
     -- end,
     -- },
-
+    eslint = {
+      on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = true
+      end,
+      settings = {
+        format = { enable = true },
+      },
+    },
     default = {
       capabilities = capabilities,
     },
@@ -126,8 +134,8 @@ end
 
 -- Auto install required language servers defined in utils.config
 function M.prepare_language_servers()
-  local get_server = require("nvim-lsp-installer.servers").get_server
   local required_servers = require("utils.config").prepared_language_servers()
+  local get_server = require("nvim-lsp-installer.servers").get_server
 
   for _, server_name in ipairs(required_servers) do
     local available, server = get_server(server_name)
@@ -145,10 +153,13 @@ function M.setup_language_servers()
   local installed_servers = require("nvim-lsp-installer.servers").get_installed_servers()
 
   for _, server in ipairs(installed_servers) do
+    local ls_overrides = require("lsp.install").ls_overrides()
+    local opts = ls_overrides[server.name] or ls_overrides.default
+    if server.name == "eslint" then
+      opts.cmd = vim.list_extend({ "yarn", "node" }, server:get_default_options().cmd)
+    end
     if server.name ~= "jdtls" then
       server:on_ready(function()
-        local ls_overrides = require("lsp.install").ls_overrides()
-        local opts = ls_overrides[server.name] or ls_overrides.default
         server:setup(opts)
       end)
     end

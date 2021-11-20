@@ -31,12 +31,12 @@ local default_options = {
 
 function M.map(bind)
   -- Set defaults
-  local unpack = M.fallback_value(table.unpack, unpack, nil)
+  local unpack = M.fallback_value(table.unpack, unpack)
   local mode, before, after = unpack(bind, 1, 3)
-  local noremap = M.fallback_value(bind.noremap, default_options.noremap, nil)
-  local silent = M.fallback_value(bind.silent, default_options.silent, nil)
-  local expr = M.fallback_value(bind.expr, default_options.expr, nil)
-  local script = M.fallback_value(bind.script, default_options.script, nil)
+  local noremap = M.fallback_value(bind.noremap, default_options.noremap)
+  local silent = M.fallback_value(bind.silent, default_options.silent)
+  local expr = M.fallback_value(bind.expr, default_options.expr)
+  local script = M.fallback_value(bind.script, default_options.script)
 
   -- Pass settings to keymap API call
   vim.api.nvim_set_keymap(mode, before, after, {

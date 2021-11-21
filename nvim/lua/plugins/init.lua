@@ -29,6 +29,7 @@
 -- gitsigns hunk preview
 -- TODO: gitlinker visual bindings
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
+-- Git worktree
 --]]
 
 --[[ Features/plugins

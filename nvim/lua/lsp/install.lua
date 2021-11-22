@@ -118,12 +118,27 @@ function M.ls_overrides()
     -- 	or vim.fn.getcwd()
     -- end,
     -- },
+    -- Source: https://github.com/williamboman/nvim-lsp-installer/tree/main/lua/nvim-lsp-installer/servers/eslint
     eslint = {
       on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = true
       end,
       settings = {
         format = { enable = true },
+      },
+    },
+    emmet_ls = {
+      -- NOTE: doesn't work with jsx
+      filetypes = {
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "eruby",
+        "typescriptreact",
+        "javascriptreact",
+        "svelte",
+        "vue",
       },
     },
     default = {

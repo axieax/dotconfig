@@ -1,4 +1,5 @@
 -- Helper functions
+-- TODO: augroup, apply highlight group
 local M = {}
 
 -- Applies options to a meta-accessor
@@ -74,6 +75,13 @@ function M.notify(...)
     notifier = vim
   end
   notifier.notify(...)
+end
+
+-- Get an attribute from a highlight group
+-- @param group highlight group to be checked
+-- @param attribute specific attribute from highlight group to be returned
+function M.highlight_group_get(group, attribute)
+  return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attribute)
 end
 
 return M

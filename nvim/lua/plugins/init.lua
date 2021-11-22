@@ -29,7 +29,8 @@
 -- gitsigns hunk preview
 -- TODO: gitlinker visual bindings
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
--- Git worktree
+-- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
+-- Git diff preview https://github.com/sindrets/diffview.nvim
 --]]
 
 --[[ Features/plugins
@@ -55,6 +56,9 @@
 -- windline instead of galaxyline (deprecated)
 -- nvimtree config migration
 -- Calltree (https://github.com/ldelossa/calltree.nvim)
+-- Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
+-- gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
+-- https://github.com/b0o/SchemaStore.nvim for jsonls
 --]]
 
 --[[ Notes
@@ -93,6 +97,72 @@ return require("packer").startup(function(use)
     config = function()
       -- NOTE: needed for versions prior to Neovim-0.6
       vim.g.did_load_filetypes = 1
+    end,
+  })
+
+  -------------
+  -- Theming --
+  -------------
+
+  -- https://github.com/ful1e5/onedark.nvim ?
+  use({
+    "navarasu/onedark.nvim",
+    config = function()
+      vim.g.onedark_transparent_background = true
+      require("onedark").setup()
+    end,
+  })
+
+  use({
+    "folke/tokyonight.nvim",
+    config = function()
+      vim.g.tokyonight_transparent = true
+      vim.g.tokyonight_transparent_sidebar = true
+    end,
+  })
+
+  use({
+    "Mofiqul/dracula.nvim",
+    config = function()
+      vim.g.dracula_transparent_bg = true
+    end,
+  })
+
+  use({
+    "EdenEast/nightfox.nvim",
+    config = function()
+      local nightfox = require("nightfox")
+      nightfox.setup({
+        fox = "duskfox",
+        transparent = true,
+        alt_nc = true,
+      })
+      -- nightfox.load()
+    end,
+  })
+
+  use({
+    "bluz71/vim-nightfly-guicolors",
+    config = function()
+      -- TODO: Telescope border and text highlights
+      vim.g.nightflyTransparent = 1
+    end,
+  })
+
+  use({
+    "marko-cerovac/material.nvim",
+    config = function()
+      vim.g.material_style = "palenight"
+      require("material").setup({
+        borders = true,
+        disable = {
+          background = true,
+        },
+        custom_highlights = {
+          IndentBlanklineContextChar = { fg = "#C678DD" },
+        },
+      })
+      vim.cmd([[colorscheme material]])
     end,
   })
 
@@ -379,69 +449,6 @@ return require("packer").startup(function(use)
     disable = true,
     config = function()
       require("neoscroll").setup()
-    end,
-  })
-
-  -------------
-  -- Theming --
-  -------------
-
-  -- https://github.com/ful1e5/onedark.nvim ?
-  use({
-    "navarasu/onedark.nvim",
-    config = function()
-      vim.g.onedark_transparent_background = true
-      require("onedark").setup()
-    end,
-  })
-
-  use({
-    "folke/tokyonight.nvim",
-    config = function()
-      vim.g.tokyonight_transparent = true
-      vim.g.tokyonight_transparent_sidebar = true
-    end,
-  })
-
-  use({
-    "Mofiqul/dracula.nvim",
-    config = function()
-      vim.g.dracula_transparent_bg = true
-    end,
-  })
-
-  use({
-    "EdenEast/nightfox.nvim",
-    config = function()
-      local nightfox = require("nightfox")
-      nightfox.setup({
-        fox = "duskfox",
-        transparent = true,
-        alt_nc = true,
-      })
-      -- nightfox.load()
-    end,
-  })
-
-  use({
-    "bluz71/vim-nightfly-guicolors",
-    config = function()
-      -- TODO: Telescope border and text highlights
-      vim.g.nightflyTransparent = 1
-    end,
-  })
-
-  use({
-    "marko-cerovac/material.nvim",
-    config = function()
-      vim.g.material_style = "palenight"
-      require("material").setup({
-        borders = true,
-        disable = {
-          background = true,
-        },
-      })
-      vim.cmd([[colorscheme material]])
     end,
   })
 

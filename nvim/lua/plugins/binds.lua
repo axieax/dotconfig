@@ -199,6 +199,7 @@ function M.which_key()
       ["?"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },
       ["<space>"] = { "<CMD>lua require'nvim-biscuits'.toggle_biscuits()<CR>", "Toggle Biscuits" },
+      ["<tab>"] = { "<CMD>SymbolsOutline<CR>", "Symbols Outline" },
     },
     ["["] = {
       name = "+previous",

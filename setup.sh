@@ -18,6 +18,14 @@ ln -s ~/dotconfig/polybar ~/.config/polybar
 
 # alacritty setup
 ln -s ~/dotconfig/alacritty ~/.config/alacritty
+# select appropriate config
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  ln -s ~/.config/alacritty/alacritty-linux.yml ~/.config/alacritty/alacritty.yml
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  ln -s ~/.config/alacritty/alacritty-mac.yml ~/.config/alacritty/alacritty.yml
+else
+  echo "invalid OSTYPE $OSTYPE for alacritty setup"
+fi
 
 # pavucontrol
 # https://community.spotify.com/t5/Desktop-Linux/Microsoft-teams-mutes-Spotify/td-p/5061607

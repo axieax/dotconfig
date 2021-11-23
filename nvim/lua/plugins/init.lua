@@ -644,6 +644,7 @@ return require("packer").startup(function(use)
   -- LSP install
   use({
     "williamboman/nvim-lsp-installer",
+    requires = "cmp-nvim-lsp",
     config = require("lsp.install").setup,
     after = "nvim-lspconfig",
   })

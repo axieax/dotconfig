@@ -7,17 +7,15 @@ local notify = require("notify")
 local M = {}
 
 -- Default capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- jdtls capabilities
+-- jdtls setup
 local java_bundles = {
   vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
 }
 vim.list_extend(java_bundles, vim.split(vim.fn.glob("~/java/vscode-java-test/server/*.jar"), "\n"))
-
-local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
 local os = vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
@@ -40,7 +38,7 @@ function M.ls_overrides()
     jdtls = {
       init_options = {
         bundles = java_bundles,
-        extendedClientCapabilities = extendedClientCapabilities,
+        -- extendedClientCapabilities = extendedClientCapabilities,
       },
       filetypes = { "java" },
       cmd = {
@@ -62,53 +60,16 @@ function M.ls_overrides()
         "--add-opens java.base/java.lang=ALL-UNNAMED",
       },
       on_attach = function(client, bufnr)
-        -- Java setup
+        -- Java extensions setup
         -- https://github.com/microsoft/java-debug
         -- https://github.com/microsoft/vscode-java-test
-
-        -- require("lsp").on_attach(client, bufnr)
         require("jdtls.setup").add_commands()
         require("jdtls").setup_dap({ hotcodereplace = "auto" })
         require("jdtls.dap").setup_dap_main_class_configs()
-        -- client.resolved_capabilities.document_formatting = false
 
-        -- Telescope
-        local finders = require("telescope.finders")
-        local sorters = require("telescope.sorters")
-        local actions = require("telescope.actions")
-        local pickers = require("telescope.pickers")
-        local action_state = require("telescope.actions.state")
-
-        require("jdtls.ui").pick_one_async = function(items, prompt, label_fn, cb)
-          local opts = {}
-          pickers.new(opts, {
-            prompt_title = prompt,
-            finder = finders.new_table({
-              results = items,
-              entry_maker = function(entry)
-                return {
-                  value = entry,
-                  display = label_fn(entry),
-                  ordinal = label_fn(entry),
-                }
-              end,
-            }),
-            sorter = sorters.get_generic_fuzzy_sorter(),
-            attach_mappings = function(prompt_bufnr)
-              actions.select_default:replace(function()
-                local selection = action_state.get_selected_entry(prompt_bufnr)
-
-                actions.close(prompt_bufnr)
-
-                cb(selection.value)
-              end)
-
-              return true
-            end,
-          }):find()
-        end
+        -- Telescope for UI picker (Neovim < 0.6)
+        require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker()
       end,
-      -- root_dir = require("jdtls.setup").find_root({ ".git", "gradle.build", "pom.xml", "gradlew" }),
     },
     -- haskell = {
     -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/hls.lua

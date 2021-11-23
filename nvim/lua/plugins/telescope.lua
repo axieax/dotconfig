@@ -53,6 +53,42 @@ function M.code_action()
   end
 end
 
+-- jdtls UI Picker using Telescope
+function M.jdtls_ui_picker(items, prompt, label_fn, cb)
+  local finders = require("telescope.finders")
+  local sorters = require("telescope.sorters")
+  local actions = require("telescope.actions")
+  local pickers = require("telescope.pickers")
+  local action_state = require("telescope.actions.state")
+
+  local opts = {}
+  pickers.new(opts, {
+    prompt_title = prompt,
+    finder = finders.new_table({
+      results = items,
+      entry_maker = function(entry)
+        return {
+          value = entry,
+          display = label_fn(entry),
+          ordinal = label_fn(entry),
+        }
+      end,
+    }),
+    sorter = sorters.get_generic_fuzzy_sorter(),
+    attach_mappings = function(prompt_bufnr)
+      actions.select_default:replace(function()
+        local selection = action_state.get_selected_entry(prompt_bufnr)
+
+        actions.close(prompt_bufnr)
+
+        cb(selection.value)
+      end)
+
+      return true
+    end,
+  }):find()
+end
+
 function M.setup()
   -- telescope setup mappings table - inside telescope overlay
   -- TODO: overwrite dotfiles? action for opening current file in native file explorer?

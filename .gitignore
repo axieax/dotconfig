@@ -4,4 +4,5 @@ xmonad-x86_64-linux
 xmonad.hi
 xmonad.errors
 
-
+# symlinked alacritty
+alacritty.yml

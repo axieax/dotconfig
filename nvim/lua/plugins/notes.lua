@@ -29,7 +29,7 @@ return function()
       NOTE = {
         icon = " ",
         color = "info",
-        alt = { "INFO" },
+        alt = { "INFO", "INSTALL", "SETUP", "GUIDE" },
       },
       QUESTION = {
         icon = " ",
@@ -39,7 +39,7 @@ return function()
       BOOKMARK = {
         icon = " ",
         color = "warning",
-        alt = { "CHECK", "READ", "LOOK", "REVIEW", "HERE" },
+        alt = { "CHECK", "READ", "LOOK", "REVIEW", "HERE", "TRY", "CONSIDER", "ALT", "ALTERNATIVE" },
       },
     },
     highlight = {

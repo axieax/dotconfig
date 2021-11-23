@@ -81,7 +81,7 @@ if auto_install then
 end
 
 -- Automatically PackerCompile with changes
-vim.cmd([[ autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile> | PackerCompile ]])
+-- vim.cmd([[ autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile> | PackerCompile ]])
 
 return require("packer").startup(function(use)
   ---------------------
@@ -104,7 +104,7 @@ return require("packer").startup(function(use)
   -- Theming --
   -------------
 
-  -- https://github.com/ful1e5/onedark.nvim ?
+  -- ALT: https://github.com/ful1e5/onedark.nvim
   use({
     "navarasu/onedark.nvim",
     config = function()
@@ -213,7 +213,6 @@ return require("packer").startup(function(use)
   })
 
   -- Tabline
-  -- TODO: check out https://github.com/akinsho/nvim-bufferline.lua
   use({
     "romgrk/barbar.nvim",
     disable = false,
@@ -221,6 +220,7 @@ return require("packer").startup(function(use)
     config = require("plugins.barbar"),
   })
 
+  -- ALT: https://github.com/akinsho/nvim-bufferline.lua
   use({
     "akinsho/bufferline.nvim",
     disable = true,
@@ -344,6 +344,7 @@ return require("packer").startup(function(use)
   -- nnn file explorer
   use({
     "luukvbaal/nnn.nvim",
+    disable = true,
     config = function()
       require("nnn").setup({
         explorer = {
@@ -380,7 +381,7 @@ return require("packer").startup(function(use)
   ------------------
 
   -- Bracket coloured pairs
-  -- TODO: change colourscheme, esp red
+  -- TODO: change colourscheme, esp red?
   use({
     "p00f/nvim-ts-rainbow",
     requires = "nvim-treesitter/nvim-treesitter",
@@ -428,7 +429,7 @@ return require("packer").startup(function(use)
   })
 
   -- CSS colours
-  -- NOTE: doesn't highlight lower case names
+  -- NOTE: doesn't highlight lower case names (#18)
   use({
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -470,9 +471,7 @@ return require("packer").startup(function(use)
   -----------------------------
 
   -- Project scope
-  -- TODO: check out https://github.com/ahmedkhalf/project.nvim
-  -- and its support for non-LSP projects?
-  -- https://github.com/ahmedkhalf/project.nvim
+  -- ALT: https://github.com/ahmedkhalf/project.nvim and its support for non-LSP projects?
   use("airblade/vim-rooter")
 
   -- Project settings
@@ -505,7 +504,7 @@ return require("packer").startup(function(use)
   -----------------------------------
 
   -- Language parser + syntax highlighting
-  -- TODO: install parsers for new file types (don't download all)
+  -- TODO: automatically install parsers for new file types (don't download all)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -539,7 +538,7 @@ return require("packer").startup(function(use)
   })
 
   -- Interactive scratchpad with virtual text
-  -- TODO: check out https://github.com/michaelb/sniprun
+  -- ALT: https://github.com/michaelb/sniprun
   use("metakirby5/codi.vim")
 
   -- Code formatter
@@ -644,7 +643,7 @@ return require("packer").startup(function(use)
   -- LSP install
   use({
     "williamboman/nvim-lsp-installer",
-    requires = "cmp-nvim-lsp",
+    requires = "hrsh7th/cmp-nvim-lsp",
     config = require("lsp.install").setup,
     after = "nvim-lspconfig",
   })
@@ -667,7 +666,23 @@ return require("packer").startup(function(use)
   })
 
   -- Symbols outline
-  use("simrat39/symbols-outline.nvim")
+  use({
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      vim.g.symbols_outline = {
+        auto_close = true,
+      }
+    end,
+  })
+
+  -- ALT: https://github.com/stevearc/aerial.nvim/
+  use({
+    "stevearc/aerial.nvim",
+    config = function()
+      -- vim.g.aerial = {
+      -- }
+    end,
+  })
 
   -- Code action menu
   use({

@@ -31,6 +31,8 @@
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 -- Git diff preview https://github.com/sindrets/diffview.nvim
+-- TODO-COMMMENTS: go to next keybind e.g. ]b?
+-- https://github.com/stevearc/stickybuf.nvim
 --]]
 
 --[[ Features/plugins
@@ -184,7 +186,11 @@ return require("packer").startup(function(use)
       { "nvim-telescope/telescope-media-files.nvim" },
       -- { "nvim-telescope/telescope-node-modules.nvim" },
     },
-    after = "nvim-neoclip.lua",
+    after = {
+      "nvim-neoclip.lua",
+      "nvim-notify",
+      "aerial.nvim",
+    },
     config = require("plugins.telescope").setup,
   })
 
@@ -647,7 +653,10 @@ return require("packer").startup(function(use)
   -- LSP install
   use({
     "williamboman/nvim-lsp-installer",
-    requires = "hrsh7th/cmp-nvim-lsp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "stevearc/aerial.nvim",
+    },
     config = require("lsp.install").setup,
     after = "nvim-lspconfig",
   })
@@ -670,21 +679,15 @@ return require("packer").startup(function(use)
   })
 
   -- Symbols outline
-  use({
-    "simrat39/symbols-outline.nvim",
-    config = function()
-      vim.g.symbols_outline = {
-        auto_close = true,
-      }
-    end,
-  })
-
-  -- ALT: https://github.com/stevearc/aerial.nvim/
+  -- use("simrat39/symbols-outline.nvim")
   use({
     "stevearc/aerial.nvim",
     config = function()
-      -- vim.g.aerial = {
-      -- }
+      vim.g.aerial = {
+        -- close_behavior = "close",
+        highlight_on_jump = 200,
+        close_on_select = true,
+      }
     end,
   })
 

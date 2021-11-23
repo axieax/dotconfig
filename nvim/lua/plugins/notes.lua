@@ -39,7 +39,7 @@ return function()
       BOOKMARK = {
         icon = " ",
         color = "warning",
-        alt = { "CHECK", "READ", "LOOK", "REVIEW", "HERE", "TRY", "CONSIDER", "ALT", "ALTERNATIVE" },
+        alt = { "CHECK", "READ", "LOOK", "REVIEW", "HERE", "TRY", "CONSIDER", "ALT", "ALTERNATIVE", "IMPORTANT", "BIG" },
       },
     },
     highlight = {

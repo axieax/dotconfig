@@ -1,10 +1,10 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
--- TODO: vim.tbl_extend default config with on_attach function (esp for jdtls)
--- TODO: common_on_attach
 
 local notify = require("notify")
 
 local M = {}
+
+local default_on_attach = require("aerial").on_attach
 
 -- jdtls setup
 local java_bundles = {
@@ -64,6 +64,8 @@ function M.ls_overrides()
 
         -- Telescope for UI picker (Neovim < 0.6)
         require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker()
+
+        default_on_attach(client, bufnr)
       end,
     },
     -- haskell = {
@@ -78,6 +80,7 @@ function M.ls_overrides()
     eslint = {
       on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = true
+        default_on_attach(client, bufnr)
       end,
       settings = {
         format = { enable = true },
@@ -99,6 +102,7 @@ function M.ls_overrides()
     },
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      on_attach = default_on_attach,
     },
   }
 end
@@ -124,11 +128,17 @@ function M.setup_language_servers()
   local installed_servers = require("nvim-lsp-installer.servers").get_installed_servers()
 
   for _, server in ipairs(installed_servers) do
+    -- Get options for server
     local ls_overrides = require("lsp.install").ls_overrides()
     local opts = ls_overrides[server.name] or ls_overrides.default
+    opts = vim.tbl_extend("keep", opts, ls_overrides.default)
+
+    -- Extra options
     if server.name == "eslint" then
       opts.cmd = vim.list_extend({ "yarn", "node" }, server:get_default_options().cmd)
     end
+
+    -- Register setup
     if server.name ~= "jdtls" then
       server:on_ready(function()
         server:setup(opts)

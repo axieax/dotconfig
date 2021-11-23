@@ -16,8 +16,8 @@ ln -s ~/dotconfig/polybar ~/.config/polybar
 
 # sddm setup
 
+# alacritty setup
+ln -s ~/dotconfig/alacritty ~/.config/alacritty
 
 # pavucontrol
 # https://community.spotify.com/t5/Desktop-Linux/Microsoft-teams-mutes-Spotify/td-p/5061607
-
-

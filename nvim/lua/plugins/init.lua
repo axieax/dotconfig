@@ -59,6 +59,10 @@
 -- Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
 -- gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
 -- https://github.com/b0o/SchemaStore.nvim for jsonls
+-- Markdown code block syntax highlighting
+-- TRY: https://github.com/goolord/alpha-nvim instead of dashboard
+-- with https://github.com/Shatur/neovim-session-manager
+-- https://github.com/lewis6991/impatient.nvim
 --]]
 
 --[[ Notes

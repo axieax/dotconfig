@@ -1,5 +1,6 @@
 -- https://github.com/folke/which-key.nvim --
 -- TODO: separate bindings
+-- Normal and Visual mappings on same key
 
 local M = {}
 local map = require("utils").map
@@ -30,7 +31,51 @@ function M.general()
   -- map({ "n", "<c-a>", "ggVG" })
   -- map({ "n", "<C-A>", "<CMD>%+y<CR>" })
 
+  -- Space mappings
+  M.register_git_bindings()
   M.misc()
+end
+
+function M.register_git_bindings()
+  -- TODO: set up g for Telescope git_*
+  require("which-key").register({
+    name = "+git",
+    [";"] = { "<CMD>lua require'gitsigns'.toggle_current_line_blame()<CR>", "git blame toggle" },
+    g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
+    h = { "<CMD>lua require'gitsigns'.stage_hunk()<CR>", "git stage hunk" },
+    H = { "<CMD>lua require'gitsigns'.preview_hunk()<CR>", "git hunk preview" },
+    r = { "<CMD>lua require'gitsigns'.reset_hunk()<CR>", "git reset hunk" },
+    R = { "<CMD>lua require'gitsigns'.reset_buffer()<CR>", "git reset buffer" },
+    d = { "git diff preview" }, -- TODO: GIT DIFF
+    m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
+    u = { "<CMD>lua require'gitsigns'.undo_stage_hunk()<CR>", "git stage hunk undo" },
+    s = { "<CMD>Telescope git_stash<CR>", "git stash" },
+    b = { "<CMD>Telescope git_branches<CR>", "git branches" },
+    c = { "<CMD>Telescope git_bcommits<CR>", "git commits (buffer)" },
+    C = { "<CMD>Telescope git_commits<CR>", "git commits (repo)" },
+    y = { "git yank reference url" },
+    Y = { "<CMD>lua require'gitlinker'.get_repo_url()<CR>", "git yank repo url" },
+    w = {
+      "<CMD>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
+      "git browse reference url",
+    },
+    W = {
+      "<CMD>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
+      "git browse repo url",
+    },
+    ["?"] = { "<CMD>Telescope git_status<CR>", "git status" },
+  }, {
+    prefix = "<space>g",
+  })
+  -- visual bindings
+  require("which-key").register({
+    name = "+git",
+    h = { "<CMD>lua require'gitsigns'.stage_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>", "git stage hunk" },
+    r = { "<CMD>lua require'gitsigns'.reset_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>", "git reset hunk" },
+  }, {
+    prefix = "<space>g",
+    mode = "v",
+  })
 end
 
 function M.misc()
@@ -53,7 +98,6 @@ function M.misc()
 end
 
 function M.which_key()
-  -- TODO: visual mode mappings?
   local wk = require("which-key")
   -- Config
   wk.setup({
@@ -145,32 +189,6 @@ function M.which_key()
         [";"] = { "<CMD>Telescope command_history<CR>", "command history" },
         ["."] = { "<CMD>Telescope resume<CR>", "resume last command" },
         -- TODO: grep_string
-      },
-      -- TODO: set up g for Telescope git_*
-      g = {
-        name = "+git",
-        [";"] = { "git blame toggle" },
-        g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
-        h = { "git stage hunk" },
-        r = { "git reset hunk" },
-        R = { "git reset buffer" },
-        d = { "git diff preview" },
-        u = { "git stage hunk undo" },
-        s = { "<CMD>Telescope git_stash<CR>", "git stash" },
-        b = { "<CMD>Telescope git_branches<CR>", "git branches" },
-        c = { "<CMD>Telescope git_bcommits<CR>", "git commits (buffer)" },
-        C = { "<CMD>Telescope git_commits<CR>", "git commits (repo)" },
-        y = { "git yank reference url" },
-        Y = { "<CMD>lua require'gitlinker'.get_repo_url()<CR>", "git yank repo url" },
-        w = {
-          "<CMD>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
-          "git browse reference url",
-        },
-        W = {
-          "<CMD>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
-          "git browse repo url",
-        },
-        ["?"] = { "<CMD>Telescope git_status<CR>", "git status" },
       },
       h = {
         name = "+hop",

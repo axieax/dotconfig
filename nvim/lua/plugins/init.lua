@@ -6,6 +6,9 @@
 --]]
 
 --[[ TODO
+-- PRIORITY: formatter.nvim -> null-ls
+-- PRIORITY: hop -> lightspeed
+-- PRIORITY: separate which-key bindings
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
 -- TODO: gradle plugin
 -- Update lsp config for installation
@@ -33,6 +36,7 @@
 -- Git diff preview https://github.com/sindrets/diffview.nvim
 -- TODO-COMMMENTS: go to next keybind e.g. ]b?
 -- https://github.com/stevearc/stickybuf.nvim
+-- NOTE: telescope find files can't find gitsigns.lua
 --]]
 
 --[[ Features/plugins
@@ -471,6 +475,7 @@ return require("packer").startup(function(use)
   use("mg979/vim-visual-multi")
 
   -- Easy motion
+  -- ALT: https://github.com/ggandor/lightspeed.nvim
   use({
     "phaazon/hop.nvim",
     config = require("plugins.hop"),

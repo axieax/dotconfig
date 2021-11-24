@@ -18,6 +18,7 @@ return function()
     incremental_selection = {
       enable = true,
       keymaps = {
+        -- TODO: resolve mapping conflicts
         init_selection = "gs",
         node_incremental = "gm",
         node_decremental = "gn",
@@ -55,17 +56,19 @@ return function()
         enable = true,
         lookahead = true,
         keymaps = {
-          ["af"] = "@function.outer",
           ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
+          ["af"] = "@function.outer",
           ["ic"] = "@class.inner",
-          ["al"] = "@loop.outer",
+          ["ac"] = "@class.outer",
           ["il"] = "@loop.inner",
-          ["ab"] = "@block.outer",
+          ["al"] = "@loop.outer",
           ["ib"] = "@block.inner",
+          ["ab"] = "@block.outer",
+          ["ii"] = "@conditional.inner",
           ["ai"] = "@conditional.outer",
-          ["iq"] = "@conditional.inner",
-          ["cq"] = "@comment.outer",
+          ["iq"] = "@parameter.inner",
+          ["aq"] = "@parameter.outer",
+          ["ag"] = "@comment.outer",
         },
       },
     },

@@ -1,6 +1,4 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter --
--- https://github.com/nvim-treesitter/playground --
--- https://github.com/nvim-treesitter/nvim-treesitter-textobjects --
 
 return function()
   local vim_apply = require("utils").vim_apply
@@ -24,23 +22,9 @@ return function()
         node_decremental = ",n",
       },
     },
-    -- Autotags
-    autotag = {
-      enable = true,
-      -- https://github.com/windwp/nvim-ts-autotag#default-values
-      -- NOTE: markdown doesn't have a TS parser
-      -- filetypes = {
-      --   "html",
-      --   "javascript",
-      --   "javascriptreact",
-      --   "typescriptreact",
-      --   "svelte",
-      --   "vue",
-      --   "markdown",
-      --   "md",
-      -- },
-    },
+
     -- Playground
+    -- https://github.com/nvim-treesitter/playground
     playground = {
       enable = true,
     },
@@ -49,16 +33,18 @@ return function()
       use_virtual_text = true,
       -- lint_events = {"BuffWrite", "CursorHold"},
     },
-    -- Textobjects
+
+    -- Text Objects
+    -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {
       move = {
         enable = true,
         set_jumps = true,
         goto_previous_start = {
-          -- ["[["] = "@parameter.inner",
+          ["[["] = "@parameter.inner",
         },
         goto_next_start = {
-          -- ["]]"] = "@parameter.inner",
+          ["]]"] = "@parameter.inner",
         },
       },
       select = {
@@ -81,7 +67,45 @@ return function()
         },
       },
     },
-    -- Comment string
+
+    -- Text Subjects
+    -- https://github.com/RRethy/nvim-treesitter-textsubjects
+    textsubjects = {
+      enable = true,
+      keymaps = {
+        ["<CR>"] = "textsubjects-smart",
+        ["<S-CR>"] = "textsubjects-container-outer",
+      },
+    },
+
+    -- Autotags
+    -- https://github.com/windwp/nvim-ts-autotag
+    autotag = {
+      enable = true,
+      -- https://github.com/windwp/nvim-ts-autotag#default-values
+      -- NOTE: markdown doesn't have a TS parser
+      -- filetypes = {
+      --   "html",
+      --   "javascript",
+      --   "javascriptreact",
+      --   "typescriptreact",
+      --   "svelte",
+      --   "vue",
+      --   "markdown",
+      --   "md",
+      -- },
+    },
+
+    -- Coloured Brackets
+    -- https://github.com/p00f/nvim-ts-rainbow
+    rainbow = {
+      enable = true,
+      extended_mode = true, -- Also highlight non-bracket delimiters like html tags
+      max_file_lines = 1000,
+    },
+
+    -- Comment String
+    -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
     context_commentstring = {
       enable = true,
     },
@@ -99,36 +123,37 @@ return function()
   })
 
   -- select previous / next parameter
-  -- NOTE: also in after/ftplugin/python.vim due to default ftplugin overriding
-  local map = require("utils").map
+  -- NOTE: python default ftplugin has keymap conflicts
+  -- local map = require("utils").map
   -- map({ "n", "[[", "[[viq", noremap = false })
   -- map({ "n", "]]", "]]viq", noremap = false })
-  map({
-    "n",
-    "[[",
-    ":lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
-    noremap = false,
-    buffer = true,
-  })
-  map({
-    "v",
-    "[[",
-    "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
-    noremap = false,
-    buffer = true,
-  })
-  map({
-    "n",
-    "]]",
-    ":lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
-    noremap = false,
-    buffer = true,
-  })
-  map({
-    "v",
-    "]]",
-    "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
-    noremap = false,
-    buffer = true,
-  })
+
+  -- map({
+  --   "n",
+  --   "[[",
+  --   ":lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
+  --   noremap = false,
+  --   buffer = true,
+  -- })
+  -- map({
+  --   "v",
+  --   "[[",
+  --   "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
+  --   noremap = false,
+  --   buffer = true,
+  -- })
+  -- map({
+  --   "n",
+  --   "]]",
+  --   ":lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
+  --   noremap = false,
+  --   buffer = true,
+  -- })
+  -- map({
+  --   "v",
+  --   "]]",
+  --   "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
+  --   noremap = false,
+  --   buffer = true,
+  -- })
 end

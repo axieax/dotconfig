@@ -8,8 +8,10 @@
 --[[ TODO
 -- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils ?)
 -- PRIORITY: hop -> lightspeed
+-- PRIORITY: orgmode / neorg / vimwiki
 -- IMPORTANT: separate which-key bindings
 -- IMPORTANT: lsp bindings on_attach
+-- TODO: ]n next note / todo
 -- TODO: Telescope picker for LSP commands
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
 -- TODO: gradle plugin
@@ -403,15 +405,6 @@ return require("packer").startup(function(use)
   use({
     "p00f/nvim-ts-rainbow",
     requires = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        rainbow = {
-          enable = true,
-          extended_mode = true, -- Also highlight non-bracket delimiters like html tags
-          max_file_lines = 1000,
-        },
-      })
-    end,
   })
 
   -- Indent context indicator
@@ -541,7 +534,13 @@ return require("packer").startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "0.5-compat",
-    requires = "nvim-treesitter",
+    requires = "nvim-treesitter/nvim-treesitter",
+  })
+
+  -- Treesitter text subjects
+  use({
+    "RRethy/nvim-treesitter-textsubjects",
+    requires = "nvim-treesitter/nvim-treesitter",
   })
 
   -- GitHub Copilot (NOTE: requires neovim 0.6)
@@ -573,12 +572,13 @@ return require("packer").startup(function(use)
   })
 
   -- Commenting
+  -- ALT: https://github.com/numToStr/Comment.nvim with TS support
   use("tpope/vim-commentary")
 
   -- Better commentstring (for vim-commentary)
   use({
     "JoosepAlviste/nvim-ts-context-commentstring",
-    requires = "nvim-treesitter",
+    requires = "nvim-treesitter/nvim-treesitter",
   })
 
   -- Surround with brackets
@@ -594,6 +594,7 @@ return require("packer").startup(function(use)
   use("hrsh7th/vim-vsnip")
 
   -- Docstring generator
+  -- ALT: https://github.com/nvim-treesitter/nvim-tree-docs
   use({
     "kkoomen/vim-doge",
     run = ":call doge#install()",

@@ -20,6 +20,7 @@ return function()
       HACK = {
         icon = " ",
         color = "warning",
+        alt = { "TEMP", "TEMPORARY" },
       },
       PERF = {
         icon = " ",

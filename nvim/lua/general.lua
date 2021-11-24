@@ -114,5 +114,7 @@ vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
 -- Center search result jumps
 map({ "n", "n", "nzz" })
 
+vim.cmd("filetype plugin on")
+
 -- Apply keybindings
 require("plugins.binds").general()

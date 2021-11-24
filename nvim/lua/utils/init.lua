@@ -17,6 +17,7 @@ local default_options = {
   silent = true,
   expr = false,
   script = false,
+  buffer = false,
 }
 
 -- Registers a keymapping
@@ -28,23 +29,27 @@ local default_options = {
 --    silent (optional keyword, boolean)
 --    expr (optional keyword, boolean)
 --    script (optional keyword, boolean)
+--    buffer (optional keyword, boolean)
 -- }
 function M.map(bind)
   -- Get options
   local unpack = M.fallback_value(table.unpack, unpack)
   local mode, before, after = unpack(bind, 1, 3)
-  local noremap = M.fallback_value(bind.noremap, default_options.noremap)
-  local silent = M.fallback_value(bind.silent, default_options.silent)
-  local expr = M.fallback_value(bind.expr, default_options.expr)
-  local script = M.fallback_value(bind.script, default_options.script)
+
+  local buffer = M.fallback_value(bind.buffer, default_options.buffer)
+  local opts = {
+    noremap = M.fallback_value(bind.noremap, default_options.noremap),
+    silent = M.fallback_value(bind.silent, default_options.silent),
+    expr = M.fallback_value(bind.expr, default_options.expr),
+    script = M.fallback_value(bind.script, default_options.script),
+  }
 
   -- Register keymap with specified options
-  vim.api.nvim_set_keymap(mode, before, after, {
-    noremap = noremap,
-    silent = silent,
-    expr = expr,
-    script = script,
-  })
+  if buffer then
+    vim.api.nvim_buf_set_keymap(0, mode, before, after, opts)
+  else
+    vim.api.nvim_set_keymap(mode, before, after, opts)
+  end
 end
 
 -- Returns value or fallback (nullish coalescing)

@@ -18,11 +18,10 @@ return function()
     incremental_selection = {
       enable = true,
       keymaps = {
-        -- TODO: resolve mapping conflicts
-        init_selection = "gs",
-        node_incremental = "gm",
-        node_decremental = "gn",
-        scope_incremental = "gs",
+        init_selection = ",,",
+        scope_incremental = ",,",
+        node_incremental = ",m",
+        node_decremental = ",n",
       },
     },
     -- Autotags
@@ -52,6 +51,16 @@ return function()
     },
     -- Textobjects
     textobjects = {
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_previous_start = {
+          -- ["[["] = "@parameter.inner",
+        },
+        goto_next_start = {
+          -- ["]]"] = "@parameter.inner",
+        },
+      },
       select = {
         enable = true,
         lookahead = true,
@@ -87,5 +96,39 @@ return function()
     -- foldminlines = 1, -- min lines required for a fold (default)
     foldlevel = 0, -- default levels folded
     foldenable = false, -- don't fold by default
+  })
+
+  -- select previous / next parameter
+  -- NOTE: also in after/ftplugin/python.vim due to default ftplugin overriding
+  local map = require("utils").map
+  -- map({ "n", "[[", "[[viq", noremap = false })
+  -- map({ "n", "]]", "]]viq", noremap = false })
+  map({
+    "n",
+    "[[",
+    ":lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
+    noremap = false,
+    buffer = true,
+  })
+  map({
+    "v",
+    "[[",
+    "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
+    noremap = false,
+    buffer = true,
+  })
+  map({
+    "n",
+    "]]",
+    ":lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
+    noremap = false,
+    buffer = true,
+  })
+  map({
+    "v",
+    "]]",
+    "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
+    noremap = false,
+    buffer = true,
   })
 end

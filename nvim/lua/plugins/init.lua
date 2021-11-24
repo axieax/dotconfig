@@ -6,9 +6,11 @@
 --]]
 
 --[[ TODO
--- PRIORITY: formatter.nvim -> null-ls
+-- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils ?)
 -- PRIORITY: hop -> lightspeed
--- PRIORITY: separate which-key bindings
+-- IMPORTANT: separate which-key bindings
+-- IMPORTANT: lsp bindings on_attach
+-- TODO: Telescope picker for LSP commands
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
 -- TODO: gradle plugin
 -- Update lsp config for installation
@@ -34,7 +36,7 @@
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 -- Git diff preview https://github.com/sindrets/diffview.nvim
--- TODO-COMMMENTS: go to next keybind e.g. ]b?
+-- TODO-COMMMENTS: go to next TODO-mark e.g. ]b?
 -- https://github.com/stevearc/stickybuf.nvim
 --]]
 
@@ -387,7 +389,10 @@ return require("packer").startup(function(use)
   use("simonefranza/nvim-conv")
 
   -- Incrementor / decrementor
-  use("monaqa/dial.nvim")
+  use({
+    "monaqa/dial.nvim",
+    config = require("plugins.dial"),
+  })
 
   ------------------
   -- UI Utilities --

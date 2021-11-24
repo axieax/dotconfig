@@ -11,7 +11,7 @@ function M.file_search()
   -- Vim rooter sets Git project scope anyways
   require("telescope.builtin").find_files({
     hidden = true,
-    file_ignore_patterns = { ".git" },
+    file_ignore_patterns = { "%.git" },
   })
 end
 
@@ -24,12 +24,12 @@ function M.explorer()
     require("telescope.builtin").file_browser({
       cwd = current_buffer,
       hidden = true,
-      file_ignore_patterns = { ".git" },
+      file_ignore_patterns = { "%.git" },
     })
   else
     require("telescope.builtin").file_browser({
       hidden = true,
-      file_ignore_patterns = { ".git" },
+      file_ignore_patterns = { "%.git" },
     })
   end
 end
@@ -38,7 +38,7 @@ function M.dotconfig()
   require("telescope.builtin").find_files({
     search_dirs = { "~/dotconfig" },
     hidden = true,
-    file_ignore_patterns = { ".git" },
+    file_ignore_patterns = { "%.git" },
   })
 end
 

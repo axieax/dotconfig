@@ -36,7 +36,6 @@
 -- Git diff preview https://github.com/sindrets/diffview.nvim
 -- TODO-COMMMENTS: go to next keybind e.g. ]b?
 -- https://github.com/stevearc/stickybuf.nvim
--- NOTE: telescope find files can't find gitsigns.lua
 --]]
 
 --[[ Features/plugins

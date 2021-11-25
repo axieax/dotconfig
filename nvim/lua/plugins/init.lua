@@ -6,7 +6,7 @@
 --]]
 
 --[[ TODO
--- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils ?)
+-- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils ?) - prettier slow
 -- PRIORITY: hop -> lightspeed
 -- PRIORITY: orgmode / neorg / vimwiki
 -- IMPORTANT: separate which-key bindings
@@ -18,7 +18,6 @@
 -- Update lsp config for installation
 -- Use eslint LSP instead of eslint_d
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
--- Try https://github.com/b3nj5m1n/kommentary?
 -- Telescope setup, find_files wrapper if buffer is directory
 -- Set up linter? (efm, ale, nvim-lint, coc?)
 -- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
@@ -30,11 +29,8 @@
 -- Cursor hover lsp hover or line diagnostic?
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
--- Telescope colorscheme preview
--- Plugin and config split into separate modules
+-- Plugin and config split into separate modules?
 -- TODO list (put on dashboard) - neorg vs vimwiki vs orgmode.nvim?
--- gitsigns hunk preview
--- TODO: gitlinker visual bindings
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 -- Git diff preview https://github.com/sindrets/diffview.nvim
@@ -71,6 +67,7 @@
 -- Markdown code block syntax highlighting
 -- TRY: https://github.com/goolord/alpha-nvim instead of dashboard
 -- with https://github.com/Shatur/neovim-session-manager
+-- https://github.com/rmagatti/auto-session
 -- https://github.com/lewis6991/impatient.nvim
 --]]
 
@@ -585,6 +582,7 @@ return require("packer").startup(function(use)
 
   -- Commenting
   -- ALT: https://github.com/numToStr/Comment.nvim with TS support
+  -- ALT: https://github.com/b3nj5m1n/kommentary ?
   use("tpope/vim-commentary")
 
   -- Better commentstring (for vim-commentary)

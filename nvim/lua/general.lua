@@ -93,9 +93,11 @@ local viewer, yank_register = "open", "*"
 if vim.loop.os_uname().sysname == "Linux" then
   viewer, yank_register = "xdg-open", "+"
 end
--- map({ "n", "gx", "yiW:!" .. viewer .. " <cWORD><CR><C-r><CR><CR>" })
--- map({"n", "gx", '"' .. yank_register .. "yiW:execute 'silent! !" .. viewer .. " ' . shellescape(expand('<cWORD>'), 1)<CR>"})
-map({ "n", "gx", "<CMD>execute '!" .. viewer .. " ' . shellescape(expand('<cfile>'), 1)<CR>" })
+map({ "n", "gx", "<CMD>execute 'silent! !" .. viewer .. " ' . shellescape(expand('<cfile>'), 1)<CR>" })
+
+-- Clipboard yank
+map({ "n", "\\y", '"' .. yank_register .. "y", noremap = false })
+map({ "v", "\\y", '"' .. yank_register .. "y", noremap = false })
 
 -- Auto-resize
 vim.cmd("autocmd VimResized * wincmd =")

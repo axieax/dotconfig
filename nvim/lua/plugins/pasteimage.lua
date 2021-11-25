@@ -1,7 +1,7 @@
 -- https://github.com/ekickx/clipboard-image.nvim --
 
 return function()
-  local dir = vim.fn.fnamemodify(vim.fn.expand("%"), ":h")
+  local relative_dir = vim.fn.fnamemodify(vim.fn.expand("%"), ":h")
   local request_img_name = function()
     vim.fn.inputsave()
     local name = vim.fn.input("Image Name: ")
@@ -16,7 +16,7 @@ return function()
       img_name = request_img_name,
     },
     markdown = {
-      img_dir = dir .. "/images",
+      img_dir = relative_dir .. "/images", -- relative to current buffer file
     },
   })
 end

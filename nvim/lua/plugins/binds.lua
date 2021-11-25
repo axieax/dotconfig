@@ -204,8 +204,8 @@ function M.which_key()
         n = { "<CMD>lua require'renamer'.rename()<CR>", "rename symbol" },
         r = { "<CMD>FloatermNew lazydocker<CR>", "lazydocker" },
       },
-      s = { "<CMD>Dashboard<CR>", "Dashboard" },
-      S = { "<CMD>PackerSync<CR>", "Update Plugins" },
+      s = { "<CMD>PackerSync<CR>", "Update Plugins" },
+      S = { "<CMD>Dashboard<CR>", "Dashboard" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
       p = { ":lua print(vim.inspect())<LEFT><LEFT>", "lua print", silent = false },
       P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },
@@ -251,6 +251,9 @@ function M.which_key()
       -- tpope/unimpaired has [<Space> and ]<Space> as well
       O = { "O<ESC>", "Create new line above" },
       o = { "o<ESC>", "Create new line below" },
+    },
+    [","] = {
+      p = { "<CMD>PasteImg<CR>", "Paste image" },
     },
   })
 end

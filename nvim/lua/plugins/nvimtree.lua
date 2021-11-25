@@ -5,6 +5,7 @@ return function()
   local utils = require("utils")
 
   require("nvim-tree").setup({
+    disable_netrw = false,
     hijack_netrw = true,
     -- lsp_diagnostics = true, -- prefer colour instead of signcolumn
     update_to_buf_dir = {

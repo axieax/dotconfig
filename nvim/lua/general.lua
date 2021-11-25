@@ -88,6 +88,15 @@ vim_apply(vim.g, {
   netrw_altv = true, -- opens vsplit to right
 })
 
+-- netrw open (link) with gx
+local viewer, yank_register = "open", "*"
+if vim.loop.os_uname().sysname == "Linux" then
+  viewer, yank_register = "xdg-open", "+"
+end
+-- map({ "n", "gx", "yiW:!" .. viewer .. " <cWORD><CR><C-r><CR><CR>" })
+-- map({"n", "gx", '"' .. yank_register .. "yiW:execute 'silent! !" .. viewer .. " ' . shellescape(expand('<cWORD>'), 1)<CR>"})
+map({ "n", "gx", "<CMD>execute '!" .. viewer .. " ' . shellescape(expand('<cfile>'), 1)<CR>" })
+
 -- Auto-resize
 vim.cmd("autocmd VimResized * wincmd =")
 
@@ -114,6 +123,7 @@ vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
 -- Center search result jumps
 map({ "n", "n", "nzz" })
 
+-- ftplugin
 vim.cmd("filetype plugin on")
 
 -- Apply keybindings

@@ -4,7 +4,7 @@
 -- TODO: venv
 -- TODO: group linecol and percentage ()
 -- TODO: short list
-
+-- NOTE: unmaintained
 -- BUG: highlight https://github.com/glepnir/galaxyline.nvim/issues/215
 
 return function()

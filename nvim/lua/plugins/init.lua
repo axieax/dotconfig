@@ -104,6 +104,16 @@ return require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
+  -- Improve startup speed
+  -- NOTE: can cache packer_compiled as well
+  use({
+    "lewis6991/impatient.nvim",
+    config = function()
+      local impatient = require("impatient")
+      impatient.enable_profile()
+    end,
+  })
+
   -- Filetype config (faster startup and custom overrides)
   use({
     "nathom/filetype.nvim",
@@ -269,6 +279,8 @@ return require("packer").startup(function(use)
   -- Zen mode
   use({
     "folke/zen-mode.nvim",
+    opt = true,
+    cmd = { "ZenMode" },
     requires = "folke/twilight.nvim",
     config = require("plugins.zen"),
   })
@@ -618,6 +630,15 @@ return require("packer").startup(function(use)
   -- Python indenting issues
   use("Vimjas/vim-python-pep8-indent")
 
+  -- Markdown LaTeX paste image
+  -- NOTE: requires xclip (X11), wl-clipboard (Wayland) or pngpaste (MacOS)
+  use({
+    "ekickx/clipboard-image.nvim",
+    opt = true,
+    cmd = { "PasteImg" },
+    config = require("plugins.pasteimage"),
+  })
+
   ---------------------------------
   -- Compilation, Test and Debug --
   ---------------------------------
@@ -732,7 +753,7 @@ return require("packer").startup(function(use)
       { "hrsh7th/cmp-emoji" },
       { "hrsh7th/cmp-cmdline" },
       { "f3fora/cmp-spell" },
-      { "kdheepak/cmp-latex-symbols" },
+      { "kdheepak/cmp-latex-symbols", opt = true },
       { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
       { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
       -- { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },

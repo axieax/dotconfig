@@ -27,17 +27,12 @@ function M.general()
   map({ "n", "<A-d>", ":co .<CR>==" })
   map({ "v", "<A-d>", ":co '><CR>gv=gv" })
 
-  -- Select all
-  -- map({ "n", "<c-a>", "ggVG" })
-  -- map({ "n", "<C-A>", "<CMD>%+y<CR>" })
-
   -- Space mappings
   M.register_git_bindings()
   M.misc()
 end
 
 function M.register_git_bindings()
-  -- TODO: set up g for Telescope git_*
   require("which-key").register({
     name = "+git",
     [";"] = { "<CMD>lua require'gitsigns'.toggle_current_line_blame()<CR>", "git blame toggle" },
@@ -63,10 +58,12 @@ function M.register_git_bindings()
       "<CMD>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
       "git browse repo url",
     },
+    q = { "<CMD>lua require'gitsigns'.toggle_numhl()<CR>", "git gutter colour toggle" },
     ["?"] = { "<CMD>Telescope git_status<CR>", "git status" },
   }, {
     prefix = "<space>g",
   })
+
   -- visual bindings
   require("which-key").register({
     name = "+git",
@@ -95,6 +92,9 @@ function M.misc()
   -- Visual indent
   map({ "v", "<", "<gv" })
   map({ "v", ">", ">gv" })
+  -- Source
+  map({ "n", "<space>rf", "<CMD>luafile %<CR>" })
+  map({ "n", "<space>rF", "<CMD>source % | PackerCompile<CR>" })
 end
 
 function M.which_key()
@@ -203,16 +203,22 @@ function M.which_key()
         -- n = { "<CMD>lua require'lsp.rename'.rename()<CR>", "rename symbol" },
         n = { "<CMD>lua require'renamer'.rename()<CR>", "rename symbol" },
         r = { "<CMD>FloatermNew lazydocker<CR>", "lazydocker" },
+        -- BUG: the following places an extra character in the buffer (replace)
+        -- f = { "<CMD>luafile %<CR>" },
+        -- F = { "<CMD>source % | PackerCompile<CR>" },
       },
       s = { "<CMD>PackerSync<CR>", "Update Plugins" },
       S = { "<CMD>Dashboard<CR>", "Dashboard" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
       p = { ":lua print(vim.inspect())<LEFT><LEFT>", "lua print", silent = false },
       P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },
-      q = { ":lua require'notify'.dismiss()<CR>", "dismiss notifications" },
+      q = { "<CMD>lua require'utils'.toggle_signcolumn()<CR>", "toggle signcolumn" },
+      Q = { "<CMD>lua require'notify'.dismiss()<CR>", "dismiss notifications" },
       u = { "<CMD>MundoToggle<CR>", "Undo Tree" },
       v = { "ggVG", "select all" },
       V = { 'ggVG"+Y', "copy all to clipboard" },
+      c = { "<CMD>lua require'utils'.display_path()<CR>", "buffer path" },
+      C = { "<CMD>lua require'utils'.display_cwd()<CR>", "cwd" },
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },

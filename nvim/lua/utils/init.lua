@@ -74,6 +74,7 @@ function M.display(...)
 end
 
 -- Send a notification
+-- NOTE: notify plugin accepts table as multi-line string, vim.notify has opts
 function M.notify(...)
   local ok, notifier = pcall(require, "notify")
   if not ok then
@@ -82,11 +83,33 @@ function M.notify(...)
   notifier.notify(...)
 end
 
+-- Display path of current buffer
+function M.display_path()
+  require("notify").notify(vim.fn.fnamemodify(vim.fn.expand("%"), ":p"), "info", {
+    title = "path",
+    render = "default",
+  })
+end
+
+-- Display path of current working directory
+function M.display_cwd()
+  require("notify").notify(vim.loop.cwd(), "info", {
+    title = "cwd",
+    render = "default",
+  })
+end
+
 -- Get an attribute from a highlight group
 -- @param group highlight group to be checked
 -- @param attribute specific attribute from highlight group to be returned
 function M.highlight_group_get(group, attribute)
   return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attribute)
+end
+
+local signcolumn_enabled = true
+function M.toggle_signcolumn()
+  vim.o.signcolumn = M.ternary(signcolumn_enabled, "no", "auto")
+  signcolumn_enabled = not signcolumn_enabled
 end
 
 return M

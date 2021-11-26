@@ -6,7 +6,7 @@
 --]]
 
 --[[ TODO
--- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils ?) - prettier slow
+-- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils ?) - prettierd
 -- PRIORITY: hop -> lightspeed
 -- PRIORITY: orgmode / neorg / vimwiki
 -- IMPORTANT: separate which-key bindings
@@ -288,7 +288,7 @@ return require("packer").startup(function(use)
 
   -- Undo history
   use({
-    "mbbill/undotree",
+    "simnalamburt/vim-mundo",
     config = require("plugins.undo"),
   })
 

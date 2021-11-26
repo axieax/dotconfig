@@ -210,7 +210,7 @@ function M.which_key()
       p = { ":lua print(vim.inspect())<LEFT><LEFT>", "lua print", silent = false },
       P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },
       q = { ":lua require'notify'.dismiss()<CR>", "dismiss notifications" },
-      u = { "<CMD>UndotreeToggle<CR>", "Undo Tree" },
+      u = { "<CMD>MundoToggle<CR>", "Undo Tree" },
       v = { "ggVG", "select all" },
       V = { 'ggVG"+Y', "copy all to clipboard" },
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },

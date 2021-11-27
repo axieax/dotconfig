@@ -6,11 +6,12 @@
 --]]
 
 --[[ TODO
--- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils ?) - prettierd
+-- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils) - prettierd, eslint?
 -- PRIORITY: hop -> lightspeed
 -- PRIORITY: orgmode / neorg / vimwiki
 -- IMPORTANT: separate which-key bindings
 -- IMPORTANT: lsp bindings on_attach
+-- IMPORTANT: nvim-lsp-ts-utils with lsp code actions, eslint ls?
 -- TODO: ]n next note / todo
 -- TODO: Telescope picker for LSP commands
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
@@ -190,6 +191,12 @@ return require("packer").startup(function(use)
   -- General Utilities --
   -----------------------
 
+  -- Keybinds
+  use({
+    "folke/which-key.nvim",
+    config = require("plugins.binds").which_key,
+  })
+
   -- Fuzzy finder
   use({
     "nvim-telescope/telescope.nvim",
@@ -213,12 +220,6 @@ return require("packer").startup(function(use)
     "folke/todo-comments.nvim",
     requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
     config = require("plugins.notes"),
-  })
-
-  -- Keybinds
-  use({
-    "folke/which-key.nvim",
-    config = require("plugins.binds").which_key,
   })
 
   -- Extra mappings (with encoding/decoding as well)
@@ -332,6 +333,8 @@ return require("packer").startup(function(use)
       require("stabilize").setup({
         -- for stabilising quickfix list (trouble.nvim)
         nested = "QuickFixCmdPost,User LspDiagnosticsChanged",
+        -- NOTE: event name change for nvim 0.6
+        -- nested = "QuickFixCmdPost,User DiagnosticChanged",
       })
     end,
   })
@@ -685,6 +688,7 @@ return require("packer").startup(function(use)
     requires = {
       "hrsh7th/cmp-nvim-lsp",
       "stevearc/aerial.nvim",
+      "jose-elias-alvarez/nvim-lsp-ts-utils",
     },
     config = require("lsp.install").setup,
     after = "nvim-lspconfig",

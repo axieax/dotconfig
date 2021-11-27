@@ -38,7 +38,7 @@ function M.register_git_bindings()
     [";"] = { "<CMD>lua require'gitsigns'.toggle_current_line_blame()<CR>", "git blame toggle" },
     g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
     h = { "<CMD>lua require'gitsigns'.stage_hunk()<CR>", "git stage hunk" },
-    H = { "<CMD>lua require'gitsigns'.preview_hunk()<CR>", "git hunk preview" },
+    K = { "<CMD>lua require'gitsigns'.preview_hunk()<CR>", "git hunk preview" },
     r = { "<CMD>lua require'gitsigns'.reset_hunk()<CR>", "git reset hunk" },
     R = { "<CMD>lua require'gitsigns'.reset_buffer()<CR>", "git reset buffer" },
     d = { "git diff preview" }, -- TODO: GIT DIFF

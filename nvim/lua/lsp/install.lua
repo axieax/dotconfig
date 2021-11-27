@@ -55,6 +55,8 @@ function M.ls_overrides()
         "--add-opens java.base/java.lang=ALL-UNNAMED",
       },
       on_attach = function(client, bufnr)
+        default_on_attach(client, bufnr)
+
         -- Java extensions setup
         -- https://github.com/microsoft/java-debug
         -- https://github.com/microsoft/vscode-java-test
@@ -63,9 +65,50 @@ function M.ls_overrides()
         require("jdtls.dap").setup_dap_main_class_configs()
 
         -- Telescope for UI picker (Neovim < 0.6)
-        require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker()
+        require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker
+      end,
+    },
+    tsserver = {
+      init_options = {
+        hostInfo = "neovim",
+        preferences = {
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
 
+      on_attach = function(client, bufnr)
         default_on_attach(client, bufnr)
+
+        local ts_utils = require("nvim-lsp-ts-utils")
+        ts_utils.setup({
+          -- inlay hints
+          auto_inlay_hints = false,
+          inlay_hints_highlight = "BiscuitColor",
+
+          -- update imports on file move
+          update_imports_on_move = true,
+          require_confirmation_on_move = true,
+          watch_dir = nil, -- fallback dir
+        })
+
+        -- required to fix code action ranges and filter diagnostics
+        ts_utils.setup_client(client)
+
+        -- toggle inlay hints
+        local ok, wk = pcall(require, "which-key")
+        if ok then
+          wk.register({
+            ["\\<space>"] = { "<CMD>TSLspToggleInlayHints<CR>", "Toggle Inlay Hints" },
+          })
+        else
+          require("utils").map({ "n", "\\<space>", "<CMD>TSLspToggleInlayHints<CR>" })
+        end
       end,
     },
     -- haskell = {
@@ -77,29 +120,29 @@ function M.ls_overrides()
     -- end,
     -- },
     -- Source: https://github.com/williamboman/nvim-lsp-installer/tree/main/lua/nvim-lsp-installer/servers/eslint
-    eslint = {
-      on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = true
-        default_on_attach(client, bufnr)
-      end,
-      settings = {
-        format = { enable = true },
-      },
-    },
-    emmet_ls = {
-      -- NOTE: doesn't work with jsx
-      filetypes = {
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "eruby",
-        "typescriptreact",
-        "javascriptreact",
-        "svelte",
-        "vue",
-      },
-    },
+    -- eslint = {
+    --   on_attach = function(client, bufnr)
+    --     default_on_attach(client, bufnr)
+    --     client.resolved_capabilities.document_formatting = true
+    --   end,
+    --   settings = {
+    --     format = { enable = true },
+    --   },
+    -- },
+    -- emmet_ls = {
+    --   -- NOTE: doesn't work with jsx
+    --   filetypes = {
+    --     "html",
+    --     "css",
+    --     "javascript",
+    --     "typescript",
+    --     "eruby",
+    --     "typescriptreact",
+    --     "javascriptreact",
+    --     "svelte",
+    --     "vue",
+    --   },
+    -- },
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = default_on_attach,

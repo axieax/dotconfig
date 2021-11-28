@@ -35,31 +35,39 @@ end
 function M.register_git_bindings()
   require("which-key").register({
     name = "+git",
-    [";"] = { "<CMD>lua require'gitsigns'.toggle_current_line_blame()<CR>", "git blame toggle" },
     g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
-    h = { "<CMD>lua require'gitsigns'.stage_hunk()<CR>", "git stage hunk" },
-    K = { "<CMD>lua require'gitsigns'.preview_hunk()<CR>", "git hunk preview" },
-    r = { "<CMD>lua require'gitsigns'.reset_hunk()<CR>", "git reset hunk" },
-    R = { "<CMD>lua require'gitsigns'.reset_buffer()<CR>", "git reset buffer" },
+    h = { require("gitsigns").stage_hunk, "git stage hunk" },
+    K = { require("gitsigns").preview_hunk, "git hunk preview" },
+    r = { require("gitsigns").reset_hunk, "git reset hunk" },
+    R = { require("gitsigns").reset_buffer, "git reset buffer" },
     d = { "git diff preview" }, -- TODO: GIT DIFF
     m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
-    u = { "<CMD>lua require'gitsigns'.undo_stage_hunk()<CR>", "git stage hunk undo" },
-    s = { "<CMD>Telescope git_stash<CR>", "git stash" },
-    b = { "<CMD>Telescope git_branches<CR>", "git branches" },
-    c = { "<CMD>Telescope git_bcommits<CR>", "git commits (buffer)" },
-    C = { "<CMD>Telescope git_commits<CR>", "git commits (repo)" },
+    u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
+    s = { require("telescope.builtin").git_stash, "git stash" },
+    b = { require("telescope.builtin").git_branches, "git branches" },
+    c = { require("telescope.builtin").git_bcommits, "git commits (buffer)" },
+    C = { require("telescope.builtin").git_commits, "git commits (repo)" },
     y = { "git yank reference url" },
-    Y = { "<CMD>lua require'gitlinker'.get_repo_url()<CR>", "git yank repo url" },
+    Y = { require("gitlinker").get_repo_url, "git yank repo url" },
     w = {
-      "<CMD>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
+      function()
+        require("gitlinker").get_buf_range_url("n", {
+          action_callback = require("gitlinker.actions").open_in_browser,
+        })
+      end,
       "git browse reference url",
     },
     W = {
-      "<CMD>lua require'gitlinker'.get_repo_url({action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
+      function()
+        require("gitlinker").get_repo_url({
+          action_callback = require("gitlinker.actions").open_in_browser,
+        })
+      end,
       "git browse repo url",
     },
-    q = { "<CMD>lua require'gitsigns'.toggle_numhl()<CR>", "git gutter colour toggle" },
-    ["?"] = { "<CMD>Telescope git_status<CR>", "git status" },
+    q = { require("gitsigns").toggle_numhl, "git gutter colour toggle" },
+    [";"] = { require("gitsigns").toggle_current_line_blame, "git blame toggle" },
+    ["?"] = { require("telescope.builtin").git_status, "git status" },
   }, {
     prefix = "<space>g",
   })
@@ -67,8 +75,18 @@ function M.register_git_bindings()
   -- visual bindings
   require("which-key").register({
     name = "+git",
-    h = { "<CMD>lua require'gitsigns'.stage_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>", "git stage hunk" },
-    r = { "<CMD>lua require'gitsigns'.reset_hunk({vim.fn.line('.'), vim.fn.line('v')})<CR>", "git reset hunk" },
+    h = {
+      function()
+        require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      end,
+      "git stage hunk",
+    },
+    r = {
+      function()
+        require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      end,
+      "git reset hunk",
+    },
   }, {
     prefix = "<space>g",
     mode = "v",
@@ -210,8 +228,8 @@ function M.which_key()
       s = { "<CMD>PackerSync<CR>", "Update Plugins" },
       S = { "<CMD>Dashboard<CR>", "Dashboard" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
-      p = { ":lua print(vim.inspect())<LEFT><LEFT>", "lua print", silent = false },
-      P = { ":lua require'notify'()<LEFT>", "lua notify", silent = false },
+      p = { ":lua require'utils'.display()<LEFT>", "lua print", silent = false },
+      P = { ":lua require'utils'.notify()<LEFT>", "lua notify", silent = false },
       q = { "<CMD>lua require'utils'.toggle_signcolumn()<CR>", "toggle signcolumn" },
       Q = { "<CMD>lua require'notify'.dismiss()<CR>", "dismiss notifications" },
       u = { "<CMD>MundoToggle<CR>", "Undo Tree" },

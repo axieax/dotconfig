@@ -202,15 +202,14 @@ return require("packer").startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = {
       { "nvim-lua/plenary.nvim" },
+      -- Extensions
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-media-files.nvim" },
       -- { "nvim-telescope/telescope-node-modules.nvim" },
-    },
-    after = {
-      "nvim-neoclip.lua",
-      "nvim-notify",
-      "aerial.nvim",
+      { "AckslD/nvim-neoclip.lua" },
+      { "rcarriga/nvim-notify" },
+      { "stevearc/aerial.nvim" },
     },
     config = require("plugins.telescope").setup,
   })
@@ -691,7 +690,6 @@ return require("packer").startup(function(use)
       "jose-elias-alvarez/nvim-lsp-ts-utils",
     },
     config = require("lsp.install").setup,
-    after = "nvim-lspconfig",
   })
 
   -- Rename

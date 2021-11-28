@@ -5,7 +5,7 @@
 local M = {}
 
 function M.display()
-  local notify = require("notify")
+  local notify = require("utils").notify
   -- get buffers
   local buffers = vim.api.nvim_list_bufs()
   for _, bufnr in ipairs(buffers) do

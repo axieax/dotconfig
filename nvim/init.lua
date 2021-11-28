@@ -15,6 +15,9 @@ require("general")
 -- Plugins config
 require("plugins")
 
+-- Apply keybindings
+require("plugins.binds").general()
+
 -- NOTES
 
 -- Automatically PackerCompile whenever plugins are updated

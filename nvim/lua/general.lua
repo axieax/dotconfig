@@ -127,6 +127,3 @@ map({ "n", "n", "nzz" })
 
 -- ftplugin
 vim.cmd("filetype plugin on")
-
--- Apply keybindings
-require("plugins.binds").general()

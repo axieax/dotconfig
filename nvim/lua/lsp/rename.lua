@@ -5,7 +5,7 @@
 local M = {}
 
 -- LSP rename with notify handler --
-local notify = require("notify")
+local notify = require("utils").notify
 
 -- handler from https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/theme/ui.lua#L47-L94
 function M.lsp_rename_handler(...)
@@ -66,7 +66,7 @@ function M.handler(result)
       num_changes = num_changes + #edits
     end
     msg = msg:sub(1, #msg - 1)
-    require("notify")(msg, "info", {
+    notify(msg, "info", {
       title = ("Succesfully renamed with %d changes"):format(num_changes),
     })
   end

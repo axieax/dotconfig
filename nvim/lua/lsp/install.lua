@@ -1,10 +1,9 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
 
-local notify = require("notify")
-
 local M = {}
 
-local default_on_attach = require("aerial").on_attach
+local ok, aerial = pcall(require, "aerial")
+local default_on_attach = require("utils").ternary(ok, aerial.on_attach, function()end)
 
 -- jdtls setup
 local java_bundles = {
@@ -85,6 +84,10 @@ function M.ls_overrides()
       on_attach = function(client, bufnr)
         default_on_attach(client, bufnr)
 
+        -- disable formatting
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+
         local ts_utils = require("nvim-lsp-ts-utils")
         ts_utils.setup({
           -- inlay hints
@@ -158,10 +161,10 @@ function M.prepare_language_servers()
   for _, server_name in ipairs(required_servers) do
     local available, server = get_server(server_name)
     if not available then
-      notify("Could not install language server " .. server_name, "error")
+      require("utils").notify("Could not install language server " .. server_name, "error")
     elseif not server:is_installed() then
       server:install()
-      notify("Installed language server " .. server_name, "info")
+      require("utils").notify("Installed language server " .. server_name, "info")
     end
   end
 end

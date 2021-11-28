@@ -35,7 +35,8 @@ end
 function M.register_git_bindings()
   require("which-key").register({
     name = "+git",
-    g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
+    -- g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
+    g = { require("plugins.toggleterm").lazygit, "lazygit" },
     h = { require("gitsigns").stage_hunk, "git stage hunk" },
     K = { require("gitsigns").preview_hunk, "git hunk preview" },
     r = { require("gitsigns").reset_hunk, "git reset hunk" },
@@ -113,6 +114,8 @@ function M.misc()
   -- Source
   map({ "n", "<space>rf", "<CMD>luafile %<CR>" })
   map({ "n", "<space>rF", "<CMD>source % | PackerCompile<CR>" })
+  -- Markdown bold
+  map({ "v", ",*", "S*gvS*", noremap = false })
 end
 
 function M.which_key()

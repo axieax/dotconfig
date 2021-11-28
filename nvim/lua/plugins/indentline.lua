@@ -37,6 +37,7 @@ return function()
       "packer",
       "help",
       "floaterm",
+      "toggleterm",
     },
   })
 

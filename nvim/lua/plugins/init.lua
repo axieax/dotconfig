@@ -207,6 +207,7 @@ return require("packer").startup(function(use)
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-media-files.nvim" },
       -- { "nvim-telescope/telescope-node-modules.nvim" },
+      { "mfussenegger/nvim-dap" },
       { "AckslD/nvim-neoclip.lua" },
       { "rcarriga/nvim-notify" },
       { "stevearc/aerial.nvim" },

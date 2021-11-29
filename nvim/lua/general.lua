@@ -94,6 +94,8 @@ if vim.loop.os_uname().sysname == "Linux" then
   viewer, yank_register = "xdg-open", "+"
 end
 map({ "n", "gx", "<CMD>execute 'silent! !" .. viewer .. " ' . shellescape(expand('<cfile>'), 1)<CR>" })
+-- HACK: need to get_visual_selection for visual binding
+map({ "v", "gx", "<CMD>execute 'silent! !" .. viewer .. " ' . shellescape(expand('<cfile>'), 1)<CR>" })
 
 -- Clipboard yank
 map({ "n", "\\y", '"' .. yank_register .. "y", noremap = false })

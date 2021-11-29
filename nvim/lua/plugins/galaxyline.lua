@@ -11,8 +11,8 @@ return function()
   -- Colours
   -- ~/.local/share/nvim/site/pack/packer/opt/galaxyline.nvim/lua/galaxyline/theme.lua
   local galaxyline_colours = require("galaxyline.theme").default
-  -- ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/lua/onedark/colors.lua
-  local onedark_colours = require("onedark.colors")
+  -- ~/.local/share/nvim/site/pack/packer/start/onedarkpro.nvim/lua/onedarkpro/colors/onedark.lua
+  local onedark_colours = require("onedarkpro").get_colors("onedark")
 
   -- Structures
   local section = require("galaxyline").section
@@ -26,10 +26,8 @@ return function()
         return require("galaxyline.provider_extensions").scrollbar_instance(scrollbar_chars)
       end,
       -- separator = " ",
-      -- highlight = { onedark_colours.orange, colours.yellow },
-      highlight = { galaxyline_colours.yellow, onedark_colours.orange },
-      -- highlight = { onedark_colours.bg_yellow, onedark_colours.yellow },
-      -- highlight = { colours.red },
+      -- highlight = { galaxyline_colours.yellow, onedark_colours.orange },
+      highlight = { onedark_colours.highlight, onedark_colours.orange },
     },
   }
 

@@ -29,11 +29,19 @@ function M.setup()
   vim.cmd("autocmd! TermOpen term://* lua require'plugins.toggleterm'.attach()")
   local map = require("utils").map
   map({ "n", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
-  map({ "n", "<F2>", "<CMD>2ToggleTerm direction=horizontal<CR>" })
-  map({ "n", "<F3>", "<CMD>3ToggleTerm direction=vertical<CR>" })
-  map({ "n", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
+  map({ "i", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
+  map({ "t", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
+  -- NOTE: actually toggles instead of opening a new toggleterm?
   -- TODO: toggle vs more in same layout
-  -- SETUP: toggleterm -> nvim
+  map({ "n", "<F2>", "<CMD>2ToggleTerm direction=horizontal<CR>" })
+  map({ "i", "<F2>", "<CMD>2ToggleTerm direction=horizontal<CR>" })
+  map({ "t", "<F2>", "<CMD>2ToggleTerm direction=horizontal<CR>" })
+  map({ "n", "<F3>", "<CMD>3ToggleTerm direction=vertical<CR>" })
+  map({ "i", "<F3>", "<CMD>3ToggleTerm direction=vertical<CR>" })
+  map({ "t", "<F3>", "<CMD>3ToggleTerm direction=vertical<CR>" })
+  map({ "n", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
+  map({ "i", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
+  map({ "t", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
 end
 
 function M.lazygit()

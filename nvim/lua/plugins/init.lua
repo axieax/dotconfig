@@ -127,10 +127,19 @@ return require("packer").startup(function(use)
 
   -- ALT: https://github.com/ful1e5/onedark.nvim
   use({
-    "navarasu/onedark.nvim",
+    "olimorris/onedarkpro.nvim",
     config = function()
-      vim.g.onedark_transparent_background = true
-      require("onedark").setup()
+      require("onedarkpro").setup({
+        -- extra from https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/colors.lua
+        colors = {
+          bg_blue = "#73b8f1",
+          dark_purple = "#8a3fa0",
+        },
+        options = {
+          transparency = true,
+        },
+      })
+      require("onedarkpro").load()
     end,
   })
 
@@ -183,7 +192,7 @@ return require("packer").startup(function(use)
           IndentBlanklineContextChar = { fg = "#C678DD" },
         },
       })
-      vim.cmd([[colorscheme material]])
+      -- vim.cmd([[colorscheme material]])
     end,
   })
 
@@ -233,7 +242,7 @@ return require("packer").startup(function(use)
     "glepnir/galaxyline.nvim",
     branch = "main",
     requires = "kyazdani42/nvim-web-devicons",
-    after = "onedark.nvim",
+    after = "onedarkpro.nvim",
     config = require("plugins.galaxyline"),
   })
 
@@ -462,6 +471,12 @@ return require("packer").startup(function(use)
 
   -- Search highlights
   use("romainl/vim-cool")
+
+  -- Search virtual text
+  use({
+    "kevinhwang91/nvim-hlslens",
+    config = require("plugins.hlslens"),
+  })
 
   -- Substitution preview
   use("markonm/traces.vim")

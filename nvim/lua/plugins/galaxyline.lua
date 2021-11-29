@@ -14,6 +14,10 @@ return function()
   -- ~/.local/share/nvim/site/pack/packer/start/onedarkpro.nvim/lua/onedarkpro/colors/onedark.lua
   local onedark_colours = require("onedarkpro").get_colors("onedark")
 
+  -- Transparent background
+  vim.cmd("highlight StatusLine guibg=#00000000")
+  vim.cmd("au ColorScheme * hi StatusLine guibg=#00000000")
+
   -- Structures
   local section = require("galaxyline").section
   local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons

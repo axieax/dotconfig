@@ -163,6 +163,7 @@ return require("packer").startup(function(use)
     "Mofiqul/dracula.nvim",
     config = function()
       vim.g.dracula_transparent_bg = true
+      -- vim.cmd("au ColorScheme dracula hi! link ColorColumn CursorLine")
     end,
   })
 
@@ -198,6 +199,7 @@ return require("packer").startup(function(use)
         },
         custom_highlights = {
           IndentBlanklineContextChar = { fg = "#C678DD" },
+          StatusLine = { bg = "#00000000" },
           -- TODO: cmp item kind highlights
           -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
           -- HLGROUP = { link = "OTHER_GROUP" },

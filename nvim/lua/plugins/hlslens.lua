@@ -37,22 +37,28 @@ function M.setup()
 
   -- other search methods
   local map = require("utils").map
+  -- vim.cmd([[
+  -- noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
+  --           \<Cmd>lua require('hlslens').start()<CR>
+  -- ]])
+  -- vim.cmd([[
+  -- noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
+  --           \<Cmd>lua require('hlslens').start()<CR>
+  -- ]])
   map({ "n", "*", "*<CMD>lua require'hlslens'.start()<CR>" })
   map({ "n", "g*", "g*<CMD>lua require'hlslens'.start()<CR>" })
   map({ "n", "#", "#<CMD>lua require'hlslens'.start()<CR>" })
   map({ "n", "g#", "g#<CMD>lua require'hlslens'.start()<CR>" })
 
   -- vim-visual-multi highlights (ctrl-n)
-  -- NOTE: does not persist
-  vim.cmd([[
-  aug VMlens
-    au!
-    "au User visual_multi_start lua require'plugins.hlslens'.vmlens_start()
-    "au User visual_multi_exit lua require'plugins.hlslens'.vmlens_exit()
-    au User visual_multi_start lua require'plugins.vmlens'.start()
-    au User visual_multi_exit lua require'plugins.vmlens'.exit()
-  aug END
-  ]])
+  -- NOTE: lens disappear with navigation
+  -- vim.cmd([[
+  -- aug VMlens
+  --   au!
+  --   au User visual_multi_start lua require'plugins.hlslens'.vmlens_start()
+  --   au User visual_multi_exit lua require'plugins.hlslens'.vmlens_exit()
+  -- aug END
+  -- ]])
 end
 
 M.override_lens = function(render, plist, nearest, idx, r_idx)

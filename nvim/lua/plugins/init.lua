@@ -135,11 +135,19 @@ return require("packer").startup(function(use)
           bg_blue = "#73b8f1",
           dark_purple = "#8a3fa0",
         },
+        hlgroups = {
+          -- TSProperty = { fg = "${gray}" },
+          -- TSVariable = { fg = "${fg}" },
+        },
+        styles = {
+          -- functions = "bold,italic",
+          -- variables = "italic",
+        },
         options = {
           transparency = true,
         },
       })
-      require("onedarkpro").load()
+      -- require("onedarkpro").load()
     end,
   })
 
@@ -190,9 +198,12 @@ return require("packer").startup(function(use)
         },
         custom_highlights = {
           IndentBlanklineContextChar = { fg = "#C678DD" },
+          -- TODO: cmp item kind highlights
+          -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
+          -- HLGROUP = { link = "OTHER_GROUP" },
         },
       })
-      -- vim.cmd([[colorscheme material]])
+      vim.cmd([[colorscheme material]])
     end,
   })
 
@@ -475,7 +486,7 @@ return require("packer").startup(function(use)
   -- Search virtual text
   use({
     "kevinhwang91/nvim-hlslens",
-    config = require("plugins.hlslens"),
+    config = require("plugins.hlslens").setup,
   })
 
   -- Substitution preview

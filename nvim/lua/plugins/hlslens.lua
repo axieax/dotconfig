@@ -1,6 +1,7 @@
 -- https://github.com/kevinhwang91/nvim-hlslens --
+local M = {}
 
-return function()
+function M.setup()
   require("hlslens").setup({
     -- statusline overlay instead of virtual text
     -- nearest_float_when = "always"
@@ -10,8 +11,8 @@ return function()
       local abs_r_idx = math.abs(r_idx)
       if abs_r_idx >= 1 then
         indicator = ("%d%s"):format(abs_r_idx, sfw ~= (r_idx > 1) and "▲" or "▼")
-      -- elseif abs_r_idx == 1 then
-      --   indicator = sfw ~= (r_idx == 1) and "▲" or "▼"
+        -- elseif abs_r_idx == 1 then
+        --   indicator = sfw ~= (r_idx == 1) and "▲" or "▼"
       else
         indicator = ""
       end
@@ -33,4 +34,13 @@ return function()
       render.set_virt(0, lnum - 1, col - 1, chunks, nearest)
     end,
   })
+
+  -- other search methods
+  local map = require("utils").map
+  map({ "n", "*", "*<CMD>lua require'hlslens'.start()<CR>" })
+  map({ "n", "g*", "g*<CMD>lua require'hlslens'.start()<CR>" })
+  map({ "n", "#", "#<CMD>lua require'hlslens'.start()<CR>" })
+  map({ "n", "g#", "g#<CMD>lua require'hlslens'.start()<CR>" })
 end
+
+return M

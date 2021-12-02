@@ -211,14 +211,6 @@ function M.which_key()
         ["."] = { "<CMD>Telescope resume<CR>", "resume last command" },
         -- TODO: grep_string
       },
-      h = {
-        name = "+hop",
-        c = { "<CMD>:HopChar1<CR>", "char 1" },
-        C = { "<CMD>:HopChar2<CR>", "Char 2" },
-        w = { "<CMD>:HopWord<CR>", "word" },
-        l = { "<CMD>:HopLine<CR>", "line" },
-        h = { "<CMD>:HopPattern<CR>", "pattern" },
-      },
       r = {
         -- n = { "<CMD>lua vim.lsp.buf.rename()<CR>", "rename symbol" },
         -- n = { "<CMD>lua require'lsp.rename'.rename()<CR>", "rename symbol" },

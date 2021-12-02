@@ -1,4 +1,5 @@
 -- https://github.com/monaqa/dial.nvim --
+-- TODO: migrate to https://github.com/monaqa/dps-dial.vim ? --
 
 return function()
   local dial = require("dial")

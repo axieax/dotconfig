@@ -40,6 +40,8 @@
 --]]
 
 --[[ Features/plugins
+-- Slow Prettier
+-- Markdown issues - code block cindent, no auto list formatoptions
 -- Coverage
 -- Faded unused variables/imports?
 -- Lazy loading
@@ -163,7 +165,6 @@ return require("packer").startup(function(use)
     "Mofiqul/dracula.nvim",
     config = function()
       vim.g.dracula_transparent_bg = true
-      -- vim.cmd("au ColorScheme dracula hi! link ColorColumn CursorLine")
     end,
   })
 
@@ -671,6 +672,17 @@ return require("packer").startup(function(use)
   ---------------------------------
   -- Compilation, Test and Debug --
   ---------------------------------
+
+  -- Code runner
+  use({
+    "arjunmahishi/run-code.nvim",
+    config = function()
+      local map = require("utils").map
+      map({ "v", "\\r", "<CMD>RunCodeSelected<CR>" })
+      map({ "n", "\\r", "<CMD>RunCodeFile<CR>" })
+      vim.cmd("au FileType markdown nmap \\r <CMD>RunCodeBlock<CR>")
+    end,
+  })
 
   -- Make
   use("neomake/neomake")

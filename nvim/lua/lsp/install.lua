@@ -3,7 +3,7 @@
 local M = {}
 
 local ok, aerial = pcall(require, "aerial")
-local default_on_attach = require("utils").ternary(ok, aerial.on_attach, function()end)
+local default_on_attach = require("utils").ternary(ok, aerial.on_attach, function() end)
 
 -- jdtls setup
 local java_bundles = {
@@ -146,6 +146,13 @@ function M.ls_overrides()
     --     "vue",
     --   },
     -- },
+    jsonls = {
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+        },
+      },
+    },
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = default_on_attach,

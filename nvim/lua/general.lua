@@ -45,7 +45,8 @@ vim_apply(vim.opt, {
 
   showmatch = true,
   hlsearch = true,
-  incsearch = true,
+  incsearch = true, -- live search preview
+  inccommand = "split", -- live substitution preview
   ignorecase = true,
   smartcase = true,
 
@@ -102,6 +103,10 @@ map({ "v", "gx", "<CMD>execute 'silent! !" .. viewer .. " ' . shellescape(expand
 map({ "n", "\\y", '"' .. yank_register .. "y", noremap = false })
 map({ "v", "\\y", '"' .. yank_register .. "y", noremap = false })
 
+-- Paste last yanked
+map({ "n", "\\p", '"0p' })
+map({ "v", "\\p", '"0p' })
+
 -- Auto-resize
 vim.cmd("autocmd VimResized * wincmd =")
 
@@ -113,12 +118,8 @@ augroup highlight_yank
 augroup END
 ]])
 
--- Paste last yanked
-map({ "n", "\\p", '"0p' })
-map({ "v", "\\p", '"0p' })
-
 -- Update (instead of write)
-map({ "n", "<space>w", "<cmd>up<CR>" })
+map({ "n", "<space>w", "<CMD>up<CR>" })
 
 -- Disable automatic comment insertion
 -- TODO: shift CR continue comment, regular CR won't

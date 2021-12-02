@@ -66,7 +66,6 @@
 -- Calltree (https://github.com/ldelossa/calltree.nvim)
 -- Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
 -- gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
--- https://github.com/b0o/SchemaStore.nvim for jsonls
 -- Markdown code block syntax highlighting
 -- TRY: https://github.com/goolord/alpha-nvim instead of dashboard
 -- with https://github.com/Shatur/neovim-session-manager
@@ -76,8 +75,7 @@
 --]]
 
 --[[ Notes
--- Galaxyline gap background not transparent
--- use null-ls as formatter? (has builtins and integrates with lsp)
+-- inccommand split preview-window scroll
 -- nvim-cmp treesitter completion source vs buffer source?
 -- Opening buffer for file (nvim-tree) replaces barbar buffers
 -- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
@@ -281,6 +279,7 @@ return require("packer").startup({
     })
 
     -- Floating terminal
+    -- TODO: replace
     use({
       "voldikss/vim-floaterm",
       config = require("plugins.floaterm"),
@@ -493,9 +492,6 @@ return require("packer").startup({
       "kevinhwang91/nvim-hlslens",
       config = require("plugins.hlslens").setup,
     })
-
-    -- Substitution preview
-    use("markonm/traces.vim")
 
     -- Smooth scroll
     -- TODO: configure animation duration
@@ -727,6 +723,7 @@ return require("packer").startup({
         "hrsh7th/cmp-nvim-lsp",
         "stevearc/aerial.nvim",
         "jose-elias-alvarez/nvim-lsp-ts-utils",
+        "b0o/schemastore.nvim",
       },
       config = require("lsp.install").setup,
     })

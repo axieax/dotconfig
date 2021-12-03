@@ -69,9 +69,12 @@
 -- Markdown code block syntax highlighting
 -- TRY: https://github.com/goolord/alpha-nvim instead of dashboard
 -- with https://github.com/Shatur/neovim-session-manager
+-- with line for startup time (v --startuptime and read tmp file?)
+-- something like https://github.com/henriquehbr/nvim-startup.lua?
 -- https://github.com/rmagatti/auto-session
 -- https://github.com/lewis6991/impatient.nvim
 -- https://github.com/VonHeikemen/fine-cmdline.nvim
+-- Themes: try sonokai and monokai
 --]]
 
 --[[ Notes
@@ -104,7 +107,7 @@ return require("packer").startup({
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
 
-    -- Improve startup speed
+    -- Improve and measure startup time
     -- NOTE: can cache packer_compiled as well
     use({
       "lewis6991/impatient.nvim",
@@ -358,7 +361,7 @@ return require("packer").startup({
           -- for stabilising quickfix list (trouble.nvim)
           nested = "QuickFixCmdPost,User LspDiagnosticsChanged",
           -- NOTE: event name change for nvim 0.6
-          -- nested = "QuickFixCmdPost,User DiagnosticChanged",
+          -- nested = "QuickFixCmdPost,DiagnosticChanged *",
         })
       end,
     })

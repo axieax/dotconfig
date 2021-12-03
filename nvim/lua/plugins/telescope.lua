@@ -36,6 +36,7 @@ end
 
 function M.dotconfig()
   require("telescope.builtin").find_files({
+    prompt_title = "dotconfig",
     search_dirs = { "~/dotconfig" },
     hidden = true,
     file_ignore_patterns = { "%.git" },

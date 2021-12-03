@@ -147,7 +147,7 @@ return function()
     {
       DiagnosticWarn = {
         provider = "DiagnosticWarn",
-        icon = lsp_diagnostics_icons.Warning .. " ",
+        icon = lsp_diagnostics_icons.Warn .. " ",
         separator = " ",
         highlight = { onedark_colours.yellow },
       },
@@ -163,7 +163,7 @@ return function()
     {
       DiagnosticInfo = {
         provider = "DiagnosticInfo",
-        icon = lsp_diagnostics_icons.Information .. " ",
+        icon = lsp_diagnostics_icons.Info .. " ",
         separator = " ",
         highlight = { onedark_colours.blue },
       },

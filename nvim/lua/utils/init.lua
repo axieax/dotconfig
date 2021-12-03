@@ -34,7 +34,6 @@ local default_options = {
 function M.map(bind)
   -- TODO: try to use which-key instead?
   -- Get options
-  local unpack = M.fallback_value(table.unpack, unpack)
   local mode, before, after = unpack(bind, 1, 3)
 
   local buffer = M.fallback_value(bind.buffer, default_options.buffer)

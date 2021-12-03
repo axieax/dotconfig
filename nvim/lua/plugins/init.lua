@@ -357,11 +357,14 @@ return require("packer").startup({
     use({
       "luukvbaal/stabilize.nvim",
       config = function()
+        -- for stabilising quickfix list (trouble.nvim)
+        local nested_autocmd = require("utils").ternary(
+          vim.fn.has("nvim-0.6"),
+          "QuickFixCmdPost,DiagnosticChanged *",
+          "QuickFixCmdPost,User LspDiagnosticsChanged"
+        )
         require("stabilize").setup({
-          -- for stabilising quickfix list (trouble.nvim)
-          nested = "QuickFixCmdPost,User LspDiagnosticsChanged",
-          -- NOTE: event name change for nvim 0.6
-          -- nested = "QuickFixCmdPost,DiagnosticChanged *",
+          nested = nested_autocmd,
         })
       end,
     })
@@ -438,6 +441,9 @@ return require("packer").startup({
     ------------------
     -- UI Utilities --
     ------------------
+
+    -- vim.ui overrides
+    use("stevearc/dressing.nvim")
 
     -- Bracket coloured pairs
     -- TODO: change colourscheme, esp red?
@@ -582,6 +588,7 @@ return require("packer").startup({
     })
 
     -- GitHub Copilot (NOTE: requires neovim 0.6)
+    -- TODO: auto disable on startup
     use({
       "github/copilot.vim",
       -- disable = true,
@@ -729,12 +736,6 @@ return require("packer").startup({
         "b0o/schemastore.nvim",
       },
       config = require("lsp.install").setup,
-    })
-
-    -- Rename
-    use({
-      "filipdutescu/renamer.nvim",
-      config = require("lsp.rename").renamer_setup,
     })
 
     -- Java LSP

@@ -30,7 +30,7 @@ return function()
       NOTE = {
         icon = " ",
         color = "info",
-        alt = { "INFO", "INSTALL", "SETUP", "GUIDE", "ASSUMPTION", "ASSUME" },
+        alt = { "INFO", "INSTALL", "SETUP", "GUIDE", "ASSUMPTION", "ASSUME", "SOURCE", "REFERENCE" },
       },
       QUESTION = {
         icon = " ",
@@ -43,6 +43,7 @@ return function()
         alt = {
           "CHECK",
           "READ",
+          "WATCH",
           "LOOK",
           "REVIEW",
           "HERE",
@@ -53,6 +54,7 @@ return function()
           "IMPORTANT",
           "BIG",
           "EXTENSION",
+          "LINK",
         },
       },
     },

@@ -1,9 +1,14 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
+-- TODO: update all language servers
 
 local M = {}
 
-local ok, aerial = pcall(require, "aerial")
-local default_on_attach = require("utils").ternary(ok, aerial.on_attach, function() end)
+local default_on_attach = function(client, bufnr)
+  -- NOTE: this additional check stops sumneko_lua from complaining during PackerCompile
+  if client.resolved_capabilities.documentSymbol then
+    require("aerial").on_attach(client, bufnr)
+  end
+end
 
 -- jdtls setup
 local java_bundles = {

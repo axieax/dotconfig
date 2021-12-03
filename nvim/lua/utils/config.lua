@@ -88,10 +88,10 @@ M.prepared_parsers = {
 -- Icons
 M.lsp_diagnostics_icons = {
   Error = "",
-  Warning = "",
+  Warn = "",
   Hint = "",
   -- Hint = "",
-  Information = "",
+  Info = "",
   VirtualText = "",
 }
 

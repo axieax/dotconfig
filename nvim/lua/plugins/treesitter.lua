@@ -108,6 +108,7 @@ return function()
     -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
     context_commentstring = {
       enable = true,
+      enable_autocmd = false, -- for Comment.nvim integration
     },
   })
 

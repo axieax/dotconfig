@@ -174,7 +174,7 @@ function M.which_key()
         t = { "<CMD>lua vim.lsp.buf.type_definition()<CR>", "show type definition" },
         s = { "<CMD>Telescope lsp_document_symbols<CR>", "show document symbols" },
         S = { "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", "show dynamic workspace symbols" },
-        R = { require("lsp.rename").rename, "rename symbol" },
+        R = { vim.lsp.buf.rename, "rename symbol" },
         f = { "<CMD>gf<CR>", "goto file" },
         F = { "<CMD>gF<CR>", "goto file (with line number)" },
         l = { "<CMD>Trouble lsp_document_diagnostics<CR>", "show document diagnostics" },
@@ -215,7 +215,7 @@ function M.which_key()
         -- TODO: grep_string
       },
       r = {
-        n = { require("lsp.rename").rename, "rename symbol" },
+        n = { vim.lsp.buf.rename, "rename symbol" },
         r = { "<CMD>FloatermNew lazydocker<CR>", "lazydocker" },
         -- BUG: the following places an extra character in the buffer (replace)
         -- f = { "<CMD>luafile %<CR>" },

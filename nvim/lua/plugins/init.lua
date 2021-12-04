@@ -617,9 +617,10 @@ return require("packer").startup({
     })
 
     -- Commenting
-    -- ALT: https://github.com/numToStr/Comment.nvim with TS support
-    -- ALT: https://github.com/b3nj5m1n/kommentary ?
-    use("tpope/vim-commentary")
+    use({
+      "numToStr/Comment.nvim",
+      config = require("plugins.comment"),
+    })
 
     -- Better commentstring (for vim-commentary)
     use({

@@ -48,9 +48,10 @@ function M.code_action()
   if ft == "java" then
     require("jdtls").code_action()
   else
-    -- require("telescope.builtin").lsp_code_actions()
+    require("telescope.builtin").lsp_code_actions()
+    -- TEMP: https://github.com/weilbith/nvim-code-action-menu/issues/32
     -- require("code_action_menu").open_code_action_menu()
-    vim.cmd("CodeActionMenu")
+    -- vim.cmd("CodeActionMenu")
   end
 end
 

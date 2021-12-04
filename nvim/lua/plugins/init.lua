@@ -340,6 +340,7 @@ return require("packer").startup({
           render = "minimal",
           on_open = function(win)
             -- transparent background
+            -- https://github.com/rcarriga/nvim-notify/issues/16
             -- vim.api.nvim_win_set_option(win, "winblend", 25)
             -- vim.api.nvim_win_set_config(win, { zindex = 100 })
           end,

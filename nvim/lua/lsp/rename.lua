@@ -75,8 +75,6 @@ function M.notify_handler(result)
   end
 
   -- set qflist
-  print("changes:")
-  print(vim.inspect(changes))
   M.set_qflist(changes)
 end
 

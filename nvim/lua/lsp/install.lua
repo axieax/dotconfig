@@ -35,10 +35,7 @@ function M.ls_overrides()
     },
     -- java: jdtls
     jdtls = {
-      init_options = {
-        bundles = java_bundles,
-        -- extendedClientCapabilities = extendedClientCapabilities,
-      },
+      init_options = { bundles = java_bundles },
       filetypes = { "java" },
       cmd = {
         "java",
@@ -85,7 +82,6 @@ function M.ls_overrides()
           includeInlayEnumMemberValueHints = true,
         },
       },
-
       on_attach = function(client, bufnr)
         default_on_attach(client, bufnr)
 
@@ -120,12 +116,12 @@ function M.ls_overrides()
       end,
     },
     -- haskell = {
-    -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/hls.lua
-    -- root_dir = lsp_utils.root_pattern('*.cabal', 'stack.yaml', 'cabal.project', 'package.yaml', 'hie.yaml', '.git'),
-    -- root_dir = function(fname)
-    -- 	return lsp_utils.root_pattern('*.cabal', 'stack.yaml', 'cabal.project', 'package.yaml', 'hie.yaml')(fname)
-    -- 	or vim.fn.getcwd()
-    -- end,
+    --   -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/hls.lua
+    --   root_dir = lsp_utils.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
+    --   root_dir = function(fname)
+    --     return lsp_utils.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")(fname)
+    --       or vim.fn.getcwd()
+    --   end,
     -- },
     -- Source: https://github.com/williamboman/nvim-lsp-installer/tree/main/lua/nvim-lsp-installer/servers/eslint
     -- eslint = {
@@ -210,7 +206,9 @@ end
 
 -- Setup jdtls language server for java files
 function M.setup_jdtls()
-  require("jdtls").start_or_attach(M.ls_overrides().jdtls)
+  local ls_overrides = M.ls_overrides()
+  local opts = vim.tbl_extend("keep", ls_overrides.jdtls, ls_overrides.default)
+  require("jdtls").start_or_attach(opts)
 end
 
 function M.setup()

@@ -274,6 +274,8 @@ function M.which_key()
     },
     [","] = {
       p = { "<CMD>PasteImg<CR>", "Paste image" },
+      o = { "<CMD>Glow<CR>", "Markdown preview (glow)" },
+      O = { "<CMD>MarkdownPreview<CR>", "Markdown preview (browser)" },
     },
   })
 end

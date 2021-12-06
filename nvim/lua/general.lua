@@ -90,16 +90,8 @@ vim_apply(vim.g, {
   netrw_altv = true, -- opens vsplit to right
 })
 
--- netrw open (link) with gx
-local viewer, yank_register = "open", "*"
-if vim.loop.os_uname().sysname == "Linux" then
-  viewer, yank_register = "xdg-open", "+"
-end
-map({ "n", "gx", "<CMD>execute 'silent! !" .. viewer .. " ' . shellescape(expand('<cfile>'), 1)<CR>" })
--- HACK: need to get_visual_selection for visual binding
-map({ "v", "gx", "<CMD>execute 'silent! !" .. viewer .. " ' . shellescape(expand('<cfile>'), 1)<CR>" })
-
 -- Clipboard yank
+local yank_register = require("utils").ternary(vim.loop.os_uname().sysname == "Linux", "+", "*")
 map({ "n", "\\y", '"' .. yank_register .. "y", noremap = false })
 map({ "v", "\\y", '"' .. yank_register .. "y", noremap = false })
 

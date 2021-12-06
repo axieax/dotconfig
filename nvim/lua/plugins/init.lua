@@ -12,6 +12,7 @@
 -- IMPORTANT: separate which-key bindings
 -- IMPORTANT: lsp bindings on_attach
 -- IMPORTANT: nvim-lsp-ts-utils with lsp code actions, eslint ls?
+-- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n next note / todo
 -- TODO: Telescope picker for LSP commands
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
@@ -26,7 +27,7 @@
 -- Automatic lspinstall and treesitter parsers
 -- Add auto packer clean, install, compile under autoinstall packer
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
--- Merge conflict resolver (like vscode)
+-- Merge conflict resolver (like vscode) - fugitive has this
 -- Cursor hover lsp hover or line diagnostic?
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
@@ -37,6 +38,10 @@
 -- Git diff preview https://github.com/sindrets/diffview.nvim
 -- TODO-COMMMENTS: go to next TODO-mark e.g. ]b?
 -- https://github.com/stevearc/stickybuf.nvim
+-- Comment nvim block mode uncomment within block
+-- Material nvim todo-comment 0.6 highlights
+-- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
+-- https://github.com/hrsh7th/nvim-cmp/issues/611
 --]]
 
 --[[ Features/plugins
@@ -52,7 +57,6 @@
 -- Set up quick compiler
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
 -- https://github.com/ThePrimeagen/refactoring.nvim
--- Markdown preview - ellisonleao/glow.nvim, iamcco/markdown-preview.nvim
 -- Markdown continue list on next line
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
@@ -673,6 +677,19 @@ return require("packer").startup({
       opt = true,
       cmd = { "PasteImg" },
       config = require("plugins.pasteimage"),
+    })
+
+    -- Markdown preview
+    use({
+      "iamcco/markdown-preview.nvim",
+      run = ":call mkdp#util#install()",
+      ft = { "markdown" },
+    })
+
+    use({
+      "ellisonleao/glow.nvim",
+      opt = true,
+      cmd = { "Glow", "GlowInstall" },
     })
 
     ---------------------------------

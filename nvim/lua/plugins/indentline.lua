@@ -38,6 +38,7 @@ return function()
       "help",
       "floaterm",
       "toggleterm",
+      "glowpreview",
     },
   })
 

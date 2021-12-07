@@ -79,6 +79,9 @@
 -- https://github.com/lewis6991/impatient.nvim
 -- https://github.com/VonHeikemen/fine-cmdline.nvim
 -- Themes: try sonokai and monokai
+-- Telescope frecency, smart-history
+-- NOTE: rust-tools not setup yet (lsp-installer integration)
+-- Rust run/debug code-lens not working
 --]]
 
 --[[ Notes
@@ -236,6 +239,7 @@ return require("packer").startup({
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-dap.nvim" },
         { "nvim-telescope/telescope-media-files.nvim" },
+        { "ahmedkhalf/project.nvim" },
         -- { "nvim-telescope/telescope-node-modules.nvim" },
         { "mfussenegger/nvim-dap" },
         { "AckslD/nvim-neoclip.lua" },
@@ -532,8 +536,12 @@ return require("packer").startup({
     -----------------------------
 
     -- Project scope
-    -- ALT: https://github.com/ahmedkhalf/project.nvim and its support for non-LSP projects?
-    use("airblade/vim-rooter")
+    use({
+      "ahmedkhalf/project.nvim",
+      config = function()
+        require("project_nvim").setup({})
+      end,
+    })
 
     -- Project settings
     use("tpope/vim-sleuth")
@@ -759,6 +767,20 @@ return require("packer").startup({
 
     -- Java LSP
     use("mfussenegger/nvim-jdtls")
+
+    -- Rust tools
+    -- TODO: setup
+    use({
+      "simrat39/rust-tools.nvim",
+      disable = true,
+      requires = {
+        "neovim/nvim-lspconfig",
+        "nvim-lua/popup.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+        "mfussenegger/nvim-dap",
+      },
+    })
 
     -- LSP diagnostics toggle
     use({

@@ -16,6 +16,7 @@ return function()
       img_name = request_img_name,
     },
     markdown = {
+      -- img_dir = { relative_dir, "images" }, -- relative to current buffer file
       img_dir = relative_dir .. "/images", -- relative to current buffer file
     },
   })

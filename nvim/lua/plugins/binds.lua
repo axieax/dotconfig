@@ -207,6 +207,7 @@ function M.which_key()
         q = { "<CMD>TodoTrouble<CR>", "find todos (Trouble)" },
         Q = { "<CMD>TodoTelescope<CR>", "find todos (Telescope)" },
         p = { "<CMD>Telescope media_files<CR>", "media files" },
+        P = { "<CMD>Telescope projects<CR>", "recent projects" },
         y = { "<CMD>Telescope neoclip<CR>", "yank clipboard manager" },
         ["?"] = { require("telescope.builtin").commands, "commands" },
         ["/"] = { "<CMD>Telescope search_history<CR>", "search history" },

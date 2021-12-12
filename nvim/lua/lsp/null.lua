@@ -8,7 +8,6 @@ function M.formatting_sources()
     null_ls.builtins.formatting.stylua,
     -- PYTHON: pip install black
     null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.brittany,
     -- C*: yarn global add clang_format
     null_ls.builtins.formatting.clang_format.with({
       disabled_filtypes = { "java" },
@@ -68,7 +67,9 @@ function M.diagnostic_sources()
     -- GCC: yay -S gccdiag
     null_ls.builtins.diagnostics.gccdiag,
     -- ESLINT: yarn global add eslint_d
-    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.diagnostics.eslint_d.with({
+      cwd = vim.loop.cwd,
+    }),
   }
 end
 
@@ -76,6 +77,15 @@ function M.code_action_sources()
   local null_ls = require("null-ls")
   return {
     null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.code_actions.refactoring,
+  }
+end
+
+function M.hover_sources()
+  local null_ls = require("null-ls")
+  return {
+    null_ls.builtins.hover.dictionary,
   }
 end
 
@@ -85,6 +95,7 @@ function M.setup()
     require("lsp.null").formatting_sources(),
     require("lsp.null").diagnostic_sources(),
     require("lsp.null").code_action_sources(),
+    require("lsp.null").hover_sources(),
   }
   for _, type in ipairs(types) do
     for _, source in ipairs(type) do

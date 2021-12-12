@@ -783,6 +783,13 @@ return require("packer").startup({
       requires = {
         "nvim-lua/plenary.nvim",
         "neovim/nvim-lspconfig",
+        {
+          "ThePrimeagen/refactoring.nvim",
+          requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+          },
+        },
       },
       config = require("lsp.null").setup,
     })

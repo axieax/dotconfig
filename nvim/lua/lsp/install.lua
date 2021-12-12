@@ -13,6 +13,12 @@ local default_on_attach = function(client, bufnr)
   print(client.resolved_capabilities.document_range_formatting)
 end
 
+local default_on_attach_no_formatting = function(client, bufnr)
+  default_on_attach(client, bufnr)
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+end
+
 -- jdtls setup
 local java_bundles = {
   vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
@@ -59,7 +65,7 @@ function M.ls_overrides()
         "--add-opens java.base/java.lang=ALL-UNNAMED",
       },
       on_attach = function(client, bufnr)
-        default_on_attach(client, bufnr)
+        default_on_attach_no_formatting(client, bufnr)
 
         -- Java extensions setup
         -- https://github.com/microsoft/java-debug
@@ -70,10 +76,6 @@ function M.ls_overrides()
 
         -- Telescope for UI picker (Neovim < 0.6)
         require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker
-
-        -- Prefer null-ls for formatting
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
       end,
     },
     tsserver = {
@@ -90,11 +92,7 @@ function M.ls_overrides()
         },
       },
       on_attach = function(client, bufnr)
-        default_on_attach(client, bufnr)
-
-        -- prefer null-ls for formatting
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        default_on_attach_no_formatting(client, bufnr)
 
         local ts_utils = require("nvim-lsp-ts-utils")
         ts_utils.setup({
@@ -131,16 +129,6 @@ function M.ls_overrides()
     --       or vim.fn.getcwd()
     --   end,
     -- },
-    -- Source: https://github.com/williamboman/nvim-lsp-installer/tree/main/lua/nvim-lsp-installer/servers/eslint
-    -- eslint = {
-    --   on_attach = function(client, bufnr)
-    --     default_on_attach(client, bufnr)
-    --     client.resolved_capabilities.document_formatting = true
-    --   end,
-    --   settings = {
-    --     format = { enable = true },
-    --   },
-    -- },
     -- emmet_ls = {
     --   -- NOTE: doesn't work with jsx
     --   filetypes = {
@@ -161,6 +149,7 @@ function M.ls_overrides()
           schemas = require("schemastore").json.schemas(),
         },
       },
+      on_attach = default_on_attach_no_formatting,
     },
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),

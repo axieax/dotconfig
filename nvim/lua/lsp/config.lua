@@ -25,4 +25,9 @@ return function()
     underline = true,
     update_in_insert = true,
   })
+
+  -- Diagnostic source
+  vim.diagnostic.config({
+    float = { source = "always" },
+  })
 end

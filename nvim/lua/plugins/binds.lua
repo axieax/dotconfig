@@ -97,6 +97,7 @@ end
 function M.misc()
   -- LSP
   map({ "n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>" })
+  map({ "v", "gq", ":lua require'plugins.telescope'.code_action()<CR>" })
   -- Telescope
   map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
   -- NvimTree
@@ -207,14 +208,13 @@ function M.which_key()
         k = { require("telescope.builtin").keymaps, "find keymaps" },
         q = { "<CMD>TodoTrouble<CR>", "find todos (Trouble)" },
         Q = { "<CMD>TodoTelescope<CR>", "find todos (Telescope)" },
-        p = { require("telescope.builtin").media_files, "media files" },
-        P = { require("telescope.builtin").projects, "recent projects" },
-        y = { require("telescope.builtin").neoclip, "yank clipboard manager" },
+        p = { "<CMD>Telescope media_files<CR>", "media files" },
+        P = { "<CMD>Telescope projects<CR>", "recent projects" },
+        y = { "<CMD>Telescope neoclip<CR>", "yank clipboard manager" },
         ["?"] = { require("telescope.builtin").commands, "commands" },
         ["/"] = { require("telescope.builtin").search_history, "search history" },
         [";"] = { require("telescope.builtin").command_history, "command history" },
         ["."] = { require("telescope.builtin").resume, "resume last command" },
-        -- TODO: grep_string
       },
       r = {
         n = { vim.lsp.buf.rename, "rename symbol" },
@@ -258,7 +258,7 @@ function M.which_key()
       K = { vim.diagnostic.open_float, "Show line diagnostics" },
       l = { "<CMD>Trouble lsp_document_diagnostics<CR>", "Show document diagnostics" },
       L = { "<CMD>Trouble lsp_workspace_diagnostics<CR>", "Show workspace diagnostics" },
-      q = { "<CMD>lua require('plugins.telescope').code_action()<CR>", "Code actions" },
+      q = { require("plugins.telescope").code_action, "Code actions" },
       d = { require("telescope.builtin").lsp_definitions, "Goto definition" },
       D = { "<CMD>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
       r = { require("telescope.builtin").lsp_references, "References" },

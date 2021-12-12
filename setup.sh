@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p ~/.config
+
 # Stylua config
 ln -s ~/dotconfig/stylua.toml ~/.config/stylua.toml
 

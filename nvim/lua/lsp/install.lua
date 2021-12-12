@@ -8,6 +8,9 @@ local default_on_attach = function(client, bufnr)
   if client.resolved_capabilities.documentSymbol then
     require("aerial").on_attach(client, bufnr)
   end
+  print(client.name)
+  print(client.resolved_capabilities.document_formatting)
+  print(client.resolved_capabilities.document_range_formatting)
 end
 
 -- jdtls setup
@@ -22,7 +25,7 @@ local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 function M.ls_overrides()
   return {
-    -- lua: sumneko_lua
+    -- LUA: sumneko_lua
     sumneko_lua = {
       settings = {
         Lua = {
@@ -33,7 +36,7 @@ function M.ls_overrides()
         },
       },
     },
-    -- java: jdtls
+    -- JAVA: jdtls
     jdtls = {
       init_options = { bundles = java_bundles },
       filetypes = { "java" },
@@ -67,6 +70,10 @@ function M.ls_overrides()
 
         -- Telescope for UI picker (Neovim < 0.6)
         require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker
+
+        -- Prefer null-ls for formatting
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
       end,
     },
     tsserver = {
@@ -85,7 +92,7 @@ function M.ls_overrides()
       on_attach = function(client, bufnr)
         default_on_attach(client, bufnr)
 
-        -- disable formatting
+        -- prefer null-ls for formatting
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
 
@@ -105,6 +112,7 @@ function M.ls_overrides()
         ts_utils.setup_client(client)
 
         -- toggle inlay hints
+        -- TODO: extract to utils
         local ok, wk = pcall(require, "which-key")
         if ok then
           wk.register({

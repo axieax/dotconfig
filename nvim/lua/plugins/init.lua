@@ -7,16 +7,18 @@
 --]]
 
 --[[ TODO
--- PRIORITY: formatter.nvim -> null-ls (with https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils) - prettierd, eslint?
+-- PRIORITY: Finish setting up null-ls (haskell-brittany?)
 -- PRIORITY: orgmode / neorg / vimwiki
 -- IMPORTANT: separate which-key bindings
 -- IMPORTANT: lsp bindings on_attach
 -- IMPORTANT: nvim-lsp-ts-utils with lsp code actions, eslint ls?
+-- IMPORTANT: Nvim-comment gcgc like vim-commentary
 -- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n next note / todo
 -- TODO: Telescope picker for LSP commands
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
 -- TODO: gradle plugin
+-- TODO: lazy load with event = "BufWinEnter"? https://youtu.be/JPEx2kI6pfo
 -- Update lsp config for installation
 -- Use eslint LSP instead of eslint_d
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
@@ -45,7 +47,6 @@
 --]]
 
 --[[ Features/plugins
--- Slow Prettier
 -- Markdown issues - code block cindent, no auto list formatoptions
 -- Coverage
 -- Faded unused variables/imports?
@@ -617,12 +618,6 @@ return require("packer").startup({
     -- ALT: https://github.com/michaelb/sniprun
     use("metakirby5/codi.vim")
 
-    -- Code formatter
-    use({
-      "mhartington/formatter.nvim",
-      config = require("lsp.formatter"),
-    })
-
     -- Align lines by character
     use({
       "godlygeek/tabular",
@@ -780,6 +775,16 @@ return require("packer").startup({
         "nvim-telescope/telescope.nvim",
         "mfussenegger/nvim-dap",
       },
+    })
+
+    -- LSP diagnostics, code actions, formatting extensions
+    use({
+      "jose-elias-alvarez/null-ls.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "neovim/nvim-lspconfig",
+      },
+      config = require("lsp.null").setup,
     })
 
     -- LSP diagnostics toggle

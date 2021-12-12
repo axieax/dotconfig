@@ -1,5 +1,5 @@
 -- Helper functions
--- TODO: augroup, apply highlight group
+-- TODO: augroup (https://github.com/kazhala/dotfiles/blob/master/.config/nvim/lua/kaz/utils/au.lua), apply highlight group
 local M = {}
 
 -- Applies options to a meta-accessor

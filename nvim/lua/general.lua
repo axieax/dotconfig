@@ -113,6 +113,10 @@ augroup END
 -- Update (instead of write)
 map({ "n", "<space>w", "<CMD>up<CR>" })
 
+-- No autoformat write
+vim.cmd("command! W :noautocmd w")
+vim.cmd("command! Wq :noautocmd wq")
+
 -- Disable automatic comment insertion
 -- TODO: shift CR continue comment, regular CR won't
 vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
@@ -123,3 +127,7 @@ map({ "n", "n", "nzz" })
 
 -- ftplugin
 vim.cmd("filetype plugin on")
+
+-- Terraform filetype
+vim.cmd("au BufEnter *.tf,*.tfvars,*.hcl,*.terraformrc,*.terraform.rc set filetype=terraform")
+vim.cmd("au BufEnter *.tfstate set filetype=json")

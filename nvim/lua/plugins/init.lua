@@ -9,22 +9,18 @@
 --[[ TODO
 -- PRIORITY: Finish setting up null-ls (haskell-brittany?)
 -- PRIORITY: orgmode / neorg / vimwiki
--- IMPORTANT: separate which-key bindings
--- IMPORTANT: lsp bindings on_attach
--- IMPORTANT: nvim-lsp-ts-utils with lsp code actions, eslint ls?
+-- IMPORTANT: group which-key bindings
+-- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: Nvim-comment gcgc like vim-commentary
 -- TODO: use vim-fugitive instead of gitlinker?
--- TODO: ]n next note / todo
+-- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
 -- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
 -- TODO: gradle plugin
 -- TODO: lazy load with event = "BufWinEnter"? https://youtu.be/JPEx2kI6pfo
 -- Update lsp config for installation
--- Use eslint LSP instead of eslint_d
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
--- Set up linter? (efm, ale, nvim-lint, coc?)
--- https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 -- Set up snippets (custom and emmet)
 -- Automatic lspinstall and treesitter parsers
 -- Add auto packer clean, install, compile under autoinstall packer
@@ -38,7 +34,6 @@
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 -- Git diff preview https://github.com/sindrets/diffview.nvim
--- TODO-COMMMENTS: go to next TODO-mark e.g. ]b?
 -- https://github.com/stevearc/stickybuf.nvim
 -- Comment nvim block mode uncomment within block
 -- Material nvim todo-comment 0.6 highlights
@@ -57,7 +52,6 @@
 -- Markdown HTML Treesitter highlighting + Autotag support
 -- Set up quick compiler
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
--- https://github.com/ThePrimeagen/refactoring.nvim
 -- Markdown continue list on next line
 -- Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 -- Telescope-cheat.nvim
@@ -92,6 +86,9 @@
 -- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
 -- Colorizer disabled on PackerCompile
+-- LSP format, autopairs may start to break after a while
+-- vim-mundo window maps
+-- floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --

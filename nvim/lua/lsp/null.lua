@@ -18,7 +18,6 @@ function M.formatting_sources()
     }),
     -- PRETTIER: yarn global add @fsouza/prettierd
     null_ls.builtins.formatting.prettierd.with({
-      -- TODO: filetypes all?
       filetypes = {
         "javascript",
         "javascriptreact",
@@ -65,11 +64,7 @@ function M.diagnostic_sources()
     -- PYTHON: pip install pylint
     null_ls.builtins.diagnostics.pylint,
     -- GCC: yay -S gccdiag
-    null_ls.builtins.diagnostics.gccdiag,
-    -- ESLINT: yarn global add eslint_d
-    null_ls.builtins.diagnostics.eslint_d.with({
-      cwd = vim.loop.cwd,
-    }),
+    -- null_ls.builtins.diagnostics.gccdiag,
   }
 end
 
@@ -77,7 +72,6 @@ function M.code_action_sources()
   local null_ls = require("null-ls")
   return {
     null_ls.builtins.code_actions.gitsigns,
-    null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.refactoring,
   }
 end

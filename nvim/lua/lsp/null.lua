@@ -84,25 +84,18 @@ function M.hover_sources()
 end
 
 function M.setup()
-  local sources = {}
-  local types = {
+  -- Combine sources
+  local sources = require("utils").list_flatten_once({
     require("lsp.null").formatting_sources(),
     require("lsp.null").diagnostic_sources(),
     require("lsp.null").code_action_sources(),
     require("lsp.null").hover_sources(),
-  }
-  for _, type in ipairs(types) do
-    for _, source in ipairs(type) do
-      table.insert(sources, source)
-    end
-  end
-  require("null-ls").config({ sources = sources })
-  require("lspconfig")["null-ls"].setup({
-    on_attach = function(client)
-      if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-      end
-    end,
+  })
+
+  -- Setup null-ls
+  require("null-ls").setup({
+    sources = sources,
+    on_attach = require("lsp.install").default_on_attach,
   })
 end
 

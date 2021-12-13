@@ -3,18 +3,28 @@
 
 local M = {}
 
-local default_on_attach = function(client, bufnr)
+function M.default_on_attach(client, bufnr)
   -- NOTE: this additional check stops sumneko_lua from complaining during PackerCompile
   if client.resolved_capabilities.documentSymbol then
     require("aerial").on_attach(client, bufnr)
   end
-  print(client.name)
-  print(client.resolved_capabilities.document_formatting)
-  print(client.resolved_capabilities.document_range_formatting)
+  -- Auto format
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
+  local ternary = require("utils").ternary
+  print(
+    string.format(
+      "%s: %s document formatting %s document range formatting",
+      client.name,
+      ternary(client.resolved_capabilities.document_formatting, "✔", "✗"),
+      ternary(client.resolved_capabilities.document_range_formatting, "✔", "✗")
+    )
+  )
 end
 
-local default_on_attach_no_formatting = function(client, bufnr)
-  default_on_attach(client, bufnr)
+function M.default_on_attach_no_formatting(client, bufnr)
+  M.default_on_attach(client, bufnr)
   client.resolved_capabilities.document_formatting = false
   client.resolved_capabilities.document_range_formatting = false
 end
@@ -65,17 +75,17 @@ function M.ls_overrides()
         "--add-opens java.base/java.lang=ALL-UNNAMED",
       },
       on_attach = function(client, bufnr)
-        default_on_attach_no_formatting(client, bufnr)
+        M.default_on_attach_no_formatting(client, bufnr)
 
         -- Java extensions setup
         -- https://github.com/microsoft/java-debug
         -- https://github.com/microsoft/vscode-java-test
-        require("jdtls.setup").add_commands()
         require("jdtls").setup_dap({ hotcodereplace = "auto" })
         require("jdtls.dap").setup_dap_main_class_configs()
+        require("jdtls.setup").add_commands()
 
         -- Telescope for UI picker (Neovim < 0.6)
-        require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker
+        -- require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker
       end,
     },
     tsserver = {
@@ -92,7 +102,7 @@ function M.ls_overrides()
         },
       },
       on_attach = function(client, bufnr)
-        default_on_attach_no_formatting(client, bufnr)
+        M.default_on_attach_no_formatting(client, bufnr)
 
         local ts_utils = require("nvim-lsp-ts-utils")
         ts_utils.setup({
@@ -149,11 +159,11 @@ function M.ls_overrides()
           schemas = require("schemastore").json.schemas(),
         },
       },
-      on_attach = default_on_attach_no_formatting,
+      on_attach = M.default_on_attach_no_formatting,
     },
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      on_attach = default_on_attach,
+      on_attach = M.default_on_attach,
       handlers = {
         ["textDocument/rename"] = require("lsp.rename").rename_handler,
       },

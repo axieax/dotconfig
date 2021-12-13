@@ -162,7 +162,7 @@ function M.which_key()
         p = { "<CMD>UltestOutput<CR>", "Ultest output" },
         [";"] = { "<CMD>lua require'lsp.test'.custom_test_summary()<CR>", "Test summary" },
         v = { "<CMD>TestVisit<CR>", "Test visit" },
-        m = { "<CMD>lua require'lsp.test'.custom_test_method()<CR>", "Test method" },
+        m = { require'lsp.test'.custom_test_method, "Test method" },
         c = { "<CMD>lua require'lsp.test'.custom_test_class()<CR>", "Test class" },
       },
       l = {

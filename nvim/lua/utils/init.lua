@@ -112,4 +112,15 @@ function M.toggle_signcolumn()
   signcolumn_enabled = not signcolumn_enabled
 end
 
+-- vim.tbl_flatten limited to only once (top-level)
+function M.list_flatten_once(list)
+  local result = {}
+  for _, t in ipairs(list) do
+    for _, v in ipairs(t) do
+      table.insert(result, v)
+    end
+  end
+  return result
+end
+
 return M

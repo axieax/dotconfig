@@ -8,16 +8,15 @@
 
 --[[ TODO
 -- PRIORITY: Finish setting up null-ls (haskell-brittany?)
--- PRIORITY: orgmode / neorg / vimwiki
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
--- IMPORTANT: Nvim-comment gcgc like vim-commentary
+-- IMPORTANT: util map function use which-key (pcall)
+-- IMPORTANT: uncomment adjacent lines
+-- IMPORTANT: set up toggleterm
+-- IMPORTANT: replace dashboard
 -- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
--- TODO: find another terminal (float/horizontal) plugin, make sure it autoresizes
--- TODO: gradle plugin
--- TODO: lazy load with event = "BufWinEnter"? https://youtu.be/JPEx2kI6pfo
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -30,26 +29,24 @@
 -- nvim cmp dadbod source
 -- nvim cmp tzachar/cmp-fzy-buffer?
 -- Plugin and config split into separate modules?
--- TODO list (put on dashboard) - neorg vs vimwiki vs orgmode.nvim?
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 -- Git diff preview https://github.com/sindrets/diffview.nvim
 -- https://github.com/stevearc/stickybuf.nvim
--- Comment nvim block mode uncomment within block
 -- Material nvim todo-comment 0.6 highlights
--- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
--- https://github.com/hrsh7th/nvim-cmp/issues/611
 --]]
 
 --[[ Features/plugins
--- Markdown issues - code block cindent, no auto list formatoptions
+-- Terminal (float/horizontal) which autosizes
 -- Coverage
+-- Gradle
 -- Faded unused variables/imports?
--- Lazy loading
--- Gradual undo
--- Autosave and swapfiles?
+-- Lazy loading (event = "BufWinEnter"?) https://youtu.be/JPEx2kI6pfo
+-- Emmet support for jsx/tsx
 -- Emmet / autoclose HTML
+-- Gradual undo
 -- Markdown HTML Treesitter highlighting + Autotag support
+-- Autosave and swapfiles?
 -- Set up quick compiler
 -- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
 -- Markdown continue list on next line
@@ -58,7 +55,6 @@
 -- mrjones2014/dash.nvim for linux?
 -- https://github.com/zim0369/butcher string to array
 -- https://github.com/ripxorip/aerojump.nvim
--- orgmode.nvim
 -- bufferline.nvim or cokeline.nvim instead of barbar?
 -- windline instead of galaxyline (deprecated)
 -- nvimtree config migration
@@ -79,7 +75,10 @@
 -- Rust run/debug code-lens not working
 --]]
 
---[[ Notes
+--[[ Notes / issues
+-- Markdown issues - code block cindent, no auto list formatoptions
+-- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
+-- https://github.com/hrsh7th/nvim-cmp/issues/611
 -- inccommand split preview-window scroll
 -- nvim-cmp treesitter completion source vs buffer source?
 -- Opening buffer for file (nvim-tree) replaces barbar buffers
@@ -305,6 +304,28 @@ return require("packer").startup({
     use({
       "glepnir/dashboard-nvim",
       config = require("plugins.dashboard"),
+    })
+
+    -- Emacs Orgmode
+    -- ALT: vimwiki (more for notes/diary), neorg (too different from md)
+    -- NOTE: https://github.com/nvim-orgmode/orgmode/blob/master/DOCS.md#getting-started-with-orgmode
+    use({
+      "nvim-orgmode/orgmode",
+      requires = {
+        "nvim-treesitter/nvim-treesitter",
+        "akinsho/org-bullets.nvim",
+      },
+      config = function()
+        require("orgmode").setup({
+          org_agenda_file = { "~/wiki/**" },
+          mappings = {
+            global = {
+              org_agenda = "<space>oa",
+              org_capture = "<space>oc",
+            },
+          },
+        })
+      end,
     })
 
     -- Zen mode
@@ -622,6 +643,8 @@ return require("packer").startup({
     })
 
     -- Commenting
+    -- NOTE: missing uncomment adjacent (gcgc, gcu)
+    -- https://github.com/numToStr/Comment.nvim/issues/22
     use({
       "numToStr/Comment.nvim",
       config = require("plugins.comment"),
@@ -650,6 +673,10 @@ return require("packer").startup({
     use({
       "kkoomen/vim-doge",
       run = ":call doge#install()",
+      config = function()
+        -- disable default mapping
+        vim.g.doge_mapping = ""
+      end,
     })
 
     -- Autoclose and autorename html tag
@@ -697,6 +724,8 @@ return require("packer").startup({
     ---------------------------------
 
     -- Code runner
+    -- NOTE: doesn't support many languages, nor REPL mode
+    -- ALT: https://github.com/michaelb/sniprun (full file support?)
     use({
       "arjunmahishi/run-code.nvim",
       config = function()
@@ -843,7 +872,7 @@ return require("packer").startup({
         { "hrsh7th/cmp-emoji" },
         { "hrsh7th/cmp-cmdline" },
         { "f3fora/cmp-spell" },
-        { "kdheepak/cmp-latex-symbols", opt = true }, -- TODO: specify opt condition
+        { "kdheepak/cmp-latex-symbols" }, -- TODO: lazy load
         { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
         { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
         -- { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },

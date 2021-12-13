@@ -48,6 +48,7 @@ function M.map(bind)
   if buffer then
     vim.api.nvim_buf_set_keymap(0, mode, before, after, opts)
   else
+    -- TODO: try which-key
     vim.api.nvim_set_keymap(mode, before, after, opts)
   end
 end

@@ -162,7 +162,7 @@ function M.which_key()
         p = { "<CMD>UltestOutput<CR>", "Ultest output" },
         [";"] = { "<CMD>lua require'lsp.test'.custom_test_summary()<CR>", "Test summary" },
         v = { "<CMD>TestVisit<CR>", "Test visit" },
-        m = { require'lsp.test'.custom_test_method, "Test method" },
+        m = { require("lsp.test").custom_test_method, "Test method" },
         c = { "<CMD>lua require'lsp.test'.custom_test_class()<CR>", "Test class" },
       },
       l = {
@@ -222,6 +222,11 @@ function M.which_key()
         -- BUG: the following places an extra character in the buffer (replace)
         -- f = { "<CMD>luafile %<CR>" },
         -- F = { "<CMD>source % | PackerCompile<CR>" },
+      },
+      o = {
+        q = { "<CMD>copen<CR>", "open qflist" },
+        Q = { "<CMD>Copen<CR>", "open qflist (vim-dispatch)" },
+        l = { "<CMD>lopen<CR>", "open loclist" },
       },
       s = { "<CMD>PackerSync<CR>", "Update Plugins" },
       S = { "<CMD>Dashboard<CR>", "Dashboard" },

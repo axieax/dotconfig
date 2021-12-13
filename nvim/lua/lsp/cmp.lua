@@ -29,6 +29,7 @@ return function()
     npm = { label = "[NPM]" },
     cmp_git = { label = "[Git]" },
     cmdline = { label = "[Cmd]" },
+    orgmode = { label = "[Org]" },
     -- treesitter = "[TS]",
     -- ["vim-dadbod-completion"] = "[DB]",
   }

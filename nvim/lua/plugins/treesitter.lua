@@ -8,7 +8,8 @@ return function()
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = false,
+      disable = { "org" },
+      additional_vim_regex_highlighting = { "org" },
     },
     indent = {
       indent = true,
@@ -82,18 +83,6 @@ return function()
     -- https://github.com/windwp/nvim-ts-autotag
     autotag = {
       enable = true,
-      -- https://github.com/windwp/nvim-ts-autotag#default-values
-      -- NOTE: markdown doesn't have a TS parser
-      -- filetypes = {
-      --   "html",
-      --   "javascript",
-      --   "javascriptreact",
-      --   "typescriptreact",
-      --   "svelte",
-      --   "vue",
-      --   "markdown",
-      --   "md",
-      -- },
     },
 
     -- Coloured Brackets
@@ -123,38 +112,15 @@ return function()
     foldenable = false, -- don't fold by default
   })
 
-  -- select previous / next parameter
-  -- NOTE: python default ftplugin has keymap conflicts
-  -- local map = require("utils").map
-  -- map({ "n", "[[", "[[viq", noremap = false })
-  -- map({ "n", "]]", "]]viq", noremap = false })
-
-  -- map({
-  --   "n",
-  --   "[[",
-  --   ":lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
-  --   noremap = false,
-  --   buffer = true,
-  -- })
-  -- map({
-  --   "v",
-  --   "[[",
-  --   "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_previous_end('@parameter.inner')<CR>viq",
-  --   noremap = false,
-  --   buffer = true,
-  -- })
-  -- map({
-  --   "n",
-  --   "]]",
-  --   ":lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
-  --   noremap = false,
-  --   buffer = true,
-  -- })
-  -- map({
-  --   "v",
-  --   "]]",
-  --   "<esc>:lua require'nvim-treesitter.textobjects.move'.goto_next_start('@parameter.inner')<CR>viq",
-  --   noremap = false,
-  --   buffer = true,
-  -- })
+  -- Orgmode.nvim integration
+  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+  parser_config.org = {
+    install_info = {
+      url = "https://github.com/milisims/tree-sitter-org",
+      revision = "f110024d539e676f25b72b7c80b0fd43c34264ef",
+      files = { "src/parser.c", "src/scanner.cc" },
+    },
+    filetype = "org",
+  }
+  require("nvim-treesitter.install").update("org")
 end

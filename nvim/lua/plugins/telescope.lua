@@ -1,11 +1,4 @@
--- NOTE: even .gitignore ignored now
 local M = {}
-
-local current_buffer = vim.api.nvim_buf_get_name(0)
-local is_directory = function(buf)
-  return vim.fn.isdirectory(buf) == 1
-end
-local cwd = vim.fn.getcwd()
 
 function M.file_search()
   -- Vim rooter sets Git project scope anyways
@@ -20,7 +13,9 @@ end
 -- current buffer points to if it is a directory
 -- NOTE: press <C-e> after query to create new file/directory
 function M.explorer()
-  if current_buffer and is_directory(current_buffer) then
+  local current_buffer = vim.api.nvim_buf_get_name(0)
+  local is_directory = vim.fn.isdirectory(current_buffer) == 1
+  if current_buffer and is_directory then
     require("telescope.builtin").file_browser({
       cwd = current_buffer,
       hidden = true,

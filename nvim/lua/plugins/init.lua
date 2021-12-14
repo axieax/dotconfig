@@ -4,6 +4,7 @@
 -- https://github.com/siduck76/NvChad theme
 -- https://bluz71.github.io/2021/09/10/vim-tips-revisited.html
 -- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/config/nvim/lua/plugins/init.lua
+-- TODO: https://github.com/numToStr/dotfiles/blob/master/neovim/.config/nvim/lua/numToStr/plugins.lua
 --]]
 
 --[[ TODO
@@ -17,6 +18,7 @@
 -- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
+-- TODO: null-ls on_attach disable formatting
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -236,6 +238,7 @@ return require("packer").startup({
       requires = {
         { "nvim-lua/plenary.nvim" },
         -- Extensions
+        { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-dap.nvim" },
         { "nvim-telescope/telescope-media-files.nvim" },
@@ -487,6 +490,7 @@ return require("packer").startup({
     use({
       "lukas-reineke/indent-blankline.nvim",
       requires = "nvim-treesitter/nvim-treesitter",
+      event = "BufRead",
       config = require("plugins.indentline"),
     })
 

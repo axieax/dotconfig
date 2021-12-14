@@ -27,8 +27,11 @@ function M.formatting_sources()
     null_ls.builtins.formatting.stylua,
     -- PYTHON: pip install black
     null_ls.builtins.formatting.black,
+    -- HASKELL: yay -S brittany
+    null_ls.builtins.formatting.brittany,
     -- C*: yarn global add clang_format
     null_ls.builtins.formatting.clang_format.with({
+      -- NOTE: disabled_filetypes still in this.filetypes
       disabled_filtypes = { "java" },
     }),
     -- MAKE: pip install cmakelang (~/.local/bin/cmake-format)

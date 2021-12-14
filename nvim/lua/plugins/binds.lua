@@ -188,6 +188,7 @@ function M.which_key()
       },
       f = {
         name = "+find",
+        a = { require("telescope.builtin").symbols, "find symbols" },
         b = { require("telescope.builtin").buffers, "search buffers" },
         c = { require("plugins.telescope").dotconfig, "search config" },
         e = { require("plugins.telescope").explorer, "file explorer" },

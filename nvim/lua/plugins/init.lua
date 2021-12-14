@@ -34,9 +34,12 @@
 -- Git diff preview https://github.com/sindrets/diffview.nvim
 -- https://github.com/stevearc/stickybuf.nvim
 -- Material nvim todo-comment 0.6 highlights
+-- TODO: lsp config separate into install, setup, utils
+-- https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
 --]]
 
 --[[ Features/plugins
+-- LSPCommands Telescope interface
 -- Terminal (float/horizontal) which autosizes
 -- Coverage
 -- Gradle

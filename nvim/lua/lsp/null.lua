@@ -19,6 +19,7 @@ function M.formatting_sources()
     -- PRETTIER: yarn global add @fsouza/prettierd
     null_ls.builtins.formatting.prettierd.with({
       filetypes = {
+        -- null_ls.builtins.formatting.prettierd.filetypes
         "javascript",
         "javascriptreact",
         "typescript",
@@ -65,6 +66,10 @@ function M.diagnostic_sources()
     null_ls.builtins.diagnostics.pylint,
     -- GCC: yay -S gccdiag
     -- null_ls.builtins.diagnostics.gccdiag,
+    -- LUA: cargo install selene
+    null_ls.builtins.diagnostics.selene.with({
+      extra_args = { "--config", vim.fn.expand("~/.config/selene.toml") },
+    }),
   }
 end
 

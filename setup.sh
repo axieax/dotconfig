@@ -1,9 +1,13 @@
 #!/bin/bash
+# TODO: add prompt for each section
 
 mkdir -p ~/.config
 
 # Stylua config
 ln -s ~/dotconfig/stylua.toml ~/.config/stylua.toml
+
+# Selene config
+ln -s ~/dotconfig/selene.toml ~/.config/selene.toml
 
 # need to install dependencies first
 

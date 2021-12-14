@@ -8,6 +8,7 @@ ln -s ~/dotconfig/stylua.toml ~/.config/stylua.toml
 
 # Selene config
 ln -s ~/dotconfig/selene.toml ~/.config/selene.toml
+ln -s ~/dotconfig/vim.toml ~/.config/vim.toml
 
 # need to install dependencies first
 

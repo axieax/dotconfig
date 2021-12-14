@@ -4,29 +4,32 @@
 local M = {}
 
 function M.default_on_attach(client, bufnr)
-  -- NOTE: this additional check stops sumneko_lua from complaining during PackerCompile
+  -- documentSymbol
   if client.resolved_capabilities.documentSymbol then
     require("aerial").on_attach(client, bufnr)
   end
-  -- Auto format
-  if client.resolved_capabilities.document_formatting then
+
+  -- documentFormatting
+  local name = client.name
+  print(name)
+  local is_null = name == "null-ls"
+  local ls_can_format = client.resolved_capabilities.document_formatting
+  print("ls_can_format", ls_can_format)
+  local null_can_format = require("lsp.null").use_null_formatting()
+  print("null_can_format", null_can_format)
+
+  -- prefer null-ls for formatting if available
+  -- NOTE: this doesn't disable null-ls formatting - could just add exclude to trim_whitespace
+  if (not is_null and null_can_format) or (is_null and not null_can_format) then
+    -- disable formatting
+    print("formatting disabled")
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  else
+    -- use client for formatting
+    print("formatting enabled")
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
-  local ternary = require("utils").ternary
-  print(
-    string.format(
-      "%s: %s document formatting %s document range formatting",
-      client.name,
-      ternary(client.resolved_capabilities.document_formatting, "✔", "✗"),
-      ternary(client.resolved_capabilities.document_range_formatting, "✔", "✗")
-    )
-  )
-end
-
-function M.default_on_attach_no_formatting(client, bufnr)
-  M.default_on_attach(client, bufnr)
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
 end
 
 -- jdtls setup
@@ -75,7 +78,7 @@ function M.ls_overrides()
         "--add-opens java.base/java.lang=ALL-UNNAMED",
       },
       on_attach = function(client, bufnr)
-        M.default_on_attach_no_formatting(client, bufnr)
+        M.default_on_attach(client, bufnr)
 
         -- Java extensions setup
         -- https://github.com/microsoft/java-debug
@@ -102,7 +105,7 @@ function M.ls_overrides()
         },
       },
       on_attach = function(client, bufnr)
-        M.default_on_attach_no_formatting(client, bufnr)
+        M.default_on_attach(client, bufnr)
 
         local ts_utils = require("nvim-lsp-ts-utils")
         ts_utils.setup({
@@ -159,7 +162,6 @@ function M.ls_overrides()
           schemas = require("schemastore").json.schemas(),
         },
       },
-      on_attach = M.default_on_attach_no_formatting,
     },
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),

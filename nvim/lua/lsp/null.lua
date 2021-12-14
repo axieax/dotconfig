@@ -1,6 +1,25 @@
 -- https://github.com/jose-elias-alvarez/null-ls.nvim --
 local M = {}
 
+-- Returns a table with keys of unique filetypes for null=ls formatting sources
+function M.formatting_filetypes()
+  local result = {}
+  local sources = M.formatting_sources()
+  for _, source in ipairs(sources) do
+    local filetypes = source.filetypes
+    for _, filetype in ipairs(filetypes) do
+      result[filetype] = true
+    end
+  end
+  return result
+end
+
+-- Use null-ls formatting if any of the given filetypes is supported
+-- @param ls_filetypes of language server to be checked
+function M.use_null_formatting()
+  return M.formatting_filetypes()[vim.bo.filetype] ~= nil
+end
+
 function M.formatting_sources()
   local null_ls = require("null-ls")
   return {
@@ -64,12 +83,14 @@ function M.diagnostic_sources()
   return {
     -- PYTHON: pip install pylint
     null_ls.builtins.diagnostics.pylint,
-    -- GCC: yay -S gccdiag
-    -- null_ls.builtins.diagnostics.gccdiag,
     -- LUA: cargo install selene
     null_ls.builtins.diagnostics.selene.with({
       extra_args = { "--config", vim.fn.expand("~/.config/selene.toml") },
     }),
+    -- GCC: yay -S gccdiag
+    -- null_ls.builtins.diagnostics.gccdiag,
+    -- SH: sudo pacman -S shellcheck
+    -- null_ls.builtins.diagnostics.shellcheck, -- also code_actions
   }
 end
 

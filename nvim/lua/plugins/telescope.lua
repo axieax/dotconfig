@@ -45,6 +45,7 @@ function M.code_action()
     vim.lsp.buf.code_action()
   else
     require("telescope.builtin").lsp_code_actions()
+    -- vim.lsp.buf.code_action()
     -- TEMP: https://github.com/weilbith/nvim-code-action-menu/issues/32
     -- require("code_action_menu").open_code_action_menu()
     -- vim.cmd("CodeActionMenu")

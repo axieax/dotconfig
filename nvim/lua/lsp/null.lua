@@ -1,23 +1,22 @@
 -- https://github.com/jose-elias-alvarez/null-ls.nvim --
 local M = {}
 
--- Returns a table with keys of unique filetypes for null=ls formatting sources
-function M.formatting_filetypes()
-  local result = {}
-  local sources = M.formatting_sources()
-  for _, source in ipairs(sources) do
-    local filetypes = source.filetypes
-    for _, filetype in ipairs(filetypes) do
-      result[filetype] = true
-    end
-  end
-  return result
-end
-
 -- Use null-ls formatting if any of the given filetypes is supported
 -- @param ls_filetypes of language server to be checked
-function M.use_null_formatting()
-  return M.formatting_filetypes()[vim.bo.filetype] ~= nil
+function M.use_null_formatting(filetype)
+  local null_ls = require("null-ls")
+  local null_ls_sources = require("null-ls.sources")
+
+  local sources = null_ls_sources.get({})
+  for _, source in ipairs(sources) do
+    if
+      source.name ~= "trim_whitespace"
+      and null_ls_sources.is_available(source, filetype, null_ls.methods.FORMATTING)
+    then
+      return true
+    end
+  end
+  return false
 end
 
 function M.formatting_sources()

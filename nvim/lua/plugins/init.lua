@@ -19,6 +19,7 @@
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
 -- TODO: null-ls on_attach disable formatting
+-- TODO: lsp-rename no pre-filled text, transparent window
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory

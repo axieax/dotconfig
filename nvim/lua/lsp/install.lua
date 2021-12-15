@@ -11,15 +11,16 @@ function M.default_on_attach(client, bufnr)
 
   -- documentFormatting
   local name = client.name
-  print(name)
   local is_null = name == "null-ls"
+  local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
   local ls_can_format = client.resolved_capabilities.document_formatting
+  local null_can_format = require("lsp.null").use_null_formatting(filetype)
+
+  print(name)
   print("ls_can_format", ls_can_format)
-  local null_can_format = require("lsp.null").use_null_formatting()
   print("null_can_format", null_can_format)
 
   -- prefer null-ls for formatting if available
-  -- NOTE: this doesn't disable null-ls formatting - could just add exclude to trim_whitespace
   if (not is_null and null_can_format) or (is_null and not null_can_format) then
     -- disable formatting
     print("formatting disabled")

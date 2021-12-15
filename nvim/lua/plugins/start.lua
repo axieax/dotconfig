@@ -20,7 +20,7 @@ return function()
     dashboard.button("n", "  New File", "<CMD>ene <BAR> startinsert<CR>"),
     dashboard.button("f", "  Find Files", "<CMD>lua require'plugins.telescope'.file_search()<CR>"),
     dashboard.button("g", "  Live Grep", "<CMD>Telescope live_grep<CR>"),
-    dashboard.button("b", "  Bookmarks", "<CMD>Telescope marks<CR>"),
+    dashboard.button("b", "  Bookmarks", "<CMD>Telescope marks<CR>"),
     -- TODO: orgmode notes
     dashboard.button("o", "  Recent Files", "<CMD>Telescope oldfiles<CR>"), -- TODO: use frecency
     dashboard.button("p", "  Find Projects", "<CMD>Telescope projects<CR>"),

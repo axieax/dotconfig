@@ -17,6 +17,7 @@ local map = require("utils").map
 
 -- TODO: vim.o instead of vim.opt?
 -- TODO: t_Co = 16?
+-- TODO: writebackup
 -- https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim#L94-L99
 vim_apply(vim.opt, {
   -- General options
@@ -118,12 +119,22 @@ vim.cmd("command! W :noautocmd w")
 vim.cmd("command! Wq :noautocmd wq")
 
 -- Disable automatic comment insertion
--- TODO: shift CR continue comment, regular CR won't
+-- NOTE: want comment continue in some cases (e.g. java(s) docstring)
 vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
 vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
 
 -- Center search result jumps
 map({ "n", "n", "nzz" })
+
+-- Resize windows
+map({ "n", "<C-k>", "<CMD>resize -1<CR>" })
+map({ "n", "<C-j>", "<CMD>resize +1<CR>" })
+map({ "n", "<C-h>", "<CMD>vertical resize -1<CR>" })
+map({ "n", "<C-l>", "<CMD>vertical resize +1<CR>" })
+
+-- Wrapped cursor navigation
+vim.cmd("noremap <expr> j v:count ? 'j' : 'gj'")
+vim.cmd("noremap <expr> k v:count ? 'k' : 'gk'")
 
 -- ftplugin
 vim.cmd("filetype plugin on")

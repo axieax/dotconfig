@@ -21,9 +21,4 @@ require("plugins.binds").general()
 -- NOTES
 
 -- Automatically PackerCompile whenever plugins are updated
-
--- -- Need better Vim event since currently this may result in an infinite loop
--- -- BUG: calling LspInstall brings up another prompt (buffer)..
--- vim.cmd("autocmd BufEnter * lua auto_lsp_install()")
-
 -- Need ripgrep for Telescope grep_string

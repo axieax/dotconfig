@@ -5,6 +5,7 @@
 -- https://bluz71.github.io/2021/09/10/vim-tips-revisited.html
 -- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/config/nvim/lua/plugins/init.lua
 -- TODO: https://github.com/numToStr/dotfiles/blob/master/neovim/.config/nvim/lua/numToStr/plugins.lua
+-- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/options.lua
 --]]
 
 --[[ TODO

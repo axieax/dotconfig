@@ -230,7 +230,7 @@ function M.which_key()
         l = { "<CMD>lopen<CR>", "open loclist" },
       },
       s = { "<CMD>PackerSync<CR>", "Update Plugins" },
-      S = { "<CMD>Dashboard<CR>", "Dashboard" },
+      S = { "<CMD>Alpha<CR>", "Start Menu" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
       p = { ":lua require'utils'.display()<LEFT>", "lua print", silent = false },
       P = { ":lua require'utils'.notify()<LEFT>", "lua notify", silent = false },

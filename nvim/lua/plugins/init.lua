@@ -9,12 +9,12 @@
 
 --[[ TODO
 -- PRIORITY: Finish setting up null-ls (haskell-brittany?)
+-- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall)
 -- IMPORTANT: uncomment adjacent lines
 -- IMPORTANT: set up toggleterm
--- IMPORTANT: replace dashboard
 -- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
@@ -68,8 +68,6 @@
 -- Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
 -- gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
 -- Markdown code block syntax highlighting
--- TRY: https://github.com/goolord/alpha-nvim instead of dashboard
--- with https://github.com/Shatur/neovim-session-manager
 -- with line for startup time (v --startuptime and read tmp file?)
 -- something like https://github.com/henriquehbr/nvim-startup.lua?
 -- https://github.com/rmagatti/auto-session
@@ -246,7 +244,6 @@ return require("packer").startup({
         { "ahmedkhalf/project.nvim" },
         -- { "nvim-telescope/telescope-node-modules.nvim" },
         { "mfussenegger/nvim-dap" },
-        { "AckslD/nvim-neoclip.lua" },
         { "rcarriga/nvim-notify" },
         { "stevearc/aerial.nvim" },
       },
@@ -307,10 +304,23 @@ return require("packer").startup({
     })
 
     -- Startup screen
-    -- TODO: see if this integrates https://github.com/rmagatti/auto-session
     use({
-      "glepnir/dashboard-nvim",
-      config = require("plugins.dashboard"),
+      "goolord/alpha-nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = require("plugins.start"),
+    })
+
+    -- Session manager
+    -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
+    use({
+      "Shatur/neovim-session-manager",
+      after = "telescope.nvim",
+      config = function()
+        require("session_manager").setup({
+          autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
+        })
+        require("telescope").load_extension("sessions")
+      end,
     })
 
     -- Emacs Orgmode
@@ -358,10 +368,12 @@ return require("packer").startup({
     use({
       "AckslD/nvim-neoclip.lua",
       requires = { "tami5/sqlite.lua", module = "sqlite" },
+      after = "telescope.nvim",
       config = function()
         require("neoclip").setup({
           enable_persistant_history = true,
         })
+        require("telescope").load_extension("neoclip")
       end,
     })
 
@@ -565,8 +577,10 @@ return require("packer").startup({
     -- Project scope
     use({
       "ahmedkhalf/project.nvim",
+      after = "telescope.nvim",
       config = function()
-        require("project_nvim").setup({})
+        require("project_nvim").setup()
+        require("telescope").load_extension("projects")
       end,
     })
 

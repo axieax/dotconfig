@@ -69,7 +69,7 @@ vim_apply(vim.opt, {
 vim.cmd([[
 fun! SetRelativeNumber()
   " dashboard\|nvimtree
-  if &ft =~ 'dashboard'
+  if &ft =~ 'alpha'
     return
   endif
   set relativenumber

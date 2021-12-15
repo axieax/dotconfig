@@ -32,9 +32,9 @@ return function()
     },
     -- exclude vim which key
     filetype_exclude = {
-      "dashboard",
       "terminal",
       "packer",
+      "alpha",
       "help",
       "floaterm",
       "toggleterm",

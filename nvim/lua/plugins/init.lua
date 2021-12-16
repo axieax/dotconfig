@@ -9,7 +9,12 @@
 --]]
 
 --[[ TODO
--- PRIORITY: Finish setting up null-ls (haskell-brittany?)
+-- IDEA: nvim-wrap (prompt for wrapper for selected text), e.g. console.log(...), markdown [](), mapping templates
+-- shift-i to edit before, shift-a to edit after (normal mode binds work)
+-- basically a substitution using vim.ui.input
+-- dot-repeatable
+-- vim ui select for template for ft
+-- support for text objects instead of selecting visually first
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
@@ -73,7 +78,6 @@
 -- with line for startup time (v --startuptime and read tmp file?)
 -- something like https://github.com/henriquehbr/nvim-startup.lua?
 -- https://github.com/rmagatti/auto-session
--- https://github.com/lewis6991/impatient.nvim
 -- https://github.com/VonHeikemen/fine-cmdline.nvim
 -- Themes: try sonokai and monokai
 -- Telescope frecency, smart-history
@@ -121,6 +125,7 @@ return require("packer").startup({
     -- NOTE: can cache packer_compiled as well
     use({
       "lewis6991/impatient.nvim",
+      disable = true,
       config = function()
         local impatient = require("impatient")
         impatient.enable_profile()

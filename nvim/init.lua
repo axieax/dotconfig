@@ -22,3 +22,6 @@ require("plugins.binds").general()
 
 -- Automatically PackerCompile whenever plugins are updated
 -- Need ripgrep for Telescope grep_string
+
+-- TEMP: surround-wrap development
+vim.o.rtp = vim.o.rtp .. vim.fn.expand(",~/dev/nvim-plugins/surround-wrap.nvim")

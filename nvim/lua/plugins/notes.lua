@@ -16,6 +16,7 @@ return function()
       TODO = {
         icon = " ",
         color = "hint",
+        alt = { "NEW", "ACTION", "ACTIONABLE" },
       },
       HACK = {
         icon = " ",
@@ -35,7 +36,7 @@ return function()
       QUESTION = {
         icon = " ",
         color = "error",
-        alt = { "IDK" },
+        alt = { "IDK", "THOUGHT", "POSSIBLE" },
       },
       BOOKMARK = {
         icon = " ",
@@ -47,15 +48,16 @@ return function()
           "LOOK",
           "REVIEW",
           "HERE",
-          "TRY",
-          "CONSIDER",
-          "ALT",
-          "ALTERNATIVE",
           "IMPORTANT",
           "BIG",
           "EXTENSION",
           "LINK",
         },
+      },
+      IDEA = {
+        icon = " ",
+        color = "hint",
+        alt = { "SUGGEST", "SUGGESTION", "TRY", "CONSIDER", "ALT", "ALTERNATIVE", "INSPO", "INSPIRATION" },
       },
     },
     highlight = {

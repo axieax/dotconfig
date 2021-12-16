@@ -16,19 +16,19 @@ function M.default_on_attach(client, bufnr)
   local ls_can_format = client.resolved_capabilities.document_formatting
   local null_can_format = require("lsp.null").use_null_formatting(filetype)
 
-  print(name)
-  print("ls_can_format", ls_can_format)
-  print("null_can_format", null_can_format)
+  -- print(name)
+  -- print("ls_can_format", ls_can_format)
+  -- print("null_can_format", null_can_format)
 
   -- prefer null-ls for formatting if available
   if (not is_null and null_can_format) or (is_null and not null_can_format) then
     -- disable formatting
-    print("formatting disabled")
+    -- print("formatting disabled")
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
   else
     -- use client for formatting
-    print("formatting enabled")
+    -- print("formatting enabled")
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 end

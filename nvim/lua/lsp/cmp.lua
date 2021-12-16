@@ -66,6 +66,7 @@ return function()
         behavior = cmp.ConfirmBehavior.Insert,
         select = false,
       })),
+      -- NOTE: this binding is not possible
       ["<S-CR>"] = cmp_map(cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,

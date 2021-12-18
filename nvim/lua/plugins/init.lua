@@ -16,6 +16,7 @@
 -- vim ui select for template for ft
 -- support for text objects instead of selecting visually first
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
+-- PRIORITY: nvim-cmp-git disable if not in git repo
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall)
@@ -311,6 +312,7 @@ return require("packer").startup({
     })
 
     -- Startup screen
+    -- ALT: https://github.com/startup-nvim/startup.nvim
     use({
       "goolord/alpha-nvim",
       requires = "kyazdani42/nvim-web-devicons",
@@ -497,7 +499,22 @@ return require("packer").startup({
     ------------------
 
     -- vim.ui overrides
-    use("stevearc/dressing.nvim")
+    use({
+      "stevearc/dressing.nvim",
+      config = function()
+        require("dressing").setup({
+          select = {
+            format_item_override = {
+              codeaction = function(action_tuple)
+                local title = action_tuple[2].title:gsub("\r\n", "\\r\\n")
+                local client = vim.lsp.get_client_by_id(action_tuple[1])
+                return string.format("%s\t[%s]", title:gsub("\n", "\\n"), client.name)
+              end,
+            },
+          },
+        })
+      end,
+    })
 
     -- Bracket coloured pairs
     -- TODO: change colourscheme, esp red?
@@ -713,6 +730,10 @@ return require("packer").startup({
       "windwp/nvim-ts-autotag",
       requires = "nvim-treesitter/nvim-treesitter",
     })
+
+    -- Auto continue bullets
+    -- NOTE: ctrl-t to indent after auto continue, ctrl-d to unindent
+    use("dkarter/bullets.vim")
 
     -- package.json dependency manager
     -- TODO: can it check vulnerabilities?

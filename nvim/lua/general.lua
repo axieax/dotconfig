@@ -37,7 +37,7 @@ vim_apply(vim.opt, {
   swapfile = false,
 
   list = true,
-  listchars = [[tab:→→,trail:·,extends:▶,precedes:◀,nbsp:␣]],
+  -- listchars = [[tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣]], -- set below due to Lua backslash escape
 
   wildmenu = true,
   wildmode = "full",
@@ -61,6 +61,11 @@ vim_apply(vim.opt, {
   smartindent = true,
   cindent = true, -- fix markdown code block indents, but may randomly indent sometimes
 })
+
+-- NOTE: indent-blankline covers first tab character
+vim.cmd([[
+  set listchars=tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣
+]])
 
 ----------
 -- Misc --

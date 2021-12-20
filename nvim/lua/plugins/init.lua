@@ -42,7 +42,6 @@
 -- Plugin and config split into separate modules?
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
--- Git diff preview https://github.com/sindrets/diffview.nvim
 -- https://github.com/stevearc/stickybuf.nvim
 -- Material nvim todo-comment 0.6 highlights
 -- TODO: lsp config separate into install, setup, utils
@@ -84,10 +83,13 @@
 -- Telescope frecency, smart-history
 -- NOTE: rust-tools not setup yet (lsp-installer integration)
 -- Rust run/debug code-lens not working
+-- https://github.com/kwkarlwang/bufresize.nvim
+-- https://github.com/neovim/nvim-lspconfig/pull/1562 grammarly lsp
 --]]
 
 --[[ Notes / issues
--- Markdown issues - code block cindent, no auto list formatoptions
+-- Markdown comments for todo-comments.nvim
+-- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets indented)
 -- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
 -- https://github.com/hrsh7th/nvim-cmp/issues/611
 -- inccommand split preview-window scroll
@@ -538,6 +540,34 @@ return require("packer").startup({
       config = require("plugins.biscuits"),
     })
 
+    -- Function context indicator
+    use({
+      "romgrk/nvim-treesitter-context",
+      requires = "nvim-treesitter/nvim-treesitter",
+      config = function()
+        -- BUG: PackerCompile stablize with active preview window
+        -- add to M.enable: { "PackerComplete", "*", 'silent lua require("treesitter-context").close()' }
+        require("treesitter-context").setup({
+          patterns = {
+            --[[ default = {
+              "class",
+              "function",
+              "method",
+              -- 'for', -- These won't appear in the context
+              -- 'while',
+              -- 'if',
+              -- 'switch',
+              -- 'case',
+            }, ]]
+            -- BUG: not working
+            markdown = {
+              "atx_heading",
+            },
+          },
+        })
+      end,
+    })
+
     -- Mark indicator
     use({
       "chentau/marks.nvim",
@@ -631,6 +661,13 @@ return require("packer").startup({
       config = function()
         require("octo").setup()
       end,
+    })
+
+    -- Git diff and history view
+    -- NOTE: can be wrapped with https://github.com/TimUntersberger/neogit
+    use({
+      "sindrets/diffview.nvim",
+      requires = "nvim-lua/plenary.nvim",
     })
 
     -----------------------------------

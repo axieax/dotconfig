@@ -6,7 +6,7 @@ return function()
       FIX = {
         icon = " ",
         color = "error",
-        alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "HELP", "PRIOR", "PRIORITY" },
+        alt = { "FIXME", "BUG", "BAD", "FIXIT", "ISSUE", "HELP", "PRIOR", "PRIORITY" },
       },
       WARN = {
         icon = " ",

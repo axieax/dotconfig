@@ -38,10 +38,13 @@ function M.register_git_bindings()
     -- g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
     g = { require("plugins.toggleterm").lazygit, "lazygit" },
     h = { require("gitsigns").stage_hunk, "git stage hunk" },
+    H = { "<CMD>DiffviewFileHistory .<CR>", "git stage hunk" },
     K = { require("gitsigns").preview_hunk, "git hunk preview" },
     r = { require("gitsigns").reset_hunk, "git reset hunk" },
     R = { require("gitsigns").reset_buffer, "git reset buffer" },
-    d = { "git diff preview" }, -- TODO: GIT DIFF
+    d = { require("gitsigns").diffthis, "git diff view" },
+    -- d = { "<CMD>DiffviewOpen<CR>", "git diff view open" },
+    -- D = { "<CMD>DiffviewOpen<CR>", "git diff view close" },
     m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
     u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
     s = { require("telescope.builtin").git_stash, "git stash" },
@@ -202,8 +205,7 @@ function M.which_key()
         t = { require("telescope.builtin").colorscheme, "theme" },
         T = { "<CMD>Telescope colorscheme enable_preview=true<CR>", "theme preview" },
         m = { require("telescope.builtin").man_pages, "search manual" },
-        n = { "<CMD>NnnExplorer<CR>", "nnn explorer" },
-        N = { "<CMD>NnnPicker<CR>", "nnn picker" },
+        -- TODO: n for notes
         s = { "1z=", "spelling correct" },
         S = { require("telescope.builtin").spell_suggest, "spelling suggestions" },
         k = { require("telescope.builtin").keymaps, "find keymaps" },
@@ -241,6 +243,7 @@ function M.which_key()
       V = { 'ggVG"+y', "copy all to clipboard" },
       c = { require("utils").display_path, "buffer path" },
       C = { require("utils").display_cwd, "cwd" },
+      i = { "<CMD>IndentBlanklineToggle<CR>", "toggle indent context line" },
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },

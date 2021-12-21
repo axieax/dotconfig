@@ -44,7 +44,8 @@ function M.register_git_bindings()
     R = { require("gitsigns").reset_buffer, "git reset buffer" },
     d = { require("gitsigns").diffthis, "git diff view" },
     -- d = { "<CMD>DiffviewOpen<CR>", "git diff view open" },
-    -- D = { "<CMD>DiffviewOpen<CR>", "git diff view close" },
+    -- D = { "<CMD>DiffviewOpen main<CR>", "git diff view close" }, -- main / master
+    -- D = { "<CMD>DiffviewClose<CR>", "git diff view close" },
     m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
     u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
     s = { require("telescope.builtin").git_stash, "git stash" },
@@ -126,9 +127,8 @@ function M.which_key()
   local wk = require("which-key")
   -- Config
   wk.setup({
-    layout = {
-      align = "center",
-    },
+    layout = { align = "center" },
+    window = { winblend = 10 },
   })
 
   -- mappings

@@ -9,7 +9,6 @@
 --]]
 
 --[[ TODO
--- IDEA: nvim-wrap (prompt for wrapper for selected text), e.g. console.log(...), markdown [](), mapping templates
 -- shift-i to edit before, shift-a to edit after (normal mode binds work)
 -- basically a substitution using vim.ui.input
 -- dot-repeatable
@@ -26,7 +25,7 @@
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
 -- TODO: null-ls on_attach disable formatting
--- TODO: lsp-rename no pre-filled text, transparent window
+-- TODO: lsp-rename no pre-filled text (<space>rN), transparent window?
 -- TRY: vim.lsp.codelens.run()
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
@@ -222,6 +221,8 @@ return require("packer").startup({
           custom_highlights = {
             IndentBlanklineContextChar = { fg = "#C678DD" },
             StatusLine = { bg = "#00000000" },
+            TelescopeNormal = { fg = "#A6ACCD" }, -- remove BG
+            -- WhichKeyFloat = { bg = "#2632384D" },
             -- TODO: cmp item kind highlights
             -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
             -- HLGROUP = { link = "OTHER_GROUP" },
@@ -397,9 +398,8 @@ return require("packer").startup({
           render = "minimal",
           on_open = function(win)
             -- transparent background
-            -- https://github.com/rcarriga/nvim-notify/issues/16
-            -- vim.api.nvim_win_set_option(win, "winblend", 25)
-            -- vim.api.nvim_win_set_config(win, { zindex = 100 })
+            -- vim.api.nvim_win_set_option(win, "winblend", 30)
+            -- vim.api.nvim_win_set_option(win, "winhighlight", "Normal:TelescopeNormal,NormalNC:TelescopeNormal")
           end,
         })
       end,
@@ -545,8 +545,6 @@ return require("packer").startup({
       "romgrk/nvim-treesitter-context",
       requires = "nvim-treesitter/nvim-treesitter",
       config = function()
-        -- BUG: PackerCompile stablize with active preview window
-        -- add to M.enable: { "PackerComplete", "*", 'silent lua require("treesitter-context").close()' }
         require("treesitter-context").setup({
           patterns = {
             --[[ default = {
@@ -559,7 +557,7 @@ return require("packer").startup({
               -- 'switch',
               -- 'case',
             }, ]]
-            -- BUG: not working
+            -- BUG: not working (TS: content not nested under heading)
             markdown = {
               "atx_heading",
             },
@@ -798,6 +796,7 @@ return require("packer").startup({
       "iamcco/markdown-preview.nvim",
       run = ":call mkdp#util#install()",
       ft = { "markdown" },
+      cmd = "MarkdownPreview",
     })
 
     use({

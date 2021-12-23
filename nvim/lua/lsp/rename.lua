@@ -2,8 +2,8 @@
 local M = {}
 
 ------------------------------------------------------------------------------------------------
--- Initial rename_handler function inspiration from CosmicNvim                                --
--- SOURCE: https://github.com/CosmicNvim/CosmicNvim/blob/main/lua/cosmic/theme/ui.lua#L51-L84 --
+-- Initial rename_handler function inspiration from CosmicNvim/cosmic-ui                      --
+-- SOURCE: https://github.com/CosmicNvim/cosmic-ui/blob/main/lua/cosmic-ui/rename/handler.lua --
 ------------------------------------------------------------------------------------------------
 
 function M.rename_handler(...)
@@ -18,6 +18,7 @@ function M.rename_handler(...)
     method = select(2, ...)
     result = select(3, ...)
   end
+
   if err then
     vim.notify(("Error running LSP query '%s': %s"):format(method, err), vim.log.levels.ERROR)
     return

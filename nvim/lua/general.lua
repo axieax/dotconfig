@@ -129,6 +129,7 @@ vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
 vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
 
 -- Center search result jumps
+map({ "n", "N", "Nzz" })
 map({ "n", "n", "nzz" })
 
 -- Resize windows

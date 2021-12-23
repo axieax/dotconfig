@@ -6,6 +6,7 @@
 -- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/config/nvim/lua/plugins/init.lua
 -- TODO: https://github.com/numToStr/dotfiles/blob/master/neovim/.config/nvim/lua/numToStr/plugins.lua
 -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/options.lua
+-- https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
 --]]
 
 --[[ TODO
@@ -42,9 +43,7 @@
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 -- https://github.com/stevearc/stickybuf.nvim
--- Material nvim todo-comment 0.6 highlights
 -- TODO: lsp config separate into install, setup, utils
--- https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
 --]]
 
 --[[ Features/plugins
@@ -127,7 +126,6 @@ return require("packer").startup({
     -- NOTE: can cache packer_compiled as well
     use({
       "lewis6991/impatient.nvim",
-      disable = true,
       config = function()
         local impatient = require("impatient")
         impatient.enable_profile()
@@ -606,7 +604,6 @@ return require("packer").startup({
     -- TODO: configure animation duration
     use({
       "karb94/neoscroll.nvim",
-      disable = true,
       config = function()
         require("neoscroll").setup()
       end,
@@ -704,7 +701,6 @@ return require("packer").startup({
     -- TODO: auto disable on startup
     use({
       "github/copilot.vim",
-      -- disable = true,
       config = function()
         -- imap <silent><script><expr> <C-L> copilot#Accept()
         local map = require("utils").map

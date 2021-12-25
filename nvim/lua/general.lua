@@ -146,5 +146,5 @@ vim.cmd("noremap <expr> k v:count ? 'k' : 'gk'")
 vim.cmd("filetype plugin on")
 
 -- Terraform filetype
-vim.cmd("au BufEnter *.tf,*.tfvars,*.hcl,*.terraformrc,*.terraform.rc set filetype=terraform")
-vim.cmd("au BufEnter *.tfstate set filetype=json")
+vim.cmd("au BufEnter *.tf,*.tfvars,*.hcl,*.terraformrc,*.terraform.rc setlocal filetype=terraform")
+vim.cmd("au BufEnter *.tfstate setlocal filetype=json")

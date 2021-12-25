@@ -1,6 +1,38 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter --
 
-return function()
+local M = {}
+
+-- TODO: extract require to pcall
+
+function M.goto_parent()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node = ts_utils.get_node_at_cursor()
+  local parent = node:parent()
+  ts_utils.goto_node(parent)
+end
+
+function M.goto_child()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node = ts_utils.get_node_at_cursor()
+  local child = node:child(0)
+  ts_utils.goto_node(child)
+end
+
+function M.goto_prev_sibling()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node = ts_utils.get_node_at_cursor()
+  local prev_sibling = node:prev_sibling()
+  ts_utils.goto_node(prev_sibling)
+end
+
+function M.goto_next_sibling()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node = ts_utils.get_node_at_cursor()
+  local next_sibling = node:next_sibling()
+  ts_utils.goto_node(next_sibling)
+end
+
+function M.setup()
   local vim_apply = require("utils").vim_apply
 
   -- Orgmode.nvim integration
@@ -15,9 +47,7 @@ return function()
   }
 
   local ensure_installed = require("nvim-treesitter.parsers").available_parsers()
-  vim.list_extend(ensure_installed, {
-    "org",
-  })
+  vim.list_extend(ensure_installed, { "org" })
 
   require("nvim-treesitter.configs").setup({
     -- Treesitter
@@ -129,3 +159,5 @@ return function()
     foldenable = false, -- don't fold by default
   })
 end
+
+return M

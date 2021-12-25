@@ -47,6 +47,7 @@
 --]]
 
 --[[ Features/plugins
+-- TODO: TS get parent, child node, prev/next same level
 -- LSPCommands Telescope interface
 -- Terminal (float/horizontal) which autosizes
 -- Coverage
@@ -674,7 +675,7 @@ return require("packer").startup({
     use({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-      config = require("plugins.treesitter"),
+      config = require("plugins.treesitter").setup,
     })
 
     -- Treesitter parser info

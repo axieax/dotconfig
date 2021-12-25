@@ -181,8 +181,8 @@ function M.which_key()
         R = { vim.lsp.buf.rename, "rename symbol" },
         f = { "<CMD>gf<CR>", "goto file" },
         F = { "<CMD>gF<CR>", "goto file (with line number)" },
-        l = { "<CMD>Trouble lsp_document_diagnostics<CR>", "show document diagnostics" },
-        L = { "<CMD>Trouble lsp_workspace_diagnostics<CR>", "show workspace diagnostics" },
+        l = { "<CMD>Trouble document_diagnostics<CR>", "show document diagnostics" },
+        L = { "<CMD>Trouble workspace_diagnostics<CR>", "show workspace diagnostics" },
         K = { vim.diagnostic.open_float, "show line diagnostics" },
         q = { require("plugins.telescope").code_action, "code actions" },
         Q = { require("telescope.builtin").lsp_range_code_actions, "code actions (range)" },
@@ -288,6 +288,10 @@ function M.which_key()
       p = { "<CMD>PasteImg<CR>", "Paste image" },
       o = { "<CMD>Glow<CR>", "Markdown preview (glow)" },
       O = { "<CMD>MarkdownPreview<CR>", "Markdown preview (browser)" },
+      ["["] = { require("plugins.treesitter").goto_prev_sibling, "Goto previous sibling node" },
+      ["]"] = { require("plugins.treesitter").goto_next_sibling, "Goto next sibling node" },
+      ["{"] = { require("plugins.treesitter").goto_parent, "Goto parent node" },
+      ["}"] = { require("plugins.treesitter").goto_child, "Goto child node" },
     },
   })
 end

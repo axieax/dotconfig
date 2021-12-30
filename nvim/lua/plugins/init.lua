@@ -16,7 +16,6 @@
 -- vim ui select for template for ft
 -- support for text objects instead of selecting visually first
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
--- PRIORITY: nvim-cmp-git disable if not in git repo
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall)
@@ -47,7 +46,6 @@
 --]]
 
 --[[ Features/plugins
--- TODO: TS get parent, child node, prev/next same level
 -- LSPCommands Telescope interface
 -- Terminal (float/horizontal) which autosizes
 -- Coverage
@@ -87,6 +85,9 @@
 --]]
 
 --[[ Notes / issues
+-- stabilize.nvim view jumps
+    -- https://github.com/luukvbaal/stabilize.nvim/issues/3
+    -- https://github.com/booperlv/nvim-gomove/issues/1
 -- Markdown comments for todo-comments.nvim
 -- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets indented)
 -- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
@@ -285,7 +286,7 @@ return require("packer").startup({
     -- Tabline
     use({
       "romgrk/barbar.nvim",
-      disable = false,
+      -- disable = true,
       requires = "kyazdani42/nvim-web-devicons",
       config = require("plugins.barbar"),
     })
@@ -413,6 +414,7 @@ return require("packer").startup({
     -- Stabilise buffers
     use({
       "luukvbaal/stabilize.nvim",
+      disable = true,
       config = function()
         -- for stabilising quickfix list (trouble.nvim)
         local nested_autocmd = require("utils").ternary(
@@ -620,6 +622,17 @@ return require("packer").startup({
     -- Easy motion / navigation
     use("ggandor/lightspeed.nvim")
 
+    -- Text movement
+    use({
+      "booperlv/nvim-gomove",
+      config = function()
+        require("gomove").setup({
+          -- whether to not to move past line when moving blocks horizontally, (true/false)
+          move_past_line = false,
+        })
+      end,
+    })
+
     -----------------------------
     -- Project / Git Utilities --
     -----------------------------
@@ -688,7 +701,6 @@ return require("packer").startup({
     -- Treesitter text objects
     use({
       "nvim-treesitter/nvim-treesitter-textobjects",
-      branch = "0.5-compat",
       requires = "nvim-treesitter/nvim-treesitter",
     })
 

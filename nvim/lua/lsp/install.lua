@@ -33,6 +33,11 @@ function M.default_on_attach(client, bufnr)
   end
 end
 
+-- sumnneko_lua setup
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 -- jdtls setup
 local java_bundles = {
   vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
@@ -49,9 +54,21 @@ function M.ls_overrides()
     sumneko_lua = {
       settings = {
         Lua = {
+          runtime = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+            version = "LuaJIT",
+            -- Setup your lua path
+            -- path = { "?.lua", "?/init.lua" }, -- default
+            -- path = runtime_path,
+          },
           diagnostics = {
             -- get language server to recognise `vim` global for nvim config
             globals = { "vim" },
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            -- NOTE: LSP support for runtime files (e.g. plugins require definition), but slow
+            -- library = vim.api.nvim_get_runtime_file("", true),
           },
         },
       },

@@ -114,6 +114,15 @@ function M.setup()
           ["ag"] = "@comment.outer",
         },
       },
+      lsp_interop = {
+        enable = true,
+        peek_definition_code = {
+          ["gp"] = "@function.outer",
+          ["<space>lp"] = "@function.outer",
+          ["gP"] = "@class.outer",
+          ["<space>lP"] = "@class.outer",
+        },
+      },
     },
 
     -- Text Subjects

@@ -88,6 +88,9 @@ function M.diagnostic_sources()
     -- LUA: cargo install selene
     null_ls.builtins.diagnostics.selene.with({
       extra_args = { "--config", vim.fn.expand("~/.config/selene.toml") },
+      condition = function(utils)
+        return utils.root_has_file({ "selene.toml" })
+      end,
     }),
     -- GCC: yay -S gccdiag
     -- null_ls.builtins.diagnostics.gccdiag,

@@ -16,16 +16,7 @@ function M.general()
   -- NOTE: PackerInstall requires restarting nvim
   -- vim.cmd("command! R :luafile $MYVIMRC<CR>:PackerCompile<CR>")
   vim.cmd("command! R :luafile $MYVIMRC<CR>")
-
-  -- Move line(s) up/down
-  map({ "n", "<A-j>", ":move .+1<CR>==" })
-  map({ "n", "<A-k>", ":move .-2<CR>==" })
-  map({ "v", "<A-j>", ":move '>+1<CR>gv=gv" })
-  map({ "v", "<A-k>", ":move '<-2<CR>gv=gv" })
-
-  -- Duplicate line(s)
-  map({ "n", "<A-d>", ":co .<CR>==" })
-  map({ "v", "<A-d>", ":co '><CR>gv=gv" })
+  -- nvim_add_user_command("R", ":luafile $MYVIMRC<CR>")
 
   -- Space mappings
   M.register_git_bindings()

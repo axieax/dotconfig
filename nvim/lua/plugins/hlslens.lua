@@ -17,7 +17,6 @@ function M.setup()
         indicator = ""
       end
 
-      local unpack = require("utils").fallback_value(table.unpack, unpack)
       local lnum, col = unpack(plist[idx])
       if nearest then
         local cnt = #plist
@@ -63,7 +62,6 @@ end
 
 M.override_lens = function(render, plist, nearest, idx, r_idx)
   local _ = r_idx
-  local unpack = require("utils").fallback_value(table.unpack, unpack)
   local lnum, col = unpack(plist[idx])
 
   local text, chunks

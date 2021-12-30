@@ -122,6 +122,8 @@ map({ "n", "<space>w", "<CMD>up<CR>" })
 -- No autoformat write
 vim.cmd("command! W :noautocmd w")
 vim.cmd("command! Wq :noautocmd wq")
+-- nvim_add_user_command("W", "noautocmd w")
+-- nvim_add_user_command("Wq", "noautocmd wq")
 
 -- Disable automatic comment insertion
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)

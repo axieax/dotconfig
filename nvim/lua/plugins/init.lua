@@ -10,11 +10,6 @@
 --]]
 
 --[[ TODO
--- shift-i to edit before, shift-a to edit after (normal mode binds work)
--- basically a substitution using vim.ui.input
--- dot-repeatable
--- vim ui select for template for ft
--- support for text objects instead of selecting visually first
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
@@ -394,11 +389,17 @@ return require("packer").startup({
       "rcarriga/nvim-notify",
       config = function()
         require("notify").setup({
-          background_colour = "#000000",
+          -- background_colour = "#B0BEC500",
+          background_colour = function()
+            local utils = require("utils")
+            local bg = utils.highlight_group_get("NormalFloat", "bg")
+            -- force transparency
+            return utils.ternary(#bg == 7, bg .. "00", bg)
+          end,
           render = "minimal",
           on_open = function(win)
             -- transparent background
-            -- vim.api.nvim_win_set_option(win, "winblend", 30)
+            vim.api.nvim_win_set_option(win, "winblend", 30)
             -- vim.api.nvim_win_set_option(win, "winhighlight", "Normal:TelescopeNormal,NormalNC:TelescopeNormal")
           end,
         })
@@ -932,6 +933,10 @@ return require("packer").startup({
           -- close_behavior = "close",
           highlight_on_jump = 200,
           close_on_select = true,
+          -- fold code from tree (overwrites treesitter foldexpr)
+          -- manage_folds = true,
+          link_tree_to_folds = true,
+          link_folds_to_tree = true,
         }
       end,
     })

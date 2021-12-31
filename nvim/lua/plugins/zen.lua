@@ -1,8 +1,22 @@
 -- https://github.com/folke/zen-mode.nvim --
 -- https://github.com/folke/twilight.nvim --
+-- TODO: Twilight background issue https://github.com/folke/twilight.nvim/issues/15#issuecomment-912146776
+-- NOTE: barbar disappears https://github.com/folke/zen-mode.nvim/issues/21
 
 return function()
-  local map = require("utils").map
+  local toggle_functions = function()
+    -- TODO: force off on_open, restore previous state on_close
+    -- [[ gitsigns ]]
+    require("gitsigns").toggle_numhl()
+    -- require("gitsigns").toggle_current_line_blame()
+    -- [[ LSP diagnostics ]]
+    vim.cmd(":silent! lua require'toggle_lsp_diagnostics'.toggle_virtual_text()<CR>")
+    vim.cmd(":silent! lua require'toggle_lsp_diagnostics'.toggle_underline()<CR>")
+    -- [[ todo-comment ]]
+    -- SEE: https://github.com/folke/todo-comments.nvim/issues/27
+    -- [[ toggle sidecolumn? ]]
+    -- require("utils").toggle_signcolumn()
+  end
 
   -- Zen mode
   require("zen-mode").setup({
@@ -10,18 +24,14 @@ return function()
       twilight = { enabled = true },
       gitsigns = { enabled = false },
     },
-    -- TODO: disable line blame and numhl
     on_open = function(win)
-      -- require("gitsigns").toggle_current_line_blame()
-      require("gitsigns").toggle_numhl()
-      -- TODO: hide todo-comments sidebar
+      toggle_functions()
     end,
     on_close = function()
-      require("gitsigns").toggle_numhl()
+      toggle_functions()
     end,
   })
 
   -- Twilight
   require("twilight").setup()
-  -- NOTE: https://github.com/folke/twilight.nvim/issues/15#issuecomment-912146776
 end

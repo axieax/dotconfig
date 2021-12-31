@@ -14,12 +14,11 @@
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall)
--- IMPORTANT: uncomment adjacent lines
+-- IMPORTANT: uncomment adjacent lines https://github.com/numToStr/Comment.nvim/issues/22
 -- IMPORTANT: set up toggleterm
 -- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
--- TODO: null-ls on_attach disable formatting
 -- TODO: lsp-rename no pre-filled text (<space>rN), transparent window?
 -- TRY: vim.lsp.codelens.run()
 -- Update lsp config for installation
@@ -38,6 +37,7 @@
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 -- https://github.com/stevearc/stickybuf.nvim
 -- TODO: lsp config separate into install, setup, utils
+-- TODO: toggle cmp
 --]]
 
 --[[ Features/plugins
@@ -76,15 +76,17 @@
 -- NOTE: rust-tools not setup yet (lsp-installer integration)
 -- Rust run/debug code-lens not working
 -- https://github.com/kwkarlwang/bufresize.nvim
--- https://github.com/neovim/nvim-lspconfig/pull/1562 grammarly lsp
+-- https://github.com/sQVe/sort.nvim
 --]]
 
 --[[ Notes / issues
+-- TRY: use vim.api.nvim_set_current_win for Mundo window map issue
+-- Zen mode with nvim-treesitter-context?
 -- stabilize.nvim view jumps
     -- https://github.com/luukvbaal/stabilize.nvim/issues/3
     -- https://github.com/booperlv/nvim-gomove/issues/1
--- Markdown comments for todo-comments.nvim
--- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets indented)
+    -- floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
+-- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent)
 -- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
 -- https://github.com/hrsh7th/nvim-cmp/issues/611
 -- inccommand split preview-window scroll
@@ -92,10 +94,8 @@
 -- Opening buffer for file (nvim-tree) replaces barbar buffers
 -- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
--- Colorizer disabled on PackerCompile
+-- Colorizer disabled on PackerCompile, no support for lowercase, unmaintained
 -- LSP format, autopairs may start to break after a while
--- vim-mundo window maps
--- floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -401,6 +401,7 @@ return require("packer").startup({
             -- transparent background
             vim.api.nvim_win_set_option(win, "winblend", 30)
             -- vim.api.nvim_win_set_option(win, "winhighlight", "Normal:TelescopeNormal,NormalNC:TelescopeNormal")
+            -- TRY: https://github.com/folke/zen-mode.nvim/blob/main/lua/zen-mode/view.lua#L198-L210
           end,
         })
       end,

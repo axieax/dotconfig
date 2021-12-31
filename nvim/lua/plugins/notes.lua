@@ -46,6 +46,7 @@ return function()
           "READ",
           "WATCH",
           "LOOK",
+          "SEE",
           "REVIEW",
           "HERE",
           "IMPORTANT",

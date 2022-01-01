@@ -41,7 +41,9 @@
 --]]
 
 --[[ Features/plugins
+-- Highlight text temporarily https://www.reddit.com/r/neovim/comments/rmq4gd/is_there_an_alternative_to_vimmark_to_colorize/
 -- LSPCommands Telescope interface
+-- https://github.com/ii14/lsp-command ?
 -- Terminal (float/horizontal) which autosizes
 -- Coverage
 -- Gradle
@@ -77,10 +79,10 @@
 -- Rust run/debug code-lens not working
 -- https://github.com/kwkarlwang/bufresize.nvim
 -- https://github.com/sQVe/sort.nvim
+-- https://github.com/strboul/urlview.vim
 --]]
 
 --[[ Notes / issues
--- TRY: use vim.api.nvim_set_current_win for Mundo window map issue
 -- Zen mode with nvim-treesitter-context?
 -- stabilize.nvim view jumps
     -- https://github.com/luukvbaal/stabilize.nvim/issues/3
@@ -107,8 +109,8 @@ if auto_install then
   vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
 end
 
--- Automatically PackerCompile with changes
--- vim.cmd([[ autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile> | PackerCompile ]])
+-- Automatically source this file on save
+vim.cmd("autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile>")
 
 return require("packer").startup({
   function(use)

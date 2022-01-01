@@ -2,7 +2,8 @@
 
 local M = {}
 
--- TODO: extract require to pcall
+-- TODO: extract requires to pcall here
+-- NOTE: not sure if this works https://www.reddit.com/r/neovim/comments/rmgxkf/better_treesitter_way_to_jump_to_parentsibling/
 
 function M.goto_parent()
   local ts_utils = require("nvim-treesitter.ts_utils")

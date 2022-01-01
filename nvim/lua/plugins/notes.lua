@@ -53,6 +53,8 @@ return function()
           "BIG",
           "EXTENSION",
           "LINK",
+          "USEFUL",
+          "HELPFUL",
         },
       },
       IDEA = {

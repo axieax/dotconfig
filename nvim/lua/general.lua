@@ -16,7 +16,6 @@ local map = require("utils").map
 -- Window options (:setlocal for window-local options) - vim.wo
 
 -- TODO: vim.o instead of vim.opt?
--- TODO: t_Co = 16?
 -- TODO: writebackup
 -- https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim#L94-L99
 vim_apply(vim.opt, {

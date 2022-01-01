@@ -33,6 +33,7 @@ local default_options = {
 -- }
 function M.map(bind)
   -- TODO: try to use which-key instead?
+  -- HELPFUL: https://www.reddit.com/r/neovim/comments/rltfgz/using_inline_functions_with_nvim_set_keymap/
   -- Get options
   local mode, before, after = unpack(bind, 1, 3)
 

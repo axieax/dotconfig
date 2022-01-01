@@ -1,4 +1,5 @@
 -- https://github.com/goolord/alpha-nvim --
+-- TODO: display startup time - async function + :AlphaRedraw?
 -- TODO: customise like https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1308930
 -- narrower center align
 

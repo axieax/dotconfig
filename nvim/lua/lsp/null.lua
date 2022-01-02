@@ -21,26 +21,29 @@ end
 
 function M.formatting_sources()
   local null_ls = require("null-ls")
+  local formatting = null_ls.builtins.formatting
   return {
     -- LUA: sudo pacman -S stylua
-    null_ls.builtins.formatting.stylua,
+    formatting.stylua,
     -- PYTHON: pip install black
-    null_ls.builtins.formatting.black,
+    formatting.black,
+    -- PYTHON: pip install isort (import sort)
+    formatting.isort,
     -- HASKELL: yay -S brittany
-    null_ls.builtins.formatting.brittany,
+    formatting.brittany,
     -- C*: yarn global add clang_format
-    null_ls.builtins.formatting.clang_format.with({
+    formatting.clang_format.with({
       -- NOTE: disabled_filetypes still in this.filetypes
       disabled_filtypes = { "java" },
     }),
     -- MAKE: pip install cmakelang (~/.local/bin/cmake-format)
-    null_ls.builtins.formatting.cmake_format.with({
+    formatting.cmake_format.with({
       filetypes = { "cmake", "make" }, -- TODO: check if this is necessary
     }),
     -- PRETTIER: yarn global add @fsouza/prettierd
-    null_ls.builtins.formatting.prettierd.with({
+    formatting.prettierd.with({
       filetypes = {
-        -- null_ls.builtins.formatting.prettierd.filetypes
+        -- formatting.prettierd.filetypes
         "javascript",
         "javascriptreact",
         "typescript",
@@ -75,42 +78,47 @@ function M.formatting_sources()
         "gitignore",
       },
     }),
+    -- DEFAULT: pip install codespell
+    formatting.codespell,
     -- DEFAULT
-    null_ls.builtins.formatting.trim_whitespace,
+    formatting.trim_whitespace,
   }
 end
 
 function M.diagnostic_sources()
   local null_ls = require("null-ls")
+  local diagnostics = null_ls.builtins.diagnostics
   return {
     -- PYTHON: pip install pylint
-    null_ls.builtins.diagnostics.pylint,
+    diagnostics.pylint,
     -- LUA: cargo install selene
-    null_ls.builtins.diagnostics.selene.with({
+    diagnostics.selene.with({
       extra_args = { "--config", vim.fn.expand("~/.config/selene.toml") },
       condition = function(utils)
         return utils.root_has_file({ "selene.toml" })
       end,
     }),
     -- GCC: yay -S gccdiag
-    -- null_ls.builtins.diagnostics.gccdiag,
+    -- diagnostics.gccdiag,
     -- SH: sudo pacman -S shellcheck
-    -- null_ls.builtins.diagnostics.shellcheck, -- also code_actions
+    -- diagnostics.shellcheck, -- also code_actions
   }
 end
 
 function M.code_action_sources()
   local null_ls = require("null-ls")
+  local code_actions = null_ls.builtins.code_actions
   return {
-    null_ls.builtins.code_actions.gitsigns,
-    null_ls.builtins.code_actions.refactoring,
+    code_actions.gitsigns,
+    code_actions.refactoring,
   }
 end
 
 function M.hover_sources()
   local null_ls = require("null-ls")
+  local hover = null_ls.builtins.hover
   return {
-    null_ls.builtins.hover.dictionary,
+    hover.dictionary,
   }
 end
 

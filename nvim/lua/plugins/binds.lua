@@ -225,6 +225,7 @@ function M.which_key()
       s = { "<CMD>PackerSync<CR>", "Update Plugins" },
       S = { "<CMD>Alpha<CR>", "Start Menu" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
+      Z = { "<CMD>Twilight<CR>", "Twilight Toggle" },
       p = { ":lua require'utils'.display()<LEFT>", "lua print", silent = false },
       P = { ":lua require'utils'.notify()<LEFT>", "lua notify", silent = false },
       q = { require("utils").toggle_signcolumn, "toggle signcolumn" },

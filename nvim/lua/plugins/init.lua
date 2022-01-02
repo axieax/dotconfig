@@ -13,7 +13,7 @@
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
--- IMPORTANT: util map function use which-key (pcall)
+-- IMPORTANT: util map function use which-key (pcall) https://github.com/neovim/neovim/pull/16594
 -- IMPORTANT: uncomment adjacent lines https://github.com/numToStr/Comment.nvim/issues/22
 -- IMPORTANT: set up toggleterm
 -- TODO: use vim-fugitive instead of gitlinker?
@@ -35,9 +35,11 @@
 -- Plugin and config split into separate modules?
 -- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 -- vim-sandwich (remap s?) or surround.nvim instead of surround.vim
+-- surround nvim = vim sandwich + vim surround?
 -- https://github.com/stevearc/stickybuf.nvim
 -- TODO: lsp config separate into install, setup, utils
 -- TODO: toggle cmp
+-- List prereqs
 --]]
 
 --[[ Features/plugins
@@ -80,6 +82,7 @@
 -- https://github.com/kwkarlwang/bufresize.nvim
 -- https://github.com/sQVe/sort.nvim
 -- https://github.com/strboul/urlview.vim
+-- https://github.com/nvim-neo-tree/neo-tree.nvim
 --]]
 
 --[[ Notes / issues
@@ -89,6 +92,7 @@
     -- https://github.com/booperlv/nvim-gomove/issues/1
     -- floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
 -- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent)
+-- Markdown header folds https://github.com/nvim-treesitter/nvim-treesitter/issues/2145
 -- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
 -- https://github.com/hrsh7th/nvim-cmp/issues/611
 -- inccommand split preview-window scroll
@@ -132,101 +136,46 @@ return require("packer").startup({
     })
 
     -- Filetype config (faster startup and custom overrides)
-    use({
-      "nathom/filetype.nvim",
-      config = function()
-        -- NOTE: needed for versions prior to Neovim-0.6
-        vim.g.did_load_filetypes = 1
-      end,
-    })
+    use("nathom/filetype.nvim")
 
     -------------
     -- Theming --
     -------------
 
+    use({
+      "marko-cerovac/material.nvim",
+      config = require("themes.material"),
+    })
+
+    use({
+      "rebelot/kanagawa.nvim",
+      config = require("themes.kanagawa"),
+    })
+
     -- ALT: https://github.com/ful1e5/onedark.nvim
     use({
       "olimorris/onedarkpro.nvim",
-      config = function()
-        require("onedarkpro").setup({
-          -- extra from https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/colors.lua
-          colors = {
-            bg_blue = "#73b8f1",
-            dark_purple = "#8a3fa0",
-          },
-          hlgroups = {
-            -- TSProperty = { fg = "${gray}" },
-            -- TSVariable = { fg = "${fg}" },
-          },
-          styles = {
-            -- functions = "bold,italic",
-            -- variables = "italic",
-          },
-          options = {
-            transparency = true,
-          },
-        })
-        -- require("onedarkpro").load()
-      end,
+      config = require("themes.onedark"),
     })
 
     use({
       "folke/tokyonight.nvim",
-      config = function()
-        vim.g.tokyonight_transparent = true
-        vim.g.tokyonight_transparent_sidebar = true
-      end,
+      config = require("themes.tokyonight"),
     })
 
     use({
       "Mofiqul/dracula.nvim",
-      config = function()
-        vim.g.dracula_transparent_bg = true
-      end,
+      config = require("themes.dracula"),
     })
 
     use({
       "EdenEast/nightfox.nvim",
-      config = function()
-        local nightfox = require("nightfox")
-        nightfox.setup({
-          fox = "duskfox",
-          transparent = true,
-          alt_nc = true,
-        })
-        -- nightfox.load()
-      end,
+      config = require("themes.nightfox"),
     })
 
     use({
       "bluz71/vim-nightfly-guicolors",
-      config = function()
-        -- TODO: Telescope border and text highlights
-        vim.g.nightflyTransparent = 1
-      end,
-    })
-
-    use({
-      "marko-cerovac/material.nvim",
-      config = function()
-        vim.g.material_style = "palenight"
-        require("material").setup({
-          borders = true,
-          disable = {
-            background = true,
-          },
-          custom_highlights = {
-            IndentBlanklineContextChar = { fg = "#C678DD" },
-            StatusLine = { bg = "#00000000" },
-            TelescopeNormal = { fg = "#A6ACCD" }, -- remove BG
-            -- WhichKeyFloat = { bg = "#2632384D" },
-            -- TODO: cmp item kind highlights
-            -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
-            -- HLGROUP = { link = "OTHER_GROUP" },
-          },
-        })
-        vim.cmd([[colorscheme material]])
-      end,
+      config = require("themes.nightfly"),
     })
 
     -----------------------
@@ -354,12 +303,23 @@ return require("packer").startup({
       end,
     })
 
-    -- Zen mode
+    -- Treesitter text dimming
+    -- NOTE: Twilight background issue https://github.com/folke/twilight.nvim/issues/15#issuecomment-912146776
+    use({
+      "folke/twilight.nvim",
+      cmd = { "Twilight" },
+      config = function()
+        require("twilight").setup()
+        -- NOTE: this does not work
+        vim.cmd("hi Twilight guibg=NONE")
+      end,
+    })
+
+    -- Focus mode
     use({
       "folke/zen-mode.nvim",
-      opt = true,
       cmd = { "ZenMode" },
-      requires = "folke/twilight.nvim",
+      requires = { "folke/twilight.nvim", "lewis6991/gitsigns.nvim" },
       config = require("plugins.zen"),
     })
 
@@ -389,24 +349,7 @@ return require("packer").startup({
     -- Notification
     use({
       "rcarriga/nvim-notify",
-      config = function()
-        require("notify").setup({
-          -- background_colour = "#B0BEC500",
-          background_colour = function()
-            local utils = require("utils")
-            local bg = utils.highlight_group_get("NormalFloat", "bg")
-            -- force transparency
-            return utils.ternary(#bg == 7, bg .. "00", bg)
-          end,
-          render = "minimal",
-          on_open = function(win)
-            -- transparent background
-            vim.api.nvim_win_set_option(win, "winblend", 30)
-            -- vim.api.nvim_win_set_option(win, "winhighlight", "Normal:TelescopeNormal,NormalNC:TelescopeNormal")
-            -- TRY: https://github.com/folke/zen-mode.nvim/blob/main/lua/zen-mode/view.lua#L198-L210
-          end,
-        })
-      end,
+      config = require("plugins.notify"),
     })
 
     -- Better quickfix list
@@ -457,6 +400,7 @@ return require("packer").startup({
     -------------------
 
     -- Tree file explorer
+    -- ALT: https://github.com/nvim-neo-tree/neo-tree.nvim
     use({
       "kyazdani42/nvim-tree.lua",
       requires = "kyazdani42/nvim-web-devicons",
@@ -508,19 +452,7 @@ return require("packer").startup({
     -- vim.ui overrides
     use({
       "stevearc/dressing.nvim",
-      config = function()
-        require("dressing").setup({
-          select = {
-            format_item_override = {
-              codeaction = function(action_tuple)
-                local title = action_tuple[2].title:gsub("\r\n", "\\r\\n")
-                local client = vim.lsp.get_client_by_id(action_tuple[1])
-                return string.format("%s\t[%s]", title:gsub("\n", "\\n"), client.name)
-              end,
-            },
-          },
-        })
-      end,
+      config = require("plugins.dressing"),
     })
 
     -- Bracket coloured pairs
@@ -714,16 +646,10 @@ return require("packer").startup({
       requires = "nvim-treesitter/nvim-treesitter",
     })
 
-    -- GitHub Copilot (NOTE: requires neovim 0.6)
-    -- TODO: auto disable on startup
+    -- GitHub Copilot
     use({
       "github/copilot.vim",
-      config = function()
-        -- imap <silent><script><expr> <C-L> copilot#Accept()
-        local map = require("utils").map
-        map({ "i", "<C-a>", "copilot#Accept()", script = true, expr = true, silent = true })
-        vim.g.copilot_no_tab_map = true
-      end,
+      config = require("plugins.copilot"),
     })
 
     -- Interactive scratchpad with virtual text
@@ -931,17 +857,7 @@ return require("packer").startup({
     -- use("simrat39/symbols-outline.nvim")
     use({
       "stevearc/aerial.nvim",
-      config = function()
-        vim.g.aerial = {
-          -- close_behavior = "close",
-          highlight_on_jump = 200,
-          close_on_select = true,
-          -- fold code from tree (overwrites treesitter foldexpr)
-          -- manage_folds = true,
-          link_tree_to_folds = true,
-          link_folds_to_tree = true,
-        }
-      end,
+      config = require("lsp.aerial"),
     })
 
     -- Code action menu

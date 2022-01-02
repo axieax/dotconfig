@@ -1,6 +1,4 @@
 -- https://github.com/folke/zen-mode.nvim --
--- https://github.com/folke/twilight.nvim --
--- TODO: Twilight background issue https://github.com/folke/twilight.nvim/issues/15#issuecomment-912146776
 -- NOTE: barbar disappears https://github.com/folke/zen-mode.nvim/issues/21
 
 return function()
@@ -9,11 +7,14 @@ return function()
     -- [[ gitsigns ]]
     require("gitsigns").toggle_numhl()
     -- require("gitsigns").toggle_current_line_blame()
+
     -- [[ LSP diagnostics ]]
     vim.cmd(":silent! lua require'toggle_lsp_diagnostics'.toggle_virtual_text()<CR>")
     vim.cmd(":silent! lua require'toggle_lsp_diagnostics'.toggle_underline()<CR>")
+
     -- [[ todo-comment ]]
     -- SEE: https://github.com/folke/todo-comments.nvim/issues/27
+
     -- [[ toggle sidecolumn? ]]
     -- require("utils").toggle_signcolumn()
   end
@@ -31,7 +32,4 @@ return function()
       toggle_functions()
     end,
   })
-
-  -- Twilight
-  require("twilight").setup()
 end

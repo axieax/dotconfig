@@ -79,7 +79,8 @@ function M.formatting_sources()
       },
     }),
     -- DEFAULT: pip install codespell
-    formatting.codespell,
+    -- NOTE: and may be autocorrected to and, causing compilation problems
+    -- formatting.codespell,
     -- DEFAULT
     formatting.trim_whitespace,
   }
@@ -102,6 +103,12 @@ function M.diagnostic_sources()
     -- diagnostics.gccdiag,
     -- SH: sudo pacman -S shellcheck
     -- diagnostics.shellcheck, -- also code_actions
+    -- DEFAULT: pip install editorconfig-checker
+    diagnostics.editorconfig_checker.with({
+      condition = function(utils)
+        return utils.root_has_file({ ".editorconfig" })
+      end,
+    }),
   }
 end
 

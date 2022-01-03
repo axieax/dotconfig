@@ -42,6 +42,7 @@ vim_apply(vim.opt, {
   wildmode = "full",
   wildoptions = "tagfile",
   autoread = true,
+  pumblend = 15,
 
   showmatch = true,
   hlsearch = true,

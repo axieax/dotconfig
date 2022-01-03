@@ -219,7 +219,8 @@ function M.setup_language_servers()
 
     -- Extra options
     if server.name == "eslint" then
-      opts.cmd = vim.list_extend({ "yarn", "node" }, server:get_default_options().cmd)
+      local eslint_config = require("lspconfig.server_configurations.eslint")
+      opts.cmd = vim.list_extend({ "yarn", "node" }, eslint_config.default_config.cmd)
     end
 
     -- Register setup

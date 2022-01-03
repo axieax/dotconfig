@@ -111,7 +111,6 @@ return function()
     },
     sources = source_config,
     formatting = {
-      deprecated = true,
       format = function(entry, vim_item)
         local source = sources[entry.source.name]
         vim_item.kind = source.kind or lspkind.presets.default[vim_item.kind]
@@ -186,4 +185,45 @@ return function()
       -- { name = "cmdline" },
     }),
   })
+
+  -- Highlights
+  -- INSPO: https://github.com/Mofiqul/dracula.nvim/blob/a8106b9370338fbec149236132fd0861d5bb6265/lua/dracula/init.lua#L375-L408
+  -- NOTE: may get overriden by some colorschemes
+  local highlight_links = {
+    -- { "CmpItemAbbrDeprecated" },
+    -- { "CmpItemAbbrMatch" },
+    -- { "CmpItemAbbrMatchFuzzy" },
+    { "CmpItemKindMethod", "TSMethod" },
+    { "CmpItemKindText", "TSText" },
+    { "CmpItemKindFunction", "TSFunction" },
+    { "CmpItemKindConstructor", "TSType" },
+    { "CmpItemKindVariable", "TSVariable" },
+    { "CmpItemKindClass", "TSType" },
+    { "CmpItemKindInterface", "TSType" },
+    { "CmpItemKindModule", "TSNamespace" },
+    { "CmpItemKindProperty", "TSProperty" },
+    { "CmpItemKindOperator", "TSOperator" },
+    { "CmpItemKindReference", "TSParameterReference" },
+    { "CmpItemKindUnit", "TSField" },
+    { "CmpItemKindValue", "TSField" },
+    { "CmpItemKindField", "TSField" },
+    { "CmpItemKindEnum", "TSField" },
+    { "CmpItemKindKeyword", "TSKeyword" },
+    { "CmpItemKindSnippet", "TSText" },
+    { "CmpItemKindColor", "cssColor" },
+    { "CmpItemKindFile", "TSURI" },
+    { "CmpItemKindFolder", "TSURI" },
+    { "CmpItemKindEvent", "TSConstant" },
+    { "CmpItemKindEnumMember", "TSField" },
+    { "CmpItemKindConstant", "TSConstant" },
+    { "CmpItemKindStruct", "TSStructure" },
+    { "CmpItemKindTypeParameter", "TSParameter" },
+  }
+
+  local override_default = false
+  for _, mapping in ipairs(highlight_links) do
+    local kind, link = unpack(mapping)
+    kind = require("utils").ternary(override_default, kind .. "Default", kind)
+    vim.cmd(string.format("highlight link %s %s", kind, link))
+  end
 end

@@ -564,7 +564,7 @@ return require("packer").startup({
       config = function()
         require("gomove").setup({
           -- whether to not to move past line when moving blocks horizontally, (true/false)
-          move_past_line = false,
+          move_past_end_col = false,
         })
       end,
     })
@@ -720,6 +720,9 @@ return require("packer").startup({
 
     -- Python indenting issues
     use("Vimjas/vim-python-pep8-indent")
+
+    -- Bazel syntax highlighting (WARN: deprecated)
+    use("davidzchen/vim-bazel")
 
     -- Markdown LaTeX paste image
     -- NOTE: requires xclip (X11), wl-clipboard (Wayland) or pngpaste (MacOS)

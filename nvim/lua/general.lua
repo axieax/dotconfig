@@ -150,3 +150,6 @@ vim.cmd("filetype plugin on")
 -- Terraform filetype
 vim.cmd("au BufEnter *.tf,*.tfvars,*.hcl,*.terraformrc,*.terraform.rc setlocal filetype=terraform")
 vim.cmd("au BufEnter *.tfstate setlocal filetype=json")
+
+-- Bazel filetype
+vim.cmd("au BufEnter *.bzl,BUILD,*.BUILD,BUILD.*,WORKSPACE,WORKSPACE.* setlocal filetype=bzl")

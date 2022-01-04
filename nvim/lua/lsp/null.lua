@@ -78,6 +78,8 @@ function M.formatting_sources()
         "gitignore",
       },
     }),
+    -- BAZEL: go install github.com/bazelbuild/buildtools/buildifier@latest or yay -S bazel-buildtools
+    formatting.buildifier,
     -- DEFAULT: pip install codespell
     -- NOTE: and may be autocorrected to and, causing compilation problems
     -- formatting.codespell,
@@ -99,8 +101,12 @@ function M.diagnostic_sources()
         return utils.root_has_file({ "selene.toml" })
       end,
     }),
-    -- GCC: yay -S gccdiag
-    -- diagnostics.gccdiag,
+    -- GCC: yay -S gccdiag or compile from source
+    diagnostics.gccdiag.with({
+      condition = function(utils)
+        return utils.root_has_file({ "compile_commands.json" })
+      end,
+    }),
     -- SH: sudo pacman -S shellcheck
     -- diagnostics.shellcheck, -- also code_actions
     -- DEFAULT: pip install editorconfig-checker

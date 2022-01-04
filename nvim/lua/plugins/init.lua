@@ -16,6 +16,7 @@
 -- IMPORTANT: util map function use which-key (pcall) https://github.com/neovim/neovim/pull/16594
 -- IMPORTANT: uncomment adjacent lines https://github.com/numToStr/Comment.nvim/issues/22
 -- IMPORTANT: set up toggleterm
+-- TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
 -- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
@@ -364,13 +365,8 @@ return require("packer").startup({
       disable = true,
       config = function()
         -- for stabilising quickfix list (trouble.nvim)
-        local nested_autocmd = require("utils").ternary(
-          vim.fn.has("nvim-0.6"),
-          "QuickFixCmdPost,DiagnosticChanged *",
-          "QuickFixCmdPost,User LspDiagnosticsChanged"
-        )
         require("stabilize").setup({
-          nested = nested_autocmd,
+          nested = "QuickFixCmdPost,DiagnosticChanged *",
         })
       end,
     })
@@ -448,6 +444,25 @@ return require("packer").startup({
     ------------------
     -- UI Utilities --
     ------------------
+
+    -- Shade inactive windows
+    -- NOTE: doesn't work with transparent backgrounds https://github.com/sunjon/Shade.nvim/issues/7
+    use({
+      "sunjon/shade.nvim",
+      disable = true,
+      config = function()
+        require("shade").setup({
+          overlay_opacity = 90,
+          opacity_step = 1,
+          keys = {
+            -- leader z instead of s?
+            brightness_up = "<leader>sk",
+            brightness_down = "<leader>sj",
+            toggle = "<leader>ss",
+          },
+        })
+      end,
+    })
 
     -- vim.ui overrides
     use({
@@ -721,14 +736,10 @@ return require("packer").startup({
     -- Python indenting issues
     use("Vimjas/vim-python-pep8-indent")
 
-    -- Bazel syntax highlighting (WARN: deprecated)
-    use("davidzchen/vim-bazel")
-
     -- Markdown LaTeX paste image
     -- NOTE: requires xclip (X11), wl-clipboard (Wayland) or pngpaste (MacOS)
     use({
       "ekickx/clipboard-image.nvim",
-      opt = true,
       cmd = { "PasteImg" },
       config = require("plugins.pasteimage"),
     })
@@ -743,7 +754,6 @@ return require("packer").startup({
 
     use({
       "ellisonleao/glow.nvim",
-      opt = true,
       cmd = { "Glow", "GlowInstall" },
     })
 

@@ -192,6 +192,7 @@ function M.ls_overrides()
 end
 
 -- Auto install required language servers defined in utils.config
+-- TODO: update as well?
 function M.prepare_language_servers()
   local required_servers = require("utils.config").prepared_language_servers()
   local get_server = require("nvim-lsp-installer.servers").get_server

@@ -11,5 +11,6 @@ return function()
       NormalFloat = { fg = default_colors.fg, bg = default_colors.sumiInk2 },
     },
   })
-  -- vim.cmd([[colorscheme kanagawa]])
+
+  -- vim.cmd("colorscheme kanagawa")
 end

@@ -7,5 +7,6 @@ return function()
     transparent = true,
     alt_nc = true,
   })
+
   -- nightfox.load()
 end

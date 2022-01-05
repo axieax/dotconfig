@@ -105,6 +105,7 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
 -- Colorizer disabled on PackerCompile, no support for lowercase, unmaintained
 -- LSP format, autopairs may start to break after a while
+-- PackerSync hang https://github.com/wbthomason/packer.nvim/issues/756
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -231,8 +232,7 @@ return require("packer").startup({
 
     -- Statusline
     use({
-      "glepnir/galaxyline.nvim",
-      branch = "main",
+      "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       after = "onedarkpro.nvim",
       config = require("plugins.galaxyline"),

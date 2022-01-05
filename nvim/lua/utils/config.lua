@@ -86,13 +86,19 @@ M.prepared_parsers = {
 }
 
 -- Icons
-M.lsp_diagnostics_icons = {
+M.diagnostics_icons = {
   Error = "",
   Warn = "",
   Hint = "",
   -- Hint = "",
   Info = "",
   VirtualText = "",
+}
+
+M.fileformat_icons = {
+  unix = "",
+  mac = "",
+  dos = "",
 }
 
 return M

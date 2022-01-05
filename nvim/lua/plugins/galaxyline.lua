@@ -1,16 +1,16 @@
--- https://github.com/glepnir/galaxyline.nvim --
+-- https://github.com/NTBBloodbath/galaxyline.nvim --
+
 -- https://elianiva.my.id/post/neovim-lua-statusline
 -- File indent size? mixed indent warning
 -- TODO: venv
 -- TODO: group linecol and percentage ()
 -- TODO: short list
--- NOTE: unmaintained
--- BUG: highlight https://github.com/glepnir/galaxyline.nvim/issues/215
+-- TODO: decouple onedark colours
 
 return function()
   -- Colours
   -- ~/.local/share/nvim/site/pack/packer/opt/galaxyline.nvim/lua/galaxyline/theme.lua
-  local galaxyline_colours = require("galaxyline.theme").default
+  local galaxyline_colours = require("galaxyline.themes.colors").default
   -- ~/.local/share/nvim/site/pack/packer/start/onedarkpro.nvim/lua/onedarkpro/colors/onedark.lua
   local onedark_colours = require("onedarkpro").get_colors("onedark")
 
@@ -20,14 +20,15 @@ return function()
 
   -- Structures
   local section = require("galaxyline").section
-  local lsp_diagnostics_icons = require("utils.config").lsp_diagnostics_icons
+  local diagnostics_icons = require("utils.config").diagnostics_icons
+  local fileformat_icons = require("utils.config").fileformat_icons
 
   -- Custom scroll bar
   local scrollbar_chars = { "_", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
   local custom_scroll_bar = {
     ScrollBar = {
       provider = function()
-        return require("galaxyline.provider_extensions").scrollbar_instance(scrollbar_chars)
+        return require("galaxyline.providers.extensions").scrollbar_instance(scrollbar_chars)
       end,
       -- separator = " ",
       -- highlight = { galaxyline_colours.yellow, onedark_colours.orange },
@@ -139,7 +140,7 @@ return function()
     {
       DiagnosticError = {
         provider = "DiagnosticError",
-        icon = lsp_diagnostics_icons.Error .. " ",
+        icon = diagnostics_icons.Error .. " ",
         separator = " ",
         highlight = { onedark_colours.red },
       },
@@ -147,7 +148,7 @@ return function()
     {
       DiagnosticWarn = {
         provider = "DiagnosticWarn",
-        icon = lsp_diagnostics_icons.Warn .. " ",
+        icon = diagnostics_icons.Warn .. " ",
         separator = " ",
         highlight = { onedark_colours.yellow },
       },
@@ -155,7 +156,7 @@ return function()
     {
       DiagnosticHint = {
         provider = "DiagnosticHint",
-        icon = lsp_diagnostics_icons.Hint .. " ",
+        icon = diagnostics_icons.Hint .. " ",
         separator = " ",
         highlight = { onedark_colours.cyan },
       },
@@ -163,7 +164,7 @@ return function()
     {
       DiagnosticInfo = {
         provider = "DiagnosticInfo",
-        icon = lsp_diagnostics_icons.Info .. " ",
+        icon = diagnostics_icons.Info .. " ",
         separator = " ",
         highlight = { onedark_colours.blue },
       },
@@ -182,6 +183,18 @@ return function()
       LspClient = {
         provider = "GetLspClient",
         highlight = { onedark_colours.cyan },
+      },
+    },
+    {
+      FileFormat = {
+        provider = function()
+          return vim.bo.fileformat
+        end,
+        icon = function()
+          return fileformat_icons[vim.bo.fileformat] .. " "
+        end,
+        separator = " ",
+        highlight = { "#dbbade" },
       },
     },
     {
@@ -206,5 +219,5 @@ return function()
     custom_scroll_bar,
   }
 
-  -- short_line_list section
+  -- TODO: short_line_list section
 end

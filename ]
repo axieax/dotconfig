@@ -37,6 +37,7 @@ return function()
 
   -- highlight group overrides
   local cp = require("catppuccin.api.colors").get_colors()
+  local rainbow_transparency = "00"
   catppuccin.remap({
     NormalFloat = { bg = cp.black2 }, -- NOTE: catppuccin needs a bg colour
     ColorColumn = { link = "CursorLine" },
@@ -46,7 +47,7 @@ return function()
     -- NvimTreeNormal = { bg = cp.none },
     WhichKeyFloat = { bg = cp.black2 },
     -- nvim-ts-rainbow
-    -- rainbowcol1 = { bg = cp.none },
+    rainbowcol1 = { bg = "#1E1D2D1A" },
     -- rainbowcol2 = { bg = cp.none },
     -- rainbowcol3 = { bg = cp.none },
     -- rainbowcol4 = { bg = cp.none },

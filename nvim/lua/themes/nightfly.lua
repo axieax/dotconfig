@@ -3,4 +3,6 @@
 return function()
   -- TODO: Telescope border and text highlights
   vim.g.nightflyTransparent = 1
+
+  -- vim.cmd("colorscheme nightfly")
 end

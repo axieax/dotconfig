@@ -11,6 +11,7 @@
 
 --[[ TODO
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
+-- PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall) https://github.com/neovim/neovim/pull/16594
@@ -41,6 +42,7 @@
 -- TODO: lsp config separate into install, setup, utils
 -- TODO: toggle cmp
 -- List prereqs
+-- TODO: bind for telescope sessions
 --]]
 
 --[[ Features/plugins
@@ -93,7 +95,7 @@
     -- https://github.com/booperlv/nvim-gomove/issues/1
     -- floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
 -- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent)
--- Markdown header folds https://github.com/nvim-treesitter/nvim-treesitter/issues/2145
+-- Markdown header folds https://github.com/nvim-treesitter/nvim-treesitter/issues/2145, https://github.com/plasticboy/vim-markdown
 -- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
 -- https://github.com/hrsh7th/nvim-cmp/issues/611
 -- inccommand split preview-window scroll
@@ -146,6 +148,12 @@ return require("packer").startup({
     use({
       "marko-cerovac/material.nvim",
       config = require("themes.material"),
+    })
+
+    use({
+      "catppuccin/nvim",
+      as = "catppuccin",
+      config = require("themes.catppuccin"),
     })
 
     use({

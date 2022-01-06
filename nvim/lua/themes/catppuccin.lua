@@ -8,7 +8,7 @@ return function()
       lsp_trouble = true,
       cmp = true,
       lsp_saga = true,
-      gitgutter = true,
+      gitgutter = false,
       gitsigns = true,
       telescope = true,
       nvimtree = {
@@ -41,8 +41,6 @@ return function()
     NormalFloat = { bg = cp.black2 }, -- NOTE: catppuccin needs a bg colour
     ColorColumn = { link = "CursorLine" },
     CursorLineNr = { fg = cp.magenta },
-    StatusLine = { bg = cp.none },
-    StatusLineNC = { bg = cp.none },
     -- NvimTreeNormal = { bg = cp.none },
     WhichKeyFloat = { bg = cp.black2 },
     -- nvim-ts-rainbow

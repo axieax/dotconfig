@@ -9,8 +9,6 @@ return function()
     },
     custom_highlights = {
       IndentBlanklineContextChar = { fg = "#C678DD" },
-      StatusLine = { bg = "NONE" },
-      StatusLineNC = { bg = "NONE" },
       TelescopeNormal = { bg = "NONE" },
       -- WhichKeyFloat = { bg = "#2632384D" },
       -- TODO: cmp item kind highlights

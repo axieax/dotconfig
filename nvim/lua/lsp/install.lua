@@ -33,22 +33,32 @@ function M.default_on_attach(client, bufnr)
   end
 end
 
--- sumnneko_lua setup
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
--- jdtls setup
-local java_bundles = {
-  vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
-}
-vim.list_extend(java_bundles, vim.split(vim.fn.glob("~/java/vscode-java-test/server/*.jar"), "\n"))
-
-local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
-local os = vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
-local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-
 function M.ls_overrides()
+  -- sumnneko_lua setup
+  local lua_rtps = vim.split(package.path, ";")
+  vim.list_extend(lua_rtps, { "lua/?.lua", "lua/?/init.lua" })
+
+  -- jdtls setup
+  local java_bundles = {
+    vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
+  }
+  vim.list_extend(java_bundles, vim.split(vim.fn.glob("~/java/vscode-java-test/server/*.jar"), "\n"))
+
+  local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
+  local os = vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
+  local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+
+  -- local runtime_base_path = "/usr/lib/jvm/"
+  -- local java_runtimes = {}
+  -- local runtime_paths = vim.split(vim.fn.glob(runtime_base_path .. "java-*"), "\n")
+  -- for _, rtp in ipairs(runtime_paths) do
+  --   -- carve everything after java-*
+  --   table.insert(java_runtimes, {
+  --     name = rtp:match(runtime_base_path .. "(.*)"),
+  --     path = rtp,
+  --   })
+  -- end
+
   return {
     -- LUA: sumneko_lua
     sumneko_lua = {
@@ -59,7 +69,7 @@ function M.ls_overrides()
             version = "LuaJIT",
             -- Setup your lua path
             -- path = { "?.lua", "?/init.lua" }, -- default
-            -- path = runtime_path,
+            -- path = lua_rtps,
           },
           diagnostics = {
             -- get language server to recognise `vim` global for nvim config
@@ -73,6 +83,7 @@ function M.ls_overrides()
         },
       },
     },
+
     -- JAVA: jdtls
     jdtls = {
       init_options = { bundles = java_bundles },
@@ -95,6 +106,14 @@ function M.ls_overrides()
         "--add-opens java.base/java.util=ALL-UNNAMED",
         "--add-opens java.base/java.lang=ALL-UNNAMED",
       },
+      settings = {
+        java = {
+          configuration = {
+            -- NOTE: for changing java runtime dynamically with :JdtSetRuntime
+            -- runtimes = java_runtimes,
+          },
+        },
+      },
       on_attach = function(client, bufnr)
         M.default_on_attach(client, bufnr)
 
@@ -109,6 +128,8 @@ function M.ls_overrides()
         -- require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker
       end,
     },
+
+    -- JS/TS: tsserver
     tsserver = {
       init_options = {
         hostInfo = "neovim",
@@ -152,6 +173,8 @@ function M.ls_overrides()
         end
       end,
     },
+
+    -- HASKELL: hls
     -- haskell = {
     --   -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/hls.lua
     --   root_dir = lsp_utils.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
@@ -160,6 +183,8 @@ function M.ls_overrides()
     --       or vim.fn.getcwd()
     --   end,
     -- },
+
+    -- HTML: Emmet
     -- emmet_ls = {
     --   -- NOTE: doesn't work with jsx
     --   filetypes = {
@@ -174,6 +199,8 @@ function M.ls_overrides()
     --     "vue",
     --   },
     -- },
+
+    -- JSON: jsonls
     jsonls = {
       settings = {
         json = {
@@ -181,6 +208,8 @@ function M.ls_overrides()
         },
       },
     },
+
+    -- DEFAULT: default configuration
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = M.default_on_attach,

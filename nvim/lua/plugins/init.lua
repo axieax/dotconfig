@@ -43,6 +43,8 @@
 -- TODO: toggle cmp
 -- List prereqs
 -- TODO: bind for telescope sessions
+-- Tab before indent spot jumps to correct indent spot
+-- Relative line number disabled ft manually defined?
 --]]
 
 --[[ Features/plugins
@@ -68,7 +70,7 @@
 -- https://github.com/zim0369/butcher string to array
 -- https://github.com/ripxorip/aerojump.nvim
 -- bufferline.nvim or cokeline.nvim instead of barbar?
--- windline instead of galaxyline (deprecated)
+-- windline instead of galaxyline?
 -- nvimtree config migration
 -- Calltree (https://github.com/ldelossa/calltree.nvim)
 -- Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
@@ -86,6 +88,8 @@
 -- https://github.com/sQVe/sort.nvim
 -- https://github.com/strboul/urlview.vim
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
+-- https://github.com/NTBBloodbath/rest.nvim API
+-- PackerUpdate force pull (git fetch origin, git reset --hard origin/master)
 --]]
 
 --[[ Notes / issues
@@ -105,7 +109,11 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
 -- Colorizer disabled on PackerCompile, no support for lowercase, unmaintained
 -- LSP format, autopairs may start to break after a while
--- PackerSync hang https://github.com/wbthomason/packer.nvim/issues/756
+--]]
+
+--[[ Current PRs
+-- https://github.com/NTBBloodbath/galaxyline.nvim/pull/31 (ignore lsp clients from provider)
+-- https://github.com/NTBBloodbath/galaxyline.nvim/pull/32 (short line mid section)
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -231,11 +239,12 @@ return require("packer").startup({
     use("tpope/vim-repeat")
 
     -- Statusline
+    -- ALT: https://github.com/windwp/windline.nvim
     use({
       "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       after = "onedarkpro.nvim",
-      config = require("plugins.galaxyline"),
+      config = require("plugins.galaxyline").setup,
     })
 
     -- Tabline
@@ -293,6 +302,7 @@ return require("packer").startup({
     -- Emacs Orgmode
     -- ALT: vimwiki (more for notes/diary), neorg (too different from md)
     -- NOTE: https://github.com/nvim-orgmode/orgmode/blob/master/DOCS.md#getting-started-with-orgmode
+    -- POSSIBLE: can this use vim.ui.select?
     use({
       "nvim-orgmode/orgmode",
       requires = {
@@ -501,6 +511,7 @@ return require("packer").startup({
     })
 
     -- Function context indicator
+    -- NOTE: doesn't play well with some plugins
     use({
       "romgrk/nvim-treesitter-context",
       requires = "nvim-treesitter/nvim-treesitter",
@@ -563,7 +574,6 @@ return require("packer").startup({
     })
 
     -- Smooth scroll
-    -- TODO: configure animation duration
     use({
       "karb94/neoscroll.nvim",
       config = function()
@@ -951,6 +961,7 @@ return require("packer").startup({
       require("packer").sync()
     end
   end,
+
   config = {
     display = {
       open_fn = function()

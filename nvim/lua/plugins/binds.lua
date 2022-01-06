@@ -177,6 +177,7 @@ function M.which_key()
         K = { vim.diagnostic.open_float, "show line diagnostics" },
         q = { require("plugins.telescope").code_action, "code actions" },
         Q = { require("telescope.builtin").lsp_range_code_actions, "code actions (range)" },
+        c = { vim.lsp.codelens.run, "code lens" },
         [";"] = { "<CMD>ToggleDiag<CR>", "toggle diagnostics" },
         ["?"] = { "<CMD>LspInfo<CR>", "LSP info" },
       },

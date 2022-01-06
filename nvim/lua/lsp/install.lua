@@ -31,6 +31,12 @@ function M.default_on_attach(client, bufnr)
     -- print("formatting enabled")
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
+
+  if client.resolved_capabilities.code_lens then
+    print(name, "supports code lens")
+    -- NOTE: language server loading delay
+    vim.cmd("au BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()")
+  end
 end
 
 function M.ls_overrides()
@@ -243,18 +249,29 @@ function M.setup_language_servers()
 
   for _, server in ipairs(installed_servers) do
     -- Get options for server
+    local name = server.name
     local ls_overrides = require("lsp.install").ls_overrides()
-    local opts = ls_overrides[server.name] or ls_overrides.default
+    local opts = ls_overrides[name] or ls_overrides.default
     opts = vim.tbl_extend("keep", opts, ls_overrides.default)
 
     -- Extra options
-    if server.name == "eslint" then
+    if name == "eslint" then
       local eslint_config = require("lspconfig.server_configurations.eslint")
       opts.cmd = vim.list_extend({ "yarn", "node" }, eslint_config.default_config.cmd)
     end
 
     -- Register setup
-    if server.name ~= "jdtls" then
+    if name == "rust_analyzer" then
+      -- Initialize the LSP via rust-tools instead
+      require("rust-tools").setup({
+        -- The "server" property provided in rust-tools setup function are the
+        -- settings rust-tools will provide to lspconfig during init.            --
+        -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
+        -- with the user's own settings (opts).
+        server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
+      })
+      server:attach_buffers()
+    elseif name ~= "jdtls" then
       server:on_ready(function()
         server:setup(opts)
       end)

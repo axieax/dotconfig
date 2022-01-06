@@ -12,6 +12,7 @@
 --[[ TODO
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
 -- PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
+-- PRIORITY: eslint/eslint_d not working
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall) https://github.com/neovim/neovim/pull/16594
@@ -22,7 +23,10 @@
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
 -- TODO: lsp-rename no pre-filled text (<space>rN), transparent window?
--- TRY: vim.lsp.codelens.run()
+-- TODO: fix lspinstaller html server
+-- TODO: <space>lU to update lsp servers?
+-- TODO: rust-tools debug setup
+-- TODO: global toggle inlay hints command (inc rust as well)
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -82,8 +86,6 @@
 -- https://github.com/VonHeikemen/fine-cmdline.nvim
 -- Themes: try sonokai and monokai
 -- Telescope frecency, smart-history
--- NOTE: rust-tools not setup yet (lsp-installer integration)
--- Rust run/debug code-lens not working
 -- https://github.com/kwkarlwang/bufresize.nvim
 -- https://github.com/sQVe/sort.nvim
 -- https://github.com/strboul/urlview.vim
@@ -838,6 +840,7 @@ return require("packer").startup({
         "stevearc/aerial.nvim",
         "jose-elias-alvarez/nvim-lsp-ts-utils",
         "b0o/schemastore.nvim",
+        "simrat39/rust-tools.nvim",
       },
       config = require("lsp.install").setup,
     })
@@ -846,15 +849,11 @@ return require("packer").startup({
     use("mfussenegger/nvim-jdtls")
 
     -- Rust tools
-    -- TODO: setup
     use({
       "simrat39/rust-tools.nvim",
-      disable = true,
       requires = {
         "neovim/nvim-lspconfig",
-        "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim",
         "mfussenegger/nvim-dap",
       },
     })

@@ -150,7 +150,8 @@ return require("packer").startup({
     })
 
     -- Filetype config (faster startup and custom overrides)
-    use("nathom/filetype.nvim")
+    -- ISSUE: https://github.com/nathom/filetype.nvim/issues/9
+    -- use("nathom/filetype.nvim")
 
     -------------
     -- Theming --

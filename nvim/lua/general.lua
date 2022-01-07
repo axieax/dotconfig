@@ -127,8 +127,8 @@ vim.cmd("command! Wq :noautocmd wq")
 
 -- Disable automatic comment insertion
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)
-vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
-vim.cmd([[autocmd BufEnter * setlocal formatoptions-=cro]])
+vim.cmd("autocmd BufEnter * set formatoptions-=cro")
+vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
 
 -- Center search result jumps
 map({ "n", "N", "Nzz" })
@@ -144,11 +144,10 @@ map({ "n", "<C-l>", "<CMD>vertical resize +1<CR>" })
 vim.cmd("noremap <expr> j v:count ? 'j' : 'gj'")
 vim.cmd("noremap <expr> k v:count ? 'k' : 'gk'")
 
--- ftplugin
-vim.cmd("filetype plugin on")
-
+-- TODO: migrate to ftdetect?
+-- NOTE: BufEnter vs BufRead,BufNewFile
 -- Terraform filetype
-vim.cmd("au BufEnter *.tf,*.tfvars,*.hcl,*.terraformrc,*.terraform.rc setlocal filetype=terraform")
+vim.cmd("au BufEnter *.terraformrc,*.terraform.rc setlocal filetype=terraform")
 vim.cmd("au BufEnter *.tfstate setlocal filetype=json")
 
 -- Bazel filetype

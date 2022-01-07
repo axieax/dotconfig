@@ -8,6 +8,9 @@ return function()
       bg_blue = "#73b8f1",
       dark_purple = "#8a3fa0",
     },
+    plugins = {
+      polyglot = false,
+    },
     hlgroups = {
       -- TSProperty = { fg = "${gray}" },
       -- TSVariable = { fg = "${fg}" },

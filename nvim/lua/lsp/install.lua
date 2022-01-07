@@ -255,10 +255,11 @@ function M.setup_language_servers()
     opts = vim.tbl_extend("keep", opts, ls_overrides.default)
 
     -- Extra options
-    if name == "eslint" then
+    -- NOTE: this is for yarn 2 / pnp support
+    --[[ if name == "eslint" then
       local eslint_config = require("lspconfig.server_configurations.eslint")
       opts.cmd = vim.list_extend({ "yarn", "node" }, eslint_config.default_config.cmd)
-    end
+    end ]]
 
     -- Register setup
     if name == "rust_analyzer" then

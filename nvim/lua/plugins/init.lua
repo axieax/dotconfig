@@ -245,6 +245,7 @@ return require("packer").startup({
     use({
       "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
+      rocks = { "lua-filesize" },
       after = "onedarkpro.nvim",
       config = require("plugins.galaxyline").setup,
     })

@@ -12,33 +12,12 @@ local fileformat_icons = require("utils.config").fileformat_icons
 
 local M = {}
 
-local filesize_enabled = true
-
 function M.get_component(name)
   -- Colours
   -- ~/.local/share/nvim/site/pack/packer/opt/galaxyline.nvim/lua/galaxyline/themes/colors.lua
   local galaxyline_colours = require("galaxyline.themes.colors").default
   -- ~/.local/share/nvim/site/pack/packer/start/onedarkpro.nvim/lua/onedarkpro/colors/onedark.lua
   local onedark_colours = require("onedarkpro").get_colors("onedark")
-
-  -- Helper functions
-  local filesize = require("filesize")
-  local filesize_options = {
-    bits = true,
-    spacer = "",
-    round = 1,
-    suffixes = {
-      b = "",
-      Kb = "k",
-      Mb = "m",
-      Gb = "g",
-      Tb = "t",
-      Pb = "p",
-      Eb = "e",
-      Zb = "z",
-      Yb = "y",
-    },
-  }
 
   local components = {
     -- Incremental Scroll Bar
@@ -136,18 +115,9 @@ function M.get_component(name)
       provider = function()
         -- TODO: caching, human readable chars?
         local wc = vim.fn.wordcount()
-        if wc.chars >= 1000000 then
-          -- filesize_enabled = false
-          -- return ""
-        end
-        return filesize(wc.words, filesize_options):gsub("b", "")
-          .. ":"
-          .. filesize(wc.chars, filesize_options):gsub("b", "")
+        return wc.words .. ":" .. wc.chars
       end,
       icon = " ",
-      condition = function()
-        return filesize_enabled
-      end,
       separator = " ",
       highlight = { onedark_colours.purple },
     },

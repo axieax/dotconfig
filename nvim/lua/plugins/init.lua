@@ -12,7 +12,7 @@
 --[[ TODO
 -- PRIORITY: Separate treesitter and telescope extensions, use Packer sequencing (after)
 -- PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
--- PRIORITY: eslint/eslint_d not working
+-- PRIORITY: out of mem for large files (e.g. ~/.cache/nvim/lsp.log)
 -- IMPORTANT: group which-key bindings
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall) https://github.com/neovim/neovim/pull/16594
@@ -245,7 +245,6 @@ return require("packer").startup({
     use({
       "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      rocks = { "lua-filesize" },
       after = "onedarkpro.nvim",
       config = require("plugins.galaxyline").setup,
     })
@@ -299,6 +298,19 @@ return require("packer").startup({
           autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
         })
         require("telescope").load_extension("sessions")
+      end,
+    })
+
+    -- Fold preview
+    use({
+      "anuvyklack/pretty-fold.nvim",
+      config = function()
+        require("pretty-fold").setup({})
+        -- require("pretty-fold.preview").setup_keybinding()
+        -- TODO: toggle keybinding
+        require("utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.show_preview()<CR>" })
+        -- require("utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.keymap_open_close('zK')<CR>" })
+        -- require("utils").map({ "n", "<esc>", "<CMD>lua require'pretty-fold.preview'.keymap_close('<esc>')<CR>" })
       end,
     })
 

@@ -43,14 +43,6 @@ return function()
     CursorLineNr = { fg = cp.magenta },
     -- NvimTreeNormal = { bg = cp.none },
     WhichKeyFloat = { bg = cp.black2 },
-    -- nvim-ts-rainbow
-    -- rainbowcol1 = { bg = cp.none },
-    -- rainbowcol2 = { bg = cp.none },
-    -- rainbowcol3 = { bg = cp.none },
-    -- rainbowcol4 = { bg = cp.none },
-    -- rainbowcol5 = { bg = cp.none },
-    -- rainbowcol6 = { bg = cp.none },
-    -- rainbowcol7 = { bg = cp.none },
   })
   vim.cmd("au ColorScheme catppuccin hi NvimTreeNormal guibg=NONE")
 

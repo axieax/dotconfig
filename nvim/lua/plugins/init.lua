@@ -23,10 +23,13 @@
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
 -- TODO: lsp-rename no pre-filled text (<space>rN), transparent window?
--- TODO: fix lspinstaller html server
 -- TODO: <space>lU to update lsp servers?
 -- TODO: rust-tools debug setup
 -- TODO: global toggle inlay hints command (inc rust as well)
+-- TODO: <C-\> for toggleterm?
+-- TODO: emmet-ls jsx/tsx support
+-- TODO: nvim-tree goto location of current buffer in cwd
+-- READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -52,6 +55,8 @@
 --]]
 
 --[[ Features/plugins
+-- cmp-rg source https://github.com/lukas-reineke/cmp-rg
+-- VSCode scroll sidebar https://github.com/petertriho/nvim-scrollbar
 -- Highlight text temporarily https://www.reddit.com/r/neovim/comments/rmq4gd/is_there_an_alternative_to_vimmark_to_colorize/
 -- LSPCommands Telescope interface
 -- https://github.com/ii14/lsp-command ?
@@ -95,12 +100,13 @@
 --]]
 
 --[[ Notes / issues
+-- Weird undos
 -- Zen mode with nvim-treesitter-context?
 -- stabilize.nvim view jumps
     -- https://github.com/luukvbaal/stabilize.nvim/issues/3
     -- https://github.com/booperlv/nvim-gomove/issues/1
     -- floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
--- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent)
+-- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent) - autopairs?
 -- Markdown header folds https://github.com/nvim-treesitter/nvim-treesitter/issues/2145, https://github.com/plasticboy/vim-markdown
 -- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
 -- https://github.com/hrsh7th/nvim-cmp/issues/611
@@ -110,7 +116,7 @@
 -- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
 -- Colorizer disabled on PackerCompile, no support for lowercase, unmaintained
--- LSP format, autopairs may start to break after a while
+-- autopairs may start to break after a while
 --]]
 
 --[[ Current PRs
@@ -573,6 +579,8 @@ return require("packer").startup({
 
     -- CSS colours
     -- NOTE: doesn't highlight lower case names (#18)
+    -- WARN: unmaintained
+    -- ALT: https://github.com/RRethy/vim-hexokinase
     use({
       "norcalli/nvim-colorizer.lua",
       config = function()
@@ -605,6 +613,7 @@ return require("packer").startup({
     use("mg979/vim-visual-multi")
 
     -- Easy motion / navigation
+    -- CHECK: letters based on characters in word?
     use("ggandor/lightspeed.nvim")
 
     -- Text movement

@@ -30,6 +30,7 @@
 -- TODO: emmet-ls jsx/tsx support
 -- TODO: nvim-tree goto location of current buffer in cwd
 -- READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
+-- TODO: telescope-env.nvim action for changing variable
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -49,12 +50,13 @@
 -- TODO: lsp config separate into install, setup, utils
 -- TODO: toggle cmp
 -- List prereqs
--- TODO: bind for telescope sessions
 -- Tab before indent spot jumps to correct indent spot
 -- Relative line number disabled ft manually defined?
 --]]
 
 --[[ Features/plugins
+-- https://github.com/sudormrfbin/cheatsheet.nvim
+-- Dictionary/thesaurus (alternative to rudism/telescope-dict.nvim)
 -- cmp-rg source https://github.com/lukas-reineke/cmp-rg
 -- VSCode scroll sidebar https://github.com/petertriho/nvim-scrollbar
 -- Highlight text temporarily https://www.reddit.com/r/neovim/comments/rmq4gd/is_there_an_alternative_to_vimmark_to_colorize/
@@ -87,7 +89,6 @@
 -- Markdown code block syntax highlighting
 -- with line for startup time (v --startuptime and read tmp file?)
 -- something like https://github.com/henriquehbr/nvim-startup.lua?
--- https://github.com/rmagatti/auto-session
 -- https://github.com/VonHeikemen/fine-cmdline.nvim
 -- Themes: try sonokai and monokai
 -- Telescope frecency, smart-history
@@ -216,6 +217,7 @@ return require("packer").startup({
     })
 
     -- Fuzzy finder
+    -- EXTENSIONS: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
     use({
       "nvim-telescope/telescope.nvim",
       requires = {
@@ -225,7 +227,10 @@ return require("packer").startup({
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-dap.nvim" },
         { "nvim-telescope/telescope-media-files.nvim" },
+        { "nvim-telescope/telescope-file-browser.nvim" },
+        { "LinArcX/telescope-env.nvim" },
         { "ahmedkhalf/project.nvim" },
+        { "jvgrootveld/telescope-zoxide" },
         -- { "nvim-telescope/telescope-node-modules.nvim" },
         { "mfussenegger/nvim-dap" },
         { "rcarriga/nvim-notify" },
@@ -304,7 +309,6 @@ return require("packer").startup({
         require("session_manager").setup({
           autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
         })
-        require("telescope").load_extension("sessions")
       end,
     })
 

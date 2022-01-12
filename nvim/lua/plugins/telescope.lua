@@ -8,27 +8,6 @@ function M.file_search()
   })
 end
 
--- File explorer wrapper which shows hidden files by default,
--- and opens the file explorer to the directory that the
--- current buffer points to if it is a directory
--- NOTE: press <C-e> after query to create new file/directory
-function M.explorer()
-  local current_buffer = vim.api.nvim_buf_get_name(0)
-  local is_directory = vim.fn.isdirectory(current_buffer) == 1
-  if current_buffer and is_directory then
-    require("telescope.builtin").file_browser({
-      cwd = current_buffer,
-      hidden = true,
-      file_ignore_patterns = { "%.git" },
-    })
-  else
-    require("telescope.builtin").file_browser({
-      hidden = true,
-      file_ignore_patterns = { "%.git" },
-    })
-  end
-end
-
 function M.dotconfig()
   require("telescope.builtin").find_files({
     prompt_title = "dotconfig",
@@ -44,54 +23,19 @@ function M.code_action()
     -- require("jdtls").code_action()
     vim.lsp.buf.code_action()
   else
-    require("telescope.builtin").lsp_code_actions()
-    -- vim.lsp.buf.code_action()
+    -- require("telescope.builtin").lsp_code_actions()
+    vim.lsp.buf.code_action()
     -- TEMP: https://github.com/weilbith/nvim-code-action-menu/issues/32
     -- require("code_action_menu").open_code_action_menu()
     -- vim.cmd("CodeActionMenu")
   end
 end
 
--- jdtls UI Picker using Telescope
-function M.jdtls_ui_picker(items, prompt, label_fn, cb)
-  local finders = require("telescope.finders")
-  local sorters = require("telescope.sorters")
-  local actions = require("telescope.actions")
-  local pickers = require("telescope.pickers")
-  local action_state = require("telescope.actions.state")
-
-  local opts = {}
-  pickers.new(opts, {
-    prompt_title = prompt,
-    finder = finders.new_table({
-      results = items,
-      entry_maker = function(entry)
-        return {
-          value = entry,
-          display = label_fn(entry),
-          ordinal = label_fn(entry),
-        }
-      end,
-    }),
-    sorter = sorters.get_generic_fuzzy_sorter(),
-    attach_mappings = function(prompt_bufnr)
-      actions.select_default:replace(function()
-        local selection = action_state.get_selected_entry(prompt_bufnr)
-
-        actions.close(prompt_bufnr)
-
-        cb(selection.value)
-      end)
-
-      return true
-    end,
-  }):find()
-end
-
 function M.setup()
   -- telescope setup mappings table - inside telescope overlay
   -- TODO: overwrite dotfiles? action for opening current file in native file explorer?
-  require("telescope").setup({
+  local telescope = require("telescope")
+  telescope.setup({
     defaults = {
       sorting_strategy = "ascending",
       layout_config = {
@@ -115,15 +59,32 @@ function M.setup()
     },
   })
 
-  -- Extensions
-  require("telescope").load_extension("fzf")
-  require("telescope").load_extension("dap")
-  require("telescope").load_extension("media_files")
-  require("telescope").load_extension("notify")
-  require("telescope").load_extension("aerial")
-  -- require("telescope").load_extension("node_modules")
+  -- TEMP: zoxide override mappings
+  require("telescope._extensions.zoxide.config").setup({
+    mappings = {
+      ["<C-b>"] = {
+        keepinsert = true,
+        action = function(selection)
+          pcall(function(path)
+            telescope.extensions.file_browser.file_browser({
+              cwd = path,
+            })
+          end, selection.path)
+        end,
+      },
+    },
+  })
 
-  -- Can Telescope file browser create/move/delete files?
+  -- Extensions
+  telescope.load_extension("fzf")
+  telescope.load_extension("dap")
+  telescope.load_extension("media_files")
+  telescope.load_extension("file_browser")
+  telescope.load_extension("env")
+  telescope.load_extension("zoxide")
+  telescope.load_extension("notify")
+  telescope.load_extension("aerial")
+  -- telescope.load_extension("node_modules")
 end
 
 return M

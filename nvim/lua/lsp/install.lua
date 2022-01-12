@@ -51,7 +51,7 @@ function M.ls_overrides()
   vim.list_extend(java_bundles, vim.split(vim.fn.glob("~/java/vscode-java-test/server/*.jar"), "\n"))
 
   local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
-  local os = vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
+  local os = require("utils").get_os()
   local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
   -- local runtime_base_path = "/usr/lib/jvm/"

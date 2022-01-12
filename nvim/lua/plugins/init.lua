@@ -133,11 +133,20 @@ local auto_install = vim.fn.empty(vim.fn.glob(packer_path)) > 0
 if auto_install then
   vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
 end
+vim.cmd("packadd packer.nvim")
+
+-- FIX: PackerUpdate might get stuck
+-- ISSUE: https://github.com/wbthomason/packer.nvim/issues/202
+local packer = require("packer")
+packer.reset()
+packer.init({
+  max_jobs = 50,
+})
 
 -- Automatically source this file on save
 vim.cmd("autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile>")
 
-return require("packer").startup({
+return packer.startup({
   function(use)
     ---------------------
     -- Setup Utilities --

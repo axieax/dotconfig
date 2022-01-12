@@ -125,4 +125,8 @@ function M.list_flatten_once(list)
   return result
 end
 
+function M.get_os()
+  return vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
+end
+
 return M

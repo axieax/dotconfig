@@ -123,6 +123,7 @@
 --[[ Current PRs
 -- https://github.com/NTBBloodbath/galaxyline.nvim/pull/31 (ignore lsp clients from provider)
 -- https://github.com/NTBBloodbath/galaxyline.nvim/pull/32 (short line mid section)
+-- https://github.com/monaqa/dial.nvim/issues/9
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --

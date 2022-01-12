@@ -98,6 +98,7 @@ function M.misc()
   -- NvimTree
   map({ "n", ";", "<CMD>NvimTreeToggle<CR>" })
   -- Dial
+  -- TODO: https://github.com/monaqa/dial.nvim/issues/7 (cursor doesn't move)
   map({ "n", "<C-a>", "<Plug>(dial-increment)", noremap = false })
   map({ "n", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
   map({ "v", "<C-a>", "<Plug>(dial-increment)", noremap = false })

@@ -34,6 +34,7 @@ vim_apply(vim.opt, {
   termguicolors = true,
   showmode = false,
   swapfile = false,
+  updatetime = 1000,
 
   list = true,
   -- listchars = [[tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣]], -- set below due to Lua backslash escape

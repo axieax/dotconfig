@@ -19,6 +19,7 @@
 -- IMPORTANT: uncomment adjacent lines https://github.com/numToStr/Comment.nvim/issues/22
 -- IMPORTANT: set up toggleterm
 -- TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
+-- READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 -- TODO: use vim-fugitive instead of gitlinker?
 -- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 -- TODO: Telescope picker for LSP commands
@@ -29,8 +30,6 @@
 -- TODO: <C-\> for toggleterm?
 -- TODO: emmet-ls jsx/tsx support
 -- TODO: nvim-tree goto location of current buffer in cwd
--- READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
--- TODO: telescope-env.nvim action for changing variable
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -169,6 +168,9 @@ return packer.startup({
     -- Filetype config (faster startup and custom overrides)
     -- ISSUE: https://github.com/nathom/filetype.nvim/issues/9
     -- use("nathom/filetype.nvim")
+
+    -- CursorHold event fix
+    use("antoinemadec/FixCursorHold.nvim")
 
     -------------
     -- Theming --

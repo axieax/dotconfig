@@ -1,10 +1,17 @@
 local M = {}
 
-function M.file_search()
+local hidden_patterns = {
+  "%.git/",
+  "node_modules/",
+}
+
+function M.file_search(no_ignore)
   -- Vim rooter sets Git project scope anyways
+  no_ignore = no_ignore or false
   require("telescope.builtin").find_files({
     hidden = true,
-    file_ignore_patterns = { "%.git" },
+    no_ignore = no_ignore,
+    file_ignore_patterns = hidden_patterns,
   })
 end
 
@@ -13,7 +20,7 @@ function M.dotconfig()
     prompt_title = "dotconfig",
     search_dirs = { "~/dotconfig" },
     hidden = true,
-    file_ignore_patterns = { "%.git" },
+    file_ignore_patterns = hidden_patterns,
   })
 end
 

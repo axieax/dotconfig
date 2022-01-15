@@ -15,4 +15,5 @@ return function()
   })
   -- Toggle Git blame
   -- TODO: customise virtual text colour. angry prefix
+  vim.cmd("highlight link GitSignsDeleteLn ErrorMsg")
 end

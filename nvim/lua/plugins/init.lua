@@ -7,6 +7,7 @@
 -- TODO: https://github.com/numToStr/dotfiles/blob/master/neovim/.config/nvim/lua/numToStr/plugins.lua
 -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/options.lua
 -- https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
+-- https://www.reddit.com/r/neovim/comments/s2ziys/alternative_lua_parser_for_nvimtreesitter_it/
 --]]
 
 --[[ TODO
@@ -938,9 +939,7 @@ return packer.startup({
     -- Code action prompt
     use({
       "kosayoda/nvim-lightbulb",
-      config = function()
-        vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'plugins.lightbulb'()]])
-      end,
+      config = require("plugins.lightbulb").setup,
     })
 
     -- Completion menu

@@ -6,6 +6,7 @@ return function()
     show_current_context = true,
     show_current_context_start = true,
     use_treesitter = true,
+    -- TODO: incorporate more default g:indent_blankline_context_patterns?
     context_patterns = {
       "class",
       "return",
@@ -36,9 +37,12 @@ return function()
       "packer",
       "alpha",
       "help",
+      "lspinfo",
       "floaterm",
       "toggleterm",
       "glowpreview",
+      "lsp-installer",
+      "checkhealth",
     },
   })
 

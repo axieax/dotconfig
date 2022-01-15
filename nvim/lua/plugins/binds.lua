@@ -37,6 +37,7 @@ function M.register_git_bindings()
     -- d = { "<CMD>DiffviewOpen<CR>", "git diff view open" },
     -- D = { "<CMD>DiffviewOpen main<CR>", "git diff view close" }, -- main / master
     -- D = { "<CMD>DiffviewClose<CR>", "git diff view close" },
+    x = { require("gitsigns").toggle_deleted, "git virtual deleted" },
     m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
     u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
     s = { require("telescope.builtin").git_stash, "git stash" },
@@ -191,6 +192,12 @@ function M.which_key()
         E = { "<CMD>Telescope env<CR>", "environment variables" },
         z = { "<CMD>Telescope zoxide list<CR>", "zoxide list" },
         f = { require("plugins.telescope").file_search, "find files" },
+        F = {
+          function()
+            require("plugins.telescope").file_search(true)
+          end,
+          "find all files",
+        },
         h = { require("telescope.builtin").help_tags, "help" },
         H = { require("telescope.builtin").vim_options, "vim options" },
         o = { require("telescope.builtin").oldfiles, "old files" },

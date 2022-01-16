@@ -114,6 +114,8 @@ function M.misc()
   map({ "n", "<space>rF", "<CMD>source % | PackerCompile<CR>" })
   -- Markdown bold
   map({ "v", ",*", "S*gvS*", noremap = false })
+  -- Shift tab to unindent
+  map({ "i", "<S-Tab>", "<C-d>" })
 end
 
 function M.which_key()
@@ -188,7 +190,7 @@ function M.which_key()
         a = { require("telescope.builtin").symbols, "find symbols" },
         b = { require("telescope.builtin").buffers, "search buffers" },
         c = { require("plugins.telescope").dotconfig, "search config" },
-        e = { "<CMD>Telescope file_browser<CR>", "file explorer" },
+        e = { "<CMD>Telescope file_browser grouped=true<CR>", "file explorer" },
         E = { "<CMD>Telescope env<CR>", "environment variables" },
         z = { "<CMD>Telescope zoxide list<CR>", "zoxide list" },
         f = { require("plugins.telescope").file_search, "find files" },

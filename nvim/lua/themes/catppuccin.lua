@@ -43,6 +43,14 @@ return function()
     CursorLineNr = { fg = cp.magenta },
     -- NvimTreeNormal = { bg = cp.none },
     WhichKeyFloat = { bg = cp.black2 },
+    SpellBad = { fg = cp.red },
+    SpellCap = { fg = cp.red },
+    SpellLocal = { fg = cp.red },
+    SpellRare = { fg = cp.red },
+    -- SpellBad = { fg = cp.maroon },
+    -- SpellCap = { fg = cp.peach },
+    -- SpellLocal = { fg = cp.lavender },
+    -- SpellRare = { fg = cp.teal },
   })
   vim.cmd("au ColorScheme catppuccin hi NvimTreeNormal guibg=NONE")
 

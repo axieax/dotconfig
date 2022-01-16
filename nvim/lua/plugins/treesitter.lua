@@ -61,6 +61,7 @@ function M.setup()
     },
     indent = {
       indent = true,
+      disable = { "python" },
     },
     incremental_selection = {
       enable = true,

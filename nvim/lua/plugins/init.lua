@@ -31,6 +31,7 @@
 -- TODO: <C-\> for toggleterm?
 -- TODO: emmet-ls jsx/tsx support
 -- TODO: nvim-tree goto location of current buffer in cwd
+-- TODO: python3 provider (OS, venv), autoinstall neovim library? (perhaps in setup.sh)
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -52,6 +53,7 @@
 -- List prereqs
 -- Tab before indent spot jumps to correct indent spot
 -- Relative line number disabled ft manually defined?
+-- Markdown tab and shift tab conditional mapping based on bullet
 --]]
 
 --[[ Features/plugins
@@ -98,10 +100,11 @@
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 -- https://github.com/NTBBloodbath/rest.nvim API
 -- PackerUpdate force pull (git fetch origin, git reset --hard origin/master)
+-- https://github.com/LudoPinelli/comment-box.nvim
 --]]
 
 --[[ Notes / issues
--- Weird undos
+-- Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 -- Zen mode with nvim-treesitter-context?
 -- stabilize.nvim view jumps
     -- https://github.com/luukvbaal/stabilize.nvim/issues/3
@@ -586,6 +589,7 @@ return packer.startup({
     })
 
     -- Underline word under cursor
+    -- ALT: augroup with vim.lsp.buf.document_highlight and vim.lsp.buf.clear_references
     use({
       "osyo-manga/vim-brightest",
       config = function()

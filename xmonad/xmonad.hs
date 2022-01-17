@@ -150,21 +150,21 @@ myManageHook =
     , "League of Legends"
     , "zoom_linux_float_video_window"
     ]
-  myTFloats  = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
-  myRFloats  = []
-  myIgnores  = ["desktop_window"]
+  myTFloats = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
+  myRFloats = []
+  myIgnores = ["desktop_window"]
   -- my1Shifts = ["Chromium", "Vivaldi-stable", "Firefox"]
   -- my2Shifts = []
   -- my3Shifts = ["Inkscape"]
-  my4Shifts  = ["Gimp", "Lutris"]
-  my5Shifts  = []
+  my4Shifts = ["Gimp", "Lutris"]
+  my5Shifts = []
 -- TODO: use dynamicTitle for Spotify
 -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicProperty.html
-  my6Shifts  = ["Spotify Premium", "spotify", "Spotify"] -- need SpotifyWM (Electron apps set class name too late)
-  my7Shifts  = ["obs"]
-  my8Shifts  = ["typora"]
-  my9Shifts  = ["discord", "slack"]
-  my10Shifts = ["Thunderbird"]
+  -- my6Shifts = ["Spotify Premium", "spotify", "Spotify"] -- need SpotifyWM (Electron apps set class name too late)
+  my7Shifts = ["obs"]
+  my8Shifts = ["typora"]
+  my9Shifts = ["discord", "slack"]
+  -- my10Shifts = ["Thunderbird"] -- reminder popup rule annoying
 
 
 

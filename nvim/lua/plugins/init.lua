@@ -635,6 +635,7 @@ return packer.startup({
 
     -- Easy motion / navigation
     -- CHECK: letters based on characters in word?
+    -- TRY: find a way / alt for jumping by starting to type word at location
     use("ggandor/lightspeed.nvim")
 
     -- Text movement

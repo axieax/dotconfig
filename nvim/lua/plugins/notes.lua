@@ -21,7 +21,7 @@ return function()
       HACK = {
         icon = " ",
         color = "warning",
-        alt = { "TEMP", "TEMPORARY" },
+        alt = { "TEMP", "TEMPORARY", "CHANGE", "UPDATE" },
       },
       PERF = {
         icon = " ",
@@ -60,7 +60,7 @@ return function()
       IDEA = {
         icon = " ",
         color = "hint",
-        alt = { "SUGGEST", "SUGGESTION", "TRY", "CONSIDER", "ALT", "ALTERNATIVE", "INSPO", "INSPIRATION" },
+        alt = { "SUGGEST", "SUGGESTION", "TRY", "CONSIDER", "ALT", "ALTERNATIVE", "INSPO", "INSPIRATION", "RANDOM" },
       },
     },
     highlight = {

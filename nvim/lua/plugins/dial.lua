@@ -4,6 +4,8 @@
 return function()
   local dial = require("dial")
 
+  local non_word_pattern = "\\C\\M\\(%s\\)"
+
   local extra_augends = {
     "markup#markdown#header",
     "date#[%H:%M:%S]",
@@ -17,11 +19,16 @@ return function()
     -- On = dial.common.enum_cyclic({ strlist = { "On", "Off" } }),
     -- direction = dial.common.enum_cyclic({ strlist = { "north", "south", "west", "east" } }),
     -- Direction = dial.common.enum_cyclic({ strlist = { "North", "South", "West", "East" } }),
-    greater = dial.common.enum_cyclic({ strlist = { ">", "<" } }),
-    -- equal = dial.common.enum_cyclic({ strlist = { "==", "!=" } }),
-    -- Equal = dial.common.enum_cyclic({ strlist = { "===", "!==" } }),
-    -- greaterEqual = dial.common.enum_cyclic({ strlist = { ">=", "<=" } }),
-    -- selfAdd = dial.common.enum_cyclic({ strlist = { "++", "--" } }),
+    greater = dial.common.enum_cyclic({ strlist = { ">", "<" }, ptn_format = non_word_pattern }),
+    equal = dial.common.enum_cyclic({ strlist = { "==", "!=" }, ptn_format = non_word_pattern }),
+    Equal = dial.common.enum_cyclic({ strlist = { "===", "!==" }, ptn_format = non_word_pattern }),
+    greaterEqual = dial.common.enum_cyclic({ strlist = { ">=", "<=" }, ptn_format = non_word_pattern }),
+    -- NOTE: following does not seem to work as expected
+    selfIncrementBy = dial.common.enum_cyclic({
+      strlist = { "+=", "-=", "*=", "/=", "//=", "%=" },
+      ptn_format = non_word_pattern,
+    }),
+    selfIncrementOne = dial.common.enum_cyclic({ strlist = { "++", "--" }, ptn_format = non_word_pattern }),
   }
 
   -- register custom augends

@@ -590,6 +590,7 @@ return packer.startup({
 
     -- Underline word under cursor
     -- ALT: augroup with vim.lsp.buf.document_highlight and vim.lsp.buf.clear_references
+    -- NOTE: this uses words instead of symbols (which LSP uses)
     use({
       "osyo-manga/vim-brightest",
       config = function()

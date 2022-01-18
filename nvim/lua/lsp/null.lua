@@ -108,7 +108,8 @@ function M.diagnostic_sources()
       end,
     }),
     -- SH: sudo pacman -S shellcheck
-    -- diagnostics.shellcheck, -- also code_actions
+    -- TODO: override diagnostic format?
+    diagnostics.shellcheck,
     -- DEFAULT: pip install editorconfig-checker
     diagnostics.editorconfig_checker.with({
       condition = function(utils)
@@ -122,6 +123,8 @@ function M.code_action_sources()
   local null_ls = require("null-ls")
   local code_actions = null_ls.builtins.code_actions
   return {
+    -- SH: sudo pacman -S shellcheck
+    code_actions.shellcheck,
     code_actions.gitsigns,
     code_actions.refactoring,
   }

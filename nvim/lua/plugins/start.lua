@@ -34,5 +34,5 @@ return function()
 
   dashboard.section.footer.val = "  https://github.com/axieax/"
 
-  require("alpha").setup(dashboard.opts)
+  require("alpha").setup(dashboard.config)
 end

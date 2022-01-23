@@ -101,6 +101,7 @@
 -- https://github.com/NTBBloodbath/rest.nvim API
 -- PackerUpdate force pull (git fetch origin, git reset --hard origin/master)
 -- https://github.com/LudoPinelli/comment-box.nvim
+-- inccommand split preview-window scroll
 --]]
 
 --[[ Notes / issues
@@ -114,7 +115,6 @@
 -- Markdown header folds https://github.com/nvim-treesitter/nvim-treesitter/issues/2145, https://github.com/plasticboy/vim-markdown
 -- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
 -- https://github.com/hrsh7th/nvim-cmp/issues/611
--- inccommand split preview-window scroll
 -- nvim-cmp treesitter completion source vs buffer source?
 -- Opening buffer for file (nvim-tree) replaces barbar buffers
 -- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
@@ -123,9 +123,8 @@
 -- autopairs may start to break after a while
 --]]
 
---[[ Current PRs
--- https://github.com/NTBBloodbath/galaxyline.nvim/pull/31 (ignore lsp clients from provider)
--- https://github.com/NTBBloodbath/galaxyline.nvim/pull/32 (short line mid section)
+--[[ Current PRs / Issues
+-- https://github.com/nvim-treesitter/nvim-treesitter/issues/2323
 -- https://github.com/monaqa/dial.nvim/issues/9
 --]]
 
@@ -139,8 +138,7 @@ if auto_install then
 end
 vim.cmd("packadd packer.nvim")
 
--- FIX: PackerUpdate might get stuck
--- ISSUE: https://github.com/wbthomason/packer.nvim/issues/202
+-- NOTE: this addresses PackerUpdate potentially getting stuck (https://github.com/wbthomason/packer.nvim/issues/202)
 local packer = require("packer")
 packer.reset()
 packer.init({

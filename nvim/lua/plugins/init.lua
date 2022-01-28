@@ -39,6 +39,7 @@
 -- Automatic lspinstall and treesitter parsers
 -- Add auto packer clean, install, compile under autoinstall packer
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
+-- https://github.com/nyngwang/NeoZoom.lua
 -- Merge conflict resolver (like vscode) - fugitive has this
 -- Cursor hover lsp hover or line diagnostic?
 -- nvim cmp dadbod source
@@ -126,6 +127,7 @@
 --[[ Current PRs / Issues
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2323
 -- https://github.com/monaqa/dial.nvim/issues/9
+-- https://github.com/j-hui/fidget.nvim/issues/11
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -917,6 +919,14 @@ return packer.startup({
         },
       },
       config = require("lsp.null").setup,
+    })
+
+    -- LSP progress indicator
+    use({
+      "j-hui/fidget.nvim",
+      config = function()
+        require("fidget").setup({})
+      end,
     })
 
     -- LSP diagnostics toggle

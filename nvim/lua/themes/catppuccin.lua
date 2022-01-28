@@ -14,6 +14,7 @@ return function()
       nvimtree = {
         enabled = true,
         show_root = false,
+        transparent_panel = true,
       },
       which_key = true,
       indent_blankline = {
@@ -41,7 +42,6 @@ return function()
     NormalFloat = { bg = cp.black2 }, -- NOTE: catppuccin needs a bg colour
     ColorColumn = { link = "CursorLine" },
     CursorLineNr = { fg = cp.magenta },
-    -- NvimTreeNormal = { bg = cp.none },
     WhichKeyFloat = { bg = cp.black2 },
     SpellBad = { fg = cp.red },
     SpellCap = { fg = cp.red },
@@ -52,7 +52,6 @@ return function()
     -- SpellLocal = { fg = cp.lavender },
     -- SpellRare = { fg = cp.teal },
   })
-  vim.cmd("au ColorScheme catppuccin hi NvimTreeNormal guibg=NONE")
 
   vim.cmd("colorscheme catppuccin")
 end

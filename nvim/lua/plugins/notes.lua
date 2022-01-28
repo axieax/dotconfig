@@ -16,7 +16,7 @@ return function()
       TODO = {
         icon = " ",
         color = "hint",
-        alt = { "NEW", "ACTION", "ACTIONABLE" },
+        alt = { "NEW", "ACTION", "ACTIONABLE", "OPTIONAL", "MAYBE" },
       },
       HACK = {
         icon = " ",

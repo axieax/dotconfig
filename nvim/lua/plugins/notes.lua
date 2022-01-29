@@ -21,7 +21,7 @@ return function()
       HACK = {
         icon = " ",
         color = "warning",
-        alt = { "TEMP", "TEMPORARY", "CHANGE", "UPDATE" },
+        alt = { "TEMP", "TEMPORARY", "CHANGE", "UPDATE", "CONFIRM", "CHECK" },
       },
       PERF = {
         icon = " ",
@@ -55,7 +55,6 @@ return function()
         icon = " ",
         color = "warning",
         alt = {
-          "CHECK",
           "READ",
           "WATCH",
           "LOOK",

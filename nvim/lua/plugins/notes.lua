@@ -31,7 +31,20 @@ return function()
       NOTE = {
         icon = " ",
         color = "info",
-        alt = { "INFO", "INSTALL", "SETUP", "GUIDE", "ASSUMPTION", "ASSUME", "SOURCE", "REFERENCE", "REFACTOR" },
+        alt = {
+          "INFO",
+          "INSTALL",
+          "SETUP",
+          "GUIDE",
+          "ASSUMPTION",
+          "ASSUME",
+          "SOURCE",
+          "REFERENCE",
+          "REFACTOR",
+          "DEP",
+          "DEPENDENCY",
+          "DEPENDENCIES",
+        },
       },
       QUESTION = {
         icon = " ",

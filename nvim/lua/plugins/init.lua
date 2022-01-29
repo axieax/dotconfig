@@ -61,7 +61,6 @@
 -- https://github.com/sudormrfbin/cheatsheet.nvim
 -- Dictionary/thesaurus (alternative to rudism/telescope-dict.nvim)
 -- cmp-rg source https://github.com/lukas-reineke/cmp-rg
--- VSCode scroll sidebar https://github.com/petertriho/nvim-scrollbar
 -- Highlight text temporarily https://www.reddit.com/r/neovim/comments/rmq4gd/is_there_an_alternative_to_vimmark_to_colorize/
 -- LSPCommands Telescope interface
 -- https://github.com/ii14/lsp-command ?
@@ -106,6 +105,7 @@
 --]]
 
 --[[ Notes / issues
+-- https://github.com/petertriho/nvim-scrollbar/issues/35
 -- Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 -- Zen mode with nvim-treesitter-context?
 -- stabilize.nvim view jumps
@@ -121,7 +121,7 @@
 -- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
 -- Colorizer disabled on PackerCompile, no support for lowercase, unmaintained
--- autopairs may start to break after a while
+-- autopairs may start to break after a while (can't insert characters)
 --]]
 
 --[[ Current PRs / Issues
@@ -262,6 +262,13 @@ return packer.startup({
       config = require("plugins.notes"),
     })
 
+    -- Scrollbar
+    use({
+      "petertriho/nvim-scrollbar",
+      after = "nvim-hlslens",
+      config = require("plugins.scrollbar"),
+    })
+
     -- Extra mappings (with encoding/decoding as well)
     use("tpope/vim-unimpaired")
 
@@ -386,7 +393,16 @@ return packer.startup({
 
     -- Minimap
     -- INSTALL: yay -S code-minimap
-    use("wfxr/minimap.vim")
+    use({
+      "wfxr/minimap.vim",
+      cmd = {
+        "Minimap",
+        "MinimapClose",
+        "MinimapToggle",
+        "MinimapRefresh",
+        "MinimapUpdateHighlight",
+      },
+    })
 
     -- Undo history
     use({
@@ -821,6 +837,9 @@ return packer.startup({
     use({
       "ellisonleao/glow.nvim",
       cmd = { "Glow", "GlowInstall" },
+      config = function()
+        vim.g.glow_border = "rounded"
+      end,
     })
 
     ---------------------------------

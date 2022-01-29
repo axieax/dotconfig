@@ -276,8 +276,8 @@ function M.which_key()
     g = {
       name = "+g",
       K = { vim.diagnostic.open_float, "Show line diagnostics" },
-      l = { "<CMD>Trouble lsp_document_diagnostics<CR>", "Show document diagnostics" },
-      L = { "<CMD>Trouble lsp_workspace_diagnostics<CR>", "Show workspace diagnostics" },
+      l = { "<CMD>Trouble document_diagnostics<CR>", "Show document diagnostics" },
+      L = { "<CMD>Trouble workspace_diagnostics<CR>", "Show workspace diagnostics" },
       q = { require("plugins.telescope").code_action, "Code actions" },
       Q = { vim.lsp.buf.code_action, "Code actions (default)" },
       d = { require("telescope.builtin").lsp_definitions, "Goto definition" },

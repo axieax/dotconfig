@@ -1,5 +1,5 @@
 #!/bin/bash
-# TODO: add prompt for each section
+source "$HOME/dotconfig/setup-utilities.sh"
 
 mkdir -p ~/.config
 
@@ -26,9 +26,9 @@ ln -s ~/dotconfig/polybar ~/.config/polybar
 # alacritty setup
 ln -s ~/dotconfig/alacritty ~/.config/alacritty
 # select appropriate config
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+if is_linux; then
   ln -s ~/.config/alacritty/alacritty-linux.yml ~/.config/alacritty/alacritty.yml
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+elif is_mac; then
   ln -s ~/.config/alacritty/alacritty-mac.yml ~/.config/alacritty/alacritty.yml
 else
   echo "invalid OSTYPE $OSTYPE for alacritty setup"

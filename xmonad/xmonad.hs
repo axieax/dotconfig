@@ -152,6 +152,7 @@ myManageHook =
     , "Riot Client"
     , "League of Legends"
     , "zoom_linux_float_video_window"
+    , "Picture-in-picture"
     ]
   myTFloats  = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
   myRFloats  = []

@@ -91,6 +91,7 @@ function M.setup()
   telescope.load_extension("zoxide")
   telescope.load_extension("notify")
   telescope.load_extension("aerial")
+  telescope.load_extension("termfinder")
   -- telescope.load_extension("node_modules")
 end
 

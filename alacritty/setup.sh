@@ -2,13 +2,13 @@
 source "$HOME/dotconfig/setup-utilities.sh"
 
 # DEPENDENCIES: fontconfig
-if ! check_dependency fontconfig; then
+if ! check_dependency fc-list; then
   if is_linux; then
     sudo pacman -S fontconfig
   elif is_mac; then
     brew install fontconfig
   else
-    echo "Failed to install dependency: fontconfig"
+    echo "Failed to install dependency: fontconfig (unsupported OS)"
   fi
 fi
 

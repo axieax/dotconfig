@@ -10,7 +10,8 @@ return function()
     padding = " ",
     transparency = 20,
     handler_opts = {
-      border = "none",
+      -- border = "none",
+      border = "rounded",
     },
   })
 end

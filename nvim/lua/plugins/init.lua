@@ -18,7 +18,7 @@
 -- IMPORTANT: lsp bindings into on_attach
 -- IMPORTANT: util map function use which-key (pcall) https://github.com/neovim/neovim/pull/16594
 -- IMPORTANT: uncomment adjacent lines https://github.com/numToStr/Comment.nvim/issues/22
--- IMPORTANT: set up toggleterm
+-- IMPORTANT: set up toggleterm - and warn if exit with hidden terminal
 -- TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
 -- READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 -- TODO: use vim-fugitive instead of gitlinker?
@@ -58,6 +58,7 @@
 --]]
 
 --[[ Features/plugins
+-- https://github.com/PlatyPew/format-installer.nvim
 -- https://github.com/sudormrfbin/cheatsheet.nvim
 -- Dictionary/thesaurus (alternative to rudism/telescope-dict.nvim)
 -- cmp-rg source https://github.com/lukas-reineke/cmp-rg
@@ -180,6 +181,8 @@ return packer.startup({
     -- Theming --
     -------------
 
+    -- TRY: https://www.reddit.com/r/neovim/comments/se377t/telescopenvim_looks_neat
+
     use({
       "marko-cerovac/material.nvim",
       config = require("themes.material"),
@@ -251,6 +254,7 @@ return packer.startup({
         { "mfussenegger/nvim-dap" },
         { "rcarriga/nvim-notify" },
         { "stevearc/aerial.nvim" },
+        { "tknightz/telescope-termfinder.nvim" },
       },
       config = require("plugins.telescope").setup,
     })
@@ -300,13 +304,6 @@ return packer.startup({
       config = function()
         require("bufferline").setup({})
       end,
-    })
-
-    -- Floating terminal
-    -- TODO: replace
-    use({
-      "voldikss/vim-floaterm",
-      config = require("plugins.floaterm"),
     })
 
     -- Terminal
@@ -1035,7 +1032,7 @@ return packer.startup({
   config = {
     display = {
       open_fn = function()
-        return require("packer.util").float({ border = "single" })
+        return require("packer.util").float({ border = "rounded" })
       end,
     },
   },

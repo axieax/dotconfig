@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if is_mac; then
+  export OS_PYTHON="python3"
+  export OS_PIP="pip3"
+else
+  export OS_PYTHON="python"
+  export OS_PIP="pip"
+fi
+
 confirm() {
   action=$1
   # TODO: maybe want user to confirm by pressing enter as well?
@@ -15,11 +23,14 @@ confirm() {
 }
 
 is_linux() {
-  [[ "$OSTYPE" == "linux-gnu"* ]]
+  # TODO: further filter by distro
+  # [[ "$OSTYPE" == "linux-gnu"* ]]
+  [[ "$(uname)" == "Linux" ]]
 }
 
 is_mac() {
-  [[ "$OSTYPE" == "darwin"* ]]
+  # [[ "$OSTYPE" == "darwin"* ]]
+  [[ "$(uname)" == "Darwin" ]]
 }
 
 check_dependency() {

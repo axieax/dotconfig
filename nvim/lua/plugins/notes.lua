@@ -38,6 +38,7 @@ return function()
           "GUIDE",
           "ASSUMPTION",
           "ASSUME",
+          "ASSUMES",
           "SOURCE",
           "REFERENCE",
           "REFACTOR",

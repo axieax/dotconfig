@@ -1,14 +1,18 @@
 -- https://github.com/akinsho/toggleterm.nvim --
+
+-- TODO: warn before exit if hidden floaterm active
+
 local M = {}
 
 function M.attach()
   local opts = { noremap = true }
   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+  vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<CMD>close<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
   vim.o.spell = false
 end
 
@@ -22,11 +26,16 @@ function M.setup()
       end
     end,
     float_opts = {
+      border = "curved",
       width = math.ceil(vim.o.columns * 0.8),
       height = math.ceil(vim.o.lines * 0.8),
+      highlights = {
+        border = "FloatBorder",
+      },
     },
   })
   vim.cmd("autocmd! TermOpen term://* lua require'plugins.toggleterm'.attach()")
+
   local map = require("utils").map
   map({ "n", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
   map({ "i", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
@@ -42,20 +51,39 @@ function M.setup()
   map({ "n", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
   map({ "i", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
   map({ "t", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
+  map({ "n", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
+  map({ "i", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
+  map({ "t", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
 end
 
 function M.lazygit()
-  local terminal = require("toggleterm.terminal").Terminal:new({
+  local lazygit = require("toggleterm.terminal").Terminal:new({
     cmd = "lazygit",
     direction = "float",
+    -- float_opts = { highlights = { border = "Normal" } },
     -- hidden = true,
     count = 5,
     on_open = function(term)
       -- restore escape key
-      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<esc>", [[<esc><C-\><C-n>>]], { noremap = true })
+      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<esc>", "<esc>", { noremap = true })
     end,
   })
-  terminal:toggle()
+  lazygit:toggle()
+end
+
+function M.lazydocker()
+  local lazydocker = require("toggleterm.terminal").Terminal:new({
+    cmd = "lazydocker",
+    direction = "float",
+    -- float_opts = { highlights = { border = "Normal" } },
+    -- hidden = true,
+    count = 6,
+    on_open = function(term)
+      -- restore escape key
+      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<esc>", "<esc>", { noremap = true })
+    end,
+  })
+  lazydocker:toggle()
 end
 
 return M

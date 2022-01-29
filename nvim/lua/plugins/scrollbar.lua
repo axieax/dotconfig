@@ -13,7 +13,6 @@ return function()
       "packer",
       "alpha",
       "lspinfo",
-      "floaterm",
       "toggleterm",
     },
   })

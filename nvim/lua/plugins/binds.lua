@@ -26,7 +26,6 @@ end
 function M.register_git_bindings()
   require("which-key").register({
     name = "+git",
-    -- g = { "<CMD>FloatermNew lazygit<CR>", "lazygit" },
     g = { require("plugins.toggleterm").lazygit, "lazygit" },
     h = { require("gitsigns").stage_hunk, "git stage hunk" },
     H = { "<CMD>DiffviewFileHistory .<CR>", "git stage hunk" },
@@ -178,7 +177,12 @@ function M.which_key()
         F = { "<CMD>gF<CR>", "goto file (with line number)" },
         l = { "<CMD>Trouble document_diagnostics<CR>", "show document diagnostics" },
         L = { "<CMD>Trouble workspace_diagnostics<CR>", "show workspace diagnostics" },
-        K = { vim.diagnostic.open_float, "show line diagnostics" },
+        K = {
+          function()
+            vim.diagnostic.open_float(0, { border = "rounded" })
+          end,
+          "show line diagnostics",
+        },
         q = { require("plugins.telescope").code_action, "code actions" },
         Q = { require("telescope.builtin").lsp_range_code_actions, "code actions (range)" },
         c = { vim.lsp.codelens.run, "code lens" },
@@ -231,7 +235,7 @@ function M.which_key()
       },
       r = {
         n = { vim.lsp.buf.rename, "rename symbol" },
-        r = { "<CMD>FloatermNew lazydocker<CR>", "lazydocker" },
+        r = { require("plugins.toggleterm").lazydocker, "lazydocker" },
         -- BUG: the following places an extra character in the buffer (replace)
         -- f = { "<CMD>luafile %<CR>" },
         -- F = { "<CMD>source % | PackerCompile<CR>" },
@@ -264,18 +268,33 @@ function M.which_key()
     ["["] = {
       name = "+previous",
       g = { "Previous git hunk" },
-      d = { vim.diagnostic.goto_prev, "Previous diagnostic" },
+      d = {
+        function()
+          vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+        end,
+        "Previous diagnostic",
+      },
       t = { "<CMD>call ultest#positions#prev()<CR>", "Previous test" },
     },
     ["]"] = {
       name = "+next",
       g = { "Next git hunk" },
-      d = { vim.diagnostic.goto_next, "Next diagnostic" },
+      d = {
+        function()
+          vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+        end,
+        "Next diagnostic",
+      },
       t = { "<CMD>call ultest#positions#next()<CR>", "Next test" },
     },
     g = {
       name = "+g",
-      K = { vim.diagnostic.open_float, "Show line diagnostics" },
+      K = {
+        function()
+          vim.diagnostic.open_float(0, { border = "rounded" })
+        end,
+        "Show line diagnostics",
+      },
       l = { "<CMD>Trouble document_diagnostics<CR>", "Show document diagnostics" },
       L = { "<CMD>Trouble workspace_diagnostics<CR>", "Show workspace diagnostics" },
       q = { require("plugins.telescope").code_action, "Code actions" },

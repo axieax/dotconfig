@@ -38,7 +38,6 @@ return function()
       "alpha",
       "help",
       "lspinfo",
-      "floaterm",
       "toggleterm",
       "glowpreview",
       "lsp-installer",

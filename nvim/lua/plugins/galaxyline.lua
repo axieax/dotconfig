@@ -5,6 +5,7 @@
 -- TODO: venv
 -- TODO: group linecol and percentage ()
 -- TODO: decouple onedark colours
+-- TODO: remove scrollbar component
 
 local ternary = require("utils").ternary
 local diagnostics_icons = require("utils.config").diagnostics_icons

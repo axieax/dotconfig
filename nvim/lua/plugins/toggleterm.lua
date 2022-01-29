@@ -6,14 +6,13 @@ local M = {}
 
 function M.attach()
   local opts = { noremap = true }
-  vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<CMD>close<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
-  vim.o.spell = false
+  -- vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<CMD>close<CR>", opts)
+  vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<CMD>noh<CR>", { silent = true })
+  -- vim.api.nvim_buf_set_keymap(0, "t", "<esc><esc>", [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", [[<a-\>]], [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, "n", [[<a-\>]], "<CMD>startinsert<CR>", opts)
+  vim.wo.spell = false
 end
 
 function M.setup()
@@ -61,12 +60,8 @@ function M.lazygit()
     cmd = "lazygit",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },
-    -- hidden = true,
+    hidden = true,
     count = 5,
-    on_open = function(term)
-      -- restore escape key
-      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<esc>", "<esc>", { noremap = true })
-    end,
   })
   lazygit:toggle()
 end
@@ -76,12 +71,8 @@ function M.lazydocker()
     cmd = "lazydocker",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },
-    -- hidden = true,
+    hidden = true,
     count = 6,
-    on_open = function(term)
-      -- restore escape key
-      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<esc>", "<esc>", { noremap = true })
-    end,
   })
   lazydocker:toggle()
 end

@@ -8,6 +8,7 @@
 -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/options.lua
 -- https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
 -- https://www.reddit.com/r/neovim/comments/s2ziys/alternative_lua_parser_for_nvimtreesitter_it/
+-- https://github.com/danymat/champagne/blob/main/lua/plugins.lua
 --]]
 
 --[[ TODO
@@ -32,6 +33,7 @@
 -- TODO: emmet-ls jsx/tsx support
 -- TODO: nvim-tree goto location of current buffer in cwd
 -- TODO: python3 provider (OS, venv), autoinstall neovim library? (perhaps in setup.sh)
+-- TODO: use https://github.com/danymat/neogen
 -- Update lsp config for installation
 -- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 -- Telescope setup, find_files wrapper if buffer is directory
@@ -39,7 +41,7 @@
 -- Automatic lspinstall and treesitter parsers
 -- Add auto packer clean, install, compile under autoinstall packer
 -- Focus.nvim (https://github.com/beauwilliams/focus.nvim)
--- https://github.com/nyngwang/NeoZoom.lua
+-- https://github.com/nyngwang/NeoZoom.lua (\z for toggle)
 -- Merge conflict resolver (like vscode) - fugitive has this
 -- Cursor hover lsp hover or line diagnostic?
 -- nvim cmp dadbod source
@@ -103,9 +105,11 @@
 -- PackerUpdate force pull (git fetch origin, git reset --hard origin/master)
 -- https://github.com/LudoPinelli/comment-box.nvim
 -- inccommand split preview-window scroll
+-- https://github.com/abecodes/tabout.nvim (<c-l>, <c-h>)
 --]]
 
 --[[ Notes / issues
+-- https://github.com/kyazdani42/nvim-tree.lua/issues/806 (plugin being refactored)
 -- https://github.com/petertriho/nvim-scrollbar/issues/35
 -- Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 -- Zen mode with nvim-treesitter-context?
@@ -349,6 +353,8 @@ return packer.startup({
     -- ALT: vimwiki (more for notes/diary), neorg (too different from md)
     -- NOTE: https://github.com/nvim-orgmode/orgmode/blob/master/DOCS.md#getting-started-with-orgmode
     -- POSSIBLE: can this use vim.ui.select?
+    -- TRY: https://github.com/nvim-neorg/neorg-telescope
+    -- TRY: https://github.com/danymat/neorg-gtd-things
     use({
       "nvim-orgmode/orgmode",
       requires = {
@@ -632,6 +638,17 @@ return packer.startup({
       config = require("plugins.hlslens").setup,
     })
 
+    -- Preview line jumps
+    use({
+      "nacro90/numb.nvim",
+      event = "BufRead",
+      config = function()
+        require("numb").setup({
+          number_only = true,
+        })
+      end,
+    })
+
     -- Smooth scroll
     use({
       "karb94/neoscroll.nvim",
@@ -662,6 +679,9 @@ return packer.startup({
         })
       end,
     })
+
+    -- Matching text navigation
+    use("andymass/vim-matchup")
 
     -----------------------------
     -- Project / Git Utilities --
@@ -784,12 +804,23 @@ return packer.startup({
 
     -- Docstring generator
     -- ALT: https://github.com/nvim-treesitter/nvim-tree-docs
+    -- ALT: https://github.com/danymat/neogen
     use({
       "kkoomen/vim-doge",
       run = ":call doge#install()",
       config = function()
         -- disable default mapping
         vim.g.doge_mapping = ""
+      end,
+    })
+
+    use({
+      "danymat/neogen",
+      requires = "nvim-treesitter/nvim-treesitter",
+      config = function()
+        require("neogen").setup({
+          enabled = true,
+        })
       end,
     })
 
@@ -973,6 +1004,7 @@ return packer.startup({
     })
 
     -- Completion menu
+    -- TODO: move sources out with after = "nvim-cmp" (https://github.com/danymat/champagne/blob/main/lua/plugins.lua)
     use({
       "hrsh7th/nvim-cmp",
       requires = {

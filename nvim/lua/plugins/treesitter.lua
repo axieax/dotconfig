@@ -157,6 +157,14 @@ function M.setup()
       enable = true,
       enable_autocmd = false, -- for Comment.nvim integration
     },
+
+    -- Matching Text Navigation
+    -- https://github.com/andymass/vim-matchup
+    matchup = {
+      enable = true,
+      disable_virtual_text = true, -- using nvim-biscuits instead
+      -- include_match_words = true,
+    },
   })
 
   -- Folding (zopen/zclose, zReveal/zMinimise)

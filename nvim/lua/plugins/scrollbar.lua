@@ -10,9 +10,8 @@ return function()
       "prompt",
       "TelescopePrompt",
       "terminal",
-      "packer",
-      "alpha",
       "lspinfo",
+      "alpha",
       "toggleterm",
     },
   })

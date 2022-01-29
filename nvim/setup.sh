@@ -39,7 +39,6 @@ fi
 
 # Formatters
 # TODO: replace local installations with nvim wrapper plugins
-# also install prettier extensions
 
 # Null-ls Sources
 action="install Stylua formatter"
@@ -63,9 +62,21 @@ if ! check_dependency "isort" && confirm "$action"; then
   $OS_PIP install isort
 fi
 
-action="install Prettierd formatter"
+action="install prettierd formatter"
 if ! check_dependency "prettierd" && confirm "$action"; then
   yarn global add @fsouza/prettierd
+fi
+
+action="install prettier extensions"
+if confirm "$action"; then
+  # yarn global add prettier-plugin-apex
+  # yarn global add prettier-plugin-elm
+  yarn global add prettier-plugin-java
+  # yarn global add prettier-plugin-solidity
+  yarn global add prettier-plugin-toml
+  # yarn global add prettier-plugin-svelte
+  # yarn global add prettier-plugin-kotlin
+  yarn global add prettier-plugin-sh
 fi
 
 action="install Pylint diagnostics"

@@ -15,7 +15,6 @@ local map = require("utils").map
 -- Buffer options (:setlocal for buffer-local options) - vim.bo
 -- Window options (:setlocal for window-local options) - vim.wo
 
--- TODO: vim.o instead of vim.opt?
 -- TODO: writebackup
 -- https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim#L94-L99
 vim_apply(vim.opt, {

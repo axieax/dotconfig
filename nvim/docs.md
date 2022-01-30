@@ -136,6 +136,5 @@
 - https://github.com/folke/todo-comments.nvim/issues/80
 - https://github.com/norcalli/nvim-colorizer.lua/pull/18
 - https://github.com/vuki656/package-info.nvim/issues/75
-- My surround-wrap plugin
-- Git review plugin
-- URL paste md
+- My surround-wrap plugin (future: URL paste md)
+- Git watch plugin

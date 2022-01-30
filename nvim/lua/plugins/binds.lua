@@ -321,7 +321,7 @@ function M.which_key()
         end,
         "Toggle spellcheck",
       },
-      u = { "<CMD>Urlview<CR>", "View buffer URLs" },
+      u = { "<CMD>UrlView<CR>", "View buffer URLs" },
       z = { "<CMD>FocusMaxOrEqual<CR>", "Maximise toggle" },
     },
     [","] = {

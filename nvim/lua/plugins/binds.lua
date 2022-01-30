@@ -122,7 +122,7 @@ function M.which_key()
   -- Config
   wk.setup({
     layout = { align = "center" },
-    window = { winblend = 10 },
+    window = { winblend = 20 },
   })
 
   -- mappings
@@ -234,7 +234,8 @@ function M.which_key()
         ["."] = { require("telescope.builtin").resume, "resume last command" },
       },
       r = {
-        n = { vim.lsp.buf.rename, "rename symbol" },
+        n = { require("lsp.rename").rename_empty, "rename symbol (no default text)" },
+        N = { vim.lsp.buf.rename, "rename symbol" },
         r = { require("plugins.toggleterm").lazydocker, "lazydocker" },
         -- BUG: the following places an extra character in the buffer (replace)
         -- f = { "<CMD>luafile %<CR>" },

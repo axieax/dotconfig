@@ -1,6 +1,19 @@
 -- TODO: Attach handler to rename directly (without this copy and paste)
 local M = {}
 
+---Calls vim.lsp.buf.rename without the default text
+function M.rename_empty()
+  -- Override vim.ui.input function to remove default text
+  local original_ui_input = vim.ui.input
+  vim.ui.input = function(opts, on_confirm)
+    opts.default = ""
+    original_ui_input(opts, on_confirm)
+    vim.ui.input = original_ui_input
+  end
+
+  vim.lsp.buf.rename()
+end
+
 ------------------------------------------------------------------------------------------------
 -- Initial rename_handler function inspiration from CosmicNvim/cosmic-ui                      --
 -- SOURCE: https://github.com/CosmicNvim/cosmic-ui/blob/main/lua/cosmic-ui/rename/handler.lua --

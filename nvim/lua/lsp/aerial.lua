@@ -9,5 +9,10 @@ return function()
     manage_folds = false,
     -- link_tree_to_folds = true,
     -- link_folds_to_tree = true,
+    show_guides = true,
+    guides = {
+      mid_item = "│ ",
+      last_item = "└ ",
+    },
   })
 end

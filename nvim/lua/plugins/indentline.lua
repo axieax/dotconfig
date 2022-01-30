@@ -42,6 +42,8 @@ return function()
       "glowpreview",
       "lsp-installer",
       "checkhealth",
+      "aerial",
+      "",
     },
   })
 

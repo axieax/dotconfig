@@ -132,7 +132,9 @@
 --[[ Current PRs / Issues
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2323
 -- https://github.com/monaqa/dial.nvim/issues/9
--- https://github.com/j-hui/fidget.nvim/issues/11
+-- https://github.com/danymat/neogen/issues/49
+-- https://github.com/vuki656/package-info.nvim/issues/75
+-- My surround-wrap plugin
 --]]
 
 -- https://github.com/wbthomason/packer.nvim --
@@ -589,7 +591,7 @@ return packer.startup({
               -- 'switch',
               -- 'case',
             }, ]]
-            -- BUG: not working (TS: content not nested under heading)
+            -- BUG: not working (treesitter: content not nested under heading)
             markdown = {
               "atx_heading",
             },
@@ -681,7 +683,12 @@ return packer.startup({
     })
 
     -- Matching text navigation
-    use("andymass/vim-matchup")
+    use({
+      "andymass/vim-matchup",
+      config = function()
+        vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
+      end,
+    })
 
     -----------------------------
     -- Project / Git Utilities --
@@ -972,7 +979,10 @@ return packer.startup({
     use({
       "j-hui/fidget.nvim",
       config = function()
-        require("fidget").setup({})
+        require("fidget").setup({
+          relative = "editor",
+          window = { blend = 0 },
+        })
       end,
     })
 

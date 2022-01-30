@@ -31,9 +31,28 @@ return function()
     float = { source = "always" },
   })
 
-  -- Borders
-  -- TODO: set up winblend for transparency (like lsp_signature)
-  -- TODO: rounded borders for :LspInfo
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+  -- Hover rounded borders with transparent background
+  local function customise_handler(handler)
+    local overrides = { border = "rounded" }
+    return vim.lsp.with(function(...)
+      local buf, winnr = handler(...)
+      if buf then
+        vim.api.nvim_buf_set_keymap(buf, "n", "K", "<CMD>wincmd p<CR>", { noremap = true, silent = true })
+        vim.api.nvim_win_set_option(winnr, "winblend", 20)
+      end
+    end, overrides)
+  end
+
+  vim.lsp.handlers["textDocument/hover"] = customise_handler(vim.lsp.handlers.hover)
+  vim.lsp.handlers["textDocument/signatureHelp"] = customise_handler(vim.lsp.handlers.signature_help)
+
+  -- LspInfo rounded borders
+  local win = require("lspconfig.ui.windows")
+  local _default_opts = win.default_opts
+
+  win.default_opts = function(options)
+    local opts = _default_opts(options)
+    opts.border = "rounded"
+    return opts
+  end
 end

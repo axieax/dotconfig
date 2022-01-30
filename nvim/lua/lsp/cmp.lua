@@ -13,7 +13,7 @@ return function()
   -- setup cmp
   local cmp = require("cmp")
   local lspkind = require("lspkind")
-  vim.o.completeopt = "menu,menuone,noselect"
+  vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
   local sources = {
     nvim_lsp = { label = "[LSP]", priority = 3 },

@@ -129,4 +129,8 @@ function M.get_os()
   return vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
 end
 
+function M.glob_split(pattern)
+  return vim.split(vim.fn.glob(pattern), "\n")
+end
+
 return M

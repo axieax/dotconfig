@@ -20,7 +20,7 @@ local map = require("utils").map
 vim_apply(vim.opt, {
   -- General options
   mouse = "a",
-  spell = true,
+  -- spell = true,
   scrolloff = 1,
   sidescrolloff = 2,
   cursorline = true,
@@ -152,3 +152,12 @@ vim.cmd("au BufEnter *.tfstate setlocal filetype=json")
 
 -- Bazel filetype
 vim.cmd("au BufEnter *.bzl,BUILD,*.BUILD,BUILD.*,WORKSPACE,WORKSPACE.* setlocal filetype=bzl")
+
+-- Enable spellcheck conditionally based on filetypes
+vim.cmd([[
+augroup spellcheck
+  autocmd!
+  au FileType markdown,text,'' setlocal spell
+  au BufEnter * if empty(&filetype) | setlocal spell | endif
+augroup END
+]])

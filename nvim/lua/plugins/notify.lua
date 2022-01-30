@@ -2,16 +2,23 @@
 
 return function()
   require("notify").setup({
-    background_colour = "#000000",
+    background_colour = "NormalFloat",
     render = "minimal",
     on_open = function(win)
       -- transparent background
-      -- BUG: does not blend properly
-      vim.api.nvim_win_set_option(win, "winblend", 20)
-      vim.api.nvim_win_set_config(win, { zindex = 20000 })
-      -- vim.api.nvim_win_set_option(win, "winhighlight", "Normal:TelescopeNormal,NormalNC:TelescopeNormal")
+      -- BUG: does not blend fully with transparent background
       -- TRY: https://github.com/folke/zen-mode.nvim/blob/main/lua/zen-mode/view.lua#L198-L210
-      -- https://github.com/ray-x/lsp_signature.nvim/blob/1178ad69ce5c2a0ca19f4a80a4048a9e4f748e5f/lua/lsp_signature/init.lua#L418-L420 works
+      vim.api.nvim_win_set_option(win, "winblend", 40)
+      vim.api.nvim_win_set_config(win, { zindex = 20000 })
+      vim.api.nvim_win_set_option(win, "winhighlight", "Normal:NormalFloat")
     end,
   })
+
+  vim.cmd([[
+    highlight link NotifyERRORBody NormalFloat
+    highlight link NotifyWARNBody NormalFloat
+    highlight link NotifyINFOBody NormalFloat
+    highlight link NotifyDEBUGBody NormalFloat
+    highlight link NotifyTRACEBody NormalFloat
+  ]])
 end

@@ -9,19 +9,22 @@
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+-- NOTES:
+-- Need ripgrep for Telescope grep_string
+
+local dev_mode = false
+
 -- General config
 require("general")
 
 -- Plugins config
-require("plugins")
+require("plugins")(dev_mode)
 
 -- Apply keybindings
 require("plugins.binds").general()
 
--- NOTES
-
--- Automatically PackerCompile whenever plugins are updated
--- Need ripgrep for Telescope grep_string
-
--- TEMP: surround-wrap development
-vim.o.rtp = vim.o.rtp .. vim.fn.expand(",~/dev/nvim-plugins/surround-wrap.nvim")
+-- Personal plugin development
+if dev_mode then
+  local plugins = require("utils").glob_split("~/dev/nvim-plugins/*")
+  vim.opt.rtp:append(plugins)
+end

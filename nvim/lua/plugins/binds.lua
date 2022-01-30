@@ -1,6 +1,7 @@
 -- https://github.com/folke/which-key.nvim --
 -- TODO: separate bindings
 -- Normal and Visual mappings on same key
+-- Can use Packer module field to lazy load based on lua require
 
 local M = {}
 local map = require("utils").map
@@ -314,6 +315,14 @@ function M.which_key()
       -- tpope/unimpaired has [<Space> and ]<Space> as well
       O = { "O<ESC>", "Create new line above" },
       o = { "o<ESC>", "Create new line below" },
+      s = {
+        function()
+          vim.o.spell = not vim.o.spell
+        end,
+        "Toggle spellcheck",
+      },
+      u = { "<CMD>Urlview<CR>", "View buffer URLs" },
+      z = { "<CMD>FocusMaxOrEqual<CR>", "Maximise toggle" },
     },
     [","] = {
       p = { "<CMD>PasteImg<CR>", "Paste image" },

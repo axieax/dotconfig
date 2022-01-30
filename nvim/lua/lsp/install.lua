@@ -45,10 +45,11 @@ function M.ls_overrides()
   vim.list_extend(lua_rtps, { "lua/?.lua", "lua/?/init.lua" })
 
   -- jdtls setup
+  local glob_split = require("utils").glob_split
   local java_bundles = {
     vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
   }
-  vim.list_extend(java_bundles, vim.split(vim.fn.glob("~/java/vscode-java-test/server/*.jar"), "\n"))
+  vim.list_extend(java_bundles, glob_split("~/java/vscode-java-test/server/*.jar"))
 
   local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
   local os = require("utils").get_os()
@@ -56,7 +57,7 @@ function M.ls_overrides()
 
   -- local runtime_base_path = "/usr/lib/jvm/"
   -- local java_runtimes = {}
-  -- local runtime_paths = vim.split(vim.fn.glob(runtime_base_path .. "java-*"), "\n")
+  -- local runtime_paths = glob_split(runtime_base_path .. "java-*")
   -- for _, rtp in ipairs(runtime_paths) do
   --   -- carve everything after java-*
   --   table.insert(java_runtimes, {

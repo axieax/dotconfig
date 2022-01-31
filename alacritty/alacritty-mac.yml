@@ -1,13 +1,16 @@
 font:
   normal:
-    family: MesloLGM Nerd Font
+    family: JetBrainsMono Nerd Font Mono
     style: Regular
   bold:
-    family: MesloLGM Nerd Font
+    family: JetBrainsMono Nerd Font Mono
     style: Bold
   italic:
-    family: MesloLGM Nerd Font
+    family: JetBrainsMono Nerd Font Mono
     style: Italic
+  bold_italic:
+    family: JetBrainsMono Nerd Font Mono
+    style: Bold Italic
 
 # mac alt mappings (https://github.com/alacritty/alacritty/issues/62#issuecomment-347552058)
 key_bindings:

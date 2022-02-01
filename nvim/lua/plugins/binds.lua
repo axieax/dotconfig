@@ -93,8 +93,8 @@ end
 function M.misc()
   -- LSP
   map({ "n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>" })
-  map({ "v", "gq", "<CMD>lua require'lsp.code_actions'.telescope(true)<CR>" })
-  map({ "v", "gQ", "<CMD>lua require'lsp.code_actions'.telescope(false)<CR>" })
+  map({ "v", "gq", "<CMD>lua require'lsp.code_actions'.default(true)<CR>" })
+  map({ "v", "gQ", "<CMD>lua require'lsp.code_actions'.default(false)<CR>" })
   -- Telescope
   map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
   -- NvimTree
@@ -185,8 +185,8 @@ function M.which_key()
           end,
           "show line diagnostics",
         },
-        q = { "<CMD>lua require'lsp.code_actions'.telescope(true)<CR>", "code actions (ignore null-ls)" },
-        Q = { "<CMD>lua require'lsp.code_actions'.telescope(false)<CR>", "code actions (all)" },
+        q = { "<CMD>lua require'lsp.code_actions'.default(true)<CR>", "code actions (ignore null-ls)" },
+        Q = { "<CMD>lua require'lsp.code_actions'.default(false)<CR>", "code actions (all)" },
         c = { vim.lsp.codelens.run, "code lens" },
         [";"] = { "<CMD>ToggleDiag<CR>", "toggle diagnostics" },
         ["?"] = { "<CMD>LspInfo<CR>", "LSP info" },
@@ -300,8 +300,8 @@ function M.which_key()
       },
       l = { "<CMD>Trouble document_diagnostics<CR>", "Show document diagnostics" },
       L = { "<CMD>Trouble workspace_diagnostics<CR>", "Show workspace diagnostics" },
-      q = { "<CMD>lua require'lsp.code_actions'.telescope(true)<CR>", "code actions (ignore null-ls)" },
-      Q = { "<CMD>lua require'lsp.code_actions'.telescope(false)<CR>", "code actions (all)" },
+      q = { "<CMD>lua require'lsp.code_actions'.default(true)<CR>", "code actions (ignore null-ls)" },
+      Q = { "<CMD>lua require'lsp.code_actions'.default(false)<CR>", "code actions (all)" },
       d = { require("telescope.builtin").lsp_definitions, "Goto definition" },
       D = { "<CMD>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
       r = { require("telescope.builtin").lsp_references, "References" },

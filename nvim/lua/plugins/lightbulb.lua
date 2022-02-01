@@ -23,9 +23,6 @@ function M.update()
   -- display status
   local status = require("nvim-lightbulb").get_status_text()
   vim.api.nvim_echo({ { status, "WarningMsg" } }, false, {})
-  -- if status ~= "" then
-  --   require("utils").notify(status, "info")
-  -- end
 end
 
 return M

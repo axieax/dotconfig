@@ -24,20 +24,6 @@ function M.dotconfig()
   })
 end
 
-function M.code_action()
-  local ft = vim.bo.filetype
-  if ft == "java" then
-    -- require("jdtls").code_action()
-    vim.lsp.buf.code_action()
-  else
-    -- require("telescope.builtin").lsp_code_actions()
-    vim.lsp.buf.code_action()
-    -- TEMP: https://github.com/weilbith/nvim-code-action-menu/issues/32
-    -- require("code_action_menu").open_code_action_menu()
-    -- vim.cmd("CodeActionMenu")
-  end
-end
-
 function M.setup()
   -- telescope setup mappings table - inside telescope overlay
   -- TODO: overwrite dotfiles? action for opening current file in native file explorer?

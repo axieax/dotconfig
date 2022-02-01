@@ -93,7 +93,8 @@ end
 function M.misc()
   -- LSP
   map({ "n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>" })
-  map({ "v", "gq", ":lua require'plugins.telescope'.code_action()<CR>" })
+  map({ "v", "gq", "<CMD>lua require'lsp.code_actions'(true)<CR>" })
+  map({ "v", "gQ", "<CMD>lua require'lsp.code_actions'(false)<CR>" })
   -- Telescope
   map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
   -- NvimTree
@@ -184,8 +185,8 @@ function M.which_key()
           end,
           "show line diagnostics",
         },
-        q = { require("plugins.telescope").code_action, "code actions" },
-        Q = { require("telescope.builtin").lsp_range_code_actions, "code actions (range)" },
+        q = { "<CMD>lua require'lsp.code_actions'(true)<CR>", "code actions (ignore null-ls)" },
+        Q = { "<CMD>lua require'lsp.code_actions'(false)<CR>", "code actions (all)" },
         c = { vim.lsp.codelens.run, "code lens" },
         [";"] = { "<CMD>ToggleDiag<CR>", "toggle diagnostics" },
         ["?"] = { "<CMD>LspInfo<CR>", "LSP info" },
@@ -215,7 +216,7 @@ function M.which_key()
         t = { require("telescope.builtin").colorscheme, "theme" },
         T = { "<CMD>Telescope colorscheme enable_preview=true<CR>", "theme preview" },
         m = { require("telescope.builtin").man_pages, "search manual" },
-        -- M = { require("telescope").extensions.macroscope.default, "search macros" },
+        -- M = { rlsp.code_actions").macroscope.default, "search macros" },
         M = { "<CMD>Telescope macroscope<CR>", "search macros" },
         -- TODO: n for notes
         s = { "1z=", "spelling correct" },
@@ -299,8 +300,8 @@ function M.which_key()
       },
       l = { "<CMD>Trouble document_diagnostics<CR>", "Show document diagnostics" },
       L = { "<CMD>Trouble workspace_diagnostics<CR>", "Show workspace diagnostics" },
-      q = { require("plugins.telescope").code_action, "Code actions" },
-      Q = { vim.lsp.buf.code_action, "Code actions (default)" },
+      q = { "<CMD>lua require'lsp.code_actions'(true)<CR>", "code actions (ignore null-ls)" },
+      Q = { "<CMD>lua require'lsp.code_actions'(false)<CR>", "code actions (all)" },
       d = { require("telescope.builtin").lsp_definitions, "Goto definition" },
       D = { "<CMD>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
       r = { require("telescope.builtin").lsp_references, "References" },

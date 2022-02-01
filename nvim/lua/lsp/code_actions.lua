@@ -3,7 +3,12 @@ local M = {}
 -- TODO: CodeActionMenu
 
 function M.default(...)
-  return M.telescope(...)
+  local ft = vim.bo.filetype
+  if ft == "java" then
+    return M.builtin(...)
+  else
+    return M.telescope(...)
+  end
 end
 
 local no_code_actions_notify = function()
@@ -15,7 +20,7 @@ function M.update_results(lsp_results, ignore_null_ls)
   local results = {}
   local null_results = {}
 
-  for client_id, result in pairs(lsp_results) do
+  for client_id, result in ipairs(lsp_results) do
     local client = vim.lsp.get_client_by_id(client_id)
     local is_null = client.name == "null-ls"
 
@@ -39,14 +44,12 @@ function M.builtin(ignore_null_ls, context)
 
   -- Attach to vim.lsp.buf_request_all
   local buf_request_all = vim.lsp.buf_request_all
-  vim.lsp.buf_request_all = function(...)
-    local lsp_results, err = buf_request_all(...)
-    vim.lsp.buf_request_all = buf_request_all
-    if err then
-      return nil, err
-    end
-
-    return M.update_results(lsp_results, ignore_null_ls), nil
+  vim.lsp.buf_request_all = function(bufnr, method, params, callback)
+    return buf_request_all(bufnr, method, params, function(lsp_results)
+      vim.lsp.buf_request_all = buf_request_all
+      local results = M.update_results(lsp_results, ignore_null_ls)
+      return callback(results)
+    end)
   end
 
   vim.lsp.buf.code_action(context)

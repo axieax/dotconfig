@@ -1,28 +1,6 @@
-local M = {}
-
 -- TODO: range code action for visual selection
 
-function M.code_action(ignore_null_ls, context)
-  ignore_null_ls = ignore_null_ls or false
-
-  -- Override request function
-  local original_requester = vim.lsp.buf_request_all
-  vim.lsp.buf_request_all = function(bufnr, method, params, _)
-    original_requester(bufnr, method, params, function(results)
-      local ctx = {
-        bufnr = bufnr,
-        method = method,
-        params = params,
-      }
-      M.code_action_handler(results, ctx, ignore_null_ls)
-    end)
-  end
-
-  vim.lsp.buf.code_action(context)
-  vim.lsp.buf_request_all = original_requester
-end
-
-function M.code_action_handler(results, ctx, ignore_null_ls)
+local function code_action_handler(results, ctx, ignore_null_ls)
   local action_tuples = {}
   local null_action_tuples = {}
   for client_id, result in pairs(results) do
@@ -116,4 +94,22 @@ function M.code_action_handler(results, ctx, ignore_null_ls)
   }, on_user_choice)
 end
 
-return M
+return function(ignore_null_ls, context)
+  ignore_null_ls = ignore_null_ls or false
+
+  -- Override request function
+  local original_requester = vim.lsp.buf_request_all
+  vim.lsp.buf_request_all = function(bufnr, method, params, _)
+    original_requester(bufnr, method, params, function(results)
+      local ctx = {
+        bufnr = bufnr,
+        method = method,
+        params = params,
+      }
+      code_action_handler(results, ctx, ignore_null_ls)
+    end)
+  end
+
+  vim.lsp.buf.code_action(context)
+  vim.lsp.buf_request_all = original_requester
+end

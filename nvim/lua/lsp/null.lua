@@ -30,7 +30,11 @@ function M.formatting_sources()
     -- PYTHON: pip install isort (import sort)
     formatting.isort,
     -- GOLANG: go install golang.org/x/tools/cmd/goimports@latest
-    formatting.goimports,
+    -- NOTE: this superset of gomft is preferred if installed
+    formatting.goimports.with({
+      -- TEMP: group local Canva packages
+      extra_args = { "-local", "github.com/canva" },
+    }),
     -- HASKELL: yay -S brittany
     formatting.brittany,
     -- C*: yarn global add clang_format

@@ -129,6 +129,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/petertriho/nvim-scrollbar/issues/35
 - https://github.com/nvim-treesitter/nvim-treesitter/issues/2323
 - https://github.com/monaqa/dial.nvim/issues/9
 - https://github.com/danymat/neogen/issues/49

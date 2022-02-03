@@ -3,6 +3,7 @@ local M = {}
 -- TODO: CodeActionMenu
 
 function M.default(...)
+  -- TODO: custom Telescope picker which uses generic builtin functionality
   local ft = vim.bo.filetype
   if ft == "java" then
     return M.builtin(...)

@@ -29,6 +29,8 @@ function M.formatting_sources()
     formatting.black,
     -- PYTHON: pip install isort (import sort)
     formatting.isort,
+    -- GOLANG: go install golang.org/x/tools/cmd/goimports@latest
+    formatting.goimports,
     -- HASKELL: yay -S brittany
     formatting.brittany,
     -- C*: yarn global add clang_format

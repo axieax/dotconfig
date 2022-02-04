@@ -12,9 +12,7 @@ return function(dev_mode)
   -- NOTE: this addresses PackerUpdate potentially getting stuck (https://github.com/wbthomason/packer.nvim/issues/202)
   local packer = require("packer")
   packer.reset()
-  packer.init({
-    max_jobs = 50,
-  })
+  packer.init({ max_jobs = 50 })
 
   -- Automatically source this file on save
   vim.cmd("autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile>")
@@ -181,7 +179,7 @@ return function(dev_mode)
         disable = true,
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
-          require("bufferline").setup({})
+          require("bufferline").setup()
         end,
       })
 
@@ -370,9 +368,7 @@ return function(dev_mode)
         disable = true,
         config = function()
           require("nnn").setup({
-            explorer = {
-              side = "botright",
-            },
+            explorer = { side = "botright" },
           })
         end,
       })
@@ -473,9 +469,7 @@ return function(dev_mode)
             }, ]]
               -- BUG: not working (treesitter: content not nested under heading)
               -- https://github.com/romgrk/nvim-treesitter-context/issues/87
-              markdown = {
-                "atx_heading",
-              },
+              markdown = { "atx_heading" },
             },
           })
         end,
@@ -527,9 +521,7 @@ return function(dev_mode)
         "nacro90/numb.nvim",
         event = "BufRead",
         config = function()
-          require("numb").setup({
-            number_only = true,
-          })
+          require("numb").setup({ number_only = true })
         end,
       })
 
@@ -714,9 +706,7 @@ return function(dev_mode)
         "danymat/neogen",
         requires = "nvim-treesitter/nvim-treesitter",
         config = function()
-          require("neogen").setup({
-            enabled = true,
-          })
+          require("neogen").setup()
         end,
       })
 
@@ -884,6 +874,7 @@ return function(dev_mode)
       })
 
       -- Symbols outline
+      -- ALT: https://github.com/simrat39/symbols-outline.nvim
       -- use("simrat39/symbols-outline.nvim")
       use({
         "stevearc/aerial.nvim",

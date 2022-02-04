@@ -12,6 +12,7 @@
 - https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
 - https://www.reddit.com/r/neovim/comments/s2ziys/alternative_lua_parser_for_nvimtreesitter_it/
 - https://github.com/danymat/champagne/blob/main/lua/plugins.lua
+- https://github.com/kabinspace/AstroVim
 
 ## TODO
 

@@ -32,7 +32,13 @@ return function()
     dashboard.button("q", "⏻  Quit Neovim", "<CMD>qa<CR>"),
   }
 
-  dashboard.section.footer.val = "  https://github.com/axieax/"
+  local glob_split = require("utils").glob_split
+  local start_plugins = #glob_split("~/.local/share/nvim/site/pack/packer/start/*")
+  local opt_plugins = #glob_split("~/.local/share/nvim/site/pack/packer/opt/*")
+  dashboard.section.footer.val = {
+    string.format("   %d plugins (%d loaded)", start_plugins + opt_plugins, start_plugins),
+    "  https://github.com/axieax/",
+  }
 
   require("alpha").setup(dashboard.config)
 end

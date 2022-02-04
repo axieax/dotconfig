@@ -13,7 +13,7 @@ local fileformat_icons = require("utils.config").fileformat_icons
 
 local M = {}
 
-function M.get_component(name)
+function M.get_component(name, condition)
   -- Colours
   -- ~/.local/share/nvim/site/pack/packer/opt/galaxyline.nvim/lua/galaxyline/themes/colors.lua
   local galaxyline_colours = require("galaxyline.themes.colors").default
@@ -195,16 +195,24 @@ function M.get_component(name)
     -- Misc Components
     Divider = {
       provider = function()
-        return "  + "
+        return "+ "
       end,
       separator = " ",
       highlight = { onedark_colours.bg_blue },
     },
   }
 
+  local component = components[name]
+  if condition then
+    component.condition = condition
+  end
   return {
-    [name] = components[name],
+    [name] = component,
   }
+end
+
+function M.filetype_conditional()
+  return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 end
 
 function M.setup()
@@ -212,6 +220,7 @@ function M.setup()
 
   -- Define the structure of the statusline
   local get_component = require("plugins.galaxyline").get_component
+  local filetype_conditional = require("plugins.galaxyline").filetype_conditional
   galaxyline.section = {
     -- Regular statusline
     left = {
@@ -248,9 +257,9 @@ function M.setup()
 
     short_line_mid = {
       get_component("VimMode"),
-      get_component("Divider"),
-      get_component("FileName"),
-      get_component("FileNameIcon"),
+      get_component("Divider", filetype_conditional),
+      get_component("FileName", filetype_conditional),
+      get_component("FileNameIcon", filetype_conditional),
     },
 
     short_line_right = {

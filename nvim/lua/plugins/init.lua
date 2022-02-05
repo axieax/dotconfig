@@ -60,6 +60,13 @@ return function(dev_mode)
 
       -- TRY: https://www.reddit.com/r/neovim/comments/se377t/telescopenvim_looks_neat
 
+      -- TODO: replace all with themer.lua?
+      use({
+        "themercorp/themer.lua",
+        disable = true,
+        config = require("themes.themer"),
+      })
+
       use({
         "marko-cerovac/material.nvim",
         config = require("themes.material"),
@@ -76,6 +83,7 @@ return function(dev_mode)
         config = require("themes.kanagawa"),
       })
 
+      -- TODO: replace (too red)
       -- ALT: https://github.com/ful1e5/onedark.nvim
       use({
         "olimorris/onedarkpro.nvim",
@@ -173,7 +181,6 @@ return function(dev_mode)
         config = require("plugins.barbar"),
       })
 
-      -- ALT: https://github.com/akinsho/nvim-bufferline.lua
       use({
         "akinsho/bufferline.nvim",
         disable = true,

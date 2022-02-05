@@ -42,7 +42,7 @@ return function()
     NormalFloat = { bg = cp.black2 }, -- NOTE: catppuccin needs a bg colour
     ColorColumn = { link = "CursorLine" },
     CursorLineNr = { fg = cp.magenta },
-    WhichKeyFloat = { bg = cp.black2 },
+    WhichKeyFloat = { link = "NormalFloat" },
     SpellBad = { fg = cp.red, style = "italic,undercurl" },
     SpellCap = { fg = cp.red, style = "italic,undercurl" },
     SpellLocal = { fg = cp.red, style = "italic,undercurl" },

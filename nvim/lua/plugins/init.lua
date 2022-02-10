@@ -300,7 +300,7 @@ return function(dev_mode)
         after = "telescope.nvim",
         config = function()
           require("neoclip").setup({
-            enable_persistant_history = true,
+            enable_persistent_history = true,
           })
           require("telescope").load_extension("neoclip")
         end,
@@ -695,6 +695,7 @@ return function(dev_mode)
       use("rafamadriz/friendly-snippets")
 
       -- Definable snippets
+      -- ALT: https://github.com/L3MON4D3/LuaSnip
       use("hrsh7th/vim-vsnip")
 
       -- Docstring generator
@@ -843,6 +844,8 @@ return function(dev_mode)
           "mfussenegger/nvim-dap",
         },
       })
+
+      -- TODO: https://github.com/p00f/clangd_extensions.nvim
 
       -- LSP diagnostics, code actions, formatting extensions
       use({

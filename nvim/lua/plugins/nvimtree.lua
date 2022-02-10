@@ -1,5 +1,4 @@
--- https://github.com/preservim/nerdtree --
--- NOTE: background colour?
+-- https://github.com/kyazdani42/nvim-tree.lua --
 
 return function()
   local utils = require("utils")

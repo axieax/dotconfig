@@ -25,6 +25,7 @@
 - IMPORTANT: uncomment adjacent lines https://github.com/numToStr/Comment.nvim/issues/22
 - IMPORTANT: set up toggleterm - and warn if exit with hidden terminal
 - TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
+- TODO: use luasnip instead of vsnip
 - READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 - TODO: use vim-fugitive instead of gitlinker?
 - TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
@@ -58,6 +59,7 @@
 - Tab before indent spot jumps to correct indent spot
 - Relative line number disabled ft manually defined?
 - Markdown tab and shift tab conditional mapping based on bullet
+- TODO: hlslens + vim-visual-multi
 
 ## Features/plugins
 

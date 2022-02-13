@@ -30,7 +30,6 @@
 - TODO: use vim-fugitive instead of gitlinker?
 - TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 - TODO: Telescope picker for LSP commands
-- TODO: lsp-rename no pre-filled text (<space>rN), transparent window?
 - TODO: <space>lU to update lsp servers?
 - TODO: rust-tools debug setup
 - TODO: global toggle inlay hints command (inc rust as well)
@@ -112,7 +111,6 @@
 ## Notes / issues
 
 - https://github.com/kyazdani42/nvim-tree.lua/issues/806 (plugin being refactored)
-- https://github.com/petertriho/nvim-scrollbar/issues/35
 - Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 - Zen mode with nvim-treesitter-context?
 - stabilize.nvim view jumps

@@ -125,19 +125,17 @@
 - nvim-cmp treesitter completion source vs buffer source?
 - Opening buffer for file (nvim-tree) replaces barbar buffers
 - Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
-- https://github.com/nvim-treesitter/nvim-treesitter/issues/872
 - Colorizer disabled on PackerCompile (changing colorscheme), no support for lowercase, unmaintained
 - autopairs may start to break after a while (can't insert characters)
 
 ## Current PRs / Issues
 
-- https://github.com/petertriho/nvim-scrollbar/issues/35
-- https://github.com/nvim-treesitter/nvim-treesitter/issues/2323
-- https://github.com/monaqa/dial.nvim/issues/9
+- https://github.com/wbthomason/packer.nvim/issues/760
+- https://github.com/wbthomason/packer.nvim/issues/824
 - https://github.com/danymat/neogen/issues/49
 - https://github.com/folke/todo-comments.nvim/issues/77
 - https://github.com/folke/todo-comments.nvim/issues/80
 - https://github.com/norcalli/nvim-colorizer.lua/pull/18
 - https://github.com/vuki656/package-info.nvim/issues/75
 - My surround-wrap plugin (future: URL paste md)
-- Git watch plugin
+- Git change watch plugin

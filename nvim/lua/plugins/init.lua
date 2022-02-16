@@ -958,7 +958,7 @@ return function(dev_mode)
 
       -- Packer auto update + compile
       if auto_install then
-        require("packer").sync()
+        packer.sync()
       end
     end,
 

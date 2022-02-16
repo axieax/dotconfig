@@ -122,6 +122,8 @@ function M.diagnostic_sources()
         return utils.root_has_file({ ".editorconfig" })
       end,
     }),
+    -- DEFAULT
+    -- diagnostics.trail_space,
   }
 end
 

@@ -23,7 +23,6 @@ return function()
     equal = dial.common.enum_cyclic({ strlist = { "==", "!=" }, ptn_format = non_word_pattern }),
     Equal = dial.common.enum_cyclic({ strlist = { "===", "!==" }, ptn_format = non_word_pattern }),
     greaterEqual = dial.common.enum_cyclic({ strlist = { ">=", "<=" }, ptn_format = non_word_pattern }),
-    -- NOTE: following does not seem to work as expected
     selfIncrementBy = dial.common.enum_cyclic({
       strlist = { "+=", "-=", "*=", "/=", "//=", "%=" },
       ptn_format = non_word_pattern,

@@ -15,7 +15,8 @@ return function(dev_mode)
   packer.init({ max_jobs = 50 })
 
   -- Automatically source this file on save
-  vim.cmd("autocmd BufWritePost */dotconfig/nvim/*/*.lua source <afile>")
+  -- Does not work with above
+  vim.cmd("autocmd! BufWritePost */dotconfig/nvim/*/*.lua,*/.config/nvim/*/*.lua source $MYVIMRC")
 
   return packer.startup({
     function(use)
@@ -962,6 +963,7 @@ return function(dev_mode)
     end,
 
     config = {
+      profile = { enable = true },
       display = {
         open_fn = function()
           return require("packer.util").float({ border = "rounded" })

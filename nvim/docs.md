@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Lua function map -> define custom wrapper func(f, ...) which returns another function
 - PRIORITY: Separate telescope extensions, use Packer sequencing (after)
 - PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
 - PRIORITY: out of mem for large files (e.g. ~/.cache/nvim/lsp.log)

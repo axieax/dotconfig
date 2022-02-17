@@ -9,15 +9,11 @@ return function(dev_mode)
   end
   vim.cmd("packadd packer.nvim")
 
-  -- NOTE: this addresses PackerUpdate potentially getting stuck (https://github.com/wbthomason/packer.nvim/issues/202)
-  local packer = require("packer")
-  packer.reset()
-  packer.init({ max_jobs = 50 })
-
   -- Automatically source this file on save
   -- Does not work with above
   vim.cmd("autocmd! BufWritePost */dotconfig/nvim/*/*.lua,*/.config/nvim/*/*.lua source $MYVIMRC")
 
+  local packer = require("packer")
   return packer.startup({
     function(use)
       ---------------------
@@ -963,6 +959,8 @@ return function(dev_mode)
     end,
 
     config = {
+      -- https://github.com/wbthomason/packer.nvim/issues/202
+      max_jobs = 50,
       profile = { enable = true },
       display = {
         open_fn = function()

@@ -29,6 +29,7 @@ return function(dev_mode)
         "lewis6991/impatient.nvim",
         config = function()
           local impatient = require("impatient")
+          -- BUG: this breaks DistantInstall for some reason
           impatient.enable_profile()
         end,
       })

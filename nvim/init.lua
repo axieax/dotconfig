@@ -14,6 +14,12 @@
 
 local dev_mode = false
 
+-- Lua require caching
+-- TODO: create a namespace for all config (axie)
+local reload_module = require("utils").reload_module
+reload_module("plugins")
+reload_module("utils")
+
 -- General config
 require("general")
 
@@ -25,6 +31,28 @@ require("plugins.binds").general()
 
 -- Personal plugin development
 if dev_mode then
-  local plugins = require("utils").glob_split("~/dev/nvim-plugins/*")
-  vim.opt.rtp:append(plugins)
+  local base_path = "~/dev/nvim-plugins/"
+  local dev_plugins = {
+    {
+      plugin_name = "urlview.nvim",
+      module_names = { "urlview" },
+    },
+    {
+      plugin_name = "surround-wrap.nvim",
+      module_names = { "surround_wrap" },
+    },
+  }
+
+  for _, dev_plugin in ipairs(dev_plugins) do
+    vim.opt.rtp:append(base_path .. dev_plugin.plugin_name)
+    for _, module_name in ipairs(dev_plugin.module_names) do
+      reload_module(module_name)
+    end
+  end
+
+  -- local plugins = require("utils").glob_split("~/dev/nvim-plugins/*")
+  -- vim.opt.rtp:append(plugins)
+  -- local refresh_modules = { "urlview" }
+  -- TODO: reload require cache (need to extract modules)
+  -- package.loaded["plugins"] = nil
 end

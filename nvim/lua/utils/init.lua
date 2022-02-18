@@ -133,4 +133,13 @@ function M.glob_split(pattern)
   return vim.split(vim.fn.glob(pattern), "\n")
 end
 
+function M.reload_module(...)
+  local ok, plenary = pcall(require, "plenary.reload")
+  if ok then
+    plenary.reload_module(...)
+  else
+    M.notify("Could not reload module: " .. select(1, ...))
+  end
+end
+
 return M

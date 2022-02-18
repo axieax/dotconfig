@@ -7,7 +7,7 @@ return function()
     act_as_tab = false,
   })
 
-  local map = require("utils").map
+  local map = require("axie.utils").map
   map({ "i", "<C-l>", "<Plug>(TaboutMulti)", noremap = false })
   map({ "i", "<C-h>", "<Plug>(TaboutBackMulti)", noremap = false })
 end

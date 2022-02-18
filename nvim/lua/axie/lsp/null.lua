@@ -148,17 +148,17 @@ end
 
 function M.setup()
   -- Combine sources
-  local sources = require("utils").list_flatten_once({
-    require("lsp.null").formatting_sources(),
-    require("lsp.null").diagnostic_sources(),
-    require("lsp.null").code_action_sources(),
-    require("lsp.null").hover_sources(),
+  local sources = require("axie.utils").list_flatten_once({
+    require("axie.lsp.null").formatting_sources(),
+    require("axie.lsp.null").diagnostic_sources(),
+    require("axie.lsp.null").code_action_sources(),
+    require("axie.lsp.null").hover_sources(),
   })
 
   -- Setup null-ls
   require("null-ls").setup({
     sources = sources,
-    on_attach = require("lsp.install").default_on_attach,
+    on_attach = require("axie.lsp.install").default_on_attach,
   })
 end
 

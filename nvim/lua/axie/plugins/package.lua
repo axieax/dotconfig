@@ -1,6 +1,6 @@
 -- https://github.com/vuki656/package-info.nvim --
 return function()
-  local map = require("utils").map
+  local map = require("axie.utils").map
   require("package-info").setup({})
   -- Keybinds
   -- Show package versions

@@ -35,7 +35,7 @@ function M.setup()
   })
 
   -- other search methods
-  local map = require("utils").map
+  local map = require("axie.utils").map
   -- vim.cmd([[
   -- noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
   --           \<Cmd>lua require('hlslens').start()<CR>
@@ -54,8 +54,8 @@ function M.setup()
   -- vim.cmd([[
   -- aug VMlens
   --   au!
-  --   au User visual_multi_start lua require'plugins.hlslens'.vmlens_start()
-  --   au User visual_multi_exit lua require'plugins.hlslens'.vmlens_exit()
+  --   au User visual_multi_start lua require'axie.plugins.hlslens'.vmlens_start()
+  --   au User visual_multi_exit lua require'axie.plugins.hlslens'.vmlens_exit()
   -- aug END
   -- ]])
 end
@@ -82,7 +82,7 @@ function M.vmlens_start()
   if ok then
     local hlslens_config = require("hlslens.config")
     previous_lens = hlslens_config.override_lens
-    hlslens_config.override_lens = require("plugins.hlslens").override_lens
+    hlslens_config.override_lens = require("axie.plugins.hlslens").override_lens
     hlslens.start()
   end
 end

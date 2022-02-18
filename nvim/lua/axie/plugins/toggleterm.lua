@@ -33,9 +33,9 @@ function M.setup()
       },
     },
   })
-  vim.cmd("autocmd! TermOpen term://* lua require'plugins.toggleterm'.attach()")
+  vim.cmd("autocmd! TermOpen term://* lua require'axie.plugins.toggleterm'.attach()")
 
-  local map = require("utils").map
+  local map = require("axie.utils").map
   map({ "n", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
   map({ "i", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
   map({ "t", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })

@@ -1,7 +1,7 @@
 -- https://github.com/kyazdani42/nvim-tree.lua --
 
 return function()
-  local utils = require("utils")
+  local utils = require("axie.utils")
 
   utils.vim_apply(vim.g, {
     nvim_tree_git_hl = 1,

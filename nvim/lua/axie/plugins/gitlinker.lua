@@ -1,6 +1,6 @@
 -- https://github.com/ruifm/gitlinker.nvim --
 return function()
-  local map = require("utils").map
+  local map = require("axie.utils").map
   require("gitlinker").setup({
     mappings = "<space>gy",
   })

@@ -34,7 +34,7 @@ function M.goto_next_sibling()
 end
 
 function M.setup()
-  local vim_apply = require("utils").vim_apply
+  local vim_apply = require("axie.utils").vim_apply
 
   -- Orgmode.nvim integration
   local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
@@ -52,7 +52,7 @@ function M.setup()
 
   require("nvim-treesitter.configs").setup({
     -- Treesitter
-    -- ensure_installed = require("utils.config").prepared_parsers,
+    -- ensure_installed = require("axie.utils.config").prepared_parsers,
     ensure_installed = ensure_installed,
     highlight = {
       enable = true,

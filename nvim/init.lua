@@ -15,22 +15,24 @@
 local dev_mode = false
 
 -- Lua require caching
--- TODO: create a namespace for all config (axie)
-local reload_module = require("utils").reload_module
-reload_module("plugins")
-reload_module("utils")
+local reload_module = require("axie.utils").reload_module
+reload_module("axie")
 
 -- General config
-require("general")
+require("axie.general")
 
 -- Plugins config
-require("plugins")(dev_mode)
+require("axie.plugins")(dev_mode)
 
 -- Apply keybindings
-require("plugins.binds").general()
+require("axie.plugins.binds").general()
 
 -- Personal plugin development
 if dev_mode then
+  -- NOTE: automatic detection cannot find module names
+  -- local plugins = require("axie.utils").glob_split("~/dev/nvim-plugins/*")
+  -- vim.opt.rtp:append(plugins)
+
   local base_path = "~/dev/nvim-plugins/"
   local dev_plugins = {
     {
@@ -50,9 +52,4 @@ if dev_mode then
     end
   end
 
-  -- local plugins = require("utils").glob_split("~/dev/nvim-plugins/*")
-  -- vim.opt.rtp:append(plugins)
-  -- local refresh_modules = { "urlview" }
-  -- TODO: reload require cache (need to extract modules)
-  -- package.loaded["plugins"] = nil
 end

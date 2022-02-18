@@ -1,5 +1,6 @@
-local vim_apply = require("utils").vim_apply
-local map = require("utils").map
+local vim_apply = require("axie.utils").vim_apply
+local map = require("axie.utils").map
+local ternary = require("axie.utils").ternary
 
 ---------------
 -- Variables --
@@ -97,7 +98,7 @@ vim_apply(vim.g, {
 })
 
 -- Clipboard yank
-local yank_register = require("utils").ternary(vim.loop.os_uname().sysname == "Linux", "+", "*")
+local yank_register = ternary(vim.loop.os_uname().sysname == "Linux", "+", "*")
 map({ "n", "\\y", '"' .. yank_register .. "y", noremap = false })
 map({ "v", "\\y", '"' .. yank_register .. "y", noremap = false })
 

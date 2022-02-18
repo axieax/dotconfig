@@ -3,7 +3,7 @@
 -- Highlight line number instead of icons (https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#highlight-line-number-instead-of-having-icons-in-sign-column)
 
 return function()
-  local diagnostics_icons = require("utils.config").diagnostics_icons
+  local diagnostics_icons = require("axie.utils.config").diagnostics_icons
 
   -- Gutter diagnostic symbols
   for type, icon in pairs(diagnostics_icons) do

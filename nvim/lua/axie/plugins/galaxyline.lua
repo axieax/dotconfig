@@ -7,9 +7,9 @@
 -- TODO: decouple onedark colours
 -- TODO: remove scrollbar component
 
-local ternary = require("utils").ternary
-local diagnostics_icons = require("utils.config").diagnostics_icons
-local fileformat_icons = require("utils.config").fileformat_icons
+local ternary = require("axie.utils").ternary
+local diagnostics_icons = require("axie.utils.config").diagnostics_icons
+local fileformat_icons = require("axie.utils.config").fileformat_icons
 
 local M = {}
 
@@ -219,8 +219,8 @@ function M.setup()
   local galaxyline = require("galaxyline")
 
   -- Define the structure of the statusline
-  local get_component = require("plugins.galaxyline").get_component
-  local filetype_conditional = require("plugins.galaxyline").filetype_conditional
+  local get_component = require("axie.plugins.galaxyline").get_component
+  local filetype_conditional = require("axie.plugins.galaxyline").filetype_conditional
   galaxyline.section = {
     -- Regular statusline
     left = {

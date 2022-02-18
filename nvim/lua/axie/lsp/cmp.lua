@@ -223,7 +223,7 @@ return function()
   local override_default = false
   for _, mapping in ipairs(highlight_links) do
     local kind, link = unpack(mapping)
-    kind = require("utils").ternary(override_default, kind .. "Default", kind)
+    kind = require("axie.utils").ternary(override_default, kind .. "Default", kind)
     vim.cmd(string.format("highlight link %s %s", kind, link))
   end
 end

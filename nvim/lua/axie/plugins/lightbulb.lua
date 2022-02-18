@@ -3,7 +3,7 @@
 local M = {}
 
 function M.setup()
-  vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'plugins.lightbulb'.update()]])
+  vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'axie.plugins.lightbulb'.update()]])
 end
 
 function M.update()

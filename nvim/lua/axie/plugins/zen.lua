@@ -16,7 +16,7 @@ return function()
     -- SEE: https://github.com/folke/todo-comments.nvim/issues/27
 
     -- [[ toggle sidecolumn? ]]
-    -- require("utils").toggle_signcolumn()
+    -- require("axie.utils").toggle_signcolumn()
   end
 
   -- Zen mode

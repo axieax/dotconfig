@@ -38,7 +38,7 @@ function M.rename_handler(...)
   end
 
   -- display the resulting changes
-  require("lsp.rename").notify_handler(result)
+  require("axie.lsp.rename").notify_handler(result)
 
   vim.lsp.handlers[method](...)
 end
@@ -54,6 +54,7 @@ function M.notify_handler(result)
 
   -- prefer documentChanges over changes (under workspaceEdit)
   -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
+  local notify = require("axie.utils")
   local changes = {}
   if result.documentChanges then
     local msg = ""
@@ -69,7 +70,7 @@ function M.notify_handler(result)
       changes[entry.textDocument.uri] = edits
     end
     msg = msg:sub(1, #msg - 1)
-    require("utils").notify(msg, "info", {
+    notify(msg, "info", {
       title = ("Succesfully renamed with %d changes"):format(num_changes),
     })
   elseif result.changes then
@@ -83,7 +84,7 @@ function M.notify_handler(result)
       num_changes = num_changes + #edits
     end
     msg = msg:sub(1, #msg - 1)
-    require("utils").notify(msg, "info", {
+    notify(msg, "info", {
       title = ("Succesfully renamed with %d changes"):format(num_changes),
     })
   end

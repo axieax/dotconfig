@@ -62,50 +62,50 @@ return function(dev_mode)
       use({
         "themercorp/themer.lua",
         disable = true,
-        config = require("themes.themer"),
+        config = require("axie.themes.themer"),
       })
 
       use({
         "marko-cerovac/material.nvim",
-        config = require("themes.material"),
+        config = require("axie.themes.material"),
       })
 
       use({
         "catppuccin/nvim",
         as = "catppuccin",
-        config = require("themes.catppuccin"),
+        config = require("axie.themes.catppuccin"),
       })
 
       use({
         "rebelot/kanagawa.nvim",
-        config = require("themes.kanagawa"),
+        config = require("axie.themes.kanagawa"),
       })
 
       -- TODO: replace (too red)
       -- ALT: https://github.com/ful1e5/onedark.nvim
       use({
         "olimorris/onedarkpro.nvim",
-        config = require("themes.onedark"),
+        config = require("axie.themes.onedark"),
       })
 
       use({
         "folke/tokyonight.nvim",
-        config = require("themes.tokyonight"),
+        config = require("axie.themes.tokyonight"),
       })
 
       use({
         "Mofiqul/dracula.nvim",
-        config = require("themes.dracula"),
+        config = require("axie.themes.dracula"),
       })
 
       use({
         "EdenEast/nightfox.nvim",
-        config = require("themes.nightfox"),
+        config = require("axie.themes.nightfox"),
       })
 
       use({
         "bluz71/vim-nightfly-guicolors",
-        config = require("themes.nightfly"),
+        config = require("axie.themes.nightfly"),
       })
 
       -----------------------
@@ -115,7 +115,7 @@ return function(dev_mode)
       -- Keybinds
       use({
         "folke/which-key.nvim",
-        config = require("plugins.binds").which_key,
+        config = require("axie.plugins.binds").which_key,
       })
 
       -- Fuzzy finder
@@ -139,21 +139,21 @@ return function(dev_mode)
           { "stevearc/aerial.nvim" },
           { "tknightz/telescope-termfinder.nvim" },
         },
-        config = require("plugins.telescope").setup,
+        config = require("axie.plugins.telescope").setup,
       })
 
       -- Search for TODO comments and Trouble pretty list
       use({
         "folke/todo-comments.nvim",
         requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
-        config = require("plugins.notes"),
+        config = require("axie.plugins.notes"),
       })
 
       -- Scrollbar
       use({
         "petertriho/nvim-scrollbar",
         after = "nvim-hlslens",
-        config = require("plugins.scrollbar"),
+        config = require("axie.plugins.scrollbar"),
       })
 
       -- Extra mappings (with encoding/decoding as well)
@@ -168,7 +168,7 @@ return function(dev_mode)
         "NTBBloodbath/galaxyline.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         after = "onedarkpro.nvim",
-        config = require("plugins.galaxyline").setup,
+        config = require("axie.plugins.galaxyline").setup,
       })
 
       -- Tabline
@@ -176,7 +176,7 @@ return function(dev_mode)
         "romgrk/barbar.nvim",
         -- disable = true,
         requires = "kyazdani42/nvim-web-devicons",
-        config = require("plugins.barbar"),
+        config = require("axie.plugins.barbar"),
       })
 
       use({
@@ -191,7 +191,7 @@ return function(dev_mode)
       -- Terminal
       use({
         "akinsho/toggleterm.nvim",
-        config = require("plugins.toggleterm").setup,
+        config = require("axie.plugins.toggleterm").setup,
       })
 
       -- Startup screen
@@ -199,7 +199,7 @@ return function(dev_mode)
       use({
         "goolord/alpha-nvim",
         requires = "kyazdani42/nvim-web-devicons",
-        config = require("plugins.start"),
+        config = require("axie.plugins.start"),
       })
 
       -- Session manager
@@ -221,9 +221,9 @@ return function(dev_mode)
           require("pretty-fold").setup({})
           -- require("pretty-fold.preview").setup_keybinding()
           -- TODO: toggle keybinding
-          require("utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.show_preview()<CR>" })
-          -- require("utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.keymap_open_close('zK')<CR>" })
-          -- require("utils").map({ "n", "<esc>", "<CMD>lua require'pretty-fold.preview'.keymap_close('<esc>')<CR>" })
+          require("axie.utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.show_preview()<CR>" })
+          -- require("axie.utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.keymap_open_close('zK')<CR>" })
+          -- require("axie.utils").map({ "n", "<esc>", "<CMD>lua require'pretty-fold.preview'.keymap_close('<esc>')<CR>" })
         end,
       })
 
@@ -269,7 +269,7 @@ return function(dev_mode)
         "folke/zen-mode.nvim",
         cmd = { "ZenMode" },
         requires = { "folke/twilight.nvim", "lewis6991/gitsigns.nvim" },
-        config = require("plugins.zen"),
+        config = require("axie.plugins.zen"),
       })
 
       -- Minimap
@@ -288,7 +288,7 @@ return function(dev_mode)
       -- Undo history
       use({
         "simnalamburt/vim-mundo",
-        config = require("plugins.undo"),
+        config = require("axie.plugins.undo"),
       })
 
       -- Clipboard manager
@@ -307,7 +307,7 @@ return function(dev_mode)
       -- Notification
       use({
         "rcarriga/nvim-notify",
-        config = require("plugins.notify"),
+        config = require("axie.plugins.notify"),
       })
 
       -- Better quickfix list
@@ -332,7 +332,7 @@ return function(dev_mode)
       use({
         "beauwilliams/focus.nvim",
         event = "BufEnter",
-        config = require("plugins.focus"),
+        config = require("axie.plugins.focus"),
       })
 
       -- Open with sudo
@@ -364,7 +364,7 @@ return function(dev_mode)
       use({
         "kyazdani42/nvim-tree.lua",
         requires = "kyazdani42/nvim-web-devicons",
-        config = require("plugins.nvimtree"),
+        config = require("axie.plugins.nvimtree"),
       })
 
       -- nnn file explorer
@@ -400,7 +400,7 @@ return function(dev_mode)
       -- Incrementor / decrementor
       use({
         "monaqa/dial.nvim",
-        config = require("plugins.dial"),
+        config = require("axie.plugins.dial"),
       })
 
       ------------------
@@ -429,7 +429,7 @@ return function(dev_mode)
       -- vim.ui overrides
       use({
         "stevearc/dressing.nvim",
-        config = require("plugins.dressing"),
+        config = require("axie.plugins.dressing"),
       })
 
       -- Bracket coloured pairs
@@ -444,14 +444,14 @@ return function(dev_mode)
         "lukas-reineke/indent-blankline.nvim",
         requires = "nvim-treesitter/nvim-treesitter",
         event = "BufRead",
-        config = require("plugins.indentline"),
+        config = require("axie.plugins.indentline"),
       })
 
       -- Scope context indicator
       use({
         "code-biscuits/nvim-biscuits",
         requires = "nvim-treesitter/nvim-treesitter",
-        config = require("plugins.biscuits"),
+        config = require("axie.plugins.biscuits"),
       })
 
       -- Function context indicator
@@ -518,7 +518,7 @@ return function(dev_mode)
       -- Search virtual text
       use({
         "kevinhwang91/nvim-hlslens",
-        config = require("plugins.hlslens").setup,
+        config = require("axie.plugins.hlslens").setup,
       })
 
       -- Preview line jumps
@@ -573,7 +573,7 @@ return function(dev_mode)
       use({
         "abecodes/tabout.nvim",
         requires = "nvim-treesitter/nvim-treesitter",
-        config = require("plugins.tabout"),
+        config = require("axie.plugins.tabout"),
       })
 
       -----------------------------
@@ -597,14 +597,14 @@ return function(dev_mode)
       use({
         "lewis6991/gitsigns.nvim",
         requires = "nvim-lua/plenary.nvim",
-        config = require("plugins.gitsigns"),
+        config = require("axie.plugins.gitsigns"),
       })
 
       -- Git repo link
       use({
         "ruifm/gitlinker.nvim",
         requires = "nvim-lua/plenary.nvim",
-        config = require("plugins.gitlinker"),
+        config = require("axie.plugins.gitlinker"),
       })
 
       -- GitHub issues and pull requests
@@ -631,7 +631,7 @@ return function(dev_mode)
       use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        config = require("plugins.treesitter").setup,
+        config = require("axie.plugins.treesitter").setup,
       })
 
       -- Treesitter parser info
@@ -656,7 +656,7 @@ return function(dev_mode)
       -- GitHub Copilot
       use({
         "github/copilot.vim",
-        config = require("plugins.copilot"),
+        config = require("axie.plugins.copilot"),
       })
 
       -- Interactive scratchpad with virtual text
@@ -666,7 +666,7 @@ return function(dev_mode)
       -- Align lines by character
       use({
         "godlygeek/tabular",
-        config = require("plugins.tabular").setup,
+        config = require("axie.plugins.tabular").setup,
       })
 
       -- Commenting
@@ -674,7 +674,7 @@ return function(dev_mode)
       -- https://github.com/numToStr/Comment.nvim/issues/22
       use({
         "numToStr/Comment.nvim",
-        config = require("plugins.comment"),
+        config = require("axie.plugins.comment"),
       })
 
       -- Better commentstring (for vim-commentary)
@@ -732,7 +732,7 @@ return function(dev_mode)
         "vuki656/package-info.nvim",
         requires = "MunifTanjim/nui.nvim",
         ft = { "json" },
-        config = require("plugins.package"),
+        config = require("axie.plugins.package"),
       })
 
       -- Python indenting issues
@@ -743,7 +743,7 @@ return function(dev_mode)
       use({
         "ekickx/clipboard-image.nvim",
         cmd = { "PasteImg" },
-        config = require("plugins.pasteimage"),
+        config = require("axie.plugins.pasteimage"),
       })
 
       -- Markdown preview
@@ -772,7 +772,7 @@ return function(dev_mode)
       use({
         "arjunmahishi/run-code.nvim",
         config = function()
-          local map = require("utils").map
+          local map = require("axie.utils").map
           map({ "v", "\\r", "<CMD>RunCodeSelected<CR>" })
           map({ "n", "\\r", "<CMD>RunCodeFile<CR>" })
           vim.cmd("au FileType markdown nmap \\r <CMD>RunCodeBlock<CR>")
@@ -789,7 +789,7 @@ return function(dev_mode)
       use({
         "rcarriga/vim-ultest",
         requires = "vim-test/vim-test",
-        config = require("lsp.test").setup,
+        config = require("axie.lsp.test").setup,
         run = ":UpdateRemotePlugins",
       })
 
@@ -801,7 +801,7 @@ return function(dev_mode)
           "theHamsta/nvim-dap-virtual-text",
           "mfussenegger/nvim-dap-python",
         },
-        config = require("lsp.debug"),
+        config = require("axie.lsp.debug"),
       })
 
       -- Debugger installer
@@ -814,7 +814,7 @@ return function(dev_mode)
       -- LSP config
       use({
         "neovim/nvim-lspconfig",
-        config = require("lsp.config"),
+        config = require("axie.lsp.config"),
       })
 
       -- LSP install
@@ -827,7 +827,7 @@ return function(dev_mode)
           "b0o/schemastore.nvim",
           "simrat39/rust-tools.nvim",
         },
-        config = require("lsp.install").setup,
+        config = require("axie.lsp.install").setup,
       })
 
       -- Java LSP
@@ -859,7 +859,7 @@ return function(dev_mode)
             },
           },
         },
-        config = require("lsp.null").setup,
+        config = require("axie.lsp.null").setup,
       })
 
       -- LSP progress indicator
@@ -886,7 +886,7 @@ return function(dev_mode)
       -- use("simrat39/symbols-outline.nvim")
       use({
         "stevearc/aerial.nvim",
-        config = require("lsp.aerial"),
+        config = require("axie.lsp.aerial"),
       })
 
       -- Code action menu
@@ -898,7 +898,7 @@ return function(dev_mode)
       -- Code action prompt
       use({
         "kosayoda/nvim-lightbulb",
-        config = require("plugins.lightbulb").setup,
+        config = require("axie.plugins.lightbulb").setup,
       })
 
       -- Completion menu
@@ -931,13 +931,13 @@ return function(dev_mode)
           -- "tzachar/cmp-fzy-buffer",
           -- "tzachar/cmp-fuzzy-path",
         },
-        config = require("lsp.cmp"),
+        config = require("axie.lsp.cmp"),
       })
 
       -- Function signature
       use({
         "ray-x/lsp_signature.nvim",
-        config = require("lsp.signature"),
+        config = require("axie.lsp.signature"),
       })
 
       -------------------
@@ -950,7 +950,7 @@ return function(dev_mode)
         run = function()
           vim.fn["firenvim#install"](0)
         end,
-        config = require("plugins.firenvim"),
+        config = require("axie.plugins.firenvim"),
       })
 
       -- Packer auto update + compile

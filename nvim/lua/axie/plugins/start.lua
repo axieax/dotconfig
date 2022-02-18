@@ -19,7 +19,7 @@ return function()
 
   dashboard.section.buttons.val = {
     dashboard.button("n", "  New File", "<CMD>ene <BAR> startinsert<CR>"),
-    dashboard.button("f", "  Find Files", "<CMD>lua require'plugins.telescope'.file_search()<CR>"),
+    dashboard.button("f", "  Find Files", "<CMD>lua require'axie.plugins.telescope'.file_search()<CR>"),
     dashboard.button("g", "  Live Grep", "<CMD>Telescope live_grep<CR>"),
     dashboard.button("b", "  Bookmarks", "<CMD>Telescope marks<CR>"),
     -- TODO: orgmode notes
@@ -32,7 +32,7 @@ return function()
     dashboard.button("q", "⏻  Quit Neovim", "<CMD>qa<CR>"),
   }
 
-  local glob_split = require("utils").glob_split
+  local glob_split = require("axie.utils").glob_split
   local start_plugins = #glob_split("~/.local/share/nvim/site/pack/packer/start/*")
   local opt_plugins = #glob_split("~/.local/share/nvim/site/pack/packer/opt/*")
   dashboard.section.footer.val = {

@@ -14,7 +14,7 @@ function M.default_on_attach(client, bufnr)
   local is_null = name == "null-ls"
   local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
   local ls_can_format = client.resolved_capabilities.document_formatting
-  local null_can_format = require("lsp.null").use_null_formatting(filetype)
+  local null_can_format = require("axie.lsp.null").use_null_formatting(filetype)
 
   -- print(name)
   -- print("ls_can_format", ls_can_format)
@@ -45,14 +45,14 @@ function M.ls_overrides()
   vim.list_extend(lua_rtps, { "lua/?.lua", "lua/?/init.lua" })
 
   -- jdtls setup
-  local glob_split = require("utils").glob_split
+  local glob_split = require("axie.utils").glob_split
   local java_bundles = {
     vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
   }
   vim.list_extend(java_bundles, glob_split("~/java/vscode-java-test/server/*.jar"))
 
   local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
-  local os = require("utils").get_os()
+  local os = require("axie.utils").get_os()
   local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
   -- local runtime_base_path = "/usr/lib/jvm/"
@@ -132,7 +132,7 @@ function M.ls_overrides()
         require("jdtls.setup").add_commands()
 
         -- Telescope for UI picker (Neovim < 0.6)
-        -- require("jdtls.ui").pick_one_async = require("plugins.telescope").jdtls_ui_picker
+        -- require("jdtls.ui").pick_one_async = require("axie.plugins.telescope").jdtls_ui_picker
       end,
     },
 
@@ -176,7 +176,7 @@ function M.ls_overrides()
             ["\\<space>"] = { "<CMD>TSLspToggleInlayHints<CR>", "Toggle Inlay Hints" },
           })
         else
-          require("utils").map({ "n", "\\<space>", "<CMD>TSLspToggleInlayHints<CR>" })
+          require("axie.utils").map({ "n", "\\<space>", "<CMD>TSLspToggleInlayHints<CR>" })
         end
       end,
     },
@@ -222,7 +222,7 @@ function M.ls_overrides()
       on_attach = M.default_on_attach,
       handlers = {
         -- TODO: move other handlers here
-        ["textDocument/rename"] = require("lsp.rename").rename_handler,
+        ["textDocument/rename"] = require("axie.lsp.rename").rename_handler,
       },
     },
   }
@@ -231,16 +231,17 @@ end
 -- Auto install required language servers defined in utils.config
 -- TODO: update as well?
 function M.prepare_language_servers()
-  local required_servers = require("utils.config").prepared_language_servers()
+  local required_servers = require("axie.utils.config").prepared_language_servers()
   local get_server = require("nvim-lsp-installer.servers").get_server
+  local notify = require("axie.utils").notify
 
   for _, server_name in ipairs(required_servers) do
     local available, server = get_server(server_name)
     if not available then
-      require("utils").notify("Could not install language server " .. server_name, "error")
+      notify("Could not install language server " .. server_name, "error")
     elseif not server:is_installed() then
       server:install()
-      require("utils").notify("Installed language server " .. server_name, "info")
+      notify("Installed language server " .. server_name, "info")
     end
   end
 end
@@ -252,7 +253,7 @@ function M.setup_language_servers()
   for _, server in ipairs(installed_servers) do
     -- Get options for server
     local name = server.name
-    local ls_overrides = require("lsp.install").ls_overrides()
+    local ls_overrides = require("axie.lsp.install").ls_overrides()
     local opts = ls_overrides[name] or ls_overrides.default
     opts = vim.tbl_extend("keep", opts, ls_overrides.default)
 
@@ -290,14 +291,14 @@ function M.setup_jdtls()
 end
 
 function M.setup()
-  require("lsp.install").prepare_language_servers()
-  require("lsp.install").setup_language_servers()
+  require("axie.lsp.install").prepare_language_servers()
+  require("axie.lsp.install").setup_language_servers()
 
   -- setup jdtls for java files
   vim.cmd([[
   augroup javalsp
     au!
-    au FileType java lua require'lsp.install'.setup_jdtls()
+    au FileType java lua require'axie.lsp.install'.setup_jdtls()
   augroup end
   ]])
 end

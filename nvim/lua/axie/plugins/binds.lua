@@ -4,7 +4,7 @@
 -- Can use Packer module field to lazy load based on lua require
 
 local M = {}
-local map = require("utils").map
+local map = require("axie.utils").map
 
 function M.general()
   -- Set leader key
@@ -27,7 +27,7 @@ end
 function M.register_git_bindings()
   require("which-key").register({
     name = "+git",
-    g = { require("plugins.toggleterm").lazygit, "lazygit" },
+    g = { require("axie.plugins.toggleterm").lazygit, "lazygit" },
     h = { require("gitsigns").stage_hunk, "git stage hunk" },
     H = { "<CMD>DiffviewFileHistory .<CR>", "git stage hunk" },
     K = { require("gitsigns").preview_hunk, "git hunk preview" },
@@ -93,8 +93,8 @@ end
 function M.misc()
   -- LSP
   map({ "n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>" })
-  map({ "v", "gq", "<CMD>lua require'lsp.code_actions'.default(true)<CR>" })
-  map({ "v", "gQ", "<CMD>lua require'lsp.code_actions'.default(false)<CR>" })
+  map({ "v", "gq", "<CMD>lua require'axie.lsp.code_actions'.default(true)<CR>" })
+  map({ "v", "gQ", "<CMD>lua require'axie.lsp.code_actions'.default(false)<CR>" })
   -- Telescope
   map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
   -- NvimTree
@@ -150,7 +150,7 @@ function M.which_key()
         v = { "<CMD>Telescope dap variables<CR>", "Variables" },
         ["/"] = { "<CMD>Telescope dap list_breakpoints<CR>", "List breakpoints" },
         [";"] = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
-        t = { "<CMD>lua require'lsp.debug.helpers'.debug_test()<CR>", "Debug test" },
+        t = { "<CMD>lua require'axie.lsp.debug.helpers'.debug_test()<CR>", "Debug test" },
       },
       t = {
         name = "+test",
@@ -159,10 +159,10 @@ function M.which_key()
         t = { "<CMD>UltestNearest<CR>", "Ultest nearest" },
         T = { "<CMD>UltestDebugNearest<CR>", "Ultest nearest debug" },
         p = { "<CMD>UltestOutput<CR>", "Ultest output" },
-        [";"] = { "<CMD>lua require'lsp.test'.custom_test_summary()<CR>", "Test summary" },
+        [";"] = { "<CMD>lua require'axie.lsp.test'.custom_test_summary()<CR>", "Test summary" },
         v = { "<CMD>TestVisit<CR>", "Test visit" },
-        m = { require("lsp.test").custom_test_method, "Test method" },
-        c = { "<CMD>lua require'lsp.test'.custom_test_class()<CR>", "Test class" },
+        m = { require("axie.lsp.test").custom_test_method, "Test method" },
+        c = { "<CMD>lua require'axie.lsp.test'.custom_test_class()<CR>", "Test class" },
       },
       l = {
         name = "+lsp",
@@ -185,8 +185,8 @@ function M.which_key()
           end,
           "show line diagnostics",
         },
-        q = { "<CMD>lua require'lsp.code_actions'.default(true)<CR>", "code actions (ignore null-ls)" },
-        Q = { "<CMD>lua require'lsp.code_actions'.default(false)<CR>", "code actions (all)" },
+        q = { "<CMD>lua require'axie.lsp.code_actions'.default(true)<CR>", "code actions (ignore null-ls)" },
+        Q = { "<CMD>lua require'axie.lsp.code_actions'.default(false)<CR>", "code actions (all)" },
         c = { vim.lsp.codelens.run, "code lens" },
         [";"] = { "<CMD>ToggleDiag<CR>", "toggle diagnostics" },
         ["?"] = { "<CMD>LspInfo<CR>", "LSP info" },
@@ -195,14 +195,14 @@ function M.which_key()
         name = "+find",
         a = { require("telescope.builtin").symbols, "find symbols" },
         b = { require("telescope.builtin").buffers, "search buffers" },
-        c = { require("plugins.telescope").dotconfig, "search config" },
+        c = { require("axie.plugins.telescope").dotconfig, "search config" },
         e = { "<CMD>Telescope file_browser grouped=true<CR>", "file explorer" },
         E = { "<CMD>Telescope env<CR>", "environment variables" },
         z = { "<CMD>Telescope zoxide list<CR>", "zoxide list" },
-        f = { require("plugins.telescope").file_search, "find files" },
+        f = { require("axie.plugins.telescope").file_search, "find files" },
         F = {
           function()
-            require("plugins.telescope").file_search(true)
+            require("axie.plugins.telescope").file_search(true)
           end,
           "find all files",
         },
@@ -236,9 +236,9 @@ function M.which_key()
         ["."] = { require("telescope.builtin").resume, "resume last command" },
       },
       r = {
-        n = { require("lsp.rename").rename_empty, "rename symbol (no default text)" },
+        n = { require("axie.lsp.rename").rename_empty, "rename symbol (no default text)" },
         N = { vim.lsp.buf.rename, "rename symbol" },
-        r = { require("plugins.toggleterm").lazydocker, "lazydocker" },
+        r = { require("axie.plugins.toggleterm").lazydocker, "lazydocker" },
         -- BUG: the following places an extra character in the buffer (replace)
         -- f = { "<CMD>luafile %<CR>" },
         -- F = { "<CMD>source % | PackerCompile<CR>" },
@@ -252,15 +252,15 @@ function M.which_key()
       S = { "<CMD>Alpha<CR>", "Start Menu" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
       Z = { "<CMD>Twilight<CR>", "Twilight Toggle" },
-      p = { ":lua require'utils'.display()<LEFT>", "lua print", silent = false },
-      P = { ":lua require'utils'.notify()<LEFT>", "lua notify", silent = false },
-      q = { require("utils").toggle_signcolumn, "toggle signcolumn" },
+      p = { ":lua require'axie.utils'.display()<LEFT>", "lua print", silent = false },
+      P = { ":lua require'axie.utils'.notify()<LEFT>", "lua notify", silent = false },
+      q = { require("axie.utils").toggle_signcolumn, "toggle signcolumn" },
       Q = { require("notify").dismiss, "dismiss notifications" },
       u = { "<CMD>MundoToggle<CR>", "Undo Tree" },
       v = { "ggVG", "select all" },
       V = { 'ggVG"+y', "copy all to clipboard" },
-      c = { require("utils").display_path, "buffer path" },
-      C = { require("utils").display_cwd, "cwd" },
+      c = { require("axie.utils").display_path, "buffer path" },
+      C = { require("axie.utils").display_cwd, "cwd" },
       i = { "<CMD>IndentBlanklineToggle<CR>", "toggle indent context line" },
       ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
       ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
@@ -300,8 +300,8 @@ function M.which_key()
       },
       l = { "<CMD>Trouble document_diagnostics<CR>", "Show document diagnostics" },
       L = { "<CMD>Trouble workspace_diagnostics<CR>", "Show workspace diagnostics" },
-      q = { "<CMD>lua require'lsp.code_actions'.default(true)<CR>", "code actions (ignore null-ls)" },
-      Q = { "<CMD>lua require'lsp.code_actions'.default(false)<CR>", "code actions (all)" },
+      q = { "<CMD>lua require'axie.lsp.code_actions'.default(true)<CR>", "code actions (ignore null-ls)" },
+      Q = { "<CMD>lua require'axie.lsp.code_actions'.default(false)<CR>", "code actions (all)" },
       d = { require("telescope.builtin").lsp_definitions, "Goto definition" },
       D = { "<CMD>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
       r = { require("telescope.builtin").lsp_references, "References" },
@@ -329,10 +329,10 @@ function M.which_key()
       p = { "<CMD>PasteImg<CR>", "Paste image" },
       o = { "<CMD>Glow<CR>", "Markdown preview (glow)" },
       O = { "<CMD>MarkdownPreview<CR>", "Markdown preview (browser)" },
-      ["["] = { require("plugins.treesitter").goto_prev_sibling, "Goto previous sibling node" },
-      ["]"] = { require("plugins.treesitter").goto_next_sibling, "Goto next sibling node" },
-      ["{"] = { require("plugins.treesitter").goto_parent, "Goto parent node" },
-      ["}"] = { require("plugins.treesitter").goto_child, "Goto child node" },
+      ["["] = { require("axie.plugins.treesitter").goto_prev_sibling, "Goto previous sibling node" },
+      ["]"] = { require("axie.plugins.treesitter").goto_next_sibling, "Goto next sibling node" },
+      ["{"] = { require("axie.plugins.treesitter").goto_parent, "Goto parent node" },
+      ["}"] = { require("axie.plugins.treesitter").goto_child, "Goto child node" },
     },
   })
 end

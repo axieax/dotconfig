@@ -24,6 +24,7 @@ function M.formatting_sources()
   local formatting = null_ls.builtins.formatting
   return {
     -- LUA: sudo pacman -S stylua
+    -- NOTE: sumneko_lua has builtin EmmyLuaCodeStyle support
     formatting.stylua,
     -- PYTHON: pip install black
     formatting.black,

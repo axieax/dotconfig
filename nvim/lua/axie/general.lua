@@ -102,6 +102,9 @@ local yank_register = ternary(vim.loop.os_uname().sysname == "Linux", "+", "*")
 map({ "n", "\\y", '"' .. yank_register .. "y", noremap = false })
 map({ "v", "\\y", '"' .. yank_register .. "y", noremap = false })
 
+-- Paste to clipboard
+map({ "n", "\\+", '<CMD>let @+=@"<CR>' })
+
 -- Paste last yanked
 map({ "n", "\\p", '"0p' })
 map({ "v", "\\p", '"0p' })
@@ -113,7 +116,7 @@ vim.cmd("autocmd VimResized * wincmd =")
 vim.cmd([[
 augroup highlight_yank
   autocmd!
-  au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+  au TextYankPost * silent! lua vim.highlight.on_yank({ higroup="IncSearch", timeout=200 })
 augroup END
 ]])
 

@@ -29,27 +29,16 @@ require("axie.plugins.binds").general()
 
 -- Personal plugin development
 if dev_mode then
-  -- NOTE: automatic detection cannot find module names
-  -- local plugins = require("axie.utils").glob_split("~/dev/nvim-plugins/*")
-  -- vim.opt.rtp:append(plugins)
+  local base_path = vim.fn.expand("~/dev/nvim-plugins/")
+  local escaped_base_path = base_path:gsub("%-", "%%-")
 
-  local base_path = "~/dev/nvim-plugins/"
-  local dev_plugins = {
-    {
-      plugin_name = "urlview.nvim",
-      module_names = { "urlview" },
-    },
-    {
-      plugin_name = "surround-wrap.nvim",
-      module_names = { "surround_wrap" },
-    },
-  }
-
-  for _, dev_plugin in ipairs(dev_plugins) do
-    vim.opt.rtp:append(base_path .. dev_plugin.plugin_name)
-    for _, module_name in ipairs(dev_plugin.module_names) do
-      reload_module(module_name)
-    end
+  local paths = require("axie.utils").glob_split(base_path .. "*")
+  for _, path in ipairs(paths) do
+    local module_name = path:gsub(escaped_base_path, ""):gsub("%.nvim", "")
+    -- module_name = module_name:gsub("%-", "_")
+    -- add to rtp
+    vim.opt.rtp:append(path)
+    -- refresh require caching
+    reload_module(module_name)
   end
-
 end

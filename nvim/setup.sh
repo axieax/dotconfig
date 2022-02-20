@@ -84,6 +84,17 @@ if ! check_dependency "pylint" && confirm "$action"; then
   $OS_PIP install pylint
 fi
 
+action="install cppcheck diagnostics"
+if ! check_dependency "cppcheck" && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S cppcheck
+  elif is_mac; then
+    brew install cppcheck
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi
+
 action="install shellcheck diagnostics"
 if ! check_dependency "shellcheck" && confirm "$action"; then
   if is_linux; then

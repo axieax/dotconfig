@@ -16,7 +16,8 @@
 
 ## TODO
 
-- Custom require which takes module_name, ... args
+- Telescope `man` docs
+- Custom require which takes module_name, ... args (pcall wrapper)
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
 - PRIORITY: Separate telescope extensions, use Packer sequencing (after)
 - PRIORITY: set up https://github.com/renerocksai/telekasten.nvim

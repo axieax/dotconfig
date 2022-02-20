@@ -22,6 +22,7 @@ reload_module("axie")
 require("axie.general")
 
 -- Plugins config
+-- TODO: remove fetched personal plugins?
 require("axie.plugins")(dev_mode)
 
 -- Apply keybindings

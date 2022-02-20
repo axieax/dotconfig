@@ -41,6 +41,16 @@ return function(dev_mode)
       -- CursorHold event fix
       use("antoinemadec/FixCursorHold.nvim")
 
+      -- Remove mapping escape delay
+      use({
+        "max397574/better-escape.nvim",
+        config = function()
+          require("better_escape").setup({
+            mapping = { "jk", "kj" },
+          })
+        end,
+      })
+
       ----------------
       -- My Plugins --
       ----------------
@@ -240,7 +250,9 @@ return function(dev_mode)
           "akinsho/org-bullets.nvim",
         },
         config = function()
-          require("orgmode").setup({
+          local orgmode = require("orgmode")
+          orgmode.setup_ts_grammar()
+          orgmode.setup({
             org_agenda_file = { "~/wiki/**" },
             mappings = {
               global = {
@@ -355,6 +367,9 @@ return function(dev_mode)
         end,
       })
 
+      -- Lua documentation
+      use("milisims/nvim-luaref")
+
       -------------------
       -- File Explorer --
       -------------------
@@ -400,6 +415,7 @@ return function(dev_mode)
       -- Incrementor / decrementor
       use({
         "monaqa/dial.nvim",
+        -- module = "dial.map",
         config = require("axie.plugins.dial"),
       })
 

@@ -6,7 +6,7 @@ function M.setup()
   -- NOTE: Prettier removes this automatic alignment
   -- USE: <!-- prettier-ignore -->
   local map = require("axie.utils").map
-  map({ "i", "|", "|<esc>:lua require('plugins.tabular').md_cucumber_table()<CR>a" })
+  map({ "i", "|", "|<esc>:lua require('axie.plugins.tabular').md_cucumber_table()<CR>a" })
 end
 
 -- Auto align for markdown cucumber table

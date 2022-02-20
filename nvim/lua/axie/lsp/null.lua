@@ -88,7 +88,7 @@ function M.formatting_sources()
     -- BAZEL: go install github.com/bazelbuild/buildtools/buildifier@latest or yay -S bazel-buildtools
     formatting.buildifier,
     -- DEFAULT: pip install codespell
-    -- NOTE: and may be autocorrected to and, causing compilation problems
+    -- ISSUE: false positives (e.g. ans -> and) may cause compilation problems
     -- formatting.codespell,
     -- DEFAULT
     formatting.trim_whitespace,
@@ -108,6 +108,8 @@ function M.diagnostic_sources()
         return utils.root_has_file({ "selene.toml" })
       end,
     }),
+    -- C / CPP: sudo pacman -S cppcheck
+    diagnostics.cppcheck,
     -- GCC: yay -S gccdiag or compile from source
     diagnostics.gccdiag.with({
       condition = function(utils)

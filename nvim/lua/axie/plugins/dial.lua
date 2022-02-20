@@ -1,43 +1,80 @@
 -- https://github.com/monaqa/dial.nvim --
--- TODO: migrate to https://github.com/monaqa/dps-dial.vim ? --
 
 return function()
-  local dial = require("dial")
+  local augend = require("dial.augend")
 
-  local non_word_pattern = "\\C\\M\\(%s\\)"
+  require("dial.config").augends:register_group({
+    default = {
+      augend.integer.alias.decimal,
+      augend.integer.alias.hex,
+      augend.integer.alias.octal,
+      augend.integer.alias.binary,
+      augend.hexcolor.new({}),
+      -- augend.constant.alias.alpha,
+      -- augend.constant.alias.Alpha,
+      augend.semver.alias.semver,
+      augend.date.alias["%H:%M:%S"],
+      -- TODO: markup#markdown#header
+      augend.constant.new({
+        elements = { "true", "false" },
+        word = true,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { "True", "False" },
+        word = true,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { "and", "or" },
+        word = true,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { "&&", "||" },
+        word = false,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { ">", "<" },
+        word = false,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { "==", "!=" },
+        word = false,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { "===", "!==" },
+        word = false,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { ">=", "<=" },
+        word = false,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { "+=", "-=", "*=", "/=", "//=", "%=" },
+        word = false,
+        cyclic = true,
+      }),
+      augend.constant.new({
+        elements = { "++", "--" },
+        word = false,
+        cyclic = true,
+      }),
+    },
+  })
 
-  local extra_augends = {
-    "markup#markdown#header",
-    "date#[%H:%M:%S]",
-  }
+  -- OTHERS: on/off variants, north/east/south/west variants
 
-  local custom_augends = {
-    boolean = dial.common.enum_cyclic({ strlist = { "true", "false" } }),
-    Boolean = dial.common.enum_cyclic({ strlist = { "True", "False" } }),
-    -- on = dial.common.enum_cyclic({ strlist = { "on", "off" } }),
-    -- ON = dial.common.enum_cyclic({ strlist = { "ON", "OFF" } }),
-    -- On = dial.common.enum_cyclic({ strlist = { "On", "Off" } }),
-    -- direction = dial.common.enum_cyclic({ strlist = { "north", "south", "west", "east" } }),
-    -- Direction = dial.common.enum_cyclic({ strlist = { "North", "South", "West", "East" } }),
-    greater = dial.common.enum_cyclic({ strlist = { ">", "<" }, ptn_format = non_word_pattern }),
-    equal = dial.common.enum_cyclic({ strlist = { "==", "!=" }, ptn_format = non_word_pattern }),
-    Equal = dial.common.enum_cyclic({ strlist = { "===", "!==" }, ptn_format = non_word_pattern }),
-    greaterEqual = dial.common.enum_cyclic({ strlist = { ">=", "<=" }, ptn_format = non_word_pattern }),
-    selfIncrementBy = dial.common.enum_cyclic({
-      strlist = { "+=", "-=", "*=", "/=", "//=", "%=" },
-      ptn_format = non_word_pattern,
-    }),
-    selfIncrementOne = dial.common.enum_cyclic({ strlist = { "++", "--" }, ptn_format = non_word_pattern }),
-  }
-
-  -- register custom augends
-  for k, v in pairs(custom_augends) do
-    local augend_name = "custom#" .. k
-    dial.augends[augend_name] = v
-    table.insert(extra_augends, augend_name)
-  end
-
-  -- extend capabilities
-  vim.list_extend(dial.config.searchlist.normal, extra_augends)
-  vim.list_extend(dial.config.searchlist.visual, extra_augends)
+  local map = require("axie.utils").map
+  map({ "n", "<C-a>", "<Plug>(dial-increment)", noremap = false })
+  map({ "n", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
+  map({ "v", "<C-a>", "<Plug>(dial-increment)", noremap = false })
+  map({ "v", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
+  map({ "v", "g<C-a>", "g<Plug>(dial-increment)", noremap = false })
+  map({ "v", "g<C-x>", "g<Plug>(dial-decrement)", noremap = false })
 end

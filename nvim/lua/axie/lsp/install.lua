@@ -181,6 +181,11 @@ function M.ls_overrides()
       end,
     },
 
+    -- MARKDOWN: grammarly
+    grammarly = {
+      settings = { grammarly = { dialect = "australian" } },
+    },
+
     -- HASKELL: hls
     -- haskell = {
     --   -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/hls.lua
@@ -263,6 +268,11 @@ function M.setup_language_servers()
       local eslint_config = require("lspconfig.server_configurations.eslint")
       opts.cmd = vim.list_extend({ "yarn", "node" }, eslint_config.default_config.cmd)
     end ]]
+
+    -- Clangd null-ls https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+    if name == "clangd" then
+      opts.capabilities.offsetEncoding = { "utf-16" }
+    end
 
     -- Register setup
     if name == "rust_analyzer" then

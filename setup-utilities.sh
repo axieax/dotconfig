@@ -1,4 +1,14 @@
 #!/bin/bash
+is_linux() {
+  # TODO: further filter by distro
+  # [[ "$OSTYPE" == "linux-gnu"* ]]
+  [[ "$(uname)" == "Linux" ]]
+}
+
+is_mac() {
+  # [[ "$OSTYPE" == "darwin"* ]]
+  [[ "$(uname)" == "Darwin" ]]
+}
 
 if is_mac; then
   export OS_PYTHON="python3"
@@ -20,17 +30,6 @@ confirm() {
   else
     confirm "$action"
   fi
-}
-
-is_linux() {
-  # TODO: further filter by distro
-  # [[ "$OSTYPE" == "linux-gnu"* ]]
-  [[ "$(uname)" == "Linux" ]]
-}
-
-is_mac() {
-  # [[ "$OSTYPE" == "darwin"* ]]
-  [[ "$(uname)" == "Darwin" ]]
 }
 
 check_dependency() {

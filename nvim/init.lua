@@ -26,6 +26,7 @@ require("axie.general")
 require("axie.plugins")(dev_mode)
 
 -- Apply keybindings
+-- NOTE: async packer means whichkey module may not be loaded in time
 require("axie.plugins.binds").general()
 
 -- Personal plugin development

@@ -17,6 +17,7 @@ return function()
   require("nvim-tree").setup({
     disable_netrw = false,
     hijack_netrw = true,
+    hijack_unnamed_buffer_when_opening = true,
     -- lsp_diagnostics = true, -- prefer colour instead of signcolumn
     update_to_buf_dir = {
       -- hijacks new directory buffers when they are opened

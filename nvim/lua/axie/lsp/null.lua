@@ -47,6 +47,8 @@ function M.formatting_sources()
     formatting.cmake_format.with({
       filetypes = { "cmake", "make" }, -- TODO: check if this is necessary
     }),
+    -- JAVA: yay -S google-java-format
+    formatting.google_java_format,
     -- PRETTIER: yarn global add @fsouza/prettierd
     formatting.prettierd.with({
       filetypes = {
@@ -72,7 +74,7 @@ function M.formatting_sources()
         -- https://prettier.io/docs/en/plugins.html#community-plugins
         "apex", -- yarn global add prettier-plugin-apex
         "elm", -- yarn global add prettier-plugin-elm
-        "java", -- yarn global add prettier-plugin-java
+        -- "java", -- yarn global add prettier-plugin-java
         "sol", -- yarn global add prettier-plugin-solidity
         "toml", -- yarn global add prettier-plugin-toml
         "svelte", -- yarn global add prettier-plugin-svelte

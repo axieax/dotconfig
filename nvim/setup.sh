@@ -62,6 +62,17 @@ if ! check_dependency "isort" && confirm "$action"; then
   $OS_PIP install isort
 fi
 
+action="install google-java-format formatter"
+if ! check_dependency "google-java-format" && confirm "$action"; then
+  if is_linux; then
+    yay -S google-java-format
+  elif is_mac; then
+    brew install google-java-format
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi
+
 action="install prettierd formatter"
 if ! check_dependency "prettierd" && confirm "$action"; then
   yarn global add @fsouza/prettierd
@@ -71,7 +82,7 @@ action="install prettier extensions"
 if confirm "$action"; then
   # yarn global add prettier-plugin-apex
   # yarn global add prettier-plugin-elm
-  yarn global add prettier-plugin-java
+  # yarn global add prettier-plugin-java
   # yarn global add prettier-plugin-solidity
   yarn global add prettier-plugin-toml
   # yarn global add prettier-plugin-svelte

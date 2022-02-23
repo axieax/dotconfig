@@ -74,7 +74,7 @@
 - https://github.com/ii14/lsp-command ?
 - Terminal (float/horizontal) which autosizes
 - Coverage
-- Gradle
+- Gradle (https://github.com/aloussase/telescope-gradle.nvim)
 - Faded unused variables/imports?
 - Lazy loading (event = "BufWinEnter"?) https://youtu.be/JPEx2kI6pfo
 - Emmet support for jsx/tsx

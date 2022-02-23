@@ -26,12 +26,10 @@ function M.update_results(lsp_results, ignore_null_ls)
     local is_null = client.name == "null-ls"
 
     -- Filter null-ls actions as requested
-    if not is_null or (is_null and not ignore_null_ls) then
-      if is_null then
-        table.insert(null_results, result)
-      else
-        table.insert(results, result)
-      end
+    if not is_null then
+      table.insert(results, result)
+    elseif not ignore_null_ls then
+      table.insert(null_results, result)
     end
   end
 

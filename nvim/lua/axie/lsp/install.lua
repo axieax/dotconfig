@@ -78,6 +78,9 @@ function M.ls_overrides()
             -- path = { "?.lua", "?/init.lua" }, -- default
             -- path = lua_rtps,
           },
+          -- completion = {
+          --   callSnippet = "Replace",
+          -- },
           diagnostics = {
             -- get language server to recognise `vim` global for nvim config
             globals = { "vim" },
@@ -86,6 +89,8 @@ function M.ls_overrides()
             -- Make the server aware of Neovim runtime files
             -- NOTE: LSP support for runtime files (e.g. plugins require definition), but slow
             -- library = vim.api.nvim_get_runtime_file("", true),
+            -- maxPreload = 10000,
+            -- preloadFileSize = 10000,
           },
         },
       },

@@ -316,6 +316,7 @@ function M.which_key()
       },
       u = { "<CMD>UrlView<CR>", "View buffer URLs" },
       z = { "<CMD>FocusMaxOrEqual<CR>", "Maximise toggle" },
+      f = { "<CMD>FocusToggle<CR>", "Focus toggle" },
     },
     [","] = {
       p = { "<CMD>PasteImg<CR>", "Paste image" },

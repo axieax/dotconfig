@@ -3,12 +3,7 @@
 local M = {}
 
 function M.setup()
-  vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'axie.plugins.lightbulb'.update()]])
-end
-
-function M.update()
-  -- update status text
-  require("nvim-lightbulb").update_lightbulb({
+  require("nvim-lightbulb").setup({
     ignore = { "null-ls" },
     sign = {
       enabled = false,
@@ -20,8 +15,16 @@ function M.update()
     },
   })
 
+  vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'axie.plugins.lightbulb'.update()]])
+end
+
+function M.update()
+  -- update status
+  local lightbulb = require("nvim-lightbulb")
+  lightbulb.update_lightbulb()
+
   -- display status
-  local status = require("nvim-lightbulb").get_status_text()
+  local status = lightbulb.get_status_text()
   vim.api.nvim_echo({ { status, "WarningMsg" } }, false, {})
 end
 

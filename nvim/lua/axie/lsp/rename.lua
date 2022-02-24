@@ -54,7 +54,7 @@ function M.notify_handler(result)
 
   -- prefer documentChanges over changes (under workspaceEdit)
   -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
-  local notify = require("axie.utils")
+  local notify = require("axie.utils").notify
   local changes = {}
   if result.documentChanges then
     local msg = ""

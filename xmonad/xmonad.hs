@@ -147,10 +147,10 @@ myManageHook =
     , "feh"
     , "mpv"
     , "Xfce4-terminal"
-    , "zoom"
     , "Lutris"
     , "Riot Client"
     , "League of Legends"
+    , "zoom"
     , "zoom_linux_float_video_window"
     , "Picture-in-picture"
     ]

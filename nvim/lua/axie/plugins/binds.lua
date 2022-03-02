@@ -210,6 +210,7 @@ function M.which_key()
         m = { require("telescope.builtin").man_pages, "search manual" },
         -- M = { require("telescope").extensions.macroscope.default, "search macros" },
         M = { "<CMD>Telescope macroscope<CR>", "search macros" },
+        n = { "<CMD>Telescope notify<CR>", "search notifications" },
         -- TODO: n for notes
         s = { "1z=", "spelling correct" },
         S = { require("telescope.builtin").spell_suggest, "spelling suggestions" },

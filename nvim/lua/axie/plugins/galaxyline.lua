@@ -6,6 +6,7 @@
 -- TODO: group linecol and percentage ()
 -- TODO: decouple onedark colours
 -- TODO: remove scrollbar component
+-- TODO: git remote ahead status (https://www.reddit.com/r/neovim/comments/t48x5i/git_branch_aheadbehind_info_status_line_component/)
 
 local ternary = require("axie.utils").ternary
 local diagnostics_icons = require("axie.utils.config").diagnostics_icons

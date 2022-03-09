@@ -726,9 +726,10 @@ return function(dev_mode)
 
       use({
         "danymat/neogen",
-        requires = "nvim-treesitter/nvim-treesitter",
+        requires = { "nvim-treesitter/nvim-treesitter", "L3MON4D3/LuaSnip" },
+        -- branch = "todo_text",
         config = function()
-          require("neogen").setup()
+          require("neogen").setup({ snippet_engine = "luasnip" })
         end,
       })
 
@@ -736,6 +737,25 @@ return function(dev_mode)
       use({
         "windwp/nvim-ts-autotag",
         requires = "nvim-treesitter/nvim-treesitter",
+      })
+
+      -- Regular expression explainer
+      use({
+        "bennypowers/nvim-regexplainer",
+        requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
+        config = function()
+          require("regexplainer").setup({
+            auto = true,
+            display = "popup",
+            popup = {
+              border = {
+                padding = { 0, 0 },
+                style = "rounded",
+              },
+              win_options = { winblend = 20 },
+            },
+          })
+        end,
       })
 
       -- Auto continue bullets

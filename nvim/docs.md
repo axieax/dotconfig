@@ -16,6 +16,7 @@
 
 ## TODO
 
+- NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Telescope `man` docs
 - Custom require which takes module_name, ... args (pcall wrapper)
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
@@ -65,8 +66,11 @@
 
 ## Features/plugins
 
+- Faded unused variables/imports? https://github.com/narutoxy/dim.lua
+- https://github.com/bennypowers/nvim-regexplainer
 - https://github.com/PlatyPew/format-installer.nvim
 - https://github.com/sudormrfbin/cheatsheet.nvim
+- Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
 - Dictionary/thesaurus (alternative to rudism/telescope-dict.nvim)
 - cmp-rg source https://github.com/lukas-reineke/cmp-rg
 - Highlight text temporarily https://www.reddit.com/r/neovim/comments/rmq4gd/is_there_an_alternative_to_vimmark_to_colorize/
@@ -75,7 +79,6 @@
 - Terminal (float/horizontal) which autosizes
 - Coverage
 - Gradle (https://github.com/aloussase/telescope-gradle.nvim)
-- Faded unused variables/imports?
 - Lazy loading (event = "BufWinEnter"?) https://youtu.be/JPEx2kI6pfo
 - Emmet support for jsx/tsx
 - Emmet / autoclose HTML
@@ -94,7 +97,6 @@
 - windline instead of galaxyline?
 - nvimtree config migration
 - Calltree (https://github.com/ldelossa/calltree.nvim)
-- Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
 - gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
 - Markdown code block syntax highlighting
 - with line for startup time (v -startuptime and read tmp file?)

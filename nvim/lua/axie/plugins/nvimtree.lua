@@ -31,6 +31,11 @@ return function()
       width = "30%",
       side = "right",
       auto_resize = true,
+      mappings = {
+        list = {
+          { key = "K", action = "show_file_info" },
+        },
+      },
     },
     filters = {
       custom = { ".git" },

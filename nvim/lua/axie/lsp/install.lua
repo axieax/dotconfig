@@ -1,5 +1,5 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
--- TODO: update all language servers
+-- TODO: update all language servers binding
 
 local M = {}
 
@@ -188,6 +188,7 @@ function M.ls_overrides()
 
     -- MARKDOWN: grammarly
     grammarly = {
+      autostart = false,
       settings = { grammarly = { dialect = "australian" } },
     },
 
@@ -258,9 +259,8 @@ end
 
 -- Setup language servers for installed servers
 function M.setup_language_servers()
-  local installed_servers = require("nvim-lsp-installer.servers").get_installed_servers()
-
-  for _, server in ipairs(installed_servers) do
+  local lsp_installer = require("nvim-lsp-installer")
+  lsp_installer.on_server_ready(function(server)
     -- Get options for server
     local name = server.name
     local ls_overrides = require("axie.lsp.install").ls_overrides()
@@ -291,11 +291,9 @@ function M.setup_language_servers()
       })
       server:attach_buffers()
     elseif name ~= "jdtls" then
-      server:on_ready(function()
-        server:setup(opts)
-      end)
+      server:setup(opts)
     end
-  end
+  end)
 end
 
 -- Setup jdtls language server for java files
@@ -303,6 +301,28 @@ function M.setup_jdtls()
   local ls_overrides = M.ls_overrides()
   local opts = vim.tbl_extend("keep", ls_overrides.jdtls, ls_overrides.default)
   require("jdtls").start_or_attach(opts)
+end
+
+function M.toggle_grammarly()
+  -- Stop Grammarly client if active
+  local clients = vim.lsp.buf_get_clients()
+  for _, client in pairs(clients) do
+    if client.name == "grammarly" then
+      vim.lsp.stop_client(client.id)
+      return
+    end
+  end
+
+  -- Start Grammarly client
+  local lsp_installer = require("nvim-lsp-installer")
+  local ok, server = lsp_installer.get_server("grammarly")
+  if ok then
+    local ls_overrides = M.ls_overrides()
+    local opts = vim.tbl_extend("keep", ls_overrides.grammarly, ls_overrides.default)
+    server:attach_buffers(opts)
+  else
+    require("axie.utils").notify("Cannot setup Grammarly language server", "warning")
+  end
 end
 
 function M.setup()
@@ -315,6 +335,10 @@ function M.setup()
     au!
     au FileType java lua require'axie.lsp.install'.setup_jdtls()
   augroup end
+  ]])
+  -- Grammarly toggle keybind
+  vim.cmd([[
+    au FileType markdown nnoremap <silent> \g <CMD>lua require'axie.lsp.install'.toggle_grammarly()<CR>
   ]])
 end
 

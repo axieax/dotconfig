@@ -745,7 +745,7 @@ return function(dev_mode)
         requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
         config = function()
           require("regexplainer").setup({
-            auto = true,
+            auto = false,
             display = "popup",
             popup = {
               border = {
@@ -754,6 +754,7 @@ return function(dev_mode)
               },
               win_options = { winblend = 20 },
             },
+            mappings = { toggle = "gR" },
           })
         end,
       })
@@ -761,6 +762,17 @@ return function(dev_mode)
       -- Auto continue bullets
       -- NOTE: ctrl-t to indent after auto continue, ctrl-d to unindent
       use("dkarter/bullets.vim")
+
+      -- Dim unused variables and functions
+      use({
+        "narutoxy/dim.lua",
+        requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
+        config = function()
+          require("dim").setup({
+            change_in_insert = true,
+          })
+        end,
+      })
 
       -- package.json dependency manager
       -- TODO: can it check vulnerabilities?
@@ -923,6 +935,14 @@ return function(dev_mode)
       use({
         "stevearc/aerial.nvim",
         config = require("axie.lsp.aerial"),
+      })
+
+      use({
+        "simrat39/symbols-outline.nvim",
+        config = function()
+          -- vim.g.symbols_outline = {
+          -- }
+        end,
       })
 
       -- Code action menu

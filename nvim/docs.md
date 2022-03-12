@@ -16,6 +16,8 @@
 
 ## TODO
 
+- PRIORITY: use SymbolsOutline -> has auto_preview (issue: slow load)
+- Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Telescope `man` docs
 - Custom require which takes module_name, ... args (pcall wrapper)

@@ -3,6 +3,7 @@
 return function()
   require("aerial").setup({
     -- close_behavior = "close",
+    highlight_on_hover = true,
     highlight_on_jump = 200,
     close_on_select = true,
     -- fold code from tree (overwrites treesitter foldexpr)

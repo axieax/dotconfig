@@ -3,10 +3,11 @@
 return function()
   local nightfox = require("nightfox")
   nightfox.setup({
-    fox = "duskfox",
-    transparent = true,
-    alt_nc = true,
+    -- options = {
+    -- transparent = true,
+    -- dim_inactive = true,
+    -- },
   })
 
-  -- nightfox.load()
+  -- vim.cmd("colorscheme duskfox")
 end

@@ -768,9 +768,7 @@ return function(dev_mode)
         "narutoxy/dim.lua",
         requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
         config = function()
-          require("dim").setup({
-            change_in_insert = true,
-          })
+          require("dim").setup()
         end,
       })
 
@@ -915,8 +913,10 @@ return function(dev_mode)
         "j-hui/fidget.nvim",
         config = function()
           require("fidget").setup({
-            relative = "editor",
-            window = { blend = 0 },
+            window = {
+              relative = "editor",
+              blend = 0,
+            },
           })
         end,
       })
@@ -930,8 +930,6 @@ return function(dev_mode)
       })
 
       -- Symbols outline
-      -- ALT: https://github.com/simrat39/symbols-outline.nvim
-      -- use("simrat39/symbols-outline.nvim")
       use({
         "stevearc/aerial.nvim",
         config = require("axie.lsp.aerial"),
@@ -940,8 +938,13 @@ return function(dev_mode)
       use({
         "simrat39/symbols-outline.nvim",
         config = function()
-          -- vim.g.symbols_outline = {
-          -- }
+          vim.g.symbols_outline = {
+            -- highlight_hovered_item = false,
+            auto_close = true,
+            instant_preview = true,
+            border = "rounded",
+            winblend = 15,
+          }
         end,
       })
 
@@ -1018,6 +1021,12 @@ return function(dev_mode)
     config = {
       -- https://github.com/wbthomason/packer.nvim/issues/202
       max_jobs = 50,
+      -- https://github.com/wbthomason/packer.nvim/issues/381#issuecomment-849815901
+      -- git = {
+      --   subcommands = {
+      --     update = "pull --ff-only --progress --rebase",
+      --   },
+      -- },
       profile = { enable = true },
       display = {
         open_fn = function()

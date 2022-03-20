@@ -139,6 +139,36 @@ function M.ls_overrides()
         -- Telescope for UI picker (Neovim < 0.6)
         -- require("jdtls.ui").pick_one_async = require("axie.plugins.telescope").jdtls_ui_picker
       end,
+      handlers = {
+        -- TEMP: https://github.com/j-hui/fidget.nvim/issues/57
+        ["language/progressReport"] = function(_, result, ctx)
+          local info = { client_id = ctx.client_id }
+
+          local kind = "report"
+          if result.complete then
+            kind = "end"
+          elseif result.workDone == 0 then
+            kind = "begin"
+          end
+
+          local percentage = 0
+          if result.totalWork > 0 and result.workDone >= 0 then
+            percentage = result.workDone / result.totalWork * 100
+          end
+
+          local msg = {
+            token = result.id,
+            value = {
+              kind = kind,
+              percentage = percentage,
+              title = result.task,
+              message = result.subTask,
+            },
+          }
+
+          vim.lsp.handlers["$/progress"](nil, msg, info)
+        end,
+      },
     },
 
     -- JS/TS: tsserver

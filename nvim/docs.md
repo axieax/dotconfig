@@ -69,7 +69,7 @@
 ## Features/plugins
 
 - Faded unused variables/imports? https://github.com/narutoxy/dim.lua
-- https://github.com/bennypowers/nvim-regexplainer
+- https://github.com/mvllow/modes.nvim
 - https://github.com/PlatyPew/format-installer.nvim
 - https://github.com/sudormrfbin/cheatsheet.nvim
 - Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
@@ -114,6 +114,7 @@
 - https://github.com/LudoPinelli/comment-box.nvim
 - inccommand split preview-window scroll
 - https://github.com/natecraddock/workspaces.nvim
+- https://github.com/hrsh7th/nvim-cmp/issues/429#issuecomment-980843997
 
 ## Notes / issues
 
@@ -136,12 +137,14 @@
 
 ## Current PRs / Issues
 
+- https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
+- https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099
+- https://github.com/anuvyklack/pretty-fold.nvim/issues/9#issuecomment-1013661876
+- https://github.com/kevinhwang91/nvim-hlslens/issues/20#issuecomment-981329510
 - https://github.com/wbthomason/packer.nvim/issues/760
-- https://github.com/wbthomason/packer.nvim/issues/824
-- https://github.com/danymat/neogen/issues/49
 - https://github.com/folke/todo-comments.nvim/issues/77
 - https://github.com/folke/todo-comments.nvim/issues/80
 - https://github.com/norcalli/nvim-colorizer.lua/pull/18
 - https://github.com/vuki656/package-info.nvim/issues/75
-- My surround-wrap plugin (future: URL paste md)
+- My surround-wrap plugin (future: URL paste md) - replaced by LuaSnip new feature?
 - Git change watch plugin

@@ -165,3 +165,7 @@ augroup spellcheck
   au BufEnter * if empty(&filetype) | setlocal spell | endif
 augroup END
 ]])
+
+-- Global statusline (v0.7)
+-- vim.cmd("set laststatus=3")
+-- vim.cmd("hi WinSeparator guibg=NONE")

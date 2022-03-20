@@ -2,7 +2,7 @@
 /* keys: control (shift) tab to navigate modes */
 
 configuration {
-modi: "run,ssh,filebrowser,window,windowcd";
+modi: "run,ssh,filebrowser,window,windowcd,emoji";
 color-enabled: true;
 color-window: "#4d32302f, #4d32302f, #0032302f";
 color-normal: "#0032302f, #d8dee9, #0032302f, #cc458588, #32302f";
@@ -21,7 +21,10 @@ lines: 10;
 terminal: "alacritty";
 case-sensitive: false;
 
-
+/* NOTE: doesn't work, run rofi with -matching fuzzy -sort-method fzf -sort */
+matching: "fuzzy";
+sort: true;
+sorting-method: "fzf";
 
 
 /*	width: 50;*/

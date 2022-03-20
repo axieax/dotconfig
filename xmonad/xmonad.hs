@@ -223,7 +223,10 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_f), sendMessage $ Toggle NBFULL) -- toggle fullscreen
        , ((modMask, xK_h), spawn $ "alacritty -e htop")
        , ((modMask, xK_q), kill)
-       , ((modMask, xK_r), spawn $ "rofi -show run")
+       -- , ((modMask, xK_r), spawn $ "rofi -show run")
+       , ( (modMask, xK_r)
+         , spawn $ "rofi -show run -matching fuzzy -sort-method fzf -sort"
+         )
        , ((modMask, xK_t), namedScratchpadAction myScratchPads "terminal")
        , ((modMask, xK_s), namedScratchpadAction myScratchPads "spotify")
        , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle") -- and resize XMonad as well?
@@ -243,6 +246,8 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_F10), spawn $ "spotify")
        , ((modMask, xK_F11), spawn $ "rofi -show drun -fullscreen")
        , ((modMask, xK_F12), spawn $ "rofi -show drun")
+       -- requires: https://github.com/Mange/rofi-emoji
+       , ((modMask, xK_period), spawn $ "rofi -show emoji")
 
   -- FUNCTION KEYS
        , ((0, xK_F12), spawn $ "xfce4-terminal --drop-down")
@@ -300,6 +305,8 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
   -- , ((mod1Mask, xK_Right), spawn $ "variety -n" )
        , ((mod1Mask, xK_F2), spawn $ "xfce4-appfinder --collapsed")
        , ((mod1Mask, xK_F3), spawn $ "xfce4-appfinder")
+       , ((mod1Mask, xK_Tab), spawn $ "rofi -show window")
+       , ((mod1Mask .|. shiftMask, xK_Tab), spawn $ "rofi -show windowcd")
 
   --VARIETY KEYS WITH PYWAL
        , ( (mod1Mask .|. shiftMask, xK_f)
@@ -369,8 +376,8 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_space), sendMessage NextLayout)
 
   --Focus selected desktop
-       , ((mod1Mask, xK_Tab), nextWS)
-       , ((mod1Mask .|. shiftMask, xK_Tab), prevWS)
+       -- , ((mod1Mask, xK_Tab), nextWS)
+       -- , ((mod1Mask .|. shiftMask, xK_Tab), prevWS)
 
   --Focus selected desktop
        , ((modMask, xK_Tab), nextWS)

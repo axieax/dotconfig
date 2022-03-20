@@ -61,7 +61,7 @@ fi
 #run firefox &
 #run thunar &
 # run copyq &
-run spotify & # wrapper?
+# run spotify & # wrapper?
 #run atom &
 
 # Communications

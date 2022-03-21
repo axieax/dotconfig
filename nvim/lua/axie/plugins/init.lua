@@ -271,8 +271,13 @@ return function(dev_mode)
         cmd = { "Twilight" },
         config = function()
           require("twilight").setup()
-          -- NOTE: this does not work
-          vim.cmd("hi Twilight guibg=NONE")
+          -- TEMP: transparent background issue above
+          local tw_config = require("twilight.config")
+          local tw_colors = tw_config.colors
+          tw_config.colors = function(...)
+            tw_colors(...)
+            vim.cmd("hi! Twilight guibg=NONE")
+          end
         end,
       })
 

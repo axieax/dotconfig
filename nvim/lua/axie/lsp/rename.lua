@@ -55,10 +55,11 @@ function M.notify_handler(result)
   -- prefer documentChanges over changes (under workspaceEdit)
   -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
   local notify = require("axie.utils").notify
+  local msg = ""
+  local num_changes = 0
+
   local changes = {}
   if result.documentChanges then
-    local msg = ""
-    local num_changes = 0
     for _, entry in ipairs(result.documentChanges) do
       local edits = entry.edits
       if edits then
@@ -69,10 +70,6 @@ function M.notify_handler(result)
       end
       changes[entry.textDocument.uri] = edits
     end
-    msg = msg:sub(1, #msg - 1)
-    notify(msg, "info", {
-      title = ("Succesfully renamed with %d changes"):format(num_changes),
-    })
   elseif result.changes then
     changes = result.changes
     local msg = ""
@@ -83,11 +80,11 @@ function M.notify_handler(result)
       msg = msg .. ("%d changes in %s"):format(#edits, filename) .. "\n"
       num_changes = num_changes + #edits
     end
-    msg = msg:sub(1, #msg - 1)
-    notify(msg, "info", {
-      title = ("Succesfully renamed with %d changes"):format(num_changes),
-    })
   end
+  msg = msg:sub(1, #msg - 1)
+  notify(msg, "info", {
+    title = ("Succesfully renamed with %d changes"):format(num_changes),
+  })
 
   -- set qflist
   M.set_qflist(changes)

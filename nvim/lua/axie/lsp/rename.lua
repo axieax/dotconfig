@@ -72,8 +72,6 @@ function M.notify_handler(result)
     end
   elseif result.changes then
     changes = result.changes
-    local msg = ""
-    local num_changes = 0
     for uri, edits in pairs(changes) do
       local filename = vim.uri_to_fname(uri)
       filename = vim.fn.fnamemodify(filename, ":.")

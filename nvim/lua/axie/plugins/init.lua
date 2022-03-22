@@ -946,7 +946,8 @@ return function(dev_mode)
           vim.g.symbols_outline = {
             -- highlight_hovered_item = false,
             auto_close = true,
-            instant_preview = true,
+            auto_preview = false,
+            -- instant_preview = true,
             border = "rounded",
             winblend = 15,
           }

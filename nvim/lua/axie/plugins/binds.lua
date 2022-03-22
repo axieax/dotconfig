@@ -259,7 +259,7 @@ function M.which_key()
       ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },
       ["<space>"] = { "<CMD>lua require'nvim-biscuits'.toggle_biscuits()<CR>", "Toggle Biscuits" },
-      ["<tab>"] = { "<CMD>AerialToggle<CR>", "Symbols Outline" },
+      ["<tab>"] = { "<CMD>AerialToggle<CR>", "Aerial Symbols" },
     },
     ["["] = {
       name = "+previous",
@@ -318,17 +318,25 @@ function M.which_key()
       u = { "<CMD>UrlView<CR>", "View buffer URLs" },
       z = { "<CMD>FocusMaxOrEqual<CR>", "Maximise toggle" },
       f = { "<CMD>FocusToggle<CR>", "Focus toggle" },
+      ["<tab>"] = { "<CMD>SymbolsOutline<CR>", "Symbols Outline" },
     },
     [","] = {
       p = { "<CMD>PasteImg<CR>", "Paste image" },
-      o = { "<CMD>Glow<CR>", "Markdown preview (glow)" },
-      O = { "<CMD>MarkdownPreview<CR>", "Markdown preview (browser)" },
+      -- o = { "<CMD>Glow<CR>", "Markdown preview (glow)" },
+      -- O = { "<CMD>MarkdownPreview<CR>", "Markdown preview (browser)" },
       ["["] = { require("axie.plugins.treesitter").goto_prev_sibling, "Goto previous sibling node" },
       ["]"] = { require("axie.plugins.treesitter").goto_next_sibling, "Goto next sibling node" },
       ["{"] = { require("axie.plugins.treesitter").goto_parent, "Goto parent node" },
       ["}"] = { require("axie.plugins.treesitter").goto_child, "Goto child node" },
     },
   })
+
+  vim.cmd([[
+    au FileType markdown nmap <buffer> ,o <CMD>Glow<CR>
+    au FileType markdown nmap <buffer> ,O <CMD>MarkdownPreview<CR>
+    au FileType html nmap <buffer> ,o <CMD>lua require'axie.plugins.toggleterm'.liveserver(true)<CR>
+    au FileType html nmap <buffer> ,O <CMD>lua require'axie.plugins.toggleterm'.liveserver()<CR>
+  ]])
 end
 
 return M

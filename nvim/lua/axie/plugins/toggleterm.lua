@@ -57,6 +57,7 @@ end
 
 function M.lazygit()
   local lazygit = require("toggleterm.terminal").Terminal:new({
+    -- INSTALL: sudo pacman -S lazygit
     cmd = "lazygit",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },
@@ -68,6 +69,7 @@ end
 
 function M.lazydocker()
   local lazydocker = require("toggleterm.terminal").Terminal:new({
+    -- INSTALL: sudo pacman -S lazydocker
     cmd = "lazydocker",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },
@@ -75,6 +77,22 @@ function M.lazydocker()
     count = 6,
   })
   lazydocker:toggle()
+end
+
+function M.liveserver(current_file)
+  local filename = require("axie.utils").ternary(current_file or false, vim.fn.expand("%"), "")
+  local liveserver = require("toggleterm.terminal").Terminal:new({
+    -- INSTALL: yarn global add live-server
+    cmd = "live-server " .. filename,
+    direction = "float",
+    -- float_opts = { highlights = { border = "Normal" } },
+    hidden = true,
+    count = 7,
+    on_open = function(t)
+      vim.api.nvim_buf_set_keymap(0, "t", "<esc>", "<CMD>close<CR>", { silent = true })
+    end,
+  })
+  liveserver:toggle()
 end
 
 return M

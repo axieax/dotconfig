@@ -1034,6 +1034,7 @@ return function(dev_mode)
       --   },
       -- },
       profile = { enable = true },
+      autoremove = true,
       display = {
         open_fn = function()
           return require("packer.util").float({ border = "rounded" })

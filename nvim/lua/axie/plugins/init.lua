@@ -383,8 +383,19 @@ return function(dev_mode)
       -- ALT: https://github.com/nvim-neo-tree/neo-tree.nvim
       use({
         "kyazdani42/nvim-tree.lua",
+        disable = true,
         requires = "kyazdani42/nvim-web-devicons",
         config = require("axie.plugins.nvimtree"),
+      })
+
+      use({
+        "nvim-neo-tree/neo-tree.nvim",
+        requires = {
+          "nvim-lua/plenary.nvim",
+          "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+          "MunifTanjim/nui.nvim",
+        },
+        config = require("axie.plugins.neotree"),
       })
 
       -- nnn file explorer
@@ -497,6 +508,18 @@ return function(dev_mode)
               -- https://github.com/romgrk/nvim-treesitter-context/issues/87
               markdown = { "atx_heading" },
             },
+          })
+        end,
+      })
+
+      -- Argument highlights
+      use({
+        "m-demare/hlargs.nvim",
+        requires = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+          require("hlargs").setup({
+            -- Catppuccin Flamingo
+            color = "#F2CDCD",
           })
         end,
       })

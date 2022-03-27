@@ -23,12 +23,12 @@ function M.default_on_attach(client, bufnr)
   -- prefer null-ls for formatting if available
   if (not is_null and null_can_format) or (is_null and not null_can_format) then
     -- disable formatting
-    -- print("formatting disabled")
+    -- print("formatting disabled for " .. name)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
   else
     -- use client for formatting
-    -- print("formatting enabled")
+    -- print("formatting enabled for " .. name)
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 

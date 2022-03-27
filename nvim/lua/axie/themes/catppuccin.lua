@@ -11,7 +11,7 @@ return function()
       gitgutter = false,
       gitsigns = true,
       telescope = true,
-      nvimtree = {
+      neotree = {
         enabled = true,
         show_root = false,
         transparent_panel = true,

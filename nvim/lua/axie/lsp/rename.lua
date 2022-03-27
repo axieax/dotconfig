@@ -52,12 +52,12 @@ function M.notify_handler(result)
     return
   end
 
-  -- prefer documentChanges over changes (under workspaceEdit)
-  -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
   local notify = require("axie.utils").notify
   local msg = ""
   local num_changes = 0
 
+  -- prefer documentChanges over changes (under workspaceEdit)
+  -- https://microsoft.github.io/language-server-protocol/specifications/specification-3-14
   local changes = {}
   if result.documentChanges then
     for _, entry in ipairs(result.documentChanges) do

@@ -16,7 +16,7 @@
 
 ## TODO
 
-- PRIORITY: use SymbolsOutline -> has auto_preview (issue: slow load)
+- PRIORITY: focus.nvim incorrect auto resize for toggleterm and bqf
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Telescope `man` docs
@@ -137,6 +137,9 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/211
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/212
+- https://github.com/beauwilliams/focus.nvim/issues/82
 - https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/9#issuecomment-1013661876

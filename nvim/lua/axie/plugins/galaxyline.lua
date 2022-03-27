@@ -273,6 +273,7 @@ function M.setup()
   galaxyline.short_line_list = {
     "qf",
     "NvimTree",
+    "neo-tree",
     "aerial",
     "Mundo",
     "Trouble",

@@ -41,6 +41,7 @@ function M.register_git_bindings()
     m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
     u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
     s = { require("telescope.builtin").git_stash, "git stash" },
+    S = { "<CMD>Neotree source=git_status toggle=true<CR>", "git status (tree)" },
     b = { require("telescope.builtin").git_branches, "git branches" },
     c = { require("telescope.builtin").git_bcommits, "git commits (buffer)" },
     C = { require("telescope.builtin").git_commits, "git commits (repo)" },
@@ -97,8 +98,8 @@ function M.misc()
   map({ "v", "gQ", "<CMD>lua require'axie.lsp.code_actions'.default(false)<CR>" })
   -- Telescope
   map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
-  -- NvimTree
-  map({ "n", ";", "<CMD>NvimTreeToggle<CR>" })
+  -- Neo-tree
+  map({ "n", ";", "<CMD>Neotree toggle=true<CR>" })
   -- Visual indent
   map({ "v", "<", "<gv" })
   map({ "v", ">", ">gv" })
@@ -186,7 +187,8 @@ function M.which_key()
       f = {
         name = "+find",
         a = { require("telescope.builtin").symbols, "find symbols" },
-        b = { require("telescope.builtin").buffers, "search buffers" },
+        b = { require("telescope.builtin").buffers, "open buffers" },
+        B = { "<CMD>Neotree source=buffers toggle=true<CR>", "open buffers (tree)" },
         c = { require("axie.plugins.telescope").dotconfig, "search config" },
         e = { "<CMD>Telescope file_browser grouped=true<CR>", "file explorer" },
         E = { "<CMD>Telescope env<CR>", "environment variables" },
@@ -249,6 +251,7 @@ function M.which_key()
       P = { ":lua require'axie.utils'.notify()<LEFT>", "lua notify", silent = false },
       q = { require("axie.utils").toggle_signcolumn, "toggle signcolumn" },
       Q = { require("notify").dismiss, "dismiss notifications" },
+      a = { ":lua require'hlargs'.toggle()<CR>", "toggle argument highlights" },
       u = { "<CMD>MundoToggle<CR>", "Undo Tree" },
       v = { "ggVG", "select all" },
       V = { 'ggVG"+y', "copy all to clipboard" },

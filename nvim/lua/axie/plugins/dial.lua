@@ -14,7 +14,7 @@ return function()
       -- augend.constant.alias.Alpha,
       augend.semver.alias.semver,
       augend.date.alias["%H:%M:%S"],
-      -- TODO: markup#markdown#header
+      augend.misc.alias.markdown_header,
       augend.constant.new({
         elements = { "true", "false" },
         word = true,

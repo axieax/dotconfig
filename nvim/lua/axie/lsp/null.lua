@@ -92,6 +92,8 @@ function M.formatting_sources()
     -- DEFAULT: pip install codespell
     -- ISSUE: false positives (e.g. ans -> and) may cause compilation problems
     -- formatting.codespell,
+    -- PROTOBUF: yay -S buf
+    -- formatting.buf,
     -- DEFAULT
     formatting.trim_whitespace,
   }
@@ -127,6 +129,8 @@ function M.diagnostic_sources()
         return utils.root_has_file({ ".editorconfig" })
       end,
     }),
+    -- PROTOBUF: yay -S buf
+    -- diagnostics.buf,
     -- DEFAULT
     -- diagnostics.trail_space,
   }

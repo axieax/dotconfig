@@ -137,8 +137,7 @@
 
 ## Current PRs / Issues
 
-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/211
-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/212
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/219
 - https://github.com/beauwilliams/focus.nvim/issues/82
 - https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099

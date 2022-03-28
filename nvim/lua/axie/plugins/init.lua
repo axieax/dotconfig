@@ -379,20 +379,12 @@ return function(dev_mode)
       -- File Explorer --
       -------------------
 
-      -- Tree file explorer
-      -- ALT: https://github.com/nvim-neo-tree/neo-tree.nvim
-      use({
-        "kyazdani42/nvim-tree.lua",
-        disable = true,
-        requires = "kyazdani42/nvim-web-devicons",
-        config = require("axie.plugins.nvimtree"),
-      })
-
+      -- Tree explorer (filesystem, buffers, git_status)
       use({
         "nvim-neo-tree/neo-tree.nvim",
         requires = {
           "nvim-lua/plenary.nvim",
-          "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+          "kyazdani42/nvim-web-devicons",
           "MunifTanjim/nui.nvim",
         },
         config = require("axie.plugins.neotree"),

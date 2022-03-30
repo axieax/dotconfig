@@ -16,6 +16,8 @@
 
 ## TODO
 
+- PRIORITY: opening nvim to a dir -> neotree changes to cwd
+- PRIORITY: no eslint node_module -> use own eslint_d
 - PRIORITY: focus.nvim incorrect auto resize for toggleterm and bqf
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)

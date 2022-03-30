@@ -121,13 +121,19 @@ augroup END
 ]])
 
 -- Update (instead of write)
-map({ "n", "<space>w", "<CMD>up<CR>" })
+map({ "n", "<space>w", "<CMD>update<CR>" })
 
 -- No autoformat write
 vim.cmd("command! W :noautocmd w")
 vim.cmd("command! Wq :noautocmd wq")
+vim.cmd("command! Wqa :noautocmd wqa")
+-- TODO(0.7): use lua function
 -- nvim_add_user_command("W", "noautocmd w")
 -- nvim_add_user_command("Wq", "noautocmd wq")
+
+-- Quit typos
+vim.cmd("command! Q q")
+vim.cmd("command! Qa qa")
 
 -- Disable automatic comment insertion
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)

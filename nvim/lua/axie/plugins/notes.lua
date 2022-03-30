@@ -77,6 +77,7 @@ return function()
       },
     },
     highlight = {
+      pattern = [[.*<(KEYWORDS)\s*]],
       before = "empty",
       keyword = "bg",
       after = "fg",

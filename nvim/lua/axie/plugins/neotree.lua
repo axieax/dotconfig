@@ -9,6 +9,7 @@
 return function()
   require("neo-tree").setup({
     use_popups_for_input = false,
+    -- popup_border_style = "rounded",
     default_component_configs = {
       indent_size = 1,
       name = {
@@ -32,7 +33,6 @@ return function()
     },
     filesystem = {
       hijack_netrw_behavior = "open_current",
-      -- hijack_netrw_behavior = "open_default",
       use_libuv_file_watcher = true,
       filtered_items = {
         hide_dotfiles = false,
@@ -41,13 +41,24 @@ return function()
     },
     event_handlers = {
       {
+        -- auto close
         event = "file_opened",
         handler = function(file_path)
-          -- auto close
           require("neo-tree").close_all()
+        end,
+      },
+      {
+        -- show netrw hijacked buffer in buffer list
+        event = "neo_tree_buffer_enter",
+        handler = function()
+          vim.schedule(function()
+            local position = vim.api.nvim_buf_get_var(0, "neo_tree_position")
+            if position == "current" then
+              vim.cmd("setlocal buflisted")
+            end
+          end)
         end,
       },
     },
   })
-  vim.cmd([[au FileType neo-tree lua vim.schedule(function() vim.cmd("setlocal buflisted") end)]])
 end

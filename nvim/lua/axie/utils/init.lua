@@ -37,12 +37,12 @@ function M.map(bind)
   -- Get options
   local mode, before, after = unpack(bind, 1, 3)
 
-  local buffer = M.fallback_value(bind.buffer, default_options.buffer)
+  local buffer = M.fallback(bind.buffer, default_options.buffer)
   local opts = {
-    noremap = M.fallback_value(bind.noremap, default_options.noremap),
-    silent = M.fallback_value(bind.silent, default_options.silent),
-    expr = M.fallback_value(bind.expr, default_options.expr),
-    script = M.fallback_value(bind.script, default_options.script),
+    noremap = M.fallback(bind.noremap, default_options.noremap),
+    silent = M.fallback(bind.silent, default_options.silent),
+    expr = M.fallback(bind.expr, default_options.expr),
+    script = M.fallback(bind.script, default_options.script),
   }
 
   -- Register keymap with specified options
@@ -54,20 +54,22 @@ function M.map(bind)
   end
 end
 
--- Returns value or fallback (nullish coalescing)
--- @param value to be checked
--- @param fallback value which may be used
--- @param fallback_comparison used to compare with value, leave empty for default nil
-function M.fallback_value(value, fallback, fallback_comparison)
-  return (value == fallback_comparison and fallback) or value
+--- Determines whether to accept the current value or use a fallback value (nullish coalescing)
+---@param value any @value to check
+---@param fallback_value any @fallback value to use
+---@param fallback_comparison any @fallback comparison, defaults to nil
+---@return any @value, or @fallback if @value is @fallback_comparison
+function M.fallback(value, fallback_value, fallback_comparison)
+  return (value == fallback_comparison and fallback_value) or value
 end
 
--- Helper function for mimicking the ternary operator
--- @param condition
--- @param first
--- @param second
-function M.ternary(condition, first, second)
-  return (condition and first) or second
+--- Mimics the ternary operator
+---@param condition boolean @condition to check
+---@param if_true any @value to return if @condition is true
+---@param if_false any @value to return if @condition is false
+---@return any @condition ? if_true : if_false
+function M.ternary(condition, if_true, if_false)
+  return (condition and if_true) or if_false
 end
 
 -- Debug printing

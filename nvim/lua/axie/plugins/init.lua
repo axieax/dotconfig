@@ -1,7 +1,7 @@
 -- https://github.com/wbthomason/packer.nvim --
 
 return function(dev_mode)
-  -- Autoinstall packer
+  -- Bootstrap packer
   local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   local auto_install = vim.fn.empty(vim.fn.glob(packer_path)) > 0
   if auto_install then
@@ -9,9 +9,8 @@ return function(dev_mode)
   end
   vim.cmd("packadd packer.nvim")
 
-  -- Automatically source this file on save
-  -- Does not work with above
-  vim.cmd("autocmd! BufWritePost */dotconfig/nvim/*/*.lua,*/.config/nvim/*/*.lua source $MYVIMRC")
+  -- Automatically source lua config files on save
+  vim.cmd("autocmd! BufWritePost */dotconfig/nvim/**/*.lua,*/.config/nvim/**/*.lua source $MYVIMRC")
 
   local packer = require("packer")
   return packer.startup({
@@ -55,7 +54,7 @@ return function(dev_mode)
       -- My Plugins --
       ----------------
 
-      -- View URLs in current buffer
+      -- View buffer URLs
       use({
         "axieax/urlview.nvim",
         disable = dev_mode,
@@ -125,7 +124,7 @@ return function(dev_mode)
       -- Keybinds
       use({
         "folke/which-key.nvim",
-        config = require("axie.plugins.binds").which_key,
+        config = require("axie.plugins.binds").setup,
       })
 
       -- Fuzzy finder
@@ -174,6 +173,7 @@ return function(dev_mode)
 
       -- Statusline
       -- ALT: https://github.com/windwp/windline.nvim
+      -- ALT: https://github.com/tamton-aquib/staline.nvim
       use({
         "NTBBloodbath/galaxyline.nvim",
         requires = "kyazdani42/nvim-web-devicons",
@@ -382,6 +382,7 @@ return function(dev_mode)
       -- Tree explorer (filesystem, buffers, git_status)
       use({
         "nvim-neo-tree/neo-tree.nvim",
+        branch = "main",
         requires = {
           "nvim-lua/plenary.nvim",
           "kyazdani42/nvim-web-devicons",

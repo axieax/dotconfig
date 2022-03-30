@@ -6,113 +6,7 @@
 local M = {}
 local map = require("axie.utils").map
 
-function M.general()
-  -- Set leader key
-  -- vim.g.mapleader = ","
-
-  -- Terminal normal mode
-  -- map("t", "<ESC>", "<C-\\><C-n>", opts)
-
-  -- Source
-  -- NOTE: PackerInstall requires restarting nvim
-  -- vim.cmd("command! R :luafile $MYVIMRC<CR>:PackerCompile<CR>")
-  vim.cmd("command! R :luafile $MYVIMRC<CR>")
-  -- nvim_add_user_command("R", ":luafile $MYVIMRC<CR>")
-
-  -- Space mappings
-  M.register_git_bindings()
-  M.misc()
-end
-
-function M.register_git_bindings()
-  require("which-key").register({
-    name = "+git",
-    g = { require("axie.plugins.toggleterm").lazygit, "lazygit" },
-    h = { require("gitsigns").stage_hunk, "git stage hunk" },
-    H = { "<CMD>DiffviewFileHistory .<CR>", "git stage hunk" },
-    K = { require("gitsigns").preview_hunk, "git hunk preview" },
-    r = { require("gitsigns").reset_hunk, "git reset hunk" },
-    R = { require("gitsigns").reset_buffer, "git reset buffer" },
-    d = { require("gitsigns").diffthis, "git diff view" },
-    -- d = { "<CMD>DiffviewOpen<CR>", "git diff view open" },
-    -- D = { "<CMD>DiffviewOpen main<CR>", "git diff view close" }, -- main / master
-    -- D = { "<CMD>DiffviewClose<CR>", "git diff view close" },
-    x = { require("gitsigns").toggle_deleted, "git virtual deleted" },
-    m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
-    u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
-    s = { require("telescope.builtin").git_stash, "git stash" },
-    S = { "<CMD>Neotree source=git_status toggle=true<CR>", "git status (tree)" },
-    b = { require("telescope.builtin").git_branches, "git branches" },
-    c = { require("telescope.builtin").git_bcommits, "git commits (buffer)" },
-    C = { require("telescope.builtin").git_commits, "git commits (repo)" },
-    y = { "git yank reference url" },
-    Y = { require("gitlinker").get_repo_url, "git yank repo url" },
-    w = {
-      function()
-        require("gitlinker").get_buf_range_url("n", {
-          action_callback = require("gitlinker.actions").open_in_browser,
-        })
-      end,
-      "git browse reference url",
-    },
-    W = {
-      function()
-        require("gitlinker").get_repo_url({
-          action_callback = require("gitlinker.actions").open_in_browser,
-        })
-      end,
-      "git browse repo url",
-    },
-    q = { require("gitsigns").toggle_numhl, "git gutter colour toggle" },
-    [";"] = { require("gitsigns").toggle_current_line_blame, "git blame toggle" },
-    ["?"] = { require("telescope.builtin").git_status, "git status" },
-  }, {
-    prefix = "<space>g",
-  })
-
-  -- visual bindings
-  require("which-key").register({
-    name = "+git",
-    h = {
-      function()
-        require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-      end,
-      "git stage hunk",
-    },
-    r = {
-      function()
-        require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-      end,
-      "git reset hunk",
-    },
-  }, {
-    prefix = "<space>g",
-    mode = "v",
-  })
-end
-
-function M.misc()
-  -- LSP
-  map({ "n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>" })
-  map({ "v", "gq", "<CMD>lua require'axie.lsp.code_actions'.default(true)<CR>" })
-  map({ "v", "gQ", "<CMD>lua require'axie.lsp.code_actions'.default(false)<CR>" })
-  -- Telescope
-  map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
-  -- Neo-tree
-  map({ "n", ";", "<CMD>Neotree toggle=true<CR>" })
-  -- Visual indent
-  map({ "v", "<", "<gv" })
-  map({ "v", ">", ">gv" })
-  -- Source
-  map({ "n", "<space>rf", "<CMD>luafile %<CR>" })
-  map({ "n", "<space>rF", "<CMD>source % | PackerCompile<CR>" })
-  -- Markdown bold
-  map({ "v", ",*", "S*gvS*", noremap = false })
-  -- Shift tab to unindent
-  map({ "i", "<S-Tab>", "<C-d>" })
-end
-
-function M.which_key()
+function M.setup()
   local wk = require("which-key")
   -- Config
   wk.setup({
@@ -120,7 +14,14 @@ function M.which_key()
     window = { winblend = 20 },
   })
 
+  require("axie.plugins.binds").general_mappings()
+  require("axie.plugins.binds").register_git_bindings()
+  require("axie.plugins.binds").misc()
+end
+
+function M.general_mappings()
   -- mappings
+  local wk = require("which-key")
   wk.register({
     ["<space>"] = {
       name = "Space",
@@ -156,6 +57,7 @@ function M.which_key()
         v = { "<CMD>TestVisit<CR>", "Test visit" },
         m = { require("axie.lsp.test").custom_test_method, "Test method" },
         c = { "<CMD>lua require'axie.lsp.test'.custom_test_class()<CR>", "Test class" },
+        P = { "<Plug>PlenaryTestFile", "Plenary test file" },
       },
       l = {
         name = "+lsp",
@@ -234,9 +136,6 @@ function M.which_key()
         n = { require("axie.lsp.rename").rename_empty, "rename symbol (no default text)" },
         N = { vim.lsp.buf.rename, "rename symbol" },
         r = { require("axie.plugins.toggleterm").lazydocker, "lazydocker" },
-        -- BUG: the following places an extra character in the buffer (replace)
-        -- f = { "<CMD>luafile %<CR>" },
-        -- F = { "<CMD>source % | PackerCompile<CR>" },
       },
       o = {
         q = { "<CMD>copen<CR>", "open qflist" },
@@ -340,6 +239,92 @@ function M.which_key()
     au FileType html nmap <buffer> ,o <CMD>lua require'axie.plugins.toggleterm'.liveserver(true)<CR>
     au FileType html nmap <buffer> ,O <CMD>lua require'axie.plugins.toggleterm'.liveserver()<CR>
   ]])
+end
+
+function M.register_git_bindings()
+  local wk = require("which-key")
+  wk.register({
+    name = "+git",
+    g = { require("axie.plugins.toggleterm").lazygit, "lazygit" },
+    h = { require("gitsigns").stage_hunk, "git stage hunk" },
+    H = { "<CMD>DiffviewFileHistory .<CR>", "git stage hunk" },
+    K = { require("gitsigns").preview_hunk, "git hunk preview" },
+    r = { require("gitsigns").reset_hunk, "git reset hunk" },
+    R = { require("gitsigns").reset_buffer, "git reset buffer" },
+    d = { require("gitsigns").diffthis, "git diff view" },
+    -- d = { "<CMD>DiffviewOpen<CR>", "git diff view open" },
+    -- D = { "<CMD>DiffviewOpen main<CR>", "git diff view close" }, -- main / master
+    -- D = { "<CMD>DiffviewClose<CR>", "git diff view close" },
+    x = { require("gitsigns").toggle_deleted, "git virtual deleted" },
+    m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
+    u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
+    s = { require("telescope.builtin").git_stash, "git stash" },
+    S = { "<CMD>Neotree source=git_status toggle=true<CR>", "git status (tree)" },
+    b = { require("telescope.builtin").git_branches, "git branches" },
+    c = { require("telescope.builtin").git_bcommits, "git commits (buffer)" },
+    C = { require("telescope.builtin").git_commits, "git commits (repo)" },
+    y = { "git yank reference url" },
+    Y = { require("gitlinker").get_repo_url, "git yank repo url" },
+    w = {
+      function()
+        require("gitlinker").get_buf_range_url("n", {
+          action_callback = require("gitlinker.actions").open_in_browser,
+        })
+      end,
+      "git browse reference url",
+    },
+    W = {
+      function()
+        require("gitlinker").get_repo_url({
+          action_callback = require("gitlinker.actions").open_in_browser,
+        })
+      end,
+      "git browse repo url",
+    },
+    q = { require("gitsigns").toggle_numhl, "git gutter colour toggle" },
+    [";"] = { require("gitsigns").toggle_current_line_blame, "git blame toggle" },
+    ["?"] = { require("telescope.builtin").git_status, "git status" },
+  }, {
+    prefix = "<space>g",
+  })
+
+  -- visual bindings
+  wk.register({
+    name = "+git",
+    h = {
+      function()
+        require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      end,
+      "git stage hunk",
+    },
+    r = {
+      function()
+        require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      end,
+      "git reset hunk",
+    },
+  }, {
+    prefix = "<space>g",
+    mode = "v",
+  })
+end
+
+function M.misc()
+  -- LSP
+  map({ "n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>" })
+  map({ "v", "gq", "<CMD>lua require'axie.lsp.code_actions'.default(true)<CR>" })
+  map({ "v", "gQ", "<CMD>lua require'axie.lsp.code_actions'.default(false)<CR>" })
+  -- Telescope
+  map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
+  -- Neo-tree
+  map({ "n", ";", "<CMD>Neotree toggle=true<CR>" })
+  -- Visual indent
+  map({ "v", "<", "<gv" })
+  map({ "v", ">", ">gv" })
+  -- Markdown bold
+  map({ "v", ",*", "S*gvS*", noremap = false })
+  -- Shift tab to unindent
+  map({ "i", "<S-Tab>", "<C-d>" })
 end
 
 return M

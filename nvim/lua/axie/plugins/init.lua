@@ -59,6 +59,7 @@ return function(dev_mode)
         "axieax/urlview.nvim",
         disable = dev_mode,
         cmd = { "UrlView" },
+        config = require("axie.plugins.urlview"),
       })
 
       -------------

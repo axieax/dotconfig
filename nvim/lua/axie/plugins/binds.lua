@@ -218,6 +218,7 @@ function M.general_mappings()
         "Toggle spellcheck",
       },
       u = { "<CMD>UrlView<CR>", "View buffer URLs" },
+      U = { "<CMD>UrlView packer<CR>", "View plugin URLs" },
       z = { "<CMD>FocusMaxOrEqual<CR>", "Maximise toggle" },
       f = { "<CMD>FocusToggle<CR>", "Focus toggle" },
       ["<tab>"] = { "<CMD>SymbolsOutline<CR>", "Symbols Outline" },

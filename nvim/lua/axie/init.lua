@@ -37,4 +37,7 @@ if dev_mode then
     -- refresh require caching
     reload_module(module_name)
   end
+
+  -- Custom config
+  require("axie.plugins.urlview")()
 end

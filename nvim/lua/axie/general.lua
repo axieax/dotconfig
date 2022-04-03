@@ -74,7 +74,7 @@ vim.cmd([[
 
 -- Hybrid relative numbers for normal mode, absolute for insert mode
 vim.cmd([[
-fun! SetRelativeNumber()
+fun! s:enable_relative_number()
   " dashboard\|nvimtree
   if &ft =~ 'alpha'
     return
@@ -84,10 +84,13 @@ endfun
 
 :augroup numbertoggle
 :  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * call SetRelativeNumber()
+:  autocmd BufEnter,FocusGained,InsertLeave * call s:enable_relative_number()
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
 ]])
+
+-- Disable colorcolumn conditionally
+vim.cmd([[au FileType alpha setlocal colorcolumn=]])
 
 -- netrw settings (for directory tree view)
 vim_apply(vim.g, {

@@ -139,6 +139,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/wbthomason/packer.nvim/issues/868 for urlview.nvim
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/219
 - https://github.com/beauwilliams/focus.nvim/issues/82
 - https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339

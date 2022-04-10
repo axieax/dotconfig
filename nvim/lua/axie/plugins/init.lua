@@ -1015,7 +1015,7 @@ return function(dev_mode)
           -- "tzachar/cmp-fzy-buffer",
           -- "tzachar/cmp-fuzzy-path",
         },
-        config = require("axie.lsp.cmp"),
+        config = require("axie.lsp.completion"),
       })
 
       -- Function signature

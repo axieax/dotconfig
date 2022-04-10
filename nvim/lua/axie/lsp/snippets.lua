@@ -34,7 +34,7 @@ function M.custom_snippets()
         "void solve() {",
         "  ",
       }),
-      i(1), -- cursor placement on snippet expansion
+      i(1, "// TODO"), -- cursor placement on snippet expansion
       t({
         "",
         "}",

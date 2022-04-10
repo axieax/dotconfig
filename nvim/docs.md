@@ -16,6 +16,7 @@
 
 ## TODO
 
+- PRIORITY: nvim-cmp tab completion broken
 - PRIORITY: no eslint node_module -> use own eslint_d
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)

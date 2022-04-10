@@ -1,6 +1,0 @@
-{
-  "cp_template": {
-    "prefix": "cpt",
-    "body": "#include <bits/stdc++.h>\n\nusing namespace std;\n\n#define ll long long\n#define ld long double\n#define PI M_PI\n#define INF 1e9\n#define debug(x) cout << #x << \": \" << x << endl;\n\nvoid solve() {\n\n}\n\nint main() {\n\t// optimise read/write\n\tios_base::sync_with_stdio(0);\n\tcin.tie(0); cout.tie(0);\n\n\t// test cases\n\tint tc = 1;\n\t// cin >> tc;\n\tfor (int t = 1; t <= tc; ++t) {\n\t\t// cout << \"Case #\" << t << \": \";\n\t\tsolve();\n\t}\n}"
-  }
-}

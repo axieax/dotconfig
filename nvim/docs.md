@@ -16,9 +16,7 @@
 
 ## TODO
 
-- PRIORITY: opening nvim to a dir -> neotree changes to cwd
 - PRIORITY: no eslint node_module -> use own eslint_d
-- PRIORITY: focus.nvim incorrect auto resize for toggleterm and bqf
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Telescope `man` docs
@@ -99,7 +97,6 @@
 - https://github.com/ripxorip/aerojump.nvim
 - bufferline.nvim or cokeline.nvim instead of barbar?
 - windline instead of galaxyline?
-- nvimtree config migration
 - Calltree (https://github.com/ldelossa/calltree.nvim)
 - gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
 - Markdown code block syntax highlighting
@@ -110,7 +107,6 @@
 - Telescope frecency, smart-history
 - https://github.com/kwkarlwang/bufresize.nvim
 - https://github.com/sQVe/sort.nvim
-- https://github.com/nvim-neo-tree/neo-tree.nvim
 - https://github.com/NTBBloodbath/rest.nvim API
 - PackerUpdate force pull (git fetch origin, git reset -hard origin/master)
 - https://github.com/LudoPinelli/comment-box.nvim
@@ -136,12 +132,12 @@
 - Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
 - Colorizer disabled on PackerCompile (changing colorscheme), no support for lowercase, unmaintained
 - autopairs may start to break after a while (can't insert characters)
+- windows without line number column will regain column if you switch to another window and come back
 
 ## Current PRs / Issues
 
 - https://github.com/wbthomason/packer.nvim/issues/868 for urlview.nvim
-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/219
-- https://github.com/beauwilliams/focus.nvim/issues/82
+- https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
 - https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/9#issuecomment-1013661876
@@ -152,4 +148,4 @@
 - https://github.com/norcalli/nvim-colorizer.lua/pull/18
 - https://github.com/vuki656/package-info.nvim/issues/75
 - My surround-wrap plugin (future: URL paste md) - replaced by LuaSnip new feature?
-- Git change watch plugin
+- Git change watch plugin (watch for breaking config setup?)

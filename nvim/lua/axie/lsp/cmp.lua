@@ -7,9 +7,6 @@
 local DEFAULT_PRIORITY = 2
 
 return function()
-  -- setup vsnip directory
-  vim.g.vsnip_snippet_dir = "~/.config/nvim/lua/lsp/snippets"
-
   -- setup cmp
   local cmp = require("cmp")
   local lspkind = require("lspkind")
@@ -19,7 +16,7 @@ return function()
     nvim_lsp = { label = "[LSP]", priority = 3 },
     nvim_lua = { label = "[Lua]", priority = 3 },
     buffer = { label = "[Buffer]", priority = 1 },
-    vsnip = { label = "[Vsnip]", priority = 5 },
+    luasnip = { label = "[LSnip]", priority = 5 },
     path = { label = "[Path]" },
     calc = { label = "[Calc]" },
     emoji = { label = "[Emoji]" },
@@ -50,8 +47,7 @@ return function()
     -- preselect = cmp.PreselectMode.None,
     snippet = {
       expand = function(args)
-        -- Vsnip
-        vim.fn["vsnip#anonymous"](args.body)
+        require("luasnip").lsp_expand(args.body)
       end,
     },
     mapping = {

@@ -12,8 +12,8 @@ return function()
       polyglot = false,
     },
     hlgroups = {
-      -- TSProperty = { fg = "${gray}" },
-      -- TSVariable = { fg = "${fg}" },
+      TSProperty = { fg = "${gray}" },
+      TSVariable = { fg = "${fg}" },
     },
     styles = {
       -- functions = "bold,italic",

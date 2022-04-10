@@ -58,7 +58,7 @@ return function(dev_mode)
       use({
         "axieax/urlview.nvim",
         disable = dev_mode,
-        cmd = { "UrlView" },
+        -- cmd = { "UrlView" },
         config = require("axie.plugins.urlview"),
       })
 
@@ -92,7 +92,7 @@ return function(dev_mode)
       })
 
       -- TODO: replace (too red)
-      -- ALT: https://github.com/ful1e5/onedark.nvim
+      -- ALT: https://github.com/navarasu/onedark.nvim
       use({
         "olimorris/onedarkpro.nvim",
         config = require("axie.themes.onedark"),
@@ -453,6 +453,7 @@ return function(dev_mode)
       })
 
       -- vim.ui overrides
+      -- ALT: https://github.com/hood/popui.nvim
       use({
         "stevearc/dressing.nvim",
         config = require("axie.plugins.dressing"),
@@ -692,6 +693,7 @@ return function(dev_mode)
       })
 
       -- GitHub Copilot
+      -- ALT: https://github.com/zbirenbaum/copilot.lua with https://github.com/zbirenbaum/copilot-cmp
       use({
         "github/copilot.vim",
         config = require("axie.plugins.copilot"),
@@ -725,14 +727,14 @@ return function(dev_mode)
       use("tpope/vim-surround")
 
       -- Snippets
-      -- TODO: check out https://github.com/L3MON4D3/LuaSnip and Ultisnips
+      -- TODO: check out Ultisnips for custom snippets
 
-      -- Snippet collection
-      use("rafamadriz/friendly-snippets")
-
-      -- Definable snippets
-      -- ALT: https://github.com/L3MON4D3/LuaSnip
-      use("hrsh7th/vim-vsnip")
+      -- Snippet engine
+      use({
+        "L3MON4D3/LuaSnip",
+        requires = "rafamadriz/friendly-snippets", -- snippet collection
+        config = require("axie.lsp.snippets").setup,
+      })
 
       -- Docstring generator
       -- ALT: https://github.com/nvim-treesitter/nvim-tree-docs
@@ -749,7 +751,6 @@ return function(dev_mode)
       use({
         "danymat/neogen",
         requires = { "nvim-treesitter/nvim-treesitter", "L3MON4D3/LuaSnip" },
-        -- branch = "todo_text",
         config = function()
           require("neogen").setup({ snippet_engine = "luasnip" })
         end,
@@ -891,6 +892,7 @@ return function(dev_mode)
         requires = {
           "hrsh7th/cmp-nvim-lsp",
           "stevearc/aerial.nvim",
+          -- ALT: https://github.com/jose-elias-alvarez/typescript.nvim ?
           "jose-elias-alvarez/nvim-lsp-ts-utils",
           "b0o/schemastore.nvim",
           "simrat39/rust-tools.nvim",
@@ -989,13 +991,13 @@ return function(dev_mode)
         "hrsh7th/nvim-cmp",
         requires = {
           { "windwp/nvim-autopairs" },
+          { "L3MON4D3/LuaSnip", requires = "rafamadriz/friendly-snippets" },
+          { "saadparwaiz1/cmp_luasnip" },
           { "lukas-reineke/cmp-under-comparator" },
           { "onsails/lspkind-nvim" },
           { "hrsh7th/cmp-nvim-lsp" },
           { "hrsh7th/cmp-nvim-lua" },
           { "hrsh7th/cmp-buffer" },
-          { "hrsh7th/vim-vsnip" },
-          { "hrsh7th/cmp-vsnip" },
           { "hrsh7th/cmp-path" },
           { "hrsh7th/cmp-calc" },
           { "hrsh7th/cmp-emoji" },

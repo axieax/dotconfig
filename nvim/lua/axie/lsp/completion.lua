@@ -68,7 +68,7 @@ return function()
         select = false,
       })),
       -- Toggle cmp menu
-      ["<C-k>"] = cmp.mapping({
+      ["<a-k>"] = cmp.mapping({
         i = function()
           if cmp.visible() then
             cmp.abort()

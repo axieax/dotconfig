@@ -4,7 +4,7 @@ return function()
   require("lsp_signature").setup({
     -- general options
     always_trigger = "true",
-    toggle_key = "<C-k>",
+    toggle_key = "<a-K>",
 
     -- floating window
     padding = " ",

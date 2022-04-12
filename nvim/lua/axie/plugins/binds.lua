@@ -157,7 +157,7 @@ function M.general_mappings()
       c = { require("axie.utils").display_path, "buffer path" },
       C = { require("axie.utils").display_cwd, "cwd" },
       i = { "<CMD>IndentBlanklineToggle<CR>", "toggle indent context line" },
-      ["/"] = { "<CMD>DogeGenerate<CR>", "Generate DocString" },
+      ["/"] = { "<CMD>Neogen<CR>", "Generate DocString" },
       ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },
       ["<space>"] = { "<CMD>lua require'nvim-biscuits'.toggle_biscuits()<CR>", "Toggle Biscuits" },

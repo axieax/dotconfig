@@ -37,6 +37,7 @@ return function()
       "packer",
       "alpha",
       "help",
+      "man",
       "lspinfo",
       "toggleterm",
       "glowpreview",

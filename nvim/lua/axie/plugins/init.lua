@@ -453,7 +453,6 @@ return function(dev_mode)
       })
 
       -- vim.ui overrides
-      -- ALT: https://github.com/hood/popui.nvim
       use({
         "stevearc/dressing.nvim",
         config = require("axie.plugins.dressing"),
@@ -737,17 +736,8 @@ return function(dev_mode)
       })
 
       -- Docstring generator
+      -- ALT: https://github.com/kkoomen/vim-doge
       -- ALT: https://github.com/nvim-treesitter/nvim-tree-docs
-      -- ALT: https://github.com/danymat/neogen
-      use({
-        "kkoomen/vim-doge",
-        run = ":call doge#install()",
-        config = function()
-          -- disable default mapping
-          vim.g.doge_mapping = ""
-        end,
-      })
-
       use({
         "danymat/neogen",
         requires = { "nvim-treesitter/nvim-treesitter", "L3MON4D3/LuaSnip" },
@@ -766,20 +756,7 @@ return function(dev_mode)
       use({
         "bennypowers/nvim-regexplainer",
         requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
-        config = function()
-          require("regexplainer").setup({
-            auto = false,
-            display = "popup",
-            popup = {
-              border = {
-                padding = { 0, 0 },
-                style = "rounded",
-              },
-              win_options = { winblend = 20 },
-            },
-            mappings = { toggle = "gR" },
-          })
-        end,
+        config = require("axie.plugins.regexplainer"),
       })
 
       -- Auto continue bullets
@@ -989,6 +966,7 @@ return function(dev_mode)
       -- TODO: move sources out with after = "nvim-cmp" (https://github.com/danymat/champagne/blob/main/lua/plugins.lua)
       use({
         "hrsh7th/nvim-cmp",
+        -- commit = "801a9f98bbae14135be3a04515b9350b145ce25b",
         requires = {
           { "windwp/nvim-autopairs" },
           { "L3MON4D3/LuaSnip", requires = "rafamadriz/friendly-snippets" },

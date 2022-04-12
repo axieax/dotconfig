@@ -38,6 +38,8 @@ function M.setup()
     inoremap <silent> <buffer> <c-k> <CMD>lua if require'luasnip'.choice_active() then require'luasnip'.change_choice(1) end<CR>
     inoremap <silent> <buffer> <c-j> <CMD>lua if require'luasnip'.choice_active() then require'luasnip'.change_choice(-1) end<CR>
   ]])
+  -- TODO: reload custom snippets keymap
+
   -- vim.keymap.set({ "i", "s" }, "<c-l>", function()
   --   if ls.expand_or_jumpable() then
   --     ls.expand_or_jump()
@@ -77,6 +79,8 @@ function M.custom_snippets()
   local t = ls.text_node
   local i = ls.insert_node
   local c = ls.choice_node
+  local d = ls.dynamic_node
+  local isn = ls.indent_snippet_node
   local rep = require("luasnip.extras").rep
   local fmt = require("luasnip.extras.fmt").fmt
 
@@ -116,7 +120,7 @@ function M.custom_snippets()
         "  ",
       }),
       i(1, "// TODO"), -- cursor placement on snippet expansion
-      -- TODO: add choice node for commented lines?
+      -- TODO: add choice node for commented lines? use ls.indent_snippet_node?
       t({
         "",
         "}",

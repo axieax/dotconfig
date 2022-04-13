@@ -43,6 +43,65 @@ return function()
     return cmp.mapping(..., { "i", "c" })
   end
 
+  local function filter_mode(mappings, mode)
+    local res = {}
+    for k, v in pairs(mappings) do
+      if v[mode] then
+        res[k] = { [mode] = v[mode] }
+      end
+    end
+    return res
+  end
+
+  local mappings = {
+    ["<C-d>"] = cmp_map(cmp.mapping.scroll_docs(-4)),
+    ["<C-f>"] = cmp_map(cmp.mapping.scroll_docs(4)),
+    ["<C-Space>"] = cmp_map(cmp.mapping.complete()),
+    ["<C-e>"] = {
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    },
+    ["<CR>"] = cmp_map(cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = false,
+    })),
+    -- Toggle cmp menu
+    ["<a-k>"] = {
+      i = function()
+        if cmp.visible() then
+          cmp.abort()
+        else
+          cmp.complete()
+        end
+      end,
+      c = function()
+        if cmp.visible() then
+          cmp.close()
+        else
+          cmp.complete()
+        end
+      end,
+    },
+    ["<Tab>"] = {
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+    },
+    ["<S-Tab>"] = {
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+    },
+  }
+
   cmp.setup({
     -- preselect = cmp.PreselectMode.None,
     snippet = {
@@ -50,61 +109,7 @@ return function()
         require("luasnip").lsp_expand(args.body)
       end,
     },
-    mapping = {
-      ["<C-d>"] = cmp_map(cmp.mapping.scroll_docs(-4)),
-      ["<C-f>"] = cmp_map(cmp.mapping.scroll_docs(4)),
-      ["<C-Space>"] = cmp_map(cmp.mapping.complete()),
-      ["<C-e>"] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ["<CR>"] = cmp_map(cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = false,
-      })),
-      -- NOTE: this binding is not possible
-      ["<S-CR>"] = cmp_map(cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
-      })),
-      -- Toggle cmp menu
-      ["<a-k>"] = cmp.mapping({
-        i = function()
-          if cmp.visible() then
-            cmp.abort()
-          else
-            cmp.complete()
-          end
-        end,
-        c = function()
-          if cmp.visible() then
-            cmp.close()
-          else
-            cmp.complete()
-          end
-        end,
-      }),
-      ["<Tab>"] = cmp_map(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          -- local copilot_keys = vim.fn["copilot#Accept"]()
-          -- if copilot_keys ~= "" then
-          --   vim.api.nvim_feedkeys(copilot_keys, "i", true)
-          -- else
-          --   fallback()
-          -- end
-          fallback()
-        end
-      end),
-      ["<S-Tab>"] = cmp_map(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        else
-          fallback()
-        end
-      end),
-    },
+    mapping = cmp.mapping.preset.insert(filter_mode(mappings, "i")),
     sources = source_config,
     formatting = {
       format = function(entry, vim_item)
@@ -127,8 +132,7 @@ return function()
       },
     },
     experimental = {
-      -- preview
-      ghost_text = true,
+      ghost_text = true, -- preview
     },
   })
 
@@ -168,6 +172,7 @@ return function()
   -- Command mode completion
   -- Use buffer source for `/`.
   cmp.setup.cmdline("/", {
+    mapping = cmp.mapping.preset.cmdline(filter_mode(mappings, "c")),
     sources = {
       { name = "buffer" },
     },
@@ -175,6 +180,7 @@ return function()
 
   -- Use cmdline & path source for ':'.
   cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(filter_mode(mappings, "c")),
     sources = cmp.config.sources({
       { name = "path" },
     }, {

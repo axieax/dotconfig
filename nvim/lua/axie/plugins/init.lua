@@ -966,7 +966,6 @@ return function(dev_mode)
       -- TODO: move sources out with after = "nvim-cmp" (https://github.com/danymat/champagne/blob/main/lua/plugins.lua)
       use({
         "hrsh7th/nvim-cmp",
-        -- commit = "801a9f98bbae14135be3a04515b9350b145ce25b",
         requires = {
           { "windwp/nvim-autopairs" },
           { "L3MON4D3/LuaSnip", requires = "rafamadriz/friendly-snippets" },

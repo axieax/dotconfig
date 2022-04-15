@@ -137,6 +137,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/283
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/269
 - https://github.com/wbthomason/packer.nvim/issues/868 for urlview.nvim
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)

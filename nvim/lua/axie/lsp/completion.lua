@@ -25,7 +25,7 @@ return function()
     -- cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
     npm = { label = "[NPM]" },
     cmp_git = { label = "[Git]" },
-    cmdline = { label = "[Cmd]" },
+    -- cmdline = { label = "[Cmd]" },
     orgmode = { label = "[Org]" },
     -- treesitter = "[TS]",
     -- ["vim-dadbod-completion"] = "[DB]",
@@ -170,9 +170,13 @@ return function()
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
   -- Command mode completion
+  local cmdline_mappings = cmp.mapping.preset.cmdline(filter_mode(mappings, "c"))
+  local cmdline_view = { entries = "wildmenu" }
+
   -- Use buffer source for `/`.
   cmp.setup.cmdline("/", {
-    mapping = cmp.mapping.preset.cmdline(filter_mode(mappings, "c")),
+    mapping = cmdline_mappings,
+    view = cmdline_view,
     sources = {
       { name = "buffer" },
     },
@@ -180,7 +184,8 @@ return function()
 
   -- Use cmdline & path source for ':'.
   cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline(filter_mode(mappings, "c")),
+    mapping = cmdline_mappings,
+    view = cmdline_view,
     sources = cmp.config.sources({
       { name = "path" },
     }, {

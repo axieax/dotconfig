@@ -978,7 +978,7 @@ return function(dev_mode)
           { "hrsh7th/cmp-path" },
           { "hrsh7th/cmp-calc" },
           { "hrsh7th/cmp-emoji" },
-          { "hrsh7th/cmp-cmdline" },
+          -- { "hrsh7th/cmp-cmdline" },
           { "f3fora/cmp-spell" },
           { "kdheepak/cmp-latex-symbols" }, -- TODO: lazy load
           { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },

@@ -232,6 +232,7 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle") -- and resize XMonad as well?
        , ((modMask, xK_v), spawn $ "xfce4-popup-clipman")
        , ((modMask, xK_x), spawn $ "arcolinux-logout")
+       , ((modMask, xK_m), return ())
        , ((modMask, xK_Escape), spawn $ "xkill")
        , ((modMask, xK_Return), spawn $ "alacritty")
        , ((modMask, xK_F1), spawn $ "vivaldi-stable")

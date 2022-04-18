@@ -146,7 +146,7 @@ function M.general_mappings()
       S = { "<CMD>Alpha<CR>", "Start Menu" },
       z = { "<CMD>ZenMode<CR>", "Zen Mode" },
       Z = { "<CMD>Twilight<CR>", "Twilight Toggle" },
-      p = { ":lua require'axie.utils'.display()<LEFT>", "lua print", silent = false },
+      p = { ":lua =", "lua print", silent = false },
       P = { ":lua require'axie.utils'.notify()<LEFT>", "lua notify", silent = false },
       q = { require("axie.utils").toggle_signcolumn, "toggle signcolumn" },
       Q = { require("notify").dismiss, "dismiss notifications" },

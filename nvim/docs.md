@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Migrate `plugins.binds` to individual plugin configs
 - Remove binding for entering ex mode (Q)?
 - PRIORITY: no eslint node_module -> use own eslint_d
 - Augroup instead of aucommand to clear for multiple source

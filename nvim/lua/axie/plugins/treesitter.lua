@@ -177,6 +177,10 @@ function M.setup()
     foldlevel = 0, -- default levels folded
     foldenable = false, -- don't fold by default
   })
+
+  -- TEMP: 0.7
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  ts_utils.get_node_text = vim.treesitter.query.get_node_text
 end
 
 return M

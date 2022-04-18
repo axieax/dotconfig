@@ -452,6 +452,9 @@ return function(dev_mode)
         end,
       })
 
+      -- cursor jump accent
+      use("rainbowhxch/beacon.nvim")
+
       -- vim.ui overrides
       use({
         "stevearc/dressing.nvim",
@@ -483,7 +486,7 @@ return function(dev_mode)
       -- Function context indicator
       -- NOTE: doesn't play well with some plugins
       use({
-        "romgrk/nvim-treesitter-context",
+        "lewis6991/nvim-treesitter-context",
         requires = "nvim-treesitter/nvim-treesitter",
         config = function()
           require("treesitter-context").setup({

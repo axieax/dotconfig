@@ -30,10 +30,6 @@ return function()
           }
         end,
       },
-      mapping_options = {
-        noremap = true,
-        nowait = true,
-      },
     },
     filesystem = {
       bind_to_cwd = false,

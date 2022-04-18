@@ -112,12 +112,15 @@ return function()
     mapping = cmp.mapping.preset.insert(filter_mode(mappings, "i")),
     sources = source_config,
     formatting = {
-      format = function(entry, vim_item)
-        local source = sources[entry.source.name]
-        vim_item.kind = source.kind or lspkind.presets.default[vim_item.kind]
-        vim_item.menu = source.label
-        return vim_item
-      end,
+      format = lspkind.cmp_format({
+        mode = "symbol",
+        before = function(entry, vim_item)
+          local source = sources[entry.source.name]
+          vim_item.kind = source.kind or vim_item.kind
+          vim_item.menu = source.label
+          return vim_item
+        end,
+      }),
     },
     sorting = {
       comparators = {

@@ -160,6 +160,7 @@ function M.general_mappings()
       ["/"] = { "<CMD>Neogen<CR>", "Generate DocString" },
       ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
       [";"] = { "<CMD>MinimapToggle<CR>", "Minimap" },
+      ["\\"] = { "<CMD>lua require'specs'.show_specs()<CR>", "Accent cursor" },
       ["<space>"] = { "<CMD>lua require'nvim-biscuits'.toggle_biscuits()<CR>", "Toggle Biscuits" },
       ["<tab>"] = { "<CMD>AerialToggle<CR>", "Aerial Symbols" },
     },

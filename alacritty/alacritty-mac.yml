@@ -14,6 +14,7 @@ font:
 
 # mac alt mappings (https://github.com/alacritty/alacritty/issues/62#issuecomment-347552058)
 key_bindings:
+  - { key: I, mods: Control, chars: "\x1b[105;5u" }
   - { key: A, mods: Alt, chars: "\x1ba" }
   - { key: B, mods: Alt, chars: "\x1bb" }
   - { key: C, mods: Alt, chars: "\x1bc" }

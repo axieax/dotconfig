@@ -153,6 +153,8 @@ myManageHook =
     , "zoom"
     , "zoom_linux_float_video_window"
     , "Picture-in-picture"
+    , "openboard"
+    , "OpenBoard"
     ]
   myTFloats  = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
   myRFloats  = []

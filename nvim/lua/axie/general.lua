@@ -1,6 +1,7 @@
-local vim_apply = require("axie.utils").vim_apply
-local map = require("axie.utils").map
-local ternary = require("axie.utils").ternary
+local utils = require("axie.utils")
+local vim_apply = utils.vim_apply
+local map = utils.map
+local ternary = utils.ternary
 
 ---------------
 -- Variables --
@@ -73,24 +74,30 @@ vim.cmd([[
 ----------
 
 -- Hybrid relative numbers for normal mode, absolute for insert mode
-vim.cmd([[
-fun! s:enable_relative_number()
-  " dashboard\|nvimtree
-  if &ft =~ 'alpha'
-    return
-  endif
-  set relativenumber
-endfun
-
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * call s:enable_relative_number()
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
-]])
+local numberToggleGroup = vim.api.nvim_create_augroup("NumberToggle", { clear = true })
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+  group = numberToggleGroup,
+  callback = function()
+    local ft = vim.bo.filetype
+    if ft ~= "alpha" then
+      vim.wo.relativenumber = true
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+  group = numberToggleGroup,
+  callback = function()
+    vim.wo.relativenumber = false
+  end,
+})
 
 -- Disable colorcolumn conditionally
-vim.cmd([[au FileType alpha setlocal colorcolumn=]])
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "alpha",
+  callback = function()
+    vim.wo.colorcolumn = ""
+  end,
+})
 
 -- netrw settings (for directory tree view)
 vim_apply(vim.g, {
@@ -113,30 +120,36 @@ map({ "n", "\\p", '"0p' })
 map({ "v", "\\p", '"0p' })
 
 -- Auto-resize
-vim.cmd("autocmd VimResized * wincmd =")
+vim.api.nvim_create_autocmd("VimResized", {
+  callback = function()
+    vim.cmd("wincmd =")
+  end,
+})
 
 -- Highlight yank
-vim.cmd([[
-augroup highlight_yank
-  autocmd!
-  au TextYankPost * silent! lua vim.highlight.on_yank({ higroup="IncSearch", timeout=200 })
-augroup END
-]])
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+  end,
+})
 
 -- Update (instead of write)
 map({ "n", "<space>w", "<CMD>update<CR>" })
 
 -- No autoformat write
-vim.cmd("command! W :noautocmd w")
-vim.cmd("command! Wq :noautocmd wq")
-vim.cmd("command! Wqa :noautocmd wqa")
--- TODO(0.7): use lua function
--- nvim_add_user_command("W", "noautocmd w")
--- nvim_add_user_command("Wq", "noautocmd wq")
+for _, cmd in ipairs({ "W", "Wq", "Wqa" }) do
+  vim.api.nvim_create_user_command(cmd, function(opts)
+    local lower_cmd = cmd:lower()
+    local bang = ternary(opts.bang, "!", "")
+    vim.cmd("noautocmd " .. lower_cmd .. bang)
+  end, {
+    bang = true,
+  })
+end
 
 -- Quit typos
-vim.cmd("command! Q q")
-vim.cmd("command! Qa qa")
+vim.api.nvim_create_user_command("Q", "q", { bang = true })
+vim.api.nvim_create_user_command("Qa", "qa", { bang = true })
 
 -- Disable automatic comment insertion
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)
@@ -160,20 +173,37 @@ vim.cmd("noremap <expr> k v:count ? 'k' : 'gk'")
 -- TODO: migrate to ftdetect?
 -- NOTE: BufEnter vs BufRead,BufNewFile
 -- Terraform filetype
-vim.cmd("au BufEnter *.terraformrc,*.terraform.rc setlocal filetype=terraform")
-vim.cmd("au BufEnter *.tfstate setlocal filetype=json")
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.terraformrc", "*.terraform.rc" },
+  callback = function()
+    vim.bo.filetype = "terraform"
+  end,
+})
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.tfstate",
+  callback = function()
+    vim.bo.filetype = "json"
+  end,
+})
 
 -- Bazel filetype
-vim.cmd("au BufEnter *.bzl,BUILD,*.BUILD,BUILD.*,WORKSPACE,WORKSPACE.* setlocal filetype=bzl")
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.bzl", "BUILD", "*.BUILD", "BUILD.*", "WORKSPACE", "WORKSPACE.*" },
+  callback = function()
+    vim.bo.filetype = "bzl"
+  end,
+})
 
 -- Enable spellcheck conditionally based on filetypes
-vim.cmd([[
-augroup spellcheck
-  autocmd!
-  au FileType markdown,text,'' setlocal spell
-  au BufEnter * if empty(&filetype) | setlocal spell | endif
-augroup END
-]])
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    local ft = vim.bo.filetype
+    local enabled_filetypes = { "markdown", "text", "" }
+    if vim.tbl_contains(enabled_filetypes, ft) or vim.fn.empty(vim.bo.filetype) ~= 0 then
+      vim.wo.spell = true
+    end
+  end,
+})
 
 -- Global statusline (v0.7)
 -- vim.cmd("set laststatus=3")

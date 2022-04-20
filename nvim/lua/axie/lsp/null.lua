@@ -62,7 +62,7 @@ function M.formatting_sources()
         "scss",
         "less",
         "html",
-        "json",
+        -- "json", -- NOTE: jsonls can format now
         "yaml",
         "markdown",
         "graphql",

@@ -5,15 +5,17 @@ local M = {}
 
 function M.default_on_attach(client, bufnr)
   -- documentSymbol
-  if client.resolved_capabilities.documentSymbol then
+  if client.server_capabilities.documentSymbolProvider then
     require("aerial").on_attach(client, bufnr)
   end
 
   -- documentFormatting
   local name = client.name
+  -- print(name)
+  -- print(vim.inspect(client.server_capabilities))
   local is_null = name == "null-ls"
   local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-  local ls_can_format = client.resolved_capabilities.document_formatting
+  local ls_can_format = client.server_capabilities.documentFormattingProvider
   local null_can_format = require("axie.lsp.null").use_null_formatting(filetype)
 
   -- print(name)
@@ -24,18 +26,29 @@ function M.default_on_attach(client, bufnr)
   if (not is_null and null_can_format) or (is_null and not null_can_format) then
     -- disable formatting
     -- print("formatting disabled for " .. name)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   else
     -- use client for formatting
     -- print("formatting enabled for " .. name)
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function()
+        require("axie.utils").notify("Formatted with " .. name)
+        local params = vim.lsp.util.make_formatting_params()
+        client.request_sync("textDocument/formatting", params, nil, bufnr)
+      end,
+    })
   end
 
-  if client.resolved_capabilities.code_lens then
+  if client.server_capabilities.codeLensProvider then
     print(name, "supports code lens")
     -- NOTE: language server loading delay
     vim.cmd("au BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()")
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      buffer = bufnr,
+      callback = vim.lsp.codelens.refresh,
+    })
   end
 end
 

@@ -49,6 +49,9 @@ function M.setup()
         filetypes = { "png", "jpg", "mp4", "webm", "pdf" },
         find_cmd = "rg",
       },
+      -- ["ui-select"] = {
+      --   require("telescope.themes").get_dropdown(),
+      -- },
     },
   })
 
@@ -79,6 +82,7 @@ function M.setup()
   telescope.load_extension("aerial")
   telescope.load_extension("termfinder")
   -- telescope.load_extension("node_modules")
+  -- telescope.load_extension("ui-select")
 
   pcall(telescope.load_extension, "urlview")
 end

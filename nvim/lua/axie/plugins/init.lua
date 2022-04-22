@@ -148,6 +148,7 @@ return function(dev_mode)
           { "rcarriga/nvim-notify" },
           { "stevearc/aerial.nvim" },
           { "tknightz/telescope-termfinder.nvim" },
+          -- { "nvim-telescope/telescope-ui-select.nvim" },
         },
         config = require("axie.plugins.telescope").setup,
       })

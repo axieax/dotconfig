@@ -4,19 +4,13 @@ return function()
   require("dressing").setup({
     input = {
       get_config = function()
-        if vim.api.nvim_buf_get_option(0, "filetype") == "neo-tree" then
+        local disabled_filetypes = { "neo-tree" }
+        if vim.tbl_contains(disabled_filetypes, vim.bo.filetype) then
           return { enabled = false }
         end
       end,
     },
-    select = {
-      format_item_override = {
-        codeaction = function(action_tuple)
-          local title = action_tuple[2].title:gsub("\r\n", "\\r\\n")
-          local client = vim.lsp.get_client_by_id(action_tuple[1])
-          return string.format("%s\t[%s]", title:gsub("\n", "\\n"), client.name)
-        end,
-      },
-    },
+    -- use https://github.com/nvim-telescope/telescope-ui-select.nvim instead for vim.ui.select
+    select = { enabled = false },
   })
 end

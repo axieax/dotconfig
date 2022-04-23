@@ -141,13 +141,8 @@ return function(dev_mode)
           { "nvim-telescope/telescope-media-files.nvim" },
           { "nvim-telescope/telescope-file-browser.nvim" },
           { "LinArcX/telescope-env.nvim" },
-          { "ahmedkhalf/project.nvim" },
           { "jvgrootveld/telescope-zoxide" },
-          -- { "nvim-telescope/telescope-node-modules.nvim" },
-          { "mfussenegger/nvim-dap" },
-          { "rcarriga/nvim-notify" },
-          { "stevearc/aerial.nvim" },
-          { "tknightz/telescope-termfinder.nvim" },
+          { "nvim-telescope/telescope-node-modules.nvim" },
         },
         config = require("axie.plugins.telescope").setup,
       })
@@ -202,6 +197,10 @@ return function(dev_mode)
       -- Terminal
       use({
         "akinsho/toggleterm.nvim",
+        requires = {
+          "nvim-telescope/telescope.nvim",
+          "tknightz/telescope-termfinder.nvim",
+        },
         config = require("axie.plugins.toggleterm").setup,
       })
 
@@ -325,6 +324,8 @@ return function(dev_mode)
       -- Notification
       use({
         "rcarriga/nvim-notify",
+        -- requires instead of after so it won't be optional
+        requires = "telescope.nvim",
         config = require("axie.plugins.notify"),
       })
 
@@ -461,17 +462,25 @@ return function(dev_mode)
         config = require("axie.plugins.dressing"),
       })
 
+      use({
+        "nvim-telescope/telescope-ui-select.nvim",
+        after = "telescope.nvim",
+        config = function()
+          require("telescope").load_extension("ui-select")
+        end,
+      })
+
       -- Bracket coloured pairs
       -- TODO: change colourscheme, esp red?
       use({
         "p00f/nvim-ts-rainbow",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
       })
 
       -- Indent context indicator
       use({
         "lukas-reineke/indent-blankline.nvim",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
         event = "BufRead",
         config = require("axie.plugins.indentline"),
       })
@@ -479,7 +488,7 @@ return function(dev_mode)
       -- Scope context indicator
       use({
         "code-biscuits/nvim-biscuits",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
         config = require("axie.plugins.biscuits"),
       })
 
@@ -487,7 +496,7 @@ return function(dev_mode)
       -- NOTE: doesn't play well with some plugins
       use({
         "lewis6991/nvim-treesitter-context",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
         config = function()
           require("treesitter-context").setup({
             patterns = {
@@ -512,7 +521,7 @@ return function(dev_mode)
       -- Argument highlights
       use({
         "m-demare/hlargs.nvim",
-        requires = { "nvim-treesitter/nvim-treesitter" },
+        after = "nvim-treesitter",
         config = function()
           require("hlargs").setup({
             -- Catppuccin Flamingo
@@ -613,7 +622,7 @@ return function(dev_mode)
       -- Tab out
       use({
         "abecodes/tabout.nvim",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
         config = require("axie.plugins.tabout"),
       })
 
@@ -679,19 +688,19 @@ return function(dev_mode)
       use({
         "nvim-treesitter/playground",
         run = ":TSUpdate query",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
       })
 
       -- Treesitter text objects
       use({
         "nvim-treesitter/nvim-treesitter-textobjects",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
       })
 
       -- Treesitter text subjects
       use({
         "RRethy/nvim-treesitter-textsubjects",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
       })
 
       -- GitHub Copilot
@@ -752,13 +761,13 @@ return function(dev_mode)
       -- Autoclose and autorename html tag
       use({
         "windwp/nvim-ts-autotag",
-        requires = "nvim-treesitter/nvim-treesitter",
+        after = "nvim-treesitter",
       })
 
       -- Regular expression explainer
       use({
         "bennypowers/nvim-regexplainer",
-        requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
+        requires = { "nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim" },
         config = require("axie.plugins.regexplainer"),
       })
 
@@ -842,7 +851,16 @@ return function(dev_mode)
         run = ":UpdateRemotePlugins",
       })
 
-      -- Debugger
+      -- Debug Adapter Protocol
+      use({
+        "mfussenegger/nvim-dap",
+        requires = "nvim-telescope/telescope.nvim",
+        config = function()
+          require("telescope").load_extension("dap")
+        end,
+      })
+
+      -- Debugger UI
       use({
         "rcarriga/nvim-dap-ui",
         requires = {
@@ -936,6 +954,7 @@ return function(dev_mode)
       -- Symbols outline
       use({
         "stevearc/aerial.nvim",
+        after = "telescope.nvim",
         config = require("axie.lsp.aerial"),
       })
 

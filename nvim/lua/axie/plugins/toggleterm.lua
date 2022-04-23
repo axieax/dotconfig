@@ -53,6 +53,8 @@ function M.setup()
   map({ "n", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
   map({ "i", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
   map({ "t", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
+
+  require("telescope").load_extension("termfinder")
 end
 
 function M.lazygit()

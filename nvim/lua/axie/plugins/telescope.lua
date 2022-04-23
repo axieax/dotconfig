@@ -70,15 +70,11 @@ function M.setup()
 
   -- Extensions
   telescope.load_extension("fzf")
-  telescope.load_extension("dap")
   telescope.load_extension("media_files")
   telescope.load_extension("file_browser")
   telescope.load_extension("env")
   telescope.load_extension("zoxide")
-  telescope.load_extension("notify")
-  telescope.load_extension("aerial")
-  telescope.load_extension("termfinder")
-  -- telescope.load_extension("node_modules")
+  telescope.load_extension("node_modules")
 
   pcall(telescope.load_extension, "urlview")
 end

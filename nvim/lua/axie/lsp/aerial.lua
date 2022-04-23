@@ -16,4 +16,6 @@ return function()
       last_item = "└ ",
     },
   })
+
+  require("telescope").load_extension("aerial")
 end

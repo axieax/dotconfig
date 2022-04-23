@@ -21,4 +21,5 @@ return function()
   --   highlight link NotifyDEBUGBody NormalFloat
   --   highlight link NotifyTRACEBody NormalFloat
   -- ]])
+  require("telescope").load_extension("notify")
 end

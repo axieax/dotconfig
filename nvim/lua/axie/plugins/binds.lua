@@ -115,7 +115,8 @@ function M.general_mappings()
         -- M = { require("telescope").extensions.macroscope.default, "search macros" },
         M = { "<CMD>Telescope macroscope<CR>", "search macros" },
         n = { "<CMD>Telescope notify<CR>", "search notifications" },
-        -- TODO: n for notes
+        N = { "<CMD>Telescope node_modules list<CR>", "search node modules" },
+        -- TODO: n for notes?
         s = { "1z=", "spelling correct" },
         S = { require("telescope.builtin").spell_suggest, "spelling suggestions" },
         k = { require("telescope.builtin").keymaps, "find keymaps" },

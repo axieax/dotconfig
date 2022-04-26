@@ -392,7 +392,7 @@ neofetch
 alias lg="lazygit"
 alias v="nvim"
 alias dns="sudoedit /etc/resolv.conf"
-alias vv="cd ~/dotconfig/nvim/lua && nvim plugins/init.lua"
+alias vv="cd ~/dotconfig/nvim/lua/axie && $EDITOR plugins/init.lua"
 alias zz="$EDITOR ~/.zshrc"
 
 yarn_path=$HOME/.yarn/bin

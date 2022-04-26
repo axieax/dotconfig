@@ -107,10 +107,10 @@ setopt GLOB_DOTS
 
 export HISTCONTROL=ignoreboth:erasedups
 
-# Make nano the default editor
+# Make nvim the default editor
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 #PS1='[\u@\h \W]\$ '
 
@@ -392,9 +392,8 @@ neofetch
 alias lg="lazygit"
 alias v="nvim"
 alias dns="sudoedit /etc/resolv.conf"
-alias dev="cd ~/dev"
-alias dotconfig="cd ~/dotconfig"
 alias vv="cd ~/dotconfig/nvim/lua && nvim plugins/init.lua"
+alias zz="$EDITOR ~/.zshrc"
 
 yarn_path=$HOME/.yarn/bin
 if [ -d $yarn_path ]; then
@@ -407,11 +406,8 @@ if [ -d $gem_path ]; then
 fi
 
 PATH=$HOME/.cargo/bin:$PATH
-
 PATH=$HOME/bin/path:$PATH
-
-EDITOR=nvim
-VISUAL=nvim
+PATH=$HOME/go/bin:$PATH
 
 # Quick QRCode
 qr() {
@@ -425,9 +421,37 @@ ggc() {
 alias ggb="ggc"
 alias ggs="git status"
 
+function grr() {
+  git fetch origin "$1" && git reset --hard origin/"$1"
+}
+
 # gitignore template generator
 function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@; }
 
 # zoxide
 eval "$(zoxide init zsh)"
 alias z..='z ..'
+
+# timezone
+alias timezone='sudo timedatectl set-ntp true'
+
+alias handbrake="ghb"
+source /usr/share/nvm/init-nvm.sh
+nvm alias default node > /dev/null
+alias tf="terraform"
+
+# canva
+source ~/.canvarc
+
+# discord lag bug
+alias discord='discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy'
+alias teams='flatpak run com.microsoft.Teams'
+
+# use Neovim as man pager
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+
+# Do not disturb
+alias dnd='xfconf-query -c xfce4-notifyd -p /do-not-disturb -T'
+
+alias via="via --no-sandbox"

@@ -685,6 +685,10 @@ window:
 # in the order they were defined in.
 key_bindings:
   - { key: I, mods: Control, chars: "\x1b[105;5u" }
+  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
+  - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
+  - { key: Tab, mods: Control, chars: "\x1b[9;5u" }
+  - { key: Tab, mods: Shift|Control, chars: "\x1b[9;6u" }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }

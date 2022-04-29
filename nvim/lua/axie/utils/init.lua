@@ -72,11 +72,6 @@ function M.ternary(condition, if_true, if_false)
   return (condition and if_true) or if_false
 end
 
--- Debug printing
-function M.display(...)
-  print(vim.inspect(...))
-end
-
 -- Send a notification
 -- NOTE: notify plugin accepts table as multi-line string, vim.notify has opts
 function M.notify(...)

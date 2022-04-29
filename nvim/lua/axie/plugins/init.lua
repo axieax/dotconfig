@@ -29,7 +29,7 @@ return function(dev_mode)
         config = function()
           local impatient = require("impatient")
           -- BUG: this breaks DistantInstall for some reason
-          impatient.enable_profile()
+          -- impatient.enable_profile()
         end,
       })
 
@@ -325,7 +325,7 @@ return function(dev_mode)
       use({
         "rcarriga/nvim-notify",
         -- requires instead of after so it won't be optional
-        requires = "telescope.nvim",
+        requires = "nvim-telescope/telescope.nvim",
         config = require("axie.plugins.notify"),
       })
 
@@ -464,6 +464,7 @@ return function(dev_mode)
 
       use({
         "nvim-telescope/telescope-ui-select.nvim",
+        -- disable = true,
         after = "telescope.nvim",
         config = function()
           require("telescope").load_extension("ui-select")
@@ -660,6 +661,11 @@ return function(dev_mode)
       -- GitHub issues and pull requests
       use({
         "pwntester/octo.nvim",
+        requires = {
+          "nvim-lua/plenary.nvim",
+          "nvim-telescope/telescope.nvim",
+          "kyazdani42/nvim-web-devicons",
+        },
         config = function()
           require("octo").setup()
         end,

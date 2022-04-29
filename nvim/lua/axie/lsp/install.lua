@@ -135,9 +135,6 @@ function M.ls_overrides()
         require("jdtls").setup_dap({ hotcodereplace = "auto" })
         require("jdtls.dap").setup_dap_main_class_configs()
         require("jdtls.setup").add_commands()
-
-        -- Telescope for UI picker (Neovim < 0.6)
-        -- require("jdtls.ui").pick_one_async = require("axie.plugins.telescope").jdtls_ui_picker
       end,
       handlers = {
         -- TEMP: https://github.com/j-hui/fidget.nvim/issues/57

@@ -1,17 +1,5 @@
 local M = {}
 
--- TODO: CodeActionMenu
-
-function M.default(...)
-  -- TODO: custom Telescope picker which uses generic builtin functionality
-  local ft = vim.bo.filetype
-  if ft == "java" then
-    return M.builtin(...)
-  else
-    return M.telescope(...)
-  end
-end
-
 local no_code_actions_notify = function()
   vim.api.nvim_echo({ { " No code actions available", "WarningMsg" } }, false, {})
 end
@@ -38,8 +26,12 @@ function M.update_results(lsp_results, ignore_null_ls)
 end
 
 ---Builtin vim.lsp.buf.code_actions
-function M.builtin(ignore_null_ls, context)
+function M.native(ignore_null_ls, context)
   ignore_null_ls = ignore_null_ls or false
+
+  -- Override vim.notify
+  local original_notify = vim.notify
+  vim.notify = no_code_actions_notify
 
   -- Attach to vim.lsp.buf_request_all
   local buf_request_all = vim.lsp.buf_request_all
@@ -47,35 +39,13 @@ function M.builtin(ignore_null_ls, context)
     return buf_request_all(bufnr, method, params, function(lsp_results)
       vim.lsp.buf_request_all = buf_request_all
       local results = M.update_results(lsp_results, ignore_null_ls)
-      return callback(results)
+      local res = callback(results)
+      vim.notify = original_notify
+      return res
     end)
   end
 
   vim.lsp.buf.code_action(context)
-end
-
----Telescope lsp_code_actions
-function M.telescope(ignore_null_ls, opts)
-  ignore_null_ls = ignore_null_ls or false
-
-  -- Override vim.notify
-  local original_notify = vim.notify
-  vim.notify = no_code_actions_notify
-
-  -- Attach to vim.lsp.buf_request_sync
-  local buf_request_sync = vim.lsp.buf_request_sync
-  vim.lsp.buf_request_sync = function(...)
-    local lsp_results, err = buf_request_sync(...)
-    vim.lsp.buf_request_sync = buf_request_sync
-    if err then
-      return nil, err
-    end
-
-    return M.update_results(lsp_results, ignore_null_ls), nil
-  end
-
-  require("telescope.builtin").lsp_code_actions(opts)
-  vim.notify = original_notify
 end
 
 return M

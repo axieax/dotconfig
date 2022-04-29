@@ -30,8 +30,22 @@ return function()
           }
         end,
       },
+      mappings = {
+        -- relative path in add prompt
+        a = {
+          "add",
+          config = { show_path = "relative" },
+        },
+        A = {
+          -- "add_directory",
+          -- config = { show_path = "relative" },
+          "add",
+          config = { show_path = "absolute" },
+        },
+      },
     },
     filesystem = {
+      group_empty_dirs = true,
       bind_to_cwd = false,
       hijack_netrw_behavior = "open_current",
       use_libuv_file_watcher = true,

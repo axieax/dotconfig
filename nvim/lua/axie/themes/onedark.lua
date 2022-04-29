@@ -2,6 +2,7 @@
 
 return function()
   require("onedarkpro").setup({
+    theme = "onedark_vivid",
     -- extra from https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/colors.lua
     colors = {
       -- for galaxyline setup colours

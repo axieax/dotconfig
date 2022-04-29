@@ -5,6 +5,7 @@
 local M = {}
 
 function M.display()
+  -- TODO: https://github.com/rcarriga/nvim-notify/issues/43
   local notify = require("axie.utils").notify
   -- get buffers
   local buffers = vim.api.nvim_list_bufs()

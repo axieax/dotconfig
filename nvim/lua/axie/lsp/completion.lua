@@ -24,7 +24,7 @@ return function()
     latex_symbols = { label = "[LaTeX]" },
     -- cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
     npm = { label = "[NPM]" },
-    cmp_git = { label = "[Git]" },
+    git = { label = "[Git]" },
     -- cmdline = { label = "[Cmd]" },
     orgmode = { label = "[Org]" },
     -- treesitter = "[TS]",

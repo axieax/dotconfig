@@ -16,6 +16,14 @@
 
 ## TODO
 
+- can map <c-tab>
+- use sshfs
+- https://github.com/williamboman/nvim-lsp-installer/pull/631 migration (ref: https://github.com/axieax/dotconfig/blob/prev-lsp-installer/nvim/lua/lsp/install.lua)
+- nvim-lsp-installer ensure_installed instead of prepare_language_servers
+- https://github.com/rcarriga/nvim-notify/issues/43 for DAP test
+- keymap for `axie.utils.reload_module` on cwd/lua modules for local plugin dev
+- command mode text disappears after a small delay
+- vim.ui.select title remove trailing `:`
 - Migrate `plugins.binds` to individual plugin configs
 - Remove binding for entering ex mode (Q)?
 - PRIORITY: no eslint node_module -> use own eslint_d
@@ -138,9 +146,8 @@
 
 ## Current PRs / Issues
 
-- https://github.com/nvim-telescope/telescope-ui-select.nvim/issues/6
-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/269
-- https://github.com/wbthomason/packer.nvim/issues/868 for urlview.nvim
+- https://github.com/folke/which-key.nvim/pull/253
+- https://github.com/nvim-telescope/telescope-ui-select.nvim/issues/9
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
 - https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099

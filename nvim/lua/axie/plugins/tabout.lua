@@ -8,6 +8,6 @@ return function()
   })
 
   local map = require("axie.utils").map
-  map({ "i", "<C-l>", "<Plug>(TaboutMulti)", noremap = false })
-  map({ "i", "<C-h>", "<Plug>(TaboutBackMulti)", noremap = false })
+  map({ "i", "<a-l>", "<Plug>(TaboutMulti)", noremap = false })
+  map({ "i", "<a-h>", "<Plug>(TaboutBackMulti)", noremap = false })
 end

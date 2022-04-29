@@ -1,5 +1,6 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
 -- TODO: update all language servers binding
+-- TODO: separate ls_overrides into separate files?
 
 local M = {}
 
@@ -41,8 +42,11 @@ end
 
 function M.ls_overrides()
   -- sumnneko_lua setup
-  local lua_rtps = vim.split(package.path, ";")
-  vim.list_extend(lua_rtps, { "lua/?.lua", "lua/?/init.lua" })
+  -- local lua_rtps = vim.split(package.path, ";")
+  -- vim.list_extend(lua_rtps, { "lua/?.lua", "lua/?/init.lua" })
+
+  -- eslint setup
+  -- local eslint_config = require("lspconfig.server_configurations.eslint")
 
   -- jdtls setup
   local glob_split = require("axie.utils").glob_split
@@ -98,6 +102,7 @@ function M.ls_overrides()
 
     -- JAVA: jdtls
     jdtls = {
+      autostart = false,
       init_options = { bundles = java_bundles },
       filetypes = { "java" },
       cmd = {
@@ -201,16 +206,15 @@ function M.ls_overrides()
         ts_utils.setup_client(client)
 
         -- toggle inlay hints
-        -- TODO: extract to utils
-        local ok, wk = pcall(require, "which-key")
-        if ok then
-          wk.register({
-            ["\\<space>"] = { "<CMD>TSLspToggleInlayHints<CR>", "Toggle Inlay Hints" },
-          })
-        else
-          require("axie.utils").map({ "n", "\\<space>", "<CMD>TSLspToggleInlayHints<CR>" })
-        end
+        vim.keymap.set("n", "\\<space>", "<CMD>TSLspToggleInlayHints<CR>", { desc = "Toggle Inlay Hints" })
       end,
+    },
+
+    -- JS/TS: eslint
+    eslint = {
+      -- uncomment for yarn 2/pnp project support
+      -- https://github.com/williamboman/nvim-lsp-installer/tree/main/lua/nvim-lsp-installer/servers/eslint
+      -- cmd = { "yarn", "exec", unpack(eslint_config.default_config.cmd) },
     },
 
     -- MARKDOWN: grammarly
@@ -254,6 +258,17 @@ function M.ls_overrides()
       },
     },
 
+    -- RUST: rust_analyzer
+    rust_analyzer = {
+      autostart = false,
+    },
+
+    -- C/C++: clangd
+    clangd = {
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+      capabilities = { offsetEncoding = { "utf-16" } },
+    },
+
     -- DEFAULT: default configuration
     default = {
       capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -266,107 +281,62 @@ function M.ls_overrides()
   }
 end
 
--- Auto install required language servers defined in utils.config
--- TODO: update as well?
-function M.prepare_language_servers()
-  local required_servers = require("axie.utils.config").prepared_language_servers()
-  local get_server = require("nvim-lsp-installer.servers").get_server
-  local notify = require("axie.utils").notify
-
-  for _, server_name in ipairs(required_servers) do
-    local available, server = get_server(server_name)
-    if not available then
-      notify("Could not install language server " .. server_name, "error")
-    elseif not server:is_installed() then
-      server:install()
-      notify("Installed language server " .. server_name, "info")
-    end
-  end
+function M.get_language_server_opts(name)
+  local ls_overrides = require("axie.lsp.install").ls_overrides()
+  return vim.tbl_extend("keep", ls_overrides[name] or {}, ls_overrides.default)
 end
 
--- Setup language servers for installed servers
-function M.setup_language_servers()
-  local lsp_installer = require("nvim-lsp-installer")
-  lsp_installer.on_server_ready(function(server)
-    -- Get options for server
-    local name = server.name
-    local ls_overrides = require("axie.lsp.install").ls_overrides()
-    local opts = ls_overrides[name] or ls_overrides.default
-    opts = vim.tbl_extend("keep", opts, ls_overrides.default)
-
-    -- Extra options
-    -- NOTE: this is for yarn 2 / pnp support
-    --[[ if name == "eslint" then
-      local eslint_config = require("lspconfig.server_configurations.eslint")
-      opts.cmd = vim.list_extend({ "yarn", "node" }, eslint_config.default_config.cmd)
-    end ]]
-
-    -- Clangd null-ls https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
-    if name == "clangd" then
-      opts.capabilities.offsetEncoding = { "utf-16" }
-    end
-
-    -- Register setup
-    if name == "rust_analyzer" then
-      -- Initialize the LSP via rust-tools instead
-      require("rust-tools").setup({
-        -- The "server" property provided in rust-tools setup function are the
-        -- settings rust-tools will provide to lspconfig during init.            --
-        -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
-        -- with the user's own settings (opts).
-        server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
-      })
-      server:attach_buffers()
-    elseif name ~= "jdtls" then
-      server:setup(opts)
-    end
-  end)
+function M.setup_language_server(name, opts)
+  opts = opts or require("axie.lsp.install").get_language_server_opts(name)
+  require("lspconfig")[name].setup(opts)
 end
 
--- Setup jdtls language server for java files
-function M.setup_jdtls()
-  local ls_overrides = M.ls_overrides()
-  local opts = vim.tbl_extend("keep", ls_overrides.jdtls, ls_overrides.default)
-  require("jdtls").start_or_attach(opts)
-end
-
-function M.toggle_grammarly()
-  -- Stop Grammarly client if active
-  local clients = vim.lsp.buf_get_clients()
-  for _, client in pairs(clients) do
-    if client.name == "grammarly" then
-      vim.lsp.stop_client(client.id)
-      return
-    end
-  end
-
-  -- Start Grammarly client
-  local lsp_installer = require("nvim-lsp-installer")
-  local ok, server = lsp_installer.get_server("grammarly")
-  if ok then
-    local ls_overrides = M.ls_overrides()
-    local opts = vim.tbl_extend("keep", ls_overrides.grammarly, ls_overrides.default)
-    server:attach_buffers(opts)
-  else
-    require("axie.utils").notify("Cannot setup Grammarly language server", "warning")
-  end
+function M.defer_server_setup(name, ft, cb)
+  local opts = require("axie.lsp.install").get_language_server_opts(name)
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = ft,
+    callback = function()
+      opts.autostart = true
+      cb(opts)
+    end,
+  })
 end
 
 function M.setup()
-  require("axie.lsp.install").prepare_language_servers()
-  require("axie.lsp.install").setup_language_servers()
+  -- Connect nvim-lsp-installer to lspconfig
+  local lsp_installer = require("nvim-lsp-installer")
+  local ensure_installed = require("axie.utils.config").prepared_language_servers()
+  lsp_installer.setup({
+    ensure_installed = ensure_installed,
+    automatic_installation = true,
+  })
 
-  -- setup jdtls for java files
-  vim.cmd([[
-  augroup javalsp
-    au!
-    au FileType java lua require'axie.lsp.install'.setup_jdtls()
-  augroup end
-  ]])
-  -- Grammarly toggle keybind
-  vim.cmd([[
-    au FileType markdown nnoremap <silent> \g <CMD>lua require'axie.lsp.install'.toggle_grammarly()<CR>
-  ]])
+  -- Setup language servers
+  local this = require("axie.lsp.install")
+  local installed_servers = lsp_installer.get_installed_servers()
+  for _, server in ipairs(installed_servers) do
+    this.setup_language_server(server.name)
+  end
+
+  -- Setup language servers via autocmd
+  this.defer_server_setup("jdtls", "java", function(opts)
+    require("jdtls").start_or_attach(opts)
+  end)
+  this.defer_server_setup("rust_analyzer", "rust", require("rust-tools").setup)
+  this.defer_server_setup("grammarly", "markdown", function(opts)
+    vim.keymap.set("n", "\\g", function()
+      -- Stop Grammarly client if active
+      local clients = vim.lsp.buf_get_clients()
+      for _, client in pairs(clients) do
+        if client.name == "grammarly" then
+          vim.lsp.stop_client(client.id)
+          return
+        end
+      end
+      -- Start Grammarly client
+      this.setup_language_server("grammarly", opts)
+    end, { desc = "Toggle Grammarly", silent = true })
+  end)
 end
 
 return M

@@ -138,6 +138,7 @@ end
 -- Quit typos
 vim.api.nvim_create_user_command("Q", "q", { bang = true })
 vim.api.nvim_create_user_command("Qa", "qa", { bang = true })
+vim.api.nvim_create_user_command("QA", "qa", { bang = true })
 
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)
 vim.api.nvim_create_autocmd("BufEnter", {

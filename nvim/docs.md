@@ -16,6 +16,8 @@
 
 ## TODO
 
+- Deprecated `resolved_capabilities`
+  - https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
 - can map <c-tab>
 - use sshfs
 - https://github.com/rcarriga/nvim-notify/issues/43 for DAP test

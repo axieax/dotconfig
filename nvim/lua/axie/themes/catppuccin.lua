@@ -5,12 +5,15 @@ return function()
   catppuccin.setup({
     transparent_background = true,
     integrations = {
+      treesitter = true,
+      native_lsp = { enabled = true },
       lsp_trouble = true,
       cmp = true,
-      lsp_saga = true,
+      lsp_saga = false,
       gitgutter = false,
       gitsigns = true,
       telescope = true,
+      nvimtree = { enabled = false },
       neotree = {
         enabled = true,
         show_root = false,
@@ -19,12 +22,12 @@ return function()
       which_key = true,
       indent_blankline = {
         enabled = true,
-        colored_indent_levels = false,
+        -- colored_indent_levels = true,
       },
-      dashboard = true,
+      dashboard = true, -- startify?
       neogit = true,
-      vim_sneak = true,
-      fern = true,
+      vim_sneak = false,
+      fern = false,
       barbar = true,
       bufferline = true,
       markdown = true,
@@ -33,6 +36,7 @@ return function()
       hop = true,
       notify = true,
       telekasten = true,
+      symbols_outline = true,
     },
   })
 

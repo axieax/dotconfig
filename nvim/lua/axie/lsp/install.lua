@@ -112,7 +112,6 @@ function M.ls_overrides()
     jdtls = {
       autostart = false,
       init_options = { bundles = java_bundles },
-      filetypes = { "java" },
       cmd = {
         "java",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -275,6 +274,7 @@ function M.ls_overrides()
 
     -- C/C++: clangd
     clangd = {
+      autostart = false,
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
       capabilities = { offsetEncoding = { "utf-16" } },
     },
@@ -301,10 +301,14 @@ function M.setup_language_server(name, opts)
   require("lspconfig")[name].setup(opts)
 end
 
-function M.defer_server_setup(name, ft, cb)
+function M.defer_server_setup(name, cb)
   local opts = require("axie.lsp.install").get_language_server_opts(name)
+  local pattern = opts.filetypes
+  if not pattern then
+    pattern = require("lspconfig.server_configurations." .. name).default_config.filetypes
+  end
   vim.api.nvim_create_autocmd("FileType", {
-    pattern = ft,
+    pattern = pattern,
     callback = function()
       opts.autostart = true
       cb(opts)
@@ -329,11 +333,10 @@ function M.setup()
   end
 
   -- Setup language servers via autocmd
-  this.defer_server_setup("jdtls", "java", function(opts)
-    require("jdtls").start_or_attach(opts)
-  end)
-  this.defer_server_setup("rust_analyzer", "rust", require("rust-tools").setup)
-  this.defer_server_setup("grammarly", "markdown", function(opts)
+  this.defer_server_setup("jdtls", require("jdtls").start_or_attach)
+  this.defer_server_setup("rust_analyzer", require("rust-tools").setup)
+  this.defer_server_setup("clangd", require("clangd_extensions").setup)
+  this.defer_server_setup("grammarly", function(opts)
     vim.keymap.set("n", "\\g", function()
       -- Stop Grammarly client if active
       local clients = vim.lsp.buf_get_clients()

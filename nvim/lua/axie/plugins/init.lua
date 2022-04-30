@@ -9,13 +9,16 @@ return function(dev_mode)
   end
   vim.cmd("packadd packer.nvim")
 
-  -- Automatically source lua config files on save
   vim.cmd("autocmd! BufWritePost */dotconfig/nvim/**/*.lua,*/.config/nvim/**/*.lua source $MYVIMRC")
-  -- NOTE: this causes memory issues
-  -- vim.api.nvim_create_autocmd("BufWritePost", {
-  --   pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
-  --   command = "source $MYVIMRC",
-  -- })
+  --[[
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    desc = "Automatically source lua config files on save",
+    pattern = "*/dotconfig/nvim/**/*.lua,*/.config/nvim/**/*.lua",
+    -- NOTE: this causes memory issues
+    -- pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
+    command = "source $MYVIMRC",
+  })
+  ]]
 
   local packer = require("packer")
   return packer.startup({
@@ -905,12 +908,13 @@ return function(dev_mode)
       use({
         "williamboman/nvim-lsp-installer",
         requires = {
+          "neovim/nvim-lspconfig",
           "hrsh7th/cmp-nvim-lsp",
           "stevearc/aerial.nvim",
           -- ALT: https://github.com/jose-elias-alvarez/typescript.nvim ?
           "jose-elias-alvarez/nvim-lsp-ts-utils",
           "b0o/schemastore.nvim",
-          "simrat39/rust-tools.nvim",
+          "p00f/clangd_extensions.nvim",
         },
         config = require("axie.lsp.install").setup,
       })
@@ -928,14 +932,14 @@ return function(dev_mode)
         },
       })
 
-      -- TODO: https://github.com/p00f/clangd_extensions.nvim
+      -- Clangd extensions
+      use("p00f/clangd_extensions.nvim")
 
       -- LSP diagnostics, code actions, formatting extensions
       use({
         "jose-elias-alvarez/null-ls.nvim",
         requires = {
           "nvim-lua/plenary.nvim",
-          "neovim/nvim-lspconfig",
           {
             "ThePrimeagen/refactoring.nvim",
             requires = {

@@ -41,4 +41,12 @@ return function()
   }
 
   require("alpha").setup(dashboard.config)
+
+  vim.api.nvim_create_autocmd("FileType", {
+    desc = "Disable alpha colorcolumn",
+    pattern = "alpha",
+    callback = function()
+      vim.wo.colorcolumn = ""
+    end,
+  })
 end

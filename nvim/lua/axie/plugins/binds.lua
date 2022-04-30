@@ -4,7 +4,6 @@
 -- Can use Packer module field to lazy load based on lua require
 
 local M = {}
-local map = require("axie.utils").map
 
 function M.setup()
   local wk = require("which-key")
@@ -135,7 +134,6 @@ function M.general_mappings()
       r = {
         n = { require("axie.lsp.rename").rename_empty, "rename symbol (no default text)" },
         N = { vim.lsp.buf.rename, "rename symbol" },
-        r = { require("axie.plugins.toggleterm").lazydocker, "lazydocker" },
       },
       o = {
         q = { "<CMD>copen<CR>", "open qflist" },
@@ -225,28 +223,18 @@ function M.general_mappings()
     },
     [","] = {
       p = { "<CMD>PasteImg<CR>", "Paste image" },
-      -- o = { "<CMD>Glow<CR>", "Markdown preview (glow)" },
-      -- O = { "<CMD>MarkdownPreview<CR>", "Markdown preview (browser)" },
       ["["] = { require("axie.plugins.treesitter").goto_prev_sibling, "Goto previous sibling node" },
       ["]"] = { require("axie.plugins.treesitter").goto_next_sibling, "Goto next sibling node" },
       ["{"] = { require("axie.plugins.treesitter").goto_parent, "Goto parent node" },
       ["}"] = { require("axie.plugins.treesitter").goto_child, "Goto child node" },
     },
   })
-
-  vim.cmd([[
-    au FileType markdown nmap <buffer> ,o <CMD>Glow<CR>
-    au FileType markdown nmap <buffer> ,O <CMD>MarkdownPreview<CR>
-    au FileType html nmap <buffer> ,o <CMD>lua require'axie.plugins.toggleterm'.liveserver(true)<CR>
-    au FileType html nmap <buffer> ,O <CMD>lua require'axie.plugins.toggleterm'.liveserver()<CR>
-  ]])
 end
 
 function M.register_git_bindings()
   local wk = require("which-key")
   wk.register({
     name = "+git",
-    g = { require("axie.plugins.toggleterm").lazygit, "lazygit" },
     h = { require("gitsigns").stage_hunk, "git stage hunk" },
     H = { "<CMD>DiffviewFileHistory .<CR>", "git stage hunk" },
     K = { require("gitsigns").preview_hunk, "git hunk preview" },
@@ -312,20 +300,20 @@ end
 
 function M.misc()
   -- LSP
-  map({ "n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>" })
-  map({ "v", "gq", "<CMD>lua require'axie.lsp.code_actions'.native(true)<CR>" })
-  map({ "v", "gQ", "<CMD>lua require'axie.lsp.code_actions'.native(false)<CR>" })
+  vim.keymap.set("n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>")
+  vim.keymap.set("v", "gq", "<CMD>lua require'axie.lsp.code_actions'.native(true)<CR>")
+  vim.keymap.set("v", "gQ", "<CMD>lua require'axie.lsp.code_actions'.native(false)<CR>")
   -- Telescope
-  map({ "n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>" }) -- control slash NOTE: inverse order
+  vim.keymap.set("n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>") -- control slash NOTE: inverse order
   -- Neo-tree
-  map({ "n", ";", "<CMD>Neotree toggle=true<CR>" })
+  vim.keymap.set("n", ";", "<CMD>Neotree toggle=true<CR>")
   -- Visual indent
-  map({ "v", "<", "<gv" })
-  map({ "v", ">", ">gv" })
+  vim.keymap.set("v", "<", "<gv")
+  vim.keymap.set("v", ">", ">gv")
   -- Markdown bold
-  map({ "v", ",*", "S*gvS*", noremap = false })
+  vim.keymap.set("v", ",*", "S*gvS*", { noremap = false })
   -- Shift tab to unindent
-  map({ "i", "<S-Tab>", "<C-d>" })
+  vim.keymap.set("i", "<S-Tab>", "<C-d>")
 end
 
 return M

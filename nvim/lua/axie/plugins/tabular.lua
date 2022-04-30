@@ -5,8 +5,12 @@ local M = {}
 function M.setup()
   -- NOTE: Prettier removes this automatic alignment
   -- USE: <!-- prettier-ignore -->
-  local map = require("axie.utils").map
-  map({ "i", "|", "|<esc>:lua require('axie.plugins.tabular').md_cucumber_table()<CR>a" })
+  vim.keymap.set(
+    "i",
+    "|",
+    "|<esc>:lua require('axie.plugins.tabular').md_cucumber_table()<CR>a",
+    { desc = "markdown cucumber table automatic alignment" }
+  )
 end
 
 -- Auto align for markdown cucumber table

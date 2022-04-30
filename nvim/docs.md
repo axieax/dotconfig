@@ -18,30 +18,26 @@
 
 - can map <c-tab>
 - use sshfs
-- https://github.com/williamboman/nvim-lsp-installer/pull/631 migration (ref: https://github.com/axieax/dotconfig/blob/prev-lsp-installer/nvim/lua/lsp/install.lua)
-- nvim-lsp-installer ensure_installed instead of prepare_language_servers
 - https://github.com/rcarriga/nvim-notify/issues/43 for DAP test
 - keymap for `axie.utils.reload_module` on cwd/lua modules for local plugin dev
-- command mode text disappears after a small delay
+- command mode text sometimes disappears after a small delay
 - vim.ui.select title remove trailing `:`
 - Migrate `plugins.binds` to individual plugin configs
-- Remove binding for entering ex mode (Q)?
+  - Update keymap RHS from vimscript to lua function
+  - Add desc to all binds and autocmd
+  - Group which-key bindings
 - PRIORITY: no eslint node_module -> use own eslint_d
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Telescope `man` docs
 - Custom require which takes module_name, ... args (pcall wrapper)
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
-- PRIORITY: Separate telescope extensions, use Packer sequencing (after)
+- Separate telescope extensions, use Packer sequencing (after)
 - PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
 - PRIORITY: out of mem for large files (e.g. ~/.cache/nvim/lsp.log)
-- IMPORTANT: group which-key bindings
 - IMPORTANT: lsp bindings into on_attach
-- IMPORTANT: util map function use which-key (pcall) https://github.com/neovim/neovim/pull/16594
-- IMPORTANT: uncomment adjacent lines https://github.com/numToStr/Comment.nvim/issues/22
 - IMPORTANT: set up toggleterm - and warn if exit with hidden terminal
 - TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
-- TODO: use luasnip instead of vsnip
 - READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 - TODO: use vim-fugitive instead of gitlinker?
 - TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
@@ -49,16 +45,9 @@
 - TODO: <space>lU to update lsp servers?
 - TODO: rust-tools debug setup
 - TODO: global toggle inlay hints command (inc rust as well)
-- TODO: emmet-ls jsx/tsx support
 - TODO: nvim-tree goto location of current buffer in cwd
 - TODO: python3 provider (OS, venv)
-- TODO: use https://github.com/danymat/neogen
-- Update lsp config for installation
-- and use https://github.com/mjlbach/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L187-L229?
 - Telescope setup, find_files wrapper if buffer is directory
-- Set up snippets (custom and emmet)
-- Automatic lspinstall and treesitter parsers
-- Add auto packer clean, install, compile under autoinstall packer
 - Merge conflict resolver (like vscode) - fugitive has this
 - Cursor hover lsp hover or line diagnostic?
 - nvim cmp dadbod source
@@ -78,9 +67,9 @@
 
 ## Features/plugins
 
-- Faded unused variables/imports? https://github.com/narutoxy/dim.lua
 - https://github.com/mvllow/modes.nvim
 - https://github.com/PlatyPew/format-installer.nvim
+- https://github.com/lukas-reineke/lsp-format.nvim
 - https://github.com/sudormrfbin/cheatsheet.nvim
 - Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
 - Dictionary/thesaurus (alternative to rudism/telescope-dict.nvim)
@@ -92,14 +81,10 @@
 - Coverage
 - Gradle (https://github.com/aloussase/telescope-gradle.nvim)
 - Lazy loading (event = "BufWinEnter"?) https://youtu.be/JPEx2kI6pfo
-- Emmet support for jsx/tsx
-- Emmet / autoclose HTML
 - Gradual undo
-- Markdown HTML Treesitter highlighting + Autotag support
 - Autosave and swapfiles?
 - Set up quick compiler
 - Code runner (Codi, https://github.com/dccsillag/magma-nvim)
-- Markdown continue list on next line
 - Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 - Telescope-cheat.nvim
 - mrjones2014/dash.nvim for linux?
@@ -109,10 +94,9 @@
 - windline instead of galaxyline?
 - Calltree (https://github.com/ldelossa/calltree.nvim)
 - gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
-- Markdown code block syntax highlighting
-- with line for startup time (v -startuptime and read tmp file?)
+- alpha startup time (v -startuptime and read tmp file?)
 - something like https://github.com/henriquehbr/nvim-startup.lua?
-- https://github.com/VonHeikemen/fine-cmdline.nvim
+- https://github.com/VonHeikemen/fine-cmdline.nvim or https://github.com/gelguy/wilder.nvim
 - Themes: try sonokai and monokai
 - Telescope frecency, smart-history
 - https://github.com/kwkarlwang/bufresize.nvim
@@ -126,7 +110,6 @@
 
 ## Notes / issues
 
-- https://github.com/kyazdani42/nvim-tree.lua/issues/806 (plugin being refactored)
 - Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 - Zen mode with nvim-treesitter-context?
 - stabilize.nvim view jumps
@@ -139,13 +122,15 @@
 - https://github.com/hrsh7th/nvim-cmp/issues/611
 - nvim-cmp treesitter completion source vs buffer source?
 - Opening buffer for file (nvim-tree) replaces barbar buffers
-- Markdown TS Parser (https://github.com/MDeiml/tree-sitter-markdown)
 - Colorizer disabled on PackerCompile (changing colorscheme), no support for lowercase, unmaintained
 - autopairs may start to break after a while (can't insert characters)
 - windows without line number column will regain column if you switch to another window and come back
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
+- https://github.com/numToStr/Comment.nvim/issues/22
+- https://github.com/aca/emmet-ls/pull/39
 - https://github.com/folke/which-key.nvim/pull/253
 - https://github.com/nvim-telescope/telescope-ui-select.nvim/issues/9
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
@@ -155,8 +140,7 @@
 - https://github.com/kevinhwang91/nvim-hlslens/issues/20#issuecomment-981329510
 - https://github.com/wbthomason/packer.nvim/issues/760
 - https://github.com/folke/todo-comments.nvim/issues/77
-- https://github.com/folke/todo-comments.nvim/issues/80
 - https://github.com/norcalli/nvim-colorizer.lua/pull/18
 - https://github.com/vuki656/package-info.nvim/issues/75
 - My surround-wrap plugin (future: URL paste md) - replaced by LuaSnip new feature?
-- Git change watch plugin (watch for breaking config setup?)
+- Git change watch plugin (watch for breaking config setup?, when dead plugin has new updates to replace temp fork)

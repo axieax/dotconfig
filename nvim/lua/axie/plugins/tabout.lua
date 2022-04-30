@@ -7,7 +7,6 @@ return function()
     act_as_tab = false,
   })
 
-  local map = require("axie.utils").map
-  map({ "i", "<a-l>", "<Plug>(TaboutMulti)", noremap = false })
-  map({ "i", "<a-h>", "<Plug>(TaboutBackMulti)", noremap = false })
+  vim.keymap.set("i", "<a-l>", "<Plug>(TaboutMulti)")
+  vim.keymap.set("i", "<a-h>", "<Plug>(TaboutBackMulti)")
 end

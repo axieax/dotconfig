@@ -5,13 +5,10 @@
 local M = {}
 
 function M.attach()
-  local opts = { noremap = true }
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<CMD>close<CR>", opts)
-  vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<CMD>noh<CR>", { silent = true })
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<esc><esc>", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", [[<a-\>]], [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "n", [[<a-\>]], "<CMD>startinsert<CR>", opts)
+  vim.keymap.set("n", "<Esc>", "<Nop>", { silent = true, buffer = 0 })
+  vim.keymap.set("t", "<c-]>", [[<C-\><C-n>]], { desc = "toggle mode", noremap = true, buffer = 0 })
+  vim.keymap.set("n", "<c-]>", "<CMD>startinsert<CR>", { desc = "toggle mode", noremap = true, buffer = 0 })
+  vim.keymap.set("t", "<c-w>", "<C-]><C-w>", { noremap = false, buffer = 0 })
   vim.wo.spell = false
 end
 
@@ -33,26 +30,39 @@ function M.setup()
       },
     },
   })
-  vim.cmd("autocmd! TermOpen term://* lua require'axie.plugins.toggleterm'.attach()")
+  vim.api.nvim_create_autocmd("TermOpen", {
+    desc = "toggleterm attach",
+    pattern = "term://*",
+    callback = require("axie.plugins.toggleterm").attach,
+  })
 
-  local map = require("axie.utils").map
-  map({ "n", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
-  map({ "i", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
-  map({ "t", "<F1>", "<CMD>1ToggleTerm direction=float<CR>" })
   -- NOTE: actually toggles instead of opening a new toggleterm?
   -- TODO: toggle vs more in same layout
-  map({ "n", "<F2>", "<CMD>2ToggleTerm direction=horizontal<CR>" })
-  map({ "i", "<F2>", "<CMD>2ToggleTerm direction=horizontal<CR>" })
-  map({ "t", "<F2>", "<CMD>2ToggleTerm direction=horizontal<CR>" })
-  map({ "n", "<F3>", "<CMD>3ToggleTerm direction=vertical<CR>" })
-  map({ "i", "<F3>", "<CMD>3ToggleTerm direction=vertical<CR>" })
-  map({ "t", "<F3>", "<CMD>3ToggleTerm direction=vertical<CR>" })
-  map({ "n", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
-  map({ "i", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
-  map({ "t", "<F4>", "<CMD>4ToggleTerm direction=tab<CR>" })
-  map({ "n", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
-  map({ "i", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
-  map({ "t", [[<C-\>]], "<CMD>Telescope termfinder find<CR>" })
+  local directions = { "float", "horizontal", "vertical", "tab" }
+  for i, direction in ipairs(directions) do
+    vim.keymap.set(
+      { "n", "i", "t" },
+      string.format("<F%d>", i),
+      string.format("<Cmd>%dToggleTerm direction=%s<CR>", i, direction)
+    )
+  end
+  vim.keymap.set({ "n", "i", "t" }, [[<C-\>]], "<CMD>Telescope termfinder find<CR>", { desc = "find terminals" })
+
+  -- Custom terminals
+  local this = require("axie.plugins.toggleterm")
+  local filetype_map = require("axie.utils").filetype_map
+  local require_args = require("axie.utils").require_args
+  filetype_map("html", "n", ",o", require_args(this.liveserver, true), {
+    desc = "start liveserver for current file",
+    buffer = true,
+  })
+  filetype_map("html", "n", ",O", require_args(this.liveserver, false), {
+    desc = "start liveserver for current project",
+    buffer = true,
+  })
+
+  vim.keymap.set("n", "<space>gg", this.lazygit, { desc = "lazygit" })
+  vim.keymap.set("n", "<space>rr", this.lazydocker, { desc = "lazydocker" })
 
   require("telescope").load_extension("termfinder")
 end

@@ -1,21 +1,13 @@
 -- https://github.com/vuki656/package-info.nvim --
 return function()
-  local map = require("axie.utils").map
-  require("package-info").setup({})
-  -- Keybinds
-  -- Show package versions
-  map({ "n", "<space>ps", "<cmd>:lua require'package-info'.show()<CR>" })
-  -- Hide package versions
-  map({ "n", "<space>pc", "<cmd>:lua require'package-info'.hide()<CR>" })
+  local package_info = require("package-info")
+  package_info.setup()
+  vim.keymap.set("n", "<space>ps", package_info.show, { desc = "Show package versions" })
+  vim.keymap.set("n", "<space>pc", package_info.hide, { desc = "Hide package versions" })
   -- TODO: toggle
-  -- Update package on line
-  map({ "n", "<space>pu", "<cmd>:lua require'package-info'.update()<CR>" })
-  -- Delete package on line
-  map({ "n", "<space>pd", "<cmd>:lua require'package-info'.delete()<CR>" })
-  -- Install a new package
-  map({ "n", "<space>pi", "<cmd>:lua require'package-info'.install()<CR>" })
-  -- Reinstall dependencies
-  map({ "n", "<space>pr", "<cmd>:lua require'package-info'.reinstall()<CR>" })
-  -- Install a different package version
-  map({ "n", "<space>pp", "<cmd>:lua require'package-info'.change_version()<CR>" })
+  vim.keymap.set("n", "<space>pu", package_info.update, { desc = "Update package on line" })
+  vim.keymap.set("n", "<space>pd", package_info.delete, { desc = "Delete package on line" })
+  vim.keymap.set("n", "<space>pi", package_info.install, { desc = "Install a new package" })
+  vim.keymap.set("n", "<space>pr", package_info.reinstall, { desc = "Reinstall dependencies" })
+  vim.keymap.set("n", "<space>pp", package_info.change_version, { desc = "Install a different package version" })
 end

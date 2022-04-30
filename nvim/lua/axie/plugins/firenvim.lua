@@ -12,8 +12,8 @@ return function()
     },
   }
 
-  -- Github buffers are Markdown
-  vim.cmd("au BufEnter github.com_*.txt set filetype=markdown")
+  -- GitHub issues Markdown filetype
+  require("axie.utils").override_filetype("github.com_*.txt", "markdown")
 
   -- TODO: setup Nerd Font glyphs
 end

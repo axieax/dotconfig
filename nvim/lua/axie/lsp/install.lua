@@ -30,13 +30,21 @@ function M.default_on_attach(client, bufnr)
   else
     -- use client for formatting
     -- print("formatting enabled for " .. name)
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      desc = "LSP Formatting",
+      buffer = bufnr,
+      callback = vim.lsp.buf.formatting_sync,
+    })
   end
 
   if client.resolved_capabilities.code_lens then
     print(name, "supports code lens")
     -- NOTE: language server loading delay
-    vim.cmd("au BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()")
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      desc = "LSP Code Lens Refresh",
+      buffer = bufnr,
+      callback = vim.lsp.codelens.refresh,
+    })
   end
 end
 
@@ -234,20 +242,22 @@ function M.ls_overrides()
     -- },
 
     -- HTML: Emmet
-    -- emmet_ls = {
-    --   -- NOTE: doesn't work with jsx
-    --   filetypes = {
-    --     "html",
-    --     "css",
-    --     "javascript",
-    --     "typescript",
-    --     "eruby",
-    --     "typescriptreact",
-    --     "javascriptreact",
-    --     "svelte",
-    --     "vue",
-    --   },
-    -- },
+    emmet_ls = {
+      filetypes = {
+        "html",
+        "javascriptreact",
+        "typescriptreact",
+        "css",
+        "sass",
+        "scss",
+        "less",
+        -- "ruby",
+        -- "typescript",
+        -- "javascript",
+        -- "svelte",
+        -- "vue",
+      },
+    },
 
     -- JSON: jsonls
     jsonls = {

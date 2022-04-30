@@ -15,7 +15,10 @@ function M.setup()
     },
   })
 
-  vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'axie.plugins.lightbulb'.update()]])
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    desc = "Check for available code actions",
+    callback = require("axie.plugins.lightbulb").update,
+  })
 end
 
 function M.update()

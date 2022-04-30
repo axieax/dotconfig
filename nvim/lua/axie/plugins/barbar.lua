@@ -4,34 +4,33 @@
 -- TODO: see if new buffers can be open in tabs by default
 
 return function()
-  local map = require("axie.utils").map
   -- Buffer navigation
-  map({ "n", "<TAB>", ":BufferNext<CR>" })
-  map({ "n", "<S-TAB>", ":BufferPrevious<CR>" })
-  map({ "n", "<A-w>", ":BufferClose<CR>" })
-  map({ "n", "<A-W>", ":BufferClose!<CR>" })
-  map({ "n", "<A-p>", ":BufferPin<CR>" })
+  vim.keymap.set("n", "<TAB>", ":BufferNext<CR>")
+  vim.keymap.set("n", "<S-TAB>", ":BufferPrevious<CR>")
+  vim.keymap.set("n", "<A-w>", ":BufferClose<CR>")
+  vim.keymap.set("n", "<A-W>", ":BufferClose!<CR>")
+  vim.keymap.set("n", "<A-p>", ":BufferPin<CR>")
 
   -- Buffer shortcuts
-  map({ "n", "<A-;>", ":BufferPick<CR>" })
-  map({ "n", "<A-1>", ":BufferGoto 1<CR>" })
-  map({ "n", "<A-2>", ":BufferGoto 2<CR>" })
-  map({ "n", "<A-3>", ":BufferGoto 3<CR>" })
-  map({ "n", "<A-4>", ":BufferGoto 4<CR>" })
-  map({ "n", "<A-5>", ":BufferGoto 5<CR>" })
-  map({ "n", "<A-6>", ":BufferGoto 6<CR>" })
-  map({ "n", "<A-7>", ":BufferGoto 7<CR>" })
-  map({ "n", "<A-8>", ":BufferGoto 8<CR>" })
-  map({ "n", "<A-9>", ":BufferGoto 9<CR>" })
-  map({ "n", "<A-0>", ":BufferLast<CR>" })
+  vim.keymap.set("n", "<A-;>", ":BufferPick<CR>")
+  vim.keymap.set("n", "<A-1>", ":BufferGoto 1<CR>")
+  vim.keymap.set("n", "<A-2>", ":BufferGoto 2<CR>")
+  vim.keymap.set("n", "<A-3>", ":BufferGoto 3<CR>")
+  vim.keymap.set("n", "<A-4>", ":BufferGoto 4<CR>")
+  vim.keymap.set("n", "<A-5>", ":BufferGoto 5<CR>")
+  vim.keymap.set("n", "<A-6>", ":BufferGoto 6<CR>")
+  vim.keymap.set("n", "<A-7>", ":BufferGoto 7<CR>")
+  vim.keymap.set("n", "<A-8>", ":BufferGoto 8<CR>")
+  vim.keymap.set("n", "<A-9>", ":BufferGoto 9<CR>")
+  vim.keymap.set("n", "<A-0>", ":BufferLast<CR>")
 
   -- Buffer re-order / sort
-  map({ "n", "<A-,>", ":BufferMovePrevious<CR>" })
-  map({ "n", "<A-.>", ":BufferMoveNext<CR>" })
-  map({ "n", "<leader>bb", ":BufferOrderByBufferNumber<CR>" })
-  map({ "n", "<leader>bd", ":BufferOrderByDirectory<CR>" })
-  map({ "n", "<leader>bl", ":BufferOrderByLanguage<CR>" })
-  map({ "n", "<leader>bw", ":BufferOrderByWindowNumber<CR>" })
+  vim.keymap.set("n", "<A-,>", ":BufferMovePrevious<CR>")
+  vim.keymap.set("n", "<A-.>", ":BufferMoveNext<CR>")
+  vim.keymap.set("n", "<leader>bb", ":BufferOrderByBufferNumber<CR>")
+  vim.keymap.set("n", "<leader>bd", ":BufferOrderByDirectory<CR>")
+  vim.keymap.set("n", "<leader>bl", ":BufferOrderByLanguage<CR>")
+  vim.keymap.set("n", "<leader>bw", ":BufferOrderByWindowNumber<CR>")
 
   -- Set barbar's options
   vim.g.bufferline = {

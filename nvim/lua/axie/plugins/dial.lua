@@ -70,11 +70,8 @@ return function()
 
   -- OTHERS: on/off variants, north/east/south/west variants
 
-  local map = require("axie.utils").map
-  map({ "n", "<C-a>", "<Plug>(dial-increment)", noremap = false })
-  map({ "n", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
-  map({ "v", "<C-a>", "<Plug>(dial-increment)", noremap = false })
-  map({ "v", "<C-x>", "<Plug>(dial-decrement)", noremap = false })
-  map({ "v", "g<C-a>", "g<Plug>(dial-increment)", noremap = false })
-  map({ "v", "g<C-x>", "g<Plug>(dial-decrement)", noremap = false })
+  vim.keymap.set({ "n", "v" }, "<C-a>", "<Plug>(dial-increment)")
+  vim.keymap.set({ "n", "v" }, "<C-x>", "<Plug>(dial-decrement)")
+  vim.keymap.set("v", "g<C-a>", "g<Plug>(dial-increment)")
+  vim.keymap.set("v", "g<C-x>", "g<Plug>(dial-decrement)")
 end

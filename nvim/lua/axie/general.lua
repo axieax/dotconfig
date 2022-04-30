@@ -1,6 +1,5 @@
 local utils = require("axie.utils")
 local vim_apply = utils.vim_apply
-local map = utils.map
 local ternary = utils.ternary
 
 ---------------
@@ -65,9 +64,7 @@ vim_apply(vim.opt, {
 })
 
 -- NOTE: indent-blankline covers first tab character
-vim.cmd([[
-  set listchars=tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣
-]])
+vim.cmd([[set listchars=tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣]])
 
 ----------
 -- Misc --
@@ -76,6 +73,7 @@ vim.cmd([[
 -- Hybrid relative numbers for normal mode, absolute for insert mode
 local numberToggleGroup = vim.api.nvim_create_augroup("NumberToggle", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+  desc = "Enable relative numbers",
   group = numberToggleGroup,
   callback = function()
     local ft = vim.bo.filetype
@@ -85,17 +83,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
   end,
 })
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+  desc = "Disable relative numbers",
   group = numberToggleGroup,
   callback = function()
     vim.wo.relativenumber = false
-  end,
-})
-
--- Disable colorcolumn conditionally
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "alpha",
-  callback = function()
-    vim.wo.colorcolumn = ""
   end,
 })
 
@@ -107,34 +98,31 @@ vim_apply(vim.g, {
   netrw_altv = true, -- opens vsplit to right
 })
 
--- Clipboard yank
 local yank_register = ternary(vim.loop.os_uname().sysname == "Linux", "+", "*")
-map({ "n", "\\y", '"' .. yank_register .. "y", noremap = false })
-map({ "v", "\\y", '"' .. yank_register .. "y", noremap = false })
-
--- Paste to clipboard
-map({ "n", "\\+", '<CMD>let @+=@"<CR>' })
-
--- Paste last yanked
-map({ "n", "\\p", '"0p' })
-map({ "v", "\\p", '"0p' })
-
--- Auto-resize
-vim.api.nvim_create_autocmd("VimResized", {
-  callback = function()
-    vim.cmd("wincmd =")
-  end,
+vim.keymap.set({ "n", "v" }, "\\y", '"' .. yank_register .. "y", {
+  desc = "yank to clipboard",
+  noremap = false,
 })
 
--- Highlight yank
+-- TODO: confirm
+vim.keymap.set("n", "\\+", '<CMD>let @+=@"<CR>', { desc = "paste from clipboard" })
+
+vim.keymap.set({ "n", "v" }, "\\p", '"0p', { desc = "paste last yanked" })
+
+vim.api.nvim_create_autocmd("VimResized", {
+  desc = "autoresize nvim",
+  command = "wincmd =",
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "highlight yank",
   callback = function()
     vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
   end,
 })
 
 -- Update (instead of write)
-map({ "n", "<space>w", "<CMD>update<CR>" })
+vim.keymap.set("n", "<space>w", "<CMD>update<CR>")
 
 -- No autoformat write
 for _, cmd in ipairs({ "W", "Wq", "Wqa" }) do
@@ -151,51 +139,43 @@ end
 vim.api.nvim_create_user_command("Q", "q", { bang = true })
 vim.api.nvim_create_user_command("Qa", "qa", { bang = true })
 
--- Disable automatic comment insertion
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)
-vim.cmd("autocmd BufEnter * set formatoptions-=cro")
-vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
+vim.api.nvim_create_autocmd("BufEnter", {
+  desc = "disable automatic comment insertion",
+  callback = function()
+    vim.o.formatoptions = vim.o.formatoptions:gsub("[cro]", "")
+    vim.bo.formatoptions = vim.o.formatoptions
+  end,
+})
 
 -- Center search result jumps
-map({ "n", "N", "Nzz" })
-map({ "n", "n", "nzz" })
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "n", "nzz")
 
 -- Resize windows
-map({ "n", "<C-k>", "<CMD>resize -1<CR>" })
-map({ "n", "<C-j>", "<CMD>resize +1<CR>" })
-map({ "n", "<C-h>", "<CMD>vertical resize -1<CR>" })
-map({ "n", "<C-l>", "<CMD>vertical resize +1<CR>" })
+vim.keymap.set("n", "<C-k>", "<CMD>resize -1<CR>")
+vim.keymap.set("n", "<C-j>", "<CMD>resize +1<CR>")
+vim.keymap.set("n", "<C-h>", "<CMD>vertical resize -1<CR>")
+vim.keymap.set("n", "<C-l>", "<CMD>vertical resize +1<CR>")
 
--- Wrapped cursor navigation
-vim.cmd("noremap <expr> j v:count ? 'j' : 'gj'")
-vim.cmd("noremap <expr> k v:count ? 'k' : 'gk'")
+for _, key in ipairs({ "j", "k" }) do
+  vim.keymap.set({ "n", "x" }, key, function()
+    return vim.v.count > 0 and key or "g" .. key
+  end, { desc = "wrapped lines cursor navigation with " .. key, expr = true, noremap = true })
+end
 
--- TODO: migrate to ftdetect?
--- NOTE: BufEnter vs BufRead,BufNewFile
--- Terraform filetype
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*.terraformrc", "*.terraform.rc" },
-  callback = function()
-    vim.bo.filetype = "terraform"
-  end,
-})
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*.tfstate",
-  callback = function()
-    vim.bo.filetype = "json"
-  end,
-})
+local override_filetype = require("axie.utils").override_filetype
 
--- Bazel filetype
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*.bzl", "BUILD", "*.BUILD", "BUILD.*", "WORKSPACE", "WORKSPACE.*" },
-  callback = function()
-    vim.bo.filetype = "bzl"
-  end,
-})
+-- Terraform files
+override_filetype({ "*.terraformrc", "*.terraform.rc" }, "terraform")
+override_filetype({ "*.tfstate" }, "json")
+
+-- Bazel files
+override_filetype({ "*.bzl", "BUILD", "*.BUILD", "BUILD.*", "WORKSPACE", "WORKSPACE.*" }, "bzl")
 
 -- Enable spellcheck conditionally based on filetypes
 vim.api.nvim_create_autocmd("BufEnter", {
+  desc = "enable spellcheck",
   callback = function()
     local ft = vim.bo.filetype
     local enabled_filetypes = { "markdown", "text", "" }
@@ -204,7 +184,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
-
--- Global statusline (v0.7)
--- vim.cmd("set laststatus=3")
--- vim.cmd("hi WinSeparator guibg=NONE")

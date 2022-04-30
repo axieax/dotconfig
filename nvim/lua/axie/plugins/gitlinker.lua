@@ -1,13 +1,16 @@
 -- https://github.com/ruifm/gitlinker.nvim --
+
 return function()
-  local map = require("axie.utils").map
-  require("gitlinker").setup({
+  local gitlinker = require("gitlinker")
+  local require_args = require("axie.utils").require_args
+  gitlinker.setup({
     mappings = "<space>gy",
   })
   -- Open line link in browser (visual mode map)
-  map({
+  vim.keymap.set(
     "v",
     "<space>gw",
-    "<cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.open_in_browser})<CR>",
-  })
+    require_args(gitlinker.get_buf_range_url, "v", { action_callback = require("gitlinker.actions").open_in_browser }),
+    { desc = "open line link in browser" }
+  )
 end

@@ -11,6 +11,11 @@ return function(dev_mode)
 
   -- Automatically source lua config files on save
   vim.cmd("autocmd! BufWritePost */dotconfig/nvim/**/*.lua,*/.config/nvim/**/*.lua source $MYVIMRC")
+  -- NOTE: this causes memory issues
+  -- vim.api.nvim_create_autocmd("BufWritePost", {
+  --   pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
+  --   command = "source $MYVIMRC",
+  -- })
 
   local packer = require("packer")
   return packer.startup({
@@ -231,9 +236,9 @@ return function(dev_mode)
           require("pretty-fold").setup({})
           -- require("pretty-fold.preview").setup_keybinding()
           -- TODO: toggle keybinding
-          require("axie.utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.show_preview()<CR>" })
-          -- require("axie.utils").map({ "n", "zK", "<CMD>lua require'pretty-fold.preview'.keymap_open_close('zK')<CR>" })
-          -- require("axie.utils").map({ "n", "<esc>", "<CMD>lua require'pretty-fold.preview'.keymap_close('<esc>')<CR>" })
+          vim.keymap.set("n", "zK", "<CMD>lua require'pretty-fold.preview'.show_preview()<CR>")
+          -- vim.keymap.set( "n", "zK", "<CMD>lua require'pretty-fold.preview'.keymap_open_close('zK')<CR>" )
+          -- vim.keymap.set( "n", "<esc>", "<CMD>lua require'pretty-fold.preview'.keymap_close('<esc>')<CR>" )
         end,
       })
 
@@ -816,6 +821,10 @@ return function(dev_mode)
         run = ":call mkdp#util#install()",
         ft = { "markdown" },
         cmd = "MarkdownPreview",
+        config = function()
+          local filetype_map = require("axie.utils").filetype_map
+          filetype_map("markdown", "n", ",O", "<CMD>MarkdownPreview<CR>", { buffer = true })
+        end,
       })
 
       use({
@@ -823,6 +832,8 @@ return function(dev_mode)
         cmd = { "Glow", "GlowInstall" },
         config = function()
           vim.g.glow_border = "rounded"
+          local filetype_map = require("axie.utils").filetype_map
+          filetype_map("markdown", "n", ",o", "<CMD>Glow<CR>", { buffer = true })
         end,
       })
 
@@ -836,10 +847,10 @@ return function(dev_mode)
       use({
         "arjunmahishi/run-code.nvim",
         config = function()
-          local map = require("axie.utils").map
-          map({ "v", "\\r", "<CMD>RunCodeSelected<CR>" })
-          map({ "n", "\\r", "<CMD>RunCodeFile<CR>" })
-          vim.cmd("au FileType markdown nmap \\r <CMD>RunCodeBlock<CR>")
+          local filetype_map = require("axie.utils").filetype_map
+          vim.keymap.set("n", "\\r", "<CMD>RunCodeFile<CR>")
+          vim.keymap.set("v", "\\r", "<CMD>RunCodeSelected<CR>")
+          filetype_map("markdown", "n", "\\r", "<CMD>RunCodeBlock<CR>", { buffer = true })
         end,
       })
 

@@ -7,18 +7,12 @@ return function()
 
   -- Persistent undo
   -- TODO: default undo limit up to buffer open
-  vim.cmd([[
-    if has("persistent_undo")
-      let target_path = expand('~/.undodir')
-
-      " create the directory and any parent directories
-      " if the location does not exist.
-      if !isdirectory(target_path)
-        call mkdir(target_path, "p", 0700)
-      endif
-
-      let &undodir=target_path
-      set undofile
-    endif
-    ]])
+  if vim.fn.has("persistent_undo") == 1 then
+    local target_path = vim.fn.expand("~/.undodir")
+    if vim.fn.isdirectory(target_path) == 0 then
+      vim.fn.mkdir(target_path)
+    end
+    vim.o.undodir = target_path
+    vim.o.undofile = true
+  end
 end

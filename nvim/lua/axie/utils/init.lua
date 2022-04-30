@@ -1,5 +1,5 @@
 -- Helper functions
--- TODO: augroup (https://github.com/kazhala/dotfiles/blob/master/.config/nvim/lua/kaz/utils/au.lua), apply highlight group
+-- TODO: apply highlight group
 local M = {}
 
 -- Applies options to a meta-accessor
@@ -11,47 +11,33 @@ function M.vim_apply(meta_accessor, options)
   end
 end
 
--- Default options for keymap settings
-local default_options = {
-  noremap = true,
-  silent = true,
-  expr = false,
-  script = false,
-  buffer = false,
-}
+--- Sets a given keymap conditionally based on a given filetype
+-- @param filetype (string) filetype to register keymap
+---@vararg any `vim.keymap.set` arguments (mode, lhs, rhs, opts)
+function M.filetype_map(ft, ...)
+  local args = { ... }
+  vim.api.nvim_create_autocmd("FileType", {
+    desc = string.format("%s map for %s", ft, args[2]),
+    pattern = ft,
+    callback = function()
+      vim.keymap.set(unpack(args))
+    end,
+  })
+end
 
--- Registers a keymapping
--- @param bind (table) consisting of {
---    mode (positional, string)
---    before (positional, string)
---    after (positional, string)
---    noremap (optional keyword, boolean)
---    silent (optional keyword, boolean)
---    expr (optional keyword, boolean)
---    script (optional keyword, boolean)
---    buffer (optional keyword, boolean)
--- }
-function M.map(bind)
-  -- TODO: try to use which-key instead?
-  -- HELPFUL: https://www.reddit.com/r/neovim/comments/rltfgz/using_inline_functions_with_nvim_set_keymap/
-  -- Get options
-  local mode, before, after = unpack(bind, 1, 3)
-
-  local buffer = M.fallback(bind.buffer, default_options.buffer)
-  local opts = {
-    noremap = M.fallback(bind.noremap, default_options.noremap),
-    silent = M.fallback(bind.silent, default_options.silent),
-    expr = M.fallback(bind.expr, default_options.expr),
-    script = M.fallback(bind.script, default_options.script),
-  }
-
-  -- Register keymap with specified options
-  if buffer then
-    vim.api.nvim_buf_set_keymap(0, mode, before, after, opts)
-  else
-    -- TODO: try which-key
-    vim.api.nvim_set_keymap(mode, before, after, opts)
-  end
+--- Overrides the filetype for files matching the given pattern
+---@param pattern (string|table) pattern to match
+---@param ft (string) filetype to set
+function M.override_filetype(pattern, ft)
+  -- TODO: migrate to ftdetect?
+  -- NOTE: BufEnter vs BufRead,BufNewFile
+  vim.api.nvim_create_autocmd("BufEnter", {
+    desc = string.format("Override filetype for %s with %s", pattern, ft),
+    pattern = pattern,
+    callback = function()
+      vim.bo.filetype = ft
+    end,
+  })
 end
 
 --- Determines whether to accept the current value or use a fallback value (nullish coalescing)
@@ -130,12 +116,29 @@ function M.glob_split(pattern)
   return vim.split(vim.fn.glob(pattern), "\n")
 end
 
-function M.reload_module(...)
+--- Reloads a module's require cache
+---@param module_name (string) module to reload
+---@vararg any additional arguments to pass to plenary reload module
+function M.reload_module(module_name, ...)
   local ok, plenary = pcall(require, "plenary.reload")
   if ok then
-    plenary.reload_module(...)
+    plenary.reload_module(module_name, ...)
   else
-    M.notify("Could not reload module: " .. select(1, ...))
+    M.notify("Could not reload module: " .. module_name)
+  end
+end
+
+--- Returns a function which calls f with the given arguments
+---@param f (function|string) function to be called
+---@vararg any arguments to be passed to f
+---@return function
+function M.require_args(f, ...)
+  local args = { ... }
+  if type(f) == "string" then
+    f = require(f)
+  end
+  return function()
+    return f(unpack(args))
   end
 end
 

@@ -35,7 +35,6 @@ function M.setup()
   })
 
   -- other search methods
-  local map = require("axie.utils").map
   -- vim.cmd([[
   -- noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
   --           \<Cmd>lua require('hlslens').start()<CR>
@@ -44,10 +43,10 @@ function M.setup()
   -- noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
   --           \<Cmd>lua require('hlslens').start()<CR>
   -- ]])
-  map({ "n", "*", "*<CMD>lua require'hlslens'.start()<CR>" })
-  map({ "n", "g*", "g*<CMD>lua require'hlslens'.start()<CR>" })
-  map({ "n", "#", "#<CMD>lua require'hlslens'.start()<CR>" })
-  map({ "n", "g#", "g#<CMD>lua require'hlslens'.start()<CR>" })
+
+  for _, trigger in ipairs({ "*", "g*", "#", "g#" }) do
+    vim.keymap.set("n", trigger, trigger .. "<CMD>lua require'hlslens'.start()<CR>")
+  end
 
   -- vim-visual-multi highlights (ctrl-n)
   -- NOTE: lens disappear with navigation

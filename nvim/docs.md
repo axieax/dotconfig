@@ -67,6 +67,8 @@
 
 ## Features/plugins
 
+- https://github.com/jbyuki/nabla.nvim
+- https://github.com/benfowler/telescope-luasnip.nvim
 - https://github.com/mvllow/modes.nvim
 - https://github.com/PlatyPew/format-installer.nvim
 - https://github.com/lukas-reineke/lsp-format.nvim

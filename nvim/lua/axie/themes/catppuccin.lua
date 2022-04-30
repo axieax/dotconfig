@@ -53,5 +53,28 @@ return function()
     -- SpellRare = { fg = cp.teal },
   })
 
+  -- NvChad Telescope theme (adapted from https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)
+  local enable_nvchad_theme = true
+  if enable_nvchad_theme then
+    local telescope_results = cp.black2
+    local telescope_prompt = cp.black3
+    local fg = cp.gray1
+    local purple = cp.green -- or mauve
+
+    catppuccin.remap({
+      TelescopeBorder = { fg = telescope_results, bg = telescope_results },
+      TelescopePromptBorder = { fg = telescope_prompt, bg = telescope_prompt },
+      TelescopePromptCounter = { fg = fg },
+      TelescopePromptNormal = { fg = fg, bg = telescope_prompt },
+      TelescopePromptPrefix = { fg = purple, bg = telescope_prompt },
+      TelescopePromptTitle = { fg = telescope_prompt, bg = purple },
+      TelescopePreviewTitle = { fg = telescope_prompt, bg = purple },
+      TelescopeResultsTitle = { fg = telescope_results, bg = telescope_results },
+      TelescopeMatching = { fg = purple },
+      TelescopeNormal = { bg = telescope_results },
+      TelescopeSelection = { bg = telescope_prompt },
+    })
+  end
+
   vim.cmd("colorscheme catppuccin")
 end

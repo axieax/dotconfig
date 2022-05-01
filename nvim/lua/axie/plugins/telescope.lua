@@ -45,8 +45,13 @@ function M.setup()
           mirror = true,
         },
         center = {
-          -- TODO: set max width
-          width = 0.6,
+          -- width = 0.6,
+          width = function(_, max_columns)
+            -- set max width
+            local percentage = 0.6
+            local max = 120
+            return math.min(math.floor(max_columns * percentage), max)
+          end,
         },
       },
     },

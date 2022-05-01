@@ -16,13 +16,14 @@
 
 ## TODO
 
+- telescope config layout
 - Deprecated `resolved_capabilities`
   - https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
 - can map <c-tab>
 - use sshfs
 - https://github.com/rcarriga/nvim-notify/issues/43 for DAP test
 - keymap for `axie.utils.reload_module` on cwd/lua modules for local plugin dev
-- command mode text sometimes disappears after a small delay
+- command mode text sometimes disappears after a small delay (flicker, cmp?)
 - vim.ui.select title remove trailing `:`
 - Migrate `plugins.binds` to individual plugin configs
   - Update keymap RHS from vimscript to lua function
@@ -69,6 +70,8 @@
 
 ## Features/plugins
 
+- https://github.com/ziontee113/syntax-tree-surfer
+- https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips
 - https://github.com/jbyuki/nabla.nvim
 - https://github.com/benfowler/telescope-luasnip.nvim
 - https://github.com/mvllow/modes.nvim
@@ -132,6 +135,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-telescope/telescope.nvim/issues/1904 for urlview center layout
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/aca/emmet-ls/pull/39

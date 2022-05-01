@@ -42,10 +42,11 @@ return function()
 
   -- highlight group overrides
   local cp = require("catppuccin.api.colors").get_colors()
-  catppuccin.remap({
+
+  local remaps = {
     NormalFloat = { bg = cp.black2 }, -- NOTE: catppuccin needs a bg colour
     ColorColumn = { link = "CursorLine" },
-    CursorLineNr = { fg = cp.magenta },
+    CursorLineNr = { fg = "#AAAAAA" },
     WhichKeyFloat = { link = "NormalFloat" },
     SpellBad = { fg = cp.red, style = "italic,undercurl" },
     SpellCap = { fg = cp.red, style = "italic,undercurl" },
@@ -55,17 +56,15 @@ return function()
     -- SpellCap = { fg = cp.peach },
     -- SpellLocal = { fg = cp.lavender },
     -- SpellRare = { fg = cp.teal },
-  })
+  }
 
   -- NvChad Telescope theme (adapted from https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)
-  local enable_nvchad_theme = true
-  if enable_nvchad_theme then
+  if require("axie.utils.config").nvchad_theme then
     local telescope_results = cp.black2
     local telescope_prompt = cp.black3
     local fg = cp.gray1
     local purple = cp.green -- or mauve
-
-    catppuccin.remap({
+    remaps = vim.tbl_extend("force", remaps, {
       TelescopeBorder = { fg = telescope_results, bg = telescope_results },
       TelescopePromptBorder = { fg = telescope_prompt, bg = telescope_prompt },
       TelescopePromptCounter = { fg = fg },
@@ -79,6 +78,8 @@ return function()
       TelescopeSelection = { bg = telescope_prompt },
     })
   end
+
+  catppuccin.remap(remaps)
 
   vim.cmd("colorscheme catppuccin")
 end

@@ -27,10 +27,14 @@ end
 function M.setup()
   -- telescope setup mappings table - inside telescope overlay
   -- TODO: overwrite dotfiles? action for opening current file in native file explorer?
+  local ternary = require("axie.utils").ternary
+
   local telescope = require("telescope")
   telescope.setup({
     defaults = {
+      winblend = ternary(require("axie.utils.config").nvchad_theme, 12, 0),
       sorting_strategy = "ascending",
+      layout_strategy = "vertical",
       layout_config = {
         horizontal = {
           prompt_position = "top",
@@ -38,6 +42,11 @@ function M.setup()
         },
         vertical = {
           prompt_position = "top",
+          mirror = true,
+        },
+        center = {
+          -- TODO: set max width
+          width = 0.6,
         },
       },
     },
@@ -48,6 +57,9 @@ function M.setup()
         -- ffmpegthumbnailer for videos
         filetypes = { "png", "jpg", "mp4", "webm", "pdf" },
         find_cmd = "rg",
+      },
+      ["ui-select"] = {
+        layout_strategy = "center",
       },
     },
   })

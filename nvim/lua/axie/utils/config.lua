@@ -49,4 +49,6 @@ M.fileformat_icons = {
   dos = "",
 }
 
+M.nvchad_theme = true
+
 return M

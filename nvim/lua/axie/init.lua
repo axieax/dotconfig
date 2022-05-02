@@ -11,19 +11,27 @@
 
 -- NOTE: need ripgrep for Telescope grep_string
 
-local dev_mode = false
-
 -- Lua require caching
 local reload_module = require("axie.utils").reload_module
--- reload_module("axie")
+reload_module("axie")
+
+-- Source config files on save
+local source_config = vim.api.nvim_create_augroup("SourceConfig", {})
+vim.api.nvim_create_autocmd("BufWritePost", {
+  desc = "Automatically source lua config files on save",
+  group = source_config,
+  pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
+  command = "source $MYVIMRC",
+})
 
 -- General config
 require("axie.general")
 
 -- Plugins config
-require("axie.plugins")(dev_mode)
+require("axie.plugins")
 
 -- Personal plugin development
+local dev_mode = require("axie.utils.config").dev_mode
 if dev_mode then
   local base_path = vim.fn.expand("~/dev/nvim-plugins/")
   local escaped_base_path = base_path:gsub("%-", "%%-")

@@ -71,6 +71,7 @@
 
 ## Features/plugins
 
+- Recent Packer updates
 - https://github.com/ziontee113/syntax-tree-surfer
 - https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips
 - https://github.com/jbyuki/nabla.nvim
@@ -135,6 +136,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/mfussenegger/nvim-jdtls/discussions/261
+- https://github.com/anuvyklack/pretty-fold.nvim/issues/9
 - https://github.com/L3MON4D3/LuaSnip/issues/415
 - https://github.com/hrsh7th/nvim-cmp/issues/953
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)

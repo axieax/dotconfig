@@ -1,6 +1,8 @@
 -- https://github.com/vim-test/vim-test --
 -- https://github.com/rcarriga/vim-ultest --
 -- TODO: java functions separate keybindings in ftplugin or on_attach?
+-- TODO: parse test cases only, and following line for errors (summary)
+-- TODO: perhaps also a maximum number of errors to report?
 
 local M = {}
 
@@ -54,7 +56,7 @@ function M.custom_test_summary()
     -- NOTE: summary not persistent
     M.display()
   else
-    vim.cmd("<CMD>UltestSummary<CR>")
+    vim.cmd("UltestSummary")
   end
 end
 

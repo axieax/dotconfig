@@ -1,5 +1,8 @@
 local M = {}
 
+M.dev_mode = false
+M.nvchad_theme = false
+
 function M.prepared_language_servers()
   return {
     ---------------
@@ -48,7 +51,5 @@ M.fileformat_icons = {
   mac = "",
   dos = "",
 }
-
-M.nvchad_theme = true
 
 return M

@@ -15,7 +15,7 @@ local dev_mode = false
 
 -- Lua require caching
 local reload_module = require("axie.utils").reload_module
-reload_module("axie")
+-- reload_module("axie")
 
 -- General config
 require("axie.general")

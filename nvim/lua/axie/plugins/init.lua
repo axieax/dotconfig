@@ -9,16 +9,11 @@ return function(dev_mode)
   end
   vim.cmd("packadd packer.nvim")
 
-  vim.cmd("autocmd! BufWritePost */dotconfig/nvim/**/*.lua,*/.config/nvim/**/*.lua source $MYVIMRC")
-  --[[
   vim.api.nvim_create_autocmd("BufWritePost", {
     desc = "Automatically source lua config files on save",
-    pattern = "*/dotconfig/nvim/**/*.lua,*/.config/nvim/**/*.lua",
-    -- NOTE: this causes memory issues
-    -- pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
+    pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
     command = "source $MYVIMRC",
   })
-  ]]
 
   local packer = require("packer")
   return packer.startup({

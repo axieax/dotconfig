@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Change LuaSnipEdit binding - don't like capital S
 - telescope config layout
 - Deprecated `resolved_capabilities`
   - https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
@@ -134,6 +135,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/L3MON4D3/LuaSnip/issues/415
+- https://github.com/hrsh7th/nvim-cmp/issues/953
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/aca/emmet-ls/pull/39

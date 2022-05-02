@@ -29,6 +29,7 @@ vim_apply(vim.opt, {
   splitright = true,
   hidden = true,
   number = true,
+  relativenumber = true,
   ruler = true,
   colorcolumn = "80",
   termguicolors = true,
@@ -70,19 +71,19 @@ vim.cmd([[set listchars=tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣]])
 -- Misc --
 ----------
 
--- Hybrid relative numbers for normal mode, absolute for insert mode
+-- Disable relative numbers for insert mode
 local numberToggleGroup = vim.api.nvim_create_augroup("NumberToggle", { clear = true })
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+vim.api.nvim_create_autocmd("InsertLeave", {
   desc = "Enable relative numbers",
   group = numberToggleGroup,
   callback = function()
-    local ft = vim.bo.filetype
-    if ft ~= "alpha" then
+    local ignored = { "TelescopePrompt" }
+    if not vim.tbl_contains(ignored, vim.bo.filetype) then
       vim.wo.relativenumber = true
     end
   end,
 })
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+vim.api.nvim_create_autocmd("InsertEnter", {
   desc = "Disable relative numbers",
   group = numberToggleGroup,
   callback = function()

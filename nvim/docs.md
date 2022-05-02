@@ -131,7 +131,6 @@
 - Opening buffer for file (nvim-tree) replaces barbar buffers
 - Colorizer disabled on PackerCompile (changing colorscheme), no support for lowercase, unmaintained
 - autopairs may start to break after a while (can't insert characters)
-- windows without line number column will regain column if you switch to another window and come back
 
 ## Current PRs / Issues
 

@@ -54,7 +54,7 @@ function M.custom_test_summary()
     -- NOTE: summary not persistent
     M.display()
   else
-    vim.cmd("<CMD>UltestSummary")
+    vim.cmd("<CMD>UltestSummary<CR>")
   end
 end
 

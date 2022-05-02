@@ -135,7 +135,6 @@
 
 ## Current PRs / Issues
 
-- https://github.com/nvim-telescope/telescope.nvim/issues/1904 for urlview center layout
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/aca/emmet-ls/pull/39

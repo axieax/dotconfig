@@ -32,7 +32,7 @@ function M.setup()
   local telescope = require("telescope")
   telescope.setup({
     defaults = {
-      winblend = ternary(require("axie.utils.config").nvchad_theme, 12, 0),
+      winblend = ternary(require("axie.utils.config").nvchad_theme, 10, 0),
       sorting_strategy = "ascending",
       layout_strategy = "vertical",
       layout_config = {
@@ -65,6 +65,9 @@ function M.setup()
       },
       ["ui-select"] = {
         layout_strategy = "center",
+        layout_config = {
+          bottom_pane = { height = 10 },
+        },
       },
     },
   })

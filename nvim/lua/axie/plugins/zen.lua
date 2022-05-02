@@ -9,8 +9,12 @@ return function()
     -- require("gitsigns").toggle_current_line_blame()
 
     -- [[ LSP diagnostics ]]
-    vim.cmd(":silent! lua require'toggle_lsp_diagnostics'.toggle_virtual_text()<CR>")
-    vim.cmd(":silent! lua require'toggle_lsp_diagnostics'.toggle_underline()<CR>")
+    local diagnostics = require("toggle_lsp_diagnostics")
+    local echo = diagnostics.display_status
+    diagnostics.display_status = function() end
+    diagnostics.toggle_virtual_text()
+    diagnostics.toggle_underline()
+    diagnostics.display_status = echo
 
     -- [[ todo-comment ]]
     -- SEE: https://github.com/folke/todo-comments.nvim/issues/27

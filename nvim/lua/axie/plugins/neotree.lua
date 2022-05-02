@@ -69,7 +69,7 @@ return function()
           vim.schedule(function()
             local position = vim.api.nvim_buf_get_var(0, "neo_tree_position")
             if position == "current" then
-              vim.cmd("setlocal buflisted")
+              vim.bo.buflisted = true
             end
           end)
         end,

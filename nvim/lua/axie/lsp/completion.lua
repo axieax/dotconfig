@@ -150,7 +150,7 @@ return function()
   -- })
 
   -- npm
-  require("cmp-npm").setup({})
+  require("cmp-npm").setup()
 
   -- git
   require("cmp_git").setup({

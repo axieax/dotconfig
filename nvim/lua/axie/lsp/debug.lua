@@ -7,7 +7,7 @@ return function()
   local dap = require("dap")
   dap.defaults.fallback.terminal_win_cmd = "10split new"
 
-  require("dapui").setup({})
+  require("dapui").setup()
 
   -- Python setup (SETUP: pip install debugpy)
   local dap_python = require("dap-python")

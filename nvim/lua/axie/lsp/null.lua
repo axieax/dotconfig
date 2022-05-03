@@ -167,7 +167,7 @@ function M.setup()
   -- Setup null-ls
   require("null-ls").setup({
     sources = sources,
-    on_attach = require("axie.lsp.install").default_on_attach,
+    on_attach = require("axie.lsp.options").default_on_attach,
   })
 end
 

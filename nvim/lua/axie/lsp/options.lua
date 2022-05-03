@@ -1,6 +1,6 @@
 local M = {}
 
--- TODO: resolved_capabilities -> server_capabilities, vim.lsp.buf.format
+-- TODO(v0.8): resolved_capabilities -> server_capabilities, vim.lsp.buf.format
 -- disable language server formatting in options here, or else use null ls?
 
 --- Returns the custom options for a given language server
@@ -135,7 +135,7 @@ function M.jdtls()
 
   local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
   local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-  local os = require("axie.utils").get_os()
+  local operating_system = require("axie.utils").get_os()
 
   -- local runtime_base_path = "/usr/lib/jvm/"
   -- local java_runtimes = {}
@@ -162,7 +162,7 @@ function M.jdtls()
       "-jar",
       vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
       "-configuration",
-      jdtls_path .. "/config_" .. os,
+      jdtls_path .. "/config_" .. operating_system,
       "-data",
       vim.fn.expand("~/java/workspaces/" .. workspace_dir),
       "--add-modules=ALL-SYSTEM",
@@ -296,7 +296,7 @@ function M.tsserver()
       ts_utils.setup_client(client)
 
       -- toggle inlay hints
-      vim.keymap.set("n", "\\<space>", "<CMD>TSLspToggleInlayHints<CR>", { desc = "Toggle Inlay Hints" })
+      vim.keymap.set("n", "\\<Space>", "<Cmd>TSLspToggleInlayHints<CR>", { desc = "Toggle Inlay Hints" })
     end,
   }
 end

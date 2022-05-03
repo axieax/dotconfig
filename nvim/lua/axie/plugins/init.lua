@@ -23,9 +23,10 @@ return packer.startup({
     use({
       "lewis6991/impatient.nvim",
       config = function()
-        -- BUG: this breaks DistantInstall for some reason
-        -- local impatient = require("impatient")
-        -- impatient.enable_profile()
+        --[[ BUG: this breaks DistantInstall for some reason
+        local impatient = require("impatient")
+        impatient.enable_profile(
+        ]]
       end,
     })
 
@@ -916,7 +917,7 @@ return packer.startup({
         "b0o/schemastore.nvim",
         "p00f/clangd_extensions.nvim",
       },
-      config = require("axie.lsp.install").setup,
+      config = require("axie.lsp.setup").servers,
     })
 
     -- Java LSP

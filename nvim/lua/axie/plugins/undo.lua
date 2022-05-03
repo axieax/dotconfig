@@ -5,6 +5,8 @@ return function()
   vim.g.mundo_auto_preview_delay = 0
   vim.g.mundo_playback_delay = 100
 
+  vim.keymap.set("n", "<Space>u", "<Cmd>MundoToggle<CR>", { desc = "Undo Tree" })
+
   -- Persistent undo
   -- TODO: default undo limit up to buffer open
   if vim.fn.has("persistent_undo") == 1 then

@@ -5,8 +5,8 @@ local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nv
 local auto_install = vim.fn.empty(vim.fn.glob(packer_path)) > 0
 if auto_install then
   vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
+  vim.cmd("packadd packer.nvim")
 end
-vim.cmd("packadd packer.nvim")
 
 local packer = require("packer")
 return packer.startup({
@@ -23,15 +23,11 @@ return packer.startup({
     use({
       "lewis6991/impatient.nvim",
       config = function()
-        local impatient = require("impatient")
         -- BUG: this breaks DistantInstall for some reason
+        -- local impatient = require("impatient")
         -- impatient.enable_profile()
       end,
     })
-
-    -- Filetype config (faster startup and custom overrides)
-    -- ISSUE: https://github.com/nathom/filetype.nvim/issues/9
-    -- use("nathom/filetype.nvim")
 
     -- CursorHold event fix
     use("antoinemadec/FixCursorHold.nvim")
@@ -63,8 +59,6 @@ return packer.startup({
     -------------
     -- Theming --
     -------------
-
-    -- TRY: https://www.reddit.com/r/neovim/comments/se377t/telescopenvim_looks_neat
 
     -- TODO: replace all with themer.lua?
     use({
@@ -222,23 +216,28 @@ return packer.startup({
       end,
     })
 
+    -- Remember last location
+    -- ALT: https://github.com/farmergreg/vim-lastplace
+    use({
+      "ethanholz/nvim-lastplace",
+      config = function()
+        require("nvim-lastplace").setup()
+      end,
+    })
+
     -- Fold preview
     use({
       "anuvyklack/pretty-fold.nvim",
-      requires = "anuvyklack/nvim-keymap-amend", -- only for preview
+      requires = "anuvyklack/nvim-keymap-amend",
       config = function()
-        require("pretty-fold").setup()
-        require("pretty-fold.preview").setup({
-          default_keybindings = false,
-        })
-        -- require("pretty-fold.preview").setup_keybinding()
-        -- TODO: toggle keybinding
+        local pretty_fold = require("pretty-fold")
+        local pretty_fold_preview = require("pretty-fold.preview")
+
+        pretty_fold.setup()
+        pretty_fold_preview.setup()
+
         local keymap_amend = require("keymap-amend")
-        local mapping = require("pretty-fold.preview").mapping
-        keymap_amend("n", "zK", mapping.show_close_preview_open_fold)
-        -- vim.keymap.set("n", "zK", "<CMD>lua require'pretty-fold.preview'.show_preview()<CR>")
-        -- vim.keymap.set( "n", "zK", "<CMD>lua require'pretty-fold.preview'.keymap_open_close('zK')<CR>" )
-        -- vim.keymap.set( "n", "<esc>", "<CMD>lua require'pretty-fold.preview'.keymap_close('<esc>')<CR>" )
+        keymap_amend("n", "zK", pretty_fold_preview.mapping.show_close_preview_open_fold)
       end,
     })
 
@@ -305,6 +304,9 @@ return packer.startup({
         "MinimapRefresh",
         "MinimapUpdateHighlight",
       },
+      config = function()
+        vim.keymap.set("n", "<Space>;", "<Cmd>MinimapToggle<CR>", { desc = "Minimap" })
+      end,
     })
 
     -- Undo history
@@ -755,7 +757,7 @@ return packer.startup({
     use({
       "L3MON4D3/LuaSnip",
       requires = "rafamadriz/friendly-snippets", -- snippet collection
-      config = require("axie.lsp.snippets").setup,
+      config = require("axie.lsp.snippets"),
     })
 
     -- Docstring generator
@@ -766,6 +768,7 @@ return packer.startup({
       requires = { "nvim-treesitter/nvim-treesitter", "L3MON4D3/LuaSnip" },
       config = function()
         require("neogen").setup({ snippet_engine = "luasnip" })
+        vim.keymap.set("n", "<Space>/", "<Cmd>Neogen<CR>", { desc = "Generate docstring" })
       end,
     })
 
@@ -823,7 +826,7 @@ return packer.startup({
       cmd = "MarkdownPreview",
       config = function()
         local filetype_map = require("axie.utils").filetype_map
-        filetype_map("markdown", "n", ",O", "<CMD>MarkdownPreview<CR>", { buffer = true })
+        filetype_map("markdown", "n", ",O", "<CMD>MarkdownPreview<CR>")
       end,
     })
 
@@ -833,7 +836,7 @@ return packer.startup({
       config = function()
         vim.g.glow_border = "rounded"
         local filetype_map = require("axie.utils").filetype_map
-        filetype_map("markdown", "n", ",o", "<CMD>Glow<CR>", { buffer = true })
+        filetype_map("markdown", "n", ",o", "<CMD>Glow<CR>")
       end,
     })
 
@@ -850,7 +853,7 @@ return packer.startup({
         local filetype_map = require("axie.utils").filetype_map
         vim.keymap.set("n", "\\r", "<CMD>RunCodeFile<CR>")
         vim.keymap.set("v", "\\r", "<CMD>RunCodeSelected<CR>")
-        filetype_map("markdown", "n", "\\r", "<CMD>RunCodeBlock<CR>", { buffer = true })
+        filetype_map("markdown", "n", "\\r", "<CMD>RunCodeBlock<CR>")
       end,
     })
 

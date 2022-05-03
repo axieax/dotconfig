@@ -34,7 +34,7 @@ function M.setup()
     defaults = {
       winblend = ternary(require("axie.utils.config").nvchad_theme, 10, 0),
       sorting_strategy = "ascending",
-      layout_strategy = "vertical",
+      -- layout_strategy = ternary(vim.o.lines > 41, "vertical", "horizontal"),
       layout_config = {
         horizontal = {
           prompt_position = "top",

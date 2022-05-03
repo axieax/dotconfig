@@ -54,11 +54,9 @@ function M.setup()
   local require_args = require("axie.utils").require_args
   filetype_map("html", "n", ",o", require_args(this.liveserver, true), {
     desc = "start liveserver for current file",
-    buffer = true,
   })
   filetype_map("html", "n", ",O", require_args(this.liveserver, false), {
     desc = "start liveserver for current project",
-    buffer = true,
   })
 
   vim.keymap.set("n", "<space>gg", this.lazygit, { desc = "lazygit" })

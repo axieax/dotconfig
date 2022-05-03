@@ -173,7 +173,7 @@ override_filetype({ "*.terraformrc", "*.terraform.rc" }, "terraform")
 override_filetype({ "*.tfstate" }, "json")
 
 -- Bazel files
-override_filetype({ "*.bzl", "BUILD", "*.BUILD", "BUILD.*", "WORKSPACE", "WORKSPACE.*" }, "bzl")
+override_filetype({ "BUILD.*", "WORKSPACE.*" }, "bzl")
 
 -- Enable spellcheck conditionally based on filetypes
 vim.api.nvim_create_autocmd("BufEnter", {

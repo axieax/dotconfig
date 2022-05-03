@@ -13,14 +13,15 @@ end
 
 --- Sets a given keymap conditionally based on a given filetype
 -- @param filetype (string) filetype to register keymap
----@vararg any `vim.keymap.set` arguments (mode, lhs, rhs, opts)
-function M.filetype_map(ft, ...)
-  local args = { ... }
+---@vararg any `vim.keymap.set` arguments (mode, lhs, rhs, opts) with optional opts
+function M.filetype_map(ft, mode, lhs, rhs, opts)
+  -- set buffer option by default
+  opts = vim.tbl_extend("keep", opts or {}, { buffer = true })
   vim.api.nvim_create_autocmd("FileType", {
-    desc = string.format("%s map for %s", ft, args[2]),
+    desc = string.format("%s map for %s", ft, lhs),
     pattern = ft,
     callback = function()
-      vim.keymap.set(unpack(args))
+      vim.keymap.set(mode, lhs, rhs, opts)
     end,
   })
 end
@@ -29,15 +30,18 @@ end
 ---@param pattern (string|table) pattern to match
 ---@param ft (string) filetype to set
 function M.override_filetype(pattern, ft)
-  -- TODO: migrate to ftdetect?
-  -- NOTE: BufEnter vs BufRead,BufNewFile
-  vim.api.nvim_create_autocmd("BufEnter", {
-    desc = string.format("Override filetype for %s with %s", pattern, ft),
-    pattern = pattern,
-    callback = function()
-      vim.bo.filetype = ft
-    end,
-  })
+  if type(pattern) == "string" then
+    pattern = { pattern }
+  end
+
+  local config = {}
+  for _, p in ipairs(pattern) do
+    config[p] = ft
+  end
+
+  -- TEMP: to enable filetype.lua
+  vim.g.do_filetype_lua = 1
+  vim.filetype.add({ pattern = config })
 end
 
 --- Determines whether to accept the current value or use a fallback value (nullish coalescing)

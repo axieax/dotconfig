@@ -16,7 +16,10 @@
 
 ## TODO
 
-- Change LuaSnipEdit binding - don't like capital S
+- remove tabnine references
+- configure ts context to be similar to intellij (names enough, maybe params)
+- `nvim_set_hl` instead of `vim.cmd("highlight ...")`?
+- Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
 - telescope config layout
 - Deprecated `resolved_capabilities`
   - https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
@@ -71,6 +74,7 @@
 
 ## Features/plugins
 
+- Packer refer to a PR
 - Recent Packer updates
 - https://github.com/ziontee113/syntax-tree-surfer
 - https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips

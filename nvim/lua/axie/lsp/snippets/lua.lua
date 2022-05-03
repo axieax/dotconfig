@@ -45,12 +45,36 @@ local packer_use = s(
         local plugin_name = snip.captures[2]
         plugin_name = string.gsub(plugin_name, "nvim", ""):gsub("[^%w]", "")
         ret_node = c(1, {
-          -- normal braces end
+          -- no config
           t({ ",", "}" }),
-          -- braces end with require
+          -- require config from plugins directory
           t({
             ",",
             string.format([[  config = require("axie.plugins.%s"),]], plugin_name),
+            "}",
+          }),
+          -- empty anonymous config
+          t({
+            ",",
+            "  config = function()",
+            "  end,",
+            "}",
+          }),
+          -- anonymous config with empty setup options
+          t({
+            ",",
+            "  config = function()",
+            string.format([[    require("%s").setup()]], plugin_name),
+            "  end,",
+            "}",
+          }),
+          -- anonymous config with setup options
+          t({
+            ",",
+            "  config = function()",
+            string.format([[    require("%s").setup({]], plugin_name),
+            "    })",
+            "  end,",
             "}",
           }),
         })

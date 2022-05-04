@@ -149,7 +149,7 @@ return packer.startup({
     -- Telescope file browser
     use({
       "nvim-telescope/telescope-file-browser.nvim",
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = function()
         local telescope = require("telescope")
         local require_args = require("axie.utils").require_args
@@ -165,7 +165,7 @@ return packer.startup({
 
     use({
       "jvgrootveld/telescope-zoxide",
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = function()
         local telescope = require("telescope")
         -- TEMP: zoxide override mappings
@@ -192,10 +192,10 @@ return packer.startup({
     use({
       "nvim-telescope/telescope-media-files.nvim",
       requires = {
-        "nvim-telescope/telescope.nvim",
         "nvim-lua/popup.nvim", -- NOTE: not necessary?
         "nvim-lua/plenary.nvim",
       },
+      after = "telescope.nvim",
       config = function()
         local telescope = require("telescope")
         -- NOTE: config in telescope setup
@@ -207,7 +207,7 @@ return packer.startup({
     -- Environment variables
     use({
       "LinArcX/telescope-env.nvim",
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = function()
         local telescope = require("telescope")
         telescope.load_extension("env")
@@ -225,7 +225,7 @@ return packer.startup({
     -- Scrollbar
     use({
       "petertriho/nvim-scrollbar",
-      requires = "kevinhwang91/nvim-hlslens",
+      after = "nvim-hlslens",
       config = require("axie.plugins.scrollbar"),
     })
 
@@ -396,10 +396,8 @@ return packer.startup({
     -- Clipboard manager
     use({
       "AckslD/nvim-neoclip.lua",
-      requires = {
-        { "tami5/sqlite.lua", module = "sqlite" },
-        "nvim-telescope/telescope.nvim",
-      },
+      requires = { "tami5/sqlite.lua", module = "sqlite" },
+      after = "telescope.nvim",
       config = function()
         require("neoclip").setup({
           enable_persistent_history = true,
@@ -523,7 +521,7 @@ return packer.startup({
 
     use({
       "nvim-telescope/telescope-ui-select.nvim",
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = function()
         require("telescope").load_extension("ui-select")
       end,
@@ -533,13 +531,13 @@ return packer.startup({
     -- TODO: change colourscheme, esp red?
     use({
       "p00f/nvim-ts-rainbow",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
     })
 
     -- Indent context indicator
     use({
       "lukas-reineke/indent-blankline.nvim",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
       event = "BufRead",
       config = require("axie.plugins.indentline"),
     })
@@ -547,14 +545,14 @@ return packer.startup({
     -- Scope context indicator
     use({
       "code-biscuits/nvim-biscuits",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
       config = require("axie.plugins.biscuits"),
     })
 
     -- Function context indicator
     use({
       "lewis6991/nvim-treesitter-context",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
       config = function()
         require("treesitter-context").setup({
           patterns = {
@@ -579,7 +577,7 @@ return packer.startup({
     -- Argument highlights
     use({
       "m-demare/hlargs.nvim",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
       config = function()
         require("hlargs").setup({
           -- Catppuccin Flamingo
@@ -680,7 +678,7 @@ return packer.startup({
     -- Tab out
     use({
       "abecodes/tabout.nvim",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
       config = require("axie.plugins.tabout"),
     })
 
@@ -691,7 +689,7 @@ return packer.startup({
     -- Project scope
     use({
       "ahmedkhalf/project.nvim",
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = function()
         require("project_nvim").setup()
         require("telescope").load_extension("projects")
@@ -741,7 +739,7 @@ return packer.startup({
     -- View node modules
     use({
       "nvim-telescope/telescope-node-modules.nvim",
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = function()
         local telescope = require("telescope")
         telescope.load_extension("node_modules")
@@ -765,19 +763,19 @@ return packer.startup({
     use({
       "nvim-treesitter/playground",
       run = ":TSUpdate query",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
     })
 
     -- Treesitter text objects
     use({
       "nvim-treesitter/nvim-treesitter-textobjects",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
     })
 
     -- Treesitter text subjects
     use({
       "RRethy/nvim-treesitter-textsubjects",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
     })
 
     -- GitHub Copilot
@@ -839,7 +837,7 @@ return packer.startup({
     -- Autoclose and autorename html tag
     use({
       "windwp/nvim-ts-autotag",
-      requires = "nvim-treesitter/nvim-treesitter",
+      after = "nvim-treesitter",
     })
 
     -- Regular expression explainer
@@ -948,7 +946,7 @@ return packer.startup({
     -- Debugger Telescope extension
     use({
       "nvim-telescope/telescope-dap.nvim",
-      requires = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
+      after = { "nvim-dap", "telescope.nvim" },
       config = function()
         local telescope = require("telescope")
         telescope.load_extension("dap")
@@ -963,7 +961,7 @@ return packer.startup({
     -- Debugger UI
     use({
       "rcarriga/nvim-dap-ui",
-      requires = "mfussenegger/nvim-dap",
+      after = "nvim-dap",
       config = function()
         require("dapui").setup()
       end,
@@ -971,7 +969,7 @@ return packer.startup({
 
     use({
       "theHamsta/nvim-dap-virtual-text",
-      requires = { "mfussenegger/nvim-dap", "nvim-treesitter/nvim-treesitter" },
+      after = { "nvim-dap", "nvim-treesitter" },
       config = function()
         require("nvim-dap-virtual-text").setup()
       end,
@@ -1072,7 +1070,7 @@ return packer.startup({
     -- Symbols outline
     use({
       "stevearc/aerial.nvim",
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = require("axie.lsp.aerial"),
     })
 

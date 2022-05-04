@@ -24,6 +24,31 @@ function M.dotconfig()
   })
 end
 
+function M.binds()
+  local this = require("axie.plugins.telescope")
+  local builtin = require("telescope.builtin")
+  local require_args = require("axie.utils").require_args
+
+  vim.keymap.set("n", "<C-_>", builtin.current_buffer_fuzzy_find, { desc = "buffer search" }) -- control slash
+  vim.keymap.set("n", "<Space>fh", builtin.help_tags, { desc = "help docs" })
+  vim.keymap.set("n", "<Space>fo", builtin.oldfiles, { desc = "old files" }) -- TODO: MRU
+  vim.keymap.set("n", "<Space>ff", this.file_search, { desc = "find files" })
+  vim.keymap.set("n", "<Space>fF", require_args(this.file_search, true), { desc = "find all files" })
+  vim.keymap.set("n", "<Space>fc", this.dotconfig, { desc = "search config" })
+  vim.keymap.set("n", "<Space>fg", builtin.live_grep, { desc = "live grep" })
+  vim.keymap.set("n", "<Space>fG", builtin.grep_string, { desc = "grep string" })
+  vim.keymap.set("n", "<Space>fm", builtin.man_pages, { desc = "search manual" })
+  vim.keymap.set("n", "<Space>ft", builtin.colorscheme, { desc = "theme" })
+  vim.keymap.set(
+    "n",
+    "<Space>fT",
+    require_args(builtin.colorscheme, { enable_preview = true }),
+    { desc = "theme preview" }
+  )
+  vim.keymap.set("n", "<Space>f.", builtin.resume, { desc = "resume last command" })
+  vim.keymap.set("n", "<Space>fk", builtin.keymaps, { desc = "find keymaps" })
+end
+
 function M.setup()
   -- telescope setup mappings table - inside telescope overlay
   -- TODO: overwrite dotfiles? action for opening current file in native file explorer?
@@ -54,6 +79,10 @@ function M.setup()
           end,
         },
       },
+      -- NOTE: https://github.com/nvim-telescope/telescope.nvim/issues/1080
+      tiebreak = function(current_entry, existing_entry)
+        return false
+      end,
     },
     extensions = {
       media_files = {
@@ -72,31 +101,8 @@ function M.setup()
     },
   })
 
-  -- TEMP: zoxide override mappings
-  require("telescope._extensions.zoxide.config").setup({
-    mappings = {
-      ["<C-b>"] = {
-        keepinsert = true,
-        action = function(selection)
-          pcall(function(path)
-            telescope.extensions.file_browser.file_browser({
-              cwd = path,
-            })
-          end, selection.path)
-        end,
-      },
-    },
-  })
-
-  -- Extensions
   telescope.load_extension("fzf")
-  telescope.load_extension("media_files")
-  telescope.load_extension("file_browser")
-  telescope.load_extension("env")
-  telescope.load_extension("zoxide")
-  telescope.load_extension("node_modules")
-
-  pcall(telescope.load_extension, "urlview")
+  require("axie.plugins.telescope").binds()
 end
 
 return M

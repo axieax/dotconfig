@@ -130,12 +130,6 @@ return packer.startup({
         -- Extensions
         { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        { "nvim-telescope/telescope-dap.nvim" },
-        { "nvim-telescope/telescope-media-files.nvim" },
-        { "nvim-telescope/telescope-file-browser.nvim" },
-        { "LinArcX/telescope-env.nvim" },
-        { "jvgrootveld/telescope-zoxide" },
-        { "nvim-telescope/telescope-node-modules.nvim" },
       },
       config = require("axie.plugins.telescope").setup,
     })
@@ -152,6 +146,75 @@ return packer.startup({
       config = require("axie.plugins.neotree"),
     })
 
+    -- Telescope file browser
+    use({
+      "nvim-telescope/telescope-file-browser.nvim",
+      requires = "nvim-telescope/telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        local require_args = require("axie.utils").require_args
+        telescope.load_extension("file_browser")
+        vim.keymap.set(
+          "n",
+          "<Space>fe",
+          require_args(telescope.extensions.file_browser.file_browser, { grouped = true }),
+          { desc = "file explorer" }
+        )
+      end,
+    })
+
+    use({
+      "jvgrootveld/telescope-zoxide",
+      requires = "nvim-telescope/telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        -- TEMP: zoxide override mappings
+        -- https://github.com/jvgrootveld/telescope-zoxide/issues/12
+        require("telescope._extensions.zoxide.config").setup({
+          mappings = {
+            ["<C-b>"] = {
+              keepinsert = true,
+              action = function(selection)
+                pcall(function(path)
+                  telescope.extensions.file_browser.file_browser({
+                    cwd = path,
+                  })
+                end, selection.path)
+              end,
+            },
+          },
+        })
+        telescope.load_extension("zoxide")
+      end,
+    })
+
+    -- Media file preview
+    use({
+      "nvim-telescope/telescope-media-files.nvim",
+      requires = {
+        "nvim-telescope/telescope.nvim",
+        "nvim-lua/popup.nvim", -- NOTE: not necessary?
+        "nvim-lua/plenary.nvim",
+      },
+      config = function()
+        local telescope = require("telescope")
+        -- NOTE: config in telescope setup
+        telescope.load_extension("media_files")
+        vim.keymap.set("n", "<Space>fp", telescope.extensions.media_files.media_files, { desc = "media files" })
+      end,
+    })
+
+    -- Environment variables
+    use({
+      "LinArcX/telescope-env.nvim",
+      requires = "nvim-telescope/telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        telescope.load_extension("env")
+        vim.keymap.set("n", "<Space>fE", telescope.extensions.env.env, { desc = "environment variables" })
+      end,
+    })
+
     -- Search for TODO comments and Trouble pretty list
     use({
       "folke/todo-comments.nvim",
@@ -162,7 +225,7 @@ return packer.startup({
     -- Scrollbar
     use({
       "petertriho/nvim-scrollbar",
-      after = "nvim-hlslens",
+      requires = "kevinhwang91/nvim-hlslens",
       config = require("axie.plugins.scrollbar"),
     })
 
@@ -221,11 +284,13 @@ return packer.startup({
     -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
     use({
       "Shatur/neovim-session-manager",
-      after = "telescope.nvim",
+      requires = "nvim-lua/plenary.nvim",
       config = function()
-        require("session_manager").setup({
+        local session_manager = require("session_manager")
+        session_manager.setup({
           autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
         })
+        vim.keymap.set("n", "<Space>fO", session_manager.load_session, { desc = "find sessions" })
       end,
     })
 
@@ -331,8 +396,10 @@ return packer.startup({
     -- Clipboard manager
     use({
       "AckslD/nvim-neoclip.lua",
-      requires = { "tami5/sqlite.lua", module = "sqlite" },
-      after = "telescope.nvim",
+      requires = {
+        { "tami5/sqlite.lua", module = "sqlite" },
+        "nvim-telescope/telescope.nvim",
+      },
       config = function()
         require("neoclip").setup({
           enable_persistent_history = true,
@@ -456,8 +523,7 @@ return packer.startup({
 
     use({
       "nvim-telescope/telescope-ui-select.nvim",
-      -- disable = true,
-      after = "telescope.nvim",
+      requires = "nvim-telescope/telescope.nvim",
       config = function()
         require("telescope").load_extension("ui-select")
       end,
@@ -467,13 +533,13 @@ return packer.startup({
     -- TODO: change colourscheme, esp red?
     use({
       "p00f/nvim-ts-rainbow",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
     })
 
     -- Indent context indicator
     use({
       "lukas-reineke/indent-blankline.nvim",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
       event = "BufRead",
       config = require("axie.plugins.indentline"),
     })
@@ -481,15 +547,14 @@ return packer.startup({
     -- Scope context indicator
     use({
       "code-biscuits/nvim-biscuits",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
       config = require("axie.plugins.biscuits"),
     })
 
     -- Function context indicator
-    -- NOTE: doesn't play well with some plugins
     use({
       "lewis6991/nvim-treesitter-context",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
       config = function()
         require("treesitter-context").setup({
           patterns = {
@@ -503,7 +568,7 @@ return packer.startup({
               -- 'switch',
               -- 'case',
             }, ]]
-            -- BUG: not working (treesitter: content not nested under heading)
+            -- NOTE: not working (treesitter: content not nested under heading)
             -- https://github.com/romgrk/nvim-treesitter-context/issues/87
             markdown = { "atx_heading" },
           },
@@ -514,7 +579,7 @@ return packer.startup({
     -- Argument highlights
     use({
       "m-demare/hlargs.nvim",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
       config = function()
         require("hlargs").setup({
           -- Catppuccin Flamingo
@@ -547,7 +612,7 @@ return packer.startup({
     -- NOTE: doesn't highlight lower case names (#18)
     -- WARN: unmaintained
     -- ALT: https://github.com/RRethy/vim-hexokinase
-    -- ISSUE: disappears on PackerCompile (probably because of event refresh?)
+    -- ISSUE: disappears on PackerCompile https://github.com/norcalli/nvim-colorizer.lua/issues/61
     use({
       "norcalli/nvim-colorizer.lua",
       config = function()
@@ -615,7 +680,7 @@ return packer.startup({
     -- Tab out
     use({
       "abecodes/tabout.nvim",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
       config = require("axie.plugins.tabout"),
     })
 
@@ -626,7 +691,7 @@ return packer.startup({
     -- Project scope
     use({
       "ahmedkhalf/project.nvim",
-      after = "telescope.nvim",
+      requires = "nvim-telescope/telescope.nvim",
       config = function()
         require("project_nvim").setup()
         require("telescope").load_extension("projects")
@@ -667,7 +732,21 @@ return packer.startup({
     -- NOTE: can be wrapped with https://github.com/TimUntersberger/neogit
     use({
       "sindrets/diffview.nvim",
-      requires = "nvim-lua/plenary.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+      },
+    })
+
+    -- View node modules
+    use({
+      "nvim-telescope/telescope-node-modules.nvim",
+      requires = "nvim-telescope/telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        telescope.load_extension("node_modules")
+        vim.keymap.set("n", "<Space>fN", telescope.extensions.node_modules.list, { desc = "search node modules" })
+      end,
     })
 
     -----------------------------------
@@ -686,19 +765,19 @@ return packer.startup({
     use({
       "nvim-treesitter/playground",
       run = ":TSUpdate query",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
     })
 
     -- Treesitter text objects
     use({
       "nvim-treesitter/nvim-treesitter-textobjects",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
     })
 
     -- Treesitter text subjects
     use({
       "RRethy/nvim-treesitter-textsubjects",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
     })
 
     -- GitHub Copilot
@@ -760,7 +839,7 @@ return packer.startup({
     -- Autoclose and autorename html tag
     use({
       "windwp/nvim-ts-autotag",
-      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
     })
 
     -- Regular expression explainer
@@ -859,25 +938,58 @@ return packer.startup({
     -- Debug Adapter Protocol
     use({
       "mfussenegger/nvim-dap",
-      requires = "nvim-telescope/telescope.nvim",
       config = function()
-        require("telescope").load_extension("dap")
+        -- Open to side
+        local dap = require("dap")
+        dap.defaults.fallback.terminal_win_cmd = "10split new"
+      end,
+    })
+
+    -- Debugger Telescope extension
+    use({
+      "nvim-telescope/telescope-dap.nvim",
+      requires = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
+      config = function()
+        local telescope = require("telescope")
+        telescope.load_extension("dap")
+        vim.keymap.set("n", "<Space>dc", telescope.extensions.dap.configurations, { desc = "configurations" })
+        vim.keymap.set("n", "<Space>d?", telescope.extensions.dap.commands, { desc = "comands" })
+        vim.keymap.set("n", "<Space>df", telescope.extensions.dap.frames, { desc = "frames" })
+        vim.keymap.set("n", "<Space>dv", telescope.extensions.dap.variables, { desc = "variables" })
+        vim.keymap.set("n", "<Space>d/", telescope.extensions.dap.list_breakpoints, { desc = "breakpoints" })
       end,
     })
 
     -- Debugger UI
     use({
       "rcarriga/nvim-dap-ui",
-      requires = {
-        "mfussenegger/nvim-dap",
-        "theHamsta/nvim-dap-virtual-text",
-        "mfussenegger/nvim-dap-python",
-      },
-      config = require("axie.lsp.debug"),
+      requires = "mfussenegger/nvim-dap",
+      config = function()
+        require("dapui").setup()
+      end,
+    })
+
+    use({
+      "theHamsta/nvim-dap-virtual-text",
+      requires = { "mfussenegger/nvim-dap", "nvim-treesitter/nvim-treesitter" },
+      config = function()
+        require("nvim-dap-virtual-text").setup()
+      end,
     })
 
     -- Debugger installer
     use("Pocco81/DAPInstall.nvim")
+
+    -- Language-specific debugger setup
+    use({
+      "mfussenegger/nvim-dap-python",
+      config = function()
+        -- SETUP: pip install debugpy
+        local dap_python = require("dap-python")
+        dap_python.setup("/usr/bin/python")
+        dap_python.test_runner = "pytest"
+      end,
+    })
 
     -------------------
     -- LSP Utilities --
@@ -960,7 +1072,7 @@ return packer.startup({
     -- Symbols outline
     use({
       "stevearc/aerial.nvim",
-      after = "telescope.nvim",
+      requires = "nvim-telescope/telescope.nvim",
       config = require("axie.lsp.aerial"),
     })
 

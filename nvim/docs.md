@@ -140,6 +140,8 @@
 
 ## Current PRs / Issues
 
+- incsearch not working
+- https://github.com/nvim-telescope/telescope-node-modules.nvim/pull/4
 - https://github.com/mfussenegger/nvim-jdtls/discussions/261
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/9
 - https://github.com/L3MON4D3/LuaSnip/issues/415

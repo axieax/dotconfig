@@ -8,6 +8,6 @@ return function()
     number = false,
     signcolumn = false,
     colorcolumn = { enable = true, width = tonumber(vim.o.colorcolumn) },
-    excluded_filetypes = { "toggleterm", "qf", "help" },
+    excluded_filetypes = { "toggleterm", "qf", "help", "Mundo" },
   })
 end

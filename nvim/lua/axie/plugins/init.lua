@@ -140,6 +140,18 @@ return packer.startup({
       config = require("axie.plugins.telescope").setup,
     })
 
+    -- Tree explorer (filesystem, buffers, git_status)
+    use({
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "main",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+      },
+      config = require("axie.plugins.neotree"),
+    })
+
     -- Search for TODO comments and Trouble pretty list
     use({
       "folke/todo-comments.nvim",
@@ -346,7 +358,6 @@ return packer.startup({
     -- Stabilise buffers
     use({
       "luukvbaal/stabilize.nvim",
-      disable = true,
       config = function()
         -- for stabilising quickfix list (trouble.nvim)
         require("stabilize").setup({
@@ -384,33 +395,6 @@ return packer.startup({
 
     -- Lua documentation
     use("milisims/nvim-luaref")
-
-    -------------------
-    -- File Explorer --
-    -------------------
-
-    -- Tree explorer (filesystem, buffers, git_status)
-    use({
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "main",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "kyazdani42/nvim-web-devicons",
-        "MunifTanjim/nui.nvim",
-      },
-      config = require("axie.plugins.neotree"),
-    })
-
-    -- nnn file explorer
-    use({
-      "luukvbaal/nnn.nvim",
-      disable = true,
-      config = function()
-        require("nnn").setup({
-          explorer = { side = "botright" },
-        })
-      end,
-    })
 
     ------------------
     -- Helper Tools --

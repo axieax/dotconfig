@@ -75,7 +75,7 @@
 ## Features/plugins
 
 - Packer refer to a PR
-- Recent Packer updates
+- Recent Packer updates (changelog)
 - https://github.com/ziontee113/syntax-tree-surfer
 - https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips
 - https://github.com/jbyuki/nabla.nvim
@@ -136,25 +136,23 @@
 - nvim-cmp treesitter completion source vs buffer source?
 - Opening buffer for file (nvim-tree) replaces barbar buffers
 - Colorizer disabled on PackerCompile (changing colorscheme), no support for lowercase, unmaintained
+  - https://github.com/norcalli/nvim-colorizer.lua/issues/61
 - autopairs may start to break after a while (can't insert characters)
 
 ## Current PRs / Issues
 
 - incsearch not working
-- https://github.com/nvim-telescope/telescope-node-modules.nvim/pull/4
-- https://github.com/mfussenegger/nvim-jdtls/discussions/261
-- https://github.com/anuvyklack/pretty-fold.nvim/issues/9
-- https://github.com/L3MON4D3/LuaSnip/issues/415
 - https://github.com/hrsh7th/nvim-cmp/issues/953
+- https://github.com/nvim-telescope/telescope-node-modules.nvim/pull/4
+- https://github.com/jvgrootveld/telescope-zoxide/issues/12
+- https://github.com/mfussenegger/nvim-jdtls/discussions/261
+- https://github.com/L3MON4D3/LuaSnip/issues/415
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/aca/emmet-ls/pull/39
-- https://github.com/folke/which-key.nvim/pull/253
-- https://github.com/nvim-telescope/telescope-ui-select.nvim/issues/9
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
 - https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099
-- https://github.com/anuvyklack/pretty-fold.nvim/issues/9#issuecomment-1013661876
 - https://github.com/kevinhwang91/nvim-hlslens/issues/20#issuecomment-981329510
 - https://github.com/wbthomason/packer.nvim/issues/760
 - https://github.com/folke/todo-comments.nvim/issues/77

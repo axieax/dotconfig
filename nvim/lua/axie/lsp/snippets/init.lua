@@ -5,6 +5,8 @@
 return function()
   local ls = require("luasnip")
   local types = require("luasnip.util.types")
+
+  ls.cleanup()
   ls.config.setup({
     -- dynamic snippet support
     history = true,

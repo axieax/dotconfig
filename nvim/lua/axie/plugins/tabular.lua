@@ -9,7 +9,7 @@ function M.setup()
     "i",
     "|",
     "|<esc>:lua require('axie.plugins.tabular').md_cucumber_table()<CR>a",
-    { desc = "markdown cucumber table automatic alignment" }
+    { desc = "markdown cucumber table automatic alignment", silent = true }
   )
 end
 

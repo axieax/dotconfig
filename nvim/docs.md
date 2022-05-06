@@ -120,6 +120,7 @@
 - inccommand split preview-window scroll
 - https://github.com/natecraddock/workspaces.nvim
 - https://github.com/hrsh7th/nvim-cmp/issues/429#issuecomment-980843997
+- https://github.com/karb94/neoscroll.nvim/issues/55
 
 ## Notes / issues
 

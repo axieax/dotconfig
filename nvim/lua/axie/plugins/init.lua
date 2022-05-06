@@ -81,6 +81,7 @@ return packer.startup({
 
     use({
       "rebelot/kanagawa.nvim",
+      disable = true,
       config = require("axie.themes.kanagawa"),
     })
 
@@ -93,21 +94,25 @@ return packer.startup({
 
     use({
       "folke/tokyonight.nvim",
+      disable = true,
       config = require("axie.themes.tokyonight"),
     })
 
     use({
       "Mofiqul/dracula.nvim",
+      disable = true,
       config = require("axie.themes.dracula"),
     })
 
     use({
       "EdenEast/nightfox.nvim",
+      disable = true,
       config = require("axie.themes.nightfox"),
     })
 
     use({
       "bluz71/vim-nightfly-guicolors",
+      disable = true,
       config = require("axie.themes.nightfly"),
     })
 
@@ -241,13 +246,13 @@ return packer.startup({
     use({
       "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      after = "onedarkpro.nvim",
       config = require("axie.plugins.galaxyline").setup,
     })
 
     -- Tabline
     use({
       "romgrk/barbar.nvim",
+      event = "BufEnter",
       -- disable = true,
       requires = "kyazdani42/nvim-web-devicons",
       config = require("axie.plugins.barbar"),
@@ -375,6 +380,7 @@ return packer.startup({
     -- INSTALL: yay -S code-minimap
     use({
       "wfxr/minimap.vim",
+      disable = true,
       cmd = {
         "Minimap",
         "MinimapClose",
@@ -440,12 +446,16 @@ return packer.startup({
 
     -- Open with sudo
     -- use("tpope/vim-eunuch")
-    use("lambdalisue/suda.vim")
+    use({
+      "lambdalisue/suda.vim",
+      cmd = { "SudaRead", "SudaWrite" },
+    })
 
     -- Remote ssh
     -- Without remote distant server: :DistantLaunch server mode=ssh ssh.user=<username>
     use({
       "chipsenkbeil/distant.nvim",
+      disable = true,
       config = function()
         require("distant").setup({
           -- Applies Chip's personal settings to every machine you connect to
@@ -870,6 +880,7 @@ return packer.startup({
     })
 
     -- Python indenting issues
+    -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
     use("Vimjas/vim-python-pep8-indent")
 
     -- Markdown LaTeX paste image
@@ -888,7 +899,7 @@ return packer.startup({
       cmd = "MarkdownPreview",
       config = function()
         local filetype_map = require("axie.utils").filetype_map
-        filetype_map("markdown", "n", ",O", "<CMD>MarkdownPreview<CR>")
+        filetype_map("markdown", "n", ",O", "<Cmd>MarkdownPreview<CR>")
       end,
     })
 
@@ -898,7 +909,7 @@ return packer.startup({
       config = function()
         vim.g.glow_border = "rounded"
         local filetype_map = require("axie.utils").filetype_map
-        filetype_map("markdown", "n", ",o", "<CMD>Glow<CR>")
+        filetype_map("markdown", "n", ",o", "<Cmd>Glow<CR>")
       end,
     })
 
@@ -911,6 +922,7 @@ return packer.startup({
     -- ALT: https://github.com/michaelb/sniprun (full file support?)
     use({
       "arjunmahishi/run-code.nvim",
+      -- cmd = { "RunCodeBlock", "RunCodeFile", "RunCodeSelected", "ReloadRunCode" },
       config = function()
         local filetype_map = require("axie.utils").filetype_map
         vim.keymap.set("n", "\\r", "<CMD>RunCodeFile<CR>")
@@ -1091,6 +1103,7 @@ return packer.startup({
     -- Code action menu
     use({
       "weilbith/nvim-code-action-menu",
+      disable = true,
       cmd = "CodeActionMenu",
     })
 
@@ -1106,7 +1119,7 @@ return packer.startup({
       "hrsh7th/nvim-cmp",
       requires = {
         { "windwp/nvim-autopairs" },
-        { "L3MON4D3/LuaSnip", requires = "rafamadriz/friendly-snippets" },
+        { "L3MON4D3/LuaSnip" },
         { "saadparwaiz1/cmp_luasnip" },
         { "lukas-reineke/cmp-under-comparator" },
         { "onsails/lspkind-nvim" },

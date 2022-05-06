@@ -1,7 +1,5 @@
 -- https://github.com/hrsh7th/nvim-cmp --
 
--- TODO: add toggle tabnine
--- BUG: tabnine: no function signatures, conflicts with autopairs
 -- BUG: command mode completion affects vim-cool search highlights
 
 local DEFAULT_PRIORITY = 2
@@ -22,7 +20,6 @@ return function()
     emoji = { label = "[Emoji]" },
     spell = { label = "[Spell]", priority = 1 },
     latex_symbols = { label = "[LaTeX]" },
-    -- cmp_tabnine = { label = "[T9]", kind = "", priority = 4 },
     npm = { label = "[NPM]" },
     git = { label = "[Git]" },
     -- cmdline = { label = "[Cmd]" },
@@ -138,16 +135,6 @@ return function()
       ghost_text = true, -- preview
     },
   })
-
-  -- tabnine setup
-  -- local tabnine = require("cmp_tabnine.config")
-  -- tabnine:setup({
-  --   max_lines = 1000,
-  --   max_num_results = 20,
-  --   sort = true,
-  --   run_on_every_keystroke = true,
-  --   snippet_placeholder = "..",
-  -- })
 
   -- npm
   require("cmp-npm").setup()

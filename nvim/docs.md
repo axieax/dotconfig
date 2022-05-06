@@ -16,7 +16,6 @@
 
 ## TODO
 
-- remove tabnine references
 - configure ts context to be similar to intellij (names enough, maybe params)
 - `nvim_set_hl` instead of `vim.cmd("highlight ...")`?
 - Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
@@ -24,26 +23,25 @@
 - Deprecated `resolved_capabilities`
   - https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
 - can map <c-tab>
-- use sshfs
 - https://github.com/rcarriga/nvim-notify/issues/43 for DAP test
 - keymap for `axie.utils.reload_module` on cwd/lua modules for local plugin dev
 - command mode text sometimes disappears after a small delay (flicker, cmp?)
-- vim.ui.select title remove trailing `:`
 - Migrate `plugins.binds` to individual plugin configs
   - Update keymap RHS from vimscript to lua function
   - Add desc to all binds and autocmd
   - Group which-key bindings
+  - Issue: lazy load plugins won't load the key binds inside config
 - PRIORITY: no eslint node_module -> use own eslint_d
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Telescope `man` docs
 - Custom require which takes module_name, ... args (pcall wrapper)
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
-- Separate telescope extensions, use Packer sequencing (after)
+- Separate cmp extensions, use Packer sequencing (after)
 - PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
 - PRIORITY: out of mem for large files (e.g. ~/.cache/nvim/lsp.log)
 - IMPORTANT: lsp bindings into on_attach
-- IMPORTANT: set up toggleterm - and warn if exit with hidden terminal
+- IMPORTANT: toggleterm - warn if exit with hidden terminal
 - TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
 - READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 - TODO: use vim-fugitive instead of gitlinker?
@@ -64,8 +62,6 @@
 - vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 - surround nvim = vim sandwich + vim surround?
 - https://github.com/stevearc/stickybuf.nvim
-- TODO: lsp config separate into install, setup, utils
-- TODO: toggle cmp
 - List prereqs
 - Tab before indent spot jumps to correct indent spot
 - Relative line number disabled ft manually defined?
@@ -90,7 +86,7 @@
 - Highlight text temporarily https://www.reddit.com/r/neovim/comments/rmq4gd/is_there_an_alternative_to_vimmark_to_colorize/
 - LSPCommands Telescope interface
 - https://github.com/ii14/lsp-command ?
-- Terminal (float/horizontal) which autosizes
+- Terminal (float/horizontal) which autosizes on VimResized
 - Coverage
 - Gradle (https://github.com/aloussase/telescope-gradle.nvim)
 - Lazy loading (event = "BufWinEnter"?) https://youtu.be/JPEx2kI6pfo
@@ -124,6 +120,7 @@
 
 ## Notes / issues
 
+- Very slow startup time
 - Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 - Zen mode with nvim-treesitter-context?
 - stabilize.nvim view jumps
@@ -142,7 +139,6 @@
 
 ## Current PRs / Issues
 
-- incsearch not working
 - https://github.com/hrsh7th/nvim-cmp/issues/953
 - https://github.com/nvim-telescope/telescope-node-modules.nvim/pull/4
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12

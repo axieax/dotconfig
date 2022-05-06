@@ -773,6 +773,7 @@ return packer.startup({
     use({
       "nvim-treesitter/playground",
       run = ":TSUpdate query",
+      cmd = { "TSPlaygroundToggle" },
       after = "nvim-treesitter",
     })
 
@@ -1134,7 +1135,6 @@ return packer.startup({
         { "kdheepak/cmp-latex-symbols" }, -- TODO: lazy load
         { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
         { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
-        -- { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
         -- "ray-x/cmp-treesitter",
         -- "quangnguyen30192/cmp-nvim-tags",
         -- "tpope/vim-dadbod",

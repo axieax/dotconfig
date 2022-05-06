@@ -4,7 +4,6 @@
 -- File indent size? mixed indent warning
 -- TODO: venv
 -- TODO: group linecol and percentage ()
--- TODO: decouple onedark colours
 -- TODO: remove scrollbar component
 -- TODO: git remote ahead status (https://www.reddit.com/r/neovim/comments/t48x5i/git_branch_aheadbehind_info_status_line_component/)
 
@@ -19,7 +18,23 @@ function M.get_component(name, condition)
   -- ~/.local/share/nvim/site/pack/packer/opt/galaxyline.nvim/lua/galaxyline/themes/colors.lua
   local galaxyline_colours = require("galaxyline.themes.colors").default
   -- ~/.local/share/nvim/site/pack/packer/start/onedarkpro.nvim/lua/onedarkpro/colors/onedark.lua
-  local onedark_colours = require("onedarkpro").get_colors("onedark")
+  local onedark_colours = {
+    bg = "#282c34",
+    fg = "#abb2bf",
+    red = "#e06c75",
+    orange = "#d19a66",
+    yellow = "#e5c07b",
+    green = "#98c379",
+    cyan = "#56b6c2",
+    blue = "#61afef",
+    purple = "#c678dd",
+    white = "#abb2bf",
+    black = "#282c34",
+    gray = "#5c6370",
+    highlight = "#e2be7d",
+    bg_blue = "#73b8f1",
+    dark_purple = "#8a3fa0",
+  }
 
   local components = {
     -- Incremental Scroll Bar

@@ -81,6 +81,7 @@ return packer.startup({
 
     use({
       "rebelot/kanagawa.nvim",
+      disable = true,
       config = require("axie.themes.kanagawa"),
     })
 
@@ -93,21 +94,25 @@ return packer.startup({
 
     use({
       "folke/tokyonight.nvim",
+      disable = true,
       config = require("axie.themes.tokyonight"),
     })
 
     use({
       "Mofiqul/dracula.nvim",
+      disable = true,
       config = require("axie.themes.dracula"),
     })
 
     use({
       "EdenEast/nightfox.nvim",
+      disable = true,
       config = require("axie.themes.nightfox"),
     })
 
     use({
       "bluz71/vim-nightfly-guicolors",
+      disable = true,
       config = require("axie.themes.nightfly"),
     })
 
@@ -130,12 +135,6 @@ return packer.startup({
         -- Extensions
         { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        { "nvim-telescope/telescope-dap.nvim" },
-        { "nvim-telescope/telescope-media-files.nvim" },
-        { "nvim-telescope/telescope-file-browser.nvim" },
-        { "LinArcX/telescope-env.nvim" },
-        { "jvgrootveld/telescope-zoxide" },
-        { "nvim-telescope/telescope-node-modules.nvim" },
       },
       config = require("axie.plugins.telescope").setup,
     })
@@ -150,6 +149,75 @@ return packer.startup({
         "MunifTanjim/nui.nvim",
       },
       config = require("axie.plugins.neotree"),
+    })
+
+    -- Telescope file browser
+    use({
+      "nvim-telescope/telescope-file-browser.nvim",
+      after = "telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        local require_args = require("axie.utils").require_args
+        telescope.load_extension("file_browser")
+        vim.keymap.set(
+          "n",
+          "<Space>fe",
+          require_args(telescope.extensions.file_browser.file_browser, { grouped = true }),
+          { desc = "file explorer" }
+        )
+      end,
+    })
+
+    use({
+      "jvgrootveld/telescope-zoxide",
+      after = "telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        -- TEMP: zoxide override mappings
+        -- https://github.com/jvgrootveld/telescope-zoxide/issues/12
+        require("telescope._extensions.zoxide.config").setup({
+          mappings = {
+            ["<C-b>"] = {
+              keepinsert = true,
+              action = function(selection)
+                pcall(function(path)
+                  telescope.extensions.file_browser.file_browser({
+                    cwd = path,
+                  })
+                end, selection.path)
+              end,
+            },
+          },
+        })
+        telescope.load_extension("zoxide")
+      end,
+    })
+
+    -- Media file preview
+    use({
+      "nvim-telescope/telescope-media-files.nvim",
+      requires = {
+        "nvim-lua/popup.nvim", -- NOTE: not necessary?
+        "nvim-lua/plenary.nvim",
+      },
+      after = "telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        -- NOTE: config in telescope setup
+        telescope.load_extension("media_files")
+        vim.keymap.set("n", "<Space>fp", telescope.extensions.media_files.media_files, { desc = "media files" })
+      end,
+    })
+
+    -- Environment variables
+    use({
+      "LinArcX/telescope-env.nvim",
+      after = "telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        telescope.load_extension("env")
+        vim.keymap.set("n", "<Space>fE", telescope.extensions.env.env, { desc = "environment variables" })
+      end,
     })
 
     -- Search for TODO comments and Trouble pretty list
@@ -178,13 +246,13 @@ return packer.startup({
     use({
       "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      after = "onedarkpro.nvim",
       config = require("axie.plugins.galaxyline").setup,
     })
 
     -- Tabline
     use({
       "romgrk/barbar.nvim",
+      event = "BufEnter",
       -- disable = true,
       requires = "kyazdani42/nvim-web-devicons",
       config = require("axie.plugins.barbar"),
@@ -221,11 +289,13 @@ return packer.startup({
     -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
     use({
       "Shatur/neovim-session-manager",
-      after = "telescope.nvim",
+      requires = "nvim-lua/plenary.nvim",
       config = function()
-        require("session_manager").setup({
+        local session_manager = require("session_manager")
+        session_manager.setup({
           autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
         })
+        vim.keymap.set("n", "<Space>fO", session_manager.load_session, { desc = "find sessions" })
       end,
     })
 
@@ -310,6 +380,7 @@ return packer.startup({
     -- INSTALL: yay -S code-minimap
     use({
       "wfxr/minimap.vim",
+      disable = true,
       cmd = {
         "Minimap",
         "MinimapClose",
@@ -375,12 +446,16 @@ return packer.startup({
 
     -- Open with sudo
     -- use("tpope/vim-eunuch")
-    use("lambdalisue/suda.vim")
+    use({
+      "lambdalisue/suda.vim",
+      cmd = { "SudaRead", "SudaWrite" },
+    })
 
     -- Remote ssh
     -- Without remote distant server: :DistantLaunch server mode=ssh ssh.user=<username>
     use({
       "chipsenkbeil/distant.nvim",
+      disable = true,
       config = function()
         require("distant").setup({
           -- Applies Chip's personal settings to every machine you connect to
@@ -456,7 +531,6 @@ return packer.startup({
 
     use({
       "nvim-telescope/telescope-ui-select.nvim",
-      -- disable = true,
       after = "telescope.nvim",
       config = function()
         require("telescope").load_extension("ui-select")
@@ -486,7 +560,6 @@ return packer.startup({
     })
 
     -- Function context indicator
-    -- NOTE: doesn't play well with some plugins
     use({
       "lewis6991/nvim-treesitter-context",
       after = "nvim-treesitter",
@@ -503,7 +576,7 @@ return packer.startup({
               -- 'switch',
               -- 'case',
             }, ]]
-            -- BUG: not working (treesitter: content not nested under heading)
+            -- NOTE: not working (treesitter: content not nested under heading)
             -- https://github.com/romgrk/nvim-treesitter-context/issues/87
             markdown = { "atx_heading" },
           },
@@ -547,7 +620,7 @@ return packer.startup({
     -- NOTE: doesn't highlight lower case names (#18)
     -- WARN: unmaintained
     -- ALT: https://github.com/RRethy/vim-hexokinase
-    -- ISSUE: disappears on PackerCompile (probably because of event refresh?)
+    -- ISSUE: disappears on PackerCompile https://github.com/norcalli/nvim-colorizer.lua/issues/61
     use({
       "norcalli/nvim-colorizer.lua",
       config = function()
@@ -667,7 +740,21 @@ return packer.startup({
     -- NOTE: can be wrapped with https://github.com/TimUntersberger/neogit
     use({
       "sindrets/diffview.nvim",
-      requires = "nvim-lua/plenary.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+      },
+    })
+
+    -- View node modules
+    use({
+      "nvim-telescope/telescope-node-modules.nvim",
+      after = "telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        telescope.load_extension("node_modules")
+        vim.keymap.set("n", "<Space>fN", telescope.extensions.node_modules.list, { desc = "search node modules" })
+      end,
     })
 
     -----------------------------------
@@ -793,6 +880,7 @@ return packer.startup({
     })
 
     -- Python indenting issues
+    -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
     use("Vimjas/vim-python-pep8-indent")
 
     -- Markdown LaTeX paste image
@@ -811,7 +899,7 @@ return packer.startup({
       cmd = "MarkdownPreview",
       config = function()
         local filetype_map = require("axie.utils").filetype_map
-        filetype_map("markdown", "n", ",O", "<CMD>MarkdownPreview<CR>")
+        filetype_map("markdown", "n", ",O", "<Cmd>MarkdownPreview<CR>")
       end,
     })
 
@@ -821,7 +909,7 @@ return packer.startup({
       config = function()
         vim.g.glow_border = "rounded"
         local filetype_map = require("axie.utils").filetype_map
-        filetype_map("markdown", "n", ",o", "<CMD>Glow<CR>")
+        filetype_map("markdown", "n", ",o", "<Cmd>Glow<CR>")
       end,
     })
 
@@ -834,6 +922,7 @@ return packer.startup({
     -- ALT: https://github.com/michaelb/sniprun (full file support?)
     use({
       "arjunmahishi/run-code.nvim",
+      -- cmd = { "RunCodeBlock", "RunCodeFile", "RunCodeSelected", "ReloadRunCode" },
       config = function()
         local filetype_map = require("axie.utils").filetype_map
         vim.keymap.set("n", "\\r", "<CMD>RunCodeFile<CR>")
@@ -859,25 +948,58 @@ return packer.startup({
     -- Debug Adapter Protocol
     use({
       "mfussenegger/nvim-dap",
-      requires = "nvim-telescope/telescope.nvim",
       config = function()
-        require("telescope").load_extension("dap")
+        -- Open to side
+        local dap = require("dap")
+        dap.defaults.fallback.terminal_win_cmd = "10split new"
+      end,
+    })
+
+    -- Debugger Telescope extension
+    use({
+      "nvim-telescope/telescope-dap.nvim",
+      after = { "nvim-dap", "telescope.nvim" },
+      config = function()
+        local telescope = require("telescope")
+        telescope.load_extension("dap")
+        vim.keymap.set("n", "<Space>dc", telescope.extensions.dap.configurations, { desc = "configurations" })
+        vim.keymap.set("n", "<Space>d?", telescope.extensions.dap.commands, { desc = "comands" })
+        vim.keymap.set("n", "<Space>df", telescope.extensions.dap.frames, { desc = "frames" })
+        vim.keymap.set("n", "<Space>dv", telescope.extensions.dap.variables, { desc = "variables" })
+        vim.keymap.set("n", "<Space>d/", telescope.extensions.dap.list_breakpoints, { desc = "breakpoints" })
       end,
     })
 
     -- Debugger UI
     use({
       "rcarriga/nvim-dap-ui",
-      requires = {
-        "mfussenegger/nvim-dap",
-        "theHamsta/nvim-dap-virtual-text",
-        "mfussenegger/nvim-dap-python",
-      },
-      config = require("axie.lsp.debug"),
+      after = "nvim-dap",
+      config = function()
+        require("dapui").setup()
+      end,
+    })
+
+    use({
+      "theHamsta/nvim-dap-virtual-text",
+      after = { "nvim-dap", "nvim-treesitter" },
+      config = function()
+        require("nvim-dap-virtual-text").setup()
+      end,
     })
 
     -- Debugger installer
     use("Pocco81/DAPInstall.nvim")
+
+    -- Language-specific debugger setup
+    use({
+      "mfussenegger/nvim-dap-python",
+      config = function()
+        -- SETUP: pip install debugpy
+        local dap_python = require("dap-python")
+        dap_python.setup("/usr/bin/python")
+        dap_python.test_runner = "pytest"
+      end,
+    })
 
     -------------------
     -- LSP Utilities --
@@ -981,6 +1103,7 @@ return packer.startup({
     -- Code action menu
     use({
       "weilbith/nvim-code-action-menu",
+      disable = true,
       cmd = "CodeActionMenu",
     })
 
@@ -996,7 +1119,7 @@ return packer.startup({
       "hrsh7th/nvim-cmp",
       requires = {
         { "windwp/nvim-autopairs" },
-        { "L3MON4D3/LuaSnip", requires = "rafamadriz/friendly-snippets" },
+        { "L3MON4D3/LuaSnip" },
         { "saadparwaiz1/cmp_luasnip" },
         { "lukas-reineke/cmp-under-comparator" },
         { "onsails/lspkind-nvim" },

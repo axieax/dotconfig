@@ -7,10 +7,6 @@ return function()
     theme = "onedark_vivid",
     -- extra from https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/colors.lua
     colors = {
-      -- for galaxyline setup colours
-      bg_blue = "#73b8f1",
-      dark_purple = "#8a3fa0",
-
       -- NvChad Telescope theme (https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)
       onedark = {
         telescope_prompt = onedarkpro_utils.lighten(onedarkpro.get_colors("onedark").bg, 0.97),

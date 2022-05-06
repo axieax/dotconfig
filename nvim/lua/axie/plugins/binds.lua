@@ -37,11 +37,6 @@ function M.general_mappings()
         k = { "<CMD>lua require'dap'.step_into()<CR>", "Step into" },
         l = { "<CMD>lua require'dap'.step_over()<CR>", "Step over" },
         q = { "<CMD>lua require'dap'.close()<CR>", "Stop" },
-        c = { "<CMD>Telescope dap configurations<CR>", "Configurations" },
-        h = { "<CMD>Telescope dap commands<CR>", "Commands" },
-        f = { "<CMD>Telescope dap frames<CR>", "Frames" },
-        v = { "<CMD>Telescope dap variables<CR>", "Variables" },
-        ["/"] = { "<CMD>Telescope dap list_breakpoints<CR>", "List breakpoints" },
         [";"] = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
         t = { "<CMD>lua require'axie.lsp.debug.helpers'.debug_test()<CR>", "Debug test" },
       },
@@ -90,38 +85,16 @@ function M.general_mappings()
         a = { require("telescope.builtin").symbols, "find symbols" },
         b = { require("telescope.builtin").buffers, "open buffers" },
         B = { "<CMD>Neotree source=buffers toggle=true<CR>", "open buffers (tree)" },
-        c = { require("axie.plugins.telescope").dotconfig, "search config" },
-        e = { "<CMD>Telescope file_browser grouped=true<CR>", "file explorer" },
-        E = { "<CMD>Telescope env<CR>", "environment variables" },
         z = { "<CMD>Telescope zoxide list<CR>", "zoxide list" },
-        f = { require("axie.plugins.telescope").file_search, "find files" },
-        F = {
-          function()
-            require("axie.plugins.telescope").file_search(true)
-          end,
-          "find all files",
-        },
-        h = { require("telescope.builtin").help_tags, "help" },
         H = { require("telescope.builtin").vim_options, "vim options" },
-        o = { require("telescope.builtin").oldfiles, "old files" },
-        O = { "<CMD>SessionManager load_session<CR>", "find sessions" },
-        g = { require("telescope.builtin").live_grep, "live grep" },
-        G = { require("telescope.builtin").grep_string, "grep string" },
         r = { require("telescope.builtin").registers, "registers" }, -- could be "
-        t = { require("telescope.builtin").colorscheme, "theme" },
-        T = { "<CMD>Telescope colorscheme enable_preview=true<CR>", "theme preview" },
-        m = { require("telescope.builtin").man_pages, "search manual" },
         -- M = { require("telescope").extensions.macroscope.default, "search macros" },
         M = { "<CMD>Telescope macroscope<CR>", "search macros" },
-        N = { "<CMD>Telescope node_modules list<CR>", "search node modules" },
         -- TODO: n for notes?
         s = { "1z=", "spelling correct" },
         S = { require("telescope.builtin").spell_suggest, "spelling suggestions" },
-        k = { require("telescope.builtin").keymaps, "find keymaps" },
         q = { "<CMD>TodoTrouble<CR>", "find todos (Trouble)" },
         Q = { "<CMD>TodoTelescope<CR>", "find todos (Telescope)" },
-        -- p = { require("telescope").extensions.media_files.media_files, "media files" },
-        p = { "<CMD>Telescope media_files<CR>", "media files" },
         -- P = { require("telescope").extensions.projects.projects, "recent projects" },
         P = { "<CMD>Telescope projects<CR>", "recent projects" },
         -- y = { require("telescope").extensions.neoclip.default, "yank clipboard manager" },
@@ -129,7 +102,6 @@ function M.general_mappings()
         ["?"] = { require("telescope.builtin").commands, "commands" },
         ["/"] = { require("telescope.builtin").search_history, "search history" },
         [";"] = { require("telescope.builtin").command_history, "command history" },
-        ["."] = { require("telescope.builtin").resume, "resume last command" },
       },
       r = {
         n = { require("axie.lsp.rename").rename_empty, "rename symbol (no default text)" },
@@ -296,19 +268,18 @@ function M.register_git_bindings()
 end
 
 function M.misc()
+  local filetype_map = require("axie.utils").filetype_map
   -- LSP
   vim.keymap.set("n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>")
   vim.keymap.set("v", "gq", "<CMD>lua require'axie.lsp.code_actions'.native(true)<CR>")
   vim.keymap.set("v", "gQ", "<CMD>lua require'axie.lsp.code_actions'.native(false)<CR>")
-  -- Telescope
-  vim.keymap.set("n", "<C-_>", "<CMD>Telescope current_buffer_fuzzy_find<CR>") -- control slash NOTE: inverse order
   -- Neo-tree
   vim.keymap.set("n", ";", "<CMD>Neotree toggle=true<CR>")
   -- Visual indent
   vim.keymap.set("v", "<", "<gv")
   vim.keymap.set("v", ">", ">gv")
   -- Markdown bold
-  vim.keymap.set("v", ",*", "S*gvS*", { noremap = false })
+  filetype_map("markdown", "v", ",*", "S*gvS*", { noremap = false })
   -- Shift tab to unindent
   vim.keymap.set("i", "<S-Tab>", "<C-d>")
 end

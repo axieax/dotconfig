@@ -93,10 +93,7 @@ function M.setup()
         find_cmd = "rg",
       },
       ["ui-select"] = {
-        layout_strategy = "center",
-        layout_config = {
-          bottom_pane = { height = 10 },
-        },
+        require("telescope.themes").get_dropdown({ layout_strategy = "center" }),
       },
     },
   })

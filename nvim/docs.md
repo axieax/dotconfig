@@ -142,7 +142,7 @@
 - https://github.com/hrsh7th/nvim-cmp/issues/953
 - https://github.com/nvim-telescope/telescope-node-modules.nvim/pull/4
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12
-- https://github.com/mfussenegger/nvim-jdtls/discussions/261
+- https://github.com/mfussenegger/nvim-jdtls/issues/264
 - https://github.com/L3MON4D3/LuaSnip/issues/415
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22

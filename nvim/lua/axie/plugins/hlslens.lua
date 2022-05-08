@@ -45,7 +45,7 @@ function M.setup()
   -- ]])
 
   for _, trigger in ipairs({ "*", "g*", "#", "g#" }) do
-    vim.keymap.set("n", trigger, trigger .. "<CMD>lua require'hlslens'.start()<CR>")
+    vim.keymap.set("n", trigger, trigger .. "<Cmd>lua require'hlslens'.start()<CR>")
   end
 
   -- vim-visual-multi highlights (ctrl-n)

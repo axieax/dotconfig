@@ -926,9 +926,9 @@ return packer.startup({
       -- cmd = { "RunCodeBlock", "RunCodeFile", "RunCodeSelected", "ReloadRunCode" },
       config = function()
         local filetype_map = require("axie.utils").filetype_map
-        vim.keymap.set("n", "\\r", "<CMD>RunCodeFile<CR>")
-        vim.keymap.set("v", "\\r", "<CMD>RunCodeSelected<CR>")
-        filetype_map("markdown", "n", "\\r", "<CMD>RunCodeBlock<CR>")
+        vim.keymap.set("n", "\\r", "<Cmd>RunCodeFile<CR>")
+        vim.keymap.set("v", "\\r", "<Cmd>RunCodeSelected<CR>")
+        filetype_map("markdown", "n", "\\r", "<Cmd>RunCodeBlock<CR>")
       end,
     })
 
@@ -941,9 +941,9 @@ return packer.startup({
     -- Unit test
     use({
       "rcarriga/vim-ultest",
+      run = ":UpdateRemotePlugins",
       requires = "vim-test/vim-test",
       config = require("axie.lsp.test").setup,
-      run = ":UpdateRemotePlugins",
     })
 
     -- Debug Adapter Protocol

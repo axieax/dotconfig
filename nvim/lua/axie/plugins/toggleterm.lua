@@ -7,7 +7,7 @@ local M = {}
 function M.attach()
   vim.keymap.set("n", "<Esc>", "<Nop>", { silent = true, buffer = 0 })
   vim.keymap.set("t", "<c-]>", [[<C-\><C-n>]], { desc = "toggle mode", noremap = true, buffer = 0 })
-  vim.keymap.set("n", "<c-]>", "<CMD>startinsert<CR>", { desc = "toggle mode", noremap = true, buffer = 0 })
+  vim.keymap.set("n", "<c-]>", "<Cmd>startinsert<CR>", { desc = "toggle mode", noremap = true, buffer = 0 })
   vim.keymap.set("t", "<c-w>", "<C-]><C-w>", { noremap = false, buffer = 0 })
   vim.wo.spell = false
 end
@@ -46,7 +46,7 @@ function M.setup()
       string.format("<Cmd>%dToggleTerm direction=%s<CR>", i, direction)
     )
   end
-  vim.keymap.set({ "n", "i", "t" }, [[<C-\>]], "<CMD>Telescope termfinder find<CR>", { desc = "find terminals" })
+  vim.keymap.set({ "n", "i", "t" }, [[<C-\>]], "<Cmd>Telescope termfinder find<CR>", { desc = "find terminals" })
 
   -- Custom terminals
   local this = require("axie.plugins.toggleterm")
@@ -99,7 +99,7 @@ function M.liveserver(current_file)
     hidden = true,
     count = 7,
     on_open = function(t)
-      vim.api.nvim_buf_set_keymap(0, "t", "<esc>", "<CMD>close<CR>", { silent = true })
+      vim.api.nvim_buf_set_keymap(0, "t", "<esc>", "<Cmd>close<CR>", { silent = true })
     end,
   })
   liveserver:toggle()

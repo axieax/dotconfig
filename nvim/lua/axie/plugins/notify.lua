@@ -25,6 +25,6 @@ return function()
 
   require("telescope").load_extension("notify")
 
-  vim.keymap.set("n", "<space>fn", "<CMD>Telescope notify<CR>", { desc = "search notifications" })
+  vim.keymap.set("n", "<space>fn", "<Cmd>Telescope notify<CR>", { desc = "search notifications" })
   vim.keymap.set("n", "<space>Q", notify.dismiss, { desc = "dismiss notifications" })
 end

@@ -11,19 +11,20 @@ return function()
   vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
   local sources = {
-    nvim_lsp = { label = "[LSP]", priority = 3 },
-    nvim_lua = { label = "[Lua]", priority = 3 },
-    buffer = { label = "[Buffer]", priority = 1 },
-    luasnip = { label = "[LSnip]", priority = 5 },
-    path = { label = "[Path]" },
-    calc = { label = "[Calc]" },
-    emoji = { label = "[Emoji]" },
-    spell = { label = "[Spell]", priority = 1 },
-    latex_symbols = { label = "[LaTeX]" },
-    npm = { label = "[NPM]" },
-    git = { label = "[Git]" },
+    -- copilot = { label = "Copilot", priority = 4 },
+    nvim_lsp = { label = "LSP", priority = 3 },
+    nvim_lua = { label = "Lua", priority = 3 },
+    buffer = { label = "Buffer", priority = 1 },
+    luasnip = { label = "LuaSnip", priority = 5 },
+    path = { label = "Path" },
+    calc = { label = "Calc" },
+    emoji = { label = "Emoji" },
+    spell = { label = "Spell", priority = 1 },
+    latex_symbols = { label = "LaTeX" },
+    npm = { label = "NPM" },
+    git = { label = "Git" },
     -- cmdline = { label = "[Cmd]" },
-    orgmode = { label = "[Org]" },
+    orgmode = { label = "Org" },
     -- treesitter = "[TS]",
     -- ["vim-dadbod-completion"] = "[DB]",
   }
@@ -109,12 +110,14 @@ return function()
     mapping = cmp.mapping.preset.insert(filter_mode(mappings, "i")),
     sources = source_config,
     formatting = {
+      fields = { "kind", "abbr", "menu" },
       format = lspkind.cmp_format({
         mode = "symbol",
         before = function(entry, vim_item)
           local source = sources[entry.source.name]
           vim_item.kind = source.kind or vim_item.kind
-          vim_item.menu = source.label
+          vim_item.menu = "[" .. source.label .. "]"
+          -- vim_item.menu = source.label
           return vim_item
         end,
       }),

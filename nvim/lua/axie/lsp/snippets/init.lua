@@ -52,7 +52,7 @@ return function()
 
   local lua_loader = require("luasnip.loaders.from_lua")
   vim.api.nvim_create_user_command("LuaSnipEdit", lua_loader.edit_snippet_files, {})
-  vim.keymap.set("n", "\\S", "<CMD>LuaSnipEdit<CR>", { silent = true })
+  vim.keymap.set("n", "\\S", "<Cmd>LuaSnipEdit<CR>", { silent = true })
 
   -- load snippets from rtp (rafamadriz/friendly-snippets)
   require("luasnip.loaders.from_vscode").lazy_load()

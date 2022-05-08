@@ -307,6 +307,36 @@ function M.rust_analyzer()
   }
 end
 
+function M.yamlls()
+  return {
+    settings = {
+      yaml = {
+        -- CloudFormation tags
+        customTags = {
+          "!Base64",
+          "!Cidr",
+          "!FindInMap sequence",
+          "!GetAtt",
+          "!GetAZs",
+          "!ImportValue",
+          "!Join sequence",
+          "!Ref",
+          "!Select sequence",
+          "!Split sequence",
+          "!Sub sequence",
+          "!Sub",
+          "!And sequence",
+          "!Condition",
+          "!Equals sequence",
+          "!If sequence",
+          "!Not sequence",
+          "!Or sequence",
+        },
+      },
+    },
+  }
+end
+
 return setmetatable(M, {
   __index = function(_, _)
     return function()

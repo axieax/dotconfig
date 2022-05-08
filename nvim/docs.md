@@ -4,15 +4,15 @@
 
 - https://github.com/rockerBOO/awesome-neovim
 - https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules
-- https://github.com/siduck76/NvChad theme
+- NvChad theme
 - https://bluz71.github.io/2021/09/10/vim-tips-revisited.html
 - TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/config/nvim/lua/plugins/init.lua
 - TODO: https://github.com/numToStr/dotfiles/blob/master/neovim/.config/nvim/lua/numToStr/plugins.lua
 - https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/options.lua
 - https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
-- https://www.reddit.com/r/neovim/comments/s2ziys/alternative_lua_parser_for_nvimtreesitter_it/
 - https://github.com/danymat/champagne/blob/main/lua/plugins.lua
-- https://github.com/kabinspace/AstroVim
+- https://github.com/AstroNvim/AstroNvim
+- https://github.com/NvChad/NvChad/blob/main/lua/plugins/init.lua lazy loading packer plugins
 
 ## TODO
 
@@ -67,6 +67,7 @@
 - Relative line number disabled ft manually defined?
 - Markdown tab and shift tab conditional mapping based on bullet
 - TODO: hlslens + vim-visual-multi
+- Persistent undo max size
 
 ## Features/plugins
 
@@ -120,6 +121,7 @@
 
 ## Notes / issues
 
+- firenvim patched fonts not working
 - Very slow startup time
 - Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 - Zen mode with nvim-treesitter-context?
@@ -139,11 +141,10 @@
 
 ## Current PRs / Issues
 
+- https://github.com/anuvyklack/pretty-fold.nvim/issues/22
 - https://github.com/hrsh7th/nvim-cmp/issues/953
-- https://github.com/nvim-telescope/telescope-node-modules.nvim/pull/4
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12
 - https://github.com/mfussenegger/nvim-jdtls/issues/264
-- https://github.com/L3MON4D3/LuaSnip/issues/415
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/aca/emmet-ls/pull/39

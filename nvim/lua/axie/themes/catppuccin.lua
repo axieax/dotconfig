@@ -52,6 +52,7 @@ return function()
     SpellCap = { fg = cp.red, style = "italic,undercurl" },
     SpellLocal = { fg = cp.red, style = "italic,undercurl" },
     SpellRare = { fg = cp.red, style = "italic,undercurl" },
+    CmpItemMenu = { fg = cp.gray1 },
     -- SpellBad = { fg = cp.maroon },
     -- SpellCap = { fg = cp.peach },
     -- SpellLocal = { fg = cp.lavender },

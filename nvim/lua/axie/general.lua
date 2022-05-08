@@ -35,6 +35,7 @@ vim_apply(vim.opt, {
   termguicolors = true,
   showmode = false,
   swapfile = false,
+  undofile = true, -- persistent undo
   -- updatetime = 1500,
 
   list = true,
@@ -106,7 +107,7 @@ vim.keymap.set({ "n", "v" }, "\\y", '"' .. yank_register .. "y", {
 })
 
 -- TODO: confirm
-vim.keymap.set("n", "\\+", '<CMD>let @+=@"<CR>', { desc = "paste from clipboard" })
+vim.keymap.set("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "paste from clipboard" })
 
 vim.keymap.set({ "n", "v" }, "\\p", '"0p', { desc = "paste last yanked" })
 
@@ -123,7 +124,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Update (instead of write)
-vim.keymap.set("n", "<space>w", "<CMD>update<CR>")
+vim.keymap.set("n", "<space>w", "<Cmd>update<CR>")
 
 -- No autoformat write
 for _, cmd in ipairs({ "W", "Wq", "Wqa" }) do
@@ -151,20 +152,30 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Center search result jumps
-vim.keymap.set("n", "N", "Nzz")
-vim.keymap.set("n", "n", "nzz")
+local center_keys = { "n", "N", "{", "}", "[g", "]g", "[s", "]s" }
+for _, key in ipairs(center_keys) do
+  vim.keymap.set("n", key, key .. "zz", { desc = "center after " .. key })
+end
 
 -- Resize windows
-vim.keymap.set("n", "<C-k>", "<CMD>resize -1<CR>")
-vim.keymap.set("n", "<C-j>", "<CMD>resize +1<CR>")
-vim.keymap.set("n", "<C-h>", "<CMD>vertical resize -1<CR>")
-vim.keymap.set("n", "<C-l>", "<CMD>vertical resize +1<CR>")
+vim.keymap.set("n", "<C-k>", "<Cmd>resize -1<CR>")
+vim.keymap.set("n", "<C-j>", "<Cmd>resize +1<CR>")
+vim.keymap.set("n", "<C-h>", "<Cmd>vertical resize -1<CR>")
+vim.keymap.set("n", "<C-l>", "<Cmd>vertical resize +1<CR>")
 
+-- Wrapped cursor navigation
 for _, key in ipairs({ "j", "k" }) do
   vim.keymap.set({ "n", "x" }, key, function()
     return vim.v.count > 0 and key or "g" .. key
   end, { desc = "wrapped lines cursor navigation with " .. key, expr = true, noremap = true })
 end
+
+vim.keymap.set("x", ".", ":norm.<CR>", { desc = "visual mode dot repeat" })
+-- vim.keymap.set("x", "Q", ":'<,'>:normal @q<CR>", { desc = "apply normal mode macro q over visual selection" })
+vim.keymap.set("x", "Q", function()
+  local register = vim.fn.nr2char(vim.fn.getchar())
+  vim.cmd(":'<,'>:normal @" .. register .. "<CR>")
+end)
 
 local override_filetype = require("axie.utils").override_filetype
 

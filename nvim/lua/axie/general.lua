@@ -1,4 +1,5 @@
 local utils = require("axie.utils")
+local override_filetype = utils.override_filetype
 local vim_apply = utils.vim_apply
 local ternary = utils.ternary
 
@@ -106,9 +107,7 @@ vim.keymap.set({ "n", "v" }, "\\y", '"' .. yank_register .. "y", {
   noremap = false,
 })
 
--- TODO: confirm
-vim.keymap.set("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "paste from clipboard" })
-
+vim.keymap.set("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "copy internal yank content to clipboard" })
 vim.keymap.set({ "n", "v" }, "\\p", '"0p', { desc = "paste last yanked" })
 
 vim.api.nvim_create_autocmd("VimResized", {
@@ -171,13 +170,10 @@ for _, key in ipairs({ "j", "k" }) do
 end
 
 vim.keymap.set("x", ".", ":norm.<CR>", { desc = "visual mode dot repeat" })
--- vim.keymap.set("x", "Q", ":'<,'>:normal @q<CR>", { desc = "apply normal mode macro q over visual selection" })
 vim.keymap.set("x", "Q", function()
-  local register = vim.fn.nr2char(vim.fn.getchar())
-  vim.cmd(":'<,'>:normal @" .. register .. "<CR>")
-end)
-
-local override_filetype = require("axie.utils").override_filetype
+  local register = vim.fn.nr2char(vim.fn.getchar()) -- get register from user
+  vim.fn.feedkeys(vim.api.nvim_replace_termcodes(":normal @" .. register .. "<CR>", true, false, true))
+end, { desc = "apply normal macro over visual selection" })
 
 -- Terraform files
 override_filetype({ "*.terraformrc", "*.terraform.rc" }, "terraform")

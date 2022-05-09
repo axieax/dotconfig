@@ -1,7 +1,5 @@
 -- https://github.com/hrsh7th/nvim-cmp --
 
--- BUG: command mode completion affects vim-cool search highlights
-
 local DEFAULT_PRIORITY = 2
 
 return function()

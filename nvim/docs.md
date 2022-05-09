@@ -16,6 +16,7 @@
 
 ## TODO
 
+- replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
 - configure ts context to be similar to intellij (names enough, maybe params)
 - `nvim_set_hl` instead of `vim.cmd("highlight ...")`?
 - Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
@@ -24,7 +25,6 @@
   - https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
 - can map <c-tab>
 - https://github.com/rcarriga/nvim-notify/issues/43 for DAP test
-- keymap for `axie.utils.reload_module` on cwd/lua modules for local plugin dev
 - command mode text sometimes disappears after a small delay (flicker, cmp?)
 - Migrate `plugins.binds` to individual plugin configs
   - Update keymap RHS from vimscript to lua function

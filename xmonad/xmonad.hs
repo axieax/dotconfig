@@ -141,7 +141,7 @@ myManageHook =
   myCFloats =
     [ "Arandr"
     , "Arcolinux-calamares-tool.py"
-    , "Arcolinux-tweak-tool.py"
+    , "Archlinux-tweak-tool.py"
     , "Arcolinux-welcome-app.py"
     , "Galculator"
     , "feh"
@@ -233,7 +233,7 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_s), namedScratchpadAction myScratchPads "spotify")
        , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle") -- and resize XMonad as well?
        , ((modMask, xK_v), spawn $ "xfce4-popup-clipman")
-       , ((modMask, xK_x), spawn $ "arcolinux-logout")
+       , ((modMask, xK_x), spawn $ "archlinux-logout")
        , ((modMask, xK_m), return ())
        , ((modMask, xK_Escape), spawn $ "xkill")
        , ((modMask, xK_Return), spawn $ "alacritty")
@@ -275,14 +275,14 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((controlMask .|. mod1Mask, xK_a), spawn $ "xfce4-appfinder")
        , ((controlMask .|. mod1Mask, xK_b), spawn $ "thunar")
        , ((controlMask .|. mod1Mask, xK_c), spawn $ "catfish")
-       , ((controlMask .|. mod1Mask, xK_e), spawn $ "arcolinux-tweak-tool")
+       , ((controlMask .|. mod1Mask, xK_e), spawn $ "archlinux-tweak-tool")
        , ((controlMask .|. mod1Mask, xK_f), spawn $ "firefox")
        , ( (controlMask .|. mod1Mask, xK_g)
          , spawn $ "chromium -no-default-browser-check"
          )
        , ((controlMask .|. mod1Mask, xK_i), spawn $ "nitrogen")
-       , ((controlMask .|. mod1Mask, xK_k), spawn $ "arcolinux-logout")
-       , ((controlMask .|. mod1Mask, xK_l), spawn $ "arcolinux-logout")
+       , ((controlMask .|. mod1Mask, xK_k), spawn $ "archlinux-logout")
+       , ((controlMask .|. mod1Mask, xK_l), spawn $ "archlinux-logout")
        , ((controlMask .|. mod1Mask, xK_m), spawn $ "xfce4-settings-manager")
        , ( (controlMask .|. mod1Mask, xK_o)
          , spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"

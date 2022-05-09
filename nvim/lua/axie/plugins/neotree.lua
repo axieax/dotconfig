@@ -6,7 +6,9 @@
 -- TODO: file preview / info (size, perms, time etc.)
 -- TODO: update git / diagnostic icons/colours
 
-return function()
+local M = {}
+
+function M.setup()
   require("neo-tree").setup({
     use_popups_for_input = false,
     -- popup_border_style = "rounded",
@@ -77,3 +79,11 @@ return function()
     },
   })
 end
+
+function M.binds()
+  vim.keymap.set("n", ";", "<Cmd>Neotree toggle=true<CR>", { desc = "file explorer" })
+  vim.keymap.set("n", "<Space>gS", "<Cmd>Neotree source=git_status toggle=true<CR>", { desc = "git status (tree)" })
+  vim.keymap.set("n", "<Space>fB", "<Cmd>Neotree source=buffers toggle=true<CR>", { desc = "find buffers (tree)" })
+end
+
+return M

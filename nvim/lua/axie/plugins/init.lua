@@ -123,6 +123,8 @@ return packer.startup({
     -- Keybinds
     use({
       "folke/which-key.nvim",
+      -- TEMP: before lsp telescope commands migrated to on_attach
+      after = "telescope.nvim",
       config = require("axie.plugins.binds").setup,
     })
 
@@ -130,12 +132,14 @@ return packer.startup({
     -- EXTENSIONS: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
     use({
       "nvim-telescope/telescope.nvim",
+      event = "BufEnter",
       requires = {
         { "nvim-lua/plenary.nvim" },
         -- Extensions
         { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       },
+      setup = require("axie.plugins.telescope").binds,
       config = require("axie.plugins.telescope").setup,
     })
 
@@ -148,7 +152,8 @@ return packer.startup({
         "kyazdani42/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
       },
-      config = require("axie.plugins.neotree"),
+      setup = require("axie.plugins.neotree").binds,
+      config = require("axie.plugins.neotree").setup,
     })
 
     -- Telescope file browser
@@ -156,15 +161,8 @@ return packer.startup({
       "nvim-telescope/telescope-file-browser.nvim",
       after = "telescope.nvim",
       config = function()
-        local telescope = require("telescope")
-        local require_args = require("axie.utils").require_args
-        telescope.load_extension("file_browser")
-        vim.keymap.set(
-          "n",
-          "<Space>fe",
-          require_args(telescope.extensions.file_browser.file_browser, { grouped = true }),
-          { desc = "file explorer" }
-        )
+        require("telescope").load_extension("file_browser")
+        vim.keymap.set("n", "<Space>fe", "<Cmd>Telescope file_browser grouped=true<CR>", { desc = "file explorer" })
       end,
     })
 
@@ -190,6 +188,7 @@ return packer.startup({
           },
         })
         telescope.load_extension("zoxide")
+        vim.keymap.set("n", "<Space>fz", "<Cmd>Telescope zoxide list<CR>", { desc = "zoxide list" })
       end,
     })
 
@@ -270,9 +269,9 @@ return packer.startup({
     -- Terminal
     use({
       "akinsho/toggleterm.nvim",
+      after = "telescope.nvim",
       requires = {
-        "nvim-telescope/telescope.nvim",
-        "tknightz/telescope-termfinder.nvim",
+        { "tknightz/telescope-termfinder.nvim", requires = "nvim-telescope/telescope.nvim" },
       },
       config = require("axie.plugins.toggleterm").setup,
     })
@@ -282,7 +281,8 @@ return packer.startup({
     use({
       "goolord/alpha-nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = require("axie.plugins.start"),
+      setup = require("axie.plugins.start").binds,
+      config = require("axie.plugins.start").setup,
     })
 
     -- Session manager
@@ -409,14 +409,15 @@ return packer.startup({
           enable_persistent_history = true,
         })
         require("telescope").load_extension("neoclip")
+        vim.keymap.set("n", "<Space>fy", "<Cmd>Telescope neoclip<CR>", { desc = "clipboard manager" })
+        vim.keymap.set("n", "<Space>fM", "<Cmd>Telescope macroscope<CR>", { desc = "search macros" })
       end,
     })
 
     -- Notification
     use({
       "rcarriga/nvim-notify",
-      -- requires instead of after so it won't be optional
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = require("axie.plugins.notify"),
     })
 
@@ -703,6 +704,7 @@ return packer.startup({
       config = function()
         require("project_nvim").setup()
         require("telescope").load_extension("projects")
+        vim.keymap.set("n", "<Space>fP", "<Cmd>Telescope projects<CR>", { desc = "recent projects" })
       end,
     })
 
@@ -726,6 +728,7 @@ return packer.startup({
     -- GitHub issues and pull requests
     use({
       "pwntester/octo.nvim",
+      after = "telescope.nvim",
       requires = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
@@ -1015,6 +1018,7 @@ return packer.startup({
     -- LSP install
     use({
       "williamboman/nvim-lsp-installer",
+      event = "BufEnter",
       requires = {
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",

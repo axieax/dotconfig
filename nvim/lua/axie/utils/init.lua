@@ -146,4 +146,11 @@ function M.require_args(f, ...)
   end
 end
 
+function M.packer_lazy_load(plugin_name, timer)
+  timer = M.fallback(timer, 0)
+  vim.defer_fn(function()
+    require("packer").loader(plugin_name)
+  end, timer)
+end
+
 return M

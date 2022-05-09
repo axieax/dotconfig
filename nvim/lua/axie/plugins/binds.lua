@@ -82,26 +82,9 @@ function M.general_mappings()
       },
       f = {
         name = "+find",
-        a = { require("telescope.builtin").symbols, "find symbols" },
-        b = { require("telescope.builtin").buffers, "open buffers" },
-        B = { "<Cmd>Neotree source=buffers toggle=true<CR>", "open buffers (tree)" },
-        z = { "<Cmd>Telescope zoxide list<CR>", "zoxide list" },
-        H = { require("telescope.builtin").vim_options, "vim options" },
-        r = { require("telescope.builtin").registers, "registers" }, -- could be "
-        -- M = { require("telescope").extensions.macroscope.default, "search macros" },
-        M = { "<Cmd>Telescope macroscope<CR>", "search macros" },
         -- TODO: n for notes?
-        s = { "1z=", "spelling correct" },
-        S = { require("telescope.builtin").spell_suggest, "spelling suggestions" },
         q = { "<Cmd>TodoTrouble<CR>", "find todos (Trouble)" },
         Q = { "<Cmd>TodoTelescope<CR>", "find todos (Telescope)" },
-        -- P = { require("telescope").extensions.projects.projects, "recent projects" },
-        P = { "<Cmd>Telescope projects<CR>", "recent projects" },
-        -- y = { require("telescope").extensions.neoclip.default, "yank clipboard manager" },
-        y = { "<Cmd>Telescope neoclip<CR>", "yank clipboard manager" },
-        ["?"] = { require("telescope.builtin").commands, "commands" },
-        ["/"] = { require("telescope.builtin").search_history, "search history" },
-        [";"] = { require("telescope.builtin").command_history, "command history" },
       },
       r = {
         n = { require("axie.lsp.rename").rename_empty, "rename symbol (no default text)" },
@@ -113,7 +96,6 @@ function M.general_mappings()
         l = { "<Cmd>lopen<CR>", "open loclist" },
       },
       s = { "<Cmd>PackerSync<CR>", "Update Plugins" },
-      S = { "<Cmd>Alpha<CR>", "Start Menu" },
       z = { "<Cmd>ZenMode<CR>", "Zen Mode" },
       Z = { "<Cmd>Twilight<CR>", "Twilight Toggle" },
       p = { ":lua =", "lua print", silent = false },
@@ -125,7 +107,6 @@ function M.general_mappings()
       c = { require("axie.utils").display_path, "buffer path" },
       C = { require("axie.utils").display_cwd, "cwd" },
       i = { "<Cmd>IndentBlanklineToggle<CR>", "toggle indent context line" },
-      ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
       ["\\"] = { "<Cmd>lua require'specs'.show_specs()<CR>", "Accent cursor" },
       ["<Tab>"] = { "<Cmd>AerialToggle<CR>", "Aerial Symbols" },
       ["<S-Tab>"] = { "<Cmd>SymbolsOutline<CR>", "Symbols Outline" },
@@ -217,7 +198,6 @@ function M.register_git_bindings()
     m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
     u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
     s = { require("telescope.builtin").git_stash, "git stash" },
-    S = { "<Cmd>Neotree source=git_status toggle=true<CR>", "git status (tree)" },
     b = { require("telescope.builtin").git_branches, "git branches" },
     c = { require("telescope.builtin").git_bcommits, "git commits (buffer)" },
     C = { require("telescope.builtin").git_commits, "git commits (repo)" },
@@ -273,8 +253,6 @@ function M.misc()
   vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   vim.keymap.set("v", "gq", "<Cmd>lua require'axie.lsp.code_actions'.native(true)<CR>")
   vim.keymap.set("v", "gQ", "<Cmd>lua require'axie.lsp.code_actions'.native(false)<CR>")
-  -- Neo-tree
-  vim.keymap.set("n", ";", "<Cmd>Neotree toggle=true<CR>")
   -- Visual indent
   vim.keymap.set("v", "<", "<gv")
   vim.keymap.set("v", ">", ">gv")

@@ -26,27 +26,34 @@ end
 
 function M.binds()
   local this = require("axie.plugins.telescope")
-  local builtin = require("telescope.builtin")
   local require_args = require("axie.utils").require_args
 
-  vim.keymap.set("n", "<C-_>", builtin.current_buffer_fuzzy_find, { desc = "buffer search" }) -- control slash
-  vim.keymap.set("n", "<Space>fh", builtin.help_tags, { desc = "help docs" })
-  vim.keymap.set("n", "<Space>fo", builtin.oldfiles, { desc = "old files" }) -- TODO: MRU
+  -- General
+  vim.keymap.set("n", "<Space>?", "<Cmd>Telescope keymaps<CR>", { desc = "keymaps" })
+  vim.keymap.set("n", "<Space>fk", "<Cmd>Telescope keymaps<CR>", { desc = "find keymaps" })
+  vim.keymap.set("n", "<Space>f?", "<Cmd>Telescope commands<CR>", { desc = "commands" })
+  vim.keymap.set("n", "<Space>f/", "<Cmd>Telescope search_history<CR>", { desc = "search history" })
+  vim.keymap.set("n", "<Space>f;", "<Cmd>Telescope command_history<CR>", { desc = "command history" })
+  vim.keymap.set("n", "<Space>ft", "<Cmd>Telescope colorscheme<CR>", { desc = "theme" })
+  vim.keymap.set("n", "<Space>fT", "<Cmd>Telescope colorscheme enable_preview=true", { desc = "theme preview" })
+  vim.keymap.set("n", "<Space>fs", "1z=", { desc = "spelling correct" })
+  vim.keymap.set("n", "<Space>fS", "<Cmd>Telescope spell_suggest<CR>", { desc = "spelling suggestions" })
+  vim.keymap.set("n", "<Space>f.", "<Cmd>Telescope resume<CR>", { desc = "resume last command" })
+
+  -- Search
+  vim.keymap.set("n", "<C-_>", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "buffer search" }) -- control slash
+  vim.keymap.set("n", "<Space>fo", "<Cmd>Telescope old_files<CR>", { desc = "old files" }) -- TODO: MRU
   vim.keymap.set("n", "<Space>ff", this.file_search, { desc = "find files" })
   vim.keymap.set("n", "<Space>fF", require_args(this.file_search, true), { desc = "find all files" })
   vim.keymap.set("n", "<Space>fc", this.dotconfig, { desc = "search config" })
-  vim.keymap.set("n", "<Space>fg", builtin.live_grep, { desc = "live grep" })
-  vim.keymap.set("n", "<Space>fG", builtin.grep_string, { desc = "grep string" })
-  vim.keymap.set("n", "<Space>fm", builtin.man_pages, { desc = "search manual" })
-  vim.keymap.set("n", "<Space>ft", builtin.colorscheme, { desc = "theme" })
-  vim.keymap.set(
-    "n",
-    "<Space>fT",
-    require_args(builtin.colorscheme, { enable_preview = true }),
-    { desc = "theme preview" }
-  )
-  vim.keymap.set("n", "<Space>f.", builtin.resume, { desc = "resume last command" })
-  vim.keymap.set("n", "<Space>fk", builtin.keymaps, { desc = "find keymaps" })
+  vim.keymap.set("n", "<Space>fg", "<Cmd>Telescope live_grep<CR>", { desc = "live grep" })
+  vim.keymap.set("n", "<Space>fG", "<Cmd>Telescope grep_string<CR>", { desc = "grep string" })
+  vim.keymap.set("n", "<Space>fh", "<Cmd>Telescope help_tags<CR>", { desc = "help docs" })
+  vim.keymap.set("n", "<Space>fH", "<Cmd>Telescope vim_options<CR>", { desc = "vim options" })
+  vim.keymap.set("n", "<Space>fm", "<Cmd>Telescope man_pages<CR>", { desc = "search manual" })
+  vim.keymap.set("n", "<Space>fb", "<Cmd>Telescope buffers<CR>", { desc = "find buffers" })
+  vim.keymap.set("n", "<Space>fa", "<Cmd>Telescope symbols<CR>", { desc = "find symbols" })
+  vim.keymap.set("n", "<Space>fr", "<Cmd>Telescope registers<CR>", { desc = "registers" }) -- could be "
 end
 
 function M.setup()
@@ -99,7 +106,6 @@ function M.setup()
   })
 
   telescope.load_extension("fzf")
-  require("axie.plugins.telescope").binds()
 end
 
 return M

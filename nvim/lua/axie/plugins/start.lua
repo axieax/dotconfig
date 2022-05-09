@@ -3,7 +3,9 @@
 -- TODO: customise like https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1308930
 -- narrower center align
 
-return function()
+local M = {}
+
+function M.setup()
   local dashboard = require("alpha.themes.dashboard")
 
   dashboard.section.header.val = {
@@ -51,3 +53,9 @@ return function()
     end,
   })
 end
+
+function M.binds()
+  vim.keymap.set("n", "<Space>S", "<Cmd>Alpha<CR>", { desc = "start menu" })
+end
+
+return M

@@ -114,8 +114,6 @@ function M.general_mappings()
       },
       s = { "<Cmd>PackerSync<CR>", "Update Plugins" },
       S = { "<Cmd>Alpha<CR>", "Start Menu" },
-      z = { "<Cmd>ZenMode<CR>", "Zen Mode" },
-      Z = { "<Cmd>Twilight<CR>", "Twilight Toggle" },
       p = { ":lua =", "lua print", silent = false },
       P = { ":lua require'axie.utils'.notify()<LEFT>", "lua notify", silent = false },
       q = { require("axie.utils").toggle_signcolumn, "toggle signcolumn" },

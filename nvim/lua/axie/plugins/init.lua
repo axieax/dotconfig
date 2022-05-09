@@ -352,13 +352,15 @@ return packer.startup({
     })
 
     -- Treesitter text dimming
-    -- NOTE: Twilight background issue https://github.com/folke/twilight.nvim/issues/15#issuecomment-912146776
     use({
       "folke/twilight.nvim",
       cmd = { "Twilight" },
+      setup = function()
+        vim.keymap.set("n", "<Space>Z", "<Cmd>Twilight<CR>", { desc = "dim inactive text" })
+      end,
       config = function()
         require("twilight").setup()
-        -- TEMP: transparent background issue above
+        -- TEMP: transparent background issue #15
         local tw_config = require("twilight.config")
         local tw_colors = tw_config.colors
         tw_config.colors = function(...)
@@ -372,8 +374,8 @@ return packer.startup({
     use({
       "folke/zen-mode.nvim",
       cmd = { "ZenMode" },
-      requires = { "folke/twilight.nvim", "lewis6991/gitsigns.nvim" },
-      config = require("axie.plugins.zen"),
+      setup = require("axie.plugins.zen").binds,
+      config = require("axie.plugins.zen").setup,
     })
 
     -- Minimap
@@ -388,7 +390,7 @@ return packer.startup({
         "MinimapRefresh",
         "MinimapUpdateHighlight",
       },
-      config = function()
+      setup = function()
         vim.keymap.set("n", "<Space>;", "<Cmd>MinimapToggle<CR>", { desc = "Minimap" })
       end,
     })
@@ -617,14 +619,16 @@ return packer.startup({
     })
 
     -- CSS colours
-    -- NOTE: doesn't highlight lower case names (#18)
-    -- WARN: unmaintained
+    -- WARN: original unmaintained (doesn't highlight lower case names #18)
     -- ALT: https://github.com/RRethy/vim-hexokinase
     -- ISSUE: disappears on PackerCompile https://github.com/norcalli/nvim-colorizer.lua/issues/61
     use({
-      "norcalli/nvim-colorizer.lua",
+      "NvChad/nvim-colorizer.lua",
+      -- event = "BufRead",
       config = function()
-        require("colorizer").setup()
+        local colorizer = require("colorizer")
+        colorizer.setup()
+        -- colorizer.reload_all_buffers()
       end,
     })
 
@@ -923,8 +927,8 @@ return packer.startup({
     -- ALT: https://github.com/michaelb/sniprun (full file support?)
     use({
       "arjunmahishi/run-code.nvim",
-      -- cmd = { "RunCodeBlock", "RunCodeFile", "RunCodeSelected", "ReloadRunCode" },
-      config = function()
+      cmd = { "RunCodeBlock", "RunCodeFile", "RunCodeSelected", "ReloadRunCode" },
+      setup = function()
         local filetype_map = require("axie.utils").filetype_map
         vim.keymap.set("n", "\\r", "<Cmd>RunCodeFile<CR>")
         vim.keymap.set("v", "\\r", "<Cmd>RunCodeSelected<CR>")

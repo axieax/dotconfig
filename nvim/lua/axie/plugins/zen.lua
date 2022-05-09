@@ -1,7 +1,9 @@
 -- https://github.com/folke/zen-mode.nvim --
 -- NOTE: barbar disappears https://github.com/folke/zen-mode.nvim/issues/21
 
-return function()
+local M = {}
+
+function M.setup()
   local toggle_functions = function()
     -- TODO: force off on_open, restore previous state on_close
     -- [[ gitsigns ]]
@@ -37,3 +39,9 @@ return function()
     end,
   })
 end
+
+function M.binds()
+  vim.keymap.set("n", "<Space>z", "<Cmd>ZenMode<CR>", { desc = "zen mode" })
+end
+
+return M

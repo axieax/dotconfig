@@ -13,7 +13,7 @@
 
 -- Lua require caching
 local reload_module = require("axie.utils").reload_module
-reload_module("axie")
+pcall(reload_module, "axie")
 
 -- Source config files on save
 local source_config = vim.api.nvim_create_augroup("SourceConfig", {})
@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 require("axie.general")
 
 -- Plugins config
+pcall(require, "impatient")
 require("axie.plugins")
 
 -- Personal plugin development

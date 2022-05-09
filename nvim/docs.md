@@ -141,6 +141,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/luukvbaal/stabilize.nvim/issues/16
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/22
 - https://github.com/hrsh7th/nvim-cmp/issues/953
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12

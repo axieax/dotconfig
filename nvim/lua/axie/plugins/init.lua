@@ -25,7 +25,7 @@ return packer.startup({
       config = function()
         --[[ BUG: this breaks DistantInstall for some reason
         local impatient = require("impatient")
-        impatient.enable_profile(
+        impatient.enable_profile()
         ]]
       end,
     })
@@ -417,8 +417,7 @@ return packer.startup({
     -- Notification
     use({
       "rcarriga/nvim-notify",
-      -- requires instead of after so it won't be optional
-      requires = "nvim-telescope/telescope.nvim",
+      after = "telescope.nvim",
       config = require("axie.plugins.notify"),
     })
 

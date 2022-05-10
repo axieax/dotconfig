@@ -16,6 +16,7 @@
 
 ## TODO
 
+- keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
 - configure ts context to be similar to intellij (names enough, maybe params)
 - `nvim_set_hl` instead of `vim.cmd("highlight ...")`?
@@ -30,7 +31,7 @@
   - Update keymap RHS from vimscript to lua function
   - Add desc to all binds and autocmd
   - Group which-key bindings
-  - Issue: lazy load plugins won't load the key binds inside config
+  - Issue: lazy load plugins won't load the key binds inside config (use `setup`)
 - PRIORITY: no eslint node_module -> use own eslint_d
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
@@ -72,7 +73,7 @@
 ## Features/plugins
 
 - Packer refer to a PR
-- Recent Packer updates (changelog)
+- PackerSnapshot diff -> changelog
 - https://github.com/ziontee113/syntax-tree-surfer
 - https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips
 - https://github.com/jbyuki/nabla.nvim
@@ -141,7 +142,6 @@
 
 ## Current PRs / Issues
 
-- https://github.com/luukvbaal/stabilize.nvim/issues/16
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/22
 - https://github.com/hrsh7th/nvim-cmp/issues/953
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12

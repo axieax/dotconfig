@@ -151,7 +151,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Center search result jumps
-local center_keys = { "n", "N", "{", "}", "*", "[g", "]g", "[s", "]s" }
+local center_keys = { "n", "N", "{", "}", "*", "[g", "]g", "[s", "]s", "[m", "]m" }
 for _, key in ipairs(center_keys) do
   vim.keymap.set("n", key, key .. "zz", { desc = "center after " .. key })
 end

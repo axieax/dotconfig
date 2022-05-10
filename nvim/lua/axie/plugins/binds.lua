@@ -112,7 +112,14 @@ function M.general_mappings()
         Q = { "<Cmd>Copen<CR>", "open qflist (vim-dispatch)" },
         l = { "<Cmd>lopen<CR>", "open loclist" },
       },
-      s = { "<Cmd>PackerSync<CR>", "Update Plugins" },
+      s = {
+        function()
+          local snapshot_time = os.date("!%Y-%m-%dT%TZ")
+          vim.cmd("PackerSnapshot " .. snapshot_time)
+          vim.cmd("PackerSync")
+        end,
+        "Update Plugins",
+      },
       S = { "<Cmd>Alpha<CR>", "Start Menu" },
       p = { ":lua =", "lua print", silent = false },
       P = { ":lua require'axie.utils'.notify()<LEFT>", "lua notify", silent = false },

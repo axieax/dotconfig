@@ -599,7 +599,7 @@ return packer.startup({
 
     -- Mark indicator
     use({
-      "chentau/marks.nvim",
+      "chentoast/marks.nvim",
       config = function()
         -- m[ and m] to navigate marks
         require("marks").setup({})

@@ -36,16 +36,24 @@ check_dependency() {
   command -v "$1" > /dev/null 2>&1
 }
 
-link_config() {
-  src=$1
-  dst=$2
-  as_root=${3:-false}
-  [[ $as_root = true ]] && as_user="sudo" || as_user=""
-  # create and move to backup if exists
+backup_dst_config() {
+  dst=$1
+  as_user=$2
   if [ -e "$dst" ]; then
     backup="$dst.$(date +%s)"
     echo "Backing up $dst to $backup"
     $as_user mv "$dst" "$backup"
   fi
-  $as_user ln -s "$src" "$dst"
+}
+
+link_config() {
+  src=$1
+  dst=$2
+  as_root=${3:-false}
+  copy_only=${4:-false}
+  [[ $as_root = true ]] && as_user="sudo" || as_user=""
+  [[ $copy_only = true ]] && command="cp" || command="ln -s"
+  # create and move to backup if exists
+  backup_dst_config $dst $as_user
+  $as_user $command "$src" "$dst"
 }

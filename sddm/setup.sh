@@ -12,4 +12,4 @@ fi
 link_config /usr/share/backgrounds/arcolinux/arco-login.jpg "$candy_path/Backgrounds/arco-login.jpg" true
 
 # copy theme config
-link_config "$HOME/dotconfig/sddm/theme.conf" "$candy_path/theme.conf" true
+link_config "$HOME/dotconfig/sddm/theme.conf" "$candy_path/theme.conf" true true

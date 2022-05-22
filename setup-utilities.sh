@@ -39,11 +39,13 @@ check_dependency() {
 link_config() {
   src=$1
   dst=$2
+  as_root=${3:-false}
+  [[ $as_root = true ]] && as_user="sudo" || as_user=""
   # create and move to backup if exists
   if [ -e "$dst" ]; then
     backup="$dst.$(date +%s)"
     echo "Backing up $dst to $backup"
-    mv "$dst" "$backup"
+    $as_user mv "$dst" "$backup"
   fi
-  ln -s "$src" "$dst"
+  $as_user ln -s "$src" "$dst"
 }

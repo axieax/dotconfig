@@ -38,6 +38,7 @@ setup_app polybar
 setup_app rofi
 
 # sddm setup
+setup_app sddm
 
 # alacritty setup
 # ln -s ~/dotconfig/alacritty ~/.config/alacritty

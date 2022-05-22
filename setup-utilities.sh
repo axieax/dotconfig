@@ -35,3 +35,15 @@ confirm() {
 check_dependency() {
   command -v "$1" > /dev/null 2>&1
 }
+
+link_config() {
+  src=$1
+  dst=$2
+  # create and move to backup if exists
+  if [ -e "$dst" ]; then
+    backup="$dst.$(date +%s)"
+    echo "Backing up $dst to $backup"
+    mv "$dst" "$backup"
+  fi
+  ln -s "$src" "$dst"
+}

@@ -4,13 +4,7 @@ source "$HOME/dotconfig/setup-utilities.sh"
 mkdir -p ~/.config
 
 # zsh config
-if is_linux; then
-  ln -s ~/dotconfig/zsh/.zshrc-linux.yml ~/.zshrc
-elif is_mac; then
-  ln -s ~/dotconfig/zsh/.zshrc-mac.yml ~/.zshrc
-else
-  echo "invalid OSTYPE $OSTYPE for zsh setup"
-fi
+$HOME/dotconfig/zsh/setup.sh
 
 # Stylua config
 ln -s ~/dotconfig/stylua.toml ~/.config/stylua.toml

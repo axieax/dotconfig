@@ -41,15 +41,7 @@ setup_app rofi
 setup_app sddm
 
 # alacritty setup
-# ln -s ~/dotconfig/alacritty ~/.config/alacritty
-# # select appropriate config
-# if is_linux; then
-#   ln -s ~/.config/alacritty/alacritty-linux.yml ~/.config/alacritty/alacritty.yml
-# elif is_mac; then
-#   ln -s ~/.config/alacritty/alacritty-mac.yml ~/.config/alacritty/alacritty.yml
-# else
-#   echo "invalid OSTYPE $OSTYPE for alacritty setup"
-# fi
+setup_app alacritty
 
 # pavucontrol
 # https://community.spotify.com/t5/Desktop-Linux/Microsoft-teams-mutes-Spotify/td-p/5061607

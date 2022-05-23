@@ -1,30 +1,28 @@
 #!/bin/bash
 source "$HOME/dotconfig/setup-utilities.sh"
 
-# DEPENDENCIES: fontconfig
-if ! check_dependency fc-list; then
-  if is_linux; then
-    sudo pacman -S fontconfig
-  elif is_mac; then
-    brew install fontconfig
-  else
-    echo "Failed to install dependency: fontconfig (unsupported OS)"
-  fi
-fi
-
-# Install JetBrains Mono font
 action="install JetBrains Mono font"
-if ! fc-list -q "JetBrainsMono" && confirm "$action"; then
+if confirm "$action"; then
   if is_linux; then
-    curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh | bash
+    yay -S nerd-fonts-jetbrains-mono
   elif is_mac; then
     brew tap homebrew/cask-fonts
-    brew install --cask font-jetbrains-mono
+    brew install --cask font-jetbrains-mono-nerd-font
   else
     echo "Failed to $action: unsupported OS"
   fi
 fi
 
 # Install Meslo LG font
-
 # Install Hack font
+
+action="link config"
+if confirm "$action"; then
+  if is_linux; then
+    link_config $HOME/dotconfig/alacritty/alacritty-linux.yml $HOME/.config/alacritty/alacritty.yml
+  elif is_mac; then
+    link_config $HOME/dotconfig/alacritty/alacritty-mac.yml $HOME/.config/alacritty/alacritty.yml
+  else
+    echo "invalid OSTYPE $OSTYPE for alacritty setup"
+  fi
+fi

@@ -6,4 +6,7 @@ if is_linux && ! check_dependency zscroll && confirm "$action"; then
   yay -S zscroll
 fi
 
-link_config "$HOME/dotconfig/polybar" "$HOME/.config/polybar"
+action="link config"
+if confirm "$action"; then
+  link_config "$HOME/dotconfig/polybar" "$HOME/.config/polybar"
+fi

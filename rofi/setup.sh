@@ -6,5 +6,7 @@ if ! check_dependency "rofi-emoji" && confirm "$action"; then
   sudo pacman -S rofi-emoji
 fi
 
-
-link_config "$HOME/dotconfig/rofi" "$HOME/.config/rofi"
+action="link config"
+if confirm "$action"; then
+  link_config "$HOME/dotconfig/rofi" "$HOME/.config/rofi"
+fi

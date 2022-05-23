@@ -34,10 +34,11 @@ fi
 # Install extensions
 action="install zsh plugins"
 if confirm "$action"; then
-  ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS_DIR/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_PLUGINS_DIR/zsh-syntax-highlighting
-  git clone https://github.com/zsh-users/zsh-completions.git $ZSH_PLUGINS_DIR/zsh-completions
+  ZSH_CUSTOM="$HOME/.oh-my-zsh/custom/plugins"
+  git clone https://github.com/marzocchi/zsh-notify.git $ZSH_CUSTOM/notify
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/zsh-completions
 fi
 
 # Change default shell

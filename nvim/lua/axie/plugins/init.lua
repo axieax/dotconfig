@@ -910,7 +910,7 @@ return packer.startup({
     use({
       "ellisonleao/glow.nvim",
       cmd = { "Glow", "GlowInstall" },
-      config = function()
+      setup = function()
         vim.g.glow_border = "rounded"
         local filetype_map = require("axie.utils").filetype_map
         filetype_map("markdown", "n", ",o", "<Cmd>Glow<CR>")

@@ -1,10 +1,21 @@
 ### ZSH EXTENSIONS ###
+# TEMP: https://github.com/ohmyzsh/ohmyzsh/pull/10947
 eval "$(starship init zsh)"
 
 # oh-my-zsh
 export ZSH="/home/$USER/.oh-my-zsh"
 plugins=(
   git
+  gitignore
+  zoxide
+  # starship
+  npm
+  nvm
+  pyenv
+  bazel
+  terraform
+  # custom plugins
+  notify
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting # NOTE: this has to be the last plugin
@@ -358,9 +369,9 @@ alias dns="sudoedit /etc/resolv.conf"
 alias vv="cd ~/dotconfig/nvim/lua/axie && $EDITOR plugins/init.lua"
 alias zz="$EDITOR $HOME/.zshrc"
 alias zzz=". $HOME/.zshrc"
+alias z..='z ..'
 
 alias handbrake="ghb"
-alias tf="terraform"
 
 ## Broken Software ##
 alias via="via --no-sandbox"
@@ -387,23 +398,14 @@ PATH=$HOME/go/bin:$PATH
 ### Custom ###
 
 # Quick QRCode
-qr() {
-  curl qrcode.show/$1
-}
+function qr() { curl qrcode.show/$1 }
 
 # git shortcuts
-ggc() {
-  git checkout "$(git branch --all | fzf | tr -d ' ')"
-}
+function ggc() { git checkout "$(git branch --all | fzf | tr -d ' ')" }
 alias ggb="ggc"
 alias ggs="git status"
 
-function grr() {
-  git fetch origin "$1" && git reset --hard origin/"$1"
-}
-
-# gitignore template generator
-function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@; }
+function grr() { git fetch origin "$1" && git reset --hard origin/"$1" }
 
 # Do not disturb
 alias dnd='xfconf-query -c xfce4-notifyd -p /do-not-disturb -T'
@@ -418,11 +420,7 @@ alias timezone='sudo timedatectl set-ntp true'
 neofetch
 # macchina
 
-# zoxide
-eval "$(zoxide init zsh)"
-alias z..='z ..'
-
 # nvm
-source /usr/share/nvm/init-nvm.sh --no-use
+# source /usr/share/nvm/init-nvm.sh --no-use
 # TODO: add default node to path https://www.ioannispoulakas.com/2020/02/22/how-to-speed-up-shell-load-while-using-nvm/
-nvm alias default node > /dev/null
+# nvm alias default node > /dev/null

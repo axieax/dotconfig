@@ -19,14 +19,12 @@ return packer.startup({
     use("wbthomason/packer.nvim")
 
     -- Improve and measure startup time
-    -- NOTE: can cache packer_compiled as well
+    -- NOTE: try `:LuaCacheClear` for config issues
     use({
       "lewis6991/impatient.nvim",
       config = function()
-        --[[ BUG: this breaks DistantInstall for some reason
         local impatient = require("impatient")
         impatient.enable_profile()
-        ]]
       end,
     })
 
@@ -90,30 +88,6 @@ return packer.startup({
     use({
       "olimorris/onedarkpro.nvim",
       config = require("axie.themes.onedark"),
-    })
-
-    use({
-      "folke/tokyonight.nvim",
-      disable = true,
-      config = require("axie.themes.tokyonight"),
-    })
-
-    use({
-      "Mofiqul/dracula.nvim",
-      disable = true,
-      config = require("axie.themes.dracula"),
-    })
-
-    use({
-      "EdenEast/nightfox.nvim",
-      disable = true,
-      config = require("axie.themes.nightfox"),
-    })
-
-    use({
-      "bluz71/vim-nightfly-guicolors",
-      disable = true,
-      config = require("axie.themes.nightfly"),
     })
 
     -----------------------
@@ -378,23 +352,6 @@ return packer.startup({
       config = require("axie.plugins.zen").setup,
     })
 
-    -- Minimap
-    -- INSTALL: yay -S code-minimap
-    use({
-      "wfxr/minimap.vim",
-      disable = true,
-      cmd = {
-        "Minimap",
-        "MinimapClose",
-        "MinimapToggle",
-        "MinimapRefresh",
-        "MinimapUpdateHighlight",
-      },
-      setup = function()
-        vim.keymap.set("n", "<Space>;", "<Cmd>MinimapToggle<CR>", { desc = "Minimap" })
-      end,
-    })
-
     -- Undo history
     use({
       "simnalamburt/vim-mundo",
@@ -450,23 +407,6 @@ return packer.startup({
     use({
       "lambdalisue/suda.vim",
       cmd = { "SudaRead", "SudaWrite" },
-    })
-
-    -- Remote ssh
-    -- Without remote distant server: :DistantLaunch server mode=ssh ssh.user=<username>
-    use({
-      "chipsenkbeil/distant.nvim",
-      disable = true,
-      config = function()
-        require("distant").setup({
-          -- Applies Chip's personal settings to every machine you connect to
-          --
-          -- 1. Ensures that distant servers terminate with no connections
-          -- 2. Provides navigation bindings for remote directories
-          -- 3. Provides keybinding to jump into a remote file's parent directory
-          ["*"] = require("distant.settings").chip_default(),
-        })
-      end,
     })
 
     -- Lua documentation
@@ -1104,7 +1044,7 @@ return packer.startup({
       end,
     })
 
-    -- Code action menu
+    -- Code action menu with diff preview
     use({
       "weilbith/nvim-code-action-menu",
       disable = true,

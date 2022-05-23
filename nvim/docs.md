@@ -149,7 +149,6 @@
 - https://github.com/mfussenegger/nvim-jdtls/issues/264
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
-- https://github.com/aca/emmet-ls/pull/39
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
 - https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099

@@ -16,6 +16,9 @@
 
 ## TODO
 
+- nvim v0.8:
+  * Migrate galaxyline.nvim to heirline.nvim
+  * Use nvim-gps in winbar to replace nvim-treesitter/nvim-treesitter-context
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
 - configure ts context to be similar to intellij (names enough, maybe params)

@@ -4,6 +4,8 @@ eval "$(starship init zsh)"
 
 # oh-my-zsh
 export ZSH="/home/$USER/.oh-my-zsh"
+ENABLE_CORRECTION="true"
+
 plugins=(
   git
   gitignore
@@ -15,7 +17,7 @@ plugins=(
   bazel
   terraform
   # custom plugins
-  notify
+  notify # NOTE: does not disappear
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting # NOTE: this has to be the last plugin
@@ -424,3 +426,5 @@ neofetch
 # source /usr/share/nvm/init-nvm.sh --no-use
 # TODO: add default node to path https://www.ioannispoulakas.com/2020/02/22/how-to-speed-up-shell-load-while-using-nvm/
 # nvm alias default node > /dev/null
+
+[ -f "/home/axie/.ghcup/env" ] && source "/home/axie/.ghcup/env" # ghcup-env

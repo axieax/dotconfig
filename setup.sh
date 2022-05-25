@@ -25,11 +25,11 @@ setup_app zsh
 
 # need to install dependencies first
 
-# NeoVim setup
+# Neovim setup
 # ln -s ~/dotconfig/nvim ~/.config/nvim
 
 # xmonad setup
-# ln -s ~/dotconfig/xmonad ~/.xmonad
+setup_app xmonad
 
 # Polybar setup
 setup_app polybar

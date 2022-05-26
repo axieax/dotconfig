@@ -11,7 +11,6 @@ return function()
   local sources = {
     -- copilot = { label = "Copilot", priority = 4 },
     nvim_lsp = { label = "LSP", priority = 3 },
-    nvim_lua = { label = "Lua", priority = 3 },
     buffer = { label = "Buffer", priority = 1 },
     luasnip = { label = "LuaSnip", priority = 5 },
     path = { label = "Path" },

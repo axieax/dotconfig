@@ -11,7 +11,7 @@
 
 -- NOTE: need ripgrep for Telescope grep_string
 
--- Lua require caching
+-- Lua reset require cache
 local reload_module = require("axie.utils").reload_module
 pcall(reload_module, "axie")
 
@@ -28,7 +28,6 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 require("axie.general")
 
 -- Plugins config
-pcall(require, "impatient")
 require("axie.plugins")
 
 -- Personal plugin development

@@ -152,6 +152,7 @@ myManageHook =
     , "Riot Client"
     , "League of Legends"
     , "zoom"
+    , "zoom "
     , "zoom_linux_float_video_window"
     , "Picture-in-picture"
     , "openboard"
@@ -173,7 +174,7 @@ myManageHook =
   my8Shifts  = ["typora"]
   my9Shifts  = ["discord", "slack"]
   -- my10Shifts = []
-  my10Shifts = ["Thunderbird"]
+  my10Shifts = ["Thunderbird", "Evolution"]
 
 
 

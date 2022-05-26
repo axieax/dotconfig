@@ -116,11 +116,12 @@ function M.grammarly()
 end
 
 function M.hls()
+  local root_pattern = require("lspconfig.util").root_pattern
   return {
-    -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/hls.lua
-    -- root_dir = lsp_utils.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
+    -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/hls.lua
+    root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
     -- root_dir = function(fname)
-    --   return lsp_utils.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")(fname)
+    --   return root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")(fname)
     --     or vim.fn.getcwd()
     -- end,
   }
@@ -231,36 +232,26 @@ function M.jsonls()
 end
 
 function M.sumneko_lua()
-  -- local lua_rtps = vim.split(package.path, ";")
-  -- vim.list_extend(lua_rtps, { "lua/?.lua", "lua/?/init.lua" })
-
-  return {
+  local settings = {
     settings = {
       Lua = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
           version = "LuaJIT",
-          -- Setup your lua path
-          -- path = { "?.lua", "?/init.lua" }, -- default
-          -- path = lua_rtps,
         },
-        -- completion = {
-        --   callSnippet = "Replace",
-        -- },
         diagnostics = {
           -- get language server to recognise `vim` global for nvim config
           globals = { "vim" },
         },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          -- NOTE: LSP support for runtime files (e.g. plugins require definition), but slow
-          -- library = vim.api.nvim_get_runtime_file("", true),
-          -- maxPreload = 10000,
-          -- preloadFileSize = 10000,
-        },
       },
     },
   }
+
+  local ok, luadev = pcall(require, "lua-dev")
+  if not ok then
+    return settings
+  end
+  return luadev.setup(settings)
 end
 
 function M.tsserver()

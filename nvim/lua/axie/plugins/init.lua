@@ -28,6 +28,9 @@ return packer.startup({
       end,
     })
 
+    -- Measure startup time
+    use("dstein64/vim-startuptime")
+
     -- CursorHold event fix
     use("antoinemadec/FixCursorHold.nvim")
 
@@ -74,6 +77,8 @@ return packer.startup({
     use({
       "catppuccin/nvim",
       as = "catppuccin",
+      -- TEMP: https://github.com/catppuccin/nvim/issues/134
+      commit = "f079dda3dc23450d69b4bad11bfbd9af2c77f6f3",
       config = require("axie.themes.catppuccin"),
     })
 
@@ -412,6 +417,9 @@ return packer.startup({
     -- Lua documentation
     use("milisims/nvim-luaref")
 
+    -- vim API completion
+    use("folke/lua-dev.nvim")
+
     ------------------
     -- Helper Tools --
     ------------------
@@ -716,7 +724,7 @@ return packer.startup({
     use({
       "nvim-treesitter/playground",
       run = ":TSUpdate query",
-      cmd = { "TSPlaygroundToggle" },
+      cmd = { "TSPlaygroundToggle", "TSNodeUnderCursor", "TSCaptureUnderCursor", "TSHighlightCapturesUnderCursor" },
       after = "nvim-treesitter",
     })
 
@@ -956,6 +964,7 @@ return packer.startup({
     })
 
     -- LSP install
+    -- TODO: move lsp setup call to axie/init.lua
     use({
       "williamboman/nvim-lsp-installer",
       requires = {
@@ -966,6 +975,7 @@ return packer.startup({
         "jose-elias-alvarez/nvim-lsp-ts-utils",
         "b0o/schemastore.nvim",
         "p00f/clangd_extensions.nvim",
+        "folke/lua-dev.nvim",
       },
       config = require("axie.lsp.setup").servers,
     })
@@ -1068,7 +1078,6 @@ return packer.startup({
         { "lukas-reineke/cmp-under-comparator" },
         { "onsails/lspkind-nvim" },
         { "hrsh7th/cmp-nvim-lsp" },
-        { "hrsh7th/cmp-nvim-lua" },
         { "hrsh7th/cmp-buffer" },
         { "hrsh7th/cmp-path" },
         { "hrsh7th/cmp-calc" },

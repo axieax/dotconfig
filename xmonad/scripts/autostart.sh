@@ -30,7 +30,7 @@ xrandr --output HDMI-0 --auto --output DP-0 --auto --right-of HDMI-0
 xsetroot -cursor_name left_ptr &
 
 #start ArcoLinux Welcome App
-run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
+# run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 
 #Some ways to set your wallpaper besides variety or nitrogen
 feh --bg-fill /usr/share/backgrounds/arcolinux/arco-login.jpg &
@@ -71,7 +71,8 @@ run slack &
 #run dropbox &
 #run insync start &
 #run ckb-next -b &
-run thunderbird &
+# run thunderbird &
+run evolution &
 
 # Set keyboard repeat delay
 xset r rate 200 25

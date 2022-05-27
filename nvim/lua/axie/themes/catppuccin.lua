@@ -2,6 +2,8 @@
 
 return function()
   local catppuccin = require("catppuccin")
+
+  vim.g.catppuccin_flavour = "mocha"
   catppuccin.setup({
     transparent_background = true,
     integrations = {

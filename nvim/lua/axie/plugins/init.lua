@@ -78,7 +78,7 @@ return packer.startup({
       "catppuccin/nvim",
       as = "catppuccin",
       -- TEMP: https://github.com/catppuccin/nvim/issues/134
-      commit = "f079dda3dc23450d69b4bad11bfbd9af2c77f6f3",
+      -- commit = "f079dda3dc23450d69b4bad11bfbd9af2c77f6f3",
       config = require("axie.themes.catppuccin"),
     })
 

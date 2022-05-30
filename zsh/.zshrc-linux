@@ -38,13 +38,21 @@ setopt GLOB_DOTS
 
 export HISTCONTROL=ignoreboth:erasedups
 
-if [ -d "$HOME/.bin" ] ;
-  then PATH="$HOME/.bin:$PATH"
-fi
+### PATH Additions ###
+function pathadd() {
+  # if exists and not already in path
+  if [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]; then
+    export PATH="$1${PATH:+":${PATH}"}"
+  fi
+}
 
-if [ -d "$HOME/.local/bin" ] ;
-  then PATH="$HOME/.local/bin:$PATH"
-fi
+pathadd "$HOME/.bin"
+pathadd "$HOME/.local/bin"
+pathadd "$HOME/.yarn/bin"
+pathadd "$HOME/.local/share/gem/ruby/3.0.0/bin"
+pathadd "$HOME/.cargo/bin"
+pathadd "$HOME/go/bin"
+pathadd "$HOME/bin/path"
 
 ### ALIASES ###
 
@@ -379,23 +387,6 @@ alias handbrake="ghb"
 alias via="via --no-sandbox"
 alias discord='discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy'
 alias teams='flatpak run com.microsoft.Teams'
-
-
-### PATH Auditions ###
-
-yarn_path=$HOME/.yarn/bin
-if [ -d $yarn_path ]; then
-  PATH=$yarn_path:$PATH
-fi
-
-gem_path=$HOME/.local/share/gem/ruby/3.0.0/bin
-if [ -d $gem_path ]; then
-  PATH=$gem_path:$PATH
-fi
-
-PATH=$HOME/.cargo/bin:$PATH
-PATH=$HOME/bin/path:$PATH
-PATH=$HOME/go/bin:$PATH
 
 ### Custom ###
 

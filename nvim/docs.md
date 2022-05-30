@@ -16,10 +16,10 @@
 
 ## TODO
 
-- null-ls formatter no warning if executable not found
+- Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:
-  * Migrate galaxyline.nvim to heirline.nvim
-  * Use nvim-gps in winbar to replace nvim-treesitter/nvim-treesitter-context
+  - Migrate galaxyline.nvim to heirline.nvim
+  - Use nvim-gps in winbar to replace nvim-treesitter/nvim-treesitter-context
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
 - configure ts context to be similar to intellij (names enough, maybe params)
@@ -145,6 +145,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/sindrets/diffview.nvim/issues/144
+- https://github.com/jose-elias-alvarez/null-ls.nvim/pull/892
 - https://github.com/stevearc/dressing.nvim/pull/41
 - https://github.com/ohmyzsh/ohmyzsh/pull/10947
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/22

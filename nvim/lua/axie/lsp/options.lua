@@ -36,7 +36,7 @@ function M.default_on_attach(client, bufnr)
     -- print("formatting disabled for " .. name)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
-  else
+  elseif client.supports_method("textDocument/formatting") then
     -- use client for formatting
     -- print("formatting enabled for " .. name)
     vim.api.nvim_create_autocmd("BufWritePre", {

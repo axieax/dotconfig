@@ -83,7 +83,7 @@ function M.formatting_sources()
         "dockerfile",
         "jproperties",
         "conf",
-        "zsh",
+        "zsh", -- https://github.com/mvdan/sh/issues/120
         "gitignore",
       },
     }),
@@ -168,6 +168,7 @@ function M.setup()
   require("null-ls").setup({
     sources = sources,
     on_attach = require("axie.lsp.options").default_on_attach,
+    -- debug = true,
   })
 end
 

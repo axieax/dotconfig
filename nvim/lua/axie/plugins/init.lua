@@ -478,14 +478,6 @@ return packer.startup({
       config = require("axie.plugins.dressing"),
     })
 
-    use({
-      "nvim-telescope/telescope-ui-select.nvim",
-      after = "telescope.nvim",
-      config = function()
-        require("telescope").load_extension("ui-select")
-      end,
-    })
-
     -- Bracket coloured pairs
     -- TODO: change colourscheme, esp red?
     use({

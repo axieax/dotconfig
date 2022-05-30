@@ -16,6 +16,7 @@
 
 ## TODO
 
+- null-ls formatter no warning if executable not found
 - nvim v0.8:
   * Migrate galaxyline.nvim to heirline.nvim
   * Use nvim-gps in winbar to replace nvim-treesitter/nvim-treesitter-context
@@ -131,7 +132,6 @@
 - Zen mode with nvim-treesitter-context?
 - stabilize.nvim view jumps
   - https://github.com/luukvbaal/stabilize.nvim/issues/3
-  - https://github.com/booperlv/nvim-gomove/issues/1
   - floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
 - Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent) - autopairs?
 - Markdown header folds https://github.com/nvim-treesitter/nvim-treesitter/issues/2145, https://github.com/plasticboy/vim-markdown
@@ -145,9 +145,13 @@
 
 ## Current PRs / Issues
 
+- https://github.com/stevearc/dressing.nvim/pull/41
 - https://github.com/ohmyzsh/ohmyzsh/pull/10947
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/22
+- https://github.com/anuvyklack/nvim-keymap-amend/issues/1
 - https://github.com/hrsh7th/nvim-cmp/issues/953
+  - NOTE: arrow keys navigate commands rather than through text
+  - https://github.com/neovim/neovim/issues/9953
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12
 - https://github.com/mfussenegger/nvim-jdtls/issues/264
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)

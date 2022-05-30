@@ -10,7 +10,5 @@ return function()
         end
       end,
     },
-    -- use https://github.com/nvim-telescope/telescope-ui-select.nvim instead for vim.ui.select
-    select = { enabled = false },
   })
 end

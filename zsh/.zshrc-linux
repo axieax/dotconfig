@@ -409,6 +409,11 @@ alias ggs="git status"
 
 function grr() { git fetch origin "$1" && git reset --hard origin/"$1" }
 
+function link-github-remote() {
+  local url="$1"
+  git remote add github "$url"
+}
+
 # Do not disturb
 alias dnd='xfconf-query -c xfce4-notifyd -p /do-not-disturb -T'
 

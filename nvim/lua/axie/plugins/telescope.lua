@@ -80,7 +80,7 @@ function M.setup()
         },
       },
       -- NOTE: https://github.com/nvim-telescope/telescope.nvim/issues/1080
-      tiebreak = function(current_entry, existing_entry)
+      tiebreak = function(_, _)
         return false
       end,
     },
@@ -91,9 +91,6 @@ function M.setup()
         -- ffmpegthumbnailer for videos
         filetypes = { "png", "jpg", "mp4", "webm", "pdf" },
         find_cmd = "rg",
-      },
-      ["ui-select"] = {
-        require("telescope.themes").get_dropdown({ layout_strategy = "center" }),
       },
     },
   })

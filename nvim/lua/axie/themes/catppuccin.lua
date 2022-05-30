@@ -26,7 +26,7 @@ return function()
         enabled = true,
         -- colored_indent_levels = true,
       },
-      dashboard = true, -- startify?
+      dashboard = false, -- startify?
       neogit = true,
       vim_sneak = false,
       fern = false,
@@ -46,7 +46,7 @@ return function()
   local cp = require("catppuccin.api.colors").get_colors()
 
   local remaps = {
-    NormalFloat = { bg = cp.black2 }, -- NOTE: catppuccin needs a bg colour
+    NormalFloat = { bg = cp.base }, -- NOTE: catppuccin needs a bg colour
     ColorColumn = { link = "CursorLine" },
     CursorLineNr = { fg = "#AAAAAA" },
     WhichKeyFloat = { link = "NormalFloat" },
@@ -54,7 +54,7 @@ return function()
     SpellCap = { fg = cp.red, style = "italic,undercurl" },
     SpellLocal = { fg = cp.red, style = "italic,undercurl" },
     SpellRare = { fg = cp.red, style = "italic,undercurl" },
-    CmpItemMenu = { fg = cp.gray1 },
+    CmpItemMenu = { fg = cp.surface2 },
     -- SpellBad = { fg = cp.maroon },
     -- SpellCap = { fg = cp.peach },
     -- SpellLocal = { fg = cp.lavender },
@@ -63,9 +63,10 @@ return function()
 
   -- NvChad Telescope theme (adapted from https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)
   if require("axie.utils.config").nvchad_theme then
-    local telescope_results = cp.black2
-    local telescope_prompt = cp.black3
-    local fg = cp.gray1
+    local telescope_results = cp.base
+    -- local telescope_prompt = cp.surface0
+    local telescope_prompt = "#302D41" -- black3 from original palette
+    local fg = cp.surface2
     local purple = cp.green -- or mauve
     remaps = vim.tbl_extend("force", remaps, {
       TelescopeBorder = { fg = telescope_results, bg = telescope_results },

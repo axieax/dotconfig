@@ -16,6 +16,7 @@ function run() {
 #xrandr --output LVDS1 --mode 1366x768 --output DP3 --mode 1920x1080 --right-of LVDS1
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 
+# same as sddm/Xsetup script
 xrandr --output HDMI-0 --auto --output DP-0 --auto --right-of HDMI-0
 
 (

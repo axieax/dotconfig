@@ -90,6 +90,7 @@
 - Dictionary/thesaurus (alternative to rudism/telescope-dict.nvim)
 - cmp-rg source https://github.com/lukas-reineke/cmp-rg
 - Highlight text temporarily https://www.reddit.com/r/neovim/comments/rmq4gd/is_there_an_alternative_to_vimmark_to_colorize/
+  - https://github.com/azabiong/vim-highlighter
 - LSPCommands Telescope interface
 - https://github.com/ii14/lsp-command ?
 - Terminal (float/horizontal) which autosizes on VimResized
@@ -145,9 +146,9 @@
 
 ## Current PRs / Issues
 
+- https://github.com/catppuccin/nvim/issues/134
 - https://github.com/sindrets/diffview.nvim/issues/144
 - https://github.com/jose-elias-alvarez/null-ls.nvim/pull/892
-- https://github.com/stevearc/dressing.nvim/pull/41
 - https://github.com/ohmyzsh/ohmyzsh/pull/10947
 - https://github.com/anuvyklack/pretty-fold.nvim/issues/22
 - https://github.com/anuvyklack/nvim-keymap-amend/issues/1

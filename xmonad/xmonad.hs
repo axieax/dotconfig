@@ -102,9 +102,18 @@ myManageHook =
         | i <- myIgnores
         ]
     -- TODO: move into a for loop?
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 0) | x <- my1Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 1) | x <- my2Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo (myWorkspaces !! 2) | x <- my3Shifts]
+      , [ (className =? x <||> title =? x <||> resource =? x)
+            --> doShiftAndGo (myWorkspaces !! 0)
+        | x <- my1Shifts
+        ]
+      , [ (className =? x <||> title =? x <||> resource =? x)
+            --> doShiftAndGo (myWorkspaces !! 1)
+        | x <- my2Shifts
+        ]
+      , [ (className =? x <||> title =? x <||> resource =? x)
+            --> doShiftAndGo (myWorkspaces !! 2)
+        | x <- my3Shifts
+        ]
       , [ (className =? x <||> title =? x <||> resource =? x)
             --> doShiftAndGo (myWorkspaces !! 3)
         | x <- my4Shifts
@@ -130,7 +139,7 @@ myManageHook =
         | x <- my9Shifts
         ]
         -- Ignore Thunderbird Reminder
-      , [ ( (className =? x <||> title =? x <||> resource =? x)
+      , [ (    (className =? x <||> title =? x <||> resource =? x)
           <&&> (not <$> isDialog)
           )
             --> doShiftAndGo (myWorkspaces !! 9)
@@ -161,9 +170,9 @@ myManageHook =
   myTFloats  = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
   myRFloats  = []
   myIgnores  = ["desktop_window"]
-  my1Shifts = []
-  my2Shifts = []
-  my3Shifts = []
+  my1Shifts  = []
+  my2Shifts  = []
+  my3Shifts  = []
   my4Shifts  = ["Gimp", "Lutris"]
   my5Shifts  = []
   -- TODO: use dynamicTitle for Spotify

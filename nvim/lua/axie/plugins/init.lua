@@ -408,6 +408,7 @@ return packer.startup({
     })
 
     -- Open with sudo
+    -- NOTE: eunuch requires an askpass helper, suda.vim asks for password everytime
     -- use("tpope/vim-eunuch")
     use({
       "lambdalisue/suda.vim",

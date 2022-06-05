@@ -146,6 +146,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/lambdalisue/suda.vim/issues/48
 - https://github.com/catppuccin/nvim/issues/134
 - https://github.com/sindrets/diffview.nvim/issues/144
 - https://github.com/jose-elias-alvarez/null-ls.nvim/pull/892

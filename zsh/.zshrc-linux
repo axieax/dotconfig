@@ -4,6 +4,11 @@ eval "$(starship init zsh)"
 
 # oh-my-zsh
 export ZSH="/home/$USER/.oh-my-zsh"
+
+# auto update
+zstyle ':omz:update' frequency 13
+zstyle ':omz:update' mode auto
+
 ENABLE_CORRECTION="true"
 
 plugins=(
@@ -28,7 +33,7 @@ source $ZSH/oh-my-zsh.sh
 ### ARCOLINUX SETTINGS ###
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 setopt GLOB_DOTS
 # setopt SHARE_HISTORY

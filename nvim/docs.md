@@ -22,6 +22,7 @@
   - Use nvim-gps in winbar to replace nvim-treesitter/nvim-treesitter-context
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
+  - Guide: https://who.ldelossa.is/posts/gh-nvim/
 - configure ts context to be similar to intellij (names enough, maybe params)
 - `nvim_set_hl` instead of `vim.cmd("highlight ...")`?
 - Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
@@ -76,6 +77,7 @@
 
 ## Features/plugins
 
+- https://www.reddit.com/r/neovim/comments/ut1cj9/i_have_just_published_nvimdevcontainer_plugin/
 - Packer refer to a PR
 - PackerSnapshot diff -> changelog
 - https://github.com/ziontee113/syntax-tree-surfer
@@ -146,6 +148,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/Zane-/howdoi.nvim/issues/1
+- https://bugs.chromium.org/p/chromium/issues/detail?id=998903
 - https://github.com/lambdalisue/suda.vim/issues/48
 - https://github.com/catppuccin/nvim/issues/134
 - https://github.com/sindrets/diffview.nvim/issues/144

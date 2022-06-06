@@ -412,7 +412,11 @@ function link-github-remote() {
 }
 
 # Do not disturb
-alias dnd='xfconf-query -c xfce4-notifyd -p /do-not-disturb -T'
+function dnd() {
+  xfconf-query -c xfce4-notifyd -p /do-not-disturb -T
+  echo -n "Do not disturb: "
+  xfconf-query -c xfce4-notifyd -p /do-not-disturb -v
+}
 
 # timezone
 alias timezone='sudo timedatectl set-ntp true'

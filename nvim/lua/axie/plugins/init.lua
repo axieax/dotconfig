@@ -421,6 +421,17 @@ return packer.startup({
     -- vim API completion
     use("folke/lua-dev.nvim")
 
+    -- howdoi query
+    use({
+      "zane-/howdoi.nvim",
+      after = "telescope.nvim",
+      config = function()
+        local telescope = require("telescope")
+        telescope.load_extension("howdoi")
+        vim.keymap.set("n", "<Space>fH", telescope.extensions.howdoi.howdoi)
+      end,
+    })
+
     ------------------
     -- Helper Tools --
     ------------------

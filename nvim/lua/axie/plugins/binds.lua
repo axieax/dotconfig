@@ -86,7 +86,7 @@ function M.general_mappings()
         b = { require("telescope.builtin").buffers, "open buffers" },
         B = { "<Cmd>Neotree source=buffers toggle=true<CR>", "open buffers (tree)" },
         z = { "<Cmd>Telescope zoxide list<CR>", "zoxide list" },
-        H = { require("telescope.builtin").vim_options, "vim options" },
+        v = { require("telescope.builtin").vim_options, "vim options" },
         r = { require("telescope.builtin").registers, "registers" }, -- could be "
         -- M = { require("telescope").extensions.macroscope.default, "search macros" },
         M = { "<Cmd>Telescope macroscope<CR>", "search macros" },

@@ -16,6 +16,7 @@
 
 ## TODO
 
+- What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:
   - Migrate galaxyline.nvim to heirline.nvim
@@ -77,6 +78,7 @@
 
 ## Features/plugins
 
+- https://github.com/Djancyp/cheat-sheet
 - https://www.reddit.com/r/neovim/comments/ut1cj9/i_have_just_published_nvimdevcontainer_plugin/
 - Packer refer to a PR
 - PackerSnapshot diff -> changelog
@@ -148,7 +150,6 @@
 
 ## Current PRs / Issues
 
-- https://github.com/Zane-/howdoi.nvim/issues/1
 - https://bugs.chromium.org/p/chromium/issues/detail?id=998903
 - https://github.com/lambdalisue/suda.vim/issues/48
 - https://github.com/catppuccin/nvim/issues/134

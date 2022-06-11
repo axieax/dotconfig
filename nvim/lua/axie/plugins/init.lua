@@ -894,6 +894,7 @@ return packer.startup({
     use("tpope/vim-dispatch")
 
     -- Unit test
+    -- TODO: replace with https://github.com/rcarriga/neotest
     use({
       "rcarriga/vim-ultest",
       run = ":UpdateRemotePlugins",

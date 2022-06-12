@@ -20,7 +20,7 @@
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:
   - Migrate galaxyline.nvim to heirline.nvim
-  - Use nvim-gps in winbar to replace nvim-treesitter/nvim-treesitter-context
+  - https://github.com/SmiteshP/nvim-navic for winbar context, replace nvim-treesitter-context
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
@@ -122,12 +122,11 @@
 - https://github.com/kwkarlwang/bufresize.nvim
 - https://github.com/sQVe/sort.nvim
 - https://github.com/NTBBloodbath/rest.nvim API
-- PackerUpdate force pull (git fetch origin, git reset -hard origin/master)
+- PackerUpdate force pull (git fetch origin, git reset --hard origin/main)
 - https://github.com/LudoPinelli/comment-box.nvim
 - inccommand split preview-window scroll
 - https://github.com/natecraddock/workspaces.nvim
 - https://github.com/hrsh7th/nvim-cmp/issues/429#issuecomment-980843997
-- https://github.com/karb94/neoscroll.nvim/issues/55
 
 ## Notes / issues
 
@@ -151,6 +150,7 @@
 ## Current PRs / Issues
 
 - https://bugs.chromium.org/p/chromium/issues/detail?id=998903
+- https://github.com/karb94/neoscroll.nvim/issues/55
 - https://github.com/lambdalisue/suda.vim/issues/48
 - https://github.com/catppuccin/nvim/issues/134
 - https://github.com/sindrets/diffview.nvim/issues/144

@@ -51,7 +51,6 @@ return function()
   local mappings = {
     ["<C-d>"] = cmp_map(cmp.mapping.scroll_docs(-4)),
     ["<C-f>"] = cmp_map(cmp.mapping.scroll_docs(4)),
-    ["<C-Space>"] = cmp_map(cmp.mapping.complete()),
     ["<C-e>"] = {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
@@ -61,7 +60,8 @@ return function()
       select = false,
     })),
     -- Toggle cmp menu
-    ["<a-k>"] = {
+    -- ["<C-Space>"] = cmp_map(cmp.mapping.complete()),
+    ["<C-Space>"] = {
       i = function()
         if cmp.visible() then
           cmp.abort()

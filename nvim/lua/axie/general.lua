@@ -157,10 +157,12 @@ for _, key in ipairs(center_keys) do
 end
 
 -- Resize windows
-vim.keymap.set("n", "<C-k>", "<Cmd>resize -1<CR>")
-vim.keymap.set("n", "<C-j>", "<Cmd>resize +1<CR>")
-vim.keymap.set("n", "<C-h>", "<Cmd>vertical resize -1<CR>")
-vim.keymap.set("n", "<C-l>", "<Cmd>vertical resize +1<CR>")
+vim.keymap.set("n", "<C-w>K", "<Cmd>resize -1<CR>")
+vim.keymap.set("n", "<C-w>J", "<Cmd>resize +1<CR>")
+vim.keymap.set("n", "<C-w>H", "<Cmd>vertical resize -1<CR>")
+vim.keymap.set("n", "<C-w>L", "<Cmd>vertical resize +1<CR>")
+vim.keymap.set("n", "H", "<Cmd>vertical resize -1<CR>")
+vim.keymap.set("n", "L", "<Cmd>vertical resize +1<CR>")
 
 -- Wrapped cursor navigation
 for _, key in ipairs({ "j", "k" }) do

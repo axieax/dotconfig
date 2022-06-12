@@ -119,7 +119,7 @@ function M.hls()
   local root_pattern = require("lspconfig.util").root_pattern
   return {
     -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/hls.lua
-    root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
+    -- root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
     -- root_dir = function(fname)
     --   return root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")(fname)
     --     or vim.fn.getcwd()

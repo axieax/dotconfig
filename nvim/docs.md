@@ -151,6 +151,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neotest/neotest/issues/35
 - https://bugs.chromium.org/p/chromium/issues/detail?id=998903
 - https://github.com/karb94/neoscroll.nvim/issues/55
 - https://github.com/lambdalisue/suda.vim/issues/48

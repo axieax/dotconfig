@@ -38,13 +38,10 @@ function M.general_mappings()
         l = { "<Cmd>lua require'dap'.step_over()<CR>", "Step over" },
         q = { "<Cmd>lua require'dap'.close()<CR>", "Stop" },
         [";"] = { "<Cmd>lua require'dapui'.toggle()<CR>", "Toggle UI" },
-        t = { "<Cmd>lua require'axie.lsp.debug.helpers'.debug_test()<CR>", "Debug test" },
       },
       t = {
         name = "+test",
-        v = { "<Cmd>TestVisit<CR>", "Test visit" },
-        m = { require("axie.lsp.test").custom_test_method, "Test method" },
-        c = { "<Cmd>lua require'axie.lsp.test'.custom_test_class()<CR>", "Test class" },
+        -- v = { "<Cmd>TestVisit<CR>", "Test visit" },
         P = { "<Plug>PlenaryTestFile", "Plenary test file" },
       },
       l = {
@@ -138,7 +135,7 @@ function M.general_mappings()
         end,
         "Previous diagnostic",
       },
-      t = { "<Cmd>call ultest#positions#prev()<CR>", "Previous test" },
+      -- t = { "<Cmd>call ultest#positions#prev()<CR>", "Previous test" },
     },
     ["]"] = {
       name = "+next",
@@ -149,7 +146,7 @@ function M.general_mappings()
         end,
         "Next diagnostic",
       },
-      t = { "<Cmd>call ultest#positions#next()<CR>", "Next test" },
+      -- t = { "<Cmd>call ultest#positions#next()<CR>", "Next test" },
     },
     g = {
       name = "+g",

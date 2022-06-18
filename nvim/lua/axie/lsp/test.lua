@@ -1,11 +1,10 @@
--- TODO: parse test cases only, and following line for errors (summary)
-
 local M = {}
 
+-- 1 for just status, 2 for reason, 3 for topmost stack trace, etc.
+local ERROR_LIMIT = 3
+
 function M.dap_repl_summary()
-  -- TODO: perhaps also a maximum number of errors to report? report length?
   local notify = require("axie.utils").notify
-  -- get buffers
   local buffers = vim.api.nvim_list_bufs()
   for _, bufnr in ipairs(buffers) do
     -- find result buffer
@@ -13,7 +12,23 @@ function M.dap_repl_summary()
     if buf_name == "[dap-repl]" then
       -- display notification
       local buf_lines = vim.api.nvim_buf_get_lines(bufnr, 1, -1, false)
-      notify(table.concat(buf_lines, "\n"))
+
+      local notification = ""
+      local error_line_count = 0
+      for _, line in ipairs(buf_lines) do
+        if line:find("^[✔️❌]") then
+          error_line_count = 0
+        else
+          -- Normal line within error block
+          error_line_count = error_line_count + 1
+        end
+
+        if error_line_count < ERROR_LIMIT then
+          notification = notification .. line .. "\n"
+        end
+      end
+
+      notify(notification)
       return
     end
   end
@@ -41,11 +56,15 @@ function M.binds()
     require("neotest").run.run_last({ strategy = "dap" })
   end, { desc = "Test last (debug)" })
   vim.keymap.set("n", "<Space>t;", function()
+    -- TODO: enter = true
     require("neotest").summary.toggle()
   end, { desc = "Test summary" })
   vim.keymap.set("n", "<Space>tp", function()
-    require("neotest").output.open({ enter = true })
+    require("neotest").output.open()
   end, { desc = "Test output" })
+  vim.keymap.set("n", "<Space>tq", function()
+    require("neotest").run.stop()
+  end, { desc = "Test quit" })
 
   -- jdtls
   local filetype_map = require("axie.utils").filetype_map

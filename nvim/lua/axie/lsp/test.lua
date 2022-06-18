@@ -1,13 +1,12 @@
 -- https://github.com/vim-test/vim-test --
 -- https://github.com/rcarriga/vim-ultest --
--- TODO: java functions separate keybindings in ftplugin or on_attach?
+-- TODO: java functions separate keybindings using utils.filetype_map
 -- TODO: parse test cases only, and following line for errors (summary)
 -- TODO: perhaps also a maximum number of errors to report?
 
 local M = {}
 
-function M.display()
-  -- TODO: https://github.com/rcarriga/nvim-notify/issues/43
+local function dap_repl_summary()
   local notify = require("axie.utils").notify
   -- get buffers
   local buffers = vim.api.nvim_list_bufs()
@@ -24,37 +23,33 @@ function M.display()
   notify("No tests found 😢", "error")
 end
 
-function M.display_delayed()
-  -- NOTE: automatically activates after a fixed timeout (regardless of test time)
-  -- TODO: keep trying until [dap-repl] found?
-  vim.defer_fn(M.display, 2000)
-end
+local jdtls_test_options = { after_test = dap_repl_summary }
 
 function M.custom_test_method()
   local ft = vim.bo.filetype
   if ft == "python" then
+    -- NOTE: use Ultest instead
     require("dap-python").test_method()
   elseif ft == "java" then
-    require("jdtls").test_nearest_method()
+    require("jdtls").test_nearest_method(jdtls_test_options)
   end
-  M.display_delayed()
 end
 
 function M.custom_test_class()
   local ft = vim.bo.filetype
   if ft == "python" then
+    -- NOTE: use Ultest instead
     require("dap-python").test_class()
   elseif ft == "java" then
-    require("jdtls").test_class()
+    require("jdtls").test_class(jdtls_test_options)
   end
-  M.display_delayed()
 end
 
 function M.custom_test_summary()
   local ft = vim.bo.filetype
   if ft == "java" then
     -- NOTE: summary not persistent
-    M.display()
+    dap_repl_summary()
   else
     vim.cmd("UltestSummary")
   end

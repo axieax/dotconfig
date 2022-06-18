@@ -608,9 +608,19 @@ return packer.startup({
       config = function()
         require("neoscroll").setup()
         require("neoscroll.config").set_mappings({
+          -- https://github.com/karb94/neoscroll.nvim/issues/55
           -- ["{"] = { "scroll", { "-vim.wo.scroll", "true", "250" } },
           -- ["}"] = { "scroll", { "vim.wo.scroll", "true", "250" } },
+          -- ["<C-y>"] = { "scroll", { "-vim.wo.scroll", "false", "0" } },
+          -- ["<C-e>"] = { "scroll", { "vim.wo.scroll", "false", "0" } },
+          -- https://github.com/karb94/neoscroll.nvim/issues/50
+          -- ["<ScrollWheelUp>"] = { "scroll", { "-0.10", "false", "50" } },
+          -- ["<ScrollWheelDown>"] = { "scroll", { "0.10", "false", "50" } },
         })
+        -- vim.keymap.set({ "n", "x" }, "<ScrollWheelUp>", "<C-y>")
+        -- vim.keymap.set("i", "<ScrollWheelUp>", "<C-o><C-y>")
+        -- vim.keymap.set({ "n", "x" }, "<ScrollWheelDown>", "<C-e>")
+        -- vim.keymap.set("i", "<ScrollWheelDown>", "<C-o><C-e>")
       end,
     })
 
@@ -624,6 +634,7 @@ return packer.startup({
     -- Easy motion / navigation
     -- CHECK: letters based on characters in word?
     -- TRY: find a way / alt for jumping by starting to type word at location
+    -- ALT: https://github.com/ggandor/leap.nvim ?
     use("ggandor/lightspeed.nvim")
 
     -- Text movement
@@ -899,7 +910,7 @@ return packer.startup({
     use("tpope/vim-dispatch")
 
     -- Unit test
-    -- TODO: replace with https://github.com/rcarriga/neotest
+    -- TODO: replace with https://github.com/nvim-neotest/neotest
     use({
       "rcarriga/vim-ultest",
       run = ":UpdateRemotePlugins",
@@ -950,7 +961,7 @@ return packer.startup({
     })
 
     -- Debugger installer
-    use("Pocco81/DAPInstall.nvim")
+    use("Pocco81/dap-buddy.nvim")
 
     -- Language-specific debugger setup
     use({

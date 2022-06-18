@@ -178,6 +178,7 @@ function M.get_component(name, condition)
 
     -- LSP / Diagnostics Components
     LspClient = {
+      -- TODO:  icon for GitHub Copilot active
       provider = function()
         return require("galaxyline.providers.lsp").get_lsp_client("", { "null-ls" })
       end,

@@ -16,11 +16,14 @@
 
 ## TODO
 
+- Replace vim-ultest with neotest
+- Custom test method / class -> utils.filetype_map
 - What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:
   - Migrate galaxyline.nvim to heirline.nvim
   - https://github.com/SmiteshP/nvim-navic for winbar context, replace nvim-treesitter-context
+  - ALT: use Aerial (https://github.com/stevearc/aerial.nvim/issues/105)
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
@@ -78,6 +81,7 @@
 
 ## Features/plugins
 
+- https://github.com/andythigpen/nvim-coverage
 - https://github.com/Djancyp/cheat-sheet
 - https://www.reddit.com/r/neovim/comments/ut1cj9/i_have_just_published_nvimdevcontainer_plugin/
 - Packer refer to a PR

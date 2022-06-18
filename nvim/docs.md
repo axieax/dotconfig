@@ -59,10 +59,9 @@
 - TODO: rust-tools debug setup
 - TODO: global toggle inlay hints command (inc rust as well)
 - TODO: nvim-tree goto location of current buffer in cwd
-- TODO: python3 provider (OS, venv)
+- TODO: python3 provider (OS, venv) -> utils (can be used in nvim-dap-python config as well)
 - Telescope setup, find_files wrapper if buffer is directory
 - Merge conflict resolver (like vscode) - fugitive has this
-- Cursor hover lsp hover or line diagnostic?
 - nvim cmp dadbod source
 - nvim cmp tzachar/cmp-fzy-buffer?
 - Plugin and config split into separate modules?

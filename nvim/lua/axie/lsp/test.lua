@@ -28,7 +28,7 @@ function M.dap_repl_summary()
         end
       end
 
-      notify(notification)
+      notify(notification:sub(0, -2))
       return
     end
   end

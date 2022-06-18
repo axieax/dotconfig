@@ -910,11 +910,18 @@ return packer.startup({
     use("tpope/vim-dispatch")
 
     -- Unit test
-    -- TODO: replace with https://github.com/nvim-neotest/neotest
     use({
-      "rcarriga/vim-ultest",
-      run = ":UpdateRemotePlugins",
-      requires = "vim-test/vim-test",
+      "nvim-neotest/neotest",
+      module = "neotest",
+      after = "nvim-treesitter",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-neotest/neotest-go",
+        "haydenmeade/neotest-jest",
+        "nvim-neotest/neotest-python",
+        "nvim-neotest/neotest-plenary",
+      },
+      setup = require("axie.lsp.test").binds,
       config = require("axie.lsp.test").setup,
     })
 

@@ -1,12 +1,9 @@
--- https://github.com/vim-test/vim-test --
--- https://github.com/rcarriga/vim-ultest --
--- TODO: java functions separate keybindings using utils.filetype_map
 -- TODO: parse test cases only, and following line for errors (summary)
--- TODO: perhaps also a maximum number of errors to report?
 
 local M = {}
 
-local function dap_repl_summary()
+function M.dap_repl_summary()
+  -- TODO: perhaps also a maximum number of errors to report? report length?
   local notify = require("axie.utils").notify
   -- get buffers
   local buffers = vim.api.nvim_list_bufs()
@@ -23,42 +20,61 @@ local function dap_repl_summary()
   notify("No tests found 😢", "error")
 end
 
-local jdtls_test_options = { after_test = dap_repl_summary }
+function M.binds()
+  -- NORMAL
+  vim.keymap.set("n", "<Space>tt", function()
+    require("neotest").run.run()
+  end, { desc = "Test nearest" })
+  vim.keymap.set("n", "<Space>tT", function()
+    require("neotest").run.run({ strategy = "dap" })
+  end, { desc = "Test nearest (debug)" })
+  vim.keymap.set("n", "<Space>tf", function()
+    require("neotest").run.run(vim.fn.expand("%"))
+  end, { desc = "Test file" })
+  vim.keymap.set("n", "<Space>tF", function()
+    require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" })
+  end, { desc = "Test file (debug)" })
+  vim.keymap.set("n", "<Space>tr", function()
+    require("neotest").run.run_last()
+  end, { desc = "Test last" })
+  vim.keymap.set("n", "<Space>tR", function()
+    require("neotest").run.run_last({ strategy = "dap" })
+  end, { desc = "Test last (debug)" })
+  vim.keymap.set("n", "<Space>t;", function()
+    require("neotest").summary.toggle()
+  end, { desc = "Test summary" })
+  vim.keymap.set("n", "<Space>tp", function()
+    require("neotest").output.open({ enter = true })
+  end, { desc = "Test output" })
 
-function M.custom_test_method()
-  local ft = vim.bo.filetype
-  if ft == "python" then
-    -- NOTE: use Ultest instead
-    require("dap-python").test_method()
-  elseif ft == "java" then
-    require("jdtls").test_nearest_method(jdtls_test_options)
-  end
-end
-
-function M.custom_test_class()
-  local ft = vim.bo.filetype
-  if ft == "python" then
-    -- NOTE: use Ultest instead
-    require("dap-python").test_class()
-  elseif ft == "java" then
-    require("jdtls").test_class(jdtls_test_options)
-  end
-end
-
-function M.custom_test_summary()
-  local ft = vim.bo.filetype
-  if ft == "java" then
-    -- NOTE: summary not persistent
-    dap_repl_summary()
-  else
-    vim.cmd("UltestSummary")
-  end
+  -- jdtls
+  local filetype_map = require("axie.utils").filetype_map
+  filetype_map("java", "n", "<Space>tm", function()
+    require("jdtls").test_nearest_method({
+      after_test = require("axie.lsp.test").dap_repl_summary,
+    })
+  end, { desc = "Test method" })
+  filetype_map("java", "n", "<Space>tc", function()
+    require("jdtls").test_class({
+      after_test = require("axie.lsp.test").dap_repl_summary,
+    })
+  end, { desc = "Test class" })
+  filetype_map("java", "n", "<Space>t;", function()
+    require("axie.lsp.test").dap_repl_summary()
+  end, { desc = "Test summary" })
 end
 
 function M.setup()
-  vim.g.ultest_use_pty = 1
-  vim.g["test#python#runner"] = "pytest"
-  vim.g["test#java#runner"] = "gradletest"
+  local adapters = {}
+  for _, adapter in ipairs({ "go", "jest", "python", "plenary" }) do
+    local ok, neotest_adapter = pcall(require, "neotest-" .. adapter)
+    if ok then
+      table.insert(adapters, neotest_adapter)
+    end
+  end
+
+  -- TODO: change floating window background
+  require("neotest").setup({ adapters = adapters })
 end
 
 return M

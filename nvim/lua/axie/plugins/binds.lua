@@ -42,12 +42,6 @@ function M.general_mappings()
       },
       t = {
         name = "+test",
-        f = { "<Cmd>Ultest<CR>", "Ultest file" },
-        F = { "<Cmd>UltestDebug<CR>", "Ultest file debug" },
-        t = { "<Cmd>UltestNearest<CR>", "Ultest nearest" },
-        T = { "<Cmd>UltestDebugNearest<CR>", "Ultest nearest debug" },
-        p = { "<Cmd>UltestOutput<CR>", "Ultest output" },
-        [";"] = { "<Cmd>lua require'axie.lsp.test'.custom_test_summary()<CR>", "Test summary" },
         v = { "<Cmd>TestVisit<CR>", "Test visit" },
         m = { require("axie.lsp.test").custom_test_method, "Test method" },
         c = { "<Cmd>lua require'axie.lsp.test'.custom_test_class()<CR>", "Test class" },

@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   desc = "Automatically source lua config files on save",
   group = source_config,
   pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
-  command = "source $MYVIMRC",
+  command = "source $MYVIMRC | source %",
 })
 
 -- General config

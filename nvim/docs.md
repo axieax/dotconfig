@@ -16,8 +16,6 @@
 
 ## TODO
 
-- Replace vim-ultest with neotest
-- Custom test method / class -> utils.filetype_map
 - What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:

@@ -387,6 +387,7 @@ alias zz="$EDITOR $HOME/.zshrc"
 alias zzz=". $HOME/.zshrc"
 alias z..='z ..'
 
+alias open="xdg-open"
 alias handbrake="ghb"
 
 ## Broken Software ##

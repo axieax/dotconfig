@@ -135,7 +135,6 @@ function M.general_mappings()
         end,
         "Previous diagnostic",
       },
-      -- t = { "<Cmd>call ultest#positions#prev()<CR>", "Previous test" },
     },
     ["]"] = {
       name = "+next",
@@ -146,7 +145,6 @@ function M.general_mappings()
         end,
         "Next diagnostic",
       },
-      -- t = { "<Cmd>call ultest#positions#next()<CR>", "Next test" },
     },
     g = {
       name = "+g",

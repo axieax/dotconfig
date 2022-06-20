@@ -38,7 +38,7 @@ function M.formatting_sources()
     }),
     -- HASKELL: yay -S brittany
     formatting.brittany,
-    -- C*: yarn global add clang_format
+    -- C*: yarn global add clang-format
     formatting.clang_format.with({
       -- NOTE: disabled_filetypes still in this.filetypes
       disabled_filtypes = { "java" },

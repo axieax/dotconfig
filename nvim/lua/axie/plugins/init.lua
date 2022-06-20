@@ -920,6 +920,7 @@ return packer.startup({
         "haydenmeade/neotest-jest",
         "nvim-neotest/neotest-python",
         "nvim-neotest/neotest-plenary",
+        { "nvim-neotest/neotest-vim-test", requires = "vim-test/vim-test" },
       },
       setup = require("axie.lsp.test").binds,
       config = require("axie.lsp.test").setup,

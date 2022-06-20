@@ -36,7 +36,7 @@ function M.dap_repl_summary()
 end
 
 function M.binds()
-  -- NORMAL
+  -- general
   vim.keymap.set("n", "<Space>tt", function()
     require("neotest").run.run()
   end, { desc = "Test nearest" })
@@ -66,6 +66,14 @@ function M.binds()
     require("neotest").run.stop()
   end, { desc = "Test quit" })
 
+  -- jump
+  vim.keymap.set("n", "[t", function()
+    require("neotest").jump.prev({ status = "failed" })
+  end, { desc = "Previous test (failed)" })
+  vim.keymap.set("n", "]t", function()
+    require("neotest").jump.next({ status = "failed" })
+  end, { desc = "Next test (failed)" })
+
   -- jdtls
   local filetype_map = require("axie.utils").filetype_map
   filetype_map("java", "n", "<Space>tm", function()
@@ -84,16 +92,37 @@ function M.binds()
 end
 
 function M.setup()
+  local adapter_config = {
+    go = {
+      filetypes = { "go" },
+    },
+    jest = {
+      filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "coffee" },
+    },
+    python = {
+      filetypes = { "python" },
+    },
+    plenary = {
+      filetypes = { "lua" },
+    },
+  }
+
   local adapters = {}
-  for _, adapter in ipairs({ "go", "jest", "python", "plenary" }) do
+  local adapter_filetypes = {}
+  for adapter, opts in pairs(adapter_config) do
     local ok, neotest_adapter = pcall(require, "neotest-" .. adapter)
     if ok then
-      table.insert(adapters, neotest_adapter)
+      table.insert(adapters, neotest_adapter(opts))
+      vim.list_extend(adapter_filetypes, opts.filetypes)
     end
   end
 
-  -- TODO: change floating window background
-  require("neotest").setup({ adapters = adapters })
+  table.insert(adapters, require("neotest-vim-test")({ ignore_file_types = adapter_filetypes }))
+
+  require("neotest").setup({
+    adapters = adapters,
+    -- floating = { options = { winblend = 80 } },
+  })
 end
 
 return M

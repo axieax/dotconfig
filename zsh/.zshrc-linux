@@ -1,3 +1,20 @@
+### PATH Additions ###
+function pathadd() {
+  # if exists and not already in path
+  if [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]; then
+    export PATH="$1${PATH:+":${PATH}"}"
+  fi
+}
+
+pathadd "$HOME/.bin"
+pathadd "$HOME/.local/bin"
+pathadd "$HOME/.yarn/bin"
+pathadd "$HOME/.local/share/gem/ruby/3.0.0/bin"
+pathadd "$HOME/.cargo/bin"
+pathadd "$HOME/go/bin"
+pathadd "$HOME/bin/path"
+pathadd "$HOME/.ghcup/bin"
+
 ### ZSH EXTENSIONS ###
 # TEMP: https://github.com/ohmyzsh/ohmyzsh/pull/10947
 eval "$(starship init zsh)"
@@ -42,23 +59,6 @@ setopt GLOB_DOTS
 [[ $- != *i* ]] && return
 
 export HISTCONTROL=ignoreboth:erasedups
-
-### PATH Additions ###
-function pathadd() {
-  # if exists and not already in path
-  if [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]; then
-    export PATH="$1${PATH:+":${PATH}"}"
-  fi
-}
-
-pathadd "$HOME/.bin"
-pathadd "$HOME/.local/bin"
-pathadd "$HOME/.yarn/bin"
-pathadd "$HOME/.local/share/gem/ruby/3.0.0/bin"
-pathadd "$HOME/.cargo/bin"
-pathadd "$HOME/go/bin"
-pathadd "$HOME/bin/path"
-pathadd "$HOME/.ghcup/bin"
 
 ### ALIASES ###
 
@@ -435,3 +435,6 @@ neofetch
 # nvm alias default node > /dev/null
 
 [ -f "/home/axie/.ghcup/env" ] && source "/home/axie/.ghcup/env" # ghcup-env
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

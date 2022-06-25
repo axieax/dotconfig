@@ -9,6 +9,7 @@ return function()
     integrations = {
       treesitter = true,
       native_lsp = { enabled = true },
+      coc_nvim = false,
       lsp_trouble = true,
       cmp = true,
       lsp_saga = false,

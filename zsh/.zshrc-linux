@@ -435,6 +435,3 @@ neofetch
 # nvm alias default node > /dev/null
 
 [ -f "/home/axie/.ghcup/env" ] && source "/home/axie/.ghcup/env" # ghcup-env
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

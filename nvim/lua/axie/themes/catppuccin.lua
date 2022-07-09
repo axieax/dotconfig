@@ -85,6 +85,4 @@ return function()
   end
 
   catppuccin.remap(remaps)
-
-  vim.cmd("colorscheme catppuccin")
 end

@@ -35,6 +35,37 @@ M.prepared_language_servers = {
   -- "texlab",
 }
 
+M.prepared_treesitter_parsers = {
+  "bash",
+  "c",
+  "comment",
+  "css",
+  "dockerfile",
+  "go",
+  "gomod",
+  "gomod",
+  "hcl",
+  "help",
+  "html",
+  "http",
+  "java",
+  "javascript",
+  "json",
+  "lua",
+  "make",
+  "markdown",
+  "markdown_inline",
+  "proto",
+  "python",
+  "org",
+  "query",
+  "sql",
+  "typescript",
+  "tsx",
+  "vim",
+  "yaml",
+}
+
 -- Icons
 M.diagnostics_icons = {
   Error = "",

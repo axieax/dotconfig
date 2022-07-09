@@ -65,6 +65,4 @@ return function()
       transparency = true,
     },
   })
-
-  -- require("onedarkpro").load()
 end

@@ -16,6 +16,4 @@ return function()
       -- HLGROUP = { link = "OTHER_GROUP" },
     },
   })
-
-  -- vim.cmd("colorscheme material")
 end

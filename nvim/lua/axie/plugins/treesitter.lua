@@ -47,13 +47,13 @@ function M.setup()
     filetype = "org",
   }
 
-  local ensure_installed = require("nvim-treesitter.parsers").available_parsers()
+  local ensure_installed = require("axie.utils.config").prepared_treesitter_parsers
   vim.list_extend(ensure_installed, { "org" })
 
   require("nvim-treesitter.configs").setup({
     -- Treesitter
-    -- ensure_installed = require("axie.utils.config").prepared_parsers,
     ensure_installed = ensure_installed,
+    auto_install = true,
     highlight = {
       enable = true,
       disable = { "org" },

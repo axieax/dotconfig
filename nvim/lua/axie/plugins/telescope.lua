@@ -37,7 +37,13 @@ function M.binds()
   vim.keymap.set("n", "<Space>fc", this.dotconfig, { desc = "search config" })
   vim.keymap.set("n", "<Space>fg", builtin.live_grep, { desc = "live grep" })
   vim.keymap.set("n", "<Space>fG", builtin.grep_string, { desc = "grep string" })
-  vim.keymap.set("n", "<Space>fm", builtin.man_pages, { desc = "search manual" })
+  vim.keymap.set(
+    "n",
+    "<Space>fm",
+    -- REF: https://en.wikipedia.org/wiki/Man_page#Manual_sections
+    require_args(builtin.man_pages, { sections = { "1", "2", "3", "4", "5", "6", "7", "8" } }),
+    { desc = "search manual" }
+  )
   vim.keymap.set("n", "<Space>ft", builtin.colorscheme, { desc = "theme" })
   vim.keymap.set(
     "n",

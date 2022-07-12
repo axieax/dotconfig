@@ -231,6 +231,16 @@ function M.jsonls()
   }
 end
 
+function M.ltex()
+  return {
+    settings = {
+      ltex = {
+        language = "en-AU",
+      },
+    },
+  }
+end
+
 function M.sumneko_lua()
   local settings = {
     settings = {

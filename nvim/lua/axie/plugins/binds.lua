@@ -117,7 +117,7 @@ function M.general_mappings()
       q = { require("axie.utils").toggle_signcolumn, "toggle signcolumn" },
       a = { ":lua require'hlargs'.toggle()<CR>", "toggle argument highlights" },
       v = { "ggVG", "select all" },
-      V = { 'ggVG"+y', "copy all to clipboard" },
+      V = { 'ggVG"+y', "copy all to clipboard" }, -- TODO: add <c-o> only if has jumped?
       c = { require("axie.utils").display_path, "buffer path" },
       C = { require("axie.utils").display_cwd, "cwd" },
       i = { "<Cmd>IndentBlanklineToggle<CR>", "toggle indent context line" },

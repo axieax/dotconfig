@@ -40,6 +40,7 @@ return function()
       notify = true,
       telekasten = true,
       symbols_outline = true,
+      mini = false,
     },
   })
 
@@ -84,5 +85,7 @@ return function()
     })
   end
 
-  catppuccin.remap(remaps)
+  vim.g.catppuccin_override_colors = remaps
+
+  vim.cmd("colorscheme catppuccin")
 end

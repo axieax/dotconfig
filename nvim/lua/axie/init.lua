@@ -30,9 +30,6 @@ require("axie.general")
 -- Plugins config
 require("axie.plugins")
 
--- Apply colorscheme
-pcall(vim.cmd, "catppuccin")
-
 -- Personal plugin development
 local dev_mode = require("axie.utils.config").dev_mode
 if dev_mode then

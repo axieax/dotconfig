@@ -26,6 +26,7 @@ M.prepared_language_servers = {
   -------------------
   -- "jdtls",
   "clangd",
+  "ltex",
   -- "cmake",
   -- "rust_analyzer",
   -- "gopls",

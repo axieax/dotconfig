@@ -529,9 +529,7 @@ return packer.startup({
               -- 'switch',
               -- 'case',
             }, ]]
-            -- NOTE: not working (treesitter: content not nested under heading)
-            -- https://github.com/romgrk/nvim-treesitter-context/issues/87
-            markdown = { "atx_heading" },
+            markdown = { "section" },
           },
         })
       end,

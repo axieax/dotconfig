@@ -177,10 +177,17 @@ function M.get_component(name, condition)
     },
 
     -- LSP / Diagnostics Components
+    -- NOTE: too slow
+    Copilot = {
+      provider = function()
+        local info = vim.call("copilot#Call", "checkStatus", { options = { localChecksOnly = false } })
+        return ternary(info.status == "OK", "yes ", "no ")
+      end,
+    },
     LspClient = {
       -- TODO:  icon for GitHub Copilot active
       provider = function()
-        return require("galaxyline.providers.lsp").get_lsp_client("", { "null-ls" })
+        return require("galaxyline.providers.lsp").get_lsp_client("", { "null-ls", "copilot" })
       end,
       highlight = { onedark_colours.cyan },
     },
@@ -259,6 +266,7 @@ function M.setup()
     },
 
     right = {
+      -- get_component("Copilot"),
       get_component("FileIcon"),
       get_component("LspClient"),
       get_component("FileFormat"),

@@ -105,7 +105,7 @@
 - Gradual undo
 - Autosave and swapfiles?
 - Set up quick compiler
-- Code runner (Codi, https://github.com/dccsillag/magma-nvim)
+- Code runner (Codi, https://github.com/dccsillag/magma-nvim, https://github.com/0x100101/lab.nvim)
 - Text object for separate parts of variable name, e.g. helloGoodbye, hello_goodbye
 - Telescope-cheat.nvim
 - mrjones2014/dash.nvim for linux?
@@ -150,6 +150,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-telescope/telescope.nvim/issues/1904
+- https://github.com/rcarriga/nvim-dap-ui/issues/115
 - https://github.com/nvim-neotest/neotest/issues/35
 - https://bugs.chromium.org/p/chromium/issues/detail?id=998903
 - https://github.com/karb94/neoscroll.nvim/issues/55

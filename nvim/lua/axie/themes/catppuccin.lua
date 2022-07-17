@@ -2,7 +2,7 @@
 
 return function()
   -- highlight group overrides
-  local cp = require("catppuccin.api.colors").get_colors()
+  local cp = require("catppuccin.palettes").get_palette()
 
   local remaps = {
     NormalFloat = { bg = cp.base }, -- NOTE: catppuccin needs a bg colour
@@ -45,6 +45,8 @@ return function()
   vim.g.catppuccin_flavour = "mocha"
   vim.g.catppuccin_override_colors = remaps
   catppuccin.setup({
+    compile = { enabled = true },
+    dim_inactive = { enabled = false },
     transparent_background = true,
     integrations = {
       treesitter = true,
@@ -83,6 +85,17 @@ return function()
       mini = false,
     },
     custom_highlights = remaps,
+  })
+
+  -- Create an autocmd User PackerCompileDone to update it every time packer is compiled
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerCompileDone",
+    callback = function()
+      vim.cmd("CatppuccinCompile")
+      vim.defer_fn(function()
+        vim.cmd("colorscheme catppuccin")
+      end, 50) -- Debounced for live reloading
+    end,
   })
 
   vim.cmd("colorscheme catppuccin")

@@ -77,6 +77,7 @@ return packer.startup({
     use({
       "catppuccin/nvim",
       as = "catppuccin",
+      run = "CatppuccinCompile",
       -- TEMP: https://github.com/catppuccin/nvim/issues/134
       -- commit = "f079dda3dc23450d69b4bad11bfbd9af2c77f6f3",
       config = require("axie.themes.catppuccin"),
@@ -875,9 +876,11 @@ return packer.startup({
 
     use({
       "ellisonleao/glow.nvim",
-      cmd = { "Glow", "GlowInstall" },
       setup = function()
-        vim.g.glow_border = "rounded"
+        require("glow").setup({
+          border = "rounded",
+          pager = false,
+        })
         local filetype_map = require("axie.utils").filetype_map
         filetype_map("markdown", "n", ",o", "<Cmd>Glow<CR>")
       end,
@@ -1151,6 +1154,8 @@ return packer.startup({
   end,
 
   config = {
+    -- catppuccin live reload after :PackerCompile
+    auto_reload_compiled = true,
     -- https://github.com/wbthomason/packer.nvim/issues/202
     max_jobs = 50,
     -- https://github.com/wbthomason/packer.nvim/issues/381#issuecomment-849815901

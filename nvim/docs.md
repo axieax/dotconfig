@@ -160,8 +160,6 @@
 - https://github.com/sindrets/diffview.nvim/issues/144
 - https://github.com/jose-elias-alvarez/null-ls.nvim/pull/892
 - https://github.com/ohmyzsh/ohmyzsh/pull/10947
-- https://github.com/anuvyklack/pretty-fold.nvim/issues/22
-- https://github.com/anuvyklack/nvim-keymap-amend/issues/1
 - https://github.com/hrsh7th/nvim-cmp/issues/953
   - NOTE: arrow keys navigate commands rather than through text
   - https://github.com/neovim/neovim/issues/9953

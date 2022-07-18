@@ -64,6 +64,10 @@ return function()
         show_root = false,
         transparent_panel = true,
       },
+      dap = {
+        enabled = true,
+        enable_ui = true,
+      },
       which_key = true,
       indent_blankline = {
         enabled = true,

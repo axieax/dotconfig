@@ -541,7 +541,7 @@ main = do
                            <+> manageHook myBaseConfig
     , modMask            = myModMask
     , borderWidth        = myBorderWidth
-    , handleEventHook    = handleEventHook myBaseConfig
+    , handleEventHook    = handleEventHook myBaseConfig <+> fullscreenEventHook
     , focusFollowsMouse  = myFocusFollowsMouse
     , workspaces         = myWorkspaces
     , focusedBorderColor = focdBord

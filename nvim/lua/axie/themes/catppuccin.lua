@@ -57,6 +57,7 @@ return function()
       lsp_saga = false,
       gitgutter = false,
       gitsigns = true,
+      leap = false,
       telescope = true,
       nvimtree = { enabled = false },
       neotree = {
@@ -87,6 +88,9 @@ return function()
       telekasten = true,
       symbols_outline = true,
       mini = false,
+      aerial = true,
+      vimwiki = true,
+      beacon = true,
     },
     custom_highlights = remaps,
   })

@@ -291,12 +291,16 @@ return packer.startup({
     -- Fold preview
     use({
       "anuvyklack/pretty-fold.nvim",
+      config = function()
+        require("pretty-fold").setup()
+      end,
+    })
+
+    use({
+      "anuvyklack/fold-preview.nvim",
       requires = "anuvyklack/nvim-keymap-amend",
       config = function()
-        local pretty_fold = require("pretty-fold")
-        local pretty_fold_preview = require("pretty-fold.preview")
-
-        pretty_fold.setup()
+        local pretty_fold_preview = require("fold-preview")
         pretty_fold_preview.setup()
 
         local keymap_amend = require("keymap-amend")

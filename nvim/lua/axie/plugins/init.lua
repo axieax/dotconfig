@@ -1000,8 +1000,10 @@ return packer.startup({
     -- LSP install
     -- TODO: move lsp setup call to axie/init.lua
     use({
-      "williamboman/nvim-lsp-installer",
+      "williamboman/mason.nvim",
       requires = {
+        "williamboman/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
         "stevearc/aerial.nvim",
@@ -1011,7 +1013,7 @@ return packer.startup({
         "p00f/clangd_extensions.nvim",
         "folke/lua-dev.nvim",
       },
-      config = require("axie.lsp.setup").servers,
+      config = require("axie.lsp.install").setup,
     })
 
     -- Java LSP

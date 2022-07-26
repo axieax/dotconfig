@@ -1,8 +1,37 @@
 -- https://github.com/williamboman/nvim-lsp-installer --
 
--- TODO: update all language servers binding
-
 local M = {}
+
+M.ensure_installed = {
+  ---------------
+  -- Scripting --
+  ---------------
+  "pyright",
+  "lua-language-server",
+  "bash-language-server",
+  ---------------------
+  -- Web Development --
+  ---------------------
+  -- "dockerfile-language-server",
+  "typescript-language-server",
+  "emmet-ls",
+  "json-lsp",
+  -- "eslint_d",
+  -- "css-lsp",
+  -- "html-lsp",
+  -------------------
+  -- Miscellaneous --
+  -------------------
+  -- "jdtls",
+  "clangd",
+  "ltex-ls",
+  -- "cmake-language-server",
+  -- "rust-analyzer",
+  -- "gopls",
+  -- "haskell-language-server",
+  -- "sqls",
+  -- "texlab",
+}
 
 --- Setup a language server with lspconfig
 ---@param name string @The name of the language server
@@ -37,19 +66,11 @@ end
 
 --- Setup language servers
 function M.servers()
-  -- Connect nvim-lsp-installer to lspconfig
-  local lsp_installer = require("nvim-lsp-installer")
-  local ensure_installed = require("axie.utils.config").prepared_language_servers
-  lsp_installer.setup({
-    ensure_installed = ensure_installed,
-    automatic_installation = true,
-  })
-
-  -- Setup language servers
+  -- Setup installed language servers
   local this = require("axie.lsp.setup")
-  local installed_servers = lsp_installer.get_installed_servers()
+  local installed_servers = require("mason-lspconfig").get_installed_servers()
   for _, server in ipairs(installed_servers) do
-    this.setup_lspconfig(server.name)
+    this.setup_lspconfig(server)
   end
 
   -- Setup language servers via autocmd

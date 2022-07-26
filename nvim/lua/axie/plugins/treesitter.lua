@@ -2,6 +2,37 @@
 
 local M = {}
 
+M.ensure_installed = {
+  "bash",
+  "c",
+  "comment",
+  "css",
+  "dockerfile",
+  "go",
+  "gomod",
+  "gomod",
+  "hcl",
+  "help",
+  "html",
+  "http",
+  "java",
+  "javascript",
+  "json",
+  "lua",
+  "make",
+  "markdown",
+  "markdown_inline",
+  "proto",
+  "python",
+  "org",
+  "query",
+  "sql",
+  "typescript",
+  "tsx",
+  "vim",
+  "yaml",
+}
+
 -- TODO: extract requires to pcall here
 -- NOTE: not sure if this works https://www.reddit.com/r/neovim/comments/rmgxkf/better_treesitter_way_to_jump_to_parentsibling/
 
@@ -47,7 +78,7 @@ function M.setup()
     filetype = "org",
   }
 
-  local ensure_installed = require("axie.utils.config").prepared_treesitter_parsers
+  local ensure_installed = require("axie.plugins.treesitter").ensure_installed
   vim.list_extend(ensure_installed, { "org" })
 
   require("nvim-treesitter.configs").setup({

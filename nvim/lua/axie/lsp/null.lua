@@ -1,6 +1,21 @@
 -- https://github.com/jose-elias-alvarez/null-ls.nvim --
 local M = {}
 
+M.ensure_installed = {
+  -- formatter
+  "stylua",
+  "black",
+  "isort",
+  -- "goimports",
+  "prettierd",
+  "shfmt",
+  -- linter
+  "editorconfig-checker",
+  -- "golangci-lint",
+  "pylint",
+  "shellcheck",
+}
+
 -- Use null-ls formatting if any of the given filetypes is supported
 -- @param ls_filetypes of language server to be checked
 function M.use_null_formatting(filetype)

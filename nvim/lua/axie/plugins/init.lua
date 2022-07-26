@@ -463,6 +463,14 @@ return packer.startup({
       config = require("axie.plugins.dial"),
     })
 
+    -- Keep cursor on shift (`>` or `<`) and filter (`=`)
+    use({
+      "gbprod/stay-in-place.nvim",
+      config = function()
+        require("stay-in-place").setup()
+      end,
+    })
+
     ------------------
     -- UI Utilities --
     ------------------
@@ -1160,7 +1168,7 @@ return packer.startup({
   end,
 
   config = {
-    -- catppuccin live reload after :PackerCompile
+    -- actually reload catppuccin setup function without restarting nvim
     auto_reload_compiled = true,
     -- https://github.com/wbthomason/packer.nvim/issues/202
     max_jobs = 50,

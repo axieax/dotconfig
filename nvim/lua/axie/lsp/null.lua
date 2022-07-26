@@ -46,7 +46,7 @@ function M.formatting_sources()
     -- PYTHON: pip install isort (import sort)
     formatting.isort,
     -- GOLANG: go install golang.org/x/tools/cmd/goimports@latest
-    -- NOTE: this superset of gomft is preferred if installed
+    -- NOTE: this superset of gofmt is preferred if installed
     formatting.goimports.with({
       -- TEMP: group local Canva packages
       extra_args = { "-local", "github.com/canva" },

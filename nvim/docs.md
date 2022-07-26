@@ -21,9 +21,10 @@
 - What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:
-  - Migrate galaxyline.nvim to heirline.nvim
+  - Migrate galaxyline.nvim to heirline.nvim (lualine has clickable components tho)
   - https://github.com/SmiteshP/nvim-navic for winbar context, replace nvim-treesitter-context
   - ALT: use Aerial (https://github.com/stevearc/aerial.nvim/issues/105)
+  - https://github.com/b0o/incline.nvim ?
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
@@ -166,7 +167,6 @@
   - NOTE: arrow keys navigate commands rather than through text
   - https://github.com/neovim/neovim/issues/9953
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12
-- https://github.com/mfussenegger/nvim-jdtls/issues/264
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)

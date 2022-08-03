@@ -2,6 +2,8 @@
 
 return function()
   -- highlight group overrides
+  vim.g.catppuccin_flavour = "mocha"
+  local catppuccin = require("catppuccin")
   local cp = require("catppuccin.palettes").get_palette()
 
   local remaps = {
@@ -41,9 +43,6 @@ return function()
     })
   end
 
-  local catppuccin = require("catppuccin")
-  vim.g.catppuccin_flavour = "mocha"
-  vim.g.catppuccin_override_colors = remaps
   catppuccin.setup({
     compile = { enabled = true },
     dim_inactive = { enabled = false },

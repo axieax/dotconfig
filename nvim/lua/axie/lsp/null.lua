@@ -10,8 +10,10 @@ M.ensure_installed = {
   "prettierd",
   "shfmt",
   -- linter
+  -- "selene",
   "editorconfig-checker",
   -- "golangci-lint",
+  -- "goimports",
   "pylint",
   "shellcheck",
 }

@@ -179,8 +179,8 @@ myManageHook =
   -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicProperty.html
   my6Shifts  = []
   -- my6Shifts = ["Spotify Premium", "spotify", "Spotify"] -- need SpotifyWM (Electron apps set class name too late)
-  my7Shifts  = ["obs"]
-  my8Shifts  = ["typora"]
+  my7Shifts  = []
+  my8Shifts  = ["obs", "typora"]
   my9Shifts  = ["discord", "slack"]
   -- my10Shifts = []
   my10Shifts = ["Thunderbird", "Evolution"]

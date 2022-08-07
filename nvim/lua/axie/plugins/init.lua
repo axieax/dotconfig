@@ -44,6 +44,13 @@ return packer.startup({
       end,
     })
 
+    use({
+      "b0o/incline.nvim",
+      config = function()
+        require("incline").setup()
+      end,
+    })
+
     ----------------
     -- My Plugins --
     ----------------
@@ -581,16 +588,13 @@ return packer.startup({
     })
 
     -- CSS colours
-    -- WARN: original unmaintained (doesn't highlight lower case names #18)
+    -- WARN: original unmaintained (lowercase, PackerCompile)
     -- ALT: https://github.com/RRethy/vim-hexokinase
-    -- ISSUE: disappears on PackerCompile https://github.com/norcalli/nvim-colorizer.lua/issues/61
     use({
       "NvChad/nvim-colorizer.lua",
-      -- event = "BufRead",
       config = function()
         local colorizer = require("colorizer")
         colorizer.setup()
-        -- colorizer.reload_all_buffers()
       end,
     })
 

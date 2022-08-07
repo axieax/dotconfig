@@ -17,14 +17,16 @@
 ## TODO
 
 - autocmd to install language server if one doesn't start for a filetype, also treesitter parser
+  - `require("mason-lspconfig").get_available_servers({ filetype = vim.bo.filetype })`
+  - https://github.com/williamboman/mason-lspconfig.nvim/pull/25
 - Packer sequence mason plugins
 - What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:
   - Migrate galaxyline.nvim to heirline.nvim (lualine has clickable components tho)
   - https://github.com/SmiteshP/nvim-navic for winbar context, replace nvim-treesitter-context
+  - NOTE: need to enable highlight for navic catppuccin integration
   - ALT: use Aerial (https://github.com/stevearc/aerial.nvim/issues/105)
-  - https://github.com/b0o/incline.nvim ?
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
@@ -147,8 +149,6 @@
 - https://github.com/hrsh7th/nvim-cmp/issues/611
 - nvim-cmp treesitter completion source vs buffer source?
 - Opening buffer for file (nvim-tree) replaces barbar buffers
-- Colorizer disabled on PackerCompile (changing colorscheme), no support for lowercase, unmaintained
-  - https://github.com/norcalli/nvim-colorizer.lua/issues/61
 - autopairs may start to break after a while (can't insert characters)
 
 ## Current PRs / Issues

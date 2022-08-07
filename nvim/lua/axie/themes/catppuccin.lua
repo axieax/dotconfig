@@ -90,6 +90,7 @@ return function()
       aerial = true,
       vimwiki = true,
       beacon = true,
+      navic = true,
     },
     custom_highlights = remaps,
   })

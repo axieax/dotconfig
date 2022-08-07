@@ -55,6 +55,10 @@ function M.default_on_attach(client, bufnr)
       callback = vim.lsp.codelens.refresh,
     })
   end
+
+  if not is_null then
+    -- require("nvim-navic").attach(client, bufnr)
+  end
 end
 
 function M.default()

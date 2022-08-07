@@ -153,6 +153,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/petertriho/cmp-git/issues/46
 - https://github.com/nvim-telescope/telescope.nvim/issues/1904
 - https://github.com/rcarriga/nvim-dap-ui/issues/115
 - https://github.com/nvim-neotest/neotest/issues/35

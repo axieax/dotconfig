@@ -44,13 +44,6 @@ return packer.startup({
       end,
     })
 
-    use({
-      "b0o/incline.nvim",
-      config = function()
-        require("incline").setup()
-      end,
-    })
-
     ----------------
     -- My Plugins --
     ----------------
@@ -252,6 +245,13 @@ return packer.startup({
       config = function()
         require("bufferline").setup()
       end,
+    })
+
+    -- Floating statusline
+    use({
+      "b0o/incline.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = require("axie.plugins.incline"),
     })
 
     -- Terminal

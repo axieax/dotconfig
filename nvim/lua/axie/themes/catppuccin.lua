@@ -91,6 +91,7 @@ return function()
       vimwiki = true,
       beacon = true,
       navic = true,
+      overseer = false,
     },
     custom_highlights = remaps,
   })

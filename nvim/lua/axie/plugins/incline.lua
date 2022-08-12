@@ -6,7 +6,7 @@ return function()
     mauve = "#CBA6F7",
     yellow = "#F9E2AF",
   }
- 
+
   require("incline").setup({
     highlight = {
       groups = {

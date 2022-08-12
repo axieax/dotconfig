@@ -60,7 +60,7 @@ function M.setup()
   })
 
   vim.keymap.set("n", "<space>gg", this.lazygit, { desc = "lazygit" })
-  vim.keymap.set("n", "<space>rr", this.lazydocker, { desc = "lazydocker" })
+  vim.keymap.set("n", "<space>gG", this.lazydocker, { desc = "lazydocker" })
 
   require("telescope").load_extension("termfinder")
 end

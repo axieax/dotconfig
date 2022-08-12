@@ -47,7 +47,6 @@
 - PRIORITY: no eslint node_module -> use own eslint_d
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
-- Telescope `man` docs
 - Custom require which takes module_name, ... args (pcall wrapper)
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
 - Separate cmp extensions, use Packer sequencing (after)
@@ -83,6 +82,8 @@
 
 ## Features/plugins
 
+- https://github.com/stevearc/overseer.nvim
+- https://github.com/lewis6991/hover.nvim
 - https://github.com/andythigpen/nvim-coverage
 - https://github.com/Djancyp/cheat-sheet
 - https://www.reddit.com/r/neovim/comments/ut1cj9/i_have_just_published_nvimdevcontainer_plugin/
@@ -153,7 +154,7 @@
 
 ## Current PRs / Issues
 
-- https://github.com/petertriho/cmp-git/issues/46
+- https://github.com/b0o/incline.nvim/issues/28
 - https://github.com/nvim-telescope/telescope.nvim/issues/1904
 - https://github.com/rcarriga/nvim-dap-ui/issues/115
 - https://github.com/nvim-neotest/neotest/issues/35

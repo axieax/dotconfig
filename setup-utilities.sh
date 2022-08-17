@@ -46,6 +46,7 @@ backup_dst_config() {
   fi
 }
 
+# TODO: mkdir -p
 link_config() {
   src=$1
   dst=$2

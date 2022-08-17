@@ -13,7 +13,6 @@ setup_app() {
   fi
 }
 
-# zsh config
 setup_app zsh
 
 # Stylua config
@@ -28,20 +27,17 @@ setup_app zsh
 # Neovim setup
 # ln -s ~/dotconfig/nvim ~/.config/nvim
 
-# xmonad setup
 setup_app xmonad
 
-# Polybar setup
 setup_app polybar
 
-# Rofi setup
 setup_app rofi
 
-# sddm setup
 setup_app sddm
 
-# alacritty setup
 setup_app alacritty
+
+setup_app lazygit
 
 # pavucontrol
 # https://community.spotify.com/t5/Desktop-Linux/Microsoft-teams-mutes-Spotify/td-p/5061607

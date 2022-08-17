@@ -1,5 +1,3 @@
--- https://github.com/godlygeek/tabular --
-
 local M = {}
 
 function M.setup()

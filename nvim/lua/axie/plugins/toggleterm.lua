@@ -1,8 +1,6 @@
--- https://github.com/akinsho/toggleterm.nvim --
+local M = {}
 
 -- TODO: warn before exit if hidden floaterm active
-
-local M = {}
 
 function M.attach()
   vim.keymap.set("n", "<Esc>", "<Nop>", { silent = true, buffer = 0 })

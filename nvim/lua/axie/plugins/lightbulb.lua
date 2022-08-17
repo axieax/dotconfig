@@ -1,5 +1,3 @@
--- https://github.com/kosayoda/nvim-lightbulb --
-
 local M = {}
 
 function M.config()

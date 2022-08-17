@@ -1,9 +1,8 @@
--- https://github.com/folke/which-key.nvim --
+local M = {}
+
 -- TODO: separate bindings
 -- Normal and Visual mappings on same key
 -- Can use Packer module field to lazy load based on lua require
-
-local M = {}
 
 function M.config()
   local wk = require("which-key")

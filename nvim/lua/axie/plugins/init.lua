@@ -1,30 +1,15 @@
--- https://github.com/wbthomason/packer.nvim --
-
 -- Bootstrap packer
-local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local auto_install = vim.fn.empty(vim.fn.glob(packer_path)) > 0
-if auto_install then
-  vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
-  vim.cmd("packadd packer.nvim")
+local P = require("axie.plugins.packer")
+local is_installed = P.is_installed()
+if not is_installed then
+  P.bootstrap()
 end
 
 local packer = require("packer")
 return packer.startup({
   function(packer_use)
-    -- Use wrapper
-    local use_config = require("axie.utils").use_config
-    local use = function(config, custom)
-      if custom then
-        if type(config) == "string" then
-          config = { config }
-        end
-        local path, types = unpack(custom)
-        for _, type in ipairs(types) do
-          config[type] = use_config(path, type)
-        end
-      end
-      return packer_use(config)
-    end
+    local use = P.decorate_use(packer_use)
+    local dev_mode = require("axie.utils.config").dev_mode
 
     ---------------------
     -- Setup Utilities --
@@ -62,8 +47,6 @@ return packer.startup({
     ----------------
     -- My Plugins --
     ----------------
-
-    local dev_mode = require("axie.utils.config").dev_mode
 
     -- View buffer URLs
     use({
@@ -1117,29 +1100,10 @@ return packer.startup({
     -- Browser integration
     use("glacambre/firenvim", { "firenvim", { "config", "run" } })
 
-    -- Packer auto update + compile
-    if auto_install then
+    -- Packer auto update + compile on bootstrap
+    if not is_installed then
       packer.sync()
     end
   end,
-
-  config = {
-    -- actually reload catppuccin setup function without restarting nvim
-    auto_reload_compiled = true,
-    -- https://github.com/wbthomason/packer.nvim/issues/202
-    max_jobs = 50,
-    -- https://github.com/wbthomason/packer.nvim/issues/381#issuecomment-849815901
-    -- git = {
-    --   subcommands = {
-    --     update = "pull --ff-only --progress --rebase",
-    --   },
-    -- },
-    profile = { enable = true },
-    autoremove = true,
-    display = {
-      open_fn = function()
-        return require("packer.util").float({ border = "rounded" })
-      end,
-    },
-  },
+  config = P.config(),
 })

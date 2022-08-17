@@ -1,7 +1,6 @@
--- https://github.com/folke/zen-mode.nvim --
--- NOTE: barbar disappears https://github.com/folke/zen-mode.nvim/issues/21
-
 local M = {}
+
+-- NOTE: barbar disappears https://github.com/folke/zen-mode.nvim/issues/21
 
 function M.setup()
   vim.keymap.set("n", "<Space>z", "<Cmd>ZenMode<CR>", { desc = "zen mode" })

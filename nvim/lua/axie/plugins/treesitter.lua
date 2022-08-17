@@ -1,5 +1,3 @@
--- https://github.com/nvim-treesitter/nvim-treesitter --
-
 local M = {}
 
 M.ensure_installed = {

@@ -1,5 +1,3 @@
--- https://github.com/williamboman/nvim-lsp-installer --
-
 local M = {}
 
 M.ensure_installed = {

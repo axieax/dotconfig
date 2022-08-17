@@ -1,4 +1,3 @@
--- https://github.com/jose-elias-alvarez/null-ls.nvim --
 local M = {}
 
 M.ensure_installed = {

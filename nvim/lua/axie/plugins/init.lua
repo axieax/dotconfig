@@ -1,9 +1,6 @@
 -- Bootstrap packer
 local P = require("axie.plugins.packer")
-local is_installed = P.is_installed()
-if not is_installed then
-  P.bootstrap()
-end
+local bootstrapped = P.bootstrap()
 
 local packer = require("packer")
 return packer.startup({
@@ -1103,7 +1100,7 @@ return packer.startup({
     use("glacambre/firenvim", { "firenvim", { "config", "run" } })
 
     -- Packer auto update + compile on bootstrap
-    if not is_installed then
+    if bootstrapped then
       packer.sync()
     end
   end,

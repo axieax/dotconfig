@@ -7,8 +7,12 @@ function M.is_installed()
 end
 
 function M.bootstrap()
+  if M.is_installed() then
+    return false
+  end
   vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
   vim.cmd("packadd packer.nvim")
+  return true
 end
 
 --- Protected require for loading a specific plugin config

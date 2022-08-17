@@ -16,6 +16,7 @@
 
 ## TODO
 
+- nerd font / emoji picker (https://github.com/ziontee113/icon-picker.nvim)
 - autocmd to install language server if one doesn't start for a filetype, also treesitter parser
   - `require("mason-lspconfig").get_available_servers({ filetype = vim.bo.filetype })`
   - https://github.com/williamboman/mason-lspconfig.nvim/pull/25

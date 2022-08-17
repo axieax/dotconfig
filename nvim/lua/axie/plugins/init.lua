@@ -554,6 +554,7 @@ return packer.startup({
     -- NOTE: this uses words instead of symbols (which LSP uses)
     use({
       "osyo-manga/vim-brightest",
+      event = "BufRead",
       config = function()
         -- Highlight group (e.g. BrighestUndercurl)
         vim.g["brightest#highlight"] = { group = "BrightestUnderline" }
@@ -635,6 +636,7 @@ return packer.startup({
     -- Matching text navigation
     use({
       "andymass/vim-matchup",
+      event = "BufRead",
       config = function()
         vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
       end,

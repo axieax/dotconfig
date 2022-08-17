@@ -1,6 +1,6 @@
--- https://github.com/petertriho/nvim-scrollbar --
+local M = {}
 
-return function()
+function M.config()
   require("scrollbar").setup({
     -- NOTE: disappears very quickly
     show_in_active_only = true,
@@ -16,3 +16,5 @@ return function()
   })
   require("scrollbar.handlers.search").setup()
 end
+
+return M

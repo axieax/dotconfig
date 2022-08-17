@@ -1,5 +1,6 @@
--- https://github.com/lewis6991/gitsigns.nvim --
-return function()
+local M = {}
+
+function M.config()
   require("gitsigns").setup({
     keymaps = {
       ["n ]g"] = { expr = true, "&diff ? ']g' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
@@ -17,3 +18,5 @@ return function()
   -- TODO: customise virtual text colour. angry prefix
   vim.cmd("highlight link GitSignsDeleteLn ErrorMsg")
 end
+
+return M

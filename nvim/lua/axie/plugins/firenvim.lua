@@ -1,6 +1,10 @@
--- https://github.com/glacambre/firenvim --
+local M = {}
 
-return function()
+function M.run()
+  vim.fn["firenvim#install"](0)
+end
+
+function M.config()
   -- Setup config
   vim.g.firenvim_config = {
     localSettings = {
@@ -18,3 +22,5 @@ return function()
   -- TODO: setup Nerd Font glyphs (`guifont`)
   vim.opt.guifont = "JetBrains Mono"
 end
+
+return M

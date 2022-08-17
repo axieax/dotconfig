@@ -1,6 +1,10 @@
--- https://github.com/folke/todo-comments.nvim --
+local M = {}
 
-return function()
+function M.setup()
+  -- TODO: https://github.com/folke/todo-comments.nvim/issues/77
+end
+
+function M.config()
   require("todo-comments").setup({
     keywords = {
       FIX = {
@@ -91,3 +95,5 @@ return function()
     },
   })
 end
+
+return M

@@ -1,13 +1,26 @@
--- https://github.com/nvim-neo-tree/neo-tree.nvim --
+local M = {}
+
 -- TODO: file nesting
 -- TODO: group empty https://github.com/nvim-neo-tree/neo-tree.nvim/issues/211
 -- TODO: highlight open buffers
--- TODO: remove nvimtree
 -- TODO: file preview / info (size, perms, time etc.)
 -- TODO: update git / diagnostic icons/colours
 
-return function()
+function M.setup()
+  vim.keymap.set("n", ";", "<Cmd>Neotree toggle<CR>", { desc = "file explorer" })
+  vim.keymap.set("n", "<Space>fB", "<Cmd>Neotree source=buffers toggle<CR>", { desc = "open buffers (tree)" })
+  vim.keymap.set("n", "<Space>G", "<Cmd>Neotree source=git_status toggle<CR>", { desc = "git status (tree)" })
+  vim.keymap.set("n", "<Space>L", "<Cmd>Neotree source=diagnostics toggle<CR>", { desc = "git status (tree)" })
+end
+
+function M.config()
   require("neo-tree").setup({
+    sources = {
+      "filesystem",
+      "buffers",
+      "git_status",
+      "diagnostics",
+    },
     use_popups_for_input = false,
     -- popup_border_style = "rounded",
     default_component_configs = {
@@ -77,3 +90,5 @@ return function()
     },
   })
 end
+
+return M

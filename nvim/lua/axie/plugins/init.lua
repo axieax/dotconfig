@@ -10,7 +10,22 @@ end
 
 local packer = require("packer")
 return packer.startup({
-  function(use)
+  function(packer_use)
+    -- Use wrapper
+    local use_config = require("axie.utils").use_config
+    local use = function(config, custom)
+      if custom then
+        if type(config) == "string" then
+          config = { config }
+        end
+        local path, types = unpack(custom)
+        for _, type in ipairs(types) do
+          config[type] = use_config(path, type)
+        end
+      end
+      return packer_use(config)
+    end
+
     ---------------------
     -- Setup Utilities --
     ---------------------
@@ -55,8 +70,7 @@ return packer.startup({
       "axieax/urlview.nvim",
       disable = dev_mode,
       -- cmd = { "UrlView" },
-      config = require("axie.plugins.urlview"),
-    })
+    }, { "urlview", { "setup", "config" } })
 
     -------------
     -- Theming --
@@ -66,45 +80,35 @@ return packer.startup({
     use({
       "themercorp/themer.lua",
       disable = true,
-      config = require("axie.themes.themer"),
-    })
+    }, { "themes.themer", { "config" } })
 
     use({
       "marko-cerovac/material.nvim",
-      config = require("axie.themes.material"),
-    })
+    }, { "themes.material", { "config" } })
 
     use({
       "catppuccin/nvim",
       as = "catppuccin",
       run = ":CatppuccinCompile",
-      -- TEMP: https://github.com/catppuccin/nvim/issues/134
-      -- commit = "f079dda3dc23450d69b4bad11bfbd9af2c77f6f3",
-      config = require("axie.themes.catppuccin"),
-    })
+    }, { "themes.catppuccin", { "config" } })
 
     use({
       "rebelot/kanagawa.nvim",
       disable = true,
-      config = require("axie.themes.kanagawa"),
-    })
+    }, { "themes.kanagawa", { "config" } })
 
     -- TODO: replace (too red)
     -- ALT: https://github.com/navarasu/onedark.nvim
     use({
       "olimorris/onedarkpro.nvim",
-      config = require("axie.themes.onedark"),
-    })
+    }, { "themes.onedark", { "config" } })
 
     -----------------------
     -- General Utilities --
     -----------------------
 
     -- Keybinds
-    use({
-      "folke/which-key.nvim",
-      config = require("axie.plugins.binds").setup,
-    })
+    use("folke/which-key.nvim", { "binds", { "config" } })
 
     -- Fuzzy finder
     -- EXTENSIONS: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
@@ -116,8 +120,7 @@ return packer.startup({
         { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       },
-      config = require("axie.plugins.telescope").setup,
-    })
+    }, { "telescope", { "config" } })
 
     -- Tree explorer (filesystem, buffers, git_status)
     use({
@@ -128,7 +131,13 @@ return packer.startup({
         "kyazdani42/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
       },
-      config = require("axie.plugins.neotree"),
+    }, { "neotree", { "config", "setup" } })
+
+    -- Neo-tree diagnostics source
+    use({
+      "mrbjarksen/neo-tree-diagnostics.nvim",
+      requires = "nvim-neo-tree/neo-tree.nvim",
+      module = "neo-tree.sources.diagnostics",
     })
 
     -- Telescope file browser
@@ -204,15 +213,14 @@ return packer.startup({
     use({
       "folke/todo-comments.nvim",
       requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
-      config = require("axie.plugins.notes"),
-    })
+    }, { "notes", { "config" } })
 
     -- Scrollbar
     use({
       "petertriho/nvim-scrollbar",
       after = "nvim-hlslens",
-      config = require("axie.plugins.scrollbar"),
-    })
+      event = "BufRead",
+    }, { "scrollbar", { "config" } })
 
     -- Extra mappings (with encoding/decoding as well)
     use("tpope/vim-unimpaired")
@@ -226,8 +234,7 @@ return packer.startup({
     use({
       "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = require("axie.plugins.galaxyline").setup,
-    })
+    }, { "galaxyline", { "config" } })
 
     -- Tabline
     use({
@@ -235,8 +242,7 @@ return packer.startup({
       event = "BufEnter",
       -- disable = true,
       requires = "kyazdani42/nvim-web-devicons",
-      config = require("axie.plugins.barbar"),
-    })
+    }, { "barbar", { "config", "setup" } })
 
     use({
       "akinsho/bufferline.nvim",
@@ -251,8 +257,7 @@ return packer.startup({
     use({
       "b0o/incline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = require("axie.plugins.incline"),
-    })
+    }, { "incline", { "config" } })
 
     -- Terminal
     use({
@@ -261,16 +266,14 @@ return packer.startup({
         "nvim-telescope/telescope.nvim",
         "tknightz/telescope-termfinder.nvim",
       },
-      config = require("axie.plugins.toggleterm").setup,
-    })
+    }, { "toggleterm", { "config" } })
 
     -- Startup screen
     -- ALT: https://github.com/startup-nvim/startup.nvim
     use({
       "goolord/alpha-nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = require("axie.plugins.start"),
-    })
+    }, { "start", { "config", "setup" } })
 
     -- Session manager
     -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
@@ -365,15 +368,13 @@ return packer.startup({
     use({
       "folke/zen-mode.nvim",
       cmd = { "ZenMode" },
-      setup = require("axie.plugins.zen").binds,
-      config = require("axie.plugins.zen").setup,
-    })
+    }, { "zen", { "config", "setup" } })
 
     -- Undo history
     use({
       "simnalamburt/vim-mundo",
-      config = require("axie.plugins.undo"),
-    })
+      event = "BufEnter",
+    }, { "undo", { "config", "setup" } })
 
     -- Clipboard manager
     use({
@@ -392,8 +393,7 @@ return packer.startup({
     use({
       "rcarriga/nvim-notify",
       after = "telescope.nvim",
-      config = require("axie.plugins.notify"),
-    })
+    }, { "notify", { "config", "setup" } })
 
     -- Better quickfix list
     use({
@@ -416,8 +416,7 @@ return packer.startup({
     use({
       "beauwilliams/focus.nvim",
       event = "BufEnter",
-      config = require("axie.plugins.focus"),
-    })
+    }, { "focus", { "config" } })
 
     -- Open with sudo
     -- NOTE: eunuch requires an askpass helper, suda.vim asks for password everytime
@@ -464,11 +463,7 @@ return packer.startup({
     use("simonefranza/nvim-conv")
 
     -- Incrementor / decrementor
-    use({
-      "monaqa/dial.nvim",
-      -- module = "dial.map",
-      config = require("axie.plugins.dial"),
-    })
+    use("monaqa/dial.nvim", { "dial", { "config", "setup" } })
 
     -- Keep cursor on shift (`>` or `<`) and filter (`=`)
     use({
@@ -505,10 +500,7 @@ return packer.startup({
     use("rainbowhxch/beacon.nvim")
 
     -- vim.ui overrides
-    use({
-      "stevearc/dressing.nvim",
-      config = require("axie.plugins.dressing"),
-    })
+    use("stevearc/dressing.nvim", { "dressing", { "config" } })
 
     -- Bracket coloured pairs
     -- TODO: change colourscheme, esp red?
@@ -522,15 +514,13 @@ return packer.startup({
       "lukas-reineke/indent-blankline.nvim",
       after = "nvim-treesitter",
       event = "BufRead",
-      config = require("axie.plugins.indentline"),
-    })
+    }, { "indentline", { "config" } })
 
     -- Scope context indicator
     use({
       "code-biscuits/nvim-biscuits",
       after = "nvim-treesitter",
-      config = require("axie.plugins.biscuits"),
-    })
+    }, { "biscuits", { "config" } })
 
     -- Function context indicator
     use({
@@ -572,7 +562,7 @@ return packer.startup({
       "chentoast/marks.nvim",
       config = function()
         -- m[ and m] to navigate marks
-        require("marks").setup({})
+        require("marks").setup()
       end,
     })
 
@@ -593,8 +583,7 @@ return packer.startup({
     use({
       "NvChad/nvim-colorizer.lua",
       config = function()
-        local colorizer = require("colorizer")
-        colorizer.setup()
+        require("colorizer").setup()
       end,
     })
 
@@ -602,10 +591,7 @@ return packer.startup({
     use("romainl/vim-cool")
 
     -- Search virtual text
-    use({
-      "kevinhwang91/nvim-hlslens",
-      config = require("axie.plugins.hlslens").setup,
-    })
+    use("kevinhwang91/nvim-hlslens", { "hlslens", { "config" } })
 
     -- Preview line jumps
     use({
@@ -675,8 +661,7 @@ return packer.startup({
     use({
       "abecodes/tabout.nvim",
       after = "nvim-treesitter",
-      config = require("axie.plugins.tabout"),
-    })
+    }, { "tabout", { "config", "setup" } })
 
     -----------------------------
     -- Project / Git Utilities --
@@ -699,15 +684,13 @@ return packer.startup({
     use({
       "lewis6991/gitsigns.nvim",
       requires = "nvim-lua/plenary.nvim",
-      config = require("axie.plugins.gitsigns"),
-    })
+    }, { "gitsigns", { "config" } })
 
     -- Git repo link
     use({
       "ruifm/gitlinker.nvim",
       requires = "nvim-lua/plenary.nvim",
-      config = require("axie.plugins.gitlinker"),
-    })
+    }, { "gitlinker", { "config" } })
 
     -- GitHub issues and pull requests
     use({
@@ -752,8 +735,7 @@ return packer.startup({
     use({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-      config = require("axie.plugins.treesitter").setup,
-    })
+    }, { "treesitter", { "config" } })
 
     -- Treesitter parser info
     use({
@@ -777,28 +759,19 @@ return packer.startup({
 
     -- GitHub Copilot
     -- ALT: https://github.com/zbirenbaum/copilot.lua with https://github.com/zbirenbaum/copilot-cmp
-    use({
-      "github/copilot.vim",
-      config = require("axie.plugins.copilot"),
-    })
+    use("github/copilot.vim", { "copilot", { "config", "setup" } })
 
     -- Interactive scratchpad with virtual text
     -- ALT: https://github.com/michaelb/sniprun
     use("metakirby5/codi.vim")
 
     -- Align lines by character
-    use({
-      "godlygeek/tabular",
-      config = require("axie.plugins.tabular").setup,
-    })
+    use("godlygeek/tabular", { "tabular", { "setup" } })
 
     -- Commenting
     -- NOTE: missing uncomment adjacent (gcgc, gcu)
     -- https://github.com/numToStr/Comment.nvim/issues/22
-    use({
-      "numToStr/Comment.nvim",
-      config = require("axie.plugins.comment"),
-    })
+    use("numToStr/Comment.nvim", { "comment", { "config" } })
 
     -- Better commentstring (for vim-commentary)
     use({
@@ -817,7 +790,7 @@ return packer.startup({
       "L3MON4D3/LuaSnip",
       requires = "rafamadriz/friendly-snippets", -- snippet collection
       config = require("axie.lsp.snippets"),
-    })
+    }, { "lsp.snippets", { "config" } })
 
     -- Docstring generator
     -- ALT: https://github.com/kkoomen/vim-doge
@@ -841,8 +814,7 @@ return packer.startup({
     use({
       "bennypowers/nvim-regexplainer",
       requires = { "nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim" },
-      config = require("axie.plugins.regexplainer"),
-    })
+    }, { "regexplainer", { "config" } })
 
     -- Auto continue bullets
     -- NOTE: ctrl-t to indent after auto continue, ctrl-d to unindent
@@ -863,8 +835,7 @@ return packer.startup({
       "vuki656/package-info.nvim",
       requires = "MunifTanjim/nui.nvim",
       ft = { "json" },
-      config = require("axie.plugins.package"),
-    })
+    }, { "package", { "config" } })
 
     -- Python indenting issues
     -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
@@ -875,8 +846,7 @@ return packer.startup({
     use({
       "ekickx/clipboard-image.nvim",
       cmd = { "PasteImg" },
-      config = require("axie.plugins.pasteimage"),
-    })
+    }, { "pasteimage", { "config" } })
 
     -- Markdown preview
     use({
@@ -884,7 +854,7 @@ return packer.startup({
       run = ":call mkdp#util#install()",
       ft = { "markdown" },
       cmd = "MarkdownPreview",
-      config = function()
+      setup = function()
         local filetype_map = require("axie.utils").filetype_map
         filetype_map("markdown", "n", ",O", "<Cmd>MarkdownPreview<CR>")
       end,
@@ -893,12 +863,14 @@ return packer.startup({
     use({
       "ellisonleao/glow.nvim",
       setup = function()
+        local filetype_map = require("axie.utils").filetype_map
+        filetype_map("markdown", "n", ",o", "<Cmd>Glow<CR>")
+      end,
+      config = function()
         require("glow").setup({
           border = "rounded",
           pager = false,
         })
-        local filetype_map = require("axie.utils").filetype_map
-        filetype_map("markdown", "n", ",o", "<Cmd>Glow<CR>")
       end,
     })
 
@@ -939,9 +911,7 @@ return packer.startup({
         "nvim-neotest/neotest-plenary",
         { "nvim-neotest/neotest-vim-test", requires = "vim-test/vim-test" },
       },
-      setup = require("axie.lsp.test").binds,
-      config = require("axie.lsp.test").setup,
-    })
+    }, { "lsp.test", { "config", "setup" } })
 
     -- Debug Adapter Protocol
     use({
@@ -1004,10 +974,7 @@ return packer.startup({
     -------------------
 
     -- LSP config
-    use({
-      "neovim/nvim-lspconfig",
-      config = require("axie.lsp.config"),
-    })
+    use("neovim/nvim-lspconfig", { "lsp.config", { "config" } })
 
     -- LSP install
     -- TODO: move lsp setup call to axie/init.lua
@@ -1025,8 +992,7 @@ return packer.startup({
         "p00f/clangd_extensions.nvim",
         "folke/lua-dev.nvim",
       },
-      config = require("axie.lsp.install").setup,
-    })
+    }, { "lsp.install", { "config", "setup" } })
 
     -- Java LSP
     use("mfussenegger/nvim-jdtls")
@@ -1057,8 +1023,7 @@ return packer.startup({
           },
         },
       },
-      config = require("axie.lsp.null").setup,
-    })
+    }, { "lsp.null", { "config" } })
 
     -- LSP progress indicator
     use({
@@ -1085,22 +1050,16 @@ return packer.startup({
     use({
       "stevearc/aerial.nvim",
       after = "telescope.nvim",
-      config = require("axie.lsp.aerial"),
-    })
+    }, { "lsp.aerial", { "config" } })
 
     use({
       "simrat39/symbols-outline.nvim",
-      config = function()
-        vim.g.symbols_outline = {
-          -- highlight_hovered_item = false,
-          auto_close = true,
-          auto_preview = false,
-          -- instant_preview = true,
-          border = "rounded",
-          winblend = 15,
-        }
-      end,
-    })
+      cmd = {
+        "SymbolsOutline",
+        "SymbolsOutlineOpen",
+        "SymbolsOutlineClose",
+      },
+    }, { "lsp.symbols", { "config", "setup" } })
 
     -- Code action menu with diff preview
     use({
@@ -1112,8 +1071,8 @@ return packer.startup({
     -- Code action prompt
     use({
       "kosayoda/nvim-lightbulb",
-      config = require("axie.plugins.lightbulb").setup,
-    })
+      event = "BufRead",
+    }, { "lightbulb", { "config" } })
 
     -- Completion menu
     -- TODO: move sources out with after = "nvim-cmp" (https://github.com/danymat/champagne/blob/main/lua/plugins.lua)
@@ -1143,27 +1102,20 @@ return packer.startup({
         -- "tzachar/cmp-fzy-buffer",
         -- "tzachar/cmp-fuzzy-path",
       },
-      config = require("axie.lsp.completion"),
-    })
+    }, { "lsp.completion", { "config" } })
 
     -- Function signature
     use({
       "ray-x/lsp_signature.nvim",
-      config = require("axie.lsp.signature"),
-    })
+      event = "BufRead",
+    }, { "lsp.signature", { "config" } })
 
     -------------------
     -- Miscellaneous --
     -------------------
 
     -- Browser integration
-    use({
-      "glacambre/firenvim",
-      run = function()
-        vim.fn["firenvim#install"](0)
-      end,
-      config = require("axie.plugins.firenvim"),
-    })
+    use("glacambre/firenvim", { "firenvim", { "config", "run" } })
 
     -- Packer auto update + compile
     if auto_install then

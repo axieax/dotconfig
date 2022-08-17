@@ -1,6 +1,6 @@
--- https://github.com/olimorris/onedarkpro.nvim --
+local M = {}
 
-return function()
+function M.config()
   local onedarkpro = require("onedarkpro")
   local onedarkpro_utils = require("onedarkpro.utils")
   onedarkpro.setup({
@@ -66,3 +66,5 @@ return function()
     },
   })
 end
+
+return M

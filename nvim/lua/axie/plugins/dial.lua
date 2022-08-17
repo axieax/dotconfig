@@ -1,8 +1,14 @@
--- https://github.com/monaqa/dial.nvim --
+local M = {}
 
-return function()
+function M.setup()
+  vim.keymap.set({ "n", "v" }, "<C-a>", "<Plug>(dial-increment)")
+  vim.keymap.set({ "n", "v" }, "<C-x>", "<Plug>(dial-decrement)")
+  vim.keymap.set("v", "g<C-a>", "g<Plug>(dial-increment)")
+  vim.keymap.set("v", "g<C-x>", "g<Plug>(dial-decrement)")
+end
+
+function M.config()
   local augend = require("dial.augend")
-
   require("dial.config").augends:register_group({
     default = {
       augend.integer.alias.decimal_int,
@@ -69,9 +75,6 @@ return function()
   })
 
   -- OTHERS: on/off variants, north/east/south/west variants
-
-  vim.keymap.set({ "n", "v" }, "<C-a>", "<Plug>(dial-increment)")
-  vim.keymap.set({ "n", "v" }, "<C-x>", "<Plug>(dial-decrement)")
-  vim.keymap.set("v", "g<C-a>", "g<Plug>(dial-increment)")
-  vim.keymap.set("v", "g<C-x>", "g<Plug>(dial-decrement)")
 end
+
+return M

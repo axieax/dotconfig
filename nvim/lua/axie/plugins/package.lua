@@ -1,7 +1,9 @@
--- https://github.com/vuki656/package-info.nvim --
-return function()
+local M = {}
+
+function M.config()
   local package_info = require("package-info")
   package_info.setup()
+
   vim.keymap.set("n", "<space>ps", package_info.show, { desc = "Show package versions" })
   vim.keymap.set("n", "<space>pc", package_info.hide, { desc = "Hide package versions" })
   -- TODO: toggle
@@ -11,3 +13,5 @@ return function()
   vim.keymap.set("n", "<space>pr", package_info.reinstall, { desc = "Reinstall dependencies" })
   vim.keymap.set("n", "<space>pp", package_info.change_version, { desc = "Install a different package version" })
 end
+
+return M

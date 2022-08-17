@@ -1,6 +1,6 @@
--- https://github.com/b0o/incline.nvim --
+local M = {}
 
-return function()
+function M.config()
   local colours = {
     maroon = "#EBA0AC",
     mauve = "#CBA6F7",
@@ -37,3 +37,5 @@ return function()
     end,
   })
 end
+
+return M

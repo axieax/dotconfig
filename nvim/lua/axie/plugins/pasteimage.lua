@@ -1,6 +1,6 @@
--- https://github.com/ekickx/clipboard-image.nvim --
+local M = {}
 
-return function()
+function M.config()
   local relative_dir = vim.fn.fnamemodify(vim.fn.expand("%"), ":h")
   local request_img_name = function()
     vim.fn.inputsave()
@@ -21,3 +21,5 @@ return function()
     },
   })
 end
+
+return M

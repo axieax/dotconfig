@@ -4,6 +4,10 @@
 local M = {}
 
 function M.setup()
+  vim.keymap.set("n", "<Space>z", "<Cmd>ZenMode<CR>", { desc = "zen mode" })
+end
+
+function M.config()
   local toggle_functions = function()
     -- TODO: force off on_open, restore previous state on_close
     -- [[ gitsigns ]]
@@ -38,10 +42,6 @@ function M.setup()
       toggle_functions()
     end,
   })
-end
-
-function M.binds()
-  vim.keymap.set("n", "<Space>z", "<Cmd>ZenMode<CR>", { desc = "zen mode" })
 end
 
 return M

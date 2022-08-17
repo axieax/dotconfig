@@ -35,7 +35,7 @@ function M.dap_repl_summary()
   notify("No tests found 😢", "error")
 end
 
-function M.binds()
+function M.setup()
   -- general
   vim.keymap.set("n", "<Space>tt", function()
     require("neotest").run.run()
@@ -91,7 +91,7 @@ function M.binds()
   end, { desc = "Test summary" })
 end
 
-function M.setup()
+function M.config()
   local adapter_config = {
     go = {
       filetypes = { "go" },

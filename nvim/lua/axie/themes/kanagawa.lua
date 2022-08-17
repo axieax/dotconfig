@@ -1,6 +1,6 @@
--- https://github.com/rebelot/kanagawa.nvim --
+local M = {}
 
-return function()
+function M.config()
   local default_colors = require("kanagawa.colors").setup()
   require("kanagawa").setup({
     transparent = true,
@@ -10,3 +10,5 @@ return function()
     },
   })
 end
+
+return M

@@ -1,6 +1,6 @@
--- https://github.com/numToStr/Comment.nvim --
+local M = {}
 
-return function()
+function M.config()
   require("Comment").setup({
     mappings = { extended = true },
     -- JoosepAlviste/nvim-ts-context-commentstring integration
@@ -29,3 +29,5 @@ return function()
     end,
   })
 end
+
+return M

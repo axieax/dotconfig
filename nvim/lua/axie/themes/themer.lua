@@ -1,10 +1,12 @@
+local M = {}
+
 -- https://github.com/ThemerCorp/themer.lua --
 -- OPTIONS:
 --  - onedark
 --  - dracula
 --  - kanagawa
 
-return function()
+function M.config()
   require("themer").setup({
     transparent = true,
     dim_inactive = true,
@@ -27,3 +29,5 @@ return function()
     },
   })
 end
+
+return M

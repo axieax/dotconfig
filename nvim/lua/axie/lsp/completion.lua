@@ -1,8 +1,8 @@
--- https://github.com/hrsh7th/nvim-cmp --
+local M = {}
 
 local DEFAULT_PRIORITY = 2
 
-return function()
+function M.config()
   -- setup cmp
   local cmp = require("cmp")
   local lspkind = require("lspkind")
@@ -219,3 +219,5 @@ return function()
     vim.cmd(string.format("highlight link %s %s", kind, link))
   end
 end
+
+return M

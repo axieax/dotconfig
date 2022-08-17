@@ -1,8 +1,14 @@
--- https://github.com/rcarriga/nvim-notify --
+local M = {}
 
-return function()
-  local notify = require("notify")
-  notify.setup({
+function M.setup()
+  vim.keymap.set("n", "<space>fn", "<Cmd>Telescope notify<CR>", { desc = "search notifications" })
+  vim.keymap.set("n", "<space>Q", function()
+    require("notify").dismiss()
+  end, { desc = "dismiss notifications" })
+end
+
+function M.config()
+  require("notify").setup({
     background_colour = "NormalFloat",
     render = "minimal",
     on_open = function(win)
@@ -24,7 +30,6 @@ return function()
   -- ]])
 
   require("telescope").load_extension("notify")
-
-  vim.keymap.set("n", "<space>fn", "<Cmd>Telescope notify<CR>", { desc = "search notifications" })
-  vim.keymap.set("n", "<space>Q", notify.dismiss, { desc = "dismiss notifications" })
 end
+
+return M

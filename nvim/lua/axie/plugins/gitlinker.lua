@@ -1,6 +1,6 @@
--- https://github.com/ruifm/gitlinker.nvim --
+local M = {}
 
-return function()
+function M.config()
   local gitlinker = require("gitlinker")
   local require_args = require("axie.utils").require_args
   gitlinker.setup({
@@ -14,3 +14,5 @@ return function()
     { desc = "open line link in browser" }
   )
 end
+
+return M

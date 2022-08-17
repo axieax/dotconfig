@@ -12,16 +12,16 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 local snippets, autosnippets = {}, {}
 
-local test = s(
-  "test",
-  c(1, {
-    t("test1"),
-    t("test2"),
-    t("test3"),
-    t("test4"),
-    t("test5"),
-  })
-)
-table.insert(snippets, test)
+-- local test = s(
+--   "test",
+--   c(1, {
+--     t("test1"),
+--     t("test2"),
+--     t("test3"),
+--     t("test4"),
+--     t("test5"),
+--   })
+-- )
+-- table.insert(snippets, test)
 
 return snippets, autosnippets

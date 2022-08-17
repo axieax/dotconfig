@@ -2,7 +2,7 @@
 
 local M = {}
 
-function M.setup()
+function M.config()
   require("nvim-lightbulb").setup({
     ignore = { "null-ls" },
     sign = {

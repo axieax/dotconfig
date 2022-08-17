@@ -1,6 +1,6 @@
--- https://github.com/marko-cerovac/material.nvim --
+local M = {}
 
-return function()
+function M.config()
   vim.g.material_style = "palenight"
   require("material").setup({
     borders = true,
@@ -17,3 +17,5 @@ return function()
     },
   })
 end
+
+return M

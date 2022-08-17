@@ -1,6 +1,11 @@
 local M = {}
 
 function M.setup()
+  vim.keymap.set("n", "<Space>lI", "<Cmd>Mason<CR>", { desc = "LSP installer" })
+  vim.keymap.set("n", "<Space>lU", "<Cmd>MasonToolsUpdate<CR>", { desc = "update Mason tools" })
+end
+
+function M.config()
   -- setup lspconfig
   require("mason").setup()
   require("mason-lspconfig").setup()

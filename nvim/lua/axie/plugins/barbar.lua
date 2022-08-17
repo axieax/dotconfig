@@ -1,9 +1,10 @@
--- https://github.com/romgrk/barbar.nvim --
+local M = {}
+
 -- BUG: https://github.com/romgrk/barbar.nvim/issues/82#issuecomment-748498951
 -- TODO: see if empty buffers bring up Dashboard instead
 -- TODO: see if new buffers can be open in tabs by default
 
-return function()
+function M.setup()
   -- Buffer navigation
   vim.keymap.set("n", "<TAB>", "<Cmd>BufferNext<CR>")
   vim.keymap.set("n", "<S-TAB>", "<Cmd>BufferPrevious<CR>")
@@ -31,7 +32,9 @@ return function()
   vim.keymap.set("n", "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>")
   vim.keymap.set("n", "<leader>bl", "<Cmd>BufferOrderByLanguage<CR>")
   vim.keymap.set("n", "<leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>")
+end
 
+function M.config()
   -- Set barbar's options
   vim.g.bufferline = {
     -- Enable/disable animations
@@ -99,3 +102,5 @@ return function()
     no_name_title = nil,
   }
 end
+
+return M

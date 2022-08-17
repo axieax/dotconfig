@@ -1,4 +1,4 @@
--- https://github.com/NTBBloodbath/galaxyline.nvim --
+local M = {}
 
 -- https://elianiva.my.id/post/neovim-lua-statusline
 -- File indent size? mixed indent warning
@@ -10,8 +10,6 @@
 local ternary = require("axie.utils").ternary
 local diagnostics_icons = require("axie.utils.config").diagnostics_icons
 local fileformat_icons = require("axie.utils.config").fileformat_icons
-
-local M = {}
 
 function M.get_component(name, condition)
   -- Colours
@@ -239,7 +237,7 @@ function M.filetype_conditional()
   return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 end
 
-function M.setup()
+function M.config()
   local galaxyline = require("galaxyline")
 
   -- Define the structure of the statusline

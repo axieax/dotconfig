@@ -86,4 +86,43 @@ local packer_use = s(
 )
 table.insert(autosnippets, packer_use)
 
+local module = s(
+  "module",
+  fmt(
+    [[
+    local {} = {{}}
+    {}
+    return {}
+    ]],
+    {
+      i(1, "M"),
+      c(2, {
+        t(""),
+        fmt(
+          [[
+            function {}.config()
+            end
+          ]],
+          { rep(1) }
+        ),
+        fmt(
+          [[
+            function {}.setup()
+            end
+
+            function {}.config()
+            end
+          ]],
+          { rep(1), rep(1) }
+        ),
+      }),
+      c(3, {
+        rep(1),
+        fmt("setmetatable({}, {{}})", { rep(1) }), -- NOTE: rep doesn't work
+      }),
+    }
+  )
+)
+table.insert(snippets, module)
+
 return snippets, autosnippets

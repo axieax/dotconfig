@@ -1,8 +1,8 @@
--- https://github.com/L3MON4D3/LuaSnip --
+local M = {}
 
 -- TODO: choice node vim.ui.select https://github.com/L3MON4D3/LuaSnip/wiki/Misc#choicenode-popup
 
-return function()
+function M.config()
   local ls = require("luasnip")
   local types = require("luasnip.util.types")
 
@@ -60,3 +60,5 @@ return function()
   -- TODO: prevent multiple registrations with PackerCompile
   lua_loader.lazy_load({ paths = "~/dotconfig/nvim/lua/axie/lsp/snippets" })
 end
+
+return M

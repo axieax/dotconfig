@@ -172,7 +172,7 @@ function M.hover_sources()
   }
 end
 
-function M.setup()
+function M.config()
   -- Combine sources
   local sources = require("axie.utils").list_flatten_once({
     require("axie.lsp.null").formatting_sources(),

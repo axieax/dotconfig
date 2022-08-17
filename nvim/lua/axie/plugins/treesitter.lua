@@ -64,7 +64,7 @@ function M.goto_next_sibling()
   ts_utils.goto_node(next_sibling)
 end
 
-function M.setup()
+function M.config()
   local vim_apply = require("axie.utils").vim_apply
 
   -- Orgmode.nvim integration

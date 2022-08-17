@@ -1,6 +1,6 @@
--- https://github.com/stevearc/aerial.nvim --
+local M = {}
 
-return function()
+function M.config()
   require("aerial").setup({
     -- close_behavior = "close",
     highlight_on_hover = true,
@@ -19,3 +19,5 @@ return function()
 
   require("telescope").load_extension("aerial")
 end
+
+return M

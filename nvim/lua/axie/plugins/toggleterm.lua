@@ -12,7 +12,7 @@ function M.attach()
   vim.wo.spell = false
 end
 
-function M.setup()
+function M.config()
   require("toggleterm").setup({
     size = function(term)
       if term.direction == "horizontal" then

@@ -1,6 +1,6 @@
--- https://github.com/bennypowers/nvim-regexplainer --
+local M = {}
 
-return function()
+function M.config()
   require("regexplainer").setup({
     auto = false,
     display = "popup",
@@ -14,3 +14,5 @@ return function()
     mappings = { toggle = "gR" },
   })
 end
+
+return M

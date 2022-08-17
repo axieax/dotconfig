@@ -5,7 +5,7 @@
 
 local M = {}
 
-function M.setup()
+function M.config()
   local wk = require("which-key")
   -- Config
   wk.setup({
@@ -50,8 +50,6 @@ function M.general_mappings()
         D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "goto Declaration" },
         r = { require("telescope.builtin").lsp_references, "list references" },
         i = { require("telescope.builtin").lsp_implementations, "list implementations" },
-        I = { "<Cmd>Mason<CR>", "LSP installer" },
-        U = { "<Cmd>MasonToolsUpdate<CR>", "Update Mason Tools" },
         t = { "<Cmd>lua vim.lsp.buf.type_definition()<CR>", "show type definition" },
         s = { require("telescope.builtin").lsp_document_symbols, "show document symbols" },
         S = { require("telescope.builtin").lsp_dynamic_workspace_symbols, "show dynamic workspace symbols" },
@@ -76,7 +74,6 @@ function M.general_mappings()
         name = "+find",
         a = { require("telescope.builtin").symbols, "find symbols" },
         b = { require("telescope.builtin").buffers, "open buffers" },
-        B = { "<Cmd>Neotree source=buffers toggle=true<CR>", "open buffers (tree)" },
         z = { "<Cmd>Telescope zoxide list<CR>", "zoxide list" },
         v = { require("telescope.builtin").vim_options, "vim options" },
         r = { require("telescope.builtin").registers, "registers" }, -- could be "
@@ -112,7 +109,6 @@ function M.general_mappings()
         end,
         "Update Plugins",
       },
-      S = { "<Cmd>Alpha<CR>", "Start Menu" },
       p = { ":lua =", "lua print", silent = false },
       P = { ":lua require'axie.utils'.notify()<LEFT>", "lua notify", silent = false },
       q = { require("axie.utils").toggle_signcolumn, "toggle signcolumn" },
@@ -125,7 +121,6 @@ function M.general_mappings()
       ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
       ["\\"] = { "<Cmd>lua require'specs'.show_specs()<CR>", "Accent cursor" },
       ["<Tab>"] = { "<Cmd>AerialToggle<CR>", "Aerial Symbols" },
-      ["<S-Tab>"] = { "<Cmd>SymbolsOutline<CR>", "Symbols Outline" },
     },
     ["["] = {
       name = "+previous",
@@ -179,8 +174,6 @@ function M.general_mappings()
         end,
         "Toggle spellcheck",
       },
-      u = { "<Cmd>UrlView<CR>", "View buffer URLs" },
-      U = { "<Cmd>UrlView packer<CR>", "View plugin URLs" },
       z = { "<Cmd>FocusMaxOrEqual<CR>", "Maximise toggle" },
       f = { "<Cmd>FocusToggle<CR>", "Focus toggle" },
       ["<tab>"] = { "<Cmd>SymbolsOutline<CR>", "Symbols Outline" },
@@ -212,7 +205,6 @@ function M.register_git_bindings()
     m = { "git merge conflict" }, -- TODO: MERGE CONFLICTS
     u = { require("gitsigns").undo_stage_hunk, "git stage hunk undo" },
     s = { require("telescope.builtin").git_stash, "git stash" },
-    S = { "<Cmd>Neotree source=git_status toggle=true<CR>", "git status (tree)" },
     b = { require("telescope.builtin").git_branches, "git branches" },
     c = { require("telescope.builtin").git_bcommits, "git commits (buffer)" },
     C = { require("telescope.builtin").git_commits, "git commits (repo)" },
@@ -268,8 +260,6 @@ function M.misc()
   vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   vim.keymap.set("v", "gq", "<Cmd>lua require'axie.lsp.code_actions'.native(true)<CR>")
   vim.keymap.set("v", "gQ", "<Cmd>lua require'axie.lsp.code_actions'.native(false)<CR>")
-  -- Neo-tree
-  vim.keymap.set("n", ";", "<Cmd>Neotree toggle=true<CR>")
   -- Visual indent
   vim.keymap.set("v", "<", "<gv")
   vim.keymap.set("v", ">", ">gv")

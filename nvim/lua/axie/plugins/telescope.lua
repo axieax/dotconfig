@@ -24,7 +24,7 @@ function M.dotconfig()
   })
 end
 
-function M.binds()
+function M.setup()
   local this = require("axie.plugins.telescope")
   local builtin = require("telescope.builtin")
   local require_args = require("axie.utils").require_args
@@ -55,7 +55,7 @@ function M.binds()
   vim.keymap.set("n", "<Space>fk", builtin.keymaps, { desc = "find keymaps" })
 end
 
-function M.setup()
+function M.config()
   -- telescope setup mappings table - inside telescope overlay
   -- TODO: overwrite dotfiles? action for opening current file in native file explorer?
   local ternary = require("axie.utils").ternary
@@ -102,7 +102,7 @@ function M.setup()
   })
 
   telescope.load_extension("fzf")
-  require("axie.plugins.telescope").binds()
+  require("axie.plugins.telescope").setup()
 end
 
 return M

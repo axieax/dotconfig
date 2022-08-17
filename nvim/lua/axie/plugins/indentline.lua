@@ -1,6 +1,6 @@
--- https://github.com/lukas-reineke/indent-blankline.nvim --
+local M = {}
 
-return function()
+function M.config()
   require("indent_blankline").setup({
     char = "▏",
     show_current_context = true,
@@ -68,3 +68,5 @@ return function()
   -- NOTE: moved to material.nvim theme config as highlight override
   -- vim.cmd([[highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine]])
 end
+
+return M

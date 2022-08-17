@@ -1,8 +1,9 @@
--- https://github.com/neovim/nvim-lspconfig --
+local M = {}
+
 -- TODO: filter/sort severity?
 -- Highlight line number instead of icons (https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#highlight-line-number-instead-of-having-icons-in-sign-column)
 
-return function()
+function M.config()
   local diagnostics_icons = require("axie.utils.config").diagnostics_icons
 
   -- Gutter diagnostic symbols
@@ -56,3 +57,5 @@ return function()
     return opts
   end
 end
+
+return M

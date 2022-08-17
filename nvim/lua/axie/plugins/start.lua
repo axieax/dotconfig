@@ -1,9 +1,14 @@
--- https://github.com/goolord/alpha-nvim --
+local M = {}
+
 -- TODO: display startup time - async function + :AlphaRedraw?
 -- TODO: customise like https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1308930
 -- narrower center align
 
-return function()
+function M.setup()
+  vim.keymap.set("n", "<Space>S", "<Cmd>Alpha<CR>", { desc = "start menu" })
+end
+
+function M.config()
   local dashboard = require("alpha.themes.dashboard")
 
   dashboard.section.header.val = {
@@ -48,6 +53,9 @@ return function()
     callback = function()
       vim.bo.buflisted = true
       vim.wo.colorcolumn = ""
+      vim.cmd("file dashboard")
     end,
   })
 end
+
+return M

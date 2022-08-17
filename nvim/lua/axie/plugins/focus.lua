@@ -1,6 +1,6 @@
--- https://github.com/beauwilliams/focus.nvim --
+local M = {}
 
-return function()
+function M.config()
   require("focus").setup({
     -- TEMP: https://github.com/beauwilliams/focus.nvim/issues/82
     autoresize = false,
@@ -11,3 +11,5 @@ return function()
     excluded_filetypes = { "toggleterm", "qf", "help", "Mundo" },
   })
 end
+
+return M

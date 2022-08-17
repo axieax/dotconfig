@@ -1,7 +1,6 @@
--- https://github.com/kevinhwang91/nvim-hlslens --
 local M = {}
 
-function M.setup()
+function M.config()
   require("hlslens").setup({
     -- statusline overlay instead of virtual text
     -- nearest_float_when = "always"

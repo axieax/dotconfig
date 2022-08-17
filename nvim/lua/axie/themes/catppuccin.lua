@@ -1,6 +1,6 @@
--- https://github.com/catppuccin/nvim --
+local M = {}
 
-return function()
+function M.config()
   -- highlight group overrides
   vim.g.catppuccin_flavour = "mocha"
   local catppuccin = require("catppuccin")
@@ -109,3 +109,5 @@ return function()
 
   vim.cmd("colorscheme catppuccin")
 end
+
+return M

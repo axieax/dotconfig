@@ -1,6 +1,6 @@
--- https://github.com/ray-x/lsp_signature.nvim --
+local M = {}
 
-return function()
+function M.config()
   require("lsp_signature").setup({
     -- general options
     always_trigger = "true",
@@ -15,3 +15,5 @@ return function()
     },
   })
 end
+
+return M

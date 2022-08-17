@@ -1,6 +1,6 @@
--- https://github.com/stevearc/dressing.nvim --
+local M = {}
 
-return function()
+function M.config()
   require("dressing").setup({
     input = {
       get_config = function()
@@ -12,3 +12,5 @@ return function()
     },
   })
 end
+
+return M

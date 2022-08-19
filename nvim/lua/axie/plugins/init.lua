@@ -50,7 +50,7 @@ return packer.startup({
       "axieax/urlview.nvim",
       disable = dev_mode,
       -- cmd = { "UrlView" },
-    }, { "urlview", { "setup", "config" } })
+    }, { "urlview", { "config", "setup" } })
 
     -------------
     -- Theming --

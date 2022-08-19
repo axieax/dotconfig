@@ -4,10 +4,9 @@ function M.setup()
   local opts = { script = true, expr = true, silent = true }
   vim.keymap.set("i", "<c-a>", "copilot#Accept()", opts)
   vim.keymap.set("i", "<c-x>", "copilot#Dismiss()", opts)
-  vim.keymap.set("i", "<c-,>", "copilot#Previous()", opts)
-  vim.keymap.set("i", "<c-.>", "copilot#Next()", opts)
-  -- vim.keymap.set("i", "<a-[>", "copilot#Previous()", opts)
-  -- vim.keymap.set("i", "<a-]>", "copilot#Next()", opts)
+  vim.keymap.set("i", "<a-[>", "copilot#Previous()", opts)
+  vim.keymap.set("i", "<a-]>", "copilot#Next()", opts)
+  -- vim.keymap.set("i", "<a-\\>", "<Cmd>Copilot panel<CR>")
 end
 
 function M.config()

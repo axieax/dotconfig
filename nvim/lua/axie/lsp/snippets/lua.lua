@@ -37,9 +37,12 @@ local packer_use = s(
     regTrig = true,
     hidden = true,
   },
-  fmt('use({}"{}/{}"{})', {
+  fmt('use({}"{}/{}"{}{})', {
     -- start
-    c(1, { t(""), t({ "{", "  " }) }),
+    c(1, {
+      t(""),
+      t({ "{", "  " }),
+    }),
     -- org
     f(regex_capture(1)),
     -- repo
@@ -55,11 +58,11 @@ local packer_use = s(
           -- no config
           t({ ",", "}" }),
           -- require config from plugins directory
-          t({
-            ",",
-            string.format([[  config = require("axie.plugins.%s"),]], plugin_name),
-            "}",
-          }),
+          -- t({
+          --   ",",
+          --   string.format([[  config = require("axie.plugins.%s"),]], plugin_name),
+          --   "}",
+          -- }),
           -- empty anonymous config
           t({
             ",",
@@ -87,7 +90,18 @@ local packer_use = s(
         })
       end
 
-      return sn(1, ret_node)
+      return sn(nil, ret_node)
+    end, { 1 }),
+    -- custom config options
+    d(3, function(args, snip)
+      local plugin_name = snip.captures[2]
+      plugin_name = string.gsub(plugin_name, "nvim", ""):gsub("[^%w]", "")
+      local ret_node = c(1, {
+        t(""),
+        t(string.format(', { "%s", { "config" } }', plugin_name)),
+        t(string.format(', { "%s", { "config", "setup" } }', plugin_name)),
+      })
+      return sn(nil, ret_node)
     end, { 1 }),
   })
 )

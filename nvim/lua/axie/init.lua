@@ -39,7 +39,7 @@ if dev_mode then
     local module_name = path:gsub("%.nvim", "")
     -- module_name = module_name:gsub("%-", "")
     -- add to rtp
-    vim.opt.rtp:append(path)
+    vim.opt.rtp:append(base_path .. path)
     -- refresh require caching
     reload_module(module_name)
     -- load config

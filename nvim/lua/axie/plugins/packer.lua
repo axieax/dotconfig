@@ -39,7 +39,7 @@ function M.customise_use(packer_use, for_dev_plugins)
 
     if mod_name then
       if type(mod_name) ~= "string" then
-        utils.notify(string.format("%s: expected module name as string", plugin_name))
+        utils.notify(string.format("%s: expected module name as string", plugin_name), "error")
         return
       end
 
@@ -48,7 +48,7 @@ function M.customise_use(packer_use, for_dev_plugins)
       end
       local ok, mod = pcall(require, "axie." .. mod_name)
       if not ok then
-        utils.notify(string.format("%s: failed to load module %s", plugin_name, mod_name))
+        utils.notify(string.format("%s: failed to load module %s", plugin_name, mod_name), "error")
         return
       end
 

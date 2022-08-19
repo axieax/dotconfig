@@ -171,6 +171,7 @@ function M.general_mappings()
     },
     [","] = {
       p = { "<Cmd>PasteImg<CR>", "Paste image" },
+      s = { "<Cmd>StartupTime<CR>", "startup time" },
       ["["] = { require("axie.plugins.treesitter").goto_prev_sibling, "Goto previous sibling node" },
       ["]"] = { require("axie.plugins.treesitter").goto_next_sibling, "Goto next sibling node" },
       ["{"] = { require("axie.plugins.treesitter").goto_parent, "Goto parent node" },

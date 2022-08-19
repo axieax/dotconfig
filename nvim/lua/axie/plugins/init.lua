@@ -50,7 +50,7 @@ return packer.startup({
       "axieax/urlview.nvim",
       disable = dev_mode,
       -- cmd = { "UrlView" },
-    }, { "urlview", { "config", "setup" } })
+    }, "urlview")
 
     -------------
     -- Theming --
@@ -60,35 +60,35 @@ return packer.startup({
     use({
       "themercorp/themer.lua",
       disable = true,
-    }, { "themes.themer", { "config" } })
+    }, "themes.themer")
 
     use({
       "marko-cerovac/material.nvim",
-    }, { "themes.material", { "config" } })
+    }, "themes.material")
 
     use({
       "catppuccin/nvim",
       as = "catppuccin",
       run = ":CatppuccinCompile",
-    }, { "themes.catppuccin", { "config" } })
+    }, "themes.catppuccin")
 
     use({
       "rebelot/kanagawa.nvim",
       disable = true,
-    }, { "themes.kanagawa", { "config" } })
+    }, "themes.kanagawa")
 
     -- TODO: replace (too red)
     -- ALT: https://github.com/navarasu/onedark.nvim
     use({
       "olimorris/onedarkpro.nvim",
-    }, { "themes.onedark", { "config" } })
+    }, "themes.onedark")
 
     -----------------------
     -- General Utilities --
     -----------------------
 
     -- Keybinds
-    use("folke/which-key.nvim", { "binds", { "config" } })
+    use("folke/which-key.nvim", "binds")
 
     -- Fuzzy finder
     -- EXTENSIONS: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
@@ -100,7 +100,7 @@ return packer.startup({
         { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       },
-    }, { "telescope", { "config" } })
+    }, "telescope")
 
     -- Tree explorer (filesystem, buffers, git_status)
     use({
@@ -111,7 +111,7 @@ return packer.startup({
         "kyazdani42/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
       },
-    }, { "neotree", { "config", "setup" } })
+    }, "neotree")
 
     -- Neo-tree diagnostics source
     use({
@@ -193,14 +193,14 @@ return packer.startup({
     use({
       "folke/todo-comments.nvim",
       requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
-    }, { "notes", { "config" } })
+    }, "notes")
 
     -- Scrollbar
     use({
       "petertriho/nvim-scrollbar",
       after = "nvim-hlslens",
       event = "BufRead",
-    }, { "scrollbar", { "config" } })
+    }, "scrollbar")
 
     -- Extra mappings (with encoding/decoding as well)
     use("tpope/vim-unimpaired")
@@ -214,7 +214,7 @@ return packer.startup({
     use({
       "NTBBloodbath/galaxyline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-    }, { "galaxyline", { "config" } })
+    }, "galaxyline")
 
     -- Tabline
     use({
@@ -222,7 +222,7 @@ return packer.startup({
       event = "BufEnter",
       -- disable = true,
       requires = "kyazdani42/nvim-web-devicons",
-    }, { "barbar", { "config", "setup" } })
+    }, "barbar")
 
     use({
       "akinsho/bufferline.nvim",
@@ -237,7 +237,7 @@ return packer.startup({
     use({
       "b0o/incline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-    }, { "incline", { "config" } })
+    }, "incline")
 
     -- Terminal
     use({
@@ -246,14 +246,14 @@ return packer.startup({
         "nvim-telescope/telescope.nvim",
         "tknightz/telescope-termfinder.nvim",
       },
-    }, { "toggleterm", { "config" } })
+    }, "toggleterm")
 
     -- Startup screen
     -- ALT: https://github.com/startup-nvim/startup.nvim
     use({
       "goolord/alpha-nvim",
       requires = "kyazdani42/nvim-web-devicons",
-    }, { "start", { "config", "setup" } })
+    }, "start")
 
     -- Session manager
     -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
@@ -348,13 +348,13 @@ return packer.startup({
     use({
       "folke/zen-mode.nvim",
       cmd = { "ZenMode" },
-    }, { "zen", { "config", "setup" } })
+    }, "zen")
 
     -- Undo history
     use({
       "simnalamburt/vim-mundo",
       event = "BufEnter",
-    }, { "undo", { "config", "setup" } })
+    }, "undo")
 
     -- Clipboard manager
     use({
@@ -373,7 +373,7 @@ return packer.startup({
     use({
       "rcarriga/nvim-notify",
       after = "telescope.nvim",
-    }, { "notify", { "config", "setup" } })
+    }, "notify")
 
     -- Better quickfix list
     use({
@@ -396,7 +396,7 @@ return packer.startup({
     use({
       "beauwilliams/focus.nvim",
       event = "BufEnter",
-    }, { "focus", { "config" } })
+    }, "focus")
 
     -- Open with sudo
     -- NOTE: eunuch requires an askpass helper, suda.vim asks for password everytime
@@ -443,7 +443,7 @@ return packer.startup({
     use("simonefranza/nvim-conv")
 
     -- Incrementor / decrementor
-    use("monaqa/dial.nvim", { "dial", { "config", "setup" } })
+    use("monaqa/dial.nvim", "dial")
 
     -- Keep cursor on shift (`>` or `<`) and filter (`=`)
     use({
@@ -480,7 +480,7 @@ return packer.startup({
     use("rainbowhxch/beacon.nvim")
 
     -- vim.ui overrides
-    use("stevearc/dressing.nvim", { "dressing", { "config" } })
+    use("stevearc/dressing.nvim", "dressing")
 
     -- Bracket coloured pairs
     -- TODO: change colourscheme, esp red?
@@ -494,13 +494,13 @@ return packer.startup({
       "lukas-reineke/indent-blankline.nvim",
       after = "nvim-treesitter",
       event = "BufRead",
-    }, { "indentline", { "config" } })
+    }, "indentline")
 
     -- Scope context indicator
     use({
       "code-biscuits/nvim-biscuits",
       after = "nvim-treesitter",
-    }, { "biscuits", { "config" } })
+    }, "biscuits")
 
     -- Function context indicator
     use({
@@ -572,7 +572,7 @@ return packer.startup({
     use("romainl/vim-cool")
 
     -- Search virtual text
-    use("kevinhwang91/nvim-hlslens", { "hlslens", { "config" } })
+    use("kevinhwang91/nvim-hlslens", "hlslens")
 
     -- Preview line jumps
     use({
@@ -605,6 +605,15 @@ return packer.startup({
         -- vim.keymap.set("i", "<ScrollWheelDown>", "<C-o><C-e>")
       end,
     })
+
+    use({
+      "ziontee113/icon-picker.nvim",
+      cmd = {
+        "IconPickerInsert",
+        "IconPickerNormal",
+        "IconPickerYank",
+      },
+    }, "iconpicker")
 
     ----------------------
     -- Motion Utilities --
@@ -643,7 +652,7 @@ return packer.startup({
     use({
       "abecodes/tabout.nvim",
       after = "nvim-treesitter",
-    }, { "tabout", { "config", "setup" } })
+    }, "tabout")
 
     -----------------------------
     -- Project / Git Utilities --
@@ -666,13 +675,13 @@ return packer.startup({
     use({
       "lewis6991/gitsigns.nvim",
       requires = "nvim-lua/plenary.nvim",
-    }, { "gitsigns", { "config" } })
+    }, "gitsigns")
 
     -- Git repo link
     use({
       "ruifm/gitlinker.nvim",
       requires = "nvim-lua/plenary.nvim",
-    }, { "gitlinker", { "config" } })
+    }, "gitlinker")
 
     -- GitHub issues and pull requests
     use({
@@ -717,7 +726,7 @@ return packer.startup({
     use({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-    }, { "treesitter", { "config" } })
+    }, "treesitter")
 
     -- Treesitter parser info
     use({
@@ -741,19 +750,19 @@ return packer.startup({
 
     -- GitHub Copilot
     -- ALT: https://github.com/zbirenbaum/copilot.lua with https://github.com/zbirenbaum/copilot-cmp
-    use("github/copilot.vim", { "copilot", { "config", "setup" } })
+    use("github/copilot.vim", "copilot")
 
     -- Interactive scratchpad with virtual text
     -- ALT: https://github.com/michaelb/sniprun
     use("metakirby5/codi.vim")
 
     -- Align lines by character
-    use("godlygeek/tabular", { "tabular", { "setup" } })
+    use("godlygeek/tabular", "tabular")
 
     -- Commenting
     -- NOTE: missing uncomment adjacent (gcgc, gcu)
     -- https://github.com/numToStr/Comment.nvim/issues/22
-    use("numToStr/Comment.nvim", { "comment", { "config" } })
+    use("numToStr/Comment.nvim", "comment")
 
     -- Better commentstring (for vim-commentary)
     use({
@@ -772,7 +781,7 @@ return packer.startup({
       "L3MON4D3/LuaSnip",
       requires = "rafamadriz/friendly-snippets", -- snippet collection
       config = require("axie.lsp.snippets"),
-    }, { "lsp.snippets", { "config" } })
+    }, "lsp.snippets")
 
     -- Docstring generator
     -- ALT: https://github.com/kkoomen/vim-doge
@@ -796,7 +805,7 @@ return packer.startup({
     use({
       "bennypowers/nvim-regexplainer",
       requires = { "nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim" },
-    }, { "regexplainer", { "config" } })
+    }, "regexplainer")
 
     -- Auto continue bullets
     -- NOTE: ctrl-t to indent after auto continue, ctrl-d to unindent
@@ -817,7 +826,7 @@ return packer.startup({
       "vuki656/package-info.nvim",
       requires = "MunifTanjim/nui.nvim",
       ft = { "json" },
-    }, { "package", { "config" } })
+    }, "package")
 
     -- Python indenting issues
     -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
@@ -828,7 +837,7 @@ return packer.startup({
     use({
       "ekickx/clipboard-image.nvim",
       cmd = { "PasteImg" },
-    }, { "pasteimage", { "config" } })
+    }, "pasteimage")
 
     -- Markdown preview
     use({
@@ -893,7 +902,7 @@ return packer.startup({
         "nvim-neotest/neotest-plenary",
         { "nvim-neotest/neotest-vim-test", requires = "vim-test/vim-test" },
       },
-    }, { "lsp.test", { "config", "setup" } })
+    }, "lsp.test")
 
     -- Debug Adapter Protocol
     use({
@@ -956,7 +965,7 @@ return packer.startup({
     -------------------
 
     -- LSP config
-    use("neovim/nvim-lspconfig", { "lsp.config", { "config" } })
+    use("neovim/nvim-lspconfig", "lsp.config")
 
     -- LSP install
     -- TODO: move lsp setup call to axie/init.lua
@@ -974,7 +983,7 @@ return packer.startup({
         "p00f/clangd_extensions.nvim",
         "folke/lua-dev.nvim",
       },
-    }, { "lsp.install", { "config", "setup" } })
+    }, "lsp.install")
 
     -- Java LSP
     use("mfussenegger/nvim-jdtls")
@@ -1005,7 +1014,7 @@ return packer.startup({
           },
         },
       },
-    }, { "lsp.null", { "config" } })
+    }, "lsp.null")
 
     -- LSP progress indicator
     use({
@@ -1032,7 +1041,7 @@ return packer.startup({
     use({
       "stevearc/aerial.nvim",
       after = "telescope.nvim",
-    }, { "lsp.aerial", { "config" } })
+    }, "lsp.aerial")
 
     use({
       "simrat39/symbols-outline.nvim",
@@ -1041,7 +1050,7 @@ return packer.startup({
         "SymbolsOutlineOpen",
         "SymbolsOutlineClose",
       },
-    }, { "lsp.symbols", { "config", "setup" } })
+    }, "lsp.symbols")
 
     -- Code action menu with diff preview
     use({
@@ -1054,7 +1063,7 @@ return packer.startup({
     use({
       "kosayoda/nvim-lightbulb",
       event = "BufRead",
-    }, { "lightbulb", { "config" } })
+    }, "lightbulb")
 
     -- Completion menu
     -- TODO: move sources out with after = "nvim-cmp" (https://github.com/danymat/champagne/blob/main/lua/plugins.lua)
@@ -1084,20 +1093,25 @@ return packer.startup({
         -- "tzachar/cmp-fzy-buffer",
         -- "tzachar/cmp-fuzzy-path",
       },
-    }, { "lsp.completion", { "config" } })
+    }, "lsp.completion")
 
     -- Function signature
     use({
       "ray-x/lsp_signature.nvim",
       event = "BufRead",
-    }, { "lsp.signature", { "config" } })
+    }, "lsp.signature")
 
     -------------------
     -- Miscellaneous --
     -------------------
 
     -- Browser integration
-    use("glacambre/firenvim", { "firenvim", { "config", "run" } })
+    use({
+      "glacambre/firenvim",
+      run = function()
+        vim.fn["firenvim#install"](0)
+      end,
+    }, "firenvim")
 
     -- Packer auto update + compile on bootstrap
     if bootstrapped then

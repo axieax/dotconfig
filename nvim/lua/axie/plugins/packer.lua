@@ -1,5 +1,6 @@
 local M = {}
 
+local utils = require("axie.utils")
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 function M.is_installed()
@@ -15,45 +16,57 @@ function M.auto_bootstrap()
   return true
 end
 
---- Protected require for loading a specific plugin config
----@param plugin (string) plugin to load (default in `axie.plugins.{}` unless specified otherwise)
----@param config_type (string) type of config to load (`setup` or `config`)
----@return function
-local function use_config(plugin, config_type)
-  if not string.match(plugin, "%.") then
-    plugin = string.format("plugins.%s", plugin)
-  end
-  local ok, mod = pcall(require, "axie." .. plugin)
-  if not ok then
-    M.notify("Could not load plugin: " .. plugin)
-    return function() end
-  end
-  if type(mod) ~= "table" then
-    M.notify(string.format("expected %s to be a table", plugin))
-    return function() end
-  end
-  return mod[config_type]
-end
+local packer_options = {
+  "config",
+  "setup",
+  "cmd",
+}
 
---- Decorate packer `use` function with custom config
+--- Update packer `use` to auto-fill options if a config module is specified
 ---@param packer_use function from packer
 ---@return function
 function M.customise_use(packer_use)
-  return function(config, custom)
-    if custom then
-      if type(config) == "string" then
-        config = { config }
+  return function(config, mod_name)
+    if type(config) == "string" then
+      config = { config }
+    end
+    local plugin_name = config[1]
+    if mod_name then
+      if type(mod_name) ~= "string" then
+        utils.notify(string.format("%s: expected module name as string", plugin_name))
+        return
       end
-      local path, types = unpack(custom)
-      for _, type in ipairs(types) do
-        config[type] = use_config(path, type)
+
+      if not string.match(mod_name, "%.") then
+        mod_name = string.format("plugins.%s", mod_name)
+      end
+      local ok, mod = pcall(require, "axie." .. mod_name)
+      if not ok then
+        utils.notify(string.format("%s: failed to load module %s", plugin_name, mod_name))
+        return
+      end
+
+      for _, type in ipairs(packer_options) do
+        if mod[type] then
+          config[type] = mod[type]
+        end
       end
     end
     return packer_use(config)
   end
 end
 
+function M.setup()
+  vim.keymap.set("n", "<Space>s", function()
+    local snapshot_time = os.date("!%Y-%m-%dT%TZ")
+    vim.cmd("PackerSnapshot " .. snapshot_time)
+    vim.cmd("PackerSync")
+  end, { desc = "sync plugins" })
+end
+
 function M.config()
+  M.setup()
+
   return {
     -- actually reload catppuccin setup function without restarting nvim
     auto_reload_compiled = true,

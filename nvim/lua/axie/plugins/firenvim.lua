@@ -1,9 +1,5 @@
 local M = {}
 
-function M.run()
-  vim.fn["firenvim#install"](0)
-end
-
 function M.config()
   -- Setup config
   vim.g.firenvim_config = {

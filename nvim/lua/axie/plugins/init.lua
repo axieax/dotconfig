@@ -1136,9 +1136,10 @@ return packer.startup({
     miscellaneous(remote_use)
 
     -- Packer auto update + compile on bootstrap
+    P.setup()
     if bootstrapped then
       packer.sync()
     end
   end,
-  config = P.config(),
+  config = P.config,
 })

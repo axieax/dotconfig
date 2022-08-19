@@ -71,28 +71,24 @@ function M.setup()
   end, { desc = "sync plugins" })
 end
 
-function M.config()
-  M.setup()
-
-  return {
-    -- actually reload catppuccin setup function without restarting nvim
-    auto_reload_compiled = true,
-    -- https://github.com/wbthomason/packer.nvim/issues/202
-    max_jobs = 50,
-    -- https://github.com/wbthomason/packer.nvim/issues/381#issuecomment-849815901
-    -- git = {
-    --   subcommands = {
-    --     update = "pull --ff-only --progress --rebase",
-    --   },
-    -- },
-    profile = { enable = true },
-    autoremove = true,
-    display = {
-      open_fn = function()
-        return require("packer.util").float({ border = "rounded" })
-      end,
-    },
-  }
-end
+M.config = {
+  -- actually reload catppuccin setup function without restarting nvim
+  auto_reload_compiled = true,
+  -- https://github.com/wbthomason/packer.nvim/issues/202
+  max_jobs = 50,
+  -- https://github.com/wbthomason/packer.nvim/issues/381#issuecomment-849815901
+  -- git = {
+  --   subcommands = {
+  --     update = "pull --ff-only --progress --rebase",
+  --   },
+  -- },
+  profile = { enable = true },
+  autoremove = true,
+  display = {
+    open_fn = function()
+      return require("packer.util").float({ border = "rounded" })
+    end,
+  },
+}
 
 return M

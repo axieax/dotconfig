@@ -5,12 +5,13 @@ local bootstrapped = P.auto_bootstrap()
 local packer = require("packer")
 return packer.startup({
   function(packer_use)
-    local use = P.customise_use(packer_use)
+    local remote_use = P.customise_use(packer_use, false)
+    local dev_use = P.customise_use(packer_use, true)
 
     ---------------------
     -- Setup Utilities --
     ---------------------
-    local setup_utilities = function()
+    local setup_utilities = function(use)
       -- Packer can manage itself
       use("wbthomason/packer.nvim")
 
@@ -38,26 +39,24 @@ return packer.startup({
         end,
       })
     end
-    setup_utilities()
+    setup_utilities(remote_use)
 
     ----------------
     -- My Plugins --
     ----------------
-    local dev_mode = require("axie.utils.config").dev_mode
-    local my_plugins = function()
+    local my_plugins = function(use)
       -- View buffer URLs
       use({
         "axieax/urlview.nvim",
-        disable = dev_mode,
         -- cmd = { "UrlView" },
       }, "urlview")
     end
-    my_plugins()
+    my_plugins(dev_use)
 
     -------------
     -- Theming --
     -------------
-    local theming = function()
+    local theming = function(use)
       -- TODO: replace all with themer.lua?
       use({
         "themercorp/themer.lua",
@@ -85,12 +84,12 @@ return packer.startup({
         "olimorris/onedarkpro.nvim",
       }, "themes.onedark")
     end
-    theming()
+    theming(remote_use)
 
     -----------------------
     -- General Utilities --
     -----------------------
-    local general_utilities = function()
+    local general_utilities = function(use)
       -- Keybinds
       use("folke/which-key.nvim", "binds")
 
@@ -141,6 +140,7 @@ return packer.startup({
         end,
       })
 
+      -- Zoxide Telescope extension
       use({
         "jvgrootveld/telescope-zoxide",
         after = "telescope.nvim",
@@ -427,12 +427,12 @@ return packer.startup({
         end,
       })
     end
-    general_utilities()
+    general_utilities(remote_use)
 
     ------------------
     -- Helper Tools --
     ------------------
-    local helper_tools = function()
+    local helper_tools = function(use)
       -- Text abbreviation / substitution / coercion
       use("tpope/vim-abolish")
 
@@ -459,12 +459,12 @@ return packer.startup({
         end,
       })
     end
-    helper_tools()
+    helper_tools(remote_use)
 
     ------------------
     -- UI Utilities --
     ------------------
-    local ui_utilities = function()
+    local ui_utilities = function(use)
       -- Shade inactive windows
       -- NOTE: doesn't work with transparent backgrounds https://github.com/sunjon/Shade.nvim/issues/7
       use({
@@ -624,12 +624,12 @@ return packer.startup({
         },
       }, "iconpicker")
     end
-    ui_utilities()
+    ui_utilities(remote_use)
 
     ----------------------
     -- Motion Utilities --
     ----------------------
-    local motion_utilities = function()
+    local motion_utilities = function(use)
       -- Multiple cursors
       use("mg979/vim-visual-multi")
 
@@ -665,12 +665,12 @@ return packer.startup({
         after = "nvim-treesitter",
       }, "tabout")
     end
-    motion_utilities()
+    motion_utilities(remote_use)
 
     -----------------------------
     -- Project / Git Utilities --
     -----------------------------
-    local project_git_utilities = function()
+    local project_git_utilities = function(use)
       -- Project scope
       use({
         "ahmedkhalf/project.nvim",
@@ -730,12 +730,12 @@ return packer.startup({
         end,
       })
     end
-    project_git_utilities()
+    project_git_utilities(remote_use)
 
     -----------------------------------
     -- General Programming Utilities --
     -----------------------------------
-    local general_programming_utilities = function()
+    local general_programming_utilities = function(use)
       -- Language parser + syntax highlighting
       -- TODO: automatically install parsers for new file types (don't download all)
       use({
@@ -880,12 +880,12 @@ return packer.startup({
         end,
       })
     end
-    general_programming_utilities()
+    general_programming_utilities(remote_use)
 
     ---------------------------------
     -- Compilation, Test and Debug --
     ---------------------------------
-    local compilation_test_debug = function()
+    local compilation_test_debug = function(use)
       -- Code runner
       -- NOTE: doesn't support many languages, nor REPL mode
       -- ALT: https://github.com/michaelb/sniprun (full file support?)
@@ -977,12 +977,12 @@ return packer.startup({
         end,
       })
     end
-    compilation_test_debug()
+    compilation_test_debug(remote_use)
 
     -------------------
     -- LSP Utilities --
     -------------------
-    local lsp_utilities = function()
+    local lsp_utilities = function(use)
       -- LSP config
       use("neovim/nvim-lspconfig", "lsp.config")
 
@@ -1120,12 +1120,12 @@ return packer.startup({
         event = "BufRead",
       }, "lsp.signature")
     end
-    lsp_utilities()
+    lsp_utilities(remote_use)
 
     -------------------
     -- Miscellaneous --
     -------------------
-    local miscellaneous = function()
+    local miscellaneous = function(use)
       -- Browser integration
       use({
         "glacambre/firenvim",
@@ -1134,7 +1134,7 @@ return packer.startup({
         end,
       }, "firenvim")
     end
-    miscellaneous()
+    miscellaneous(remote_use)
 
     -- Packer auto update + compile on bootstrap
     if bootstrapped then

@@ -31,21 +31,22 @@ require("axie.general")
 require("axie.plugins")
 
 -- Personal plugin development
-local dev_mode = require("axie.utils.config").dev_mode
-if dev_mode then
-  local base_path = vim.fn.expand("~/dev/nvim-plugins/")
-  local escaped_base_path = base_path:gsub("%-", "%%-")
-
-  local paths = require("axie.utils").glob_split(base_path .. "*")
-  for _, path in ipairs(paths) do
-    local module_name = path:gsub(escaped_base_path, ""):gsub("%.nvim", "")
-    -- module_name = module_name:gsub("%-", "_")
-    -- add to rtp
-    vim.opt.rtp:append(path)
-    -- refresh require caching
-    reload_module(module_name)
-  end
-
-  -- Custom config
-  require("axie.plugins.urlview")()
-end
+-- local dev_mode = require("axie.utils.config").dev_mode
+-- if dev_mode then
+--   local base_path = vim.fn.expand("~/dev/nvim-plugins/")
+--   local escaped_base_path = base_path:gsub("%-", "%%-")
+--
+--   local paths = require("axie.utils").glob_split(base_path .. "*")
+--   for _, path in ipairs(paths) do
+--     local module_name = path:gsub(escaped_base_path, ""):gsub("%.nvim", "")
+--     -- module_name = module_name:gsub("%-", "_")
+--     -- add to rtp
+--     vim.opt.rtp:append(path)
+--     -- refresh require caching
+--     pcall(reload_module, module_name)
+--   end
+--
+--   -- Custom config
+--   require("axie.plugins.urlview").setup()
+--   require("axie.plugins.urlview").config()
+-- end

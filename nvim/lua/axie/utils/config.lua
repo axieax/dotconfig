@@ -1,6 +1,6 @@
 local M = {}
 
-M.dev_mode = false
+M.dev_mode = true
 M.nvchad_theme = true
 M.copilot_enabled = true
 

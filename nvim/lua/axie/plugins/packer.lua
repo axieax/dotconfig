@@ -1,6 +1,7 @@
 local M = {}
 
 local utils = require("axie.utils")
+local dev_mode = require("axie.utils.config").dev_mode
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 function M.is_installed()
@@ -24,13 +25,19 @@ local packer_options = {
 
 --- Update packer `use` to auto-fill options if a config module is specified
 ---@param packer_use function from packer
+---@param for_dev_plugins boolean whether `use` is for configuring dev plugins
 ---@return function
-function M.customise_use(packer_use)
+function M.customise_use(packer_use, for_dev_plugins)
+  for_dev_plugins = utils.fallback(for_dev_plugins, false)
   return function(config, mod_name, additional_options)
     if type(config) == "string" then
       config = { config }
     end
     local plugin_name = config[1]
+    if for_dev_plugins and dev_mode then
+      config[1] = "~/dev/nvim-plugins/" .. plugin_name:gsub("axieax/", "")
+    end
+
     if mod_name then
       if type(mod_name) ~= "string" then
         utils.notify(string.format("%s: expected module name as string", plugin_name))

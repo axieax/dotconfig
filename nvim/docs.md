@@ -155,6 +155,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/stevearc/aerial.nvim/discussions/141
 - PackerCompile (calling setup again) clears bufferline and incline colours
 - https://github.com/b0o/incline.nvim/issues/28
 - https://github.com/nvim-telescope/telescope.nvim/issues/1904

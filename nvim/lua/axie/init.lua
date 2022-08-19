@@ -34,19 +34,23 @@ require("axie.plugins")
 local dev_mode = require("axie.utils.config").dev_mode
 if dev_mode then
   local base_path = vim.fn.expand("~/dev/nvim-plugins/")
-  local escaped_base_path = base_path:gsub("%-", "%%-")
-
-  local paths = require("axie.utils").glob_split(base_path .. "*")
+  local paths = require("axie.utils").glob_split(base_path .. "*", vim.pesc(base_path))
   for _, path in ipairs(paths) do
-    local module_name = path:gsub(escaped_base_path, ""):gsub("%.nvim", "")
-    -- module_name = module_name:gsub("%-", "_")
+    local module_name = path:gsub("%.nvim", "")
+    -- module_name = module_name:gsub("%-", "")
     -- add to rtp
     vim.opt.rtp:append(path)
     -- refresh require caching
     reload_module(module_name)
+    -- load config
+    local ok, mod = pcall(require, "axie.plugins." .. module_name)
+    if ok then
+      if mod.setup then
+        mod.setup()
+      end
+      if mod.config then
+        mod.config()
+      end
+    end
   end
-
-  -- Custom config
-  require("axie.plugins.urlview").setup()
-  require("axie.plugins.urlview").config()
 end

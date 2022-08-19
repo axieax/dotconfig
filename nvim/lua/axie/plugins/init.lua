@@ -777,13 +777,13 @@ return packer.startup({
       -- Commenting
       -- NOTE: missing uncomment adjacent (gcgc, gcu)
       -- https://github.com/numToStr/Comment.nvim/issues/22
-      use("numToStr/Comment.nvim", "comment")
-
-      -- Better commentstring (for vim-commentary)
       use({
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        requires = "nvim-treesitter/nvim-treesitter",
-      })
+        "numToStr/Comment.nvim",
+        requires = {
+          -- language-aware commentstring
+          { "JoosepAlviste/nvim-ts-context-commentstring", requires = "nvim-treesitter/nvim-treesitter" },
+        },
+      }, "comment")
 
       -- Surround with brackets
       use("tpope/vim-surround")

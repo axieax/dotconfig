@@ -47,5 +47,6 @@ if dev_mode then
   end
 
   -- Custom config
-  require("axie.plugins.urlview")()
+  require("axie.plugins.urlview").setup()
+  require("axie.plugins.urlview").config()
 end

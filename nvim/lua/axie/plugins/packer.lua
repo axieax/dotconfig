@@ -26,7 +26,7 @@ local packer_options = {
 ---@param packer_use function from packer
 ---@return function
 function M.customise_use(packer_use)
-  return function(config, mod_name)
+  return function(config, mod_name, additional_options)
     if type(config) == "string" then
       config = { config }
     end
@@ -46,7 +46,8 @@ function M.customise_use(packer_use)
         return
       end
 
-      for _, type in ipairs(packer_options) do
+      local options = vim.tbl_extend("force", packer_options, additional_options or {})
+      for _, type in ipairs(options) do
         if mod[type] then
           config[type] = mod[type]
         end

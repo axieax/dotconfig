@@ -17,6 +17,24 @@ function M.config()
     },
   })
 
+  local packer_aerial = vim.api.nvim_create_augroup("packer aerial symbols", {})
+  vim.api.nvim_create_autocmd("BufEnter", {
+    desc = "set Aerial symbols collapse limit for plugins/init.lua",
+    group = packer_aerial,
+    pattern = {
+      vim.fn.glob("~/dotconfig/nvim/lua/axie/plugins/init.lua"),
+      vim.fn.glob("~/.config/nvim/lua/axie/plugins/init.lua"),
+    },
+    callback = function()
+      vim.defer_fn(function()
+        local ok, aerial = pcall(require, "aerial")
+        if ok then
+          aerial.tree_set_collapse_level(0, 1)
+        end
+      end, 0)
+    end,
+  })
+
   require("telescope").load_extension("aerial")
 end
 

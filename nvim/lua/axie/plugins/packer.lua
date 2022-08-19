@@ -6,7 +6,7 @@ function M.is_installed()
   return vim.fn.empty(vim.fn.glob(packer_path)) == 0
 end
 
-function M.bootstrap()
+function M.auto_bootstrap()
   if M.is_installed() then
     return false
   end
@@ -35,10 +35,10 @@ local function use_config(plugin, config_type)
   return mod[config_type]
 end
 
---- Decorate packer `use` function
+--- Decorate packer `use` function with custom config
 ---@param packer_use function from packer
 ---@return function
-function M.decorate_use(packer_use)
+function M.customise_use(packer_use)
   return function(config, custom)
     if custom then
       if type(config) == "string" then

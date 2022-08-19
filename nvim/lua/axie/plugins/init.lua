@@ -1,12 +1,12 @@
 -- Bootstrap packer
 local P = require("axie.plugins.packer")
-local bootstrapped = P.bootstrap()
+local bootstrapped = P.auto_bootstrap()
 
 local packer = require("packer")
 return packer.startup({
   function(packer_use)
-    local use = P.decorate_use(packer_use)
     local dev_mode = require("axie.utils.config").dev_mode
+    local use = P.customise_use(packer_use)
 
     ---------------------
     -- Setup Utilities --

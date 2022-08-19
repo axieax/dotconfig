@@ -45,11 +45,12 @@ if dev_mode then
     -- load config
     local ok, mod = pcall(require, "axie.plugins." .. module_name)
     if ok then
-      if mod.setup then
-        mod.setup()
-      end
-      if mod.config then
-        mod.config()
+      local mod_types = { "setup", "config" }
+      for _, mod_type in ipairs(mod_types) do
+        local mod_func = mod[mod_type]
+        if mod_func then
+          mod_func()
+        end
       end
     end
   end

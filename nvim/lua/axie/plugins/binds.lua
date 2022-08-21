@@ -53,8 +53,8 @@ function M.general_mappings()
         s = { require("telescope.builtin").lsp_document_symbols, "show document symbols" },
         S = { require("telescope.builtin").lsp_dynamic_workspace_symbols, "show dynamic workspace symbols" },
         R = { vim.lsp.buf.rename, "rename symbol" },
-        f = { "<Cmd>gf<CR>", "goto file" },
-        F = { "<Cmd>gF<CR>", "goto file (with line number)" },
+        -- f = { "gf", "goto file" },
+        -- F = { "gF", "goto file (with line number)" },
         l = { "<Cmd>Trouble document_diagnostics<CR>", "show document diagnostics" },
         L = { "<Cmd>Trouble workspace_diagnostics<CR>", "show workspace diagnostics" },
         K = {
@@ -63,8 +63,6 @@ function M.general_mappings()
           end,
           "show line diagnostics",
         },
-        q = { "<Cmd>lua require'axie.lsp.code_actions'.native(true)<CR>", "code actions (ignore null-ls)" },
-        Q = { "<Cmd>lua require'axie.lsp.code_actions'.native(false)<CR>", "code actions (all)" },
         c = { vim.lsp.codelens.run, "code lens" },
         [";"] = { "<Cmd>ToggleDiag<CR>", "toggle diagnostics" },
         ["?"] = { "<Cmd>LspInfo<CR>", "LSP info" },
@@ -165,17 +163,9 @@ function M.general_mappings()
         end,
         "Toggle spellcheck",
       },
-      z = { "<Cmd>FocusMaxOrEqual<CR>", "Maximise toggle" },
-      f = { "<Cmd>FocusToggle<CR>", "Focus toggle" },
-      ["<tab>"] = { "<Cmd>SymbolsOutline<CR>", "Symbols Outline" },
     },
     [","] = {
-      p = { "<Cmd>PasteImg<CR>", "Paste image" },
       s = { "<Cmd>StartupTime<CR>", "startup time" },
-      ["["] = { require("axie.plugins.treesitter").goto_prev_sibling, "Goto previous sibling node" },
-      ["]"] = { require("axie.plugins.treesitter").goto_next_sibling, "Goto next sibling node" },
-      ["{"] = { require("axie.plugins.treesitter").goto_parent, "Goto parent node" },
-      ["}"] = { require("axie.plugins.treesitter").goto_child, "Goto child node" },
     },
   })
 end
@@ -248,10 +238,12 @@ end
 
 function M.misc()
   local filetype_map = require("axie.utils").filetype_map
+  local require_args = require("axie.utils").require_args
+  local code_actions = require("axie.lsp.code_actions").native
   -- LSP
-  vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
-  vim.keymap.set("v", "gq", "<Cmd>lua require'axie.lsp.code_actions'.native(true)<CR>")
-  vim.keymap.set("v", "gQ", "<Cmd>lua require'axie.lsp.code_actions'.native(false)<CR>")
+  vim.keymap.set("n", "K", vim.lsp.buf.hover)
+  vim.keymap.set({ "n", "v" }, "gq", require_args(code_actions, true), { desc = "code actions (ignore null-ls)" })
+  vim.keymap.set({ "n", "v" }, "gQ", require_args(code_actions, false), { desc = "code actions (all)" })
   -- Visual indent
   vim.keymap.set("v", "<", "<gv")
   vim.keymap.set("v", ">", ">gv")

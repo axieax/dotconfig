@@ -1,5 +1,9 @@
 local M = {}
 
+function M.setup()
+  vim.keymap.set("n", ",p", "<Cmd>PasteImg<CR>", { desc = "paste image" })
+end
+
 function M.config()
   local relative_dir = vim.fn.fnamemodify(vim.fn.expand("%"), ":h")
   local request_img_name = function()

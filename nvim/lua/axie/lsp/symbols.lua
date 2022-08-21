@@ -1,6 +1,7 @@
 local M = {}
 
 function M.setup()
+  vim.keymap.set("n", "\\<Tab>", "<Cmd>SymbolsOutline<CR>", { desc = "symbols outline" })
   vim.keymap.set("n", "<Space><S-Tab>", "<Cmd>SymbolsOutline<CR>", { desc = "symbols outline" })
 end
 

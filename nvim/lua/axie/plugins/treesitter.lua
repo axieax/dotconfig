@@ -62,6 +62,14 @@ function M.goto_next_sibling()
   ts_utils.goto_node(next_sibling)
 end
 
+function M.setup()
+  local this = require("axie.plugins.treesitter")
+  vim.keymap.set("n", ",[", this.goto_prev_sibling, { desc = "goto previous sibling node" })
+  vim.keymap.set("n", ",]", this.goto_next_sibling, { desc = "goto next sibling node" })
+  vim.keymap.set("n", ",{", this.goto_parent, { desc = "goto parent node" })
+  vim.keymap.set("n", ",}", this.goto_child, { desc = "goto child node" })
+end
+
 function M.config()
   local vim_apply = require("axie.utils").vim_apply
 

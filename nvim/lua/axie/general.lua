@@ -102,11 +102,7 @@ vim_apply(vim.g, {
 })
 
 local yank_register = ternary(vim.loop.os_uname().sysname == "Linux", "+", "*")
-vim.keymap.set({ "n", "v" }, "\\y", '"' .. yank_register .. "y", {
-  desc = "yank to clipboard",
-  noremap = false,
-})
-
+vim.keymap.set({ "n", "v" }, "\\y", '"' .. yank_register .. "y", { desc = "yank to clipboard" })
 vim.keymap.set("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "copy internal yank content to clipboard" })
 vim.keymap.set({ "n", "v" }, "\\p", '"0p', { desc = "paste last yanked" })
 
@@ -168,7 +164,7 @@ vim.keymap.set("n", "L", "<Cmd>vertical resize +1<CR>")
 for _, key in ipairs({ "j", "k" }) do
   vim.keymap.set({ "n", "x" }, key, function()
     return vim.v.count > 0 and key or "g" .. key
-  end, { desc = "wrapped lines cursor navigation with " .. key, expr = true, noremap = true })
+  end, { desc = "wrapped lines cursor navigation with " .. key, expr = true })
 end
 
 vim.keymap.set("x", ".", ":norm.<CR>", { desc = "visual mode dot repeat" })

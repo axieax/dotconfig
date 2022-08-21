@@ -7,6 +7,7 @@ return packer.startup({
   function(packer_use)
     local remote_use = P.customise_use(packer_use, false)
     local local_use = P.customise_use(packer_use, true)
+    P.setup()
 
     ---------------------
     -- Setup Utilities --
@@ -1136,7 +1137,6 @@ return packer.startup({
     miscellaneous(remote_use)
 
     -- Packer auto update + compile on bootstrap
-    P.setup()
     if bootstrapped then
       packer.sync()
     end

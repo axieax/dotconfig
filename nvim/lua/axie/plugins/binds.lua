@@ -256,7 +256,7 @@ function M.misc()
   vim.keymap.set("v", "<", "<gv")
   vim.keymap.set("v", ">", ">gv")
   -- Markdown bold
-  filetype_map("markdown", "v", ",*", "S*gvS*", { noremap = false })
+  filetype_map("markdown", "v", ",*", "S*gvS*", { remap = true })
   -- Shift tab to unindent
   vim.keymap.set("i", "<S-Tab>", "<C-d>")
 end

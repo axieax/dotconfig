@@ -38,7 +38,7 @@ function M.config()
     return vim.lsp.with(function(...)
       local buf, winnr = handler(...)
       if buf then
-        vim.api.nvim_buf_set_keymap(buf, "n", "K", "<Cmd>wincmd p<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "K", "<Cmd>wincmd p<CR>", { buffer = buf })
         vim.api.nvim_win_set_option(winnr, "winblend", 20)
       end
     end, overrides)

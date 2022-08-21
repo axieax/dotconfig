@@ -4,9 +4,9 @@ local M = {}
 
 function M.attach()
   vim.keymap.set("n", "<Esc>", "<Nop>", { silent = true, buffer = 0 })
-  vim.keymap.set("t", "<c-]>", [[<C-\><C-n>]], { desc = "toggle mode", noremap = true, buffer = 0 })
-  vim.keymap.set("n", "<c-]>", "<Cmd>startinsert<CR>", { desc = "toggle mode", noremap = true, buffer = 0 })
-  vim.keymap.set("t", "<c-w>", [[<C-\><C-n><C-w>]], { noremap = true, buffer = 0 })
+  vim.keymap.set("t", "<c-]>", [[<C-\><C-n>]], { desc = "toggle mode", buffer = 0 })
+  vim.keymap.set("n", "<c-]>", "<Cmd>startinsert<CR>", { desc = "toggle mode", buffer = 0 })
+  vim.keymap.set("t", "<c-w>", [[<C-\><C-n><C-w>]], { buffer = 0 })
   vim.wo.spell = false
 end
 

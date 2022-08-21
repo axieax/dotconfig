@@ -95,6 +95,7 @@ return packer.startup({
       use("folke/which-key.nvim", "binds")
 
       -- Fuzzy finder
+      -- TODO: lazy load
       -- EXTENSIONS: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
       use({
         "nvim-telescope/telescope.nvim",
@@ -283,6 +284,7 @@ return packer.startup({
       })
 
       -- Fold preview
+      -- TODO: lazy load (https://neovim.discourse.group/t/examples-of-lazyloading/2897)
       use({
         "anuvyklack/pretty-fold.nvim",
         config = function()
@@ -446,7 +448,7 @@ return packer.startup({
       })
 
       -- Unit converter
-      use("simonefranza/nvim-conv")
+      use({ "simonefranza/nvim-conv", event = "BufRead" })
 
       -- Incrementor / decrementor
       use("monaqa/dial.nvim", "dial")
@@ -857,9 +859,11 @@ return packer.startup({
       -- Markdown preview
       use({
         "iamcco/markdown-preview.nvim",
-        run = ":call mkdp#util#install()",
         ft = { "markdown" },
         cmd = "MarkdownPreview",
+        run = function()
+          vim.fn["mkdp#util#install"]()
+        end,
         setup = function()
           local filetype_map = require("axie.utils").filetype_map
           filetype_map("markdown", "n", ",O", "<Cmd>MarkdownPreview<CR>")
@@ -1090,20 +1094,20 @@ return packer.startup({
         "hrsh7th/nvim-cmp",
         requires = {
           { "windwp/nvim-autopairs" },
-          { "L3MON4D3/LuaSnip" },
-          { "saadparwaiz1/cmp_luasnip" },
-          { "lukas-reineke/cmp-under-comparator" },
           { "onsails/lspkind-nvim" },
-          { "hrsh7th/cmp-nvim-lsp" },
-          { "hrsh7th/cmp-buffer" },
-          { "hrsh7th/cmp-path" },
-          { "hrsh7th/cmp-calc" },
-          { "hrsh7th/cmp-emoji" },
-          -- { "hrsh7th/cmp-cmdline" },
-          { "f3fora/cmp-spell" },
-          { "kdheepak/cmp-latex-symbols" }, -- TODO: lazy load
-          { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim" },
-          { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
+          { "L3MON4D3/LuaSnip" },
+          { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+          { "lukas-reineke/cmp-under-comparator", after = "nvim-cmp" },
+          { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+          { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+          { "hrsh7th/cmp-path", after = "nvim-cmp" },
+          { "hrsh7th/cmp-calc", after = "nvim-cmp" },
+          { "hrsh7th/cmp-emoji", after = "nvim-cmp" },
+          -- { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+          { "f3fora/cmp-spell", after = "nvim-cmp" },
+          { "kdheepak/cmp-latex-symbols", after = "nvim-cmp" }, -- TODO: lazy load
+          { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim", after = "nvim-cmp" },
+          { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim", after = "nvim-cmp" },
           -- "ray-x/cmp-treesitter",
           -- "quangnguyen30192/cmp-nvim-tags",
           -- "tpope/vim-dadbod",

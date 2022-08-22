@@ -156,6 +156,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/AckslD/nvim-FeMaco.lua/pull/2
 - https://github.com/dstein64/vim-startuptime/issues/15
 - https://github.com/stevearc/aerial.nvim/discussions/141
 - PackerCompile (calling setup again) clears bufferline and incline colours

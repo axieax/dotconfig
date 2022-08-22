@@ -1,5 +1,7 @@
 local M = {}
 
+M.run = ":CatppuccinCompile"
+
 function M.config()
   -- highlight group overrides
   vim.g.catppuccin_flavour = "mocha"

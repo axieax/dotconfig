@@ -62,6 +62,8 @@ function M.goto_next_sibling()
   ts_utils.goto_node(next_sibling)
 end
 
+M.run = ":TSUpdate"
+
 function M.setup()
   local this = require("axie.plugins.treesitter")
   vim.keymap.set("n", ",[", this.goto_prev_sibling, { desc = "goto previous sibling node" })

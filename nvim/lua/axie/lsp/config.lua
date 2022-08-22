@@ -36,9 +36,8 @@ function M.config()
   local function customise_handler(handler)
     local overrides = { border = "rounded" }
     return vim.lsp.with(function(...)
-      local buf, winnr = handler(...)
-      if buf then
-        vim.keymap.set("n", "K", "<Cmd>wincmd p<CR>", { buffer = buf })
+      local _, winnr = handler(...)
+      if winnr then
         vim.api.nvim_win_set_option(winnr, "winblend", 20)
       end
     end, overrides)

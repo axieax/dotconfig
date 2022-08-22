@@ -18,9 +18,10 @@ function M.auto_bootstrap()
 end
 
 local packer_options = {
-  "config",
+  -- "cmd",
+  "run",
   "setup",
-  "cmd",
+  "config",
 }
 
 --- Update packer `use` to auto-fill options if a config module is specified

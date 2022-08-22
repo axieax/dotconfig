@@ -71,7 +71,6 @@ return packer.startup({
       use({
         "catppuccin/nvim",
         as = "catppuccin",
-        run = ":CatppuccinCompile",
       }, "themes.catppuccin")
 
       use({
@@ -740,10 +739,7 @@ return packer.startup({
     local general_programming_utilities = function(use)
       -- Language parser + syntax highlighting
       -- TODO: automatically install parsers for new file types (don't download all)
-      use({
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-      }, "treesitter")
+      use("nvim-treesitter/nvim-treesitter", "treesitter")
 
       -- Treesitter parser info
       use({
@@ -861,14 +857,7 @@ return packer.startup({
         "iamcco/markdown-preview.nvim",
         ft = { "markdown" },
         cmd = "MarkdownPreview",
-        run = function()
-          vim.fn["mkdp#util#install"]()
-        end,
-        setup = function()
-          local filetype_map = require("axie.utils").filetype_map
-          filetype_map("markdown", "n", ",O", "<Cmd>MarkdownPreview<CR>")
-        end,
-      })
+      }, "markdownpreview")
 
       use({
         "ellisonleao/glow.nvim",
@@ -1123,6 +1112,13 @@ return packer.startup({
         "ray-x/lsp_signature.nvim",
         event = "BufRead",
       }, "lsp.signature")
+
+      -- Markdown code block edit
+      use({
+        "AckslD/nvim-FeMaco.lua",
+        cmd = "FeMaco",
+        ft = "markdown",
+      }, "markdowncodeblock")
     end
     lsp_utilities(remote_use)
 
@@ -1131,12 +1127,7 @@ return packer.startup({
     -------------------
     local miscellaneous = function(use)
       -- Browser integration
-      use({
-        "glacambre/firenvim",
-        run = function()
-          vim.fn["firenvim#install"](0)
-        end,
-      }, "firenvim")
+      use("glacambre/firenvim", "firenvim")
     end
     miscellaneous(remote_use)
 

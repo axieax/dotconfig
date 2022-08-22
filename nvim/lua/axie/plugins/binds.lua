@@ -135,7 +135,11 @@ function M.general_mappings()
       name = "+g",
       K = {
         function()
-          vim.diagnostic.open_float(0, { border = "rounded" })
+          -- TODO: use `customise_handler` from axie.lsp.config
+          local _, winnr = vim.diagnostic.open_float({ border = "rounded" })
+          if winnr then
+            vim.api.nvim_win_set_option(winnr, "winblend", 20)
+          end
         end,
         "Show line diagnostics",
       },

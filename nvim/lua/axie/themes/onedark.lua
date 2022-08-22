@@ -17,7 +17,7 @@ function M.config()
         telescope_results = onedarkpro_utils.darken(onedarkpro.get_colors("onelight").bg, 0.95),
       },
     },
-    hlgroups = {
+    highlights = {
       TSProperty = { fg = "${gray}" },
       TSVariable = { fg = "${fg}" },
 

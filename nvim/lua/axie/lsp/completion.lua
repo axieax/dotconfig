@@ -136,14 +136,6 @@ function M.config()
     },
   })
 
-  -- npm
-  require("cmp-npm").setup()
-
-  -- git
-  require("cmp_git").setup({
-    filetypes = { "*" },
-  })
-
   -- Setup autopairs
   require("nvim-autopairs").setup({
     -- insert mode "alt-e"

@@ -94,7 +94,8 @@ return packer.startup({
       use("folke/which-key.nvim", "binds")
 
       -- Fuzzy finder
-      -- TODO: lazy load
+      -- TODO: lazy load with `module`, breaks indentline and lastplace
+      -- NOTE: setup calls `telescope.builtin`
       -- EXTENSIONS: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
       use({
         "nvim-telescope/telescope.nvim",
@@ -1082,11 +1083,11 @@ return packer.startup({
       use({
         "hrsh7th/nvim-cmp",
         requires = {
+          { "lukas-reineke/cmp-under-comparator" },
           { "windwp/nvim-autopairs" },
           { "onsails/lspkind-nvim" },
           { "L3MON4D3/LuaSnip" },
           { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-          { "lukas-reineke/cmp-under-comparator", after = "nvim-cmp" },
           { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
           { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
           { "hrsh7th/cmp-path", after = "nvim-cmp" },
@@ -1095,8 +1096,22 @@ return packer.startup({
           -- { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
           { "f3fora/cmp-spell", after = "nvim-cmp" },
           { "kdheepak/cmp-latex-symbols", after = "nvim-cmp" }, -- TODO: lazy load
-          { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim", after = "nvim-cmp" },
-          { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim", after = "nvim-cmp" },
+          {
+            "David-Kunz/cmp-npm",
+            requires = "nvim-lua/plenary.nvim",
+            after = "nvim-cmp",
+            config = function()
+              require("cmp-npm").setup()
+            end,
+          },
+          {
+            "petertriho/cmp-git",
+            requires = "nvim-lua/plenary.nvim",
+            after = "nvim-cmp",
+            config = function()
+              require("cmp_git").setup({ filetypes = { "*" } })
+            end,
+          },
           -- "ray-x/cmp-treesitter",
           -- "quangnguyen30192/cmp-nvim-tags",
           -- "tpope/vim-dadbod",

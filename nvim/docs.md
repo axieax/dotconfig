@@ -16,6 +16,8 @@
 
 ## TODO
 
+- Telescope setup requires telescope
+- migrate from lightspeed.nvim to leap.nvim
 - `gF`: goto file with line number
 - nerd font / emoji picker (https://github.com/ziontee113/icon-picker.nvim)
 - autocmd to install language server if one doesn't start for a filetype, also treesitter parser
@@ -156,6 +158,7 @@
 
 ## Current PRs / Issues
 
+- https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
 - https://github.com/AckslD/nvim-FeMaco.lua/pull/2
 - https://github.com/dstein64/vim-startuptime/issues/15
 - https://github.com/stevearc/aerial.nvim/discussions/141

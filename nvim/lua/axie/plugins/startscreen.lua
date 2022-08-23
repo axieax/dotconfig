@@ -4,6 +4,15 @@ local M = {}
 -- TODO: customise like https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1308930
 -- narrower center align
 
+function M.update_startuptime(startuptime)
+  local ok, dashboard = pcall(require, "alpha.themes.dashboard")
+  if ok then
+    dashboard.section.footer.val[3] = string.format("       %.3f seconds", startuptime)
+  else
+    require("axie.utils").notify("Failed to load dashboard from vim-startuptime", "error")
+  end
+end
+
 function M.setup()
   vim.keymap.set("n", "<Space>S", "<Cmd>Alpha<CR>", { desc = "start menu" })
 end
@@ -43,12 +52,15 @@ function M.config()
   dashboard.section.footer.val = {
     string.format("   %d plugins (%d loaded)", start_plugins + opt_plugins, start_plugins),
     "  https://github.com/axieax/",
+    "", -- startup time
   }
 
   require("alpha").setup(dashboard.config)
 
+  local alpha_attach = vim.api.nvim_create_augroup("AlphaAttach", {})
   vim.api.nvim_create_autocmd("FileType", {
-    desc = "Disable alpha colorcolumn, show alpha in bufferline",
+    desc = "Disable alpha colorcolumn, show alpha in bufferline, calculate startuptime",
+    group = alpha_attach,
     pattern = "alpha",
     callback = function()
       vim.bo.buflisted = true

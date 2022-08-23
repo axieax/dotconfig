@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Telescope not buflisted?
 - Telescope setup requires telescope
 - migrate from lightspeed.nvim to leap.nvim
 - `gF`: goto file with line number

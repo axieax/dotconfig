@@ -7,9 +7,11 @@ function M.config()
   vim.g.catppuccin_flavour = "mocha"
   local catppuccin = require("catppuccin")
   local cp = require("catppuccin.palettes").get_palette()
+  local ucolors = require("catppuccin.utils.colors")
 
   local remaps = {
     NormalFloat = { bg = cp.base }, -- NOTE: catppuccin needs a bg colour
+    CursorLine = { bg = ucolors.darken(cp.surface0, 0.64, cp.base) },
     ColorColumn = { link = "CursorLine" },
     WhichKeyFloat = { link = "NormalFloat" },
     SpellBad = { fg = cp.red, style = { "italic", "undercurl" } },
@@ -17,6 +19,7 @@ function M.config()
     SpellLocal = { fg = cp.red, style = { "italic", "undercurl" } },
     SpellRare = { fg = cp.red, style = { "italic", "undercurl" } },
     CmpItemMenu = { fg = cp.surface2 },
+    -- VertSplit = { fg = cp.overlay1 },
     -- SpellBad = { fg = cp.maroon },
     -- SpellCap = { fg = cp.peach },
     -- SpellLocal = { fg = cp.lavender },
@@ -60,7 +63,7 @@ function M.config()
       gitsigns = true,
       leap = false,
       telescope = true,
-      nvimtree = { enabled = false },
+      nvimtree = false,
       neotree = {
         enabled = true,
         show_root = false,

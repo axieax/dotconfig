@@ -27,7 +27,7 @@ return packer.startup({
       })
 
       -- Measure startup time
-      use("dstein64/vim-startuptime")
+      use("dstein64/vim-startuptime", "startuptime")
 
       -- CursorHold event fix
       use("antoinemadec/FixCursorHold.nvim")
@@ -258,7 +258,7 @@ return packer.startup({
       use({
         "goolord/alpha-nvim",
         requires = "kyazdani42/nvim-web-devicons",
-      }, "start")
+      }, "startscreen")
 
       -- Session manager
       -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens

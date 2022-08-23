@@ -11,3 +11,4 @@
 
 pcall(require, "impatient")
 require("axie")
+vim.defer_fn(require("axie.plugins.startuptime").calculate_startup_time, 0)

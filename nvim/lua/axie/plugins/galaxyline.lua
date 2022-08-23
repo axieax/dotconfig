@@ -112,6 +112,7 @@ function M.get_component(name, condition)
       highlight = { onedark_colours.cyan },
     },
     FileName = {
+      -- NOTE: `vim.bo.readonly` lock is before filename, modified after
       provider = "FileName",
       -- separator = " ",
       highlight = { "#debac3" },
@@ -248,8 +249,8 @@ function M.config()
     left = {
       get_component("ScrollBar"),
       get_component("VimMode"),
-      get_component("FileNameIcon"),
-      get_component("FileName"),
+      get_component("FileNameIcon", filetype_conditional),
+      get_component("FileName", filetype_conditional),
       get_component("GitBranch"),
       get_component("DiffAdd"),
       get_component("DiffModified"),
@@ -303,6 +304,7 @@ function M.config()
     "alpha",
     "minimap",
   }
+  -- vim.opt.laststatus = 3
 
   -- Transparent gaps between sections
   vim.cmd("hi GalaxyLineFillSection guibg=NONE")

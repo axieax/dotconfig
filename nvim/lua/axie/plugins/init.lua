@@ -596,7 +596,7 @@ return packer.startup({
       -- Smooth scroll
       use({
         "karb94/neoscroll.nvim",
-        event = { "CursorMoved", "CursorMovedI" },
+        event = "BufRead",
         config = function()
           require("neoscroll").setup()
           require("neoscroll.config").set_mappings({

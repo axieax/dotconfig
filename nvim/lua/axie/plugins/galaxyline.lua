@@ -249,6 +249,7 @@ function M.config()
     left = {
       get_component("ScrollBar"),
       get_component("VimMode"),
+      -- BUG: may not update when this conditional becomes true
       get_component("FileNameIcon", filetype_conditional),
       get_component("FileName", filetype_conditional),
       get_component("GitBranch"),
@@ -294,17 +295,17 @@ function M.config()
   -- Define filetypes which should use the short status line
   -- NOTE: floating windows use the short status line by default
   galaxyline.short_line_list = {
-    "qf",
-    "NvimTree",
-    "neo-tree",
-    "aerial",
-    "Mundo",
-    "Trouble",
-    "toggleterm",
-    "alpha",
-    "minimap",
+    -- "qf",
+    -- "NvimTree",
+    -- "neo-tree",
+    -- "aerial",
+    -- "Mundo",
+    -- "Trouble",
+    -- "toggleterm",
+    -- "alpha",
+    -- "minimap",
   }
-  -- vim.opt.laststatus = 3
+  vim.opt.laststatus = 3
 
   -- Transparent gaps between sections
   vim.cmd("hi GalaxyLineFillSection guibg=NONE")

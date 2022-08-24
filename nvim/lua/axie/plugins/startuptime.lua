@@ -11,7 +11,7 @@ function M.setup()
       -- require("axie.utils").notify(tostring(startuptime), "info", { title = "Startup Time", render = "default" })
       vim.notify(string.format(" Startup Time: %.3f seconds", startuptime), vim.log.levels.WARN)
       vim.defer_fn(function()
-        vim.notify("")
+        vim.api.nvim_echo({ { "" } }, false, {})
       end, 3000)
       require("axie.plugins.startscreen").update_startuptime(startuptime)
     end,

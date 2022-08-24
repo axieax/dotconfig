@@ -87,6 +87,7 @@
 
 ## Features/plugins
 
+- https://github.com/numToStr/prettierrc.nvim
 - https://github.com/stevearc/overseer.nvim
 - https://github.com/lewis6991/hover.nvim
 - https://github.com/andythigpen/nvim-coverage
@@ -99,7 +100,6 @@
 - https://github.com/jbyuki/nabla.nvim
 - https://github.com/benfowler/telescope-luasnip.nvim
 - https://github.com/mvllow/modes.nvim
-- https://github.com/PlatyPew/format-installer.nvim
 - https://github.com/lukas-reineke/lsp-format.nvim
 - https://github.com/sudormrfbin/cheatsheet.nvim
 - Git worktree (https://github.com/ThePrimeagen/git-worktree.nvim)
@@ -159,9 +159,9 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/497
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
-- https://github.com/AckslD/nvim-FeMaco.lua/pull/2
 - https://github.com/dstein64/vim-startuptime/issues/15
 - https://github.com/stevearc/aerial.nvim/discussions/141
 - PackerCompile (calling setup again) clears bufferline and incline colours

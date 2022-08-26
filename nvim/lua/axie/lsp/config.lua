@@ -47,14 +47,7 @@ function M.config()
   vim.lsp.handlers["textDocument/signatureHelp"] = customise_handler(vim.lsp.handlers.signature_help)
 
   -- LspInfo rounded borders
-  local win = require("lspconfig.ui.windows")
-  local _default_opts = win.default_opts
-
-  win.default_opts = function(options)
-    local opts = _default_opts(options)
-    opts.border = "rounded"
-    return opts
-  end
+  require("lspconfig.ui.windows").default_options.border = "rounded"
 end
 
 return M

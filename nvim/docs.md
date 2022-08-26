@@ -159,7 +159,7 @@
 
 ## Current PRs / Issues
 
-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/497
+- https://github.com/neovim/nvim-lspconfig/pull/2094
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
 - https://github.com/dstein64/vim-startuptime/issues/15

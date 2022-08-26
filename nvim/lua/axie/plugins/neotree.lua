@@ -79,10 +79,11 @@ function M.config()
         -- show netrw hijacked buffer in buffer list
         event = "neo_tree_buffer_enter",
         handler = function()
+          local bufnr = vim.api.nvim_get_current_buf()
           vim.schedule(function()
-            local position = vim.api.nvim_buf_get_var(0, "neo_tree_position")
+            local _, position = pcall(vim.api.nvim_buf_get_var, bufnr, "neo_tree_position")
             if position == "current" then
-              vim.bo.buflisted = true
+              vim.api.nvim_buf_set_option(bufnr, "buflisted", true)
             end
           end)
         end,

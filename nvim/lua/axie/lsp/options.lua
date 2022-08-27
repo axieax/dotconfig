@@ -138,7 +138,7 @@ function M.jdtls()
   }
   vim.list_extend(java_bundles, glob_split("~/java/vscode-java-test/server/*.jar"))
 
-  local jdtls_path = vim.fn.expand("~/.local/share/nvim/lsp_servers/jdtls")
+  local jdtls_path = vim.fn.expand("~/.local/share/nvim/mason/packages/jdtls")
   local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
   local operating_system = require("axie.utils").get_os()
 

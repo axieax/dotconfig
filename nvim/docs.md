@@ -16,11 +16,11 @@
 
 ## TODO
 
+- replace bullets.vim with https://github.com/gaoDean/autolist.nvim
 - Telescope not buflisted?
 - Telescope setup requires telescope
 - migrate from lightspeed.nvim to leap.nvim
 - `gF`: goto file with line number
-- nerd font / emoji picker (https://github.com/ziontee113/icon-picker.nvim)
 - autocmd to install language server if one doesn't start for a filetype, also treesitter parser
   - `require("mason-lspconfig").get_available_servers({ filetype = vim.bo.filetype })`
   - https://github.com/williamboman/mason-lspconfig.nvim/pull/25
@@ -84,6 +84,7 @@
 - Markdown tab and shift tab conditional mapping based on bullet
 - TODO: hlslens + vim-visual-multi
 - Persistent undo max size
+- Add ripgrep to setup.sh
 
 ## Features/plugins
 
@@ -140,17 +141,20 @@
 - https://github.com/natecraddock/workspaces.nvim
 - https://github.com/hrsh7th/nvim-cmp/issues/429#issuecomment-980843997
 
+## Debugging
+
+- `:LuaCacheClear` to clear impatient.nvim's cache
+- `rm -rf ~/.local/share/nvim/shada/*` for Linux permission issues
+- stabilize.nvim view jumps (floats closing soon after nvim startup, e.g. Telescope, Lazygit)
+- Floats closing soon after nvim startup (e.g. Telescope, lazygit) - maybe stabilize.nvim
+  - https://github.com/luukvbaal/stabilize.nvim/issues/3
+
 ## Notes / issues
 
 - firenvim patched fonts not working
-- Very slow startup time
 - Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
 - Zen mode with nvim-treesitter-context?
-- stabilize.nvim view jumps
-  - https://github.com/luukvbaal/stabilize.nvim/issues/3
-  - floats may be closed soon after nvim startup (e.g. Telescope, lazygit)
 - Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent) - autopairs?
-- Markdown header folds https://github.com/nvim-treesitter/nvim-treesitter/issues/2145, https://github.com/plasticboy/vim-markdown
 - https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
 - https://github.com/hrsh7th/nvim-cmp/issues/611
 - nvim-cmp treesitter completion source vs buffer source?
@@ -159,10 +163,10 @@
 
 ## Current PRs / Issues
 
-- https://github.com/neovim/nvim-lspconfig/pull/2094
+- https://github.com/folke/todo-comments.nvim/pull/120
+- https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
-- https://github.com/dstein64/vim-startuptime/issues/15
 - https://github.com/stevearc/aerial.nvim/discussions/141
 - PackerCompile (calling setup again) clears bufferline and incline colours
 - https://github.com/b0o/incline.nvim/issues/28

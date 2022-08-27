@@ -17,7 +17,6 @@ return packer.startup({
       use("wbthomason/packer.nvim")
 
       -- Improve and measure startup time
-      -- NOTE: try `:LuaCacheClear` for config issues
       use({
         "lewis6991/impatient.nvim",
         config = function()
@@ -195,8 +194,9 @@ return packer.startup({
       })
 
       -- Search for TODO comments and Trouble pretty list
+      -- FORK: https://github.com/folke/todo-comments.nvim
       use({
-        "folke/todo-comments.nvim",
+        "B4mbus/todo-comments.nvim",
         requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
       }, "notes")
 
@@ -214,6 +214,7 @@ return packer.startup({
       use("tpope/vim-repeat")
 
       -- Statusline
+      -- FORK: https://github.com/glepnir/galaxyline.nvim
       -- ALT: https://github.com/windwp/windline.nvim
       -- ALT: https://github.com/tamton-aquib/staline.nvim
       use({
@@ -345,7 +346,8 @@ return packer.startup({
           local tw_colors = tw_config.colors
           tw_config.colors = function(...)
             tw_colors(...)
-            vim.cmd("hi! Twilight guibg=NONE")
+            -- vim.api.nvim_set_hl(0, "Twilight", { bg = nil })
+            vim.cmd("hi Twilight guibg=NONE")
           end
         end,
       })
@@ -569,7 +571,7 @@ return packer.startup({
       })
 
       -- CSS colours
-      -- WARN: original unmaintained (lowercase, PackerCompile)
+      -- FORK: https://github.com/norcalli/nvim-colorizer.lua
       -- ALT: https://github.com/RRethy/vim-hexokinase
       use({
         "NvChad/nvim-colorizer.lua",

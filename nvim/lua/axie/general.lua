@@ -121,21 +121,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Update (instead of write)
 vim.keymap.set("n", "<space>w", "<Cmd>update<CR>")
 
--- No autoformat write
-for _, cmd in ipairs({ "W", "Wq", "Wqa" }) do
+-- Write and quit typos
+local typos = { "W", "Wq", "WQ", "Wqa", "WQa", "WQA", "WqA", "Q", "Qa", "QA" }
+for _, cmd in ipairs(typos) do
   vim.api.nvim_create_user_command(cmd, function(opts)
     local lower_cmd = cmd:lower()
     local bang = ternary(opts.bang, "!", "")
     vim.cmd("noautocmd " .. lower_cmd .. bang)
-  end, {
-    bang = true,
-  })
+  end, { bang = true })
 end
-
--- Quit typos
-vim.api.nvim_create_user_command("Q", "q", { bang = true })
-vim.api.nvim_create_user_command("Qa", "qa", { bang = true })
-vim.api.nvim_create_user_command("QA", "qa", { bang = true })
 
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)
 vim.api.nvim_create_autocmd("BufEnter", {

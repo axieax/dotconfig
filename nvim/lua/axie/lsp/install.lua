@@ -7,7 +7,9 @@ end
 
 function M.config()
   -- setup lspconfig
-  require("mason").setup()
+  require("mason").setup({
+    -- ui = { border = "rounded" },
+  })
   require("mason-lspconfig").setup()
 
   -- auto install

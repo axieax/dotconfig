@@ -308,7 +308,7 @@ function M.config()
   vim.opt.laststatus = 3
 
   -- Transparent gaps between sections
-  vim.cmd("hi GalaxyLineFillSection guibg=NONE")
+  vim.api.nvim_set_hl(0, "GalaxyLineFillSection", { bg = nil })
 end
 
 return M

@@ -9,7 +9,8 @@
 -----------------------------------------------------------
 -----------------------------------------------------------
 
--- NOTE: need ripgrep for Telescope grep_string
+-- Impatient cache
+pcall(require, "impatient")
 
 -- Lua reset require cache
 local reload_module = require("axie.utils").reload_module
@@ -55,3 +56,6 @@ if dev_mode then
     end
   end
 end
+
+-- Calculate startup time
+vim.defer_fn(require("axie.plugins.startuptime").calculate_startup_time, 0)

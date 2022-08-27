@@ -88,13 +88,6 @@ function M.display_cwd()
   })
 end
 
--- Get an attribute from a highlight group
--- @param group highlight group to be checked
--- @param attribute specific attribute from highlight group to be returned
-function M.highlight_group_get(group, attribute)
-  return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attribute)
-end
-
 local signcolumn_enabled = true
 function M.toggle_signcolumn()
   vim.o.signcolumn = M.ternary(signcolumn_enabled, "no", "auto")

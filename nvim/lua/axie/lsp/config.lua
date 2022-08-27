@@ -48,6 +48,7 @@ function M.config()
 
   -- LspInfo rounded borders
   require("lspconfig.ui.windows").default_options.border = "rounded"
+  vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
 end
 
 return M

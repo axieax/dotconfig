@@ -6,13 +6,14 @@ function M.setup()
 end
 
 function M.config()
+  local colorcolumn_width = 80 -- NOTE: for some reason `tonumber(vim.o.colorcolumn)` doesn't work
   require("focus").setup({
     -- TEMP: https://github.com/beauwilliams/focus.nvim/issues/82
     autoresize = false,
     cursorline = false,
     number = false,
     signcolumn = false,
-    colorcolumn = { enable = true, width = tonumber(vim.o.colorcolumn) },
+    colorcolumn = { enable = true, width = colorcolumn_width },
     excluded_filetypes = { "toggleterm", "qf", "help", "Mundo" },
   })
 end

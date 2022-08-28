@@ -346,7 +346,6 @@ return packer.startup({
           local tw_colors = tw_config.colors
           tw_config.colors = function(...)
             tw_colors(...)
-            -- vim.api.nvim_set_hl(0, "Twilight", { bg = nil })
             vim.cmd("hi Twilight guibg=NONE")
           end
         end,
@@ -823,9 +822,16 @@ return packer.startup({
         requires = { "nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim" },
       }, "regexplainer")
 
-      -- Auto continue bullets
-      -- NOTE: ctrl-t to indent after auto continue, ctrl-d to unindent
-      use("dkarter/bullets.vim")
+      -- Auto continue bullet points
+      -- NOTE: <C-t> (tab) to indent after auto continue, <C-d> (dedent) to unindent
+      use({
+        "gaoDean/autolist.nvim",
+        ft = { "markdown", "text" },
+        after = "nvim-cmp", -- <CR> mapping
+        config = function()
+          require("autolist").setup()
+        end,
+      })
 
       -- Dim unused variables and functions
       use({

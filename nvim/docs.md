@@ -16,7 +16,6 @@
 
 ## TODO
 
-- replace bullets.vim with https://github.com/gaoDean/autolist.nvim
 - Telescope not buflisted?
 - Telescope setup requires telescope
 - migrate from lightspeed.nvim to leap.nvim
@@ -165,10 +164,9 @@
 
 - https://github.com/mfussenegger/nvim-jdtls/issues/279
 - https://github.com/folke/todo-comments.nvim/pull/120
-- https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
+- https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069
 - https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
-- https://github.com/stevearc/aerial.nvim/discussions/141
 - PackerCompile (calling setup again) clears bufferline and incline colours
 - https://github.com/b0o/incline.nvim/issues/28
 - https://github.com/nvim-telescope/telescope.nvim/issues/1904

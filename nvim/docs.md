@@ -31,6 +31,7 @@
   - https://github.com/SmiteshP/nvim-navic for winbar context, replace nvim-treesitter-context
   - NOTE: need to enable highlight for navic catppuccin integration
   - ALT: use Aerial (https://github.com/stevearc/aerial.nvim/issues/105)
+  - heirline supports tabline now - maybe migrate??
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/

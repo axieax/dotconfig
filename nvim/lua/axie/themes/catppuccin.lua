@@ -54,6 +54,7 @@ function M.config()
     transparent_background = true,
     integrations = {
       treesitter = true,
+      treesitter_context = false, -- prefer defaults
       native_lsp = { enabled = true },
       coc_nvim = false,
       lsp_trouble = true,

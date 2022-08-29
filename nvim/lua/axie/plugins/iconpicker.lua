@@ -1,9 +1,8 @@
 local M = {}
 
 function M.setup()
-  local options = "alt_font symbols nerd_font emoji"
-  vim.keymap.set("i", "<c-i>", string.format("<Cmd>IconPickerInsert %s<CR>", options), { desc = "icon picker" })
-  vim.keymap.set("n", "\\i", string.format("<Cmd>IconPickerYank %s<CR>", options), { desc = "icon picker" })
+  vim.keymap.set("i", "<c-i>", "<Cmd>IconPickerInsert<CR>", { desc = "icon picker" })
+  vim.keymap.set("n", "\\i", "<Cmd>IconPickerYank<CR>", { desc = "icon picker" })
 end
 
 function M.config()

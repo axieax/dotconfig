@@ -8,6 +8,10 @@ function M.setup()
 end
 
 function M.config()
+  local this = require("axie.plugins.dial")
+  local cyclic_words = this.cyclic_words
+  local cyclic_symbols = this.cyclic_symbols
+
   local augend = require("dial.augend")
   require("dial.config").augends:register_group({
     default = {
@@ -21,60 +25,40 @@ function M.config()
       augend.semver.alias.semver,
       augend.date.alias["%H:%M:%S"],
       augend.misc.alias.markdown_header,
-      augend.constant.new({
-        elements = { "true", "false" },
-        word = true,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { "True", "False" },
-        word = true,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { "and", "or" },
-        word = true,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { "&&", "||" },
-        word = false,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { ">", "<" },
-        word = false,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { "==", "!=" },
-        word = false,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { "===", "!==" },
-        word = false,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { ">=", "<=" },
-        word = false,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { "+=", "-=", "*=", "/=", "//=", "%=" },
-        word = false,
-        cyclic = true,
-      }),
-      augend.constant.new({
-        elements = { "++", "--" },
-        word = false,
-        cyclic = true,
-      }),
+      cyclic_words({ "true", "false" }),
+      cyclic_words({ "on", "off" }),
+      cyclic_words({ "north", "east", "south", "west" }),
+      cyclic_words({ "and", "or" }),
+      cyclic_symbols({ "&&", "||" }),
+      cyclic_symbols({ "==", "!=" }),
+      cyclic_symbols({ "===", "!==" }),
+      cyclic_symbols({ ">", "<" }),
+      cyclic_symbols({ ">=", "<=" }),
+      cyclic_symbols({ "+=", "-=", "*=", "/=", "//=", "%=" }),
+      cyclic_symbols({ "++", "--" }),
     },
   })
+end
 
-  -- OTHERS: on/off variants, north/east/south/west variants
+-- case_insensitive: lowercase, uppercase, lowercase with first letter uppercase
+-- strict_casing = not case_insensitive
+function M.cyclic_words(elements, strict_casing)
+  local augend = require("dial.augend")
+  return augend.constant.new({
+    elements = elements,
+    word = true,
+    cyclic = true,
+    preserve_case = not strict_casing,
+  })
+end
+
+function M.cyclic_symbols(elements)
+  local augend = require("dial.augend")
+  return augend.constant.new({
+    elements = elements,
+    word = false,
+    cyclic = true,
+  })
 end
 
 return M

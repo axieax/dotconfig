@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Check out mind.nvim
 - Telescope not buflisted?
 - Telescope setup requires telescope
 - migrate from lightspeed.nvim to leap.nvim
@@ -88,6 +89,7 @@
 
 ## Features/plugins
 
+- https://github.com/Djancyp/regex.nvim ?
 - https://github.com/numToStr/prettierrc.nvim
 - https://github.com/stevearc/overseer.nvim
 - https://github.com/lewis6991/hover.nvim

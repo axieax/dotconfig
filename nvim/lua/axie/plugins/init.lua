@@ -306,7 +306,7 @@ return packer.startup({
       })
 
       -- Emacs Orgmode
-      -- ALT: vimwiki (more for notes/diary), neorg (too different from md)
+      -- ALT: vimwiki (more for notes/diary), neorg (too different from md), mind.nvim
       -- NOTE: https://github.com/nvim-orgmode/orgmode/blob/master/DOCS.md#getting-started-with-orgmode
       -- POSSIBLE: can this use vim.ui.select?
       -- TRY: https://github.com/nvim-neorg/neorg-telescope

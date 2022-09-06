@@ -33,6 +33,7 @@ function M.config()
     plugins = {
       twilight = { enabled = true },
       gitsigns = { enabled = false },
+      -- diagnostics = { enabled = false }, -- NOTE: prefer custom diagnostics view
     },
     on_open = function(win)
       toggle_functions()

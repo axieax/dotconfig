@@ -341,13 +341,6 @@ return packer.startup({
         end,
         config = function()
           require("twilight").setup()
-          -- TEMP: transparent background issue #15
-          local tw_config = require("twilight.config")
-          local tw_colors = tw_config.colors
-          tw_config.colors = function(...)
-            tw_colors(...)
-            vim.cmd("hi Twilight guibg=NONE")
-          end
         end,
       })
 
@@ -429,6 +422,9 @@ return packer.startup({
           vim.keymap.set("n", "<Space>fH", telescope.extensions.howdoi.howdoi)
         end,
       })
+
+      -- argument correction
+      use("mong8se/actually.nvim")
     end
     general_utilities(remote_use)
 

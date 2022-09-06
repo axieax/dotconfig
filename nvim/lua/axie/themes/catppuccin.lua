@@ -98,6 +98,7 @@ function M.config()
       beacon = true,
       navic = true,
       overseer = false,
+      fidget = false, -- prefer default colours
     },
     custom_highlights = remaps,
   })

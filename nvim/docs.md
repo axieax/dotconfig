@@ -165,6 +165,7 @@
 
 ## Current PRs / Issues
 
+- Twilight doesn't fade dim.lua highlights
 - https://github.com/mfussenegger/nvim-jdtls/issues/279
 - https://github.com/folke/todo-comments.nvim/pull/120
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41

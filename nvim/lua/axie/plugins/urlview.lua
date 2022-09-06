@@ -8,6 +8,10 @@ end
 function M.config()
   require("urlview").setup({
     default_title = "Links",
+    jump = {
+      prev = "[U",
+      next = "]U",
+    },
   })
 end
 

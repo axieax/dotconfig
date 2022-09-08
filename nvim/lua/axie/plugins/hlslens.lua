@@ -43,7 +43,7 @@ function M.config()
   for _, trigger in ipairs({ "n", "N" }) do
     vim.keymap.set(
       "n",
-      "n",
+      trigger,
       string.format("<Cmd>execute('normal! ' . v:count1 . '%s')<CR><Cmd>lua require('hlslens').start()<CR>", trigger)
     )
   end

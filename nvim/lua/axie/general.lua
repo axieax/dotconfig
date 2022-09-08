@@ -81,7 +81,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
     local ignored = { "TelescopePrompt" }
     if not vim.tbl_contains(ignored, vim.bo.filetype) then
-      vim.wo.relativenumber = true
+      vim.opt_local.relativenumber = true
     end
   end,
 })
@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   desc = "Disable relative numbers",
   group = numberToggleGroup,
   callback = function()
-    vim.wo.relativenumber = false
+    vim.opt_local.relativenumber = false
   end,
 })
 
@@ -136,7 +136,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "disable automatic comment insertion",
   callback = function()
     vim.o.formatoptions = vim.o.formatoptions:gsub("[cro]", "")
-    vim.bo.formatoptions = vim.o.formatoptions
+    vim.opt_local.formatoptions = vim.o.formatoptions
   end,
 })
 
@@ -181,7 +181,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
     local ft = vim.bo.filetype
     local enabled_filetypes = { "markdown", "text", "" }
     if vim.tbl_contains(enabled_filetypes, ft) or vim.fn.empty(vim.bo.filetype) ~= 0 then
-      vim.wo.spell = true
+      vim.opt_local.spell = true
     end
   end,
 })

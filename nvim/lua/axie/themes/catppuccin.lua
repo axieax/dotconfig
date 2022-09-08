@@ -110,6 +110,7 @@ function M.config()
       vim.cmd("CatppuccinCompile")
       vim.defer_fn(function()
         vim.cmd("colorscheme catppuccin")
+        -- vim.cmd("ColorizerReloadAllBuffers") -- nvim-colorizer.lua
       end, 50) -- Debounced for live reloading
     end,
   })

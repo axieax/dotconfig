@@ -63,8 +63,8 @@ function M.config()
     group = alpha_attach,
     pattern = "alpha",
     callback = function()
-      vim.bo.buflisted = true
-      vim.wo.colorcolumn = ""
+      vim.opt_local.buflisted = true
+      vim.opt_local.colorcolumn = ""
       vim.cmd("file dashboard")
     end,
   })

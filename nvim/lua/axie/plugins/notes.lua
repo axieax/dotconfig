@@ -5,7 +5,8 @@ function M.setup()
 end
 
 function M.config()
-  require("todo-comments").setup({
+  local todo_comments = require("todo-comments")
+  todo_comments.setup({
     keywords = {
       FIX = {
         icon = " ",
@@ -94,6 +95,9 @@ function M.config()
       pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
     },
   })
+
+  vim.keymap.set("n", "]c", todo_comments.jump_next, { desc = "Next todo comment" })
+  vim.keymap.set("n", "[c", todo_comments.jump_prev, { desc = "Previous todo comment" })
 end
 
 return M

@@ -16,6 +16,7 @@
 
 ## TODO
 
+- jdtls fidget migration
 - Check out mind.nvim
 - Telescope not buflisted?
 - Telescope setup requires telescope
@@ -63,7 +64,6 @@
 - TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
 - READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 - TODO: use vim-fugitive instead of gitlinker?
-- TODO: ]n or ]b next note / todo (todo-commments go to next bookmark)
 - TODO: Telescope picker for LSP commands
 - TODO: <space>lU to update lsp servers?
 - TODO: rust-tools debug setup
@@ -165,6 +165,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neo-tree/neo-tree.nvim/pull/502#issuecomment-1244785594
 - https://github.com/NvChad/nvim-colorizer.lua/issues/16
 - Twilight doesn't fade dim.lua highlights
 - https://github.com/mfussenegger/nvim-jdtls/issues/279

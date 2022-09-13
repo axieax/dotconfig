@@ -196,7 +196,7 @@ return packer.startup({
       -- Search for TODO comments and Trouble pretty list
       -- FORK: https://github.com/folke/todo-comments.nvim
       use({
-        "B4mbus/todo-comments.nvim",
+        "folke/todo-comments.nvim",
         requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
       }, "notes")
 

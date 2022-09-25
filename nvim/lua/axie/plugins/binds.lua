@@ -126,7 +126,7 @@ function M.general_mappings()
       g = { "Next git hunk" },
       d = {
         function()
-          vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+          vim.diagnostic.goto_next({ float = { border = "rounded" } })
         end,
         "Next diagnostic",
       },

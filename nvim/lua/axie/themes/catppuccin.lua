@@ -100,6 +100,7 @@ function M.config()
       overseer = false,
       pounce = false,
       fidget = false, -- prefer default colours
+      illuminate = false,
     },
     custom_highlights = remaps,
   })

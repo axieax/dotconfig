@@ -29,6 +29,7 @@ return packer.startup({
       use("dstein64/vim-startuptime", "startuptime")
 
       -- CursorHold event fix
+      -- NOTE: resolved by https://github.com/neovim/neovim/pull/20198
       use("antoinemadec/FixCursorHold.nvim")
 
       -- Remove mapping escape delay
@@ -71,6 +72,11 @@ return packer.startup({
         "catppuccin/nvim",
         as = "catppuccin",
       }, "themes.catppuccin")
+
+      use({
+        "sam4llis/nvim-tundra",
+        disable = true,
+      }, "themes.tundra")
 
       use({
         "rebelot/kanagawa.nvim",
@@ -194,7 +200,6 @@ return packer.startup({
       })
 
       -- Search for TODO comments and Trouble pretty list
-      -- FORK: https://github.com/folke/todo-comments.nvim
       use({
         "folke/todo-comments.nvim",
         requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
@@ -393,6 +398,7 @@ return packer.startup({
       })
 
       -- Focused splits
+      -- ALT: https://github.com/anuvyklack/windows.nvim
       use({
         "beauwilliams/focus.nvim",
         event = "BufEnter",
@@ -525,6 +531,7 @@ return packer.startup({
               -- 'if',
               -- 'switch',
               -- 'case',
+              -- 'interface',
             }, ]]
               markdown = { "section" },
             },

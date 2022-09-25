@@ -16,6 +16,9 @@
 
 ## TODO
 
+- normal mode `0` for beginning of line, `00` with no delay for end of line
+  - https://github.com/max397574/better-escape.nvim/issues/41
+- keybind for refreshing `VimEnter` event
 - jdtls fidget migration
 - Check out mind.nvim
 - Telescope not buflisted?
@@ -71,7 +74,6 @@
 - TODO: nvim-tree goto location of current buffer in cwd
 - TODO: python3 provider (OS, venv) -> utils (can be used in nvim-dap-python config as well)
 - Telescope setup, find_files wrapper if buffer is directory
-- Merge conflict resolver (like vscode) - fugitive has this
 - nvim cmp dadbod source
 - nvim cmp tzachar/cmp-fzy-buffer?
 - Plugin and config split into separate modules?
@@ -89,6 +91,10 @@
 
 ## Features/plugins
 
+- https://github.com/lvimuser/lsp-inlayhints.nvim
+- check out https://github.com/anuvyklack/windows.nvim
+- https://github.com/jayp0521/mason-null-ls.nvim ?
+- Discover make / build commands, MakeFile, Docker (https://github.com/ptethng/telescope-makefile)
 - https://github.com/Djancyp/regex.nvim ?
 - https://github.com/numToStr/prettierrc.nvim
 - https://github.com/stevearc/overseer.nvim
@@ -133,7 +139,7 @@
 - something like https://github.com/henriquehbr/nvim-startup.lua?
 - https://github.com/VonHeikemen/fine-cmdline.nvim or https://github.com/gelguy/wilder.nvim
 - Themes: try sonokai and monokai
-- Telescope frecency, smart-history
+- Telescope frecency, smart-history (https://github.com/smartpde/telescope-recent-files)
 - https://github.com/kwkarlwang/bufresize.nvim
 - https://github.com/sQVe/sort.nvim
 - https://github.com/NTBBloodbath/rest.nvim API
@@ -165,8 +171,7 @@
 
 ## Current PRs / Issues
 
-- https://github.com/nvim-neo-tree/neo-tree.nvim/pull/502#issuecomment-1244785594
-- https://github.com/NvChad/nvim-colorizer.lua/issues/16
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - Twilight doesn't fade dim.lua highlights
 - https://github.com/mfussenegger/nvim-jdtls/issues/279
 - https://github.com/folke/todo-comments.nvim/pull/120
@@ -196,7 +201,6 @@
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099
 - https://github.com/kevinhwang91/nvim-hlslens/issues/20#issuecomment-981329510
 - https://github.com/wbthomason/packer.nvim/issues/760
-- https://github.com/folke/todo-comments.nvim/issues/77
 - https://github.com/norcalli/nvim-colorizer.lua/pull/18
 - https://github.com/vuki656/package-info.nvim/issues/75
 - My surround-wrap plugin (future: URL paste md) - replaced by LuaSnip new feature?

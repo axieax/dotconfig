@@ -133,6 +133,7 @@ end
 
 function M.jdtls()
   local utils = require("axie.utils")
+  local operating_system = utils.get_os()
   local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
   local java_bundles = {
     vim.fn.glob(mason_path .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
@@ -148,16 +149,26 @@ function M.jdtls()
   local jdtls_workspaces = vim.fn.stdpath("cache") .. "/jdtls_workspaces/"
   vim.fn.mkdir(jdtls_workspaces, "p")
 
-  -- local runtime_base_path = "/usr/lib/jvm/"
-  -- local java_runtimes = {}
-  -- local runtime_paths = utils.glob_split(runtime_base_path .. "java-*")
-  -- for _, rtp in ipairs(runtime_paths) do
-  --   -- carve everything after java-*
-  --   table.insert(java_runtimes, {
-  --     name = rtp:match(runtime_base_path .. "(.*)"),
-  --     path = rtp,
-  --   })
-  -- end
+  local java_runtimes = {}
+  if operating_system == "linux" then
+    local runtime_base_path = "/usr/lib/jvm/"
+    local runtime_paths = utils.glob_split(runtime_base_path .. "java-*")
+    for _, rtp in ipairs(runtime_paths) do
+      table.insert(java_runtimes, {
+        name = rtp:match(runtime_base_path .. "(.*)"),
+        path = rtp,
+      })
+    end
+  elseif operating_system == "mac" then
+    local runtime_base_path = "/Library/Java/JavaVirtualMachines/"
+    local jdks = utils.glob_split(runtime_base_path .. "*")
+    for _, jdk in ipairs(jdks) do
+      table.insert(java_runtimes, {
+        name = jdk:match(runtime_base_path .. "(.*)"),
+        path = jdk .. "/Contents/Home/bin",
+      })
+    end
+  end
 
   return {
     autostart = false,
@@ -182,7 +193,7 @@ function M.jdtls()
       "-jar",
       vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
       "-configuration",
-      jdtls_path .. "/config_" .. utils.get_os(),
+      jdtls_path .. "/config_" .. operating_system,
       "-data",
       jdtls_workspaces .. workspace_dir,
     },
@@ -190,7 +201,7 @@ function M.jdtls()
       java = {
         configuration = {
           -- NOTE: for changing java runtime dynamically with :JdtSetRuntime
-          -- runtimes = java_runtimes,
+          runtimes = java_runtimes,
         },
       },
     },

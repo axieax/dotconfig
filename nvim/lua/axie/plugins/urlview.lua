@@ -14,6 +14,13 @@ function M.config()
       next = "]U",
     },
   })
+
+  local search = require("urlview.search")
+  local search_helpers = require("urlview.search.helpers")
+  search.jira = search_helpers.generate_custom_search({
+    capture = "AXIE%-%d+",
+    format = "https://jira.axieax.com/browse/%s",
+  })
 end
 
 return M

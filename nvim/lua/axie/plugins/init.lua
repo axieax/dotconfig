@@ -927,14 +927,7 @@ return packer.startup({
       }, "lsp.test")
 
       -- Debug Adapter Protocol
-      use({
-        "mfussenegger/nvim-dap",
-        config = function()
-          -- Open to side
-          local dap = require("dap")
-          dap.defaults.fallback.terminal_win_cmd = "10split new"
-        end,
-      })
+      use("mfussenegger/nvim-dap")
 
       -- Debugger Telescope extension
       use({
@@ -954,11 +947,12 @@ return packer.startup({
       -- Debugger UI
       use({
         "rcarriga/nvim-dap-ui",
-        -- TEMP: https://github.com/rcarriga/nvim-dap-ui/issues/148
-        requires = "mfussenegger/nvim-dap",
-        -- after = "nvim-dap",
+        after = "nvim-dap",
         config = function()
           require("dapui").setup()
+          -- Open terminal to side
+          -- NOTE: https://github.com/rcarriga/nvim-dap-ui/issues/148
+          require("dap").defaults.fallback.terminal_win_cmd = "10split new"
         end,
       })
 

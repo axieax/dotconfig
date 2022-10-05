@@ -81,6 +81,7 @@ function M.config()
       },
       dashboard = false, -- startify?
       neogit = true,
+      neotest = true,
       vim_sneak = false,
       fern = false,
       barbar = true,
@@ -88,6 +89,7 @@ function M.config()
       markdown = true,
       lightspeed = true,
       ts_rainbow = true,
+      harpoon = false,
       hop = true,
       notify = true,
       telekasten = true,

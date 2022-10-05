@@ -132,19 +132,25 @@ function M.hls()
 end
 
 function M.jdtls()
-  local glob_split = require("axie.utils").glob_split
+  local utils = require("axie.utils")
+  local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
   local java_bundles = {
-    vim.fn.glob("~/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
+    vim.fn.glob(mason_path .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
   }
-  vim.list_extend(java_bundles, glob_split("~/java/vscode-java-test/server/*.jar"))
+  vim.list_extend(java_bundles, utils.glob_split(mason_path .. "/java-test/extension/server/*.jar"))
+  -- TEMP: Failed to get bundleInfo for bundle from com.microsoft.java.test.runner-jar-with-dependencies.jar
+  java_bundles = vim.tbl_filter(function(bundle)
+    return not vim.endswith(bundle, "com.microsoft.java.test.runner-jar-with-dependencies.jar")
+  end, java_bundles)
 
-  local jdtls_path = vim.fn.expand("~/.local/share/nvim/mason/packages/jdtls")
+  local jdtls_path = mason_path .. "/jdtls"
   local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-  local operating_system = require("axie.utils").get_os()
+  local jdtls_workspaces = vim.fn.stdpath("cache") .. "/jdtls_workspaces/"
+  vim.fn.mkdir(jdtls_workspaces, "p")
 
   -- local runtime_base_path = "/usr/lib/jvm/"
   -- local java_runtimes = {}
-  -- local runtime_paths = glob_split(runtime_base_path .. "java-*")
+  -- local runtime_paths = utils.glob_split(runtime_base_path .. "java-*")
   -- for _, rtp in ipairs(runtime_paths) do
   --   -- carve everything after java-*
   --   table.insert(java_runtimes, {
@@ -155,24 +161,30 @@ function M.jdtls()
 
   return {
     autostart = false,
-    init_options = { bundles = java_bundles },
+    init_options = {
+      bundles = java_bundles,
+      -- https://github.com/j-hui/fidget.nvim/issues/57
+      extendedClientCapabilities = { progressReportProvider = false },
+    },
     cmd = {
       "java",
       "-Declipse.application=org.eclipse.jdt.ls.core.id1",
       "-Dosgi.bundles.defaultStartLevel=4",
       "-Declipse.product=org.eclipse.jdt.ls.core.product",
+      "-Dlog.protocol=true",
       "-Dlog.level=ALL",
-      "-noverify",
-      "-Xmx1G",
+      "-Xms1g",
+      "--add-modules=ALL-SYSTEM",
+      "--add-opens",
+      "java.base/java.util=ALL-UNNAMED",
+      "--add-opens",
+      "java.base/java.lang=ALL-UNNAMED",
       "-jar",
       vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
       "-configuration",
-      jdtls_path .. "/config_" .. operating_system,
+      jdtls_path .. "/config_" .. utils.get_os(),
       "-data",
-      vim.fn.expand("~/java/workspaces/" .. workspace_dir),
-      "--add-modules=ALL-SYSTEM",
-      "--add-opens java.base/java.util=ALL-UNNAMED",
-      "--add-opens java.base/java.lang=ALL-UNNAMED",
+      jdtls_workspaces .. workspace_dir,
     },
     settings = {
       java = {
@@ -192,36 +204,6 @@ function M.jdtls()
       require("jdtls.dap").setup_dap_main_class_configs()
       require("jdtls.setup").add_commands()
     end,
-    handlers = {
-      -- TEMP: https://github.com/j-hui/fidget.nvim/issues/57
-      ["language/progressReport"] = function(_, result, ctx)
-        local info = { client_id = ctx.client_id }
-
-        local kind = "report"
-        if result.complete then
-          kind = "end"
-        elseif result.workDone == 0 then
-          kind = "begin"
-        end
-
-        local percentage = 0
-        if result.totalWork > 0 and result.workDone >= 0 then
-          percentage = result.workDone / result.totalWork * 100
-        end
-
-        local msg = {
-          token = result.id,
-          value = {
-            kind = kind,
-            percentage = percentage,
-            title = result.task,
-            message = result.subTask,
-          },
-        }
-
-        vim.lsp.handlers["$/progress"](nil, msg, info)
-      end,
-    },
   }
 end
 

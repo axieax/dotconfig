@@ -23,18 +23,6 @@ action="setup Java for Neovim"
 if confirm "$action"; then
   # JRE, JDK, Java (sudo pacman -S jre-openjdk)
   mkdir -p "$HOME/java"
-  cd "$HOME/java"
-
-  git clone https://github.com/microsoft/java-debug
-  cd java-debug
-  ./mvnw clean install
-  cd ..
-
-  git clone https://github.com/microsoft/vscode-java-test
-  cd vscode-java-test
-  yarn install
-  yarn run build-plugin
-  cd ..
 fi
 
 # Formatters

@@ -21,6 +21,8 @@ M.ensure_installed = {
   -- Miscellaneous --
   -------------------
   -- "jdtls",
+  -- "java-debug-adapter",
+  -- "java-test",
   "clangd",
   "ltex-ls",
   -- "cmake-language-server",

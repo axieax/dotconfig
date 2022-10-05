@@ -954,7 +954,9 @@ return packer.startup({
       -- Debugger UI
       use({
         "rcarriga/nvim-dap-ui",
-        after = "nvim-dap",
+        -- TEMP: https://github.com/rcarriga/nvim-dap-ui/issues/148
+        requires = "mfussenegger/nvim-dap",
+        -- after = "nvim-dap",
         config = function()
           require("dapui").setup()
         end,

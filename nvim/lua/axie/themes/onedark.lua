@@ -2,9 +2,10 @@ local M = {}
 
 function M.config()
   local onedarkpro = require("onedarkpro")
-  local onedarkpro_utils = require("onedarkpro.utils")
+  local onedarkpro_utils = require("onedarkpro.lib.color")
   onedarkpro.setup({
     theme = "onedark_vivid",
+    caching = true,
     -- extra from https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/colors.lua
     colors = {
       -- NvChad Telescope theme (https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)

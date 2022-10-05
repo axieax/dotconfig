@@ -12,6 +12,9 @@ font:
     family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
 
+window:
+  opacity: 0.8
+
 # mac alt mappings (https://github.com/alacritty/alacritty/issues/62#issuecomment-347552058)
 key_bindings:
   - { key: I, mods: Control, chars: "\x1b[105;5u" }

@@ -173,7 +173,7 @@
 
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - Twilight doesn't fade dim.lua highlights
-- https://github.com/mfussenegger/nvim-jdtls/issues/279
+- https://github.com/rcarriga/nvim-dap-ui/issues/148
 - https://github.com/folke/todo-comments.nvim/pull/120
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069

@@ -9,8 +9,9 @@ function M.config()
   local cp = require("catppuccin.palettes").get_palette()
   local ucolors = require("catppuccin.utils.colors")
 
+  local float_bg = cp.base
   local remaps = {
-    NormalFloat = { bg = cp.base }, -- NOTE: catppuccin needs a bg colour
+    NormalFloat = { bg = float_bg }, -- NOTE: catppuccin needs a bg colour
     CursorLine = { bg = ucolors.darken(cp.surface0, 0.64, cp.base) },
     ColorColumn = { link = "CursorLine" },
     WhichKeyFloat = { link = "NormalFloat" },
@@ -98,7 +99,10 @@ function M.config()
       aerial = true,
       vimwiki = true,
       beacon = true,
-      navic = true,
+      navic = {
+        enabled = true,
+        custom_bg = float_bg,
+      },
       overseer = false,
       pounce = false,
       fidget = false, -- prefer default colours

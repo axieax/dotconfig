@@ -28,10 +28,6 @@ return packer.startup({
       -- Measure startup time
       use("dstein64/vim-startuptime", "startuptime")
 
-      -- CursorHold event fix
-      -- NOTE: resolved by https://github.com/neovim/neovim/pull/20198
-      use("antoinemadec/FixCursorHold.nvim")
-
       -- Remove mapping escape delay
       use({
         "max397574/better-escape.nvim",
@@ -243,12 +239,6 @@ return packer.startup({
           require("bufferline").setup()
         end,
       })
-
-      -- Floating statusline
-      use({
-        "b0o/incline.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-      }, "incline")
 
       -- Terminal
       use({
@@ -514,30 +504,6 @@ return packer.startup({
         "code-biscuits/nvim-biscuits",
         after = "nvim-treesitter",
       }, "biscuits")
-
-      -- Function context indicator
-      use({
-        "nvim-treesitter/nvim-treesitter-context",
-        after = "nvim-treesitter",
-        config = function()
-          require("treesitter-context").setup({
-            patterns = {
-              --[[ default = {
-              "class",
-              "function",
-              "method",
-              -- 'for', -- These won't appear in the context
-              -- 'while',
-              -- 'if',
-              -- 'switch',
-              -- 'case',
-              -- 'interface',
-            }, ]]
-              markdown = { "section" },
-            },
-          })
-        end,
-      })
 
       -- Argument highlights
       use({
@@ -997,6 +963,7 @@ return packer.startup({
           "neovim/nvim-lspconfig",
           "hrsh7th/cmp-nvim-lsp",
           "stevearc/aerial.nvim",
+          "SmiteshP/nvim-navic",
           -- ALT: https://github.com/jose-elias-alvarez/typescript.nvim ?
           "jose-elias-alvarez/nvim-lsp-ts-utils",
           "b0o/schemastore.nvim",
@@ -1004,6 +971,15 @@ return packer.startup({
           "folke/lua-dev.nvim",
         },
       }, "lsp.install")
+
+      -- Code context
+      use({
+        "SmiteshP/nvim-navic",
+        requires = "neovim/nvim-lspconfig",
+        config = function()
+          require("nvim-navic").setup({ highlight = true })
+        end,
+      })
 
       -- Java LSP
       use("mfussenegger/nvim-jdtls")

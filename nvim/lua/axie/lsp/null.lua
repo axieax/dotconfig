@@ -1,18 +1,17 @@
 local M = {}
 
 M.ensure_installed = {
-  -- formatter
   "stylua",
+  -- formatter --
   "black",
   "isort",
   -- "goimports",
   "prettierd",
   "shfmt",
-  -- linter
+  -- linter --
   -- "selene",
   "editorconfig-checker",
   -- "golangci-lint",
-  -- "goimports",
   "pylint",
   "shellcheck",
 }

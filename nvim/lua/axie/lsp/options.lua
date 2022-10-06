@@ -1,8 +1,5 @@
 local M = {}
 
--- TODO(v0.8): resolved_capabilities -> server_capabilities, vim.lsp.buf.format
--- disable language server formatting in options here, or else use null ls?
-
 --- Returns the custom options for a given language server
 ---@param name string @The name of the language server
 ---@return table @The custom options for the language server
@@ -14,50 +11,40 @@ end
 ---@param client table @The language server client
 ---@param bufnr number @Attached buffer number
 function M.default_on_attach(client, bufnr)
-  -- documentSymbol
-  if client.resolved_capabilities.documentSymbol then
+  -- document symbol
+  if client.server_capabilities.documentSymbolProvider then
     require("aerial").on_attach(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
   end
 
-  -- documentFormatting
-  local name = client.name
-  local is_null = name == "null-ls"
-  local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-  local ls_can_format = client.resolved_capabilities.document_formatting
-  local null_can_format = require("axie.lsp.null").use_null_formatting(filetype)
-
-  -- print(name)
-  -- print("ls_can_format", ls_can_format)
-  -- print("null_can_format", null_can_format)
-
-  -- prefer null-ls for formatting if available
-  if (not is_null and null_can_format) or (is_null and not null_can_format) then
-    -- disable formatting
-    -- print("formatting disabled for " .. name)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-  elseif client.supports_method("textDocument/formatting") then
-    -- use client for formatting
-    -- print("formatting enabled for " .. name)
+  -- document formatting
+  if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_autocmd("BufWritePre", {
       desc = "LSP Formatting",
       buffer = bufnr,
-      callback = vim.lsp.buf.formatting_sync,
+      callback = function()
+        vim.lsp.buf.format({
+          filter = function(c)
+            -- prefer null-ls if available
+            local is_null = c.name == "null-ls"
+            local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+            local null_can_format = require("axie.lsp.null").use_null_formatting(filetype)
+            return (is_null and null_can_format) or (not is_null and not null_can_format)
+          end,
+        })
+      end,
     })
   end
 
-  if client.resolved_capabilities.code_lens then
-    print(name, "supports code lens")
+  -- code lens
+  if client.server_capabilities.codeLensProvider then
+    print(client.name, "supports code lens")
     -- NOTE: language server loading delay
     vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
       desc = "LSP Code Lens Refresh",
       buffer = bufnr,
       callback = vim.lsp.codelens.refresh,
     })
-  end
-
-  if not is_null then
-    -- require("nvim-navic").attach(client, bufnr)
   end
 end
 

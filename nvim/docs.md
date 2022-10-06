@@ -34,7 +34,6 @@
 - nvim v0.8:
   - Migrate galaxyline.nvim to heirline.nvim (lualine has clickable components tho)
   - clickable winbar and statusline, remove incline
-  - NOTE: need to enable highlight for navic catppuccin integration
   - Aerial not detecting some symbols -> have to use nvim-navic
   - heirline supports tabline now - maybe migrate??
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)

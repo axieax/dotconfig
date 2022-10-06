@@ -1,6 +1,7 @@
 local M = {}
 
 local utils = require("axie.utils")
+local separator = ""
 
 local function decorate(hl_group, content)
   return string.format("%%#%s#%s%%*", hl_group, content)
@@ -34,12 +35,12 @@ local function aerial_context()
     vim.tbl_map(function(symbol)
       return decorate("NavicIcons" .. symbol.kind, symbol.icon) .. " " .. decorate("NavicText", symbol.name)
     end, symbols),
-    " > "
+    " " .. separator .. " "
   )
 end
 
 function M.context()
-  local context = require("nvim-navic").get_location()
+  local context = require("nvim-navic").get_location():gsub(">", separator)
   if context == "" then
     -- NOTE: navic slow startup for some LSPs -> use aerial instead
     context = aerial_context()
@@ -47,18 +48,30 @@ function M.context()
   return utils.ternary(context ~= "", decorate("NavicSeparator", ":: ") .. context, "")
 end
 
+local focused_win = vim.api.nvim_get_current_win()
+
 function M.eval()
+  local is_nc = focused_win ~= vim.api.nvim_get_current_win()
+  local file_hl = "NavicIconsFile" .. utils.ternary(is_nc, "NC", "")
+  local modified = vim.api.nvim_buf_get_option(0, "modified")
+
   local _, value = pcall(function()
     local components = {
-      { "NavicIconsFile", M.file_icon() },
-      { "NavicIconsFile", M.file_name() },
-      -- TODO: hide on NC?
-      { "WinBarContext", M.context() },
+      { "WinBarModified", modified and "*" or "" },
+      { file_hl, M.file_icon() },
+      { file_hl, M.file_name() },
     }
+    if not is_nc then
+      table.insert(components, { "WinBarContext", M.context() })
+    end
 
     return vim.fn.join(
       vim.tbl_map(function(component)
-        return decorate(unpack(component))
+        if type(component) == "table" then
+          return decorate(unpack(component))
+        else
+          return component
+        end
       end, components),
       " "
     )
@@ -67,12 +80,26 @@ function M.eval()
 end
 
 function M.activate()
-  vim.o.winbar = "%{%v:lua.require'axie.winbar'.eval()%}"
+  vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = vim.api.nvim_create_augroup("WinBarGroup", {}),
+    callback = function()
+      vim.schedule(function()
+        local ignored_filetypes = { "", "alpha", "neo-tree", "toggleterm" }
+        if not vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
+          vim.wo.winbar = "%{%v:lua.require'axie.winbar'.eval()%}"
+        end
+        focused_win = vim.api.nvim_get_current_win()
+      end)
+    end,
+  })
   vim.schedule(function()
     local float_bg = vim.api.nvim_get_hl_by_name("NormalFloat", true).background
     vim.api.nvim_set_hl(0, "WinBar", { bg = float_bg })
     -- TODO: different fg for NC?
-    vim.api.nvim_set_hl(0, "WinBarNC", {})
+    vim.api.nvim_set_hl(0, "WinBarNC", { bg = float_bg })
+    local bufferline_modified_fg = vim.api.nvim_get_hl_by_name("BufferCurrentMod", true).foreground
+    vim.api.nvim_set_hl(0, "WinBarModified", { fg = bufferline_modified_fg, bg = float_bg })
+    vim.api.nvim_set_hl(0, "NavicIconsFileNC", { fg = "#f2cdcd", bg = float_bg })
   end)
 end
 

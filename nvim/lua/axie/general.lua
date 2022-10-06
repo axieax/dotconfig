@@ -67,7 +67,7 @@ vim_apply(vim.opt, {
 })
 
 -- NOTE: indent-blankline covers first tab character
-vim.cmd([[set listchars=tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣]])
+vim.cmd.set([[listchars=tab:→\ ,trail:·,extends:▶,precedes:◀,nbsp:␣]])
 
 ----------
 -- Misc --
@@ -127,7 +127,7 @@ for _, cmd in ipairs(typos) do
   vim.api.nvim_create_user_command(cmd, function(opts)
     local lower_cmd = cmd:lower()
     local bang = ternary(opts.bang, "!", "")
-    vim.cmd("noautocmd " .. lower_cmd .. bang)
+    vim.cmd.noautocmd(lower_cmd .. bang)
   end, { bang = true })
 end
 

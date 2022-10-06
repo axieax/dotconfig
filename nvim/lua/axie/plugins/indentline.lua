@@ -67,7 +67,7 @@ function M.config()
 
   -- NOTE: moved to material.nvim theme config as highlight override
   -- vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = "#C678DD", nocombine = true }) -- NOTE: doesn't work yet
-  -- vim.cmd([[highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine]])
+  -- vim.cmd.highlight("IndentBlanklineContextChar guifg=#C678DD gui=nocombine")
 end
 
 return M

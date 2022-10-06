@@ -39,8 +39,6 @@ function M.override_filetype(pattern, ft)
     config[p] = ft
   end
 
-  -- TEMP: to enable filetype.lua
-  vim.g.do_filetype_lua = 1
   vim.filetype.add({ pattern = config })
 end
 

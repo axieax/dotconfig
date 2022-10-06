@@ -16,6 +16,7 @@
 
 ## TODO
 
+- default `gq` binding for code formatting (and range)
 - normal mode `0` for beginning of line, `00` with no delay for end of line
   - https://github.com/max397574/better-escape.nvim/issues/41
 - keybind for refreshing `VimEnter` event
@@ -32,7 +33,7 @@
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - nvim v0.8:
   - Migrate galaxyline.nvim to heirline.nvim (lualine has clickable components tho)
-  - clickable winbar, remove incline
+  - clickable winbar and statusline, remove incline
   - NOTE: need to enable highlight for navic catppuccin integration
   - Aerial not detecting some symbols -> have to use nvim-navic
   - heirline supports tabline now - maybe migrate??
@@ -171,7 +172,6 @@
 
 ## Current PRs / Issues
 
-- https://github.com/catppuccin/nvim/issues/292
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - Twilight doesn't fade dim.lua highlights
 - https://github.com/rcarriga/nvim-dap-ui/issues/148

@@ -13,7 +13,7 @@ function M.auto_bootstrap()
     return false
   end
   vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
-  vim.cmd("packadd packer.nvim")
+  vim.cmd.packadd("packer.nvim")
   return true
 end
 

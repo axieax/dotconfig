@@ -117,13 +117,13 @@ function M.config()
     callback = function()
       vim.cmd("CatppuccinCompile")
       vim.defer_fn(function()
-        vim.cmd("colorscheme catppuccin")
+        vim.cmd.colorscheme("catppuccin")
         -- vim.cmd("ColorizerReloadAllBuffers") -- nvim-colorizer.lua
       end, 50) -- Debounced for live reloading
     end,
   })
 
-  vim.cmd("colorscheme catppuccin")
+  vim.cmd.colorscheme("catppuccin")
 end
 
 return M

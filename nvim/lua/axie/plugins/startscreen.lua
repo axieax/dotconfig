@@ -65,7 +65,7 @@ function M.config()
     callback = function()
       vim.opt_local.buflisted = true
       vim.opt_local.colorcolumn = ""
-      vim.cmd("file dashboard")
+      vim.cmd.file("dashboard")
     end,
   })
 end

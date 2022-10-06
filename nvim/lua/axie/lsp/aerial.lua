@@ -15,6 +15,7 @@ function M.config()
       mid_item = "│ ",
       last_item = "└ ",
     },
+    filter_kind = false,
   })
 
   local packer_aerial = vim.api.nvim_create_augroup("packer aerial symbols", {})

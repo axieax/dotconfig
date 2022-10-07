@@ -514,6 +514,8 @@ return packer.startup({
           require("hlargs").setup({
             -- Catppuccin Flamingo
             color = "#F2CDCD",
+            -- NOTE: needs to be lower than Twilight.nvim's priority of 10000
+            hl_priority = 9999,
           })
         end,
       })

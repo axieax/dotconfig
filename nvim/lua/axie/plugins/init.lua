@@ -806,8 +806,6 @@ return packer.startup({
       -- Dim unused variables and functions
       use({
         "narutoxy/dim.lua",
-        -- TEMP: https://github.com/NarutoXY/dim.lua/issues/18
-        disable = true,
         requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
         config = function()
           require("dim").setup()

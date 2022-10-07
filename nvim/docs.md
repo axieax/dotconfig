@@ -158,15 +158,11 @@
 
 ## Notes / issues
 
+- Treesitter highlighting on bufenter (markdown)
 - insert mode <tab> using <c-i> mapping
 - firenvim patched fonts not working
-- Weird undos https://github.com/hrsh7th/nvim-cmp/issues/328
-- Zen mode with nvim-treesitter-context?
 - Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent) - autopairs?
-- https://www.reddit.com/r/neovim/comments/r8qcxl/nvimcmp_deletes_the_first_word_after_autocomplete/
-- https://github.com/hrsh7th/nvim-cmp/issues/611
 - nvim-cmp treesitter completion source vs buffer source?
-- Opening buffer for file (nvim-tree) replaces barbar buffers
 - autopairs may start to break after a while (can't insert characters)
 
 ## Current PRs / Issues
@@ -174,12 +170,10 @@
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - Twilight doesn't fade dim.lua highlights
 - https://github.com/rcarriga/nvim-dap-ui/issues/148
-- https://github.com/folke/todo-comments.nvim/pull/120
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069
 - https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
 - PackerCompile (calling setup again) clears bufferline and incline colours
-- https://github.com/b0o/incline.nvim/issues/28
 - https://github.com/nvim-telescope/telescope.nvim/issues/1904
 - https://github.com/rcarriga/nvim-dap-ui/issues/115
 - https://github.com/nvim-neotest/neotest/issues/35
@@ -197,11 +191,9 @@
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
-- https://github.com/j-hui/fidget.nvim/issues/57#issuecomment-1072548339
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099
 - https://github.com/kevinhwang91/nvim-hlslens/issues/20#issuecomment-981329510
 - https://github.com/wbthomason/packer.nvim/issues/760
-- https://github.com/norcalli/nvim-colorizer.lua/pull/18
 - https://github.com/vuki656/package-info.nvim/issues/75
 - My surround-wrap plugin (future: URL paste md) - replaced by LuaSnip new feature?
 - Git change watch plugin (watch for breaking config setup?, when dead plugin has new updates to replace temp fork)

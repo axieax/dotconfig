@@ -41,7 +41,6 @@ function M.config()
       "lspinfo",
       "toggleterm",
       "glowpreview",
-      "lsp-installer",
       "checkhealth",
       "aerial",
       "",

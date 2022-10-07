@@ -1,7 +1,23 @@
 local M = {}
 
 local utils = require("axie.utils")
-local separator = ""
+local separator = "  "
+local ignored_filetypes = {
+  "",
+  "alpha",
+  "neo-tree",
+  "toggleterm",
+  "packer",
+  "lspinfo",
+  "null-ls-info",
+  "glowpreview",
+  "help",
+  "man",
+  "prompt",
+  "mason",
+  "aerial",
+  "checkhealth",
+}
 
 local function decorate(hl_group, content)
   return string.format("%%#%s#%s%%*", hl_group, content)
@@ -35,12 +51,12 @@ local function aerial_context()
     vim.tbl_map(function(symbol)
       return decorate("NavicIcons" .. symbol.kind, symbol.icon) .. " " .. decorate("NavicText", symbol.name)
     end, symbols),
-    " " .. separator .. " "
+    separator
   )
 end
 
 function M.context()
-  local context = require("nvim-navic").get_location():gsub(">", separator)
+  local context = require("nvim-navic").get_location():gsub(" > ", separator)
   if context == "" then
     -- NOTE: navic slow startup for some LSPs -> use aerial instead
     context = aerial_context()
@@ -84,7 +100,6 @@ function M.activate()
     group = vim.api.nvim_create_augroup("WinBarGroup", {}),
     callback = function()
       vim.schedule(function()
-        local ignored_filetypes = { "", "alpha", "neo-tree", "toggleterm" }
         if not vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
           vim.wo.winbar = "%{%v:lua.require'axie.winbar'.eval()%}"
         end

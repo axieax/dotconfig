@@ -10,6 +10,12 @@ function M.config()
   wk.setup({
     layout = { align = "center" },
     window = { winblend = 20 },
+    -- For modes.nvim
+    -- plugins = {
+    --   presets = {
+    --     operators = false,
+    --   },
+    -- },
   })
 
   require("axie.plugins.binds").general_mappings()

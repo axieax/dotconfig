@@ -63,7 +63,7 @@ function M.config()
       lsp_saga = false,
       gitgutter = false,
       gitsigns = true,
-      leap = false,
+      leap = true,
       telescope = true,
       nvimtree = false,
       neotree = {
@@ -88,7 +88,7 @@ function M.config()
       barbar = true,
       bufferline = true,
       markdown = true,
-      lightspeed = true,
+      lightspeed = false,
       ts_rainbow = true,
       harpoon = false,
       hop = true,

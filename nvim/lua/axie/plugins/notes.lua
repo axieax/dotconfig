@@ -80,6 +80,10 @@ function M.config()
         color = "hint",
         alt = { "SUGGEST", "SUGGESTION", "TRY", "CONSIDER", "ALT", "ALTERNATIVE", "INSPO", "INSPIRATION", "RANDOM" },
       },
+      FORK = {
+        icon = " ",
+        color = "hint",
+      },
     },
     highlight = {
       pattern = [[.*<(KEYWORDS)\s*]],

@@ -480,6 +480,15 @@ return packer.startup({
         end,
       })
 
+      -- Highlight based on mode
+      use({
+        "mvllow/modes.nvim",
+        disable = true,
+        config = function()
+          require("modes").setup()
+        end,
+      })
+
       -- cursor jump accent
       use("rainbowhxch/beacon.nvim")
 
@@ -609,10 +618,14 @@ return packer.startup({
       use("mg979/vim-visual-multi")
 
       -- Easy motion / navigation
-      -- CHECK: letters based on characters in word?
-      -- TRY: find a way / alt for jumping by starting to type word at location
-      -- ALT: https://github.com/ggandor/leap.nvim ?
-      use("ggandor/lightspeed.nvim")
+      use({
+        "ggandor/leap.nvim",
+        event = "BufRead",
+        after = "vim-repeat",
+        config = function()
+          require("leap").set_default_keymaps()
+        end,
+      })
 
       -- Text movement
       use({

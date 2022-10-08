@@ -22,8 +22,7 @@
 - keybind for refreshing `VimEnter` event
 - Check out mind.nvim
 - Telescope not buflisted?
-- Telescope setup requires telescope
-- migrate from lightspeed.nvim to leap.nvim
+- Telescope setup requires telescope (telescope.builtin)
 - `gF`: goto file with line number
 - autocmd to install language server if one doesn't start for a filetype, also treesitter parser
   - `require("mason-lspconfig").get_available_servers({ filetype = vim.bo.filetype })`
@@ -39,14 +38,9 @@
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
-- configure ts context to be similar to intellij (names enough, maybe params)
-- `nvim_set_hl` instead of `vim.cmd("highlight ...")`?
 - Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
 - telescope config layout
-- Deprecated `resolved_capabilities`
-  - https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
 - can map <c-tab>
-- https://github.com/rcarriga/nvim-notify/issues/43 for DAP test
 - command mode text sometimes disappears after a small delay (flicker, cmp?)
 - Migrate `plugins.binds` to individual plugin configs
   - Update keymap RHS from vimscript to lua function
@@ -152,9 +146,8 @@
 
 - `:LuaCacheClear` to clear impatient.nvim's cache
 - `rm -rf ~/.local/share/nvim/shada/*` for Linux permission issues
-- stabilize.nvim view jumps (floats closing soon after nvim startup, e.g. Telescope, Lazygit)
 - Floats closing soon after nvim startup (e.g. Telescope, lazygit) - maybe stabilize.nvim
-  - https://github.com/luukvbaal/stabilize.nvim/issues/3
+  - e.g. https://github.com/luukvbaal/stabilize.nvim/issues/3
 
 ## Notes / issues
 
@@ -167,6 +160,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/mong8se/actually.nvim/issues/2
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - https://github.com/rcarriga/nvim-dap-ui/issues/148
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41

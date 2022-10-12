@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Statusline clickable LSP info component
 - default `gq` binding for code formatting (and range)
 - normal mode `0` for beginning of line, `00` with no delay for end of line
   - https://github.com/max397574/better-escape.nvim/issues/41
@@ -182,7 +183,7 @@
   - NOTE: arrow keys navigate commands rather than through text
   - https://github.com/neovim/neovim/issues/9953
 - https://github.com/jvgrootveld/telescope-zoxide/issues/12
-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/216 (group_empty multiple <CR>)
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/552 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099

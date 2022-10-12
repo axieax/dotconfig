@@ -1,10 +1,9 @@
 local M = {}
 
 -- TODO: file nesting
--- TODO: group empty https://github.com/nvim-neo-tree/neo-tree.nvim/issues/211
+-- TODO: group empty https://github.com/nvim-neo-tree/neo-tree.nvim/issues/552
 -- TODO: highlight open buffers
--- TODO: file preview / info (size, perms, time etc.)
--- TODO: update git / diagnostic icons/colours
+-- TODO: file info (size, perms, time etc.)
 
 function M.setup()
   vim.keymap.set("n", ";", "<Cmd>Neotree toggle<CR>", { desc = "file explorer" })
@@ -20,6 +19,15 @@ function M.config()
       "buffers",
       "git_status",
       "diagnostics",
+    },
+    source_selector = {
+      winbar = true,
+      tab_labels = {
+        filesystem = "  Files ",
+        buffers = "  Buffers ",
+        git_status = "  Git ",
+        diagnostics = " 裂LSP ",
+      },
     },
     use_popups_for_input = false,
     -- popup_border_style = "rounded",

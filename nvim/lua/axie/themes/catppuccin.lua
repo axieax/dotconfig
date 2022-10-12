@@ -91,7 +91,7 @@ function M.config()
       lightspeed = false,
       ts_rainbow = true,
       harpoon = false,
-      hop = true,
+      hop = false,
       notify = true,
       telekasten = true,
       symbols_outline = true,

@@ -187,7 +187,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- CHECK: https://github.com/neovim/neovim/issues/14090#issuecomment-1113090354
-vim.keymap.set("n", "<c-i>", "<c-i>")
+vim.keymap.set("n", "<C-i>", "<C-i>")
 
 -- Winbar
 require("axie.winbar").activate()

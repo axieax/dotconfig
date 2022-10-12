@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-  vim.keymap.set("i", "<c-i>", "<Cmd>IconPickerInsert<CR>", { desc = "icon picker" })
+  vim.keymap.set("i", "<C-i>", "<Cmd>IconPickerInsert<CR>", { desc = "icon picker" })
   vim.keymap.set("n", "\\i", "<Cmd>IconPickerYank<CR>", { desc = "icon picker" })
 end
 

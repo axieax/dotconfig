@@ -110,7 +110,6 @@ function M.activate()
   vim.schedule(function()
     local float_bg = vim.api.nvim_get_hl_by_name("NormalFloat", true).background
     vim.api.nvim_set_hl(0, "WinBar", { bg = float_bg })
-    -- TODO: different fg for NC?
     vim.api.nvim_set_hl(0, "WinBarNC", { bg = float_bg })
     local bufferline_modified_fg = vim.api.nvim_get_hl_by_name("BufferCurrentMod", true).foreground
     vim.api.nvim_set_hl(0, "WinBarModified", { fg = bufferline_modified_fg, bg = float_bg })

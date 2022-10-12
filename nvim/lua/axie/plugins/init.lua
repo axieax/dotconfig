@@ -623,7 +623,7 @@ return packer.startup({
         event = "BufRead",
         after = "vim-repeat",
         config = function()
-          require("leap").set_default_keymaps()
+          require("leap").add_default_mappings()
         end,
       })
 
@@ -904,6 +904,7 @@ return packer.startup({
           "haydenmeade/neotest-jest",
           "nvim-neotest/neotest-python",
           "nvim-neotest/neotest-plenary",
+          -- "mrcjkb/neotest-haskell",
           { "nvim-neotest/neotest-vim-test", requires = "vim-test/vim-test" },
         },
       }, "lsp.test")

@@ -105,6 +105,9 @@ function M.config()
     plenary = {
       filetypes = { "lua" },
     },
+    -- haskell = {
+    --   filetypes = { "haskell" },
+    -- },
   }
 
   local adapters = {}

@@ -252,15 +252,16 @@ function M.misc()
   local code_actions = require("axie.lsp.code_actions").native
   -- LSP
   vim.keymap.set("n", "K", vim.lsp.buf.hover)
+  -- NOTE: conflicts with default formatting keybind
   vim.keymap.set({ "n", "v" }, "gq", require_args(code_actions, true), { desc = "code actions (ignore null-ls)" })
   vim.keymap.set({ "n", "v" }, "gQ", require_args(code_actions, false), { desc = "code actions (all)" })
   -- Visual indent
   vim.keymap.set("v", "<", "<gv")
   vim.keymap.set("v", ">", ">gv")
-  -- Markdown bold
-  filetype_map("markdown", "v", ",*", "S*gvS*", { remap = true })
-  -- Shift tab to unindent
-  vim.keymap.set("i", "<S-Tab>", "<C-d>")
+  -- Others
+  filetype_map("markdown", "v", ",*", "S*gvS*", { remap = true, desc = "bold selection" })
+  vim.keymap.set("i", "<S-Tab>", "<C-d>", { desc = "unindent" })
+  vim.keymap.set("n", "<Space>e", "<Cmd>edit<CR>", { desc = "refresh buffer" })
 end
 
 return M

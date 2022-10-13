@@ -94,11 +94,30 @@ function M.context()
   local symbols = aerial.get_location(false)
   local context = vim.fn.join(
     vim.tbl_map(function(symbol)
+      -- anonymous function
       if symbol.kind == "Function" and symbol.name == "<Anonymous>" then
         return highlight(kind_icons.Lambda, "NavicIconsFunction")
       end
 
-      return highlight(kind_icons[symbol.kind], "NavicIcons" .. symbol.kind) .. highlight(symbol.name, "NavicText")
+      -- highlight function parameters
+      local text = highlight(symbol.name, "NavicText")
+      if vim.tbl_contains({ "Function", "Method", "Constructor" }, symbol.kind) then
+        local name, param_list = string.match(symbol.name, "(.+)%((.*)%)")
+        if name and param_list then
+          local params = vim.split(param_list, ", ")
+          local comma = highlight(", ", "NavicText")
+          text = highlight(name .. "(", "NavicText")
+            .. vim.fn.join(
+              vim.tbl_map(function(param)
+                return highlight(param, "NavicIconsProperty")
+              end, params),
+              comma
+            )
+            .. highlight(")", "NavicText")
+        end
+      end
+
+      return highlight(kind_icons[symbol.kind], "NavicIcons" .. symbol.kind) .. text
     end, symbols),
     "  "
   )

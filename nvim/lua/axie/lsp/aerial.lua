@@ -29,10 +29,11 @@ function M.config()
       vim.fn.glob("~/.config/nvim/lua/axie/plugins/init.lua"),
     },
     callback = function()
+      local bufnr = vim.api.nvim_get_current_buf()
       vim.defer_fn(function()
         local ok, aerial = pcall(require, "aerial")
-        if ok then
-          aerial.tree_set_collapse_level(0, 1)
+        if ok and vim.api.nvim_buf_is_valid(bufnr) then
+          aerial.tree_set_collapse_level(bufnr, 1)
         end
       end, 0)
     end,

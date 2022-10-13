@@ -162,6 +162,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/stevearc/aerial.nvim/discussions/141#discussioncomment-3867574
 - https://neovim.discourse.group/t/mapping-c-i-in-insert-mode/3225
 - https://github.com/mong8se/actually.nvim/issues/2
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514

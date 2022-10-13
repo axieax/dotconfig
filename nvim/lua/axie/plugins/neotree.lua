@@ -96,6 +96,13 @@ function M.config()
           end)
         end,
       },
+      {
+        -- refresh winbar for non-current (NC) windows
+        event = "neo_tree_window_after_close",
+        handler = function()
+          vim.schedule(require("axie.winbar").show_winbar)
+        end,
+      },
     },
   })
 end

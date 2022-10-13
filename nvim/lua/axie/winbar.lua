@@ -134,38 +134,33 @@ function M.eval()
 
   local _, value = pcall(function()
     local components = {
-      { modified and "*" or "", "WinBarModified" },
-      { M.file_icon(), file_hl },
-      { clickable(M.file_name(), "toggle_context"), file_hl },
+      highlight(modified and "*" or "", "WinBarModified"),
+      highlight(M.file_icon(), file_hl),
+      highlight(clickable(M.file_name(), "toggle_context"), file_hl),
     }
     if not is_nc then
-      table.insert(components, { M.context(), "WinBarContext" })
+      table.insert(components, highlight(M.context(), "WinBarContext"))
     end
 
-    return vim.fn.join(
-      vim.tbl_map(function(component)
-        if type(component) == "table" then
-          return highlight(unpack(component))
-        else
-          return component
-        end
-      end, components),
-      " "
-    )
+    return vim.fn.join(components, " ")
   end)
   return value
 end
 
+function M.show_winbar()
+  local win = vim.api.nvim_get_current_win()
+  local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+  if not vim.tbl_contains(ignored_filetypes, filetype) then
+    vim.api.nvim_win_set_option(win, "winbar", "%{%v:lua.require'axie.winbar'.eval()%}")
+  end
+  focused_win = win
+end
+
 function M.activate()
-  vim.api.nvim_create_autocmd("BufWinEnter", {
+  vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWinLeave" }, {
     group = vim.api.nvim_create_augroup("WinBarGroup", {}),
     callback = function()
-      vim.schedule(function()
-        if not vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
-          vim.wo.winbar = "%{%v:lua.require'axie.winbar'.eval()%}"
-        end
-        focused_win = vim.api.nvim_get_current_win()
-      end)
+      vim.schedule(M.show_winbar)
     end,
   })
   vim.schedule(function()

@@ -18,11 +18,11 @@ local ignored_filetypes = {
   "checkhealth",
 }
 
-local function highlight(hl_group, content)
+local function highlight(content, hl_group)
   return string.format("%%#%s#%s%%*", hl_group, content)
 end
 
-local function clickable(fn_name, content)
+local function clickable(content, fn_name)
   fn_name = "v:lua.require'axie.winbar'." .. fn_name
   return string.format("%%0@%s@%s%%T", fn_name, content)
 end
@@ -95,15 +95,15 @@ function M.context()
   local context = vim.fn.join(
     vim.tbl_map(function(symbol)
       if symbol.kind == "Function" and symbol.name == "<Anonymous>" then
-        return highlight("NavicIconsFunction", kind_icons.Lambda)
+        return highlight(kind_icons.Lambda, "NavicIconsFunction")
       end
 
-      return highlight("NavicIcons" .. symbol.kind, kind_icons[symbol.kind]) .. highlight("NavicText", symbol.name)
+      return highlight(kind_icons[symbol.kind], "NavicIcons" .. symbol.kind) .. highlight(symbol.name, "NavicText")
     end, symbols),
     "  "
   )
 
-  return utils.ternary(context ~= "", highlight("NavicSeparator", ":: ") .. context, "")
+  return utils.ternary(context ~= "", highlight(":: ", "NavicSeparator") .. context, "")
 end
 
 local focused_win = vim.api.nvim_get_current_win()
@@ -115,12 +115,12 @@ function M.eval()
 
   local _, value = pcall(function()
     local components = {
-      { "WinBarModified", modified and "*" or "" },
-      { file_hl, M.file_icon() },
-      { file_hl, clickable("toggle_context", M.file_name()) },
+      { modified and "*" or "", "WinBarModified" },
+      { M.file_icon(), file_hl },
+      { clickable(M.file_name(), "toggle_context"), file_hl },
     }
     if not is_nc then
-      table.insert(components, { "WinBarContext", M.context() })
+      table.insert(components, { M.context(), "WinBarContext" })
     end
 
     return vim.fn.join(

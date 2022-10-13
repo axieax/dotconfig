@@ -126,16 +126,6 @@ function M.config()
     -- Text Objects
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {
-      move = {
-        enable = true,
-        set_jumps = true,
-        goto_previous_start = {
-          ["[["] = "@parameter.inner",
-        },
-        goto_next_start = {
-          ["]]"] = "@parameter.inner",
-        },
-      },
       select = {
         enable = true,
         lookahead = true,
@@ -153,6 +143,25 @@ function M.config()
           ["iq"] = "@parameter.inner",
           ["aq"] = "@parameter.outer",
           ["ag"] = "@comment.outer",
+        },
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          [",a"] = "@parameter.inner",
+        },
+        swap_previous = {
+          [",x"] = "@parameter.inner",
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_previous_start = {
+          ["[["] = "@parameter.inner",
+        },
+        goto_next_start = {
+          ["]]"] = "@parameter.inner",
         },
       },
       lsp_interop = {

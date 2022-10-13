@@ -1,11 +1,10 @@
 local M = {}
 
 local utils = require("axie.utils")
-local separator = "  "
 local ignored_filetypes = {
   "",
   "alpha",
-  "neo-tree",
+  "neo-tree", -- NOTE: managed by neo-tree
   "toggleterm",
   "packer",
   "lspinfo",
@@ -21,6 +20,11 @@ local ignored_filetypes = {
 
 local function decorate(hl_group, content)
   return string.format("%%#%s#%s%%*", hl_group, content)
+end
+
+local function clickable(callback, content)
+  callback = "v:lua.require'axie.winbar'." .. callback
+  return string.format("%%0@%s@%s%%T", callback, content)
 end
 
 function M.file_icon()
@@ -39,28 +43,62 @@ function M.file_name()
   return vim.fn.expand("%:p:t")
 end
 
--- NOTE: doesn't include struct symbols
-local function aerial_context()
+-- REFERENCE: nvim-navic
+local kind_icons = {
+  File = "",
+  Module = "",
+  Namespace = "",
+  Package = "",
+  Class = "",
+  Method = "",
+  Property = "",
+  Field = "",
+  Constructor = "",
+  Enum = "",
+  Interface = "",
+  Function = "",
+  Variable = "",
+  Constant = "",
+  String = "",
+  Number = "",
+  Boolean = "◩",
+  Array = "",
+  Object = "",
+  Key = "",
+  Null = "ﳠ",
+  EnumMember = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+  Macro = "",
+}
+
+local show_context = true
+
+function M.toggle_context()
+  show_context = not show_context
+end
+
+function M.context()
+  if not show_context then
+    return ""
+  end
+
   local ok, aerial = pcall(require, "aerial")
   if not ok then
     return ""
   end
 
-  local symbols = aerial.get_location(true)
-  return vim.fn.join(
+  local symbols = aerial.get_location(false)
+  local context = vim.fn.join(
     vim.tbl_map(function(symbol)
-      return decorate("NavicIcons" .. symbol.kind, symbol.icon) .. " " .. decorate("NavicText", symbol.name)
+      return decorate("NavicIcons" .. symbol.kind, kind_icons[symbol.kind])
+        .. " "
+        .. decorate("NavicText", symbol.name:gsub("<Anonymous>", "-"))
     end, symbols),
-    separator
+    "  "
   )
-end
-
-function M.context()
-  local context = require("nvim-navic").get_location():gsub(" > ", separator)
-  if context == "" then
-    -- NOTE: navic slow startup for some LSPs -> use aerial instead
-    context = aerial_context()
-  end
   return utils.ternary(context ~= "", decorate("NavicSeparator", ":: ") .. context, "")
 end
 
@@ -75,7 +113,7 @@ function M.eval()
     local components = {
       { "WinBarModified", modified and "*" or "" },
       { file_hl, M.file_icon() },
-      { file_hl, M.file_name() },
+      { file_hl, clickable("toggle_context", M.file_name()) },
     }
     if not is_nc then
       table.insert(components, { "WinBarContext", M.context() })

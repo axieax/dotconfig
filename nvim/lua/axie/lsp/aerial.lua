@@ -16,6 +16,8 @@ function M.config()
       last_item = "└ ",
     },
     filter_kind = false,
+    -- fall back to treesitter if LSP not available
+    backends = { "lsp", "treesitter", "markdown" },
   })
 
   local packer_aerial = vim.api.nvim_create_augroup("packer aerial symbols", {})

@@ -980,7 +980,6 @@ return packer.startup({
           "neovim/nvim-lspconfig",
           "hrsh7th/cmp-nvim-lsp",
           "stevearc/aerial.nvim",
-          "SmiteshP/nvim-navic",
           -- ALT: https://github.com/jose-elias-alvarez/typescript.nvim ?
           "jose-elias-alvarez/nvim-lsp-ts-utils",
           "b0o/schemastore.nvim",
@@ -988,15 +987,6 @@ return packer.startup({
           "folke/lua-dev.nvim",
         },
       }, "lsp.install")
-
-      -- Code context
-      use({
-        "SmiteshP/nvim-navic",
-        requires = "neovim/nvim-lspconfig",
-        config = function()
-          require("nvim-navic").setup({ highlight = true })
-        end,
-      })
 
       -- Java LSP
       use("mfussenegger/nvim-jdtls")

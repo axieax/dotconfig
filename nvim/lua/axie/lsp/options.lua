@@ -14,7 +14,6 @@ function M.default_on_attach(client, bufnr)
   -- document symbol
   if client.server_capabilities.documentSymbolProvider then
     require("aerial").on_attach(client, bufnr)
-    require("nvim-navic").attach(client, bufnr)
   end
 
   -- document formatting

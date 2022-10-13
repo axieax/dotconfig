@@ -46,6 +46,7 @@ function M.config()
           "ASSUMES",
           "SOURCE",
           "REFERENCE",
+          "REF",
           "REFACTOR",
           "DEP",
           "DEPENDENCY",

@@ -23,8 +23,6 @@
   - Clickable LSP info component
   - Selection word count (on visual mode)
   - Limit for large files
-- nvim v0.8:
-  - Aerial not detecting some symbols -> have to use nvim-navic (but slow startup)
 - default `gq` binding for code formatting (and range)
 - normal mode `0` for beginning of line, `00` with no delay for end of line
   - https://github.com/max397574/better-escape.nvim/issues/41

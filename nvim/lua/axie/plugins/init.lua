@@ -1046,15 +1046,6 @@ return packer.startup({
         after = "telescope.nvim",
       }, "lsp.aerial")
 
-      use({
-        "simrat39/symbols-outline.nvim",
-        cmd = {
-          "SymbolsOutline",
-          "SymbolsOutlineOpen",
-          "SymbolsOutlineClose",
-        },
-      }, "lsp.symbols")
-
       -- Code action menu with diff preview
       use({
         "weilbith/nvim-code-action-menu",

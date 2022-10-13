@@ -18,13 +18,13 @@ local ignored_filetypes = {
   "checkhealth",
 }
 
-local function decorate(hl_group, content)
+local function highlight(hl_group, content)
   return string.format("%%#%s#%s%%*", hl_group, content)
 end
 
-local function clickable(callback, content)
-  callback = "v:lua.require'axie.winbar'." .. callback
-  return string.format("%%0@%s@%s%%T", callback, content)
+local function clickable(fn_name, content)
+  fn_name = "v:lua.require'axie.winbar'." .. fn_name
+  return string.format("%%0@%s@%s%%T", fn_name, content)
 end
 
 function M.file_icon()
@@ -45,33 +45,34 @@ end
 
 -- REFERENCE: nvim-navic
 local kind_icons = {
-  File = "",
-  Module = "",
-  Namespace = "",
-  Package = "",
-  Class = "",
-  Method = "",
-  Property = "",
-  Field = "",
-  Constructor = "",
-  Enum = "",
-  Interface = "",
-  Function = "",
-  Variable = "",
-  Constant = "",
-  String = "",
-  Number = "",
-  Boolean = "◩",
-  Array = "",
-  Object = "",
-  Key = "",
-  Null = "ﳠ",
-  EnumMember = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-  Macro = "",
+  File = " ",
+  Module = " ",
+  Namespace = " ",
+  Package = " ",
+  Class = " ",
+  Method = " ",
+  Property = " ",
+  Field = " ",
+  Constructor = " ",
+  Enum = "練",
+  Interface = "練",
+  Function = " ",
+  Lambda = "λ",
+  Variable = " ",
+  Constant = " ",
+  String = " ",
+  Number = " ",
+  Boolean = "◩ ",
+  Array = " ",
+  Object = " ",
+  Key = " ",
+  Null = "ﳠ ",
+  EnumMember = " ",
+  Struct = " ",
+  Event = " ",
+  Operator = " ",
+  TypeParameter = " ",
+  Macro = " ",
 }
 
 local show_context = true
@@ -94,15 +95,15 @@ function M.context()
   local context = vim.fn.join(
     vim.tbl_map(function(symbol)
       if symbol.kind == "Function" and symbol.name == "<Anonymous>" then
-        return decorate("NavicIconsFunction", "λ")
+        return highlight("NavicIconsFunction", kind_icons.Lambda)
       end
 
-      return decorate("NavicIcons" .. symbol.kind, kind_icons[symbol.kind]) .. " " .. decorate("NavicText", symbol.name)
+      return highlight("NavicIcons" .. symbol.kind, kind_icons[symbol.kind]) .. highlight("NavicText", symbol.name)
     end, symbols),
     "  "
   )
 
-  return utils.ternary(context ~= "", decorate("NavicSeparator", ":: ") .. context, "")
+  return utils.ternary(context ~= "", highlight("NavicSeparator", ":: ") .. context, "")
 end
 
 local focused_win = vim.api.nvim_get_current_win()
@@ -125,7 +126,7 @@ function M.eval()
     return vim.fn.join(
       vim.tbl_map(function(component)
         if type(component) == "table" then
-          return decorate(unpack(component))
+          return highlight(unpack(component))
         else
           return component
         end

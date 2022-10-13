@@ -6,8 +6,8 @@ local M = {}
 
 function M.setup()
   -- Buffer navigation
-  vim.keymap.set("n", "<TAB>", "<Cmd>BufferNext<CR>")
-  vim.keymap.set("n", "<S-TAB>", "<Cmd>BufferPrevious<CR>")
+  vim.keymap.set("n", "<Tab>", "<Cmd>BufferNext<CR>")
+  vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>")
   vim.keymap.set("n", "<A-w>", "<Cmd>BufferClose<CR>")
   vim.keymap.set("n", "<A-W>", "<Cmd>BufferClose!<CR>")
   vim.keymap.set("n", "<A-p>", "<Cmd>BufferPin<CR>")
@@ -28,10 +28,10 @@ function M.setup()
   -- Buffer re-order / sort
   vim.keymap.set("n", "<A-,>", "<Cmd>BufferMovePrevious<CR>")
   vim.keymap.set("n", "<A-.>", "<Cmd>BufferMoveNext<CR>")
-  vim.keymap.set("n", "<leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>")
-  vim.keymap.set("n", "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>")
-  vim.keymap.set("n", "<leader>bl", "<Cmd>BufferOrderByLanguage<CR>")
-  vim.keymap.set("n", "<leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>")
+  vim.keymap.set("n", "<Leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>")
+  vim.keymap.set("n", "<Leader>bd", "<Cmd>BufferOrderByDirectory<CR>")
+  vim.keymap.set("n", "<Leader>bl", "<Cmd>BufferOrderByLanguage<CR>")
+  vim.keymap.set("n", "<Leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>")
 end
 
 function M.config()

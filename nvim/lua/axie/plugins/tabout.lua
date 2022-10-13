@@ -1,8 +1,8 @@
 local M = {}
 
 function M.setup()
-  vim.keymap.set("i", "<a-l>", "<Plug>(TaboutMulti)")
-  vim.keymap.set("i", "<a-h>", "<Plug>(TaboutBackMulti)")
+  vim.keymap.set("i", "<A-l>", "<Plug>(TaboutMulti)")
+  vim.keymap.set("i", "<A-h>", "<Plug>(TaboutBackMulti)")
 end
 
 function M.config()

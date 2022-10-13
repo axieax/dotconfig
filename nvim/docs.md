@@ -16,7 +16,15 @@
 
 ## TODO
 
-- Statusline clickable LSP info component
+- Statusline:
+  - Migrate galaxyline.nvim to heirline.nvim (lualine has clickable components tho)
+  - heirline supports tabline now - maybe migrate as well??
+  - Clickable filename component - full path / relative path / just filename
+  - Clickable LSP info component
+  - Selection word count (on visual mode)
+  - Limit for large files
+- nvim v0.8:
+  - Aerial not detecting some symbols -> have to use nvim-navic (but slow startup)
 - default `gq` binding for code formatting (and range)
 - normal mode `0` for beginning of line, `00` with no delay for end of line
   - https://github.com/max397574/better-escape.nvim/issues/41
@@ -31,11 +39,6 @@
 - Packer sequence mason plugins
 - What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
-- nvim v0.8:
-  - Migrate galaxyline.nvim to heirline.nvim (lualine has clickable components tho)
-  - clickable winbar and statusline, remove incline
-  - Aerial not detecting some symbols -> have to use nvim-navic
-  - heirline supports tabline now - maybe migrate??
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
@@ -153,9 +156,9 @@
 ## Notes / issues
 
 - Treesitter highlighting on bufenter (markdown)
-- insert mode <tab> using <c-i> mapping
+- insert mode `<Tab>` using `<C-i>` mapping
 - firenvim patched fonts not working
-- Markdown issues - code block cindent, normal nocindent (<CR> on normal line gets extra indent) - autopairs?
+- Markdown issues - code block cindent, normal nocindent (`<CR>` on normal line gets extra indent) - autopairs?
 - nvim-cmp treesitter completion source vs buffer source?
 - autopairs may start to break after a while (can't insert characters)
 

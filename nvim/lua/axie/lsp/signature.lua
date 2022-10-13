@@ -4,7 +4,7 @@ function M.config()
   require("lsp_signature").setup({
     -- general options
     always_trigger = "true",
-    toggle_key = "<a-k>",
+    toggle_key = "<A-k>",
 
     -- floating window
     padding = " ",

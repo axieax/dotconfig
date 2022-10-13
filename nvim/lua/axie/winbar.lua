@@ -93,12 +93,15 @@ function M.context()
   local symbols = aerial.get_location(false)
   local context = vim.fn.join(
     vim.tbl_map(function(symbol)
-      return decorate("NavicIcons" .. symbol.kind, kind_icons[symbol.kind])
-        .. " "
-        .. decorate("NavicText", symbol.name:gsub("<Anonymous>", "-"))
+      if symbol.kind == "Function" and symbol.name == "<Anonymous>" then
+        return decorate("NavicIconsFunction", "λ")
+      end
+
+      return decorate("NavicIcons" .. symbol.kind, kind_icons[symbol.kind]) .. " " .. decorate("NavicText", symbol.name)
     end, symbols),
     "  "
   )
+
   return utils.ternary(context ~= "", decorate("NavicSeparator", ":: ") .. context, "")
 end
 

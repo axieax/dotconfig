@@ -406,8 +406,8 @@ return packer.startup({
       -- Lua documentation
       use("milisims/nvim-luaref")
 
-      -- vim API completion
-      use("folke/lua-dev.nvim")
+      -- Lua nvim API completion
+      use("folke/neodev.nvim")
 
       -- howdoi query
       use({
@@ -935,7 +935,7 @@ return packer.startup({
           require("dapui").setup()
           -- Open terminal to side
           -- NOTE: https://github.com/rcarriga/nvim-dap-ui/issues/148
-          require("dap").defaults.fallback.terminal_win_cmd = "10split new"
+          -- require("dap").defaults.fallback.terminal_win_cmd = "10split new"
         end,
       })
 
@@ -953,10 +953,11 @@ return packer.startup({
       -- Language-specific debugger setup
       use({
         "mfussenegger/nvim-dap-python",
+        ft = "python",
         config = function()
           -- SETUP: pip install debugpy
           local dap_python = require("dap-python")
-          dap_python.setup("/usr/bin/python")
+          dap_python.setup()
           dap_python.test_runner = "pytest"
         end,
       })

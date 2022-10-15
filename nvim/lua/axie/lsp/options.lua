@@ -241,11 +241,16 @@ function M.sumneko_lua()
     },
   }
 
-  local ok, luadev = pcall(require, "lua-dev")
-  if not ok then
-    return settings
+  local ok, neodev = pcall(require, "neodev")
+  if ok then
+    neodev.setup({
+      library = {
+        runtime = true,
+        plugins = true,
+      },
+    })
   end
-  return luadev.setup(settings)
+  return settings
 end
 
 function M.tsserver()

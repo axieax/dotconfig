@@ -162,6 +162,8 @@
 
 ## Current PRs / Issues
 
+- Aerial toggle sidebar - jump to cursor location by default
+- https://github.com/community/community/discussions/29817
 - https://github.com/stevearc/aerial.nvim/discussions/141#discussioncomment-3867574
 - https://neovim.discourse.group/t/mapping-c-i-in-insert-mode/3225
 - https://github.com/mong8se/actually.nvim/issues/2

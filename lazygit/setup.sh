@@ -2,12 +2,12 @@
 source "$HOME/dotconfig/setup-utilities.sh"
 
 action="install lazygit"
-if ! check_dependency lazygit; then
+if ! check_dependency lazygit && confirm "$action"; then
   go install github.com/jesseduffield/lazygit@latest
 fi
 
 action="install commitizen"
-if ! check_dependency commitizen; then
+if ! check_dependency commitizen && confirm "$action"; then
   yarn global add commitizen cz-conventional-changelog
 fi
 
@@ -21,7 +21,7 @@ if confirm "$action"; then
   if is_linux; then
     link_config "$HOME/dotconfig/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
   elif is_mac; then
-    link_config "$HOME/dotconfig/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml"
+    link_config "$HOME/dotconfig/lazygit/config.yml" "$HOME/Library/Application?Support/lazygit/config.yml"
   else
     echo "Failed to $action: unsupported OS"
   fi

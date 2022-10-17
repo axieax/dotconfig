@@ -11,6 +11,7 @@ function M.config()
   local this = require("axie.plugins.dial")
   local cyclic_words = this.cyclic_words
   local cyclic_symbols = this.cyclic_symbols
+  local cyclic_dates = this.cyclic_dates
 
   local augend = require("dial.augend")
   require("dial.config").augends:register_group({
@@ -20,11 +21,18 @@ function M.config()
       augend.integer.alias.octal,
       augend.integer.alias.binary,
       augend.hexcolor.new({}),
+      augend.paren.alias.quote,
+      augend.paren.alias.brackets,
+      augend.paren.alias.lua_str_literal,
+      augend.paren.alias.rust_str_literal,
       -- augend.constant.alias.alpha,
       -- augend.constant.alias.Alpha,
       augend.semver.alias.semver,
-      augend.date.alias["%H:%M:%S"],
       augend.misc.alias.markdown_header,
+      cyclic_dates("%-H:%M", "min"),
+      cyclic_dates("%-I:%M", "min"),
+      cyclic_dates("%-d/%-m/%y", "day"),
+      cyclic_dates("%-d/%-m/%Y", "day"),
       cyclic_words({ "true", "false" }),
       cyclic_words({ "on", "off" }),
       cyclic_words({ "north", "east", "south", "west" }),
@@ -58,6 +66,15 @@ function M.cyclic_symbols(elements)
     elements = elements,
     word = false,
     cyclic = true,
+  })
+end
+
+function M.cyclic_dates(pattern, default_kind)
+  local augend = require("dial.augend")
+  return augend.date.new({
+    pattern = pattern,
+    default_kind = default_kind,
+    only_valid = true,
   })
 end
 

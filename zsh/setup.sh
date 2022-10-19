@@ -31,7 +31,8 @@ fi
 action="install zsh plugins"
 if confirm "$action"; then
   ZSH_CUSTOM="$HOME/.oh-my-zsh/custom/plugins"
-  git clone https://github.com/marzocchi/zsh-notify.git $ZSH_CUSTOM/notify
+  # git clone https://github.com/marzocchi/zsh-notify.git $ZSH_CUSTOM/notify
+  git clone https://github.com/MichaelAquilina/zsh-auto-notify.git $ZSH_CUSTOM/auto-notify
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/zsh-completions
@@ -44,11 +45,5 @@ fi
 
 action="link config"
 if confirm "$action"; then
-  if is_linux; then
-    link_config "$HOME/dotconfig/zsh/.zshrc-linux" "$HOME/.zshrc"
-  elif is_mac; then
-    link_config "$HOME/dotconfig/zsh/.zshrc-mac" "$HOME/.zshrc"
-  else
-    echo "invalid OSTYPE $OSTYPE for zsh setup"
-  fi
+  link_config "$HOME/dotconfig/zsh/.zshrc" "$HOME/.zshrc"
 fi

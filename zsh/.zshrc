@@ -20,7 +20,7 @@ pathadd "$HOME/.ghcup/bin"
 eval "$(starship init zsh)"
 
 # oh-my-zsh
-export ZSH="/home/$USER/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # auto update
 zstyle ':omz:update' frequency 13
@@ -39,7 +39,8 @@ plugins=(
   bazel
   terraform
   # custom plugins
-  notify # NOTE: does not disappear
+  # notify # NOTE: does not disappear
+  auto-notify
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting # NOTE: this has to be the last plugin
@@ -434,4 +435,4 @@ neofetch
 # TODO: add default node to path https://www.ioannispoulakas.com/2020/02/22/how-to-speed-up-shell-load-while-using-nvm/
 # nvm alias default node > /dev/null
 
-[ -f "/home/axie/.ghcup/env" ] && source "/home/axie/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env

@@ -17,25 +17,17 @@ function M.config()
     },
     filter_kind = false,
     -- fall back to treesitter if LSP not available
-    backends = { "lsp", "treesitter", "markdown" },
-  })
-
-  local packer_aerial = vim.api.nvim_create_augroup("packer aerial symbols", {})
-  vim.api.nvim_create_autocmd("BufEnter", {
-    desc = "set Aerial symbols collapse limit for plugins/init.lua",
-    group = packer_aerial,
-    pattern = {
-      vim.fn.glob("~/dotconfig/nvim/lua/axie/plugins/init.lua"),
-      vim.fn.glob("~/.config/nvim/lua/axie/plugins/init.lua"),
-    },
-    callback = function()
-      local bufnr = vim.api.nvim_get_current_buf()
-      vim.defer_fn(function()
-        local ok, aerial = pcall(require, "aerial")
-        if ok and vim.api.nvim_buf_is_valid(bufnr) then
-          aerial.tree_set_collapse_level(bufnr, 1)
-        end
-      end, 0)
+    backends = { "lsp", "treesitter", "markdown", "man" },
+    on_attach = function(bufnr)
+      -- set fold level
+      local name = vim.api.nvim_buf_get_name(bufnr)
+      local matches = {
+        vim.fn.glob("~/dotconfig/nvim/lua/axie/plugins/init.lua"),
+        vim.fn.glob("~/.config/nvim/lua/axie/plugins/init.lua"),
+      }
+      if vim.tbl_contains(matches, name) then
+        require("aerial").tree_set_collapse_level(bufnr, 1)
+      end
     end,
   })
 

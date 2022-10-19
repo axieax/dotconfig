@@ -21,7 +21,7 @@ fi
 # Setup Java - JRE, JDK, Java (sudo pacman -S jre-openjdk)
 
 # Formatters
-# TODO: replace local installations with nvim wrapper plugins
+# TODO: replace local installations with mason
 
 # Null-ls Sources
 action="install google-java-format formatter"
@@ -35,21 +35,18 @@ if ! check_dependency "google-java-format" && confirm "$action"; then
   fi
 fi
 
-action="install prettierd formatter"
-if ! check_dependency "prettierd" && confirm "$action"; then
-  yarn global add @fsouza/prettierd
-fi
-
+# TEMP: https://github.com/williamboman/mason.nvim/issues/392
 action="install prettier extensions"
 if confirm "$action"; then
+  cd "$HOME/.local/share/nvim/mason/packages/prettierd/node_modules/@fsouza/prettierd" && npm install prettier-plugin-sh prettier-plugin-toml
   # yarn global add prettier-plugin-apex
   # yarn global add prettier-plugin-elm
   # yarn global add prettier-plugin-java
   # yarn global add prettier-plugin-solidity
-  yarn global add prettier-plugin-toml
+  # yarn global add prettier-plugin-toml
   # yarn global add prettier-plugin-svelte
   # yarn global add prettier-plugin-kotlin
-  yarn global add prettier-plugin-sh
+  # yarn global add prettier-plugin-sh
 fi
 
 action="install cppcheck diagnostics"

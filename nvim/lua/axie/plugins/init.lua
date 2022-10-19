@@ -995,7 +995,7 @@ return packer.startup({
           "jose-elias-alvarez/nvim-lsp-ts-utils",
           "b0o/schemastore.nvim",
           "p00f/clangd_extensions.nvim",
-          "folke/lua-dev.nvim",
+          "folke/neodev.nvim",
         },
       }, "lsp.install")
 

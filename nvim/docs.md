@@ -163,6 +163,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/stevearc/aerial.nvim/issues/165
+- https://github.com/catppuccin/nvim/issues/307
 - https://github.com/monaqa/dial.nvim/issues/37
 - Copilot slow startup + large CPU usage - use copilot.lua instead
 - Aerial toggle sidebar - jump to cursor location by default

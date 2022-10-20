@@ -92,7 +92,7 @@ function M.context()
   end
 
   local symbols = aerial.get_location(false)
-  local context = vim.fn.join(
+  local context = table.concat(
     vim.tbl_map(function(symbol)
       -- anonymous function
       if symbol.kind == "Function" and symbol.name == "<Anonymous>" then
@@ -107,7 +107,7 @@ function M.context()
           local params = vim.split(param_list, ", ")
           local comma = highlight(", ", "NavicText")
           text = highlight(name .. "(", "NavicText")
-            .. vim.fn.join(
+            .. table.concat(
               vim.tbl_map(function(param)
                 return highlight(param, "NavicIconsProperty")
               end, params),
@@ -142,7 +142,7 @@ function M.eval()
       table.insert(components, highlight(M.context(), "WinBarContext"))
     end
 
-    return vim.fn.join(components, " ")
+    return table.concat(components, " ")
   end)
   return value
 end

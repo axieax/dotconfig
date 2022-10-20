@@ -215,13 +215,10 @@ return packer.startup({
       use("tpope/vim-repeat")
 
       -- Statusline
-      -- FORK: https://github.com/glepnir/galaxyline.nvim
-      -- ALT: https://github.com/windwp/windline.nvim
-      -- ALT: https://github.com/tamton-aquib/staline.nvim
       use({
-        "NTBBloodbath/galaxyline.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-      }, "galaxyline")
+        "rebelot/heirline.nvim",
+        after = { "nvim-web-devicons", "gitsigns.nvim" },
+      }, "statusline")
 
       -- Tabline
       use({
@@ -942,10 +939,46 @@ return packer.startup({
         "rcarriga/nvim-dap-ui",
         after = "nvim-dap",
         config = function()
+          local dap = require("dap")
           require("dapui").setup()
           -- Open terminal to side
           -- NOTE: https://github.com/rcarriga/nvim-dap-ui/issues/148
-          require("dap").defaults.fallback.terminal_win_cmd = "10split new"
+          local dapui_terminal = dap.defaults.fallback.terminal_win_cmd
+          -- dap.defaults.fallback.terminal_win_cmd = "10split new"
+          dap.defaults.fallback.terminal_win_cmd = function()
+            local dapui_active = false
+            if dapui_active then
+              return dapui_terminal()
+            else
+              local cur_win = vim.api.nvim_get_current_win()
+              -- open terminal
+              vim.api.nvim_command("10split new")
+              local bufnr = vim.api.nvim_get_current_buf()
+              local win = vim.api.nvim_get_current_win()
+              -- open repl
+              -- vim.api.nvim_command("vsplit new")
+              -- local repl_win = vim.api.nvim_get_current_win()
+              -- vim.schedule(function()
+              --   local dap_repl_bufnr
+              --   while not dap_repl_bufnr do
+              --     vim.schedule(function()
+              --       local buffers = vim.api.nvim_list_bufs()
+              --       for _, bufnr in ipairs(buffers) do
+              --         local buf_name = vim.api.nvim_buf_get_name(bufnr)
+              --         if buf_name == "[dap-repl]" then
+              --           dap_repl_bufnr = bufnr
+              --           break
+              --         end
+              --       end
+              --     end)
+              --   end
+              --   vim.api.nvim_win_set_buf(repl_win, dap_repl_bufnr)
+              -- end)
+              -- restore original position
+              vim.api.nvim_set_current_win(cur_win)
+              return bufnr, win
+            end
+          end
         end,
       })
 

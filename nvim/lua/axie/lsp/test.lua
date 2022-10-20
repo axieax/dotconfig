@@ -8,7 +8,7 @@ function M.dap_repl_summary()
   local buffers = vim.api.nvim_list_bufs()
   for _, bufnr in ipairs(buffers) do
     -- find result buffer
-    local buf_name = vim.fn.bufname(bufnr)
+    local buf_name = vim.api.nvim_buf_get_name(bufnr)
     if buf_name == "[dap-repl]" then
       -- display notification
       local buf_lines = vim.api.nvim_buf_get_lines(bufnr, 1, -1, false)

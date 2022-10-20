@@ -125,9 +125,11 @@ vim.keymap.set("n", "<space>w", "<Cmd>update<CR>")
 local typos = { "W", "Wq", "WQ", "Wqa", "WQa", "WQA", "WqA", "Q", "Qa", "QA" }
 for _, cmd in ipairs(typos) do
   vim.api.nvim_create_user_command(cmd, function(opts)
-    local lower_cmd = cmd:lower()
-    local bang = ternary(opts.bang, "!", "")
-    vim.cmd("noautocmd " .. lower_cmd .. bang)
+    vim.api.nvim_cmd({
+      cmd = cmd:lower(),
+      bang = opts.bang,
+      mods = { noautocmd = true },
+    }, {})
   end, { bang = true })
 end
 

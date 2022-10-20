@@ -13,7 +13,7 @@ function M.auto_bootstrap()
     return false
   end
   vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
-  vim.cmd.packadd("packer.nvim")
+  vim.api.nvim_cmd({ cmd = "packadd", args = { "packer.nvim" } }, {})
   return true
 end
 
@@ -67,8 +67,8 @@ end
 function M.setup()
   vim.keymap.set("n", "<Space>s", function()
     local snapshot_time = os.date("!%Y-%m-%dT%TZ")
-    vim.cmd("PackerSnapshot " .. snapshot_time)
-    vim.cmd("PackerSync")
+    vim.api.nvim_cmd({ cmd = "PackerSnapshot", args = { snapshot_time } }, {})
+    vim.api.nvim_cmd({ cmd = "PackerSync" }, {})
   end, { desc = "sync plugins" })
 end
 

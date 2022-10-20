@@ -16,7 +16,10 @@ function M.config()
   })
   -- Toggle Git blame
   -- TODO: customise virtual text colour. angry prefix
-  vim.cmd.highlight("link GitSignsDeleteLn ErrorMsg")
+  vim.api.nvim_cmd({
+    cmd = "highlight",
+    args = { "link", "GitSignsDeleteLn", "ErrorMsg" },
+  }, {})
 end
 
 return M

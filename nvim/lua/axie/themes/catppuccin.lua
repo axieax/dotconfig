@@ -117,15 +117,15 @@ function M.config()
   vim.api.nvim_create_autocmd("User", {
     pattern = "PackerCompileDone",
     callback = function()
-      vim.cmd("CatppuccinCompile")
+      vim.api.nvim_cmd({ cmd = "CatppuccinCompile" }, {})
       vim.defer_fn(function()
-        vim.cmd.colorscheme("catppuccin")
+        vim.api.nvim_cmd({ cmd = "colorscheme", args = { "catppuccin" } }, {})
         -- vim.cmd("ColorizerReloadAllBuffers") -- nvim-colorizer.lua
       end, 50) -- Debounced for live reloading
     end,
   })
 
-  vim.cmd.colorscheme("catppuccin")
+  vim.api.nvim_cmd({ cmd = "colorscheme", args = { "catppuccin" } }, {})
 end
 
 return M

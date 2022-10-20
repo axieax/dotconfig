@@ -80,15 +80,13 @@ function M.servers()
   this.setup_custom("grammarly", function(opts)
     vim.keymap.set("n", "\\g", function()
       -- Stop Grammarly client if active
-      local clients = vim.lsp.buf_get_clients()
-      for _, client in pairs(clients) do
-        if client.name == "grammarly" then
-          vim.lsp.stop_client(client.id)
-          return
-        end
+      local client = vim.lsp.get_active_clients({ bufnr = 0, name = "grammarly" })[1]
+      if client then
+        vim.lsp.stop_client(client.id)
+      else
+        -- Start Grammarly client
+        this.setup_lspconfig("grammarly", opts)
       end
-      -- Start Grammarly client
-      this.setup_lspconfig("grammarly", opts)
     end, { desc = "Toggle Grammarly", silent = true })
   end)
 end

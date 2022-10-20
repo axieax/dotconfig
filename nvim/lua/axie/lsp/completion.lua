@@ -208,7 +208,10 @@ function M.config()
   for _, mapping in ipairs(highlight_links) do
     local kind, link = unpack(mapping)
     kind = require("axie.utils").ternary(override_default, kind .. "Default", kind)
-    vim.cmd.highlight(string.format("link %s %s", kind, link))
+    vim.api.nvim_cmd({
+      cmd = "highlight",
+      args = { "link", kind, link },
+    }, {})
   end
 end
 

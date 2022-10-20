@@ -952,7 +952,7 @@ return packer.startup({
             else
               local cur_win = vim.api.nvim_get_current_win()
               -- open terminal
-              vim.api.nvim_command("10split new")
+              vim.api.nvim_cmd({ cmd = "new", range = { 10 } }, {})
               local bufnr = vim.api.nvim_get_current_buf()
               local win = vim.api.nvim_get_current_win()
               -- open repl

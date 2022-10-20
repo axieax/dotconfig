@@ -106,12 +106,6 @@ function M.file_name()
     init = function(self)
       self.filename = vim.api.nvim_buf_get_name(0)
     end,
-    on_click = {
-      name = "Display CWD",
-      callback = function()
-        require("axie.utils").display_cwd()
-      end,
-    },
     { -- File Icon
       init = function(self)
         self.icon, _ = require("nvim-web-devicons").get_icon(self.filename)
@@ -180,6 +174,12 @@ function M.git()
     init = function(self)
       self.status_dict = vim.b.gitsigns_status_dict
     end,
+    on_click = {
+      name = "Open LazyGit",
+      callback = function()
+        require("axie.plugins.toggleterm").lazygit()
+      end,
+    },
     { -- Git Branch
       condition = function(self)
         return self.status_dict.head and self.status_dict.head ~= ""
@@ -288,7 +288,6 @@ end
 function M.lsp()
   local conditions = require("heirline.conditions")
   return {
-    condition = conditions.lsp_attached,
     hl = { fg = "onedark_cyan" },
     { -- Copilot status
       update = { "BufEnter", "BufLeave" },
@@ -308,26 +307,24 @@ function M.lsp()
     },
     { -- LSP Clients
       static = {
-        ignored_clients = { "null-ls", "copilot" },
+        ignored_servers = { "null-ls", "copilot" },
       },
-      -- NOTE: PackerCompile breaks this
+      condition = conditions.lsp_attached,
       update = { "BufEnter", "BufLeave", "LspAttach", "LspDetach" },
       init = function(self)
-        local clients = vim.lsp.buf_get_clients(0)
         local names = {}
-        for _, client in ipairs(clients) do
-          if not vim.tbl_contains(self.ignored_clients, client.name) then
+        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        local ignored_servers = self.ignored_servers
+        for _, client in pairs(clients) do
+          if not vim.tbl_contains(ignored_servers, client.name) then
             table.insert(names, client.name)
           end
         end
         self.clients = names
       end,
-      -- condition = function(self)
-      --   return self.clients and not vim.tbl_isempty(self.clients)
-      -- end,
       provider = function(self)
-        -- vim.pretty_print(self.clients)
-        return table.concat(self.clients or {}, ", ")
+        local clients = self.clients
+        return table.concat(clients, ", ") .. " "
       end,
       on_click = {
         name = "LSP Info",
@@ -335,7 +332,6 @@ function M.lsp()
           vim.api.nvim_command("LspInfo")
         end,
       },
-      M.space(),
     },
   }
 end

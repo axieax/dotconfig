@@ -19,7 +19,10 @@ function M.setup()
 end
 
 function M.calculate_startup_time()
-  pcall(vim.cmd, "StartupTime --save startuptime --hidden")
+  pcall(vim.api.nvim_cmd, {
+    cmd = "StartupTime",
+    args = { "--save", "startuptime", "--hidden" },
+  }, {})
 end
 
 return M

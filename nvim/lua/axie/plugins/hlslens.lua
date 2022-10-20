@@ -37,7 +37,8 @@ function M.config()
   })
 
   -- clear highlighting on double escape
-  vim.keymap.set("n", "<Esc><Esc>", [[:let @/=""<CR>]], { silent = true })
+  -- ISSUE: <Esc> delay
+  -- vim.keymap.set("n", "<Esc><Esc>", [[:let @/=""<CR>]], { silent = true })
 
   -- other search methods
   for _, trigger in ipairs({ "n", "N" }) do

@@ -61,6 +61,7 @@ function M.config()
   local ternary = require("axie.utils").ternary
 
   local telescope = require("telescope")
+  local actions = require("telescope.actions")
   telescope.setup({
     defaults = {
       winblend = ternary(require("axie.utils.config").nvchad_theme, 10, 0),
@@ -89,6 +90,12 @@ function M.config()
       tiebreak = function(_, _)
         return false
       end,
+      mappings = {
+        i = {
+          ["C-k"] = actions.move_selection_previous,
+          ["C-j"] = actions.move_selection_next,
+        },
+      },
     },
     extensions = {
       media_files = {

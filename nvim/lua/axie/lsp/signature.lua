@@ -9,10 +9,7 @@ function M.config()
     -- floating window
     padding = " ",
     transparency = 20,
-    handler_opts = {
-      -- border = "none",
-      border = "rounded",
-    },
+    handler_opts = { border = "rounded" },
   })
 end
 

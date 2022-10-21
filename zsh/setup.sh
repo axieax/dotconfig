@@ -43,7 +43,12 @@ if confirm "$action"; then
   chsh -s "$(which zsh)"
 fi
 
-action="link config"
+action="link zsh config"
 if confirm "$action"; then
   link_config "$HOME/dotconfig/zsh/.zshrc" "$HOME/.zshrc"
+fi
+
+action="link starship config"
+if confirm "$action"; then
+  link_config "$HOME/dotconfig/zsh/starship.toml" "$HOME/.config/starship.toml"
 fi

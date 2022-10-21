@@ -4,14 +4,20 @@ function M.config()
   local package_info = require("package-info")
   package_info.setup()
 
-  vim.keymap.set("n", "<space>ps", package_info.show, { desc = "Show package versions" })
-  vim.keymap.set("n", "<space>pc", package_info.hide, { desc = "Hide package versions" })
-  -- TODO: toggle
-  vim.keymap.set("n", "<space>pu", package_info.update, { desc = "Update package on line" })
-  vim.keymap.set("n", "<space>pd", package_info.delete, { desc = "Delete package on line" })
-  vim.keymap.set("n", "<space>pi", package_info.install, { desc = "Install a new package" })
-  vim.keymap.set("n", "<space>pr", package_info.reinstall, { desc = "Reinstall dependencies" })
-  vim.keymap.set("n", "<space>pp", package_info.change_version, { desc = "Install a different package version" })
+  -- TEMP: https://github.com/vuki656/package-info.nvim/pull/135
+  package_info.toggle = function()
+    if require("package-info.state").is_virtual_text_displayed then
+      package_info.hide()
+    else
+      package_info.show()
+    end
+  end
+
+  vim.keymap.set("n", "<Space>pp", package_info.toggle, { desc = "Toggle package versions" })
+  vim.keymap.set("n", "<Space>pu", package_info.update, { desc = "Update package on line" })
+  vim.keymap.set("n", "<Space>pd", package_info.delete, { desc = "Delete package on line" })
+  vim.keymap.set("n", "<Space>pi", package_info.install, { desc = "Install a new package" })
+  vim.keymap.set("n", "<Space>pv", package_info.change_version, { desc = "Install a different package version" })
 end
 
 return M

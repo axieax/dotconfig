@@ -20,6 +20,11 @@ function M.config()
     SpellLocal = { fg = cp.red, style = { "italic", "undercurl" } },
     SpellRare = { fg = cp.red, style = { "italic", "undercurl" } },
     CmpItemMenu = { fg = cp.surface2 },
+    Pmenu = { bg = cp.surface0 },
+    WinBar = { bg = float_bg },
+    WinBarNC = { bg = float_bg },
+    WinBarModified = { fg = cp.yellow, bg = float_bg }, -- same as BufferCurrentMod
+    NavicIconsFileNC = { fg = cp.flamingo, bg = float_bg },
     -- VertSplit = { fg = cp.overlay1 },
     -- SpellBad = { fg = cp.maroon },
     -- SpellCap = { fg = cp.peach },

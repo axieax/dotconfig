@@ -7,7 +7,6 @@ function M.attach()
   vim.keymap.set("t", "<C-]>", [[<C-\><C-n>]], { desc = "toggle mode", buffer = 0 })
   vim.keymap.set("n", "<C-]>", "<Cmd>startinsert<CR>", { desc = "toggle mode", buffer = 0 })
   vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], { buffer = 0 })
-  vim.opt_local.spell = false
 end
 
 function M.config()

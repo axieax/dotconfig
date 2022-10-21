@@ -21,12 +21,9 @@
   - GitHub, e.g. https://github.com/williamboman/mason.nvim/blob/cd07e4270ac6b294d09057117e027a4e963d00cb/lua/mason-registry/vls/init.lua
 - PRIORITY: TS\* Highlights
 - Statusline:
-  - Migrate galaxyline.nvim to heirline.nvim (lualine has clickable components tho)
   - heirline supports tabline now - maybe migrate as well??
-  - Clickable components not working (https://www.reddit.com/r/neovim/comments/uwmdf2/heirline_statusline_mouse_clicks_support/)
   - Remove plugins/galaxyline.nvim
   - Clickable filename component - full path / relative path / just filename
-  - Clickable LSP info component
   - Selection word count (on visual mode)
   - Limit for large files (condition)
 - default `gq` binding for code formatting (and range)
@@ -159,8 +156,10 @@
 
 ## Notes / issues
 
+- Copilot `kD` + ignoring autopairs
 - Treesitter highlighting on bufenter (markdown)
 - insert mode `<Tab>` using `<C-i>` mapping
+  - https://neovim.discourse.group/t/mapping-c-i-in-insert-mode/3225
 - firenvim patched fonts not working
 - Markdown issues - code block cindent, normal nocindent (`<CR>` on normal line gets extra indent) - autopairs?
 - nvim-cmp treesitter completion source vs buffer source?
@@ -168,14 +167,15 @@
 
 ## Current PRs / Issues
 
-- https://github.com/rebelot/heirline.nvim/discussions/76
+- https://github.com/mong8se/actually.nvim/blob/main/lua/actually/init.lua#L37
+- https://github.com/vuki656/package-info.nvim/pull/135
+- https://github.com/akinsho/toggleterm.nvim/issues/332
+- https://github.com/rebelot/heirline.nvim/issues/77
 - https://github.com/stevearc/aerial.nvim/issues/165
-- https://github.com/catppuccin/nvim/issues/307
 - https://github.com/monaqa/dial.nvim/issues/37
 - Copilot slow startup + large CPU usage - use copilot.lua instead
 - Aerial toggle sidebar - jump to cursor location by default
 - https://github.com/community/community/discussions/29817
-- https://neovim.discourse.group/t/mapping-c-i-in-insert-mode/3225
 - https://github.com/mong8se/actually.nvim/issues/2
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - https://github.com/rcarriga/nvim-dap-ui/issues/148
@@ -207,3 +207,5 @@
 - My surround-wrap plugin (future: URL paste md) - replaced by LuaSnip new feature?
 - Git change watch plugin (watch for breaking config setup?, when dead plugin has new updates to replace temp fork)
 - https://embark-theme.github.io/ for nvim
+- start typo.nvim (guess from relative file path)
+- vim.ui.select for packer plugins (quickly check out / edit config)

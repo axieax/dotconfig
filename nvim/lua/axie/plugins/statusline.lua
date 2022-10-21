@@ -119,7 +119,7 @@ function M.file_name()
       end,
       hl = { fg = "fileicon" },
       on_click = {
-        name = "Display CWD",
+        name = "display_cwd",
         callback = function()
           require("axie.utils").display_cwd()
         end,
@@ -128,6 +128,8 @@ function M.file_name()
     },
     { -- File name
       provider = function(self)
+        -- local name = vim.fn.fnamemodify(self.filename, ":.")
+        -- name = vim.fn.pathshorten(name)
         local name = vim.fn.fnamemodify(self.filename, ":t")
         if name == "" then
           if vim.bo.filetype == "TelescopePrompt" then
@@ -140,7 +142,7 @@ function M.file_name()
       end,
       hl = { fg = "filename" },
       on_click = {
-        name = "Display Path",
+        name = "display_path",
         callback = function()
           require("axie.utils").display_path()
         end,
@@ -175,9 +177,11 @@ function M.git()
       self.status_dict = vim.b.gitsigns_status_dict
     end,
     on_click = {
-      name = "Open LazyGit",
+      name = "open_lazygit",
       callback = function()
-        require("axie.plugins.toggleterm").lazygit()
+        vim.defer_fn(function()
+          require("axie.plugins.toggleterm").lazygit()
+        end, 100)
       end,
     },
     { -- Git Branch
@@ -298,7 +302,7 @@ function M.lsp()
         return self.copilot_enabled and "" or ""
       end,
       on_click = {
-        name = "null-ls info",
+        name = "null_ls_info",
         callback = function()
           vim.api.nvim_command("NullLsInfo")
         end,
@@ -327,7 +331,7 @@ function M.lsp()
         return table.concat(clients, ", ") .. " "
       end,
       on_click = {
-        name = "LSP Info",
+        name = "lsp_info",
         callback = function()
           vim.api.nvim_command("LspInfo")
         end,
@@ -351,7 +355,7 @@ function M.file_format()
     hl = { fg = "fileformat" },
     updates = { "BufEnter", "BufLeave" },
     on_click = {
-      name = "Convert format",
+      name = "convert_format",
       callback = function()
         -- TODO: converts format
       end,

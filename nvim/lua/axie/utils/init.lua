@@ -107,18 +107,6 @@ function M.get_os()
   return vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
 end
 
---- Returns a glob pattern as a table (list)
----@param pattern string @glob pattern
----@param filter string|nil @filter to apply after globbing (optional)
----@return table @list of matches
-function M.glob_split(pattern, filter)
-  local globbed = vim.fn.glob(pattern)
-  if filter ~= nil then
-    globbed = globbed:gsub(filter, "")
-  end
-  return vim.split(globbed, "\n")
-end
-
 --- Reloads a module's require cache
 ---@param module_name (string) module to reload
 ---@vararg any additional arguments to pass to plenary reload module

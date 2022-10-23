@@ -46,9 +46,9 @@ function M.config()
     dashboard.button("q", "⏻  Quit Neovim", "<Cmd>qa<CR>"),
   }
 
-  local glob_split = require("axie.utils").glob_split
-  local start_plugins = #glob_split("~/.local/share/nvim/site/pack/packer/start/*")
-  local opt_plugins = #glob_split("~/.local/share/nvim/site/pack/packer/opt/*")
+  local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/"
+  local start_plugins = #vim.fn.globpath(packer_path, "start/*", 0, 1)
+  local opt_plugins = #vim.fn.globpath(packer_path, "opt/*", 0, 1)
   dashboard.section.footer.val = {
     string.format("   %d plugins (%d loaded)", start_plugins + opt_plugins, start_plugins),
     "  https://github.com/axieax/",

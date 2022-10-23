@@ -1,20 +1,16 @@
 local M = {}
 
 local utils = require("axie.utils")
-local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local dev_mode = require("axie.utils.config").dev_mode
-
-function M.is_installed()
-  return vim.fn.empty(vim.fn.glob(packer_path)) == 0
-end
+local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 function M.auto_bootstrap()
-  if M.is_installed() then
-    return false
+  local should_bootstrap = vim.loop.fs_stat(packer_path) == nil
+  if should_bootstrap then
+    vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
+    vim.api.nvim_cmd({ cmd = "packadd", args = { "packer.nvim" } }, {})
   end
-  vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
-  vim.api.nvim_cmd({ cmd = "packadd", args = { "packer.nvim" } }, {})
-  return true
+  return should_bootstrap
 end
 
 local packer_options = {

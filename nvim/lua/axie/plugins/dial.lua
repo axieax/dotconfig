@@ -75,6 +75,8 @@ function M.cyclic_dates(pattern, default_kind)
     pattern = pattern,
     default_kind = default_kind,
     only_valid = true,
+    clamp = true,
+    end_sensitive = false,
   })
 end
 

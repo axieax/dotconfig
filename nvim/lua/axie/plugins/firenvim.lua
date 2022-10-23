@@ -5,6 +5,10 @@ function M.run()
 end
 
 function M.config()
+  if not vim.g.started_by_firenvim then
+    return
+  end
+
   -- Setup config
   vim.g.firenvim_config = {
     localSettings = {

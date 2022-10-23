@@ -122,10 +122,10 @@ function M.jdtls()
   local utils = require("axie.utils")
   local operating_system = utils.get_os()
   local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
-  local java_bundles = {
-    vim.fn.glob(mason_path .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
-  }
-  vim.list_extend(java_bundles, utils.glob_split(mason_path .. "/java-test/extension/server/*.jar"))
+  local java_bundles =
+    vim.fn.globpath(mason_path, "java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 0, 1)
+
+  vim.list_extend(java_bundles, vim.fn.globpath(mason_path, "java-test/extension/server/*.jar", 0, 1))
   -- TEMP: Failed to get bundleInfo for bundle from com.microsoft.java.test.runner-jar-with-dependencies.jar
   java_bundles = vim.tbl_filter(function(bundle)
     return not vim.endswith(bundle, "com.microsoft.java.test.runner-jar-with-dependencies.jar")
@@ -139,7 +139,7 @@ function M.jdtls()
   local java_runtimes = {}
   if operating_system == "linux" then
     local runtime_base_path = "/usr/lib/jvm/"
-    local runtime_paths = utils.glob_split(runtime_base_path .. "java-*")
+    local runtime_paths = vim.fn.globpath(runtime_base_path, "java-*", 0, 1)
     for _, rtp in ipairs(runtime_paths) do
       table.insert(java_runtimes, {
         name = rtp:match(runtime_base_path .. "(.*)"),
@@ -148,7 +148,7 @@ function M.jdtls()
     end
   elseif operating_system == "mac" then
     local runtime_base_path = "/Library/Java/JavaVirtualMachines/"
-    local jdks = utils.glob_split(runtime_base_path .. "*")
+    local jdks = vim.fn.globpath(runtime_base_path, "*", 0, 1)
     for _, jdk in ipairs(jdks) do
       table.insert(java_runtimes, {
         name = jdk:match(runtime_base_path .. "(.*)"),
@@ -178,7 +178,7 @@ function M.jdtls()
       "--add-opens",
       "java.base/java.lang=ALL-UNNAMED",
       "-jar",
-      vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+      vim.fn.globpath(jdtls_path, "plugins/org.eclipse.equinox.launcher_*.jar"),
       "-configuration",
       jdtls_path .. "/config_" .. operating_system,
       "-data",

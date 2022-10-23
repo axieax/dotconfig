@@ -22,8 +22,8 @@ function M.config()
       -- set fold level
       local name = vim.api.nvim_buf_get_name(bufnr)
       local matches = {
-        vim.fn.glob("~/dotconfig/nvim/lua/axie/plugins/init.lua"),
-        vim.fn.glob("~/.config/nvim/lua/axie/plugins/init.lua"),
+        vim.fn.expand("~/dotconfig/nvim/lua/axie/plugins/init.lua"),
+        vim.fn.expand("~/.config/nvim/lua/axie/plugins/init.lua"),
       }
       if vim.tbl_contains(matches, name) then
         require("aerial").tree_set_collapse_level(bufnr, 1)

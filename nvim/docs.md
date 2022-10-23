@@ -156,6 +156,7 @@
 
 ## Notes / issues
 
+- LSP multiple instances? lsp-signature delay (mainly sumneko_lua)
 - Copilot `kD` + ignoring autopairs
 - Treesitter highlighting on bufenter (markdown)
 - insert mode `<Tab>` using `<C-i>` mapping

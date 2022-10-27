@@ -34,13 +34,14 @@ require("axie.plugins")
 -- Personal plugin development
 local dev_mode = require("axie.utils.config").dev_mode
 if dev_mode then
-  local base_path = vim.fn.expand("~/dev/nvim-plugins/")
-  local paths = require("axie.utils").glob_split(base_path .. "*", vim.pesc(base_path))
+  local plugins_path = vim.fn.expand("~/dev/nvim-plugins/")
+  local paths = vim.fn.globpath(plugins_path, "*", 0, 1)
   for _, path in ipairs(paths) do
-    local module_name = path:gsub("%.nvim", "")
+    local plugin = vim.fn.fnamemodify(path, ":t")
+    local module_name = plugin:gsub("%.nvim", "")
     -- module_name = module_name:gsub("%-", "")
     -- add to rtp
-    vim.opt.rtp:append(base_path .. path)
+    vim.opt.rtp:append(path)
     -- refresh require caching
     reload_module(module_name)
     -- load config

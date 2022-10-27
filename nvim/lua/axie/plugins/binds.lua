@@ -31,23 +31,10 @@ function M.general_mappings()
       name = "Space",
       d = {
         name = "+debug",
-        -- TODO: up down bindings
-        p = { "<Cmd>lua require'dap'.run_last()<CR>", "Run last" },
-        b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle breakpoint" },
-        B = {
-          "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-          "Breakpoint set conditional",
-        },
-        j = { "<Cmd>lua require'dap'.step_out()<CR>", "Step out" },
-        k = { "<Cmd>lua require'dap'.step_into()<CR>", "Step into" },
-        l = { "<Cmd>lua require'dap'.step_over()<CR>", "Step over" },
-        q = { "<Cmd>lua require'dap'.close()<CR>", "Stop" },
-        [";"] = { "<Cmd>lua require'dapui'.toggle()<CR>", "Toggle UI" },
       },
       t = {
         name = "+test",
-        -- v = { "<Cmd>TestVisit<CR>", "Test visit" },
-        P = { "<Plug>PlenaryTestFile", "Plenary test file" },
+        -- v = { "<Cmd>TestVisit<CR>", "Test visit" }, -- vim-test
       },
       l = {
         name = "+lsp",

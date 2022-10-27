@@ -176,6 +176,7 @@ return packer.startup({
           "nvim-lua/plenary.nvim",
         },
         after = "telescope.nvim",
+        disable = require("axie.utils").get_os() ~= "linux",
         config = function()
           local telescope = require("telescope")
           -- NOTE: config in telescope setup
@@ -418,7 +419,7 @@ return packer.startup({
       })
 
       -- argument correction
-      use("mong8se/actually.nvim")
+      use({ "mong8se/actually.nvim", disable = true })
     end
     general_utilities(remote_use)
 
@@ -907,87 +908,30 @@ return packer.startup({
       }, "lsp.test")
 
       -- Debug Adapter Protocol
+      local debug = require("axie.lsp.debug")
       use({
         "mfussenegger/nvim-dap",
-        config = function()
-          require("dap")
-
-          local sign = vim.fn.sign_define
-          sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-          sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-          sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-        end,
+        config = debug.dap_config,
       })
 
       -- Debugger Telescope extension
       use({
         "nvim-telescope/telescope-dap.nvim",
         after = { "nvim-dap", "telescope.nvim" },
-        config = function()
-          local telescope = require("telescope")
-          telescope.load_extension("dap")
-          vim.keymap.set("n", "<Space>dc", telescope.extensions.dap.configurations, { desc = "configurations" })
-          vim.keymap.set("n", "<Space>d?", telescope.extensions.dap.commands, { desc = "comands" })
-          vim.keymap.set("n", "<Space>df", telescope.extensions.dap.frames, { desc = "frames" })
-          vim.keymap.set("n", "<Space>dv", telescope.extensions.dap.variables, { desc = "variables" })
-          vim.keymap.set("n", "<Space>d/", telescope.extensions.dap.list_breakpoints, { desc = "breakpoints" })
-        end,
+        config = debug.dap_telescope_config,
       })
 
       -- Debugger UI
       use({
         "rcarriga/nvim-dap-ui",
         after = "nvim-dap",
-        config = function()
-          local dap = require("dap")
-          require("dapui").setup()
-          -- Open terminal to side
-          -- NOTE: https://github.com/rcarriga/nvim-dap-ui/issues/148
-          local dapui_terminal = dap.defaults.fallback.terminal_win_cmd
-          -- dap.defaults.fallback.terminal_win_cmd = "10split new"
-          dap.defaults.fallback.terminal_win_cmd = function()
-            local dapui_active = false
-            if dapui_active then
-              return dapui_terminal()
-            else
-              local cur_win = vim.api.nvim_get_current_win()
-              -- open terminal
-              vim.api.nvim_cmd({ cmd = "new", range = { 10 } }, {})
-              local bufnr = vim.api.nvim_get_current_buf()
-              local win = vim.api.nvim_get_current_win()
-              -- open repl
-              -- vim.api.nvim_command("vsplit new")
-              -- local repl_win = vim.api.nvim_get_current_win()
-              -- vim.schedule(function()
-              --   local dap_repl_bufnr
-              --   while not dap_repl_bufnr do
-              --     vim.schedule(function()
-              --       local buffers = vim.api.nvim_list_bufs()
-              --       for _, bufnr in ipairs(buffers) do
-              --         local buf_name = vim.api.nvim_buf_get_name(bufnr)
-              --         if buf_name == "[dap-repl]" then
-              --           dap_repl_bufnr = bufnr
-              --           break
-              --         end
-              --       end
-              --     end)
-              --   end
-              --   vim.api.nvim_win_set_buf(repl_win, dap_repl_bufnr)
-              -- end)
-              -- restore original position
-              vim.api.nvim_set_current_win(cur_win)
-              return bufnr, win
-            end
-          end
-        end,
+        config = debug.dapui_config,
       })
 
       use({
         "theHamsta/nvim-dap-virtual-text",
         after = { "nvim-dap", "nvim-treesitter" },
-        config = function()
-          require("nvim-dap-virtual-text").setup()
-        end,
+        config = debug.dap_virtual_text_config,
       })
 
       -- Debugger installer
@@ -997,12 +941,7 @@ return packer.startup({
       use({
         "mfussenegger/nvim-dap-python",
         ft = "python",
-        config = function()
-          -- SETUP: pip install debugpy
-          local dap_python = require("dap-python")
-          dap_python.setup()
-          dap_python.test_runner = "pytest"
-        end,
+        config = debug.dap_python_config,
       })
     end
     compilation_test_debug(remote_use)
@@ -1023,7 +962,6 @@ return packer.startup({
           "WhoIsSethDaniel/mason-tool-installer.nvim",
           "neovim/nvim-lspconfig",
           "hrsh7th/cmp-nvim-lsp",
-          "stevearc/aerial.nvim",
           -- ALT: https://github.com/jose-elias-alvarez/typescript.nvim ?
           "jose-elias-alvarez/nvim-lsp-ts-utils",
           "b0o/schemastore.nvim",
@@ -1073,6 +1011,18 @@ return packer.startup({
               blend = 0,
             },
           })
+        end,
+      })
+
+      -- LSP diagnostics lines
+      use({
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        disable = true,
+        config = function()
+          local lsp_lines = require("lsp_lines")
+          lsp_lines.setup()
+          vim.diagnostic.config({ virtual_text = false })
+          vim.keymap.set("", "<Space>l", lsp_lines.toggle, { desc = "toggle lsp lines" })
         end,
       })
 

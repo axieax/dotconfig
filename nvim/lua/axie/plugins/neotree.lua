@@ -92,6 +92,7 @@ function M.config()
             local _, position = pcall(vim.api.nvim_buf_get_var, bufnr, "neo_tree_position")
             if position == "current" then
               vim.api.nvim_buf_set_option(bufnr, "buflisted", true)
+              vim.opt_local.winbar = nil
             end
           end)
         end,
@@ -99,9 +100,7 @@ function M.config()
       {
         -- refresh winbar for non-current (NC) windows
         event = "neo_tree_window_after_close",
-        handler = function()
-          vim.schedule(require("axie.winbar").show_winbar)
-        end,
+        handler = vim.schedule_wrap(require("axie.winbar").show_winbar),
       },
     },
   })

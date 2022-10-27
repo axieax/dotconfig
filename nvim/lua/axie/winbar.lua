@@ -159,9 +159,7 @@ end
 function M.activate()
   vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWinLeave" }, {
     group = vim.api.nvim_create_augroup("WinBarGroup", {}),
-    callback = function()
-      vim.schedule(M.show_winbar)
-    end,
+    callback = vim.schedule_wrap(M.show_winbar),
   })
 end
 

@@ -11,11 +11,6 @@ end
 ---@param client table @The language server client
 ---@param bufnr number @Attached buffer number
 function M.default_on_attach(client, bufnr)
-  -- document symbol
-  if client.server_capabilities.documentSymbolProvider then
-    require("aerial").on_attach(client, bufnr)
-  end
-
   -- document formatting
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_autocmd("BufWritePre", {

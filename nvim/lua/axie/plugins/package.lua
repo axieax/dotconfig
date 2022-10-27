@@ -13,11 +13,11 @@ function M.config()
     end
   end
 
-  vim.keymap.set("n", "<Space>pp", package_info.toggle, { desc = "Toggle package versions" })
-  vim.keymap.set("n", "<Space>pu", package_info.update, { desc = "Update package on line" })
-  vim.keymap.set("n", "<Space>pd", package_info.delete, { desc = "Delete package on line" })
-  vim.keymap.set("n", "<Space>pi", package_info.install, { desc = "Install a new package" })
-  vim.keymap.set("n", "<Space>pv", package_info.change_version, { desc = "Install a different package version" })
+  vim.keymap.set("n", ",pp", package_info.toggle, { desc = "Toggle package versions" })
+  vim.keymap.set("n", ",pu", package_info.update, { desc = "Update package on line" })
+  vim.keymap.set("n", ",pd", package_info.delete, { desc = "Delete package on line" })
+  vim.keymap.set("n", ",pi", package_info.install, { desc = "Install a new package" })
+  vim.keymap.set("n", ",pv", package_info.change_version, { desc = "Install a different package version" })
 end
 
 return M

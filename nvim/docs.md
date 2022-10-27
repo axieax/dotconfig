@@ -16,6 +16,7 @@
 
 ## TODO
 
+- winbar: restore non-custom winbar when switching NC
 - Aerial - add keybind to toggle between fold levels (1 and all)
 - Add google-java-format to Mason registry
   - GitHub, e.g. https://github.com/williamboman/mason.nvim/blob/cd07e4270ac6b294d09057117e027a4e963d00cb/lua/mason-registry/vls/init.lua
@@ -89,6 +90,7 @@
 
 ## Features/plugins
 
+- https://github.com/miversen33/netman.nvim
 - https://github.com/lvimuser/lsp-inlayhints.nvim
 - check out https://github.com/anuvyklack/windows.nvim
 - https://github.com/jayp0521/mason-null-ls.nvim ?
@@ -157,6 +159,7 @@
 ## Notes / issues
 
 - LSP multiple instances? lsp-signature delay (mainly sumneko_lua)
+- Auto formatter sometimes requires refreshing buffer with `:e`
 - Copilot `kD` + ignoring autopairs
 - Treesitter highlighting on bufenter (markdown)
 - insert mode `<Tab>` using `<C-i>` mapping
@@ -168,16 +171,10 @@
 
 ## Current PRs / Issues
 
-- https://github.com/mong8se/actually.nvim/blob/main/lua/actually/init.lua#L37
-- https://github.com/vuki656/package-info.nvim/pull/135
 - https://github.com/akinsho/toggleterm.nvim/issues/332
-- https://github.com/rebelot/heirline.nvim/issues/77
-- https://github.com/stevearc/aerial.nvim/issues/165
 - https://github.com/monaqa/dial.nvim/issues/37
 - Copilot slow startup + large CPU usage - use copilot.lua instead
-- Aerial toggle sidebar - jump to cursor location by default
 - https://github.com/community/community/discussions/29817
-- https://github.com/mong8se/actually.nvim/issues/2
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - https://github.com/rcarriga/nvim-dap-ui/issues/148
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41

@@ -9,7 +9,7 @@ function M.dap_repl_summary()
   for _, bufnr in ipairs(buffers) do
     -- find result buffer
     local buf_name = vim.api.nvim_buf_get_name(bufnr)
-    if buf_name == "[dap-repl]" then
+    if buf_name:find("[dap-repl]", 0, 1) then
       -- display notification
       local buf_lines = vim.api.nvim_buf_get_lines(bufnr, 1, -1, false)
 
@@ -75,20 +75,18 @@ function M.setup()
   end, { desc = "Next test (failed)" })
 
   -- jdtls
+  local repl_summary = require("axie.lsp.test").dap_repl_summary
   local filetype_map = require("axie.utils").filetype_map
   filetype_map("java", "n", "<Space>tm", function()
-    require("jdtls").test_nearest_method({
-      after_test = require("axie.lsp.test").dap_repl_summary,
-    })
+    require("jdtls").test_nearest_method({ after_test = repl_summary })
   end, { desc = "Test method" })
   filetype_map("java", "n", "<Space>tc", function()
-    require("jdtls").test_class({
-      after_test = require("axie.lsp.test").dap_repl_summary,
-    })
+    require("jdtls").test_class({ after_test = repl_summary })
   end, { desc = "Test class" })
-  filetype_map("java", "n", "<Space>t;", function()
-    require("axie.lsp.test").dap_repl_summary()
-  end, { desc = "Test summary" })
+  filetype_map("java", "n", "<Space>t;", repl_summary, { desc = "Test summary" })
+
+  -- plenary
+  vim.keymap.set("n", "<Space>tP", "<Plug>PlenaryTestFile", { desc = "Plenary test file" })
 end
 
 function M.config()

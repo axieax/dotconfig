@@ -5,8 +5,7 @@ local bootstrapped = P.auto_bootstrap()
 local packer = require("packer")
 return packer.startup({
   function(packer_use)
-    local remote_use = P.customise_use(packer_use, false)
-    local local_use = P.customise_use(packer_use, true)
+    local local_use, remote_use = P.use(packer_use)
     P.setup()
 
     ---------------------
@@ -746,6 +745,12 @@ return packer.startup({
         after = "nvim-treesitter",
       })
 
+      -- Auto brackets
+      use({
+        "windwp/nvim-autopairs",
+        after = "nvim-cmp",
+      }, "autopairs")
+
       -- GitHub Copilot
       -- ALT: https://github.com/zbirenbaum/copilot.lua with https://github.com/zbirenbaum/copilot-cmp
       use("github/copilot.vim", "copilot")
@@ -1059,7 +1064,6 @@ return packer.startup({
         "hrsh7th/nvim-cmp",
         requires = {
           { "lukas-reineke/cmp-under-comparator" },
-          { "windwp/nvim-autopairs" },
           { "onsails/lspkind-nvim" },
           { "L3MON4D3/LuaSnip" },
           { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },

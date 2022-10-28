@@ -35,7 +35,30 @@ end
 function M.dapui_config()
   local dap = require("dap")
   local dapui = require("dapui")
-  dapui.setup()
+  dapui.setup({
+    layouts = {
+      {
+        elements = {
+          -- Elements can be strings or table with id and size keys.
+          { id = "scopes", size = 0.25 },
+          "breakpoints",
+          "stacks",
+          "watches",
+        },
+        size = 40, -- 40 columns
+        position = "left",
+      },
+      {
+        elements = {
+          -- TODO
+          { id = "repl", size = 0.3, position = "left" },
+          "console",
+        },
+        size = 0.25, -- 25% of total lines
+        position = "bottom",
+      },
+    },
+  })
 
   -- Open terminal to side
   local dapui_terminal = dap.defaults.fallback.terminal_win_cmd
@@ -45,6 +68,7 @@ function M.dapui_config()
     return result
   end
 
+  local require_args = require("axie.utils").require_args
   vim.keymap.set("n", "<Space>d;", function()
     local windows = require("dapui.windows")
     -- just repl + console open
@@ -53,9 +77,7 @@ function M.dapui_config()
     end
     dapui.toggle()
   end, { desc = "Toggle UI" })
-  vim.keymap.set("n", "<Space>dd", function()
-    dap.toggle(2)
-  end, { desc = "Toggle UI console" })
+  vim.keymap.set("n", "<Space>dd", require_args(dapui.toggle, 2), { desc = "Toggle UI console" })
 end
 
 function M.dap_virtual_text_config()

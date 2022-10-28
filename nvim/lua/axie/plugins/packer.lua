@@ -20,44 +20,50 @@ local packer_options = {
   "config",
 }
 
---- Update packer `use` to auto-fill options if a config module is specified
----@param packer_use function from packer
----@param for_dev_plugins boolean whether `use` is for configuring dev plugins
----@return function
-function M.customise_use(packer_use, for_dev_plugins)
-  return function(config, mod_name, additional_options)
-    if type(config) == "string" then
-      config = { config }
-    end
-    local plugin_name = config[1]
-    if for_dev_plugins then
-      config.disable = dev_mode
-    end
-
-    if mod_name then
-      if type(mod_name) ~= "string" then
-        utils.notify(string.format("%s: expected module name as string", plugin_name), "error")
-        return
+--- Decorate packer's `use` function to auto-fill options if a config module is specified
+---@param packer_use function @from packer
+---@return function, function @local_use for local dev plugins, @remote_use for remote plugins
+function M.use(packer_use)
+  local function decorate_use(for_dev_plugins)
+    return function(config, mod_name, additional_options)
+      if type(config) == "string" then
+        config = { config }
+      end
+      local plugin_name = config[1]
+      if for_dev_plugins then
+        config.disable = dev_mode
       end
 
-      if not string.match(mod_name, "%.") then
-        mod_name = string.format("plugins.%s", mod_name)
-      end
-      local ok, mod = pcall(require, "axie." .. mod_name)
-      if not ok then
-        utils.notify(string.format("%s: failed to load module %s", plugin_name, mod_name), "error")
-        return
-      end
+      if mod_name then
+        if type(mod_name) ~= "string" then
+          utils.notify(string.format("%s: expected module name as string", plugin_name), "error")
+          return
+        end
 
-      local options = vim.tbl_extend("force", packer_options, additional_options or {})
-      for _, type in ipairs(options) do
-        if mod[type] then
-          config[type] = mod[type]
+        if not string.match(mod_name, "%.") then
+          mod_name = string.format("plugins.%s", mod_name)
+        end
+        local ok, mod = pcall(require, "axie." .. mod_name)
+        if not ok then
+          utils.notify(string.format("%s: failed to load module %s", plugin_name, mod_name), "error")
+          -- TODO: print in background
+          vim.notify(string.format("-- ERROR: %s --\n%s", mod_name, vim.inspect(mod)), vim.log.levels.ERROR)
+          return
+        end
+
+        local options = vim.tbl_extend("force", packer_options, additional_options or {})
+        for _, type in ipairs(options) do
+          if mod[type] then
+            -- TODO: pcall wrapper here
+            config[type] = mod[type]
+          end
         end
       end
+      return packer_use(config)
     end
-    return packer_use(config)
   end
+
+  return decorate_use(true), decorate_use(false)
 end
 
 function M.setup()

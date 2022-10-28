@@ -136,16 +136,6 @@ function M.config()
     },
   })
 
-  -- Setup autopairs
-  require("nvim-autopairs").setup({
-    -- insert mode "alt-e"
-    -- NOTE: vim surround visual selection: S_ as well
-    fast_wrap = {},
-  })
-
-  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
   -- Command mode completion
   local cmdline_mappings = cmp.mapping.preset.cmdline(filter_mode(mappings, "c"))
   local cmdline_view = { entries = "wildmenu" }
@@ -169,50 +159,6 @@ function M.config()
       -- { name = "cmdline" },
     }),
   })
-
-  -- Highlights
-  -- INSPO: https://github.com/Mofiqul/dracula.nvim/blob/a8106b9370338fbec149236132fd0861d5bb6265/lua/dracula/init.lua#L375-L408
-  -- NOTE: may get overriden by some colorschemes
-  local highlight_links = {
-    -- { "CmpItemAbbrDeprecated" },
-    -- { "CmpItemAbbrMatch" },
-    -- { "CmpItemAbbrMatchFuzzy" },
-    { "CmpItemKindMethod", "TSMethod" },
-    { "CmpItemKindText", "TSText" },
-    { "CmpItemKindFunction", "TSFunction" },
-    { "CmpItemKindConstructor", "TSType" },
-    { "CmpItemKindVariable", "TSVariable" },
-    { "CmpItemKindClass", "TSType" },
-    { "CmpItemKindInterface", "TSType" },
-    { "CmpItemKindModule", "TSNamespace" },
-    { "CmpItemKindProperty", "TSProperty" },
-    { "CmpItemKindOperator", "TSOperator" },
-    { "CmpItemKindReference", "TSParameterReference" },
-    { "CmpItemKindUnit", "TSField" },
-    { "CmpItemKindValue", "TSField" },
-    { "CmpItemKindField", "TSField" },
-    { "CmpItemKindEnum", "TSField" },
-    { "CmpItemKindKeyword", "TSKeyword" },
-    { "CmpItemKindSnippet", "TSText" },
-    { "CmpItemKindColor", "cssColor" },
-    { "CmpItemKindFile", "TSURI" },
-    { "CmpItemKindFolder", "TSURI" },
-    { "CmpItemKindEvent", "TSConstant" },
-    { "CmpItemKindEnumMember", "TSField" },
-    { "CmpItemKindConstant", "TSConstant" },
-    { "CmpItemKindStruct", "TSStructure" },
-    { "CmpItemKindTypeParameter", "TSParameter" },
-  }
-
-  local override_default = false
-  for _, mapping in ipairs(highlight_links) do
-    local kind, link = unpack(mapping)
-    kind = require("axie.utils").ternary(override_default, kind .. "Default", kind)
-    vim.api.nvim_cmd({
-      cmd = "highlight",
-      args = { "link", kind, link },
-    }, {})
-  end
 end
 
 return M

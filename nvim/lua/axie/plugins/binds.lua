@@ -18,9 +18,10 @@ function M.config()
     -- },
   })
 
-  require("axie.plugins.binds").general_mappings()
-  require("axie.plugins.binds").register_git_bindings()
-  require("axie.plugins.binds").misc()
+  local this = require("axie.plugins.binds")
+  this.general_mappings()
+  this.register_git_bindings()
+  this.misc()
 end
 
 function M.general_mappings()
@@ -102,7 +103,6 @@ function M.general_mappings()
       i = { "<Cmd>IndentBlanklineToggle<CR>", "toggle indent context line" },
       ["?"] = { require("telescope.builtin").keymaps, "Keymaps" },
       ["\\"] = { "<Cmd>lua require'specs'.show_specs()<CR>", "Accent cursor" },
-      ["<Tab>"] = { "<Cmd>AerialToggle<CR>", "Aerial Symbols" },
     },
     ["["] = {
       name = "+previous",

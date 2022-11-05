@@ -16,6 +16,8 @@
 
 ## TODO
 
+- replace text object with yank buffer
+- https://github.com/ggandor/leap-spooky.nvim
 - winbar: restore non-custom winbar when switching NC
 - Aerial - add keybind to toggle between fold levels (1 and all)
 - Add google-java-format to Mason registry
@@ -176,7 +178,6 @@
 - Copilot slow startup + large CPU usage - use copilot.lua instead
 - https://github.com/community/community/discussions/29817
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
-- https://github.com/rcarriga/nvim-dap-ui/issues/148
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069
 - https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043

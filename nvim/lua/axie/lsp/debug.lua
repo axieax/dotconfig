@@ -50,9 +50,8 @@ function M.dapui_config()
       },
       {
         elements = {
-          -- TODO
-          { id = "repl", size = 0.3, position = "left" },
-          "console",
+          { id = "repl", size = 0.3 },
+          { id = "console", size = 0.7 },
         },
         size = 0.25, -- 25% of total lines
         position = "bottom",

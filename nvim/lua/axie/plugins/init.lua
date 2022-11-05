@@ -418,7 +418,7 @@ return packer.startup({
       })
 
       -- argument correction
-      use({ "mong8se/actually.nvim", disable = true })
+      use({ "mong8se/actually.nvim", disable = require("axie.utils.config").dev_mode })
     end
     general_utilities(remote_use)
 

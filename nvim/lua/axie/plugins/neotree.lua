@@ -52,6 +52,8 @@ function M.config()
         end,
       },
       mappings = {
+        ["<S-Tab>"] = "prev_source",
+        ["<Tab>"] = "next_source",
         -- relative path in add prompt
         a = {
           "add",

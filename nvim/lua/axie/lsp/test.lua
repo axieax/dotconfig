@@ -62,6 +62,9 @@ function M.setup()
   vim.keymap.set("n", "<Space>tp", function()
     require("neotest").output.open()
   end, { desc = "Test output" })
+  vim.keymap.set("n", "<Space>tP", function()
+    require("neotest").output_panel.toggle()
+  end, { desc = "Test output panel" })
   vim.keymap.set("n", "<Space>tq", function()
     require("neotest").run.stop()
   end, { desc = "Test quit" })
@@ -84,9 +87,6 @@ function M.setup()
     require("jdtls").test_class({ after_test = repl_summary })
   end, { desc = "Test class" })
   filetype_map("java", "n", "<Space>t;", repl_summary, { desc = "Test summary" })
-
-  -- plenary
-  vim.keymap.set("n", "<Space>tP", "<Plug>PlenaryTestFile", { desc = "Plenary test file" })
 end
 
 function M.config()
@@ -115,6 +115,8 @@ function M.config()
     if ok then
       table.insert(adapters, neotest_adapter(opts))
       vim.list_extend(adapter_filetypes, opts.filetypes)
+    else
+      require("axie.utils").notify(string.format("Could not load neotest-%s adapter", adapter))
     end
   end
 

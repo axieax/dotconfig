@@ -6,6 +6,8 @@ function pathadd() {
   fi
 }
 
+OS=$(uname -s)
+
 pathadd "$HOME/.bin"
 pathadd "$HOME/.local/bin"
 pathadd "$HOME/.yarn/bin"
@@ -89,7 +91,11 @@ alias upal='paru -Syu --noconfirm'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias diff='diff --color'
+if [[ $OS == "Darwin" ]]; then
+  alias diff='git diff'
+else
+  alias diff='diff --color'
+fi
 
 # readable output
 alias df='df -h'
@@ -388,7 +394,9 @@ alias zz="$EDITOR $HOME/.zshrc"
 alias zzz=". $HOME/.zshrc"
 alias z..='z ..'
 
-alias open="xdg-open"
+if [[ $OS == "Linux" ]]; then
+  alias open="xdg-open"
+fi
 alias handbrake="ghb"
 
 ## Broken Software ##

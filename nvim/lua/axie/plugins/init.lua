@@ -113,7 +113,7 @@ return packer.startup({
         branch = "main",
         requires = {
           "nvim-lua/plenary.nvim",
-          "kyazdani42/nvim-web-devicons",
+          "nvim-tree/nvim-web-devicons",
           "MunifTanjim/nui.nvim",
         },
       }, "neotree")
@@ -225,13 +225,13 @@ return packer.startup({
         "romgrk/barbar.nvim",
         event = "BufEnter",
         -- disable = true,
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = "nvim-tree/nvim-web-devicons",
       }, "barbar")
 
       use({
         "akinsho/bufferline.nvim",
         disable = true,
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = "nvim-tree/nvim-web-devicons",
         config = function()
           require("bufferline").setup()
         end,
@@ -250,7 +250,7 @@ return packer.startup({
       -- ALT: https://github.com/startup-nvim/startup.nvim
       use({
         "goolord/alpha-nvim",
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = "nvim-tree/nvim-web-devicons",
       }, "startscreen")
 
       -- Session manager
@@ -469,9 +469,9 @@ return packer.startup({
             opacity_step = 1,
             keys = {
               -- leader z instead of s?
-              brightness_up = "<leader>sk",
-              brightness_down = "<leader>sj",
-              toggle = "<leader>ss",
+              brightness_up = "<Leader>sk",
+              brightness_down = "<Leader>sj",
+              toggle = "<Leader>ss",
             },
           })
         end,
@@ -687,7 +687,7 @@ return packer.startup({
         requires = {
           "nvim-lua/plenary.nvim",
           "nvim-telescope/telescope.nvim",
-          "kyazdani42/nvim-web-devicons",
+          "nvim-tree/nvim-web-devicons",
         },
         config = function()
           require("octo").setup()
@@ -700,7 +700,7 @@ return packer.startup({
         "sindrets/diffview.nvim",
         requires = {
           "nvim-lua/plenary.nvim",
-          "kyazdani42/nvim-web-devicons",
+          "nvim-tree/nvim-web-devicons",
         },
       })
 

@@ -101,6 +101,7 @@ function M.config()
         show_root = false,
         transparent_panel = true,
       },
+      noice = false,
       notify = true,
       nvimtree = false,
       overseer = false,

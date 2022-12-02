@@ -97,7 +97,18 @@ function M.general_mappings()
       q = { require("axie.utils").toggle_signcolumn, "toggle signcolumn" },
       a = { ":lua require'hlargs'.toggle()<CR>", "toggle argument highlights" },
       v = { "ggVG", "select all" },
-      V = { 'ggVG"+y', "copy all to clipboard" }, -- TODO: add <c-o> only if has jumped?
+      V = {
+        function()
+          local pos = vim.api.nvim_win_get_cursor(0)
+          vim.api.nvim_cmd({
+            cmd = "normal",
+            bang = true,
+            args = { 'ggVG"+y' },
+          }, {})
+          vim.api.nvim_win_set_cursor(0, pos)
+        end,
+        "copy all to clipboard",
+      },
       c = { require("axie.utils").display_path, "buffer path" },
       C = { require("axie.utils").display_cwd, "cwd" },
       i = { "<Cmd>IndentBlanklineToggle<CR>", "toggle indent context line" },

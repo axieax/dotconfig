@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Migrate from packer.nvim to https://github.com/folke/lazy.nvim (update lockfile path)
 - mason.nvim pynvim
 - nvim-surround restore cursor
 - replace text object with yank buffer
@@ -94,6 +95,7 @@
 
 ## Features/plugins
 
+- https://github.com/jackMort/ChatGPT.nvim
 - https://github.com/miversen33/netman.nvim
 - https://github.com/lvimuser/lsp-inlayhints.nvim
 - check out https://github.com/anuvyklack/windows.nvim
@@ -175,6 +177,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/monaqa/dial.nvim/issues/44
 - https://github.com/nvim-telescope/telescope.nvim/pull/2252 (requires additional setup)
 - https://github.com/williamboman/mason.nvim/discussions/709
 - https://github.com/akinsho/toggleterm.nvim/issues/332

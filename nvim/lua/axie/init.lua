@@ -9,54 +9,24 @@
 -----------------------------------------------------------
 -----------------------------------------------------------
 
--- Impatient cache
-pcall(require, "impatient")
-
--- Lua reset require cache
-local reload_module = require("axie.utils").reload_module
-pcall(reload_module, "axie")
-
--- Source config files on save
-local source_config = vim.api.nvim_create_augroup("SourceConfig", {})
-vim.api.nvim_create_autocmd("BufWritePost", {
-  desc = "Automatically source lua config files on save",
-  group = source_config,
-  pattern = { "*/dotconfig/nvim/**/*.lua", "*/.config/nvim/**/*.lua" },
-  command = "source $MYVIMRC | source %",
-})
-
 -- General config
 require("axie.general")
+require("axie.general.options")
+require("axie.general.keymaps")
+
+-- Winbar
+require("axie.winbar").activate()
 
 -- Plugins config
-require("axie.plugins")
+require("axie.lazy").setup()
 
--- Personal plugin development
-local dev_mode = require("axie.utils.config").dev_mode
-if dev_mode then
-  local plugins_path = vim.fn.expand("~/dev/nvim-plugins/")
-  local paths = vim.fn.globpath(plugins_path, "*", 0, 1)
-  for _, path in ipairs(paths) do
-    local plugin = vim.fn.fnamemodify(path, ":t")
-    local module_name = plugin:gsub("%.nvim", "")
-    -- module_name = module_name:gsub("%-", "")
-    -- add to rtp
-    vim.opt.rtp:append(path)
-    -- refresh require caching
-    reload_module(module_name)
-    -- load config
-    local ok, mod = pcall(require, "axie.plugins." .. module_name)
-    if ok then
-      local mod_types = { "setup", "config" }
-      for _, mod_type in ipairs(mod_types) do
-        local mod_func = mod[mod_type]
-        if mod_func then
-          mod_func()
-        end
-      end
-    end
-  end
+-- Set colorscheme
+local ok, res = pcall(vim.api.nvim_cmd, { cmd = "colorscheme", args = { "catppuccin" } }, {})
+if not ok then
+  vim.notify(string.format("Failed to set colorscheme: %s", res))
 end
 
--- Calculate startup time
-vim.defer_fn(require("axie.plugins.startuptime").calculate_startup_time, 0)
+-- Set up language servers
+require("axie.plugins.lsp.setup").servers()
+
+-- print(string.rep("-", 5000))

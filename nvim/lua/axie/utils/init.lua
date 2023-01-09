@@ -88,7 +88,7 @@ end
 
 local signcolumn_enabled = true
 function M.toggle_signcolumn()
-  vim.o.signcolumn = M.ternary(signcolumn_enabled, "no", "auto")
+  vim.o.signcolumn = signcolumn_enabled and "no" or "auto"
   signcolumn_enabled = not signcolumn_enabled
 end
 

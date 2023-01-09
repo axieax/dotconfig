@@ -16,7 +16,11 @@
 
 ## TODO
 
-- Migrate from packer.nvim to https://github.com/folke/lazy.nvim (update lockfile path)
+- Editor plugin category as well?
+- Binding for inserting tab character
+- Dot repeat for macros (normal and visual)
+- `gF` doesn't expand if cursor on number
+- Migrate from packer.nvim to https://github.com/folke/lazy.nvim (update lockfile path, lazy default, luasnip use, setup -> init)
 - mason.nvim pynvim
 - nvim-surround restore cursor
 - replace text object with yank buffer
@@ -177,7 +181,8 @@
 
 ## Current PRs / Issues
 
-- https://github.com/monaqa/dial.nvim/issues/44
+- https://github.com/gaoDean/autolist.nvim/issues/56
+- https://github.com/folke/lazy.nvim/issues/139
 - https://github.com/nvim-telescope/telescope.nvim/pull/2252 (requires additional setup)
 - https://github.com/williamboman/mason.nvim/discussions/709
 - https://github.com/akinsho/toggleterm.nvim/issues/332

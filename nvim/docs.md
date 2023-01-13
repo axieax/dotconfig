@@ -16,11 +16,13 @@
 
 ## TODO
 
-- Editor plugin category as well?
+- todo-comments qflist for single file (https://github.com/folke/todo-comments.nvim/issues/136)
+- Bind for rerunning last test
+- neo-tree lazy load like folke lazyvim sample
+- nvim autopairs cmdline
 - Binding for inserting tab character
 - Dot repeat for macros (normal and visual)
 - `gF` doesn't expand if cursor on number
-- Migrate from packer.nvim to https://github.com/folke/lazy.nvim (update lockfile path, lazy default, luasnip use, setup -> init)
 - mason.nvim pynvim
 - nvim-surround restore cursor
 - replace text object with yank buffer
@@ -47,7 +49,6 @@
 - autocmd to install language server if one doesn't start for a filetype, also treesitter parser
   - `require("mason-lspconfig").get_available_servers({ filetype = vim.bo.filetype })`
   - https://github.com/williamboman/mason-lspconfig.nvim/pull/25
-- Packer sequence mason plugins
 - What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
 - keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
@@ -67,7 +68,6 @@
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Custom require which takes module_name, ... args (pcall wrapper)
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
-- Separate cmp extensions, use Packer sequencing (after)
 - PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
 - PRIORITY: out of mem for large files (e.g. ~/.cache/nvim/lsp.log)
 - IMPORTANT: lsp bindings into on_attach
@@ -112,8 +112,7 @@
 - https://github.com/andythigpen/nvim-coverage
 - https://github.com/Djancyp/cheat-sheet
 - https://www.reddit.com/r/neovim/comments/ut1cj9/i_have_just_published_nvimdevcontainer_plugin/
-- Packer refer to a PR
-- PackerSnapshot diff -> changelog
+- Lazy refer to a PR
 - https://github.com/ziontee113/syntax-tree-surfer
 - https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips
 - https://github.com/jbyuki/nabla.nvim
@@ -181,6 +180,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/folke/lazy.nvim/issues/349
 - https://github.com/gaoDean/autolist.nvim/issues/56
 - https://github.com/folke/lazy.nvim/issues/139
 - https://github.com/nvim-telescope/telescope.nvim/pull/2252 (requires additional setup)
@@ -193,7 +193,6 @@
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069
 - https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
-- PackerCompile (calling setup again) clears bufferline and incline colours
 - https://github.com/nvim-telescope/telescope.nvim/issues/1904
 - https://github.com/rcarriga/nvim-dap-ui/issues/115
 - https://github.com/nvim-neotest/neotest/issues/35
@@ -219,4 +218,4 @@
 - Git change watch plugin (watch for breaking config setup?, when dead plugin has new updates to replace temp fork)
 - https://embark-theme.github.io/ for nvim
 - start typo.nvim (guess from relative file path)
-- vim.ui.select for packer plugins (quickly check out / edit config)
+- vim.ui.select for lazy plugins (quickly check out / edit config)

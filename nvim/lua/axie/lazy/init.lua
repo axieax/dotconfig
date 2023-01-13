@@ -51,7 +51,7 @@ function M.setup()
   })
 end
 
-local resolve_keys = { "config", "init", "keys", "cmd" }
+local resolve_keys = { "config", "init", "keys", "cmd", "opts" }
 
 function M.transform_spec(specs, category)
   return vim.tbl_map(function(spec)

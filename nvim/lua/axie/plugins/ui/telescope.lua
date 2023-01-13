@@ -33,14 +33,14 @@ M.keys = {
     function()
       require("telescope.builtin").current_buffer_fuzzy_find()
     end,
-    desc = "buffer search",
+    desc = "Buffer search",
   },
   {
     "<Space>fh",
     function()
       require("telescope.builtin").help_tags()
     end,
-    desc = "help docs",
+    desc = "Help docs",
   },
   -- TODO: MRU
   {
@@ -48,42 +48,49 @@ M.keys = {
     function()
       require("telescope.builtin").oldfiles()
     end,
-    desc = "old files",
+    desc = "Old files",
   },
   {
     "<Space>ff",
     function()
       require("axie.plugins.ui.telescope").file_search()
     end,
-    desc = "find files",
+    desc = "Find files",
   },
   {
     "<Space>fF",
     function()
       require("axie.plugins.ui.telescope").file_search(true)
     end,
-    desc = "find all files",
+    desc = "Find all files",
   },
   {
     "<Space>fc",
     function()
       require("axie.plugins.ui.telescope").dotconfig()
     end,
-    desc = "search config",
+    desc = "Search config",
   },
   {
     "<Space>fg",
     function()
       require("telescope.builtin").live_grep()
     end,
-    desc = "live grep",
+    desc = "Live grep",
   },
   {
     "<Space>fG",
     function()
       require("telescope.builtin").grep_string()
     end,
-    desc = "grep string",
+    desc = "Grep string",
+  },
+  {
+    "<Space>fb",
+    function()
+      require("telescope.builtin").buffers()
+    end,
+    desc = "Open buffers",
   },
   {
     "<Space>fm",
@@ -91,35 +98,42 @@ M.keys = {
       -- REF: https://en.wikipedia.org/wiki/Man_page#Manual_sections
       require("telescope.builtin").man_pages({ sections = { "1", "2", "3", "4", "5", "6", "7", "8" } })
     end,
-    desc = "search manual",
+    desc = "Search manual",
   },
   {
     "<Space>ft",
     function()
       require("telescope.builtin").colorscheme()
     end,
-    desc = "theme",
+    desc = "Theme",
   },
   {
     "<Space>fT",
     function()
       require("telescope.builtin").colorscheme({ enable_preview = true })
     end,
-    desc = "theme preview",
+    desc = "Theme preview",
   },
   {
     "<Space>f.",
     function()
       require("telescope.builtin").resume()
     end,
-    desc = "resume last command",
+    desc = "Resume last command",
   },
   {
     "<Space>fk",
     function()
       require("telescope.builtin").keymaps()
     end,
-    desc = "find keymaps",
+    desc = "Find keymaps",
+  },
+  {
+    "<Space>fS",
+    function()
+      require("telescope.builtin").spell_suggest()
+    end,
+    desc = "Spelling suggestions",
   },
 }
 

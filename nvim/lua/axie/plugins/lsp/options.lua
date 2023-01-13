@@ -49,6 +49,12 @@ function M.default_on_attach(client, bufnr)
       vim.api.nvim_win_set_option(winnr, "winblend", 20)
     end
   end, { desc = "Show line diagnostics" })
+  map("n", "[d", function()
+    vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+  end, { desc = "Previous diagnostic" })
+  map("n", "]d", function()
+    vim.diagnostic.goto_next({ float = { border = "rounded" } })
+  end, { desc = "Next diagnostic" })
 
   map("n", "gr", function()
     require("telescope.builtin").lsp_references()

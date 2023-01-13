@@ -1,6 +1,7 @@
 local spec = {
   -- ALT: https://github.com/zbirenbaum/copilot.lua with https://github.com/zbirenbaum/copilot-cmp
   { "github/copilot.vim", event = "InsertEnter", settings = "copilot" },
+  { "folke/todo-comments.nvim", event = "VeryLazy", settings = "todo" },
 
   {
     -- TODO: automatically install parsers for new file types (don't download all)
@@ -9,7 +10,7 @@ local spec = {
     event = "BufReadPost",
     settings = "treesitter",
   },
-  { "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
+  { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPost" },
   {
     "nvim-treesitter/playground",
     build = ":TSUpdate query",
@@ -18,12 +19,12 @@ local spec = {
   -- TODO: use fork https://github.com/mrjones2014/nvim-ts-rainbow instead?
   { "p00f/nvim-ts-rainbow", event = "BufReadPost" },
   { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", settings = "indentline" },
-  { "code-biscuits/nvim-biscuits", event = "VeryLazy", settings = "biscuits" },
+  { "code-biscuits/nvim-biscuits", event = "BufReadPost", settings = "biscuits" },
   {
     -- Argument highlights
     "m-demare/hlargs.nvim",
     event = "BufReadPost",
-    config = {
+    opts = {
       -- Catppuccin Flamingo
       color = "#F2CDCD",
       -- NOTE: needs to be lower than Twilight.nvim's priority of 10000
@@ -35,7 +36,7 @@ local spec = {
     "danymat/neogen",
     cmd = "Neogen",
     keys = { { "<Space>/", "<Cmd>Neogen<CR>", desc = "Generate docstring" } },
-    config = { snippet_engine = "luasnip" },
+    opts = { snippet_engine = "luasnip" },
   },
   {
     "numToStr/Comment.nvim",
@@ -45,6 +46,13 @@ local spec = {
     settings = "comment",
   },
   { "tpope/vim-surround", event = "VeryLazy" },
+  {
+    "andymass/vim-matchup",
+    event = "BufReadPost",
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
+    end,
+  },
   { "windwp/nvim-autopairs", event = "InsertEnter", settings = "autopairs" },
   {
     "windwp/nvim-ts-autotag",
@@ -70,6 +78,12 @@ local spec = {
   },
   -- NOTE: requires treesitter regex
   { "bennypowers/nvim-regexplainer", build = ":TSUpdate regex", settings = "regexplainer" },
+  { "nacro90/numb.nvim", event = "CmdlineEnter", opts = { number_only = true } },
+
+  -- IDE tools
+  { "mfussenegger/nvim-dap", settings = "plugins.editor.debug.dap" },
+  { "nvim-telescope/telescope-dap.nvim", settings = "plugins.editor.debug.dap_telescope" },
+  -- dapui, dap virtaul text (config = true)
 
   -- Python indenting issues
   -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
@@ -93,7 +107,7 @@ local spec = {
     "ellisonleao/glow.nvim",
     ft = "markdown",
     keys = { { ",o", "<Cmd>Glow<CR>" } },
-    config = {
+    opts = {
       border = "rounded",
       pager = false,
     },
@@ -102,8 +116,8 @@ local spec = {
     -- NOTE: <C-t> (tab) to indent after auto continue, <C-d> (dedent) to unindent
     "gaoDean/autolist.nvim",
     ft = { "markdown", "text", "tex", "plaintex" },
-    -- BUG: https://github.com/gaoDean/autolist.nvim/issues/56
-    priority = 48, -- lower than nvim-cmp
+    event = "InsertEnter *md",
+    dependencies = "hrsh7th/nvim-cmp",
     settings = "autolist",
   },
 }

@@ -54,7 +54,7 @@ M.keys = {
   },
 }
 
-M.config = {
+M.opts = {
   numhl = true,
   signcolumn = false,
   current_line_blame = false,

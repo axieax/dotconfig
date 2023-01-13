@@ -7,6 +7,3 @@ build-x86_64-linux/
 
 # symlinked alacritty
 alacritty.yml
-
-# neovim
-packer_compiled.lua

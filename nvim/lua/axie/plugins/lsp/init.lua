@@ -11,18 +11,37 @@ local spec = {
     settings = "install",
   },
   { "jose-elias-alvarez/null-ls.nvim", settings = "null" },
+  "ThePrimeagen/refactoring.nvim",
 
   -- LSP server extensions
   -- "jose-elias-alvarez/typescript.nvim", -- for dynamic renames?
   "b0o/schemastore.nvim",
   "folke/neodev.nvim",
-  "mfussenegger/nvim-jdtls",
+  {
+    "mfussenegger/nvim-jdtls",
+    init = function()
+      local filetype_map = require("axie.utils").filetype_map
+      filetype_map("java", "n", "<Space>tm", function()
+        require("jdtls").test_nearest_method({
+          after_test = require("axie.plugins.editor.test").test_summary,
+        })
+      end, { desc = "Test method" })
+      filetype_map("java", "n", "<Space>tc", function()
+        require("jdtls").test_class({
+          after_test = require("axie.plugins.editor.test").test_summary,
+        })
+      end, { desc = "Test class" })
+      filetype_map("java", "n", "<Space>t;", function()
+        require("axie.plugins.editor.test").test_summary()
+      end, { desc = "Test summary" })
+    end,
+  },
   "simrat39/rust-tools.nvim",
 
   -- LSP essentials
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "onsails/lspkind-nvim",
@@ -36,7 +55,7 @@ local spec = {
       "f3fora/cmp-spell",
       "kdheepak/cmp-latex-symbols",
       { "David-Kunz/cmp-npm", config = true },
-      { "petertriho/cmp-git", config = { filetypes = { "*" } } },
+      { "petertriho/cmp-git", opts = { filetypes = { "*" } } },
       -- "quangnguyen30192/cmp-nvim-tags",
       -- "tpope/vim-dadbod",
       -- "kristijanhusak/vim-dadbod-ui",
@@ -56,7 +75,7 @@ local spec = {
   "ray-x/lsp_signature.nvim",
   {
     "lvimuser/lsp-inlayhints.nvim",
-    config = { inlay_hints = { highlight = "Comment" } },
+    opts = { inlay_hints = { highlight = "Comment" } },
   },
 
   -- LSP utils
@@ -64,17 +83,13 @@ local spec = {
   {
     "j-hui/fidget.nvim",
     event = "VeryLazy",
-    config = {
+    opts = {
       window = {
         relative = "editor",
         blend = 0,
       },
     },
   },
-
-  -- IDK
-  "mfussenegger/nvim-dap", -- TODO: MOVE THIS
-  "nvim-telescope/telescope-dap.nvim",
 }
 
 return require("axie.lazy").transform_spec(spec, "lsp")

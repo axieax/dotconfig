@@ -11,10 +11,6 @@ function M.init()
   vim.keymap.set("n", "\\i", "<Cmd>IconPickerYank<CR>", { desc = "icon picker" })
 end
 
-function M.config()
-  require("icon-picker").setup({
-    disable_legacy_commands = true,
-  })
-end
+M.opts = { disable_legacy_commands = true }
 
 return M

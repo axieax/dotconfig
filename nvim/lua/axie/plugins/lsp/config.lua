@@ -3,6 +3,10 @@ local M = {}
 -- TODO: filter/sort severity?
 -- Highlight line number instead of icons (https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#highlight-line-number-instead-of-having-icons-in-sign-column)
 
+M.keys = {
+  { "<Space>l?", "<Cmd>LspInfo<CR>" },
+}
+
 function M.config()
   local diagnostics_icons = require("axie.utils.config").diagnostics_icons
 

@@ -1,7 +1,15 @@
 local M = {}
 
 M.keys = {
-  { "<Space>gy", mode = { "n", "v" } },
+  { "<Space>gy", mode = { "n", "v" }, desc = "Copy Git line reference URL to clipboard" },
+  {
+    "<Space>gY",
+    function()
+      require("gitlinker").get_repo_url()
+    end,
+    mode = "n",
+    desc = "Copy Git repo URL to clipboard",
+  },
   {
     "<Space>gw",
     function()
@@ -10,7 +18,7 @@ M.keys = {
       })
     end,
     mode = "n",
-    desc = "open line link in browser",
+    desc = "Open Git line reference URL in browser",
   },
   {
     "<Space>gw",
@@ -20,12 +28,20 @@ M.keys = {
       })
     end,
     mode = "v",
-    desc = "open line link in browser",
+    desc = "Open Git line reference URL in browser",
+  },
+  {
+    "<Space>gW",
+    function()
+      require("gitlinker").get_repo_url("n", {
+        action_callback = require("gitlinker.actions").open_in_browser,
+      })
+    end,
+    mode = "n",
+    desc = "Open Git repo URL in browser",
   },
 }
 
-function M.config()
-  require("gitlinker").setup({ mappings = "<Space>gy" })
-end
+M.opts = { mappings = "<Space>gy" }
 
 return M

@@ -36,6 +36,7 @@ map("n", "L", "<Cmd>vertical resize +1<CR>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+map("n", "<Space>fs", "1z=", { desc = "Correct spelling" })
 map("i", "<S-Tab>", "<C-d>", { desc = "Unindent" })
 map("n", "<Space>e", "<Cmd>edit<CR>", { desc = "Refresh buffer" })
 map("n", "<Space>c", function()
@@ -46,6 +47,23 @@ map("n", "<Space>C", function()
 end, { desc = "Display cwd" })
 map("n", "<Space>p", ":lua =", { desc = "Lua print", silent = false })
 map("n", "<Space>P", ":lua require'axie.utils'.notify()<LEFT>", { desc = "Lua notify", silent = false })
+map("n", "<Space>v", "ggVG", { desc = "Select all" })
+map("n", "<Space>V", function()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  vim.api.nvim_cmd({
+    cmd = "normal",
+    bang = true,
+    args = { 'ggVG"+y' },
+  }, {})
+  vim.api.nvim_win_set_cursor(0, pos)
+end, { desc = "Copy all to clipboard" })
+
+-- tpope/unimpaired has [<Space> and ]<Space> as well
+map("n", "\\o", "o<Esc>", { desc = "Create new line below" })
+map("n", "\\O", "O<Esc>", { desc = "Create new line above" })
+map("n", "\\s", function()
+  vim.o.spell = not vim.o.spell
+end, { desc = "Toggle spell" })
 
 local yank_register = vim.loop.os_uname().sysname == "Linux" and "+" or "*"
 map({ "n", "v" }, "\\y", '"' .. yank_register .. "y", { desc = "Yank to clipboard" })

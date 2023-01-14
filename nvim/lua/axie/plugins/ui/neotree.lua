@@ -7,12 +7,7 @@ local M = {}
 
 M.cmd = "Neotree"
 
-M.keys = {
-  { ";", "<Cmd>Neotree toggle<CR>", { desc = "file explorer" } },
-  { "<Space>fB", "<Cmd>Neotree source=buffers toggle<CR>", { desc = "open buffers (tree)" } },
-  { "<Space>G", "<Cmd>Neotree source=git_status toggle<CR>", { desc = "git status (tree)" } },
-  { "<Space>L", "<Cmd>Neotree source=diagnostics toggle<CR>", { desc = "git status (tree)" } },
-}
+M.keys = { { ";", "<Cmd>Neotree toggle<CR>", { desc = "File explorer" } } }
 
 function M.config()
   require("neo-tree").setup({

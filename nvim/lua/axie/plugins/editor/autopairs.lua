@@ -1,11 +1,11 @@
 local M = {}
 
-function M.config()
-  require("nvim-autopairs").setup({
-    -- insert mode "alt-e"
-    -- NOTE: vim surround visual selection: S_ as well
-    fast_wrap = {},
-  })
+-- insert mode "alt-e"
+-- NOTE: vim surround visual selection: S_ as well
+M.opts = { fast_wrap = {} }
+
+function M.config(_, opts)
+  require("nvim-autopairs").setup(opts)
 
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")
   local cmp = require("cmp")

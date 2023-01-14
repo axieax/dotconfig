@@ -28,5 +28,3 @@ end
 
 -- Set up language servers
 require("axie.plugins.lsp.setup").servers()
-
--- print(string.rep("-", 5000))

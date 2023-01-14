@@ -3,8 +3,8 @@ local M = {}
 M.cmd = "UrlView"
 
 M.keys = {
-  { "\\u", "<Cmd>UrlView<CR>", desc = "view buffer URLs" },
-  { "\\U", "<Cmd>UrlView lazy<CR>", desc = "view plugin URLs" },
+  { "\\u", "<Cmd>UrlView<CR>", desc = "Buffer URLs" },
+  { "\\U", "<Cmd>UrlView lazy<CR>", desc = "Plugin URLs" },
 }
 
 function M.config()

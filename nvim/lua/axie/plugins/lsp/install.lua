@@ -2,7 +2,7 @@ local M = {}
 
 function M.init()
   vim.keymap.set("n", "<Space>lI", "<Cmd>Mason<CR>", { desc = "LSP installer" })
-  vim.keymap.set("n", "<Space>lU", "<Cmd>MasonToolsUpdate<CR>", { desc = "update Mason tools" })
+  vim.keymap.set("n", "<Space>lU", "<Cmd>MasonToolsUpdate<CR>", { desc = "Update Mason tools" })
 end
 
 function M.config()

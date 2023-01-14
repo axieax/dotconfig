@@ -32,10 +32,6 @@ M.keys = {
   { "<Leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>" },
 }
 
-function M.config()
-  require("bufferline").setup({
-    maximum_padding = 1,
-  })
-end
+M.opts = { maximum_padding = 1 }
 
 return M

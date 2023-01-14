@@ -72,14 +72,16 @@ function M.default_on_attach(client, bufnr)
     require("axie.plugins.lsp.rename").rename_empty()
   end, { desc = "Rename" })
   map("n", "<Space>rN", vim.lsp.buf.rename, { desc = "Rename (with placeholder)" })
-
-  -- NOTE: conflicts with default formatting keybind
-  vim.keymap.set({ "n", "v" }, "gq", function()
+  map("n", "<Space>rl", vim.lsp.codelens.run, { desc = "Run code lens" })
+  map({ "n", "v" }, "<Space>ra", function()
     require("axie.plugins.lsp.code_actions").native(true)
-  end, { desc = "code actions (ignore null-ls)" })
-  vim.keymap.set({ "n", "v" }, "gQ", function()
+  end, { desc = "Code actions (ignore null-ls)" })
+  map({ "n", "v" }, "<Space>rA", function()
     require("axie.plugins.lsp.code_actions").native(false)
-  end, { desc = "code actions (all)" })
+  end, { desc = "Code actions (all)" })
+
+  map("n", "<Space>ll", vim.diagnostic.setloclist, { desc = "Document diagnostics" })
+  map("n", "<Space>lL", vim.diagnostic.setqflist, { desc = "Project diagnostics" })
 end
 
 function M.default()
@@ -245,6 +247,7 @@ function M.jsonls()
     settings = {
       json = {
         schemas = require("schemastore").json.schemas(),
+        validate = { enable = true },
       },
     },
   }

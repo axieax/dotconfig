@@ -16,16 +16,17 @@
 
 ## TODO
 
+- lazy plugins to update in heirline
+- telescope command history - resume more than just last command (`<Space>f;`)
+- git merge conflict plugin? with bind `<Space>gm`
 - todo-comments qflist for single file (https://github.com/folke/todo-comments.nvim/issues/136)
 - Bind for rerunning last test
 - neo-tree lazy load like folke lazyvim sample
-- nvim autopairs cmdline
 - Binding for inserting tab character
 - Dot repeat for macros (normal and visual)
 - `gF` doesn't expand if cursor on number
 - mason.nvim pynvim
 - nvim-surround restore cursor
-- replace text object with yank buffer
 - https://github.com/ggandor/leap-spooky.nvim
 - winbar: restore non-custom winbar when switching NC
 - Aerial - add keybind to toggle between fold levels (1 and all)
@@ -99,6 +100,7 @@
 
 ## Features/plugins
 
+- https://github.com/jbyuki/one-small-step-for-vimkind for nvim debugging?
 - https://github.com/jackMort/ChatGPT.nvim
 - https://github.com/miversen33/netman.nvim
 - https://github.com/lvimuser/lsp-inlayhints.nvim
@@ -160,7 +162,6 @@
 
 ## Debugging
 
-- `:LuaCacheClear` to clear impatient.nvim's cache
 - `rm -rf ~/.local/share/nvim/shada/*` for Linux permission issues
 - Floats closing soon after nvim startup (e.g. Telescope, lazygit) - maybe stabilize.nvim
   - e.g. https://github.com/luukvbaal/stabilize.nvim/issues/3
@@ -180,8 +181,8 @@
 
 ## Current PRs / Issues
 
-- https://github.com/folke/lazy.nvim/issues/349
-- https://github.com/gaoDean/autolist.nvim/issues/56
+- https://neovim.discourse.group/t/text-object-mapping/3597
+- https://github.com/windwp/nvim-autopairs/issues/315
 - https://github.com/folke/lazy.nvim/issues/139
 - https://github.com/nvim-telescope/telescope.nvim/pull/2252 (requires additional setup)
 - https://github.com/williamboman/mason.nvim/discussions/709

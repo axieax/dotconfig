@@ -14,7 +14,7 @@ function M.update_startuptime(loaded_plugins, startuptime)
 end
 
 function M.init()
-  vim.keymap.set("n", "<Space>S", "<Cmd>Alpha<CR>", { desc = "start menu" })
+  vim.keymap.set("n", "<Space>S", "<Cmd>Alpha<CR>", { desc = "Start menu" })
 end
 
 function M.config()

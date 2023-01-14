@@ -99,6 +99,10 @@ local spec = {
       vim.g.caser_prefix = "cR"
     end,
   },
+  -- Extra mappings (with encoding/decoding as well)
+  { "tpope/vim-unimpaired", event = "VeryLazy" },
+  -- "." repeat for some commands
+  { "tpope/vim-repeat", event = "VeryLazy" },
   { "ziontee113/icon-picker.nvim", settings = "iconpicker" },
 }
 

@@ -1,8 +1,6 @@
 local M = {}
 
-M.keys = {
-  { ",p", "<Cmd>PasteImg<CR>", desc = "Paste image" },
-}
+M.keys = { { ",p", "<Cmd>PasteImg<CR>", desc = "Paste image" } }
 
 function M.config()
   local relative_dir = vim.fn.fnamemodify(vim.fn.expand("%"), ":h")

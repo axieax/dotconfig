@@ -1,4 +1,6 @@
-local filetype_map = require("axie.utils").filetype_map
+local utils = require("axie.utils")
+local filetype_map = utils.filetype_map
+local restore_position_wrap = utils.restore_position_wrap
 local map = vim.keymap.set
 
 map("n", "K", vim.lsp.buf.hover)
@@ -12,7 +14,7 @@ for _, key in ipairs({ "j", "k" }) do
   end, { desc = "Wrapped lines cursor navigation with " .. key, expr = true })
 end
 
-map("x", ".", ":norm.<CR>", { desc = "visual mode dot repeat" })
+map("x", ".", ":norm.<CR>", { desc = "Visual mode dot repeat" })
 map("x", "Q", function()
   local register = vim.fn.nr2char(vim.fn.getchar()) -- get register from user
   vim.fn.feedkeys(vim.api.nvim_replace_termcodes(":normal @" .. register .. "<CR>", true, false, true))
@@ -36,7 +38,10 @@ map("n", "L", "<Cmd>vertical resize +1<CR>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+map("n", "<Space>q", "<Cmd>copen<CR>", { desc = "Quickfix list" })
+map("n", "<Space>Q", "<Cmd>lopen<CR>", { desc = "Location list" })
 map("n", "<Space>fs", "1z=", { desc = "Correct spelling" })
+map("n", "<Space>fS", "z=", { desc = "Spelling suggestions", remap = true })
 map("i", "<S-Tab>", "<C-d>", { desc = "Unindent" })
 map("n", "<Space>e", "<Cmd>edit<CR>", { desc = "Refresh buffer" })
 map("n", "<Space>c", function()
@@ -48,15 +53,18 @@ end, { desc = "Display cwd" })
 map("n", "<Space>p", ":lua =", { desc = "Lua print", silent = false })
 map("n", "<Space>P", ":lua require'axie.utils'.notify()<LEFT>", { desc = "Lua notify", silent = false })
 map("n", "<Space>v", "ggVG", { desc = "Select all" })
-map("n", "<Space>V", function()
-  local pos = vim.api.nvim_win_get_cursor(0)
-  vim.api.nvim_cmd({
-    cmd = "normal",
-    bang = true,
-    args = { 'ggVG"+y' },
-  }, {})
-  vim.api.nvim_win_set_cursor(0, pos)
-end, { desc = "Copy all to clipboard" })
+map(
+  "n",
+  "<Space>V",
+  restore_position_wrap(function()
+    vim.api.nvim_cmd({
+      cmd = "normal",
+      bang = true,
+      args = { 'ggVG"+y' },
+    }, {})
+  end),
+  { desc = "Copy all to clipboard" }
+)
 
 -- tpope/unimpaired has [<Space> and ]<Space> as well
 map("n", "\\o", "o<Esc>", { desc = "Create new line below" })
@@ -65,10 +73,51 @@ map("n", "\\s", function()
   vim.o.spell = not vim.o.spell
 end, { desc = "Toggle spell" })
 
+local signcolumn_enabled = true
+map("n", "\\l", function()
+  vim.o.signcolumn = signcolumn_enabled and "no" or "auto"
+  signcolumn_enabled = not signcolumn_enabled
+end, { desc = "Toggle signcolumn" })
+
+--- Replace text-object with yanked content
+---@param paste_cmd string @command for pasting
+local function paste_replace(paste_cmd)
+  local prev_func = vim.go.operatorfunc
+  -- selene: allow(global_usage)
+  _G.paste_replace = function()
+    vim.api.nvim_feedkeys("`[v`]" .. paste_cmd, "n", true)
+    vim.go.operatorfunc = prev_func
+    _G.paste_replace = nil
+  end
+  vim.go.operatorfunc = "v:lua.paste_replace"
+  vim.api.nvim_feedkeys("g@", "n", false)
+end
+
+map("n", "\\r", function()
+  paste_replace("p")
+end, { desc = "Replace with yanked" })
+map("n", "\\R", function()
+  paste_replace("\\p")
+end, { desc = "Replace with last yanked" })
+
+map(
+  "n",
+  "gQ",
+  restore_position_wrap(function()
+    vim.api.nvim_cmd({
+      cmd = "normal",
+      args = { "ggVGgq" },
+    }, {})
+  end),
+  { desc = "Format buffer" }
+)
+
 local yank_register = vim.loop.os_uname().sysname == "Linux" and "+" or "*"
 map({ "n", "v" }, "\\y", '"' .. yank_register .. "y", { desc = "Yank to clipboard" })
 map("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "Copy yank register to clipboard" })
 map({ "n", "v" }, "\\p", '"0p', { desc = "Paste last yanked" })
+
+map("i", "<A-t>", "<C-v><Tab>", { desc = "Insert tab" })
 
 -- Filetype-specific
 filetype_map("markdown", "v", ",*", "S*gvS*", { remap = true, desc = "Bold selection" })

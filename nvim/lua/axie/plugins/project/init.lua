@@ -11,6 +11,7 @@ local spec = {
     -- Project scope
     "ahmedkhalf/project.nvim",
     event = "VeryLazy",
+    keys = { { "<Space>fP", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
     config = function()
       require("project_nvim").setup()
     end,
@@ -48,9 +49,11 @@ local spec = {
       "DiffviewLog",
     },
     keys = {
-      { "<Space>gd", "<Cmd>DiffviewFileHistory %<CR>", desc = "Git diff (file)" },
-      { "<Space>gD", "<Cmd>DiffviewFileHistory<CR>", desc = "Git diff (repo)" },
-      { "<Space>gq", "<Cmd>DiffviewClose<CR>", desc = "Git diff close" },
+      { "<Space>gdf", "<Cmd>DiffviewFileHistory %<CR>", desc = "Git diff (file)" },
+      { "<Space>gdr", "<Cmd>DiffviewFileHistory<CR>", desc = "Git diff (repo)" },
+      { "<Space>gdm", "<Cmd>DiffviewOpen main<CR>", desc = "Git diff (main)" },
+      { "<Space>gdM", "<Cmd>DiffviewOpen master<CR>", desc = "Git diff (master)" },
+      { "<Space>gdq", "<Cmd>DiffviewClose<CR>", desc = "Git diff close" },
     },
   },
 }

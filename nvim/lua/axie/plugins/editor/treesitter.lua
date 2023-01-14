@@ -64,10 +64,10 @@ end
 
 function M.init()
   local this = require("axie.plugins.editor.treesitter")
-  vim.keymap.set("n", ",[", this.goto_prev_sibling, { desc = "goto previous sibling node" })
-  vim.keymap.set("n", ",]", this.goto_next_sibling, { desc = "goto next sibling node" })
-  vim.keymap.set("n", ",{", this.goto_parent, { desc = "goto parent node" })
-  vim.keymap.set("n", ",}", this.goto_child, { desc = "goto child node" })
+  vim.keymap.set("n", ",[", this.goto_prev_sibling, { desc = "Goto previous sibling node" })
+  vim.keymap.set("n", ",]", this.goto_next_sibling, { desc = "Goto next sibling node" })
+  vim.keymap.set("n", ",{", this.goto_parent, { desc = "Goto parent node" })
+  vim.keymap.set("n", ",}", this.goto_child, { desc = "Goto child node" })
 end
 
 function M.config()
@@ -166,9 +166,9 @@ function M.config()
         enable = true,
         peek_definition_code = {
           ["gp"] = "@function.outer",
-          ["<space>lp"] = "@function.outer",
+          ["<Space>lp"] = "@function.outer",
           ["gP"] = "@class.outer",
-          ["<space>lP"] = "@class.outer",
+          ["<Space>lP"] = "@class.outer",
         },
       },
     },

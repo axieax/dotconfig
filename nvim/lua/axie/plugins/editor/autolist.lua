@@ -1,6 +1,7 @@
 local M = {}
 
 function M.config()
+  require("notify").notify("LOADED")
   local autolist = require("autolist")
   autolist.setup()
   autolist.create_mapping_hook("i", "<CR>", autolist.new)

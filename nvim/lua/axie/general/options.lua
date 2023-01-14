@@ -60,7 +60,7 @@ vim_apply(vim.g, {
 
 -- NOTE: want comment continue in some cases (e.g. java(s) docstring)
 vim.api.nvim_create_autocmd("BufEnter", {
-  desc = "disable automatic comment insertion",
+  desc = "Disable automatic comment insertion",
   callback = function()
     vim.o.formatoptions = vim.o.formatoptions:gsub("[cro]", "")
     vim.opt_local.formatoptions = vim.o.formatoptions
@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- Enable spellcheck conditionally based on filetypes
 vim.api.nvim_create_autocmd("BufEnter", {
-  desc = "enable spellcheck",
+  desc = "Enable spellcheck",
   callback = function()
     local ft = vim.bo.filetype
     local enabled_filetypes = { "markdown", "text", "" }

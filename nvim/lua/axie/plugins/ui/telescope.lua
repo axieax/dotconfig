@@ -27,20 +27,19 @@ function M.dotconfig()
 end
 
 M.keys = {
-  -- control slash
   {
-    "<C-_>",
+    "<C-_>", -- control slash
     function()
       require("telescope.builtin").current_buffer_fuzzy_find()
     end,
     desc = "Buffer search",
   },
   {
-    "<Space>fh",
+    "<Space>f/",
     function()
-      require("telescope.builtin").help_tags()
+      require("telescope.builtin").current_buffer_fuzzy_find()
     end,
-    desc = "Help docs",
+    desc = "Buffer search",
   },
   -- TODO: MRU
   {
@@ -48,7 +47,7 @@ M.keys = {
     function()
       require("telescope.builtin").oldfiles()
     end,
-    desc = "Old files",
+    desc = "Recent files",
   },
   {
     "<Space>ff",
@@ -93,12 +92,33 @@ M.keys = {
     desc = "Open buffers",
   },
   {
+    '<Space>f"',
+    function()
+      require("telescope.builtin").registers()
+    end,
+    desc = "Registers",
+  },
+  {
+    "<Space>fh",
+    function()
+      require("telescope.builtin").help_tags()
+    end,
+    desc = "Help docs",
+  },
+  {
     "<Space>fm",
     function()
       -- REF: https://en.wikipedia.org/wiki/Man_page#Manual_sections
       require("telescope.builtin").man_pages({ sections = { "1", "2", "3", "4", "5", "6", "7", "8" } })
     end,
     desc = "Search manual",
+  },
+  {
+    "<Space>fv",
+    function()
+      require("telescope.builtin").vim_options()
+    end,
+    desc = "Vim options",
   },
   {
     "<Space>ft",
@@ -122,6 +142,13 @@ M.keys = {
     desc = "Resume last command",
   },
   {
+    "<Space>f?",
+    function()
+      require("telescope.builtin").commands()
+    end,
+    desc = "Find commands",
+  },
+  {
     "<Space>fk",
     function()
       require("telescope.builtin").keymaps()
@@ -129,11 +156,11 @@ M.keys = {
     desc = "Find keymaps",
   },
   {
-    "<Space>fS",
+    "<Space>gc",
     function()
-      require("telescope.builtin").spell_suggest()
+      require("telescope.builtin").git_bcommits()
     end,
-    desc = "Spelling suggestions",
+    desc = "Buffer Git commits",
   },
 }
 

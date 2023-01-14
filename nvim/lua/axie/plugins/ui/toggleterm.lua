@@ -6,8 +6,8 @@ M.cmd = "ToggleTerm"
 
 function M.attach()
   vim.keymap.set("n", "<Esc>", "<Nop>", { silent = true, buffer = 0 })
-  vim.keymap.set("t", "<C-]>", [[<C-\><C-n>]], { desc = "toggle mode", buffer = 0 })
-  vim.keymap.set("n", "<C-]>", "<Cmd>startinsert<CR>", { desc = "toggle mode", buffer = 0 })
+  vim.keymap.set("t", "<C-]>", [[<C-\><C-n>]], { desc = "Toggle mode", buffer = 0 })
+  vim.keymap.set("n", "<C-]>", "<Cmd>startinsert<CR>", { desc = "Toggle mode", buffer = 0 })
   vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], { buffer = 0 })
 end
 
@@ -16,14 +16,14 @@ function M.init()
   local filetype_map = require("axie.utils").filetype_map
   local require_args = require("axie.utils").require_args
   filetype_map("html", "n", ",o", require_args(this.liveserver, true), {
-    desc = "start liveserver for current file",
+    desc = "Start liveserver for current file",
   })
   filetype_map("html", "n", ",O", require_args(this.liveserver, false), {
-    desc = "start liveserver for current project",
+    desc = "Start liveserver for current project",
   })
 
-  vim.keymap.set("n", "<Space>gg", this.lazygit, { desc = "lazygit" })
-  vim.keymap.set("n", "<Space>gG", this.lazydocker, { desc = "lazydocker" })
+  vim.keymap.set("n", "<Space>gg", this.lazygit, { desc = "Lazygit" })
+  vim.keymap.set("n", "<Space>gG", this.lazydocker, { desc = "Lazydocker" })
 
   -- NOTE: actually toggles instead of opening a new toggleterm?
   -- TODO: toggle vs more in same layout
@@ -33,10 +33,10 @@ function M.init()
       { "n", "i", "t" },
       string.format("<F%d>", i),
       string.format("<Cmd>%dToggleTerm direction=%s<CR>", i, direction),
-      { desc = "toggleterm " .. direction }
+      { desc = "Toggleterm " .. direction }
     )
   end
-  vim.keymap.set({ "n", "i", "t" }, [[<C-\>]], "<Cmd>Telescope termfinder find<CR>", { desc = "find terminals" })
+  vim.keymap.set({ "n", "i", "t" }, [[<C-\>]], "<Cmd>Telescope termfinder find<CR>", { desc = "Find terminals" })
 end
 
 function M.config()
@@ -58,7 +58,7 @@ function M.config()
     },
   })
   vim.api.nvim_create_autocmd("TermOpen", {
-    desc = "toggleterm attach",
+    desc = "Toggleterm attach",
     pattern = "term://*",
     callback = require("axie.plugins.ui.toggleterm").attach,
   })

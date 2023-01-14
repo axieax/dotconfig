@@ -20,17 +20,7 @@ local spec = {
   { "p00f/nvim-ts-rainbow", event = "BufReadPost" },
   { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", settings = "indentline" },
   { "code-biscuits/nvim-biscuits", event = "BufReadPost", settings = "biscuits" },
-  {
-    -- Argument highlights
-    "m-demare/hlargs.nvim",
-    event = "BufReadPost",
-    opts = {
-      -- Catppuccin Flamingo
-      color = "#F2CDCD",
-      -- NOTE: needs to be lower than Twilight.nvim's priority of 10000
-      hl_priority = 9999,
-    },
-  },
+  { "m-demare/hlargs.nvim", event = "BufReadPost", settings = "hlargs" },
   { "narutoxy/dim.lua", event = "VeryLazy", config = true },
   {
     "danymat/neogen",
@@ -81,7 +71,13 @@ local spec = {
   { "nacro90/numb.nvim", event = "CmdlineEnter", opts = { number_only = true } },
 
   -- IDE tools
-  { "mfussenegger/nvim-dap", settings = "plugins.editor.debug.dap" },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      { "rcarriga/nvim-dap-ui", settings = "plugins.editor.debug.dapui" },
+    },
+    settings = "plugins.editor.debug.dap",
+  },
   { "nvim-telescope/telescope-dap.nvim", settings = "plugins.editor.debug.dap_telescope" },
   -- dapui, dap virtaul text (config = true)
 
@@ -115,8 +111,7 @@ local spec = {
   {
     -- NOTE: <C-t> (tab) to indent after auto continue, <C-d> (dedent) to unindent
     "gaoDean/autolist.nvim",
-    ft = { "markdown", "text", "tex", "plaintex" },
-    event = "InsertEnter *md",
+    event = "InsertEnter *.md,*.txt,*.tex", -- https://github.com/gaoDean/autolist.nvim/issues/56
     dependencies = "hrsh7th/nvim-cmp",
     settings = "autolist",
   },

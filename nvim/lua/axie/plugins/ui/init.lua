@@ -1,16 +1,7 @@
 local dev_mode = require("axie.utils.config").dev_mode
 
 local spec = {
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      layout = { align = "center" },
-      window = { winblend = 20 },
-      -- For modes.nvim
-      -- plugins = { presets = { operators = false } },
-    },
-  },
+  { "folke/which-key.nvim", event = "VeryLazy", settings = "whichkey" },
   { "rebelot/heirline.nvim", event = "VeryLazy", settings = "statusline" },
   { "romgrk/barbar.nvim", event = "VeryLazy", settings = "barbar" },
   -- { "akinsho/bufferline.nvim", event = "VeryLazy", config = true },
@@ -24,7 +15,6 @@ local spec = {
   },
   "mrbjarksen/neo-tree-diagnostics.nvim",
   { "nvim-telescope/telescope.nvim", settings = "telescope" },
-  "nvim-telescope/telescope-symbols.nvim",
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   {
     "nvim-telescope/telescope-file-browser.nvim",

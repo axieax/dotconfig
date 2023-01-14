@@ -296,8 +296,8 @@ function M.lsp()
     { -- Copilot status
       update = { "BufEnter", "BufLeave" },
       init = function(self)
-	    local ok, res = pcall(vim.fn, "copilot#Enabled")
-		self.copilot_enabled = ok and res ~= 0
+        local ok, res = pcall(vim.fn, "copilot#Enabled")
+        self.copilot_enabled = ok and res ~= 0
       end,
       provider = function(self)
         return self.copilot_enabled and "" or ""
@@ -440,7 +440,7 @@ function M.config()
     this.scrollbar(),
   }
 
-  heirline.setup(statusline)
+  heirline.setup({ statusline = statusline })
 end
 
 return M

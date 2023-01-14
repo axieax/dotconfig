@@ -86,12 +86,6 @@ function M.display_cwd()
   })
 end
 
-local signcolumn_enabled = true
-function M.toggle_signcolumn()
-  vim.o.signcolumn = signcolumn_enabled and "no" or "auto"
-  signcolumn_enabled = not signcolumn_enabled
-end
-
 -- vim.tbl_flatten limited to only once (top-level)
 function M.list_flatten_once(list)
   local result = {}
@@ -130,6 +124,17 @@ function M.require_args(f, ...)
   end
   return function()
     return f(unpack(args))
+  end
+end
+
+--- Restores position after calling @func
+---@param func function @to be wrapped
+---@return function
+function M.restore_position_wrap(func)
+  return function(...)
+    local pos = vim.api.nvim_win_get_cursor(0)
+    func(...)
+    vim.api.nvim_win_set_cursor(0, pos)
   end
 end
 

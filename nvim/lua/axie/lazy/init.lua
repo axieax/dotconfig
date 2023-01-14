@@ -82,6 +82,12 @@ function M.transform_spec(specs, category)
       end
       spec.settings = nil
     end
+
+    -- Recursively transform dependencies
+    if type(spec.dependencies) == "table" then
+      spec.dependencies = M.transform_spec(spec.dependencies, category)
+    end
+
     return spec
   end, specs)
 end

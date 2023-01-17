@@ -55,6 +55,10 @@ local spec = {
       { "<Space>gdM", "<Cmd>DiffviewOpen master<CR>", desc = "Git diff (master)" },
       { "<Space>gdq", "<Cmd>DiffviewClose<CR>", desc = "Git diff close" },
     },
+    opts = { view = {
+      default = { winbar_info = true },
+      file_history = { winbar_info = true },
+    } },
   },
 }
 

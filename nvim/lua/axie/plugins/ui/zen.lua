@@ -14,12 +14,7 @@ function M.config()
     -- require("gitsigns").toggle_current_line_blame()
 
     -- [[ LSP diagnostics ]]
-    local diagnostics = require("toggle_lsp_diagnostics")
-    local echo = diagnostics.display_status
-    diagnostics.display_status = function() end
-    diagnostics.toggle_virtual_text()
-    diagnostics.toggle_underline()
-    diagnostics.display_status = echo
+    require("axie.utils").toggle_diagnostics()
 
     -- [[ todo-comment ]]
     -- SEE: https://github.com/folke/todo-comments.nvim/issues/27

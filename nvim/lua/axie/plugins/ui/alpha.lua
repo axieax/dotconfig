@@ -13,9 +13,7 @@ function M.update_startuptime(loaded_plugins, startuptime)
   end
 end
 
-function M.init()
-  vim.keymap.set("n", "<Space>S", "<Cmd>Alpha<CR>", { desc = "Start menu" })
-end
+M.keys = { { "<Space>S", "<Cmd>Alpha<CR>", desc = "Start menu" } }
 
 function M.config()
   local dashboard = require("alpha.themes.dashboard")

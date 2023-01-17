@@ -16,6 +16,8 @@
 
 ## TODO
 
+- Diffview merge tool
+- plugin help docs not imported
 - lazy plugins to update in heirline
 - telescope command history - resume more than just last command (`<Space>f;`)
 - git merge conflict plugin? with bind `<Space>gm`
@@ -35,9 +37,8 @@
 - PRIORITY: TS\* Highlights
 - Statusline:
   - heirline supports tabline now - maybe migrate as well??
-  - Remove plugins/galaxyline.nvim
   - Clickable filename component - full path / relative path / just filename
-  - Selection word count (on visual mode)
+  - Selection word count (on visual mode) - reference old galaxyline config
   - Limit for large files (condition)
 - default `gq` binding for code formatting (and range)
 - normal mode `0` for beginning of line, `00` with no delay for end of line

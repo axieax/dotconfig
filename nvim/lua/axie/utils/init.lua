@@ -138,4 +138,14 @@ function M.restore_position_wrap(func)
   end
 end
 
+local diagnostics_active = true
+function M.toggle_diagnostics()
+  if diagnostics_active then
+    vim.diagnostic.hide()
+  else
+    vim.diagnostic.show()
+  end
+  diagnostics_active = not diagnostics_active
+end
+
 return M

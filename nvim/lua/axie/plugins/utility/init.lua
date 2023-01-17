@@ -6,7 +6,6 @@
 local spec = {
   { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { mapping = { "jk", "kj" } } },
   {
-    -- Smooth scrolling
     "karb94/neoscroll.nvim",
     event = "VeryLazy",
     config = function()
@@ -27,11 +26,15 @@ local spec = {
       -- vim.keymap.set("i", "<ScrollWheelDown>", "<C-o><C-e>")
     end,
   },
-  -- Better quickfix list
+  {
+    "ggandor/leap.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
-  -- Disable search highlights
   { "romainl/vim-cool", event = "VeryLazy" },
-  -- Search virtual text
   { "kevinhwang91/nvim-hlslens", settings = "hlslens" },
   {
     -- Underline word under cursor
@@ -55,19 +58,9 @@ local spec = {
   },
   -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
   { "Shatur/neovim-session-manager", event = "VimLeavePre", settings = "sessions" },
-  {
-    -- Remember last location
-    -- ALT: https://github.com/farmergreg/vim-lastplace
-    "ethanholz/nvim-lastplace",
-    event = "BufReadPre",
-    config = true,
-  },
-  {
-    -- Keep cursor on shift (`>` or `<`) and filter (`=`)
-    "gbprod/stay-in-place.nvim",
-    keys = { ">", "<", "=" },
-    config = true,
-  },
+  { "ethanholz/nvim-lastplace", event = "BufReadPre", config = true },
+  -- Keep cursor on shift (`>` or `<`) and filter (`=`)
+  { "gbprod/stay-in-place.nvim", keys = { ">", "<", "=" }, config = true },
   -- Incrementor / decrementor
   { "monaqa/dial.nvim", settings = "dial" },
   {
@@ -104,6 +97,14 @@ local spec = {
   -- "." repeat for some commands
   { "tpope/vim-repeat", event = "VeryLazy" },
   { "ziontee113/icon-picker.nvim", settings = "iconpicker" },
+  {
+    "booperlv/nvim-gomove",
+    keys = { "<A-h>", "<A-j>", "<A-k>", "<A-l>" },
+    opts = {
+      -- whether to not to move past line when moving blocks horizontally, (true/false)
+      move_past_end_col = false,
+    },
+  },
 }
 
 return require("axie.lazy").transform_spec(spec, "utility")

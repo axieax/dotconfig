@@ -1,5 +1,7 @@
 local M = {}
 
+local utils = require("axie.utils")
+
 --- Returns the custom options for a given language server
 ---@param name string @The name of the language server
 ---@return table @The custom options for the language server
@@ -82,6 +84,7 @@ function M.default_on_attach(client, bufnr)
 
   map("n", "<Space>ll", vim.diagnostic.setloclist, { desc = "Document diagnostics" })
   map("n", "<Space>lL", vim.diagnostic.setqflist, { desc = "Project diagnostics" })
+  map("n", "<Space>l;", utils.toggle_diagnostics, { desc = "Toggle diagnostics" })
 end
 
 function M.default()
@@ -156,7 +159,6 @@ function M.hls()
 end
 
 function M.jdtls()
-  local utils = require("axie.utils")
   local operating_system = utils.get_os()
   local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
   local java_bundles =

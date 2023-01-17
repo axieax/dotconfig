@@ -100,7 +100,7 @@ local spec = {
     end,
   },
   -- ALT: https://github.com/startup-nvim/startup.nvim
-  { "goolord/alpha-nvim", event = "BufEnter", settings = "startscreen" },
+  { "goolord/alpha-nvim", event = "BufEnter", settings = "alpha" },
   { "akinsho/toggleterm.nvim", settings = "toggleterm" },
   "tknightz/telescope-termfinder.nvim",
 

@@ -75,11 +75,21 @@ local spec = {
     "mfussenegger/nvim-dap",
     dependencies = {
       { "rcarriga/nvim-dap-ui", settings = "plugins.editor.debug.dapui" },
+      { "theHamsta/nvim-dap-virtual-text", config = true },
     },
     settings = "plugins.editor.debug.dap",
   },
   { "nvim-telescope/telescope-dap.nvim", settings = "plugins.editor.debug.dap_telescope" },
-  -- dapui, dap virtaul text (config = true)
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    config = function()
+      -- SETUP: pip install debugpy
+      local dap_python = require("dap-python")
+      dap_python.setup()
+      dap_python.test_runner = "pytest"
+    end,
+  },
 
   -- Python indenting issues
   -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136

@@ -27,7 +27,7 @@ function M.report_startuptime()
       vim.defer_fn(function()
         vim.api.nvim_echo({ { "" } }, false, {})
       end, 3000)
-      require("axie.plugins.ui.startscreen").update_startuptime(stats.loaded, stats.startuptime)
+      require("axie.plugins.ui.alpha").update_startuptime(stats.loaded, stats.startuptime)
     end,
   })
 end
@@ -48,6 +48,7 @@ function M.setup()
       missing = true,
       colorscheme = { "catppuccin" },
     },
+    checker = { enabled = true },
   })
 end
 

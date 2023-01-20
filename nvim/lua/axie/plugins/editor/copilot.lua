@@ -1,8 +1,10 @@
 local M = {}
 
+M.cmd = "Copilot"
+
 M.keys = {
-  -- script=true as well?
-  { "<C-a>", "copilot#Accept()", mode = "i", expr = true, silent = true },
+  -- https://github.com/community/community/discussions/29817#discussioncomment-4217615
+  { "<C-a>", "copilot#Accept()", mode = "i", expr = true, silent = true, replace_keycodes = false },
   { "<C-x>", "copilot#Dismiss()", mode = "i", expr = true, silent = true },
   { "<A-[>", "copilot#Previous()", mode = "i", expr = true, silent = true },
   { "<A-]>", "copilot#Next()", mode = "i", expr = true, silent = true },

@@ -33,8 +33,17 @@ local spec = {
       require("leap").add_default_mappings()
     end,
   },
+  {
+    "abecodes/tabout.nvim",
+    keys = {
+      { "<A-l>", "<Plug>(TaboutMulti)", mode = "i" },
+      { "<A-h>", "<Plug>(TaboutBackMulti)", mode = "i" },
+    },
+    opts = { tabkey = "", backwards_tabkey = "", act_as_tab = false },
+  },
   { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "romainl/vim-cool", event = "VeryLazy" },
+  { "mg979/vim-visual-multi", event = "VeryLazy" }, -- NOTE: too difficult to lazy load
   { "kevinhwang91/nvim-hlslens", settings = "hlslens" },
   {
     -- Underline word under cursor
@@ -54,7 +63,7 @@ local spec = {
     -- ALT: https://github.com/RRethy/vim-hexokinase
     "NvChad/nvim-colorizer.lua",
     event = "BufReadPre",
-    config = true,
+    opts = { filetypes = { "*", "!prompt", "!popup", "!TelescopePrompt", "!toggleterm" } },
   },
   -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
   { "Shatur/neovim-session-manager", event = "VimLeavePre", settings = "sessions" },

@@ -16,55 +16,39 @@
 
 ## TODO
 
-- Diffview merge tool
-- plugin help docs not imported
-- lazy plugins to update in heirline
+- Bug with aerial symbol icons
+- lazy plugins to update in polybar with `nvim --headless`
+- Diffview merge tool `<Space>gm`?
 - telescope command history - resume more than just last command (`<Space>f;`)
-- git merge conflict plugin? with bind `<Space>gm`
 - todo-comments qflist for single file (https://github.com/folke/todo-comments.nvim/issues/136)
 - Bind for rerunning last test
-- neo-tree lazy load like folke lazyvim sample
-- Binding for inserting tab character
+- neo-tree lazy load like folke lazyvim sample?
 - Dot repeat for macros (normal and visual)
 - `gF` doesn't expand if cursor on number
 - mason.nvim pynvim
 - nvim-surround restore cursor
 - https://github.com/ggandor/leap-spooky.nvim
 - winbar: restore non-custom winbar when switching NC
-- Aerial - add keybind to toggle between fold levels (1 and all)
 - Add google-java-format to Mason registry
   - GitHub, e.g. https://github.com/williamboman/mason.nvim/blob/cd07e4270ac6b294d09057117e027a4e963d00cb/lua/mason-registry/vls/init.lua
 - PRIORITY: TS\* Highlights
 - Statusline:
   - heirline supports tabline now - maybe migrate as well??
   - Clickable filename component - full path / relative path / just filename
-  - Selection word count (on visual mode) - reference old galaxyline config
   - Limit for large files (condition)
-- default `gq` binding for code formatting (and range)
 - normal mode `0` for beginning of line, `00` with no delay for end of line
   - https://github.com/max397574/better-escape.nvim/issues/41
-- keybind for refreshing `VimEnter` event
 - Check out mind.nvim
-- Telescope not buflisted?
-- Telescope setup requires telescope (telescope.builtin)
-- `gF`: goto file with line number
 - autocmd to install language server if one doesn't start for a filetype, also treesitter parser
   - `require("mason-lspconfig").get_available_servers({ filetype = vim.bo.filetype })`
   - https://github.com/williamboman/mason-lspconfig.nvim/pull/25
-- What happens if a plugin is defined to be after a disabled plugin?
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
-- keybind for replacing text object with content in yank register (instead of `v{text-object}p`)
 - replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
 - Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
 - telescope config layout
-- can map <c-tab>
+- can map `<C-Tab>`
 - command mode text sometimes disappears after a small delay (flicker, cmp?)
-- Migrate `plugins.binds` to individual plugin configs
-  - Update keymap RHS from vimscript to lua function
-  - Add desc to all binds and autocmd
-  - Group which-key bindings
-  - Issue: lazy load plugins won't load the key binds inside config (use `setup`)
 - PRIORITY: no eslint node_module -> use own eslint_d
 - Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
@@ -72,29 +56,22 @@
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
 - PRIORITY: set up https://github.com/renerocksai/telekasten.nvim
 - PRIORITY: out of mem for large files (e.g. ~/.cache/nvim/lsp.log)
-- IMPORTANT: lsp bindings into on_attach
 - IMPORTANT: toggleterm - warn if exit with hidden terminal
 - TODO: use bufferline https://www.youtube.com/watch?v=vJAmjAax2H0
 - READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 - TODO: use vim-fugitive instead of gitlinker?
 - TODO: Telescope picker for LSP commands
-- TODO: <space>lU to update lsp servers?
+- TODO: `<Space>lU` to update lsp servers?
 - TODO: rust-tools debug setup
-- TODO: global toggle inlay hints command (inc rust as well)
 - TODO: nvim-tree goto location of current buffer in cwd
 - TODO: python3 provider (OS, venv) -> utils (can be used in nvim-dap-python config as well)
-- Telescope setup, find_files wrapper if buffer is directory
 - nvim cmp dadbod source
 - nvim cmp tzachar/cmp-fzy-buffer?
-- Plugin and config split into separate modules?
-- TODO: wildmode (command completion) prefer copen over Copen (default > user-defined)
 - vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 - surround nvim = vim sandwich + vim surround?
 - https://github.com/stevearc/stickybuf.nvim
 - List prereqs
-- Tab before indent spot jumps to correct indent spot
-- Relative line number disabled ft manually defined?
-- Markdown tab and shift tab conditional mapping based on bullet
+- Tab before indent spot jumps to correct indent spot (like vscode)
 - TODO: hlslens + vim-visual-multi
 - Persistent undo max size
 - Add ripgrep to setup.sh
@@ -104,7 +81,6 @@
 - https://github.com/jbyuki/one-small-step-for-vimkind for nvim debugging?
 - https://github.com/jackMort/ChatGPT.nvim
 - https://github.com/miversen33/netman.nvim
-- https://github.com/lvimuser/lsp-inlayhints.nvim
 - check out https://github.com/anuvyklack/windows.nvim
 - https://github.com/jayp0521/mason-null-ls.nvim ?
 - Discover make / build commands, MakeFile, Docker (https://github.com/ptethng/telescope-makefile)
@@ -144,7 +120,6 @@
 - https://github.com/zim0369/butcher string to array
 - https://github.com/ripxorip/aerojump.nvim
 - bufferline.nvim or cokeline.nvim instead of barbar?
-- windline instead of galaxyline?
 - Calltree (https://github.com/ldelossa/calltree.nvim)
 - gcc diagnostics? (https://gitlab.com/andrejr/gccdiag)
 - alpha startup time (v -startuptime and read tmp file?)
@@ -166,13 +141,13 @@
 - `rm -rf ~/.local/share/nvim/shada/*` for Linux permission issues
 - Floats closing soon after nvim startup (e.g. Telescope, lazygit) - maybe stabilize.nvim
   - e.g. https://github.com/luukvbaal/stabilize.nvim/issues/3
+- `EMFILE: too many open files`
+  - `ulimit -n 526` (Mac, should fix it)
+  - https://github.com/neovim/neovim/issues/9912: `sudo chown -R "${USER}" ~/.local`
 
 ## Notes / issues
 
-- LSP multiple instances? lsp-signature delay (mainly sumneko_lua)
-- Auto formatter sometimes requires refreshing buffer with `:e`
-- Copilot `kD` + ignoring autopairs
-- Treesitter highlighting on bufenter (markdown)
+- lsp-signature delay (mainly sumneko_lua)
 - insert mode `<Tab>` using `<C-i>` mapping
   - https://neovim.discourse.group/t/mapping-c-i-in-insert-mode/3225
 - firenvim patched fonts not working
@@ -182,6 +157,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/folke/lazy.nvim/discussions/424
 - https://neovim.discourse.group/t/text-object-mapping/3597
 - https://github.com/windwp/nvim-autopairs/issues/315
 - https://github.com/folke/lazy.nvim/issues/139
@@ -194,15 +170,12 @@
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/514
 - https://github.com/NTBBloodbath/galaxyline.nvim/pull/41
 - https://neovim.discourse.group/t/is-there-a-way-to-update-highlight-groups-with-lua-api/3069
-- https://neovim.discourse.group/t/vim-diagnostic-open-float-handler/3043
 - https://github.com/nvim-telescope/telescope.nvim/issues/1904
-- https://github.com/rcarriga/nvim-dap-ui/issues/115
 - https://github.com/nvim-neotest/neotest/issues/35
 - https://bugs.chromium.org/p/chromium/issues/detail?id=998903
 - https://github.com/karb94/neoscroll.nvim/issues/55
 - https://github.com/lambdalisue/suda.vim/issues/48
 - https://github.com/catppuccin/nvim/issues/134
-- https://github.com/sindrets/diffview.nvim/issues/144
 - https://github.com/jose-elias-alvarez/null-ls.nvim/pull/892
 - https://github.com/ohmyzsh/ohmyzsh/pull/10947
 - https://github.com/hrsh7th/nvim-cmp/issues/953

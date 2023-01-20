@@ -1,5 +1,6 @@
 local M = {}
 
+-- ALT: lua function version: https://github.com/folke/lazy.nvim/issues/426#issuecomment-1396856753
 M.keys = {
   "<Plug>(dial-increment)",
   "<Plug>(dial-decrement)",

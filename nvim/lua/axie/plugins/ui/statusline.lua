@@ -24,6 +24,8 @@ M.setup_colours = function()
     onedark_red = "#e06c75",
     onedark_yellow = "#e5c07b",
     onedark_green = "#98c379",
+    onedark_purple = "#c678dd",
+    onedark_dark_purple = "#8a3fa0",
   }
 end
 
@@ -366,10 +368,40 @@ function M.file_format()
 end
 
 function M.word_count()
-  -- TODO
+  return {
+    init = function(self)
+      self.wc = vim.fn.wordcount()
+    end,
+    provider = function(self)
+      -- TODO: caching, human readable chars?, max limit?
+      local mode = self.wc.visual_chars and "visual_" or ""
+      local type = self.char_mode and "chars" or "words"
+      return " " .. self.wc[mode .. type] .. " "
+    end,
+    hl = { fg = "onedark_purple" },
+    updates = { "CursorMoved", "CursorMovedI", "ModeChanged" },
+    on_click = {
+      name = "toggle_word_char_mode",
+      callback = function(self)
+        self.char_mode = not self.char_mode
+      end,
+    },
+  }
 end
+
 function M.line_column()
   -- TODO
+  return {
+    init = function(self)
+      self.line = vim.fn.line(".")
+      self.col = vim.fn.col(".")
+    end,
+    provider = function(self)
+      return " " .. self.line .. ":" .. self.col .. " "
+    end,
+    hl = { fg = "onedark_dark_purple" },
+    updates = { "CursorMoved", "CursorMovedI" },
+  }
 end
 
 function M.scrollbar()
@@ -435,8 +467,8 @@ function M.config()
     this.space(),
     this.lsp(),
     this.file_format(),
-    -- this.word_count(),
-    -- this.line_column(),
+    this.word_count(),
+    this.line_column(),
     this.scrollbar(),
   }
 

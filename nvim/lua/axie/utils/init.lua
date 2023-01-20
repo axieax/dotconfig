@@ -73,7 +73,7 @@ end
 -- Display path of current buffer
 function M.display_path()
   M.notify(vim.fn.fnamemodify(vim.fn.expand("%"), ":p"), "info", {
-    title = "path",
+    title = "Path",
     render = "default",
   })
 end
@@ -81,7 +81,7 @@ end
 -- Display path of current working directory
 function M.display_cwd()
   M.notify(vim.loop.cwd(), "info", {
-    title = "cwd",
+    title = "Cwd",
     render = "default",
   })
 end

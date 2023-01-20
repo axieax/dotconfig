@@ -33,42 +33,21 @@ local spec = {
     enabled = function()
       return require("axie.utils").get_os() == "linux"
     end,
-    keys = {
-      {
-        "<Space>fp",
-        function()
-          require("telescope").extensions.media_files.media_files()
-        end,
-        desc = "Media files",
-      },
-    },
+    keys = { { "<Space>fp", "<Cmd>Telescope media_files<CR>", desc = "Media files" } },
   },
   {
     "LinArcX/telescope-env.nvim",
-    keys = {
-      {
-        "<Space>fE",
-        function()
-          require("telescope").extensions.env.env()
-        end,
-        desc = "Environment variables",
-      },
-    },
+    keys = { { "<Space>fE", "<Cmd>Telescope env env<CR>", desc = "Environment variables" } },
   },
   {
     "nvim-telescope/telescope-node-modules.nvim",
-    keys = {
-      {
-        "<Space>fN",
-        function()
-          require("telescope").extensions.node_modules.list()
-        end,
-        desc = "Node modules",
-      },
-    },
+    keys = { { "<Space>fN", "<Cmd>Telescope node_modules list<CR>", desc = "Node modules" } },
   },
   {
-    -- vim.ui overrides
+    "jvgrootveld/telescope-zoxide",
+    keys = { { "<Space>fz", "<Cmd>Telescope zoxide list<CR>", desc = "Zoxide" } },
+  },
+  {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
     opts = {
@@ -82,8 +61,17 @@ local spec = {
       },
     },
   },
+  {
+    "AckslD/nvim-neoclip.lua",
+    dependencies = "tami5/sqlite.lua",
+    event = "VeryLazy",
+    keys = {
+      { "<Space>fy", "<Cmd>Telescope neoclip<CR>", desc = "Yank history" },
+      { "<Space>fM", "<Cmd>Telescope macroscope<CR>", desc = "Macro history" },
+    },
+    opts = { enable_persistent_history = true, enable_macro_history = true },
+  },
   { "axieax/urlview.nvim", dev = dev_mode, settings = "urlview" },
-  -- cursor jump accent
   { "rainbowhxch/beacon.nvim", event = "VeryLazy" },
   { "petertriho/nvim-scrollbar", event = "VeryLazy", settings = "scrollbar" },
   { "anuvyklack/pretty-fold.nvim", event = "VeryLazy", config = true },
@@ -111,7 +99,16 @@ local spec = {
     config = true,
   },
   { "folke/zen-mode.nvim", settings = "zen" },
+  -- m[ and m] to navigate marks as well
   { "chentoast/marks.nvim", event = "VeryLazy", config = true },
+  {
+    "simnalamburt/vim-mundo",
+    keys = { { "<Space>fu", "<Cmd>MundoToggle<CR>", desc = "Undo tree" } },
+    config = function()
+      vim.g.mundo_auto_preview_delay = 0
+      vim.g.mundo_playback_delay = 100
+    end,
+  },
 }
 
 return require("axie.lazy").transform_spec(spec, "ui")

@@ -40,15 +40,17 @@ function M.setup()
   M.bootstrap()
   M.init()
   M.report_startuptime()
+
+  local colorscheme = require("axie.utils.config").colorscheme
   require("lazy").setup("axie.plugins", {
     defaults = { lazy = true },
     lockfile = vim.fn.expand("~/dotconfig/nvim/lua/axie/lazy/lazy-lock.json"),
     dev = { path = vim.fn.expand("~/dev/nvim-plugins") },
     install = {
       missing = true,
-      colorscheme = { "catppuccin" },
+      colorscheme = { colorscheme },
     },
-    checker = { enabled = true },
+    checker = { enabled = true, notify = false },
   })
 end
 

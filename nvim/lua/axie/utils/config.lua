@@ -3,6 +3,7 @@ local M = {}
 M.dev_mode = false
 M.nvchad_theme = true
 M.copilot_enabled = true
+M.colorscheme = "catppuccin"
 
 -- Icons
 M.diagnostics_icons = {

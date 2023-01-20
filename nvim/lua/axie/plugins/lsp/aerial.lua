@@ -23,17 +23,6 @@ function M.config()
     filter_kind = false,
     -- fall back to treesitter if LSP not available
     backends = { "lsp", "treesitter", "markdown", "man" },
-    on_attach = function(bufnr)
-      -- set fold level for Packer plugins config
-      local name = vim.api.nvim_buf_get_name(bufnr)
-      local matches = {
-        vim.fn.expand("~/dotconfig/nvim/lua/axie/plugins/init.lua"),
-        vim.fn.expand("~/.config/nvim/lua/axie/plugins/init.lua"),
-      }
-      if vim.tbl_contains(matches, name) then
-        aerial.tree_set_collapse_level(bufnr, 1)
-      end
-    end,
     keymaps = {
       ["<"] = {
         callback = aerial.tree_decrease_fold_level,

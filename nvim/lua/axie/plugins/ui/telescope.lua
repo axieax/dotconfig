@@ -227,6 +227,9 @@ function M.config()
   telescope.load_extension("aerial")
   telescope.load_extension("projects")
   telescope.load_extension("notify")
+  telescope.load_extension("zoxide")
+  telescope.load_extension("neoclip")
+  telescope.load_extension("macroscope")
 end
 
 return M

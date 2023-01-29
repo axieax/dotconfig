@@ -10,7 +10,7 @@ local spec = {
     },
     settings = "install",
   },
-  { "jose-elias-alvarez/null-ls.nvim", settings = "null" },
+  { "jose-elias-alvarez/null-ls.nvim", event = "VeryLazy", settings = "null" },
   "ThePrimeagen/refactoring.nvim",
 
   -- LSP server extensions

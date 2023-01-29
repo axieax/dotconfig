@@ -1,5 +1,6 @@
 -- Helper functions
 -- TODO: apply highlight group
+
 local M = {}
 
 -- Applies options to a meta-accessor
@@ -42,24 +43,6 @@ function M.override_filetype(pattern, ft)
   vim.filetype.add({ pattern = config })
 end
 
---- Determines whether to accept the current value or use a fallback value (nullish coalescing)
----@param value any @value to check
----@param fallback_value any @fallback value to use
----@param fallback_comparison any @fallback comparison, defaults to nil
----@return any @value, or @fallback if @value is @fallback_comparison
-function M.fallback(value, fallback_value, fallback_comparison)
-  return (value == fallback_comparison and fallback_value) or value
-end
-
---- Mimics the ternary operator
----@param condition boolean @condition to check
----@param if_true any @value to return if @condition is true
----@param if_false any @value to return if @condition is false
----@return any @condition ? if_true : if_false
-function M.ternary(condition, if_true, if_false)
-  return (condition and if_true) or if_false
-end
-
 -- Send a notification
 -- NOTE: notify plugin accepts table as multi-line string, vim.notify has opts
 function M.notify(...)
@@ -72,7 +55,7 @@ end
 
 -- Display path of current buffer
 function M.display_path()
-  M.notify(vim.fn.fnamemodify(vim.fn.expand("%"), ":p"), "info", {
+  M.notify(vim.fn.fnamemodify(vim.fn.expand("%"), ":p"), vim.log.levels.INFO, {
     title = "Path",
     render = "default",
   })
@@ -80,13 +63,15 @@ end
 
 -- Display path of current working directory
 function M.display_cwd()
-  M.notify(vim.loop.cwd(), "info", {
+  M.notify(vim.loop.cwd(), vim.log.levels.INFO, {
     title = "Cwd",
     render = "default",
   })
 end
 
--- vim.tbl_flatten limited to only once (top-level)
+--- vim.tbl_flatten limited to only once (top-level)
+---@param list table @list to flatten
+---@return table @flattened list
 function M.list_flatten_once(list)
   local result = {}
   for _, t in ipairs(list) do
@@ -97,6 +82,8 @@ function M.list_flatten_once(list)
   return result
 end
 
+--- Gets the operating system type
+---@return string @os
 function M.get_os()
   return vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
 end
@@ -109,7 +96,7 @@ function M.reload_module(module_name, ...)
   if ok then
     plenary.reload_module(module_name, ...)
   else
-    M.notify("Could not reload module: " .. module_name)
+    M.notify("Could not reload module: " .. module_name, vim.log.levels.ERROR)
   end
 end
 

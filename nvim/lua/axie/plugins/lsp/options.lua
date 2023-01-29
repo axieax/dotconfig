@@ -85,6 +85,12 @@ function M.default_on_attach(client, bufnr)
   map("n", "<Space>ll", vim.diagnostic.setloclist, { desc = "Document diagnostics" })
   map("n", "<Space>lL", vim.diagnostic.setqflist, { desc = "Project diagnostics" })
   map("n", "<Space>l;", utils.toggle_diagnostics, { desc = "Toggle diagnostics" })
+  map("n", "<Space>ls", function()
+    require("telescope.builtin").lsp_document_symbols()
+  end, { desc = "Document symbols" })
+  map("n", "<Space>lS", function()
+    require("telescope.builtin").lsp_dynamic_workspace_symbols()
+  end, { desc = "Dynamic workspace symbols" })
 end
 
 function M.default()
@@ -93,9 +99,7 @@ function M.default()
     on_attach = M.default_on_attach,
     handlers = {
       -- TODO: move other handlers here
-      ["textDocument/rename"] = function()
-        require("axie.plugins.lsp.rename").rename_handler()
-      end,
+      ["textDocument/rename"] = require("axie.plugins.lsp.rename").rename_handler,
     },
   }
 end

@@ -1,12 +1,10 @@
 local M = {}
 
-local utils = require("axie.utils")
 local ignored_filetypes = {
   "",
   "alpha",
   "neo-tree", -- NOTE: managed by neo-tree
   "toggleterm",
-  "packer",
   "lspinfo",
   "null-ls-info",
   "glowpreview",
@@ -16,6 +14,7 @@ local ignored_filetypes = {
   "mason",
   "aerial",
   "checkhealth",
+  "qf",
 }
 
 local function highlight(content, hl_group)
@@ -122,14 +121,14 @@ function M.context()
     "  "
   )
 
-  return utils.ternary(context ~= "", highlight(":: ", "NavicSeparator") .. context, "")
+  return context ~= "" and highlight(":: ", "NavicSeparator") .. context or ""
 end
 
 local focused_win = vim.api.nvim_get_current_win()
 
 function M.eval()
   local is_nc = focused_win ~= vim.api.nvim_get_current_win()
-  local file_hl = "NavicIconsFile" .. utils.ternary(is_nc, "NC", "")
+  local file_hl = "NavicIconsFile" .. (is_nc and "NC" or "")
   local modified = vim.api.nvim_buf_get_option(0, "modified")
 
   local _, value = pcall(function()

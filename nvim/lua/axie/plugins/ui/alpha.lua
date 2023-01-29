@@ -9,7 +9,7 @@ function M.update_startuptime(loaded_plugins, startuptime)
   if ok then
     dashboard.section.footer.val[2] = string.format("  %d plugins loaded in %.3f ms", loaded_plugins, startuptime)
   else
-    require("axie.utils").notify("Failed to load dashboard from vim-startuptime", "error")
+    require("axie.utils").notify("Failed to load dashboard from vim-startuptime", vim.log.levels.ERROR)
   end
 end
 

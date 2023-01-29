@@ -59,7 +59,7 @@ function M.notify_handler(result)
     end
   end
   msg = msg:sub(1, #msg - 1)
-  notify(msg, "info", {
+  notify(msg, vim.log.levels.INFO, {
     title = ("Succesfully renamed with %d changes"):format(num_changes),
   })
 

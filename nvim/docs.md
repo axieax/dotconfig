@@ -16,9 +16,14 @@
 
 ## TODO
 
+- Don't use Tabular? Prettier auto format tables?
+- `<Space>tv` for vim-test's `<Cmd>TestVisit<CR>`
+- `<Space>fn` for notes?
+- `<Space>oQ` for vim-dispatch's `<Cmd>Copen<CR>` qflist?
+- `]x` for next git merge conflict? (like diffview)
 - Bug with aerial symbol icons
+- Main bug to resolve is `wildmenu` cmp
 - lazy plugins to update in polybar with `nvim --headless`
-- Diffview merge tool `<Space>gm`?
 - telescope command history - resume more than just last command (`<Space>f;`)
 - todo-comments qflist for single file (https://github.com/folke/todo-comments.nvim/issues/136)
 - Bind for rerunning last test
@@ -130,7 +135,6 @@
 - https://github.com/kwkarlwang/bufresize.nvim
 - https://github.com/sQVe/sort.nvim
 - https://github.com/NTBBloodbath/rest.nvim API
-- PackerUpdate force pull (git fetch origin, git reset --hard origin/main)
 - https://github.com/LudoPinelli/comment-box.nvim
 - inccommand split preview-window scroll
 - https://github.com/natecraddock/workspaces.nvim
@@ -157,6 +161,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neotest/neotest-python/issues/43
 - https://github.com/folke/lazy.nvim/discussions/424
 - https://neovim.discourse.group/t/text-object-mapping/3597
 - https://github.com/windwp/nvim-autopairs/issues/315
@@ -187,7 +192,6 @@
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)
 - https://github.com/simrat39/symbols-outline.nvim/issues/115#issuecomment-1065854099
 - https://github.com/kevinhwang91/nvim-hlslens/issues/20#issuecomment-981329510
-- https://github.com/wbthomason/packer.nvim/issues/760
 - https://github.com/vuki656/package-info.nvim/issues/75
 - My surround-wrap plugin (future: URL paste md) - replaced by LuaSnip new feature?
 - Git change watch plugin (watch for breaking config setup?, when dead plugin has new updates to replace temp fork)

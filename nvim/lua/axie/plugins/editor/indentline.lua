@@ -35,7 +35,6 @@ M.opts = {
   -- exclude vim which key
   filetype_exclude = {
     "terminal",
-    "packer",
     "alpha",
     "help",
     "man",

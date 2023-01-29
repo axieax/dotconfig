@@ -91,6 +91,20 @@ local spec = {
     end,
   },
 
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/neotest-go",
+      "haydenmeade/neotest-jest",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-plenary",
+      -- "mrcjkb/neotest-haskell",
+      { "nvim-neotest/neotest-vim-test", requires = "vim-test/vim-test" },
+    },
+    settings = "test",
+  },
+
   -- Python indenting issues
   -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
   { "Vimjas/vim-python-pep8-indent", ft = "python" },

@@ -8,7 +8,7 @@ function M.config()
     vim.fn.inputsave()
     local name = vim.fn.input("Image Name: ")
     vim.fn.inputrestore()
-    return require("axie.utils").fallback(name, os.date("%Y-%m-%d-%H-%M-%S"))
+    return name ~= "" and name or os.date("%Y-%m-%d-%H-%M-%S")
   end
 
   require("clipboard-image").setup({

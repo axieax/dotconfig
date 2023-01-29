@@ -32,6 +32,9 @@ M.keys = {
   { "<Leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>" },
 }
 
-M.opts = { maximum_padding = 1 }
+M.opts = {
+  maximum_padding = 1,
+  -- highlight_inactive_file_icons = true,
+}
 
 return M

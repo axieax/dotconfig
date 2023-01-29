@@ -1,5 +1,7 @@
 local M = {}
 
+M.cmd = { "Catppuccin", "CatppuccinCompile" }
+
 function M.config()
   -- highlight group overrides
   vim.g.catppuccin_flavour = "mocha"
@@ -115,18 +117,6 @@ function M.config()
       which_key = true,
     },
     custom_highlights = remaps,
-  })
-
-  -- Create an autocmd User PackerCompileDone to update it every time packer is compiled
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "PackerCompileDone",
-    callback = function()
-      vim.api.nvim_cmd({ cmd = "CatppuccinCompile" }, {})
-      vim.defer_fn(function()
-        vim.api.nvim_cmd({ cmd = "colorscheme", args = { "catppuccin" } }, {})
-        -- vim.cmd("ColorizerReloadAllBuffers") -- nvim-colorizer.lua
-      end, 50) -- Debounced for live reloading
-    end,
   })
 
   vim.api.nvim_cmd({ cmd = "colorscheme", args = { "catppuccin" } }, {})

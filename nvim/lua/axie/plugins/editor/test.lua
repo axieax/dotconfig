@@ -32,7 +32,7 @@ function M.test_summary()
       return
     end
   end
-  notify("No tests found 😢", "error")
+  notify("No tests found 😢", vim.log.levels.ERROR)
 end
 
 M.keys = {
@@ -147,6 +147,8 @@ function M.config()
     },
     python = {
       filetypes = { "python" },
+      python = "/usr/local/bin/python3",
+      runner = "pytest",
     },
     plenary = {
       filetypes = { "lua" },
@@ -164,7 +166,7 @@ function M.config()
       table.insert(adapters, neotest_adapter(opts))
       vim.list_extend(adapter_filetypes, opts.filetypes)
     else
-      require("axie.utils").notify(string.format("Could not load neotest-%s adapter", adapter))
+      require("axie.utils").notify(string.format("Could not load neotest-%s adapter", adapter), vim.log.levels.ERROR)
     end
   end
 

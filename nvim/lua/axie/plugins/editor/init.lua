@@ -100,7 +100,7 @@ local spec = {
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
       -- "mrcjkb/neotest-haskell",
-      { "nvim-neotest/neotest-vim-test", requires = "vim-test/vim-test" },
+      { "nvim-neotest/neotest-vim-test", dependencies = "vim-test/vim-test" },
     },
     settings = "test",
   },

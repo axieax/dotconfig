@@ -16,6 +16,7 @@
 
 ## TODO
 
+- Use https://github.com/epwalsh/obsidian.nvim ?
 - Don't use Tabular? Prettier auto format tables?
 - `<Space>tv` for vim-test's `<Cmd>TestVisit<CR>`
 - `<Space>fn` for notes?
@@ -186,7 +187,7 @@
 - https://github.com/hrsh7th/nvim-cmp/issues/953
   - NOTE: arrow keys navigate commands rather than through text
   - https://github.com/neovim/neovim/issues/9953
-- https://github.com/jvgrootveld/telescope-zoxide/issues/12
+- https://github.com/jvgrootveld/telescope-zoxide/issues/19
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/552 (group_empty multiple <CR>)
 - https://github.com/numToStr/Comment.nvim/issues/22
 - https://github.com/beauwilliams/focus.nvim/issues/82 (incorrect auto resize for toggleterm and bqf)

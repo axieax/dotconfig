@@ -1,17 +1,7 @@
 local M = {}
 
--- TODO: display startup time - async function + :AlphaRedraw?
 -- TODO: customise like https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1308930
 -- narrower center align
-
-function M.update_startuptime(loaded_plugins, startuptime)
-  local ok, dashboard = pcall(require, "alpha.themes.dashboard")
-  if ok then
-    dashboard.section.footer.val[2] = string.format("  %d plugins loaded in %.3f ms", loaded_plugins, startuptime)
-  else
-    require("axie.utils").notify("Failed to load dashboard from vim-startuptime", vim.log.levels.ERROR)
-  end
-end
 
 M.keys = { { "<Space>S", "<Cmd>Alpha<CR>", desc = "Start menu" } }
 
@@ -40,7 +30,7 @@ function M.config()
     dashboard.button("s", "  Restore Session", "<Cmd>SessionManager load_last_session<CR>"),
     dashboard.button("S", "  Find Sessions", "<Cmd>SessionManager load_session<CR>"),
     dashboard.button("c", "﫸 Neovim Config", "<Cmd>lua require'axie.plugins.ui.telescope'.dotconfig()<CR>"),
-    dashboard.button("u", "  Update Plugins", "<Cmd>PackerSync<CR>"),
+    dashboard.button("u", "  Update Plugins", "<Cmd>Lazy<CR>"),
     dashboard.button("q", "⏻  Quit Neovim", "<Cmd>qa<CR>"),
   }
 
@@ -62,6 +52,15 @@ function M.config()
       vim.api.nvim_cmd({ cmd = "file", args = { "dashboard" } }, {})
     end,
   })
+end
+
+function M.update_startuptime(loaded_plugins, startuptime)
+  local ok, dashboard = pcall(require, "alpha.themes.dashboard")
+  if ok then
+    dashboard.section.footer.val[2] = string.format("  %d plugins loaded in %.3f ms", loaded_plugins, startuptime)
+  else
+    require("axie.utils").notify("Failed to load dashboard from vim-startuptime", vim.log.levels.ERROR)
+  end
 end
 
 return M

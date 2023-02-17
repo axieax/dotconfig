@@ -52,6 +52,13 @@ M.keys = {
     end,
     desc = "Close",
   },
+  {
+    "<Space>dK",
+    function()
+      require("dap.ui.widgets").hover()
+    end,
+    desc = "Hover",
+  },
 }
 
 function M.config()

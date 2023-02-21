@@ -8,6 +8,7 @@ M.ensure_installed = {
   -- "goimports",
   "prettierd",
   "shfmt",
+  -- "google-java-format",
   -- linter --
   -- "selene",
   "editorconfig-checker",

@@ -16,6 +16,10 @@
 
 ## TODO
 
+- Sometimes `A` is added to Telescope Prompt
+- Neotest plenary `neotest-plenary/run_tests.lua:26: module 'plenary.busted' not found`
+  - Works for plugin managed by lazy.nvim, not local dev directory
+- Requiring `dapui` temporarily buflists DAP widgets
 - Use https://github.com/epwalsh/obsidian.nvim ?
 - Don't use Tabular? Prettier auto format tables?
 - `<Space>tv` for vim-test's `<Cmd>TestVisit<CR>`
@@ -162,7 +166,6 @@
 
 ## Current PRs / Issues
 
-- https://github.com/nvim-neotest/neotest-python/issues/43
 - https://github.com/folke/lazy.nvim/discussions/424
 - https://neovim.discourse.group/t/text-object-mapping/3597
 - https://github.com/windwp/nvim-autopairs/issues/315

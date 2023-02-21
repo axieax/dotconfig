@@ -147,7 +147,6 @@ function M.config()
     },
     python = {
       filetypes = { "python" },
-      python = "/usr/local/bin/python3",
       runner = "pytest",
     },
     plenary = {
@@ -175,6 +174,7 @@ function M.config()
   require("neotest").setup({
     adapters = adapters,
     -- floating = { options = { winblend = 80 } },
+    quickfix = { open = false },
   })
 end
 

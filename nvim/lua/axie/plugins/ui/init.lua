@@ -30,6 +30,7 @@ local spec = {
   },
   {
     "nvim-telescope/telescope-media-files.nvim",
+    commit = "513e4ee385edd72bf0b35a217b7e39f84b6fe93c",
     enabled = function()
       return require("axie.utils").get_os() == "linux"
     end,

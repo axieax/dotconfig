@@ -37,7 +37,6 @@ function M.config(_, opts)
     return result
   end
 
-  local require_args = require("axie.utils").require_args
   vim.keymap.set("n", "<Space>d;", function()
     local windows = require("dapui.windows")
     -- just repl + console open
@@ -46,6 +45,8 @@ function M.config(_, opts)
     end
     dapui.toggle()
   end, { desc = "Toggle UI" })
-  vim.keymap.set("n", "<Space>dd", require_args(dapui.toggle, 2), { desc = "Toggle UI console" })
+  vim.keymap.set("n", "<Space>dd", function()
+    dapui.toggle(2)
+  end, { desc = "Toggle UI console" })
 end
 return M

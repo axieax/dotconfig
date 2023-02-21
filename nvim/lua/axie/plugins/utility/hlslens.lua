@@ -45,12 +45,12 @@ function M.config()
     vim.keymap.set(
       "n",
       trigger,
-      string.format("<Cmd>execute('normal! ' . v:count1 . '%s')<CR><Cmd>lua require('hlslens').start()<CR>", trigger)
+      string.format("<Cmd>execute('normal! ' . v:count1 . '%s')<CR><Cmd>lua require('hlslens').start()<CR>zz", trigger)
     )
   end
 
   for _, trigger in ipairs({ "*", "g*", "#", "g#" }) do
-    vim.keymap.set("n", trigger, trigger .. "<Cmd>lua require'hlslens'.start()<CR>")
+    vim.keymap.set("n", trigger, trigger .. "<Cmd>lua require'hlslens'.start()<CR>zz")
   end
 
   -- vim-visual-multi highlights (ctrl-n)

@@ -6,6 +6,21 @@
 local spec = {
   { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { mapping = { "jk", "kj" } } },
   {
+    "axieax/typo.nvim",
+    event = "BufWinEnter",
+    dev = true,
+    keys = {
+      {
+        "\\<Tab>",
+        function()
+          require("typo").check()
+        end,
+        desc = "Typo check",
+      },
+    },
+    config = true,
+  },
+  {
     "karb94/neoscroll.nvim",
     event = "VeryLazy",
     config = function()

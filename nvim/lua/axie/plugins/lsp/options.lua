@@ -269,7 +269,7 @@ function M.ltex()
   }
 end
 
-function M.sumneko_lua()
+function M.lua_ls()
   local settings = {
     settings = {
       Lua = {

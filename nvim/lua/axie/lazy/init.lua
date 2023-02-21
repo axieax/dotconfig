@@ -45,7 +45,7 @@ function M.setup()
   require("lazy").setup("axie.plugins", {
     defaults = { lazy = true },
     lockfile = vim.fn.expand("~/dotconfig/nvim/lua/axie/lazy/lazy-lock.json"),
-    dev = { path = vim.fn.expand("~/dev/nvim-plugins") },
+    dev = { path = vim.fn.expand("~/dev/nvim-plugins"), fallback = true },
     install = {
       missing = true,
       colorscheme = { colorscheme },

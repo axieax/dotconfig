@@ -14,6 +14,8 @@ M.keys = {
 function M.init()
   vim.g.copilot_enabled = require("axie.utils.config").copilot_enabled
   vim.g.copilot_no_tab_map = true
+
+  -- vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#6c7086" }) -- Catppuccin Overlay0
 end
 
 return M

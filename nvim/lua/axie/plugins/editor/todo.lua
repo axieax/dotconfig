@@ -47,7 +47,7 @@ M.opts = {
     PERF = {
       icon = " ",
       color = "warning",
-      alt = { "PERFORMANCE", "OPTIM", "OPTIMIZE", "OPTIMISE", "EFFICIENCY", "TEST" },
+      alt = { "PERFORMANCE", "OPTIM", "OPTIMIZE", "OPTIMISE", "EFFICIENCY", "TEST", "EXT", "EXTENSION" },
     },
     NOTE = {
       icon = " ",
@@ -86,7 +86,6 @@ M.opts = {
         "HERE",
         "IMPORTANT",
         "BIG",
-        "EXTENSION",
         "LINK",
         "USEFUL",
         "HELPFUL",

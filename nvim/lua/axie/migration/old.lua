@@ -85,9 +85,6 @@ local general_utilities = function(use)
       vim.keymap.set("n", "<Space>fH", telescope.extensions.howdoi.howdoi)
     end,
   })
-
-  -- argument correction
-  use({ "mong8se/actually.nvim", disable = require("axie.utils.config").dev_mode })
 end
 
 ------------------

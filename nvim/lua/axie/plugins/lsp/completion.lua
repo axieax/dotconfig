@@ -85,6 +85,14 @@ function M.config()
           fallback()
         end
       end,
+      c = function()
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-z>", true, true, true), "ni", true)
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "tn", false)
+        end
+      end,
     },
     ["<S-Tab>"] = {
       i = function(fallback)
@@ -92,6 +100,13 @@ function M.config()
           cmp.select_prev_item()
         else
           fallback()
+        end
+      end,
+      c = function()
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "tn", false)
         end
       end,
     },

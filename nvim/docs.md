@@ -16,10 +16,9 @@
 
 ## TODO
 
-- Sometimes `A` is added to Telescope Prompt
+- Setup iron.nvim, howdoi/stack overflow plugin
 - Neotest plenary `neotest-plenary/run_tests.lua:26: module 'plenary.busted' not found`
   - Works for plugin managed by lazy.nvim, not local dev directory
-- Requiring `dapui` temporarily buflists DAP widgets
 - Use https://github.com/epwalsh/obsidian.nvim ?
 - Don't use Tabular? Prettier auto format tables?
 - `<Space>tv` for vim-test's `<Cmd>TestVisit<CR>`
@@ -89,7 +88,6 @@
 ## Features/plugins
 
 - https://github.com/jbyuki/one-small-step-for-vimkind for nvim debugging?
-- https://github.com/jackMort/ChatGPT.nvim
 - https://github.com/miversen33/netman.nvim
 - check out https://github.com/anuvyklack/windows.nvim
 - https://github.com/jayp0521/mason-null-ls.nvim ?
@@ -166,6 +164,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/766
 - https://github.com/folke/lazy.nvim/discussions/424
 - https://neovim.discourse.group/t/text-object-mapping/3597
 - https://github.com/windwp/nvim-autopairs/issues/315

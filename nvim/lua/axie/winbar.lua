@@ -15,6 +15,7 @@ local ignored_filetypes = {
   "aerial",
   "checkhealth",
   "qf",
+  "netrw",
 }
 
 local function highlight(content, hl_group)

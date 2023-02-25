@@ -1,6 +1,21 @@
 local spec = {
   -- ALT: https://github.com/zbirenbaum/copilot.lua with https://github.com/zbirenbaum/copilot-cmp
   { "github/copilot.vim", event = "InsertEnter", settings = "copilot" },
+  {
+    "jackMort/ChatGPT.nvim",
+    cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
+    keys = {
+      { "<Space>rc", "<CMD>ChatGPT<CR>", desc = "ChatGPT" },
+      {
+        "<Space>rC",
+        "<CMD>ChatGPTEditWithInstructions<CR>",
+        desc = "ChatGPTEditWithInstructions",
+        mode = { "n", "v" },
+      },
+      { "<Space>rk", "<CMD>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
+    },
+    config = true,
+  },
   { "folke/todo-comments.nvim", event = "VeryLazy", settings = "todo" },
 
   {

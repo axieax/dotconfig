@@ -51,7 +51,7 @@ function M.formatting_sources()
     formatting.goimports,
     -- HASKELL: yay -S brittany
     formatting.brittany,
-    -- C*: yarn global add clang-format
+    -- C*: npm install -g clang-format
     formatting.clang_format.with({
       -- NOTE: disabled_filetypes still in this.filetypes
       disabled_filtypes = { "java" },
@@ -62,7 +62,7 @@ function M.formatting_sources()
     }),
     -- JAVA: yay -S google-java-format
     formatting.google_java_format,
-    -- PRETTIER: yarn global add @fsouza/prettierd
+    -- PRETTIER: npm install -g @fsouza/prettierd
     formatting.prettierd.with({
       filetypes = {
         -- formatting.prettierd.filetypes
@@ -85,14 +85,14 @@ function M.formatting_sources()
         "ruby",
         "xml",
         -- https://prettier.io/docs/en/plugins.html#community-plugins
-        "apex", -- yarn global add prettier-plugin-apex
-        "elm", -- yarn global add prettier-plugin-elm
-        -- "java", -- yarn global add prettier-plugin-java
-        "sol", -- yarn global add prettier-plugin-solidity
-        "toml", -- yarn global add prettier-plugin-toml
-        "svelte", -- yarn global add prettier-plugin-svelte
-        "kotlin", -- yarn global add prettier-plugin-kotlin
-        "sh", -- yarn global add prettier-plugin-sh
+        "apex", -- npm install -g prettier-plugin-apex
+        "elm", -- npm install -g prettier-plugin-elm
+        -- "java", -- npm install -g prettier-plugin-java
+        "sol", -- npm install -g prettier-plugin-solidity
+        "toml", -- npm install -g prettier-plugin-toml
+        "svelte", -- npm install -g prettier-plugin-svelte
+        "kotlin", -- npm install -g prettier-plugin-kotlin
+        "sh", -- npm install -g prettier-plugin-sh
         "dockerfile",
         "jproperties",
         "conf",

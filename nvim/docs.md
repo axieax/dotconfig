@@ -83,7 +83,6 @@
 - Tab before indent spot jumps to correct indent spot (like vscode)
 - TODO: hlslens + vim-visual-multi
 - Persistent undo max size
-- Add ripgrep to setup.sh
 
 ## Features/plugins
 

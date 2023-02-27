@@ -1,4 +1,5 @@
 #!/bin/bash
+source "$HOME/dotconfig/setup-utilities.sh"
 
 # Setup core tools
 action="install Homebrew"
@@ -29,11 +30,42 @@ fi
 
 action="install yarn"
 if ! check_dependency yarn && confirm "$action"; then
-  # npm install --global yarn
+  npm install --global yarn
+fi
+
+action="install go"
+if ! check_dependency go && confirm "$action"; then
   if is_linux; then
-    sudo pacman -S yarn
+    sudo pacman -S go
   elif is_mac; then
-    brew install yarn
+    brew install go
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi
+
+action="install zoxide"
+if ! check_dependency zoxide && confirm "$action"; then
+  curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+fi
+
+action="install lsd"
+if ! check_dependency lsd; then
+  if is_linux && confirm "$action"; then
+    sudo pacman -S lsd
+  elif is_mac && confirm "$action"; then
+    brew install lsd
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi
+
+action="install ripgrep"
+if ! check_dependency rg; then
+  if is_linux && confirm "$action"; then
+    sudo pacman -S ripgrep
+  elif is_mac && confirm "$action"; then
+    brew install ripgrep
   else
     echo "Failed to $action: unsupported OS"
   fi

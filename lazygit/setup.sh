@@ -8,7 +8,7 @@ fi
 
 action="install commitizen"
 if ! check_dependency commitizen && confirm "$action"; then
-  yarn global add commitizen cz-conventional-changelog
+  npm install -g commitizen cz-conventional-changelog
 fi
 
 action="link commitizen config"

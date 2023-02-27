@@ -24,29 +24,19 @@ fi
 # TODO: replace local installations with mason
 
 # Null-ls Sources
-action="install google-java-format formatter"
-if ! check_dependency "google-java-format" && confirm "$action"; then
-  if is_linux; then
-    yay -S google-java-format
-  elif is_mac; then
-    brew install google-java-format
-  else
-    echo "Failed to $action: unsupported OS"
-  fi
-fi
 
 # TEMP: https://github.com/williamboman/mason.nvim/issues/392
 action="install prettier extensions"
 if confirm "$action"; then
   cd "$HOME/.local/share/nvim/mason/packages/prettierd/node_modules/@fsouza/prettierd" && npm install prettier-plugin-sh prettier-plugin-toml
-  # yarn global add prettier-plugin-apex
-  # yarn global add prettier-plugin-elm
-  # yarn global add prettier-plugin-java
-  # yarn global add prettier-plugin-solidity
-  # yarn global add prettier-plugin-toml
-  # yarn global add prettier-plugin-svelte
-  # yarn global add prettier-plugin-kotlin
-  # yarn global add prettier-plugin-sh
+  # npm install -g prettier-plugin-apex
+  # npm install -g prettier-plugin-elm
+  # npm install -g prettier-plugin-java
+  # npm install -g prettier-plugin-solidity
+  # npm install -g prettier-plugin-toml
+  # npm install -g prettier-plugin-svelte
+  # npm install -g prettier-plugin-kotlin
+  # npm install -g prettier-plugin-sh
 fi
 
 action="install cppcheck diagnostics"
@@ -58,4 +48,31 @@ if ! check_dependency "cppcheck" && confirm "$action"; then
   else
     echo "Failed to $action: unsupported OS"
   fi
+fi
+
+action="install ripgrep"
+if ! check_dependency rg; then
+  if is_linux && confirm "$action"; then
+    sudo pacman -S ripgrep
+  elif is_mac && confirm "$action"; then
+    brew install ripgrep
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi
+
+action="link nvim config"
+if confirm "$action"; then
+  link_config "$HOME/dotconfig/nvim" "$HOME/.config/nvim"
+fi
+
+action="link stylua config"
+if confirm "$action"; then
+  link_config "$HOME/dotconfig/stylua.toml" "$HOME/.config/stylua.toml"
+fi
+
+action="link selene config"
+if confirm "$action"; then
+  link_config "$HOME/dotconfig/selene.toml" "$HOME/.config/selene.toml"
+  link_config "$HOME/dotconfig/vim.toml" "$HOME/.config/vim.toml"
 fi

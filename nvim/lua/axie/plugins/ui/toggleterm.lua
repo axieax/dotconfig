@@ -91,7 +91,7 @@ end
 function M.liveserver(current_file)
   local filename = (current_file or false) and vim.fn.expand("%") or ""
   local liveserver = require("toggleterm.terminal").Terminal:new({
-    -- INSTALL: yarn global add live-server
+    -- INSTALL: npm install -g live-server
     cmd = "live-server " .. filename,
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },

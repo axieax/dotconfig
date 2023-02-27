@@ -1,6 +1,17 @@
 #!/bin/bash
 source "$HOME/dotconfig/setup-utilities.sh"
 
+action="install alacritty"
+if ! check_dependency alacritty && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S alacritty
+  elif is_mac; then
+    brew install alacritty
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi
+
 action="install JetBrains Mono font"
 if confirm "$action"; then
   if is_linux; then
@@ -24,5 +35,16 @@ if confirm "$action"; then
     link_config $HOME/dotconfig/alacritty/alacritty-mac.yml $HOME/.config/alacritty/alacritty.yml
   else
     echo "invalid OSTYPE $OSTYPE for alacritty setup"
+  fi
+fi
+
+action="install neofetch"
+if ! check_dependency neofetch && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S neofetch
+  elif is_mac; then
+    brew install neofetch
+  else
+    echo "Failed to $action: unsupported OS"
   fi
 fi

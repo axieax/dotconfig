@@ -66,7 +66,12 @@ if confirm "$action"; then
   link_config "$HOME/dotconfig/vim.toml" "$HOME/.config/vim.toml"
 fi
 
-action="install sqlite for neoclip"
+action="install sqlite for neoclip persistence"
 if is_linux && ! check_dependency sqlite3 && confirm "$action"; then
   sudo pacman -S sqlite
+elif is_mac && confirm "$action"; then
+  # NOTE: required to install for Mac even if built-in
+  brew install sqlite
+else
+  echo "Failed to $action: unsupported OS"
 fi

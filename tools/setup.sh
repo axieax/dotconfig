@@ -70,3 +70,14 @@ if ! check_dependency rg && confirm "$action"; then
     echo "Failed to $action: unsupported OS"
   fi
 fi
+
+action="install bat"
+if ! check_dependency bat && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S bat
+  elif is_mac; then
+    brew install bat
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi

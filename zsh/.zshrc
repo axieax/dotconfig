@@ -67,8 +67,7 @@ export HISTCONTROL=ignoreboth:erasedups
 
 # list
 alias ls='lsd'
-alias lt='lsd --tree'
-alias lst='lsd --tree'
+alias tree='lsd --tree'
 alias la='ls -a'
 alias ll='ls -alFh'
 alias l='ls'
@@ -433,6 +432,7 @@ alias timezone='sudo timedatectl set-ntp true'
 
 
 ### Start Services ###
+[ -f "$HOME/.zsh_env" ] && source "$HOME/.zsh_env"
 
 # reporting tools
 neofetch

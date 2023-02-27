@@ -50,10 +50,10 @@ if ! check_dependency zoxide && confirm "$action"; then
 fi
 
 action="install lsd"
-if ! check_dependency lsd; then
-  if is_linux && confirm "$action"; then
+if ! check_dependency lsd && confirm "$action"; then
+  if is_linux; then
     sudo pacman -S lsd
-  elif is_mac && confirm "$action"; then
+  elif is_mac; then
     brew install lsd
   else
     echo "Failed to $action: unsupported OS"
@@ -61,10 +61,10 @@ if ! check_dependency lsd; then
 fi
 
 action="install ripgrep"
-if ! check_dependency rg; then
-  if is_linux && confirm "$action"; then
+if ! check_dependency rg && confirm "$action"; then
+  if is_linux; then
     sudo pacman -S ripgrep
-  elif is_mac && confirm "$action"; then
+  elif is_mac; then
     brew install ripgrep
   else
     echo "Failed to $action: unsupported OS"

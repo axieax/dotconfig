@@ -39,22 +39,11 @@ if confirm "$action"; then
   # npm install -g prettier-plugin-sh
 fi
 
-action="install cppcheck diagnostics"
-if ! check_dependency "cppcheck" && confirm "$action"; then
-  if is_linux; then
-    sudo pacman -S cppcheck
-  elif is_mac; then
-    brew install cppcheck
-  else
-    echo "Failed to $action: unsupported OS"
-  fi
-fi
-
 action="install ripgrep"
-if ! check_dependency rg; then
-  if is_linux && confirm "$action"; then
+if ! check_dependency rg && confirm "$action"; then
+  if is_linux; then
     sudo pacman -S ripgrep
-  elif is_mac && confirm "$action"; then
+  elif is_mac; then
     brew install ripgrep
   else
     echo "Failed to $action: unsupported OS"
@@ -75,4 +64,9 @@ action="link selene config"
 if confirm "$action"; then
   link_config "$HOME/dotconfig/selene.toml" "$HOME/.config/selene.toml"
   link_config "$HOME/dotconfig/vim.toml" "$HOME/.config/vim.toml"
+fi
+
+action="install sqlite for neoclip"
+if is_linux && ! check_dependency sqlite3 && confirm "$action"; then
+  sudo pacman -S sqlite
 fi

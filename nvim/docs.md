@@ -86,6 +86,7 @@
 
 ## Features/plugins
 
+- `cppcheck` null-ls diagnostics source install with mason instead of OS package manager
 - https://github.com/jbyuki/one-small-step-for-vimkind for nvim debugging?
 - https://github.com/miversen33/netman.nvim
 - check out https://github.com/anuvyklack/windows.nvim

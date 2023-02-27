@@ -2,10 +2,10 @@
 source "$HOME/dotconfig/setup-utilities.sh"
 
 action="install zsh"
-if ! check_dependency zsh; then
-  if is_linux && confirm "$action"; then
+if ! check_dependency zsh && confirm "$action"; then
+  if is_linux; then
     sudo pacman -S zsh
-  elif is_mac && confirm "$action"; then
+  elif is_mac; then
     brew install zsh
   else
     echo "Failed to $action: unsupported OS"
@@ -18,10 +18,10 @@ if [ ! -d "$HOME/.oh-my-zsh" ] && confirm "$action"; then
 fi
 
 action="install starship prompt"
-if ! check_dependency starship; then
-  if is_linux && confirm "$action"; then
+if ! check_dependency starship && confirm "$action"; then
+  if is_linux; then
     sudo pacman -S starship
-  elif is_mac && confirm "$action"; then
+  elif is_mac; then
     brew install starship
   else
     echo "Failed to $action: unsupported OS"
@@ -46,6 +46,7 @@ fi
 action="link zsh config"
 if confirm "$action"; then
   link_config "$HOME/dotconfig/zsh/.zshrc" "$HOME/.zshrc"
+  touch "$HOME/.zsh_env"
 fi
 
 action="link starship config"

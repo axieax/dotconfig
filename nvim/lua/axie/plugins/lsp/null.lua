@@ -48,10 +48,7 @@ function M.formatting_sources()
     formatting.isort,
     -- GOLANG: go install golang.org/x/tools/cmd/goimports@latest
     -- NOTE: this superset of gofmt is preferred if installed
-    formatting.goimports.with({
-      -- TEMP: group local Canva packages
-      extra_args = { "-local", "github.com/canva" },
-    }),
+    formatting.goimports,
     -- HASKELL: yay -S brittany
     formatting.brittany,
     -- C*: yarn global add clang-format

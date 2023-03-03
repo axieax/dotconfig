@@ -81,3 +81,14 @@ if ! check_dependency bat && confirm "$action"; then
     echo "Failed to $action: unsupported OS"
   fi
 fi
+
+action="install fzf"
+if ! check_dependency fzf && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S fzf
+  elif is_mac; then
+    brew install fzf
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi

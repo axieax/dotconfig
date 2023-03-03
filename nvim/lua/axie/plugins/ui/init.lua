@@ -14,6 +14,17 @@ local spec = {
     settings = "neotree",
   },
   "mrbjarksen/neo-tree-diagnostics.nvim",
+  {
+    "ibhagwan/fzf-lua",
+    cmd = "FzfLua",
+    keys = {
+      { "<Space>fzf", "<Cmd>FzfLua files<CR>", desc = "Fzf files" },
+      { "<Space>fzg", "<Cmd>FzfLua live_grep<CR>", desc = "Fzf live grep" },
+      { "<Space>fzG", "<Cmd>FzfLua grep<CR>", desc = "Fzf grep" },
+      { "<Space>fz.", "<Cmd>FzfLua resume<CR>", desc = "Fzf grep" },
+      { "<Space>fz/", "<Cmd>FzfLua lgrep_curbuf<CR>", desc = "Fzf search buffer" },
+    },
+  },
   { "nvim-telescope/telescope.nvim", settings = "telescope" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   {

@@ -405,6 +405,9 @@ alias teams='flatpak run com.microsoft.Teams'
 
 ### Custom ###
 
+# vim mode
+bindkey -v
+
 # Quick QRCode
 function qr() { curl qrcode.show/$1 }
 
@@ -444,3 +447,4 @@ neofetch
 # nvm alias default node > /dev/null
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -112,8 +112,8 @@ map(
   { desc = "Format buffer" }
 )
 
-local yank_register = vim.loop.os_uname().sysname == "Linux" and "+" or "*"
-map({ "n", "v" }, "\\y", '"' .. yank_register .. "y", { desc = "Yank to clipboard" })
+local clipboard_register = vim.loop.os_uname().sysname == "Linux" and "+" or "*"
+map({ "n", "v" }, "\\y", '"' .. clipboard_register .. "y", { desc = "Yank to clipboard" })
 map("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "Copy yank register to clipboard" })
 map({ "n", "v" }, "\\p", '"0p', { desc = "Paste last yanked" })
 

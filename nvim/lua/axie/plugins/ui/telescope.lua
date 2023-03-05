@@ -205,6 +205,22 @@ function M.config()
       },
     },
     extensions = {
+      file_browser = {
+        mappings = {
+          i = {
+            ["<C-y>"] = function(prompt_bufnr)
+              local symbol = require("telescope.actions.state").get_selected_entry().ordinal
+              vim.fn.setreg('"', symbol)
+              actions.close(prompt_bufnr)
+            end,
+            ["<C-p>"] = function(prompt_bufnr)
+              local symbol = require("telescope.actions.state").get_selected_entry().value
+              vim.fn.setreg('"', symbol)
+              actions.close(prompt_bufnr)
+            end,
+          },
+        },
+      },
       media_files = {
         -- pip install ueberzug for images
         -- pdftoppm for pdf

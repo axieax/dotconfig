@@ -1,0 +1,25 @@
+# zoxide integration
+cmd z %{{
+  result="$(zoxide query --exclude $PWD $@)"
+  lf -remote "send $id cd $result"
+}}
+
+cmd zi ${{
+  result="$(zoxide query -i)"
+  lf -remote "send $id cd $result"
+}}
+
+# trash-cli integration
+cmd trash %trash-put $fx
+
+# cd
+cmd dump ${{
+  set -f
+  # if file under cursor, use parent directory instead
+  [[ -f $f ]] && dir=$PWD || dir=$f
+  echo $dir > /tmp/lf-last-dir
+}}
+
+cmd q quit
+map o open
+map E push :dump<enter>q

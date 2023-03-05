@@ -423,6 +423,20 @@ function link-github-remote() {
   git remote add github "$url"
 }
 
+# lf with cd behaviour
+function lf () {
+  LF_DIR="/tmp/lf-last-dir"
+  [ -f "$LF_DIR" ] && rm -f "$LF_DIR"
+  command lf "$@"
+  if [ -f "$LF_DIR" ]; then
+    DIR="$(cat "$LF_DIR")"
+    if [ -d "$DIR" ] && [ "$DIR" != "$(pwd)" ]; then
+      echo "Changing directory to $DIR"
+      cd "$DIR"
+    fi
+  fi
+}
+
 # Do not disturb
 function dnd() {
   xfconf-query -c xfce4-notifyd -p /do-not-disturb -T
@@ -446,5 +460,6 @@ neofetch
 # TODO: add default node to path https://www.ioannispoulakas.com/2020/02/22/how-to-speed-up-shell-load-while-using-nvm/
 # nvm alias default node > /dev/null
 
+# Misc
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

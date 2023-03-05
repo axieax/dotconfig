@@ -1,7 +1,7 @@
 #!/bin/bash
 source "$HOME/dotconfig/setup-utilities.sh"
 
-mkdir -p ~/.config
+mkdir -p "$HOME/.config"
 
 setup_app() {
   app=$1
@@ -18,6 +18,7 @@ setup_app zsh
 setup_app alacritty
 setup_app nvim
 setup_app lazygit
+setup_app lf
 
 setup_app xmonad
 setup_app polybar

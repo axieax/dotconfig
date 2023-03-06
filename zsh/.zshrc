@@ -1,47 +1,3 @@
-### tmux
-function tn() {
-  # new tmux session
-  NAME="$(basename "$PWD")"
-  SESSION="$NAME"
-  i=1
-  while tmux has-session -t "$SESSION" 2>/dev/null; do
-    SESSION="$NAME-$i"
-    ((i++))
-  done
-  tmux new-session -s "$SESSION"
-}
-
-function ts() {
-  # find / switch sessions
-  NAME=${1:=$(tmux list-sessions 2>/dev/null | fzf | cut -d ':' -f1)}
-  [ -z "$TMUX" ] && tmux attach -t "$NAME" || tmux switch-client -t "$NAME"
-}
-
-function t() {
-  # zoxide-like tmux navigation (inspired by @joshmedeski)
-  DIR=$(zoxide query "$1")
-  NAME=$(basename "$DIR")
-  tmux has-session -t "$NAME" 2>/dev/null
-  [ "$?" -ne 0 ] && tmux new-session -d -s "$NAME" -c "$DIR"
-  ts "$NAME"
-}
-
-# NOTE: doesn't handle multiple sessions with the same basename well
-alias tt='t "$(zoxide query -i)"'
-
-alias td='tmux delete-session -t "$(tmux list-sessions 2>/dev/null | fzf | cut -d ":" -f1)"'
-
-# tmux autostart
-if [ -x "$(command -v tmux)" ] && [ -x "$(command -v fzf)" ] && [ -z "$TMUX" ]; then
-  SESSIONS=$(tmux list-sessions 2>/dev/null | grep -v '(attached)$')
-  if [ $? -eq 0 ]; then
-    SESSION=$(echo "$SESSIONS" | fzf | cut -d ':' -f1)
-    [ -z "$SESSION" ] && tn || tmux attach -t "$SESSION"
-  else
-    tn
-  fi
-fi
-
 ### PATH Additions ###
 function pathadd() {
   # if exists and not already in path
@@ -49,6 +5,9 @@ function pathadd() {
     export PATH="$1${PATH:+":${PATH}"}"
   fi
 }
+
+pathadd "$HOME/.config/tmux/scripts"
+_tmux_autostart.sh
 
 function sauce() {
   [[ -f "$1" ]] && source "$1"

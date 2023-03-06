@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# New tmux session
+NAME="$(basename "$PWD")"
+SESSION="$NAME"
+i=1
+while tmux has-session -t "$SESSION" 2>/dev/null; do
+  SESSION="$NAME-$i"
+  ((i++))
+done
+tmux new-session -s "$SESSION"

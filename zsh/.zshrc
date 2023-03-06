@@ -1,5 +1,6 @@
-# tmux new session
+### tmux
 function tn() {
+  # new tmux session
   NAME="$(basename "$PWD")"
   SESSION="$NAME"
   i=1
@@ -9,6 +10,26 @@ function tn() {
   done
   tmux new-session -s "$SESSION"
 }
+
+function ts() {
+  # find / switch sessions
+  NAME=${1:=$(tmux list-sessions 2>/dev/null | fzf | cut -d ':' -f1)}
+  [ -z "$TMUX" ] && tmux attach -t "$NAME" || tmux switch-client -t "$NAME"
+}
+
+function t() {
+  # zoxide-like tmux navigation (inspired by @joshmedeski)
+  DIR=$(zoxide query "$1")
+  NAME=$(basename "$DIR")
+  tmux has-session -t "$NAME" 2>/dev/null
+  [ "$?" -ne 0 ] && tmux new-session -d -s "$NAME" -c "$DIR"
+  ts "$NAME"
+}
+
+# NOTE: doesn't handle multiple sessions with the same basename well
+alias tt='t "$(zoxide query -i)"'
+
+alias td='tmux delete-session -t "$(tmux list-sessions 2>/dev/null | fzf | cut -d ":" -f1)"'
 
 # tmux autostart
 if [ -x "$(command -v tmux)" ] && [ -x "$(command -v fzf)" ] && [ -z "$TMUX" ]; then
@@ -417,7 +438,7 @@ alias v="nvim"
 alias dns="sudoedit /etc/resolv.conf"
 alias vv="cd ~/dotconfig/nvim && $EDITOR"
 alias zz="$EDITOR $HOME/.zshrc"
-alias zzz=". $HOME/.zshrc"
+alias zzz="clear && source $HOME/.zshrc"
 alias z..='z ..'
 
 if [[ $OS == "Linux" ]]; then

@@ -16,6 +16,8 @@
 
 ## TODO
 
+- Toggleterm add another horizontal terminal
+- Try `cmdheight=0`, preferably messages just above statusline
 - Setup iron.nvim, howdoi/stack overflow plugin
 - Neotest plenary `neotest-plenary/run_tests.lua:26: module 'plenary.busted' not found`
   - Works for plugin managed by lazy.nvim, not local dev directory
@@ -155,6 +157,8 @@
 
 ## Notes / issues
 
+- leap `s` bind cleared after buffer switched from alpha.nvim
+  - https://github.com/goolord/alpha-nvim/issues/153 ?
 - lsp-signature delay (mainly sumneko_lua)
 - insert mode `<Tab>` using `<C-i>` mapping
   - https://neovim.discourse.group/t/mapping-c-i-in-insert-mode/3225

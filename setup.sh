@@ -18,6 +18,7 @@ setup_app zsh
 setup_app alacritty
 setup_app nvim
 setup_app lazygit
+setup_app tmux
 setup_app lf
 
 setup_app xmonad

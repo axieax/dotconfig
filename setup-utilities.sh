@@ -55,6 +55,6 @@ link_config() {
   [[ $copy_only = true ]] && command="cp" || command="ln -s"
   # create and move to backup if exists
   mkdir -p "$(dirname "$dst")"
-  backup_dst_config $dst $as_user
+  backup_dst_config "$dst" "$as_user"
   $as_user $command "$src" "$dst"
 }

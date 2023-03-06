@@ -104,6 +104,7 @@ function M.config()
       noice = false,
       notify = true,
       nvimtree = false,
+      octo = false,
       overseer = false,
       pounce = false,
       symbols_outline = true,

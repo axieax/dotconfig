@@ -52,6 +52,8 @@ function M.setup()
     },
     checker = { enabled = true, notify = false },
   })
+  require("lazy.view.config").dimmed_commits =
+    { "build", "chore", "ci", "doc", "style", "refactor", "perf", "test", "fix", "highlight", "injection" }
 end
 
 local resolve_keys = { "config", "init", "keys", "cmd", "opts" }

@@ -21,7 +21,7 @@ if confirm "$action"; then
   if is_linux; then
     link_config "$HOME/dotconfig/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
   elif is_mac; then
-    link_config "$HOME/dotconfig/lazygit/config.yml" "$HOME/Library/Application?Support/lazygit/config.yml"
+    link_config "$HOME/dotconfig/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml"
   else
     echo "Failed to $action: unsupported OS"
   fi

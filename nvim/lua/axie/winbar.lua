@@ -31,7 +31,7 @@ function M.file_icon()
   local filetype = vim.fn.expand("%:p:e")
   local ok, devicons = pcall(require, "nvim-web-devicons")
   if ok then
-    local icon = devicons.get_icon(nil, filetype)
+    local icon = devicons.get_icon("", filetype)
     if icon then
       return icon
     end
@@ -132,7 +132,7 @@ function M.eval()
   local file_hl = "NavicIconsFile" .. (is_nc and "NC" or "")
   local modified = vim.api.nvim_buf_get_option(0, "modified")
 
-  local _, value = pcall(function()
+  local ok, value = pcall(function()
     local components = {
       highlight(modified and "*" or "", "WinBarModified"),
       highlight(M.file_icon(), file_hl),
@@ -144,7 +144,7 @@ function M.eval()
 
     return table.concat(components, " ")
   end)
-  return value
+  return ok and value or highlight(value, "ErrorMsg")
 end
 
 function M.show_winbar()

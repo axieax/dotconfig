@@ -121,6 +121,11 @@ map("i", "<A-t>", "<C-v><Tab>", { desc = "Insert tab" })
 
 -- Filetype-specific
 filetype_map("markdown", "v", ",*", "S*gvS*", { remap = true, desc = "Bold selection" })
+filetype_map("json", "n", ",c", function()
+  local buf = vim.api.nvim_get_current_buf()
+  local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+  vim.api.nvim_buf_set_option(buf, "filetype", filetype == "json" and "jsonc" or "json")
+end, { desc = "Toggle jsonc filetype" })
 filetype_map("sh", "n", ",x", "<Cmd>!chmod +x %<CR>", { desc = "Make file executable" })
 
 -- CHECK: https://github.com/neovim/neovim/issues/14090#issuecomment-1113090354

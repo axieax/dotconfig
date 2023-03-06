@@ -1,9 +1,36 @@
+# tmux new session
+function tn() {
+  NAME="$(basename "$PWD")"
+  SESSION="$NAME"
+  i=1
+  while tmux has-session -t "$SESSION" 2>/dev/null; do
+    SESSION="$NAME-$i"
+    ((i++))
+  done
+  tmux new-session -s "$SESSION"
+}
+
+# tmux autostart
+if [ -x "$(command -v tmux)" ] && [ -x "$(command -v fzf)" ] && [ -z "$TMUX" ]; then
+  SESSIONS=$(tmux list-sessions 2>/dev/null | grep -v '(attached)$')
+  if [ $? -eq 0 ]; then
+    SESSION=$(echo "$SESSIONS" | fzf | cut -d ':' -f1)
+    [ -z "$SESSION" ] && tn || tmux attach -t "$SESSION"
+  else
+    tn
+  fi
+fi
+
 ### PATH Additions ###
 function pathadd() {
   # if exists and not already in path
   if [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]; then
     export PATH="$1${PATH:+":${PATH}"}"
   fi
+}
+
+function sauce() {
+  [[ -f "$1" ]] && source "$1"
 }
 
 OS=$(uname -s)
@@ -48,7 +75,7 @@ plugins=(
   zsh-syntax-highlighting # NOTE: this has to be the last plugin
 )
 fpath+=~/.oh-my-zsh/custom/plugins/zsh-completions/src
-source $ZSH/oh-my-zsh.sh
+sauce $ZSH/oh-my-zsh.sh
 
 ### ARCOLINUX SETTINGS ###
 
@@ -424,7 +451,7 @@ function link-github-remote() {
 }
 
 # lf with cd behaviour
-function lf () {
+function lf() {
   LF_DIR="/tmp/lf-last-dir"
   [ -f "$LF_DIR" ] && rm -f "$LF_DIR"
   command lf "$@"
@@ -449,17 +476,17 @@ alias timezone='sudo timedatectl set-ntp true'
 
 
 ### Start Services ###
-[ -f "$HOME/.zsh_env" ] && source "$HOME/.zsh_env"
+sauce "$HOME/.zsh_env"
 
 # reporting tools
 neofetch
 # macchina
 
 # nvm
-# source /usr/share/nvm/init-nvm.sh --no-use
+# sauce /usr/share/nvm/init-nvm.sh --no-use
 # TODO: add default node to path https://www.ioannispoulakas.com/2020/02/22/how-to-speed-up-shell-load-while-using-nvm/
 # nvm alias default node > /dev/null
 
 # Misc
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+sauce "$HOME/.ghcup/env" # ghcup-env
+sauce "$HOME/.nix-profile/etc/profile.d/nix.sh" # added by Nix installer

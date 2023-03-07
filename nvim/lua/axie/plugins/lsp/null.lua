@@ -23,13 +23,14 @@ function M.use_null_formatting(filetype)
   local null_ls = require("null-ls")
   local null_ls_sources = require("null-ls.sources")
 
-  local sources = null_ls_sources.get({})
+  local sources = null_ls_sources.get_available(filetype, null_ls.methods.FORMATTING)
   for _, source in ipairs(sources) do
-    if
-      source.name ~= "trim_whitespace"
-      and null_ls_sources.is_available(source, filetype, null_ls.methods.FORMATTING)
-    then
-      return true
+    if source.name ~= "trim_whitespace" then
+      local cmd = source.generator.opts.command
+      if vim.fn.executable(cmd) == 1 then
+        -- require("axie.utils").notify(string.format("%s using null-ls formatting with %s", filetype, source.name))
+        return true
+      end
     end
   end
   return false
@@ -39,46 +40,22 @@ function M.formatting_sources()
   local null_ls = require("null-ls")
   local formatting = null_ls.builtins.formatting
   return {
-    -- LUA: sudo pacman -S stylua
     -- NOTE: sumneko_lua has builtin EmmyLuaCodeStyle support
-    formatting.stylua,
-    -- PYTHON: pip install black
-    formatting.black,
-    -- PYTHON: pip install isort (import sort)
-    formatting.isort,
-    -- GOLANG: go install golang.org/x/tools/cmd/goimports@latest
+    formatting.stylua, -- lua
+    formatting.black, -- python
+    formatting.isort, -- python
     -- NOTE: this superset of gofmt is preferred if installed
-    formatting.goimports,
-    -- HASKELL: yay -S brittany
-    formatting.brittany,
-    -- C*: npm install -g clang-format
-    formatting.clang_format.with({
-      -- NOTE: disabled_filetypes still in this.filetypes
-      disabled_filtypes = { "java" },
-    }),
-    -- MAKE: pip install cmakelang (~/.local/bin/cmake-format)
+    formatting.goimports, -- go
+    formatting.brittany, -- haskell (yay -S brittany)
+    formatting.clang_format.with({ disabled_filetypes = { "java" } }), -- c*
+    -- make: pip install cmakelang (~/.local/bin/cmake-format)
     formatting.cmake_format.with({
       filetypes = { "cmake", "make" }, -- TODO: check if this is necessary
     }),
-    -- JAVA: yay -S google-java-format
-    formatting.google_java_format,
-    -- PRETTIER: npm install -g @fsouza/prettierd
+    formatting.google_java_format, -- java
+    -- prettier: npm install -g @fsouza/prettierd
     formatting.prettierd.with({
-      filetypes = {
-        -- formatting.prettierd.filetypes
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "vue",
-        "css",
-        "scss",
-        "less",
-        "html",
-        "json",
-        "yaml",
-        "markdown",
-        "graphql",
+      extra_filetypes = {
         -- https://prettier.io/docs/en/plugins.html#official-plugins
         "php",
         "pug",
@@ -100,15 +77,13 @@ function M.formatting_sources()
         "gitignore",
       },
     }),
-    -- BAZEL: go install github.com/bazelbuild/buildtools/buildifier@latest or yay -S bazel-buildtools
+    -- bazel: go install github.com/bazelbuild/buildtools/buildifier@latest or yay -S bazel-buildtools
     formatting.buildifier,
-    -- DEFAULT: pip install codespell
+    -- default: pip install codespell
     -- ISSUE: false positives (e.g. ans -> and) may cause compilation problems
     -- formatting.codespell,
-    -- PROTOBUF: yay -S buf
-    -- formatting.buf,
-    -- DEFAULT
-    formatting.trim_whitespace,
+    -- formatting.buf, -- protobuf (yay -S buf)
+    formatting.trim_whitespace, -- default
   }
 end
 
@@ -116,36 +91,31 @@ function M.diagnostic_sources()
   local null_ls = require("null-ls")
   local diagnostics = null_ls.builtins.diagnostics
   return {
-    -- PYTHON: pip install pylint
-    diagnostics.pylint,
-    -- LUA: cargo install selene
+    diagnostics.pylint, -- python
+    -- lua
     diagnostics.selene.with({
       extra_args = { "--config", vim.fn.expand("~/.config/selene.toml") },
       condition = function(utils)
         return utils.root_has_file({ "selene.toml" })
       end,
     }),
-    -- C / CPP: sudo pacman -S cppcheck
-    diagnostics.cppcheck,
-    -- GCC: yay -S gccdiag or compile from source
+    diagnostics.cppcheck, -- c/c++ (sudo pacman -S cppcheck)
+    -- gcc: yay -S gccdiag or compile from source
     diagnostics.gccdiag.with({
       condition = function(utils)
         return utils.root_has_file({ "compile_commands.json" })
       end,
     }),
-    -- SH: sudo pacman -S shellcheck
     -- TODO: override diagnostic format?
-    diagnostics.shellcheck,
-    -- DEFAULT: pip install editorconfig-checker
+    diagnostics.shellcheck, -- sh
+    -- default
     diagnostics.editorconfig_checker.with({
       condition = function(utils)
         return utils.root_has_file({ ".editorconfig" })
       end,
     }),
-    -- PROTOBUF: yay -S buf
-    -- diagnostics.buf,
-    -- DEFAULT
-    -- diagnostics.trail_space,
+    -- diagnostics.buf, -- protobuf
+    -- diagnostics.trail_space, -- default
   }
 end
 
@@ -153,8 +123,7 @@ function M.code_action_sources()
   local null_ls = require("null-ls")
   local code_actions = null_ls.builtins.code_actions
   return {
-    -- SH: sudo pacman -S shellcheck
-    code_actions.shellcheck,
+    code_actions.shellcheck, -- sh
     code_actions.gitsigns,
     code_actions.refactoring,
   }

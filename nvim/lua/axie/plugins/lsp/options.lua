@@ -17,16 +17,18 @@ function M.default_on_attach(client, bufnr)
   if client.supports_method("textDocument/formatting") then
     local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
     local null_can_format = require("axie.plugins.lsp.null").use_null_formatting(filetype)
-    client.server_capabilities.documentFormattingProvider = not (null_can_format and client.name ~= "null-ls")
 
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      desc = "LSP Formatting",
-      group = vim.api.nvim_create_augroup(string.format("LSP Formatting (buf: %s)", bufnr), {}),
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format()
-      end,
-    })
+    if not (null_can_format and client.name ~= "null-ls") then
+      client.server_capabilities.documentFormattingProvider = true
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        desc = "LSP Formatting",
+        group = vim.api.nvim_create_augroup(string.format("LSP Formatting (buf: %s, %s)", bufnr, client.name), {}),
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
+    end
   end
 
   -- Code lens

@@ -14,6 +14,7 @@ M.config = function(_, opts)
   wk.setup(opts)
   wk.register({
     ["<Space>f"] = { name = "find" },
+    ["<Space>fz"] = { name = "fzf" },
     ["<Space>g"] = { name = "git" },
     ["<Space>gd"] = { name = "git diff" },
     ["<Space>d"] = { name = "debug" },

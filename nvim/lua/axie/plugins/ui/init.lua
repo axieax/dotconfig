@@ -7,6 +7,19 @@ local spec = {
   -- { "akinsho/bufferline.nvim", event = "VeryLazy", config = true },
   { "rcarriga/nvim-notify", settings = "notify" },
   {
+    "stevearc/oil.nvim",
+    keys = {
+      {
+        "<Space>;",
+        function()
+          require("oil").open_float()
+        end,
+        desc = "Edit filesystem",
+      },
+    },
+    opts = { float = { padding = 10 } },
+  },
+  {
     -- Tree explorer (filesystem, buffers, git_status)
     "nvim-neo-tree/neo-tree.nvim",
     branch = "main",
@@ -57,7 +70,7 @@ local spec = {
   },
   {
     "jvgrootveld/telescope-zoxide",
-    keys = { { "<Space>fz", "<Cmd>Telescope zoxide list<CR>", desc = "Zoxide" } },
+    keys = { { "<Space>fZ", "<Cmd>Telescope zoxide list<CR>", desc = "Zoxide" } },
   },
   {
     "stevearc/dressing.nvim",

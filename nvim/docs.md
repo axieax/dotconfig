@@ -16,6 +16,7 @@
 
 ## TODO
 
+- git hunk keymaps
 - Toggleterm add another horizontal terminal
 - Try `cmdheight=0`, preferably messages just above statusline
 - Setup iron.nvim, howdoi/stack overflow plugin
@@ -169,6 +170,9 @@
 
 ## Current PRs / Issues
 
+- https://github.com/stevearc/oil.nvim/issues/70
+- https://github.com/spaceship-prompt/spaceship-prompt/issues/558
+- https://github.com/starship/starship/discussions/4968
 - https://github.com/nvim-neo-tree/neo-tree.nvim/issues/766
 - https://github.com/folke/lazy.nvim/discussions/424
 - https://neovim.discourse.group/t/text-object-mapping/3597

@@ -16,6 +16,8 @@
 
 ## TODO
 
+- group filetype settings in config, which can be enabled with flag
+  - `sudo pacman -S jre-openjdk` for jre setup
 - git hunk keymaps
 - Toggleterm add another horizontal terminal
 - Try `cmdheight=0`, preferably messages just above statusline

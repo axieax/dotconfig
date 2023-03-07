@@ -74,8 +74,12 @@ function M.servers()
   end
 
   -- Setup language servers via autocmd
-  this.setup_custom("jdtls", require("jdtls").start_or_attach)
-  this.setup_custom("rust_analyzer", require("rust-tools").setup, "server")
+  this.setup_custom("jdtls", function(opts)
+    require("jdtls").start_or_attach(opts)
+  end)
+  this.setup_custom("rust_analyzer", function(opts)
+    require("rust-tools").setup(opts)
+  end, "server")
   this.setup_custom("grammarly", function(opts)
     vim.keymap.set("n", "\\g", function()
       -- Stop Grammarly client if active

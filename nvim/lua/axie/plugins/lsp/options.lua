@@ -18,8 +18,8 @@ function M.default_on_attach(client, bufnr)
     local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
     local null_can_format = require("axie.plugins.lsp.null").use_null_formatting(filetype)
 
-    if not (null_can_format and client.name ~= "null-ls") then
-      client.server_capabilities.documentFormattingProvider = true
+    local enabled = null_can_format == (client.name == "null-ls")
+    if enabled then
       vim.api.nvim_create_autocmd("BufWritePre", {
         desc = "LSP Formatting",
         group = vim.api.nvim_create_augroup(string.format("LSP Formatting (buf: %s, %s)", bufnr, client.name), {}),
@@ -29,6 +29,8 @@ function M.default_on_attach(client, bufnr)
         end,
       })
     end
+    client.server_capabilities.documentFormattingProvider = enabled
+    client.server_capabilities.documentFormattingRangeProvider = enabled
   end
 
   -- Code lens
@@ -72,6 +74,7 @@ function M.default_on_attach(client, bufnr)
   end, { desc = "Definition" })
   map("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration" })
 
+  map("n", "<Space>rf", vim.lsp.buf.format, { desc = "Format" })
   map("n", "<Space>rn", function()
     require("axie.plugins.lsp.rename").rename_empty()
   end, { desc = "Rename" })
@@ -168,7 +171,7 @@ function M.jdtls()
   local operating_system = utils.get_os()
   local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
   local java_bundles =
-    vim.fn.globpath(mason_path, "java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 0, 1)
+      vim.fn.globpath(mason_path, "java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 0, 1)
 
   vim.list_extend(java_bundles, vim.fn.globpath(mason_path, "java-test/extension/server/*.jar", 0, 1))
   -- TEMP: Failed to get bundleInfo for bundle from com.microsoft.java.test.runner-jar-with-dependencies.jar

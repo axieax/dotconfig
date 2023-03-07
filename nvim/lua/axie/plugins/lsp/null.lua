@@ -24,16 +24,9 @@ function M.use_null_formatting(filetype)
   local null_ls_sources = require("null-ls.sources")
 
   local sources = null_ls_sources.get_available(filetype, null_ls.methods.FORMATTING)
-  for _, source in ipairs(sources) do
-    if source.name ~= "trim_whitespace" then
-      local cmd = source.generator.opts.command
-      if vim.fn.executable(cmd) == 1 then
-        -- require("axie.utils").notify(string.format("%s using null-ls formatting with %s", filetype, source.name))
-        return true
-      end
-    end
-  end
-  return false
+  return not vim.tbl_isempty(vim.tbl_filter(function(source)
+    return source.name ~= "trim_whitespace"
+  end, sources))
 end
 
 function M.formatting_sources()
@@ -53,7 +46,6 @@ function M.formatting_sources()
       filetypes = { "cmake", "make" }, -- TODO: check if this is necessary
     }),
     formatting.google_java_format, -- java
-    -- prettier: npm install -g @fsouza/prettierd
     formatting.prettierd.with({
       extra_filetypes = {
         -- https://prettier.io/docs/en/plugins.html#official-plugins
@@ -77,11 +69,9 @@ function M.formatting_sources()
         "gitignore",
       },
     }),
-    -- bazel: go install github.com/bazelbuild/buildtools/buildifier@latest or yay -S bazel-buildtools
-    formatting.buildifier,
-    -- default: pip install codespell
+    formatting.buildifier, -- bazel
     -- ISSUE: false positives (e.g. ans -> and) may cause compilation problems
-    -- formatting.codespell,
+    -- formatting.codespell, -- default
     -- formatting.buf, -- protobuf (yay -S buf)
     formatting.trim_whitespace, -- default
   }

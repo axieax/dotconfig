@@ -3,7 +3,13 @@ source "$HOME/dotconfig/setup-utilities.sh"
 
 action="install lazygit"
 if ! check_dependency lazygit && confirm "$action"; then
-  go install github.com/jesseduffield/lazygit@latest
+  if is_linux; then
+    sudo pacman -S lazygit
+  elif is_mac; then
+    brew install lazygit
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
 fi
 
 action="install commitizen"

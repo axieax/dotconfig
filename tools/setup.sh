@@ -33,17 +33,6 @@ if ! check_dependency yarn && confirm "$action"; then
   npm install --global yarn
 fi
 
-action="install go"
-if ! check_dependency go && confirm "$action"; then
-  if is_linux; then
-    sudo pacman -S go
-  elif is_mac; then
-    brew install go
-  else
-    echo "Failed to $action: unsupported OS"
-  fi
-fi
-
 action="install zoxide"
 if ! check_dependency zoxide && confirm "$action"; then
   curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash

@@ -232,20 +232,36 @@ function M.config()
   })
 
   telescope.load_extension("fzf")
-  telescope.load_extension("file_browser")
-  if require("axie.utils").get_os() == "linux" then
-    telescope.load_extension("media_files")
-  end
-  telescope.load_extension("env")
-  telescope.load_extension("node_modules")
-  telescope.load_extension("dap")
-  telescope.load_extension("termfinder")
-  telescope.load_extension("aerial")
-  telescope.load_extension("projects")
-  telescope.load_extension("notify")
-  telescope.load_extension("zoxide")
-  telescope.load_extension("neoclip")
-  telescope.load_extension("macroscope")
+end
+
+function M.init()
+  local loaded = false
+  vim.api.nvim_create_autocmd("CmdlineEnter", {
+    -- BUG: closing a window also triggers `CmdlineEnter`
+    pattern = ":",
+    group = vim.api.nvim_create_augroup("TelescopeExtensions", {}),
+    callback = vim.schedule_wrap(function()
+      if not loaded then
+        local telescope = require("telescope")
+        telescope.load_extension("file_browser")
+        if require("axie.utils").get_os() == "linux" then
+          telescope.load_extension("media_files")
+        end
+        telescope.load_extension("env")
+        telescope.load_extension("node_modules")
+        telescope.load_extension("dap")
+        telescope.load_extension("termfinder")
+        telescope.load_extension("aerial")
+        telescope.load_extension("projects")
+        telescope.load_extension("notify")
+        telescope.load_extension("zoxide")
+        telescope.load_extension("neoclip")
+        telescope.load_extension("macroscope")
+
+        loaded = true
+      end
+    end),
+  })
 end
 
 return M

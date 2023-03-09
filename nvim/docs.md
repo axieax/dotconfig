@@ -57,7 +57,7 @@
   - `require("mason-lspconfig").get_available_servers({ filetype = vim.bo.filetype })`
   - https://github.com/williamboman/mason-lspconfig.nvim/pull/25
 - Specify preferred formatter (specific lsp or null-ls for filetype as a table in order of pref)
-- replace Octo with gh.nvim, orgmode with neorg, neo-tree with litee
+- replace Octo with gh.nvim, orgmode with neorg (check out mkdnflow.nvim), neo-tree with litee
   - Guide: https://who.ldelossa.is/posts/gh-nvim/
 - Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
 - telescope config layout

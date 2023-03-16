@@ -15,7 +15,7 @@ function M.config()
   require("axie.utils").override_filetype("github.com_*.txt", "markdown")
 
   -- TODO: setup Nerd Font glyphs (`guifont`)
-  vim.opt.guifont = "JetBrains Mono"
+  vim.opt.guifont = "JetBrainsMono Nerd Font Mono"
 end
 
 return M

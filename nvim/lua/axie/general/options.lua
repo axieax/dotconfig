@@ -8,6 +8,7 @@ vim_apply(vim.opt, {
   -- spell = true,
   scrolloff = 1,
   sidescrolloff = 2,
+  whichwrap = "bs<>[]hl",
   cursorline = true,
   splitbelow = true,
   splitright = true,
@@ -16,6 +17,8 @@ vim_apply(vim.opt, {
   relativenumber = true,
   ruler = true,
   colorcolumn = "80",
+  numberwidth = 1,
+  -- signcolumn = "number", -- TODO: find a way to right-align symbol
   termguicolors = true,
   showmode = false,
   swapfile = false,

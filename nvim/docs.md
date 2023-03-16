@@ -3,23 +3,16 @@
 ## Inspiration
 
 - https://github.com/rockerBOO/awesome-neovim
-- https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules
-- NvChad theme
-- https://bluz71.github.io/2021/09/10/vim-tips-revisited.html
-- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/config/nvim/lua/plugins/init.lua
-- TODO: https://github.com/numToStr/dotfiles/blob/master/neovim/.config/nvim/lua/numToStr/plugins.lua
-- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/options.lua
-- https://github.com/Gelio/ubuntu-dotfiles/blob/master/install/neovim/stowed/.config/nvim/lua/lsp/tsserver.lua#L13
-- https://github.com/danymat/champagne/blob/main/lua/plugins.lua
-- https://github.com/AstroNvim/AstroNvim
-- https://github.com/NvChad/NvChad/blob/main/lua/plugins/init.lua lazy loading packer plugins
+- https://github.com/AstroNvim/AstroNvim nvim-IDE style
 
 ## TODO
 
+- find a way to right-align symbols with `signcolumn=number`
 - remove pep8-indent plugin when Python treesitter indents are fixed
 - group filetype settings in config, which can be enabled with flag
   - also have language specific `setup.sh` if necessary (e.g. Python `pynvim`, `pytest`, Mason sources)
   - `sudo pacman -S jre-openjdk` for jre setup
+  - https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules
 - git hunk keymaps
 - Toggleterm add another horizontal terminal
 - Try `cmdheight=0`, preferably messages just above statusline
@@ -45,9 +38,6 @@
 - nvim-surround restore cursor
 - https://github.com/ggandor/leap-spooky.nvim
 - winbar: restore non-custom winbar when switching NC
-- Add google-java-format to Mason registry
-  - GitHub, e.g. https://github.com/williamboman/mason.nvim/blob/cd07e4270ac6b294d09057117e027a4e963d00cb/lua/mason-registry/vls/init.lua
-- PRIORITY: TS\* Highlights
 - Statusline:
   - heirline supports tabline now - maybe migrate as well??
   - Clickable filename component - full path / relative path / just filename
@@ -64,9 +54,8 @@
 - Change LuaSnipEdit binding - don't like capital S (`\\<Tab>`?)
 - telescope config layout
 - can map `<C-Tab>`
-- command mode text sometimes disappears after a small delay (flicker, cmp?)
+- PRIORITY: command mode text sometimes disappears after a small delay (flicker, cmp?)
 - PRIORITY: no eslint node_module -> use own eslint_d
-- Augroup instead of aucommand to clear for multiple source
 - NvimTree show_file_info border config (https://github.com/kyazdani42/nvim-tree.lua/pull/1042#discussion_r819122836)
 - Custom require which takes module_name, ... args (pcall wrapper)
 - Lua function map -> define custom wrapper func(f, ...) which returns another function
@@ -77,7 +66,6 @@
 - READ: https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166
 - TODO: use vim-fugitive instead of gitlinker?
 - TODO: Telescope picker for LSP commands
-- TODO: `<Space>lU` to update lsp servers?
 - TODO: rust-tools debug setup
 - TODO: nvim-tree goto location of current buffer in cwd
 - TODO: python3 provider (OS, venv) -> utils (can be used in nvim-dap-python config as well)
@@ -86,7 +74,6 @@
 - vim-sandwich (remap s?) or surround.nvim instead of surround.vim
 - surround nvim = vim sandwich + vim surround?
 - https://github.com/stevearc/stickybuf.nvim
-- List prereqs
 - Tab before indent spot jumps to correct indent spot (like vscode)
 - TODO: hlslens + vim-visual-multi
 - Persistent undo max size
@@ -94,7 +81,10 @@
 
 ## Features/plugins
 
+- splitjoin (ts-node-action with null-ls integration)
+- https://github.com/mizlan/iswap.nvim ?
 - `cppcheck` null-ls diagnostics source install with mason instead of OS package manager
+- https://github.com/jose-elias-alvarez/typescript.nvim
 - https://github.com/jbyuki/one-small-step-for-vimkind for nvim debugging?
 - https://github.com/miversen33/netman.nvim
 - check out https://github.com/anuvyklack/windows.nvim
@@ -174,6 +164,8 @@
 
 ## Current PRs / Issues
 
+- nvim-scrollbar covers wrapped EOL (https://github.com/petertriho/nvim-scrollbar/issues/40 ?)
+- https://github.com/gaoDean/autolist.nvim/issues/56 (`<Esc>g@la`)
 - https://github.com/folke/lazy.nvim/pull/612#issuecomment-1463271058
 - https://github.com/stevearc/oil.nvim/issues/70
 - https://github.com/spaceship-prompt/spaceship-prompt/issues/558

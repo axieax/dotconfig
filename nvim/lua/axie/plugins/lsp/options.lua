@@ -1,6 +1,7 @@
 local M = {}
 
 local utils = require("axie.utils")
+local group = vim.api.nvim_create_augroup("LspFormatting", {})
 
 --- Returns the custom options for a given language server
 ---@param name string @The name of the language server
@@ -20,9 +21,10 @@ function M.default_on_attach(client, bufnr)
 
     local enabled = null_can_format == (client.name == "null-ls")
     if enabled then
+      vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
         desc = "LSP Formatting",
-        group = vim.api.nvim_create_augroup(string.format("LSP Formatting (buf: %s, %s)", bufnr, client.name), {}),
+        group = group,
         buffer = bufnr,
         callback = function()
           vim.lsp.buf.format()
@@ -171,7 +173,7 @@ function M.jdtls()
   local operating_system = utils.get_os()
   local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
   local java_bundles =
-      vim.fn.globpath(mason_path, "java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 0, 1)
+    vim.fn.globpath(mason_path, "java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 0, 1)
 
   vim.list_extend(java_bundles, vim.fn.globpath(mason_path, "java-test/extension/server/*.jar", 0, 1))
   -- TEMP: Failed to get bundleInfo for bundle from com.microsoft.java.test.runner-jar-with-dependencies.jar

@@ -99,6 +99,8 @@ end, { desc = "Replace with yanked" })
 map("n", "\\R", function()
   paste_replace("\\p")
 end, { desc = "Replace with last yanked" })
+map("n", "\\c", '"_c', { desc = "Change (no register)" })
+map("n", "\\C", '"_C', { desc = "Change (no register)" })
 
 map(
   "n",

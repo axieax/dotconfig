@@ -135,6 +135,13 @@ M.keys = {
     desc = "Theme preview",
   },
   {
+    "<Space>fH",
+    function()
+      require("telescope.builtin").highlights()
+    end,
+    desc = "Highlight groups",
+  },
+  {
     "<Space>f.",
     function()
       require("telescope.builtin").resume()

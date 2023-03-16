@@ -44,6 +44,7 @@ function M.setup()
   local colorscheme = require("axie.utils.config").colorscheme
   require("lazy").setup("axie.plugins", {
     defaults = { lazy = true },
+    concurrency = utils.get_os() == "mac" and 50 or nil,
     lockfile = vim.fn.expand("~/dotconfig/nvim/lua/axie/lazy/lazy-lock.json"),
     dev = { path = vim.fn.expand("~/dev/nvim-plugins"), fallback = true },
     install = {

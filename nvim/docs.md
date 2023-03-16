@@ -16,7 +16,9 @@
 
 ## TODO
 
+- remove pep8-indent plugin when Python treesitter indents are fixed
 - group filetype settings in config, which can be enabled with flag
+  - also have language specific `setup.sh` if necessary (e.g. Python `pynvim`, `pytest`, Mason sources)
   - `sudo pacman -S jre-openjdk` for jre setup
 - git hunk keymaps
 - Toggleterm add another horizontal terminal
@@ -172,6 +174,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/folke/lazy.nvim/pull/612#issuecomment-1463271058
 - https://github.com/stevearc/oil.nvim/issues/70
 - https://github.com/spaceship-prompt/spaceship-prompt/issues/558
 - https://github.com/starship/starship/discussions/4968

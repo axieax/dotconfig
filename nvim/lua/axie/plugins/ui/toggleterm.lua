@@ -41,6 +41,7 @@ end
 
 function M.config()
   require("toggleterm").setup({
+    persist_mode = false,
     size = function(term)
       if term.direction == "horizontal" then
         return 15

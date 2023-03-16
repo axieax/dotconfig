@@ -215,13 +215,8 @@ function M.config()
   })
 
   -- TEMP: bash parser for zsh https://github.com/nvim-treesitter/nvim-treesitter/issues/655
-  local ft_to_lang = require("nvim-treesitter.parsers").ft_to_lang
-  require("nvim-treesitter.parsers").ft_to_lang = function(ft)
-    if ft == "zsh" then
-      return "bash"
-    end
-    return ft_to_lang(ft)
-  end
+  require("nvim-treesitter.parsers").filetype_to_parsername.zsh = "bash"
+  -- vim.treesitter.language.register("bash", "zsh") -- TODO: replace (nightly)
 end
 
 return M

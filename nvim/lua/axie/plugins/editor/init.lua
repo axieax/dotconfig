@@ -56,6 +56,7 @@ local spec = {
     event = "BufReadPost",
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
+      vim.cmd.highlight("MatchParen", "guibg=NONE")
     end,
   },
   { "windwp/nvim-autopairs", event = "InsertEnter", settings = "autopairs" },
@@ -150,8 +151,8 @@ local spec = {
   {
     -- NOTE: <C-t> (tab) to indent after auto continue, <C-d> (dedent) to unindent
     "gaoDean/autolist.nvim",
-    event = "InsertEnter *.md,*.txt,*.tex", -- https://github.com/gaoDean/autolist.nvim/issues/56
-    dependencies = "hrsh7th/nvim-cmp",
+    ft = { "markdown", "txt", "tex", "plaintex" },
+    dependencies = { "hrsh7th/nvim-cmp", "windwp/nvim-autopairs" },
     settings = "autolist",
   },
 }

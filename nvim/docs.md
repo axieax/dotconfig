@@ -7,6 +7,9 @@
 
 ## TODO
 
+- revert formatting
+- Telescope search `ripgrep` with arguments for file patterns
+- jdtls mac runtimes
 - find a way to right-align symbols with `signcolumn=number`
 - remove pep8-indent plugin when Python treesitter indents are fixed
 - group filetype settings in config, which can be enabled with flag
@@ -84,6 +87,7 @@
 - splitjoin (ts-node-action with null-ls integration)
 - https://github.com/mizlan/iswap.nvim ?
 - `cppcheck` null-ls diagnostics source install with mason instead of OS package manager
+  - https://github.com/williamboman/mason.nvim/pull/559
 - https://github.com/jose-elias-alvarez/typescript.nvim
 - https://github.com/jbyuki/one-small-step-for-vimkind for nvim debugging?
 - https://github.com/miversen33/netman.nvim
@@ -164,13 +168,14 @@
 
 ## Current PRs / Issues
 
+- https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133
+- https://github.com/mfussenegger/nvim-jdtls/discussions/446
 - nvim-scrollbar covers wrapped EOL (https://github.com/petertriho/nvim-scrollbar/issues/40 ?)
 - https://github.com/gaoDean/autolist.nvim/issues/56 (`<Esc>g@la`)
 - https://github.com/folke/lazy.nvim/pull/612#issuecomment-1463271058
 - https://github.com/stevearc/oil.nvim/issues/70
 - https://github.com/spaceship-prompt/spaceship-prompt/issues/558
 - https://github.com/starship/starship/discussions/4968
-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/766
 - https://github.com/folke/lazy.nvim/discussions/424
 - https://neovim.discourse.group/t/text-object-mapping/3597
 - https://github.com/windwp/nvim-autopairs/issues/315

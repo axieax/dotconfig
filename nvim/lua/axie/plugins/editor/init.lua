@@ -31,7 +31,7 @@ local spec = {
     build = ":TSUpdate query",
     cmd = { "TSPlaygroundToggle", "TSNodeUnderCursor", "TSCaptureUnderCursor", "TSHighlightCapturesUnderCursor" },
   },
-  -- TODO: use fork https://github.com/mrjones2014/nvim-ts-rainbow instead?
+  -- TODO: use fork https://github.com/HiPhish/nvim-ts-rainbow2 instead?
   { "p00f/nvim-ts-rainbow", event = "BufReadPost" },
   { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", settings = "indentline" },
   { "code-biscuits/nvim-biscuits", event = "BufReadPost", settings = "biscuits" },

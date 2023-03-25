@@ -38,7 +38,9 @@ M.ensure_installed = {
 ---@param opts table @Optional table of options to pass to the language server
 function M.setup_lspconfig(name, opts)
   opts = opts or require("axie.plugins.lsp.options").get(name)
-  require("lspconfig")[name].setup(opts)
+  if opts.autostart or opts.autostart == nil then
+    require("lspconfig")[name].setup(opts)
+  end
 end
 
 --- Setup a language server using the `cb` function provided

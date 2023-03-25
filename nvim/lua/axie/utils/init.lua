@@ -85,7 +85,7 @@ end
 --- Gets the operating system type
 ---@return string @os
 function M.get_os()
-  return vim.loop.os_uname().sysname:lower():gsub("darwin", "mac")
+  return vim.loop.os_uname().sysname:lower():gsub("^darwin$", "mac")
 end
 
 --- Reloads a module's require cache

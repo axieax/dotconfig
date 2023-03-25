@@ -213,6 +213,7 @@ function M.config()
     },
     extensions = {
       file_browser = {
+        -- prompt_path = true,
         mappings = {
           i = {
             ["<C-y>"] = function(prompt_bufnr)

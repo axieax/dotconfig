@@ -34,6 +34,7 @@ local spec = {
       { "<Space>fzf", "<Cmd>FzfLua files<CR>", desc = "Fzf files" },
       { "<Space>fzg", "<Cmd>FzfLua live_grep<CR>", desc = "Fzf live grep" },
       { "<Space>fzG", "<Cmd>FzfLua grep<CR>", desc = "Fzf grep" },
+      { "<Space>fzl", "<Cmd>FzfLua lsp_finder<CR>", desc = "Fzf lsp finder" },
       { "<Space>fz.", "<Cmd>FzfLua resume<CR>", desc = "Fzf grep" },
       { "<Space>fz/", "<Cmd>FzfLua lgrep_curbuf<CR>", desc = "Fzf search buffer" },
     },

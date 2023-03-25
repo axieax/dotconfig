@@ -76,6 +76,7 @@ function M.config()
       gitgutter = false,
       gitsigns = true,
       harpoon = false,
+      headlines = false,
       hop = false,
       illuminate = false,
       indent_blankline = {
@@ -89,7 +90,15 @@ function M.config()
       markdown = true,
       mason = true,
       mini = false,
-      native_lsp = { enabled = true },
+      native_lsp = {
+        enabled = true,
+        underlines = {
+          -- errors = { "undercurl" },
+          -- hints = { "undercurl" },
+          -- warnings = { "undercurl" },
+          -- information = { "undercurl" },
+        },
+      },
       navic = {
         enabled = true,
         custom_bg = float_bg,

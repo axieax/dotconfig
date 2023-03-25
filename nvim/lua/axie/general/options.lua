@@ -53,6 +53,8 @@ vim_apply(vim.opt, {
   -- cindent = true, -- fix markdown code block indents, but may randomly indent sometimes
 })
 
+-- vim.opt.cpoptions:append(">")
+
 -- netrw settings (for directory tree view)
 vim_apply(vim.g, {
   -- loaded_netrw = 1, -- disables netrw

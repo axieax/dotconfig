@@ -27,7 +27,7 @@ function M.default_on_attach(client, bufnr)
         group = group,
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format()
+          vim.lsp.buf.format({ bufnr = bufnr })
         end,
       })
     end
@@ -202,7 +202,7 @@ function M.jdtls()
     for _, jdk in ipairs(jdks) do
       table.insert(java_runtimes, {
         name = jdk:match(runtime_base_path .. "(.*)"),
-        path = jdk .. "/Contents/Home/bin",
+        path = jdk .. "/Contents/Home",
       })
     end
   end

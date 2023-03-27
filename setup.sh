@@ -21,6 +21,9 @@ setup_app lazygit
 setup_app tmux
 setup_app lf
 
+setup_app vim
+setup_app intellij
+
 setup_app xmonad
 setup_app polybar
 setup_app rofi

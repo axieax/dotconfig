@@ -81,6 +81,7 @@
 - TODO: hlslens + vim-visual-multi
 - Persistent undo max size
 - Setup scripts for Ubuntu (`apt`) or nix
+- heirline winbar (clickable LSP components to jump - need to pass different positions)
 
 ## Features/plugins
 

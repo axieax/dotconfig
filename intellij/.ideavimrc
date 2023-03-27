@@ -1,0 +1,28 @@
+source ~/.vimrc
+
+set ideajoin
+set ideamarks
+
+map <Space>s :source ~/.ideavimrc<CR>
+map <Space>w :write<CR>
+map <Space>ff <Action>(GotoFile)
+map <Space>fg <Action>(FindInPath)
+map <Space>gg <Action>(Git.Menu)
+map <Space><Tab> <Action>(FileStructurePopup)
+
+map [d <Action>(GotoPrevError)
+map ]d <Action>(GotoNextError)
+map [f <Action>(MethodUp)
+map ]f <Action>(MethodDown)
+nmap ]g <Action>(VcsShowNextChangeMarker)
+nmap [g <Action>(VcsShowPrevChangeMarker)
+
+map K <Action>(QuickJavaDoc)
+map gK <Action>(ShowErrorDescription)
+map gD <Action>(GotoTypeDeclaration)
+map gr <Action>(FindUsages)
+map gi <Action>(QuickImplementations)
+map <Space>ra <Action>(Refactorings.QuickListPopupAction)
+map <Space>rA <Action>(Generate)
+
+let g:NERDTreeMapQuit = ';'

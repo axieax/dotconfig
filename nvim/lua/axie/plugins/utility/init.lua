@@ -11,7 +11,7 @@ local spec = {
     dev = true,
     keys = {
       {
-        "\\<Tab>",
+        "<Space>E",
         function()
           require("typo").check()
         end,

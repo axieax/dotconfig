@@ -114,6 +114,42 @@ map(
   { desc = "Format buffer" }
 )
 
+map(
+  "n",
+  "\\,",
+  restore_position_wrap(function()
+    vim.api.nvim_cmd({
+      cmd = "normal",
+      args = { "A," },
+    }, {})
+  end),
+  { desc = "Add trailing comma" }
+)
+map(
+  "v",
+  "\\,",
+  ":'<,'>norm A,<CR>", -- TODO: restore_position_wrap
+  { desc = "Add trailing commas" }
+)
+
+map(
+  "n",
+  "\\;",
+  restore_position_wrap(function()
+    vim.api.nvim_cmd({
+      cmd = "normal",
+      args = { "A;" },
+    }, {})
+  end),
+  { desc = "Add trailing semicolon" }
+)
+map(
+  "v",
+  "\\,",
+  ":'<,'>norm A;<CR>", -- TODO: restore_position_wrap
+  { desc = "Add trailing semicolons" }
+)
+
 local clipboard_register = vim.loop.os_uname().sysname == "Linux" and "+" or "*"
 map({ "n", "v" }, "\\y", '"' .. clipboard_register .. "y", { desc = "Yank to clipboard" })
 map("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "Copy yank register to clipboard" })

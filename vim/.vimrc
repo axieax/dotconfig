@@ -10,9 +10,10 @@ Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 Plug 'machakann/vim-highlightedyank'
 
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'mg979/vim-visual-multi'
+" Plug 'junegunn/fzf.vim'
 " Plug 'romainl/vim-cool'
-" Plug 'justinmk/vim-sneak'
-" Plug 'andymass/vim-matchup'
 call plug#end()
 
 set number relativenumber
@@ -31,5 +32,7 @@ nnoremap <Space>v ggVG
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap <C-l> :noh<CR>
+nnoremap <A-j> :m +1<CR>
+nnoremap <A-k> :m -2<CR>
 
 nnoremap ; :NERDTreeToggle<CR>

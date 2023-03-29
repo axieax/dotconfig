@@ -2,12 +2,15 @@ source ~/.vimrc
 
 set ideajoin
 set ideamarks
+set idearefactormode=keep
 
 map <Space>s :source ~/.ideavimrc<CR>
 map <Space>w :write<CR>
+map <Space>a <Action>(GotoAction)
 map <Space>ff <Action>(GotoFile)
 map <Space>fg <Action>(FindInPath)
-map <Space>gg <Action>(Git.Menu)
+map <Space>gg <Action>(ActivateCommitToolWindow)
+map <Space>gG <Action>(Git.Menu)
 map <Space><Tab> <Action>(FileStructurePopup)
 
 map [d <Action>(GotoPrevError)
@@ -24,5 +27,10 @@ map gr <Action>(FindUsages)
 map gi <Action>(QuickImplementations)
 map <Space>ra <Action>(Refactorings.QuickListPopupAction)
 map <Space>rA <Action>(Generate)
+map <Space>rn <Action>(RenameElement)
+map <Space>rN <Action>(RenameFile)
+
+map <Space>tt <Action>(RunClass)
+map <Space>tT <Action>(DebugClass)
 
 let g:NERDTreeMapQuit = ';'

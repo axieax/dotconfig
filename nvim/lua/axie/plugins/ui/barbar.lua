@@ -6,6 +6,7 @@ M.keys = {
   -- Buffer navigation
   { "<Tab>", "<Cmd>BufferNext<CR>" },
   { "<S-Tab>", "<Cmd>BufferPrevious<CR>" },
+  { "<A-t>", "<Cmd>BufferRestore<CR>" },
   { "<A-w>", "<Cmd>BufferClose<CR>" },
   { "<A-W>", "<Cmd>BufferClose!<CR>" },
   { "<A-p>", "<Cmd>BufferPin<CR>" },

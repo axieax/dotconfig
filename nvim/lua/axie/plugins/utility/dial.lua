@@ -1,19 +1,12 @@
 local M = {}
 
--- ALT: lua function version: https://github.com/folke/lazy.nvim/issues/426#issuecomment-1396856753
+-- ALT: lua function version
 M.keys = {
-  "<Plug>(dial-increment)",
-  "<Plug>(dial-decrement)",
-  { "<Plug>(dial-increment)", mode = "v" },
-  { "<Plug>(dial-decrement)", mode = "v" },
+  { "<C-a>", "<Plug>(dial-increment)", mode = { "n", "v" } },
+  { "<C-x>", "<Plug>(dial-decrement)", mode = { "n", "v" } },
+  { "g<C-a>", "g<Plug>(dial-increment)", mode = "v" },
+  { "g<C-x>", "g<Plug>(dial-decrement)", mode = "v" },
 }
-
-function M.init()
-  vim.keymap.set({ "n", "v" }, "<C-a>", "<Plug>(dial-increment)")
-  vim.keymap.set({ "n", "v" }, "<C-x>", "<Plug>(dial-decrement)")
-  vim.keymap.set("v", "g<C-a>", "g<Plug>(dial-increment)")
-  vim.keymap.set("v", "g<C-x>", "g<Plug>(dial-decrement)")
-end
 
 function M.config()
   local this = require("axie.plugins.utility.dial")

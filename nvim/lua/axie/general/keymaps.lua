@@ -5,7 +5,7 @@ local map = vim.keymap.set
 
 map("n", "K", vim.lsp.buf.hover)
 
-map("n", "<Space>w", "<Cmd>update<CR>")
+map("n", "<Space>w", "<Cmd>update<CR>", { desc = "Update" })
 
 -- Wrapped cursor navigation
 for _, key in ipairs({ "j", "k" }) do
@@ -150,8 +150,7 @@ map(
   { desc = "Add trailing semicolons" }
 )
 
-local clipboard_register = vim.loop.os_uname().sysname == "Linux" and "+" or "*"
-map({ "n", "v" }, "\\y", '"' .. clipboard_register .. "y", { desc = "Yank to clipboard" })
+map({ "n", "v" }, "\\y", '"+y', { desc = "Yank to clipboard" })
 map("n", "\\+", '<Cmd>let @+=@"<CR>', { desc = "Copy yank register to clipboard" })
 map({ "n", "v" }, "\\p", '"0p', { desc = "Paste last yanked" })
 

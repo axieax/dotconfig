@@ -169,6 +169,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/jesseduffield/lazygit/pull/2539
 - https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133
 - https://github.com/mfussenegger/nvim-jdtls/discussions/446
 - nvim-scrollbar covers wrapped EOL (https://github.com/petertriho/nvim-scrollbar/issues/40 ?)

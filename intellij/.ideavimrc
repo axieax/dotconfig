@@ -12,6 +12,8 @@ map <Space>fg <Action>(FindInPath)
 map <Space>gg <Action>(ActivateCommitToolWindow)
 map <Space>gG <Action>(Git.Menu)
 map <Space><Tab> <Action>(FileStructurePopup)
+map <Tab> <Action>(NextTab)
+map <S-Tab> <Action>(PreviousTab)
 
 map [d <Action>(GotoPrevError)
 map ]d <Action>(GotoNextError)

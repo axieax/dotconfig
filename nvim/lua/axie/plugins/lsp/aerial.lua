@@ -1,8 +1,9 @@
 local M = {}
 
-function M.init()
-  vim.keymap.set("n", "<Space><Tab>", "<Cmd>AerialToggle<CR>", { desc = "Aerial Symbols" })
-end
+M.keys = {
+  { "<Space><Tab>", "<Cmd>AerialToggle<CR>", desc = "Aerial symbols" },
+  { "\\<Tab>", "<Cmd>AerialNavToggle<CR>", desc = "Aerial nav" },
+}
 
 function M.config()
   local aerial = require("aerial")

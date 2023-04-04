@@ -3,6 +3,8 @@ local M = {}
 M.cmd = "UrlView"
 
 M.keys = {
+  "[u",
+  "]u",
   { "\\u", "<Cmd>UrlView<CR>", desc = "Buffer URLs" },
   { "\\U", "<Cmd>UrlView lazy<CR>", desc = "Plugin URLs" },
 }

@@ -1,10 +1,16 @@
 local spec = {
-  -- common plugin dependencies
+  -- Common plugin dependencies
   "nvim-lua/plenary.nvim",
   "nvim-tree/nvim-web-devicons",
   "MunifTanjim/nui.nvim",
 
-  -- misc
+  -- Misc
+  {
+    "willothy/flatten.nvim",
+    lazy = false,
+    priority = 1001,
+    opts = { window = { open = "alternate" } },
+  },
   {
     "glacambre/firenvim",
     lazy = false,

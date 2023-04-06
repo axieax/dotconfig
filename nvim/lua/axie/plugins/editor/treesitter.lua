@@ -203,16 +203,9 @@ function M.config()
     },
   })
 
-  -- Folding (zopen/zclose, zReveal/zMinimise)
+  -- Folding
   -- TODO: use TS query to find all functions/methods - vifzc, repeat with classes, then zR
-  vim_apply(vim.o, {
-    foldmethod = "expr",
-    foldexpr = "nvim_treesitter#foldexpr()",
-    -- foldnestmax = 3, -- maximum nesting of folds
-    -- foldminlines = 1, -- min lines required for a fold (default)
-    foldlevel = 0, -- default levels folded
-    foldenable = false, -- don't fold by default
-  })
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
   -- TEMP: bash parser for zsh https://github.com/nvim-treesitter/nvim-treesitter/issues/655
   require("nvim-treesitter.parsers").filetype_to_parsername.zsh = "bash"

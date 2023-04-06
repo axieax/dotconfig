@@ -1,57 +1,89 @@
 local vim_apply = require("axie.utils").vim_apply
 
--- TODO: writebackup
 -- TODO: https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+-- Grouped by :options
 vim_apply(vim.opt, {
-  -- General options
-  mouse = "a",
-  -- spell = true,
-  scrolloff = 1,
-  sidescrolloff = 2,
+  -- 2 moving around, searching and patterns
   whichwrap = "bs<>[]hl",
-  cursorline = true,
-  splitbelow = true,
-  splitright = true,
-  hidden = true,
-  number = true,
-  relativenumber = true,
-  ruler = true,
-  colorcolumn = "80",
-  numberwidth = 1,
-  -- signcolumn = "number", -- TODO: find a way to right-align symbol
-  termguicolors = true,
-  showmode = false,
-  swapfile = false,
-  undofile = true, -- persistent undo
-  -- updatetime = 1500,
-
-  list = true,
-  -- NOTE: indent-blankline covers first tab character so not visible
-  listchars = "tab:→ ,trail:·,extends:▶,precedes:◀,nbsp:␣",
-
-  wildmenu = true,
-  wildmode = "full",
-  wildoptions = "tagfile",
-  autoread = true,
-  pumblend = 15,
-
-  showmatch = true,
-  hlsearch = true,
   incsearch = true, -- live search preview
   inccommand = "split", -- live substitution preview
   ignorecase = true,
   smartcase = true,
+
+  -- 4 displaying text
+  scrolloff = 1,
+  sidescrolloff = 2,
+  list = true,
+  -- NOTE: indent-blankline covers first tab character so not visible
+  listchars = "tab:→ ,trail:·,extends:▶,precedes:◀,nbsp:␣",
+  number = true,
+  relativenumber = true,
+  numberwidth = 1,
+
+  -- 5 syntax, highlighting and spelling
+  hlsearch = true,
+  termguicolors = true,
+  cursorline = true,
+  -- cursorcolumn = true,
+  colorcolumn = "80",
+  -- spell = true,
   spelllang = "en_au",
 
-  -- Coding options
-  -- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
-  expandtab = true,
-  shiftwidth = 2,
-  softtabstop = 2,
+  -- 6 multiple windows
+  laststatus = 3,
+  hidden = true,
+  splitbelow = true,
+  splitright = true,
+  pumblend = 15,
+
+  -- 9 using the mouse
+  mouse = "a",
+
+  -- 11 messages and info
+  showmode = false,
+  ruler = true,
+
+  -- 13 editing text
+  undofile = true, -- persistent undo
+  completeopt = { "menu", "menuone", "noselect" },
+  showmatch = true,
+
+  -- 14 tabs and indenting
+  -- REF: https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
   tabstop = 2,
+  shiftwidth = 2,
+  expandtab = true,
+  softtabstop = 2,
   autoindent = true,
   smartindent = true,
   -- cindent = true, -- fix markdown code block indents, but may randomly indent sometimes
+  -- cinoptions
+
+  -- 15 folding (zopen/zclose, zReveal/zMinimise)
+  -- TODO: use TS query to find all functions/methods - vifzc, repeat with classes, then zR
+  foldenable = true, -- don't fold by default
+  foldlevel = 0, -- default levels folded
+  foldlevelstart = 0, -- default for functional languages
+  foldmethod = "expr",
+  foldexpr = "nvim_treesitter#foldexpr()",
+  -- foldminlines = 1, -- min lines required for a fold (default)
+  -- foldnestmax = 3, -- maximum nesting of folds
+
+  -- 18 reading and writing files
+  writebackup = true,
+  autoread = true,
+
+  -- 19 the swap file
+  swapfile = false,
+  -- updatetime = 1500,
+
+  -- 20 command line editing
+  wildmode = "full",
+  wildmenu = true,
+  wildoptions = "tagfile",
+
+  -- 25 various
+  -- signcolumn = "number", -- TODO: find a way put symbol next to line number
 })
 
 -- vim.opt.cpoptions:append(">")
@@ -83,5 +115,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
     if vim.tbl_contains(enabled_filetypes, ft) or vim.fn.empty(vim.bo.filetype) ~= 0 then
       vim.opt_local.spell = true
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "Foldlevel (OOP)",
+  pattern = "java",
+  callback = function()
+    vim.opt.foldlevel = 2
   end,
 })

@@ -55,21 +55,4 @@ M.opts = {
   -- },
 }
 
-function M.config(_, opts)
-  require("indent_blankline").setup(opts)
-
-  -- Context line colours
-  vim.opt.termguicolors = true
-  -- #E06C75
-  -- #E5C07B
-  -- #98C379
-  -- #56B6C2
-  -- #61AFEF
-  -- #C678DD
-
-  -- NOTE: moved to material.nvim theme config as highlight override
-  -- vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = "#C678DD", nocombine = true }) -- NOTE: doesn't work yet
-  -- vim.cmd.highlight("IndentBlanklineContextChar guifg=#C678DD gui=nocombine")
-end
-
 return M

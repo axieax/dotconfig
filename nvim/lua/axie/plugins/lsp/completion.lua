@@ -6,7 +6,6 @@ function M.config()
   -- setup cmp
   local cmp = require("cmp")
   local lspkind = require("lspkind")
-  vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
   local sources = {
     -- copilot = { label = "Copilot", priority = 4 },

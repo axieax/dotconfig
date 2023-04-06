@@ -435,7 +435,6 @@ end
 function M.config()
   local this = require("axie.plugins.ui.statusline")
   local heirline = require("heirline")
-  vim.opt.laststatus = 3
   heirline.load_colors(this.setup_colours())
 
   local augroup = vim.api.nvim_create_augroup("Heirline", {})

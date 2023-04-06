@@ -38,19 +38,49 @@ M.keys = {
     desc = "Select Git hunk",
   },
 
+  -- TODO: toggle stage hunk containing cursor with <Space>gh
+  {
+    "<Space>gh",
+    function()
+      require("gitsigns").stage_hunk()
+    end,
+    desc = "Git stage hunk",
+  },
+  {
+    "<Space>gH",
+    function()
+      require("gitsigns").undo_stage_hunk()
+    end,
+    desc = "Git stage hunk (undo)",
+  },
+  {
+    "<Space>gK",
+    function()
+      require("gitsigns").preview_hunk()
+    end,
+    desc = "Git preview hunk",
+  },
+
+  {
+    "<Space>gd",
+    function()
+      require("gitsigns").toggle_deleted()
+    end,
+    desc = "Git toggle deleted lines",
+  },
+  {
+    "<Space>gr",
+    function()
+      require("gitsigns").reset_hunk()
+    end,
+    desc = "Git reset hunk",
+  },
   {
     "<Space>gR",
     function()
       require("gitsigns").reset_buffer()
     end,
     desc = "Git reset buffer",
-  },
-  {
-    "<Space>gr",
-    function()
-      require("gitsigns").toggle_deleted()
-    end,
-    desc = "Git toggle deleted lines",
   },
 }
 

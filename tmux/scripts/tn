@@ -4,7 +4,7 @@
 NAME="$(basename "$PWD")"
 SESSION="$NAME"
 i=1
-while tmux has-session -t "$SESSION" 2>/dev/null; do
+while tmux has-session -t "$SESSION" 2> /dev/null; do
   SESSION="$NAME-$i"
   ((i++))
 done

@@ -8,6 +8,9 @@ function pathadd() {
 
 pathadd "$HOME/.config/tmux/scripts"
 _tmux_autostart.sh
+if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
+  exit
+fi
 
 function sauce() {
   [[ -f "$1" ]] && source "$1"

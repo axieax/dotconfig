@@ -3,5 +3,5 @@
 # Zoxide-like tmux navigation (inspired by @joshmedeski)
 DIR=$(zoxide query "$1")
 NAME=$(basename "$DIR")
-tmux has-session -t "$NAME" 2>/dev/null || tmux new-session -d -s "$NAME" -c "$DIR"
+tmux has-session -t "$NAME" 2> /dev/null || tmux new-session -d -s "$NAME" -c "$DIR"
 ts "$NAME"

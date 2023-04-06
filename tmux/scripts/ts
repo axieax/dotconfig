@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Find / switch sessions
-NAME=${1:-$(tmux list-sessions 2>/dev/null | fzf | cut -d ':' -f1)}
+NAME=${1:-$(tmux list-sessions 2> /dev/null | fzf | cut -d ':' -f1)}
 if [ -z "$TMUX" ]; then
   tmux attach -t "$NAME"
 else

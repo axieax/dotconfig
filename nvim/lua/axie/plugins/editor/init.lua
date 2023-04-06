@@ -5,14 +5,14 @@ local spec = {
     "jackMort/ChatGPT.nvim",
     cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
     keys = {
-      { "<Space>rc", "<CMD>ChatGPT<CR>", desc = "ChatGPT" },
+      { "<Space>rc", "<Cmd>ChatGPT<CR>", desc = "ChatGPT" },
       {
         "<Space>rC",
-        "<CMD>ChatGPTEditWithInstructions<CR>",
+        "<Cmd>ChatGPTEditWithInstructions<CR>",
         desc = "ChatGPTEditWithInstructions",
         mode = { "n", "v" },
       },
-      { "<Space>rk", "<CMD>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
+      { "<Space>rk", "<Cmd>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
     },
     config = true,
   },
@@ -45,7 +45,6 @@ local spec = {
   },
   {
     "numToStr/Comment.nvim",
-    event = "VeryLazy",
     -- language-aware commentstring
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     settings = "comment",
@@ -104,6 +103,26 @@ local spec = {
       local dap_python = require("dap-python")
       dap_python.setup()
       dap_python.test_runner = "pytest"
+    end,
+  },
+  {
+    "jbyuki/one-small-step-for-vimkind",
+    -- TEMP: https://github.com/jbyuki/one-small-step-for-vimkind/issues/30
+    enabled = false,
+    ft = "lua",
+    config = function()
+      local dap = require("dap")
+      dap.configurations.lua = {
+        {
+          type = "nlua",
+          request = "attach",
+          name = "Attach to running Neovim instance",
+        },
+      }
+
+      dap.adapters.nlua = function(callback, config)
+        callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+      end
     end,
   },
 

@@ -84,7 +84,18 @@ local spec = {
   { "Shatur/neovim-session-manager", event = "VimLeavePre", settings = "sessions" },
   { "ethanholz/nvim-lastplace", event = "BufReadPre", config = true },
   -- Keep cursor on shift (`>` or `<`) and filter (`=`)
-  { "gbprod/stay-in-place.nvim", keys = { ">", "<", "=" }, config = true },
+  {
+    "gbprod/stay-in-place.nvim",
+    keys = {
+      { ">", mode = { "n", "x" } },
+      { "<", mode = { "n", "x" } },
+      { "=", mode = { "n", "x" } },
+      { ">>", mode = { "n" } },
+      { "<<", mode = { "n" } },
+      { "==", mode = { "n" } },
+    },
+    config = true,
+  },
   -- Incrementor / decrementor
   { "monaqa/dial.nvim", settings = "dial" },
   {
@@ -110,7 +121,7 @@ local spec = {
   {
     -- Case conversion
     "arthurxavierx/vim-caser",
-    event = "VeryLazy",
+    keys = { { "cR", mode = { "n", "v" } } },
     init = function()
       -- Works with motions, text objects and visual mode as well
       vim.g.caser_prefix = "cR"
@@ -123,7 +134,12 @@ local spec = {
   { "ziontee113/icon-picker.nvim", settings = "iconpicker" },
   {
     "booperlv/nvim-gomove",
-    keys = { "<A-h>", "<A-j>", "<A-k>", "<A-l>" },
+    keys = {
+      { "<A-h>", mode = { "n", "v" } },
+      { "<A-j>", mode = { "n", "v" } },
+      { "<A-k>", mode = { "n", "v" } },
+      { "<A-l>", mode = { "n", "v" } },
+    },
     opts = {
       -- whether to not to move past line when moving blocks horizontally, (true/false)
       move_past_end_col = false,

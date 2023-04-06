@@ -1,8 +1,11 @@
 local M = {}
 
+M.keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } }
+
 function M.config()
   require("Comment").setup({
     pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+    ignore = "^$", -- ignore empty lines
   })
 
   ---Textobject for adjacent commented lines (gcgc, gcu)
@@ -40,18 +43,14 @@ function M.config()
     vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
   end
 
-  vim.keymap.set(
-    "o",
-    "gc",
-    commented_lines_textobject,
-    { silent = true, desc = "Textobject for adjacent commented lines" }
-  )
-  vim.keymap.set(
-    "o",
-    "u",
-    commented_lines_textobject,
-    { silent = true, desc = "Textobject for adjacent commented lines" }
-  )
+  for _, keymap in { "gc", "u" } do
+    vim.keymap.set(
+      "o",
+      keymap,
+      commented_lines_textobject,
+      { silent = true, desc = "Textobject for adjacent commented lines" }
+    )
+  end
 end
 
 return M

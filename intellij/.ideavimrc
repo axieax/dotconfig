@@ -7,13 +7,21 @@ set idearefactormode=keep
 map <Space>s :source ~/.ideavimrc<CR>
 map <Space>w :write<CR>
 map <Space>a <Action>(GotoAction)
+map <Space>z <Action>(ToggleZenMode)
 map <Space>ff <Action>(GotoFile)
 map <Space>fg <Action>(FindInPath)
+
 map <Space>gg <Action>(ActivateCommitToolWindow)
 map <Space>gG <Action>(Git.Menu)
+map <Space>g; <Action>(Annotate)
+map <Space>gw <Action>(Github.Open.In.Browser)
+map <Space>gp <Action>(Github.Create.Pull.Request)
+map <Space>gdb <Action>(Git.CompareWithBranch)
+
 map <Space><Tab> <Action>(FileStructurePopup)
 map <Tab> <Action>(NextTab)
 map <S-Tab> <Action>(PreviousTab)
+map \\<Tab> <Action>(FileStructurePopup)
 
 map [d <Action>(GotoPrevError)
 map ]d <Action>(GotoNextError)
@@ -21,18 +29,39 @@ map [f <Action>(MethodUp)
 map ]f <Action>(MethodDown)
 nmap ]g <Action>(VcsShowNextChangeMarker)
 nmap [g <Action>(VcsShowPrevChangeMarker)
+nmap [m <Action>(MethodUp)
+nmap ]m <Action>(MethodDown)
 
 map K <Action>(QuickJavaDoc)
 map gK <Action>(ShowErrorDescription)
 map gD <Action>(GotoTypeDeclaration)
 map gr <Action>(FindUsages)
 map gi <Action>(QuickImplementations)
+map gx gd
 map <Space>ra <Action>(Refactorings.QuickListPopupAction)
 map <Space>rA <Action>(Generate)
 map <Space>rn <Action>(RenameElement)
 map <Space>rN <Action>(RenameFile)
+map <Space>rc <Action>(Coverage)
 
 map <Space>tt <Action>(RunClass)
 map <Space>tT <Action>(DebugClass)
 
+map <Space>db <Action>(ToggleLineBreakpoint)
+map <Space>dB <Action>(EditBreakpoint)
+map <Space>dc <Action>(ChooseDebugConfiguration)
+map <Space>dC <Action>(Debug)
+map <Space>dj <Action>(StepOut)
+map <Space>dk <Action>(StepInto)
+map <Space>dl <Action>(StepOver)
+map <Space>dq <Action>(Stop)
+map <Space>d; <Action>(ActivateDebugToolWindow)
+map <Space>d/ <Action>(ViewBreakpoints)
+
 let g:NERDTreeMapQuit = ';'
+
+" NOTE: requires Which-Key plugin from Marketplace
+set which-key
+set notimeout
+let g:WhichKey_ShowVimActions = "true"
+let g:WhichKey_DefaultDelay = 1000

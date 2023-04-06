@@ -82,17 +82,12 @@ local spec = {
   { "stevearc/aerial.nvim", settings = "aerial" },
   {
     "j-hui/fidget.nvim",
-    event = "VeryLazy",
-    opts = {
-      window = {
-        relative = "editor",
-        blend = 0,
-      },
-    },
+    event = "LspAttach",
+    opts = { window = { relative = "editor", blend = 0 } },
   },
   {
     "kosayoda/nvim-lightbulb",
-    event = { "CursorHold", "CursorHoldI" },
+    event = "LspAttach",
     opts = {
       ignore = { "null-ls" },
       sign = { enabled = false },

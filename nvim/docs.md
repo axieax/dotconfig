@@ -169,6 +169,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/jbyuki/one-small-step-for-vimkind/issues/30
+- https://github.com/booperlv/nvim-gomove/issues/13
 - https://github.com/jesseduffield/lazygit/pull/2539
 - https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133
 - https://github.com/mfussenegger/nvim-jdtls/discussions/446

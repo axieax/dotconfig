@@ -2,6 +2,11 @@ local M = {}
 
 -- TODO: see if new buffers can be open in tabs by default
 
+-- TEMP: https://github.com/romgrk/barbar.nvim/pull/438
+M.init = function()
+  vim.g.barbar_auto_setup = false
+end
+
 M.keys = {
   -- Buffer navigation
   { "<Tab>", "<Cmd>BufferNext<CR>" },

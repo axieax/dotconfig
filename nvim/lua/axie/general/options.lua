@@ -61,6 +61,7 @@ vim_apply(vim.opt, {
 
   -- 15 folding (zopen/zclose, zReveal/zMinimise)
   -- TODO: use TS query to find all functions/methods - vifzc, repeat with classes, then zR
+  -- BUG: sometimes opened folds close to default level when switching focus (if not ":e")
   foldenable = true, -- don't fold by default
   foldlevel = 0, -- default levels folded
   foldlevelstart = 0, -- default for functional languages
@@ -118,10 +119,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- Filetype foldlevelstart override
+local foldlevels = {
+  java = 2,
+  markdown = 1,
+}
 vim.api.nvim_create_autocmd("FileType", {
-  desc = "Foldlevel (OOP)",
-  pattern = "java",
-  callback = function()
-    vim.opt.foldlevel = 2
+  desc = "Larger fold level",
+  pattern = vim.tbl_keys(foldlevels),
+  callback = function(opts)
+    local filetype = vim.api.nvim_buf_get_option(opts.buf, "filetype")
+    vim.opt_local.foldlevel = foldlevels[filetype]
   end,
 })

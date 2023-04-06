@@ -43,7 +43,7 @@ function M.config()
     vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
   end
 
-  for _, keymap in { "gc", "u" } do
+  for _, keymap in ipairs({ "gc", "u" }) do
     vim.keymap.set(
       "o",
       keymap,

@@ -26,16 +26,10 @@ local spec = {
     settings = "treesitter",
   },
   { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPost" },
-  {
-    "nvim-treesitter/playground",
-    build = ":TSUpdate query",
-    cmd = { "TSPlaygroundToggle", "TSNodeUnderCursor", "TSCaptureUnderCursor", "TSHighlightCapturesUnderCursor" },
-  },
   -- TODO: use fork https://github.com/HiPhish/nvim-ts-rainbow2 instead?
   { "p00f/nvim-ts-rainbow", event = "BufReadPost" },
   { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", settings = "indentline" },
   { "code-biscuits/nvim-biscuits", event = "BufReadPost", settings = "biscuits" },
-  { "m-demare/hlargs.nvim", event = "BufReadPost", settings = "hlargs" },
   { "narutoxy/dim.lua", event = "VeryLazy", config = true },
   {
     "danymat/neogen",

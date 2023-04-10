@@ -7,6 +7,9 @@
 
 ## TODO
 
+- Nvim 0.9 stuff
+  - Statuscolumn (fold)
+  - Use `workspace/didChangeWatchedFiles`
 - revert formatting
 - Telescope search `ripgrep` with arguments for file patterns
 - jdtls mac runtimes
@@ -18,7 +21,7 @@
   - https://github.com/NTBBloodbath/doom-nvim/blob/main/docs/modules.md#list-of-modules
 - git hunk keymaps
 - Toggleterm add another horizontal terminal
-- Try `cmdheight=0`, preferably messages just above statusline
+- Try `cmdheight=0` with noice.nvim, preferably messages just above statusline
 - Setup iron.nvim, howdoi/stack overflow plugin
 - Neotest plenary `neotest-plenary/run_tests.lua:26: module 'plenary.busted' not found`
   - Works for plugin managed by lazy.nvim, not local dev directory

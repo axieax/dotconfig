@@ -110,11 +110,6 @@ function M.config()
       },
     },
 
-    -- Playground
-    -- https://github.com/nvim-treesitter/playground
-    playground = {
-      enable = true,
-    },
     query_linter = {
       enable = true,
       use_virtual_text = true,
@@ -208,8 +203,7 @@ function M.config()
   vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
   -- TEMP: bash parser for zsh https://github.com/nvim-treesitter/nvim-treesitter/issues/655
-  require("nvim-treesitter.parsers").filetype_to_parsername.zsh = "bash"
-  -- vim.treesitter.language.register("bash", "zsh") -- TODO: replace (nightly)
+  vim.treesitter.language.register("bash", "zsh")
 end
 
 return M

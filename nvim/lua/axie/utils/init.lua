@@ -125,14 +125,12 @@ function M.restore_position_wrap(func)
   end
 end
 
-local diagnostics_active = true
 function M.toggle_diagnostics()
-  if diagnostics_active then
-    vim.diagnostic.hide()
+  if vim.diagnostic.is_disabled() then
+    vim.diagnostic.enable()
   else
-    vim.diagnostic.show()
+    vim.diagnostic.disable()
   end
-  diagnostics_active = not diagnostics_active
 end
 
 return M

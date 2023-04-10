@@ -1,3 +1,4 @@
+local default_folds = require("axie.utils.config").default_folds
 local vim_apply = require("axie.utils").vim_apply
 
 -- TODO: https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
@@ -62,11 +63,11 @@ vim_apply(vim.opt, {
   -- 15 folding (zopen/zclose, zReveal/zMinimise)
   -- TODO: use TS query to find all functions/methods - vifzc, repeat with classes, then zR
   -- BUG: sometimes opened folds close to default level when switching focus (if not ":e")
-  foldenable = true, -- don't fold by default
+  foldenable = default_folds,
   foldlevel = 0, -- default levels folded
   foldlevelstart = 0, -- default for functional languages
   foldmethod = "expr",
-  foldexpr = "nvim_treesitter#foldexpr()",
+  foldexpr = "v:lua.vim.treesitter.foldexpr()",
   -- foldminlines = 1, -- min lines required for a fold (default)
   -- foldnestmax = 3, -- maximum nesting of folds
 
@@ -120,15 +121,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Filetype foldlevelstart override
-local foldlevels = {
-  java = 2,
-  markdown = 1,
-}
-vim.api.nvim_create_autocmd("FileType", {
-  desc = "Larger fold level",
-  pattern = vim.tbl_keys(foldlevels),
-  callback = function(opts)
-    local filetype = vim.api.nvim_buf_get_option(opts.buf, "filetype")
-    vim.opt_local.foldlevel = foldlevels[filetype]
-  end,
-})
+if default_folds then
+  local foldlevels = {
+    java = 2,
+    markdown = 1,
+  }
+  vim.api.nvim_create_autocmd("FileType", {
+    desc = "Larger fold level",
+    pattern = vim.tbl_keys(foldlevels),
+    callback = function(opts)
+      local filetype = vim.api.nvim_buf_get_option(opts.buf, "filetype")
+      vim.opt_local.foldlevel = foldlevels[filetype]
+    end,
+  })
+end

@@ -20,27 +20,7 @@ local spec = {
     },
     config = true,
   },
-  {
-    "karb94/neoscroll.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("neoscroll").setup()
-      require("neoscroll.config").set_mappings({
-        -- https://github.com/karb94/neoscroll.nvim/issues/55
-        -- ["{"] = { "scroll", { "-vim.wo.scroll", "true", "250" } },
-        -- ["}"] = { "scroll", { "vim.wo.scroll", "true", "250" } },
-        -- ["<C-y>"] = { "scroll", { "-vim.wo.scroll", "false", "0" } },
-        -- ["<C-e>"] = { "scroll", { "vim.wo.scroll", "false", "0" } },
-        -- https://github.com/karb94/neoscroll.nvim/issues/50
-        -- ["<ScrollWheelUp>"] = { "scroll", { "-0.10", "false", "50" } },
-        -- ["<ScrollWheelDown>"] = { "scroll", { "0.10", "false", "50" } },
-      })
-      -- vim.keymap.set({ "n", "x" }, "<ScrollWheelUp>", "<C-y>")
-      -- vim.keymap.set("i", "<ScrollWheelUp>", "<C-o><C-y>")
-      -- vim.keymap.set({ "n", "x" }, "<ScrollWheelDown>", "<C-e>")
-      -- vim.keymap.set("i", "<ScrollWheelDown>", "<C-o><C-e>")
-    end,
-  },
+  { "karb94/neoscroll.nvim", settings = "neoscroll" },
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",

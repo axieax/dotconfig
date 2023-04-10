@@ -44,6 +44,7 @@ function M.config()
       indent_size = 1,
       name = {
         trailing_slash = true,
+        highlight_opened_files = true,
       },
     },
     window = {

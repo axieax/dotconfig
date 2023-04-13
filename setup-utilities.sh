@@ -53,8 +53,14 @@ link_config() {
   copy_only=${4:-false}
   [[ $as_root = true ]] && as_user="sudo" || as_user=""
   [[ $copy_only = true ]] && command="cp" || command="ln -s"
-  # create and move to backup if exists
-  mkdir -p "$(dirname "$dst")"
-  backup_dst_config "$dst" "$as_user"
+  
+  if [ -d $dst ]; then
+    # create and move to backup if exists
+    backup_dst_config $dst $as_user
+  else
+    # make directory if it doesn't exist currently
+    mkdir -p $dst
+  fi
+
   $as_user $command "$src" "$dst"
 }

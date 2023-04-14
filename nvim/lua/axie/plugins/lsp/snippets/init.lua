@@ -65,7 +65,7 @@ function M.config()
     ext_opts = {
       [types.choiceNode] = {
         active = {
-          virt_text = { { "", "DiagnosticSignWarn" } },
+          virt_text = { { "󰌵", "DiagnosticSignWarn" } },
         },
       },
       [types.insertNode] = {

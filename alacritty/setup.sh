@@ -15,7 +15,7 @@ fi
 action="install JetBrains Mono font"
 if confirm "$action"; then
   if is_linux; then
-    yay -S nerd-fonts-jetbrains-mono
+    yay -S ttf-jetbrains-mono-nerd
   elif is_mac; then
     brew tap homebrew/cask-fonts
     brew install --cask font-jetbrains-mono-nerd-font

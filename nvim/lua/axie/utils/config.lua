@@ -10,8 +10,8 @@ M.default_folds = false
 M.diagnostics_icons = {
   Error = "",
   Warn = "",
-  Hint = "",
-  -- Hint = "",
+  Hint = "󰍉",
+  -- Hint = "",
   Info = "",
   VirtualText = "",
 }

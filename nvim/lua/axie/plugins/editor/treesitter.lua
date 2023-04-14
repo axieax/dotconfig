@@ -10,7 +10,7 @@ M.ensure_installed = {
   "gomod",
   "gomod",
   "hcl",
-  "help",
+  "vimdoc",
   "html",
   "http",
   "java",

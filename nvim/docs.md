@@ -175,6 +175,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/SmiteshP/nvim-navic/issues/104
 - https://github.com/booperlv/nvim-gomove/issues/13
 - https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133
 - https://github.com/mfussenegger/nvim-jdtls/discussions/446

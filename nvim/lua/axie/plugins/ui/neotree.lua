@@ -32,10 +32,10 @@ function M.config()
     source_selector = {
       winbar = true,
       tab_labels = {
-        filesystem = "  Files ",
-        buffers = "  Buffers ",
-        git_status = "  Git ",
-        diagnostics = " 裂LSP ",
+        filesystem = " 󰉓 Files ",
+        buffers = " 󱔗 Buffers ",
+        git_status = "  Git ",
+        diagnostics = "  LSP ",
       },
     },
     use_popups_for_input = false,

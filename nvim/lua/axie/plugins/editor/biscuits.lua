@@ -8,7 +8,7 @@ M.opts = {
   default_config = {
     max_length = 24,
     min_distance = 4,
-    prefix_string = " ﬌ ",
+    prefix_string = " 󰘍 ",
   },
 }
 

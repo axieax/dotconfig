@@ -1,7 +1,7 @@
 local M = {}
 
 local no_code_actions_notify = function()
-  vim.api.nvim_echo({ { " No code actions available", "WarningMsg" } }, false, {})
+  vim.api.nvim_echo({ { "󰇸 No code actions available", "WarningMsg" } }, false, {})
 end
 
 ---Filter lsp results

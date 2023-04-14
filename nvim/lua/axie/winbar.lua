@@ -44,6 +44,7 @@ function M.file_name()
 end
 
 -- REFERENCE: nvim-navic
+-- NOTE: obsolete icons (https://github.com/SmiteshP/nvim-navic/issues/104)
 local kind_icons = {
   File = " ",
   Module = " ",

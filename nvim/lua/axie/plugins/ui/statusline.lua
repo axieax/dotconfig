@@ -376,7 +376,7 @@ function M.word_count()
       -- TODO: caching, human readable chars?, max limit?
       local mode = self.wc.visual_chars and "visual_" or ""
       local type = self.char_mode and "chars" or "words"
-      return " " .. self.wc[mode .. type] .. " "
+      return "󰄷 " .. self.wc[mode .. type] .. " "
     end,
     hl = { fg = "onedark_purple" },
     updates = { "CursorMoved", "CursorMovedI", "ModeChanged" },

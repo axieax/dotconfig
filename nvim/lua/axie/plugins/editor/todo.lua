@@ -50,7 +50,7 @@ M.opts = {
       alt = { "PERFORMANCE", "OPTIM", "OPTIMIZE", "OPTIMISE", "EFFICIENCY", "TEST", "EXT", "EXTENSION" },
     },
     NOTE = {
-      icon = " ",
+      icon = "󰍨 ",
       color = "info",
       alt = {
         "INFO",
@@ -92,7 +92,7 @@ M.opts = {
       },
     },
     IDEA = {
-      icon = " ",
+      icon = " ",
       color = "hint",
       alt = { "SUGGEST", "SUGGESTION", "TRY", "CONSIDER", "ALT", "ALTERNATIVE", "INSPO", "INSPIRATION", "RANDOM" },
     },

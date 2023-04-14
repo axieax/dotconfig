@@ -125,6 +125,103 @@ local spec = {
       move_past_end_col = false,
     },
   },
+  {
+    "ThePrimeagen/harpoon",
+    keys = {
+      {
+        "<Space>mm",
+        function()
+          require("harpoon.mark").add_file()
+        end,
+        desc = "Harpoon mark file",
+      },
+      {
+        "<Space>mM",
+        function()
+          -- TODO: telescope instead?
+          require("harpoon.ui").toggle_quick_menu()
+        end,
+        desc = "Harpoon list",
+      },
+      {
+        "<Space>ma",
+        function()
+          require("harpoon.ui").nav_file(1)
+        end,
+        desc = "Harpoon file 1",
+      },
+      {
+        "<Space>ms",
+        function()
+          require("harpoon.ui").nav_file(2)
+        end,
+        desc = "Harpoon file 2",
+      },
+      {
+        "<Space>md",
+        function()
+          require("harpoon.ui").nav_file(3)
+        end,
+        desc = "Harpoon file 3",
+      },
+      {
+        "<Space>mf",
+        function()
+          require("harpoon.ui").nav_file(4)
+        end,
+        desc = "Harpoon file 4",
+      },
+      {
+        "<Space>mg",
+        function()
+          require("harpoon.ui").nav_file(5)
+        end,
+        desc = "Harpoon file 5",
+      },
+      {
+        "<Space>mh",
+        function()
+          require("harpoon.ui").nav_file(6)
+        end,
+        desc = "Harpoon file 6",
+      },
+      {
+        "<Space>mj",
+        function()
+          require("harpoon.ui").nav_file(7)
+        end,
+        desc = "Harpoon file 7",
+      },
+      {
+        "<Space>mk",
+        function()
+          require("harpoon.ui").nav_file(8)
+        end,
+        desc = "Harpoon file 8",
+      },
+      {
+        "<Space>ml",
+        function()
+          require("harpoon.ui").nav_file(9)
+        end,
+        desc = "Harpoon file 9",
+      },
+      {
+        "<Space>m,",
+        function()
+          require("harpoon.ui").nav_prev()
+        end,
+        desc = "Harpoon prev",
+      },
+      {
+        "<Space>m.",
+        function()
+          require("harpoon.ui").nav_next()
+        end,
+        desc = "Harpoon next",
+      },
+    },
+  },
 }
 
 return require("axie.lazy").transform_spec(spec, "utility")

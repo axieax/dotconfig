@@ -21,6 +21,7 @@ M.config = function(_, opts)
     ["<Space>l"] = { name = "lsp" },
     ["<Space>t"] = { name = "test" },
     ["<Space>r"] = { name = "run actions" },
+    ["<Space>m"] = { name = "harpoon" },
     ["["] = { name = "previous" },
     ["]"] = { name = "next" },
   })

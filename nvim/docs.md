@@ -7,6 +7,8 @@
 
 ## TODO
 
+- proto ts parser?
+- ts-node-action null-ls builtin PR
 - Nvim 0.9 stuff
   - Statuscolumn (fold)
   - Use `workspace/didChangeWatchedFiles`
@@ -88,6 +90,7 @@
 
 ## Features/plugins
 
+- harpoon (`<Space>mm` and `<Space>m(asdfghjkl)`)
 - splitjoin (ts-node-action with null-ls integration)
 - https://github.com/mizlan/iswap.nvim ?
 - `cppcheck` null-ls diagnostics source install with mason instead of OS package manager
@@ -172,9 +175,7 @@
 
 ## Current PRs / Issues
 
-- https://github.com/jbyuki/one-small-step-for-vimkind/issues/30
 - https://github.com/booperlv/nvim-gomove/issues/13
-- https://github.com/jesseduffield/lazygit/pull/2539
 - https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133
 - https://github.com/mfussenegger/nvim-jdtls/discussions/446
 - nvim-scrollbar covers wrapped EOL (https://github.com/petertriho/nvim-scrollbar/issues/40 ?)

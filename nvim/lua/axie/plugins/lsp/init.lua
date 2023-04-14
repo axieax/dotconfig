@@ -12,6 +12,7 @@ local spec = {
   },
   { "jose-elias-alvarez/null-ls.nvim", event = "VeryLazy", settings = "null" },
   "ThePrimeagen/refactoring.nvim",
+  "CKolkey/ts-node-action",
 
   -- LSP server extensions
   -- "jose-elias-alvarez/typescript.nvim", -- for dynamic renames?

@@ -24,15 +24,16 @@ M.config = function()
   --   calculate_pattern_lines("^$", false)
   -- end)
 
-  vim.keymap.set("n", "gg", function()
-    local current_line = vim.api.nvim_win_get_cursor(0)[1]
-    require("neoscroll").scroll(-current_line, true, 50)
-  end)
-  vim.keymap.set("n", "G", function()
-    local current_line = vim.api.nvim_win_get_cursor(0)[1]
-    local num_lines = vim.api.nvim_buf_line_count(0)
-    require("neoscroll").scroll(num_lines - current_line, true, 50)
-  end)
+  -- BUG: affects view centering after
+  -- vim.keymap.set("n", "gg", function()
+  --   local current_line = vim.api.nvim_win_get_cursor(0)[1]
+  --   require("neoscroll").scroll(-current_line, true, 50)
+  -- end)
+  -- vim.keymap.set("n", "G", function()
+  --   local current_line = vim.api.nvim_win_get_cursor(0)[1]
+  --   local num_lines = vim.api.nvim_buf_line_count(0)
+  --   require("neoscroll").scroll(num_lines - current_line, true, 50)
+  -- end)
 
   require("neoscroll.config").set_mappings({
     -- https://github.com/karb94/neoscroll.nvim/issues/55

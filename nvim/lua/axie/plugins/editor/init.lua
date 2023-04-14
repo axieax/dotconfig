@@ -101,8 +101,6 @@ local spec = {
   },
   {
     "jbyuki/one-small-step-for-vimkind",
-    -- TEMP: https://github.com/jbyuki/one-small-step-for-vimkind/issues/30
-    enabled = false,
     ft = "lua",
     config = function()
       local dap = require("dap")

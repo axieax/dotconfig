@@ -38,8 +38,9 @@ map gD <Action>(GotoTypeDeclaration)
 map gr <Action>(FindUsages)
 map gi <Action>(QuickImplementations)
 map gx gd
-map <Space>ra <Action>(Refactorings.QuickListPopupAction)
-map <Space>rA <Action>(Generate)
+map <Space>ra <Action>(ShowIntentionActions)
+map <Space>rA <Action>(Refactorings.QuickListPopupAction)
+map <Space>rr <Action>(Generate)
 map <Space>rn <Action>(RenameElement)
 map <Space>rN <Action>(RenameFile)
 map <Space>rc <Action>(Coverage)
@@ -65,3 +66,5 @@ set which-key
 set notimeout
 let g:WhichKey_ShowVimActions = "true"
 let g:WhichKey_DefaultDelay = 1000
+
+" TODO: https://youtrack.jetbrains.com/issue/VIM-2178 for multiple cursors

@@ -112,10 +112,13 @@ end
 function M.code_action_sources()
   local null_ls = require("null-ls")
   local code_actions = null_ls.builtins.code_actions
+
   return {
     code_actions.shellcheck, -- sh
     code_actions.gitsigns,
     code_actions.refactoring,
+    -- TEMP: https://github.com/jose-elias-alvarez/null-ls.nvim/pull/1517
+    -- code_actions.ts_node_action,
   }
 end
 

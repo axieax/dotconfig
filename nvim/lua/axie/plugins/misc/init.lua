@@ -9,12 +9,13 @@ local spec = {
     "willothy/flatten.nvim",
     lazy = false,
     priority = 1001,
-    opts = { window = { open = "alternate" } },
+    opts = { window = { open = "alternate" }, nest_if_no_args = true },
   },
   {
     "glacambre/firenvim",
     lazy = false,
     build = function()
+      -- NOTE: need to reinstall on nvim version upgrade
       require("lazy").load({ plugins = "firenvim", wait = true })
       vim.fn["firenvim#install"](0)
     end,

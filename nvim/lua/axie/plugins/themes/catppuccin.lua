@@ -14,7 +14,6 @@ function M.config()
     NormalFloat = { bg = float_bg }, -- NOTE: catppuccin needs a bg colour
     CursorLine = { bg = ucolors.darken(cp.surface0, 0.64, cp.base) },
     ColorColumn = { link = "CursorLine" },
-    WhichKeyFloat = { link = "NormalFloat" },
     SpellBad = { fg = cp.red, style = { "italic", "undercurl" } },
     SpellCap = { fg = cp.red, style = { "italic", "undercurl" } },
     SpellLocal = { fg = cp.red, style = { "italic", "undercurl" } },

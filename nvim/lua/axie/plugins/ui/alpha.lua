@@ -29,7 +29,7 @@ function M.config()
     dashboard.button("p", "󰏗  Find Projects", "<Cmd>Telescope projects<CR>"),
     dashboard.button("s", "  Restore Session", "<Cmd>SessionManager load_last_session<CR>"),
     dashboard.button("S", "󰍨  Find Sessions", "<Cmd>SessionManager load_session<CR>"),
-    dashboard.button("c", "󰗹 Neovim Config", "<Cmd>lua require'axie.plugins.ui.telescope'.dotconfig()<CR>"),
+    dashboard.button("c", "󰗹  Neovim Config", "<Cmd>lua require'axie.plugins.ui.telescope'.dotconfig()<CR>"),
     dashboard.button("u", "  Update Plugins", "<Cmd>Lazy<CR>"),
     dashboard.button("q", "⏻  Quit Neovim", "<Cmd>qa<CR>"),
   }

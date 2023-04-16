@@ -68,7 +68,7 @@ fi
 # Communications
 #run telegram-desktop &
 run discord &
-run slack &
+# run slack &
 #run dropbox &
 #run insync start &
 #run ckb-next -b &

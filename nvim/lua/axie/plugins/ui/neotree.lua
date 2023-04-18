@@ -31,11 +31,11 @@ function M.config()
     },
     source_selector = {
       winbar = true,
-      tab_labels = {
-        filesystem = " 󰉓 Files ",
-        buffers = " 󱔗 Buffers ",
-        git_status = "  Git ",
-        diagnostics = "  LSP ",
+      sources = {
+        { source = "filesystem", display_name = " 󰉓 Files " },
+        { source = "buffers", display_name = " 󱔗 Buffers " },
+        { source = "git_status", display_name = "  Git " },
+        { source = "diagnostics", display_name = "  LSP " },
       },
     },
     use_popups_for_input = false,

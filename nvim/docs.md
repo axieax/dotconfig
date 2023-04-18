@@ -163,6 +163,7 @@
 
 ## Notes / issues
 
+- `rust_analyzer` won't startup
 - leap `s` bind cleared after buffer switched from alpha.nvim
   - https://github.com/goolord/alpha-nvim/issues/153 ?
 - lsp-signature delay (mainly sumneko_lua)

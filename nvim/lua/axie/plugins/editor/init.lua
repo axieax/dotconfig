@@ -30,7 +30,7 @@ local spec = {
   { "p00f/nvim-ts-rainbow", event = "BufReadPost" },
   { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", settings = "indentline" },
   { "code-biscuits/nvim-biscuits", event = "BufReadPost", settings = "biscuits" },
-  { "narutoxy/dim.lua", event = "VeryLazy", config = true },
+  { "zbirenbaum/neodim", branch = "v2", event = "LspAttach", config = true },
   {
     "danymat/neogen",
     cmd = "Neogen",

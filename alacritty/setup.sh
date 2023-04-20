@@ -6,7 +6,7 @@ if ! check_dependency alacritty && confirm "$action"; then
   if is_linux; then
     sudo pacman -S alacritty
   elif is_mac; then
-    brew install alacritty
+    brew install --cask alacritty
   else
     echo "Failed to $action: unsupported OS"
   fi

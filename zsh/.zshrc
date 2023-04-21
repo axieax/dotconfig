@@ -92,10 +92,10 @@ fi
 ### CUSTOM FUNCTIONS ###
 function qr() { curl qrcode.show/$1 }
 
-function ggc() { git checkout "$(git branch --all | fzf | awk '{print $1}')" }
+function ggc() { git checkout "${1:-$(git branch --all | fzf | awk '{print $1}')}" }
 alias ggb="ggc"
-
-function ggr() { git reset --soft "$(git log --oneline -100 | fzf | awk '{print $1}')" }
+function ggf() { git fetch origin "$1" }
+function ggr() { git reset --soft "${1:-$(git log --oneline -100 | fzf | awk '{print $1}')}" }
 function ggR() { git fetch origin "$1" && git reset --hard origin/"$1" }
 
 # lf with cd behaviour

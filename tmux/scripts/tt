@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# t query
-# NOTE: doesn't handle multiple sessions with the same basename well
-t "$(zoxide query -i)"

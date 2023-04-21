@@ -14,7 +14,7 @@ fi
 
 action="install oh-my-zsh"
 if [ ! -d "$HOME/.oh-my-zsh" ] && confirm "$action"; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 action="install starship prompt"
@@ -45,8 +45,7 @@ fi
 
 action="link zsh config"
 if confirm "$action"; then
-  link_config "$HOME/dotconfig/zsh/.zshrc" "$HOME/.zshrc"
-  touch "$HOME/.zsh_env"
+  link_config "$HOME/dotconfig/zsh/.zshenv" "$HOME/.zshenv"
 fi
 
 action="link starship config"

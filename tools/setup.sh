@@ -9,12 +9,14 @@ if is_mac && ! check_dependency brew && confirm "$action"; then
 fi
 
 action="install python3"
-if is_linux && ! check_dependency python && confirm "$action"; then
-  sudo pacman -S python python-pip
-elif is_mac && ! check_dependency python3 && confirm "$action"; then
-  brew install python
-else
-  echo "Failed to $action: unsupported OS"
+if ! check_dependency python3 && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S python python-pip
+  elif is_mac && confirm "$action"; then
+    brew install python
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
 fi
 
 action="install node and npm"
@@ -35,7 +37,13 @@ fi
 
 action="install zoxide"
 if ! check_dependency zoxide && confirm "$action"; then
-  curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+  if is_linux; then
+    sudo pacman -S zoxide
+  elif is_mac; then
+    brew install zoxide
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
 fi
 
 action="install lsd"

@@ -7,6 +7,7 @@
 
 ## TODO
 
+- Find a way to traverse through history for zsh-autosuggestions
 - proto ts parser?
 - ts-node-action null-ls builtin PR
 - Nvim 0.9 stuff
@@ -176,6 +177,8 @@
 
 ## Current PRs / Issues
 
+- https://github.com/toptal/gitignore/pull/529
+- https://github.com/alacritty/alacritty/pull/6876
 - https://github.com/SmiteshP/nvim-navic/issues/104
 - https://github.com/booperlv/nvim-gomove/issues/13
 - https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133

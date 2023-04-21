@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Delete tmux session
-tmux delete-session -t "$(tmux list-sessions 2> /dev/null | fzf | cut -d ':' -f1)"

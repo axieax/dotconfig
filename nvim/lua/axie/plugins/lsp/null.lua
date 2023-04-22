@@ -117,8 +117,7 @@ function M.code_action_sources()
     code_actions.shellcheck, -- sh
     code_actions.gitsigns,
     code_actions.refactoring,
-    -- TEMP: https://github.com/jose-elias-alvarez/null-ls.nvim/pull/1517
-    -- code_actions.ts_node_action,
+    code_actions.ts_node_action,
   }
 end
 

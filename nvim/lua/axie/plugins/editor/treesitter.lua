@@ -204,6 +204,7 @@ function M.config()
 
   -- TEMP: bash parser for zsh https://github.com/nvim-treesitter/nvim-treesitter/issues/655
   vim.treesitter.language.register("bash", "zsh")
+  vim.treesitter.language.register("terraform", "terraform-vars")
 end
 
 return M

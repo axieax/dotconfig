@@ -9,7 +9,6 @@
 
 - Find a way to traverse through history for zsh-autosuggestions
 - proto ts parser?
-- ts-node-action null-ls builtin PR
 - Nvim 0.9 stuff
   - Statuscolumn (fold)
   - Use `workspace/didChangeWatchedFiles`
@@ -92,7 +91,6 @@
 ## Features/plugins
 
 - harpoon (`<Space>mm` and `<Space>m(asdfghjkl)`)
-- splitjoin (ts-node-action with null-ls integration)
 - https://github.com/mizlan/iswap.nvim ?
 - `cppcheck` null-ls diagnostics source install with mason instead of OS package manager
   - https://github.com/williamboman/mason.nvim/pull/559

@@ -45,9 +45,6 @@ for _, cmd in ipairs(typos) do
   end, { bang = true })
 end
 
--- Terraform files
-override_filetype({ "*.terraformrc", "*.terraform.rc" }, "terraform")
-override_filetype({ "*.tfstate" }, "json")
-
--- Bazel files
-override_filetype({ "BUILD.*", "WORKSPACE.*" }, "bzl")
+-- Terraform filetypes
+override_filetype({ ".*%.terraformrc", ".*%.terraform.rc" }, "terraform")
+override_filetype({ ".*%.tfstate" }, "json")

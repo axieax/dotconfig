@@ -100,3 +100,14 @@ if ! check_dependency fd && confirm "$action"; then
     echo "Failed to $action: unsupported OS"
   fi
 fi
+
+action="install neofetch"
+if ! check_dependency neofetch && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S neofetch
+  elif is_mac; then
+    brew install neofetch
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi

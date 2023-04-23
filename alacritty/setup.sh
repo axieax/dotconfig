@@ -24,21 +24,12 @@ if confirm "$action"; then
   fi
 fi
 
-# Install Meslo LG font
-# Install Hack font
-
 action="link config"
 if confirm "$action"; then
   link_config $HOME/dotconfig/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 fi
 
-action="install neofetch"
-if ! check_dependency neofetch && confirm "$action"; then
-  if is_linux; then
-    sudo pacman -S neofetch
-  elif is_mac; then
-    brew install neofetch
-  else
-    echo "Failed to $action: unsupported OS"
-  fi
+action="set up tabs"
+if is_mac && confirm "$action"; then
+  defaults write org.alacritty AppleWindowTabbingMode -string always
 fi

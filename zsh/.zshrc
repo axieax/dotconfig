@@ -34,6 +34,11 @@ plugins=(
 fpath+="$ZSH/custom/plugins/zsh-completions/src"
 sauce $ZSH/oh-my-zsh.sh
 
+AUTO_NOTIFY_IGNORE+=(
+  vv
+  lazygit
+)
+
 ### SETTINGS ##
 bindkey -v
 setopt glob_dots

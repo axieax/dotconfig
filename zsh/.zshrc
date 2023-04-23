@@ -10,15 +10,12 @@ export ZSH="$HOME/.oh-my-zsh"
 zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 13
 
-# TEMP: https://github.com/ohmyzsh/ohmyzsh/pull/10947
-eval "$(starship init zsh)"
-
 ENABLE_CORRECTION="true"
 plugins=(
   git
   gitignore
   zoxide
-  # starship
+  starship
   npm
   nvm
   pyenv

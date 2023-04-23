@@ -154,6 +154,7 @@ myManageHook =
     , "Arcolinux-calamares-tool.py"
     , "Archlinux-tweak-tool.py"
     , "Arcolinux-welcome-app.py"
+    , "Archlinux-logout.py"
     , "Galculator"
     , "feh"
     , "mpv"
@@ -225,6 +226,18 @@ myMouseBindings (XConfig { XMonad.modMask = modMask }) =
 
 
 -- keys config
+-- https://hackage.haskell.org/package/X11-1.8/docs/src/Graphics-X11-Types.html
+increaseGaps = do
+  sendMessage $ IncGap 15 U
+  sendMessage $ IncGap 10 D
+  sendMessage $ IncGap 10 L
+  sendMessage $ IncGap 10 R
+
+decreaseGaps = do
+  sendMessage $ DecGap 15 U
+  sendMessage $ DecGap 10 D
+  sendMessage $ DecGap 10 L
+  sendMessage $ DecGap 10 R
 
 myKeys conf@(XConfig { XMonad.modMask = modMask }) =
   M.fromList
@@ -263,6 +276,9 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_F12), spawn $ "rofi -show drun")
        -- requires: https://github.com/Mange/rofi-emoji
        , ((modMask, xK_period), spawn $ "rofi -show emoji")
+       , ((modMask, xK_bracketleft), increaseGaps)
+       , ((modMask, xK_bracketright), decreaseGaps)
+       , ((modMask, xK_backslash), sendMessage $ ToggleGaps)
 
   -- FUNCTION KEYS
        , ((0, xK_F12), spawn $ "xfce4-terminal --drop-down")
@@ -277,6 +293,9 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
          )
        , ( (modMask .|. shiftMask, xK_r)
          , spawn $ "xmonad --recompile && xmonad --restart"
+         )
+       , ( (modMask .|. shiftMask, xK_p)
+         , spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"
          )
        , ((modMask .|. shiftMask, xK_q), kill)
   -- , ((modMask .|. shiftMask , xK_x ), io (exitWith ExitSuccess))
@@ -296,9 +315,6 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((controlMask .|. mod1Mask, xK_k), spawn $ "archlinux-logout")
        , ((controlMask .|. mod1Mask, xK_l), spawn $ "archlinux-logout")
        , ((controlMask .|. mod1Mask, xK_m), spawn $ "xfce4-settings-manager")
-       , ( (controlMask .|. mod1Mask, xK_o)
-         , spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"
-         )
        , ((controlMask .|. mod1Mask, xK_p), spawn $ "pamac-manager")
        , ((controlMask .|. mod1Mask, xK_r), spawn $ "rofi-theme-selector")
        , ((controlMask .|. mod1Mask, xK_s), spawn $ "spotify")

@@ -89,3 +89,14 @@ if ! check_dependency fzf && confirm "$action"; then
     echo "Failed to $action: unsupported OS"
   fi
 fi
+
+action="install fd"
+if ! check_dependency fd && confirm "$action"; then
+  if is_linux; then
+    sudo pacman -S fd
+  elif is_mac; then
+    brew install fd
+  else
+    echo "Failed to $action: unsupported OS"
+  fi
+fi

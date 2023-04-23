@@ -88,6 +88,7 @@ elif [[ "$OS" == "Darwin" ]]; then
 else
   echo "Unsupported OS: $OS"
 fi
+sauce "$HOME/.zshrc"
 
 ### CUSTOM FUNCTIONS ###
 function qr() { curl qrcode.show/$1 }

@@ -17,7 +17,7 @@ function run() {
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 
 # same as sddm/Xsetup script
-xrandr --output HDMI-0 --auto --output DP-0 --auto --right-of HDMI-0
+# xrandr --output HDMI-0 --auto --output DP-0 --auto --left-of HDMI-0
 
 (
   sleep 2
@@ -46,7 +46,7 @@ run xfce4-power-manager &
 # run volumeicon &
 numlockx on &
 blueberry-tray &
-picom --config $HOME/.xmonad/scripts/picom.conf &
+picom &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 unclutter &
@@ -73,7 +73,7 @@ run discord &
 #run insync start &
 #run ckb-next -b &
 # run thunderbird &
-run evolution &
+# run evolution &
 
 # Set keyboard repeat delay
 xset r rate 200 25

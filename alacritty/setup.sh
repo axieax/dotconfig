@@ -29,13 +29,7 @@ fi
 
 action="link config"
 if confirm "$action"; then
-  if is_linux; then
-    link_config $HOME/dotconfig/alacritty/alacritty-linux.yml $HOME/.config/alacritty/alacritty.yml
-  elif is_mac; then
-    link_config $HOME/dotconfig/alacritty/alacritty-mac.yml $HOME/.config/alacritty/alacritty.yml
-  else
-    echo "invalid OSTYPE $OSTYPE for alacritty setup"
-  fi
+  link_config $HOME/dotconfig/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 fi
 
 action="install neofetch"

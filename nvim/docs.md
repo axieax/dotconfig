@@ -90,12 +90,10 @@
 
 ## Features/plugins
 
-- harpoon (`<Space>mm` and `<Space>m(asdfghjkl)`)
-- https://github.com/mizlan/iswap.nvim ?
+- https://github.com/cshuaimin/ssr.nvim/
 - `cppcheck` null-ls diagnostics source install with mason instead of OS package manager
   - https://github.com/williamboman/mason.nvim/pull/559
 - https://github.com/jose-elias-alvarez/typescript.nvim
-- https://github.com/jbyuki/one-small-step-for-vimkind for nvim debugging?
 - https://github.com/miversen33/netman.nvim
 - check out https://github.com/anuvyklack/windows.nvim
 - https://github.com/jayp0521/mason-null-ls.nvim ?

@@ -14,7 +14,7 @@ local spec = {
       },
       { "<Space>rk", "<Cmd>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
     },
-    config = true,
+    opts = { popup_input = { submit = "<C-s>" } },
   },
   { "folke/todo-comments.nvim", event = "VeryLazy", settings = "todo" },
 

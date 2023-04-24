@@ -15,7 +15,6 @@ plugins=(
   git
   gitignore
   zoxide
-  starship
   npm
   nvm
   pyenv
@@ -29,12 +28,14 @@ plugins=(
   zsh-syntax-highlighting # NOTE: this has to be the last plugin
 )
 fpath+="$ZSH/custom/plugins/zsh-completions/src"
-sauce $ZSH/oh-my-zsh.sh
 
+ZSH_THEME="spaceship"
 AUTO_NOTIFY_IGNORE+=(
   vv
   lazygit
 )
+
+sauce $ZSH/oh-my-zsh.sh
 
 ### SETTINGS ##
 bindkey -v

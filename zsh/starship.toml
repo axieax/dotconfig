@@ -1,0 +1,14 @@
+command_timeout = 1000
+
+# [git_status]
+# disabled = true
+
+[directory]
+truncation_length = 10
+truncation_symbol = "…/"
+
+[gcloud]
+disabled = true
+
+[java]
+symbol = " "

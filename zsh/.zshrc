@@ -20,6 +20,7 @@ plugins=(
   pyenv
   bazel
   terraform
+  starship
 
   # notify # NOTE: does not disappear
   auto-notify
@@ -29,7 +30,7 @@ plugins=(
 )
 fpath+="$ZSH/custom/plugins/zsh-completions/src"
 
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
 AUTO_NOTIFY_IGNORE+=(
   vv
   lazygit
@@ -100,7 +101,8 @@ function ggc() { git checkout "${1:-$(git branch --all | fzf | awk '{print $1}')
 alias ggb="ggc"
 function ggf() { git fetch origin "$1" }
 function ggr() { git reset --soft "${1:-$(git log --oneline -100 | fzf | awk '{print $1}')}" }
-function ggR() { git fetch origin "$1" && git reset --hard origin/"$1" }
+function ggR() { git reset --hard "${1:-$(git log --oneline -100 | fzf | awk '{print $1}')}" }
+function ggRb() { git fetch origin "$1" && git reset --hard origin/"$1" }
 
 # lf with cd behaviour
 function lf() {

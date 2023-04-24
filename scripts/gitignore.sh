@@ -2,28 +2,31 @@
 
 QUERY_API="https://www.toptal.com/developers/gitignore/api"
 GITIGNORE=".gitignore"
-query=$@
+options=(${@// / })
 
-if [[ ! -n $query ]]; then
-  # select technologies if no query provided
+if [[ -z "$options" ]]; then
+  technologies="$(curl -sL ${QUERY_API}/list | tr "," "\n")"
   while true; do
-    selected="$(curl -sL ${QUERY_API}/list | tr "," "\n" | fzf)"
+    selected="$(echo "$technologies" | fzf)"
     if [[ $? = 0 ]]; then
-      # argument selected
-      query="$query$selected,"
+      options+=("$selected")
     else
-      # strip last comma if exists
-      query="$(echo $query | sed -e 's/\,$//')"
       break
     fi
   done
 fi
 
 # generate template
-if [[ -n $query ]]; then
-  output="$(curl -sL ${QUERY_API}/$query)"
+if [[ -n "$options" ]]; then
+  query="$(echo "${options[@]}" | tr ' ' ',')"
+  output="$(curl -sL "${QUERY_API}/$query")"
+  echo -e "$output"
+  read -p "Save to $GITIGNORE? [y/n] " -n 1 -r
+  echo
+  [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
+
   if [[ -f "$GITIGNORE" ]]; then
-    # append existing gitignore contents
+    echo "Adding to existing $GITIGNORE file"
     output="${output}\n\n$(cat $GITIGNORE)"
   fi
   echo -e "$output" > $GITIGNORE

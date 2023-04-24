@@ -13,7 +13,6 @@ zstyle ':omz:update' frequency 13
 ENABLE_CORRECTION="true"
 plugins=(
   git
-  gitignore
   zoxide
   npm
   nvm
@@ -62,6 +61,7 @@ alias ll='ls -alFh'
 alias l='ls'
 alias l.="ls -A | grep -E '^\.'"
 
+alias gi="$HOME/dotconfig/scripts/gitignore.sh"
 alias ggs="git status"
 alias ggm="git mergetool"
 alias ggd="git diff"

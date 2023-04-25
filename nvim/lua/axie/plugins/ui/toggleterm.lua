@@ -2,7 +2,16 @@ local M = {}
 
 -- TODO: warn before exit if hidden floaterm active
 
-M.cmd = "ToggleTerm"
+M.cmd = {
+  "TermSelect",
+  "TermExec",
+  "ToggleTerm",
+  "ToggleTermToggleAll",
+  "ToggleTermSendVisualLines",
+  "ToggleTermSendVisualSelection",
+  "ToggleTermSendCurrentLine",
+  "ToggleTermSetName",
+}
 
 function M.attach()
   vim.keymap.set("n", "<Esc>", "<Nop>", { silent = true, buffer = 0 })

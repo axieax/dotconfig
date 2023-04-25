@@ -5,6 +5,7 @@ local spec = {
   { "rebelot/heirline.nvim", event = "VeryLazy", settings = "statusline" },
   { "romgrk/barbar.nvim", event = "VeryLazy", settings = "barbar" },
   -- { "akinsho/bufferline.nvim", event = "VeryLazy", config = true },
+  { "luukvbaal/statuscol.nvim", event = "VeryLazy", settings = "statuscolumn" },
   { "rcarriga/nvim-notify", settings = "notify" },
   {
     "stevearc/oil.nvim",
@@ -100,7 +101,7 @@ local spec = {
   { "axieax/urlview.nvim", dev = dev_mode, settings = "urlview" },
   { "rainbowhxch/beacon.nvim", event = "VeryLazy" },
   { "petertriho/nvim-scrollbar", event = "VeryLazy", settings = "scrollbar" },
-  { "anuvyklack/pretty-fold.nvim", event = "VeryLazy", config = true },
+  { "anuvyklack/pretty-fold.nvim", event = "VeryLazy", opts = { fill_char = "-" } },
   {
     "anuvyklack/fold-preview.nvim",
     dependencies = "anuvyklack/nvim-keymap-amend",

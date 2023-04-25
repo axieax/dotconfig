@@ -20,7 +20,7 @@ local spec = {
   { "tpope/vim-sleuth", event = "VeryLazy" },
 
   -- Git stuff
-  { "lewis6991/gitsigns.nvim", event = "VeryLazy", settings = "gitsigns" },
+  { "lewis6991/gitsigns.nvim", event = "BufReadPost", settings = "gitsigns" },
   { "ruifm/gitlinker.nvim", settings = "gitlinker" },
   -- NOTE: can be wrapped with https://github.com/TimUntersberger/neogit
   { "sindrets/diffview.nvim", settings = "diffview" },

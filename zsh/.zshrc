@@ -30,12 +30,12 @@ plugins=(
 fpath+="$ZSH/custom/plugins/zsh-completions/src"
 
 # ZSH_THEME="spaceship"
-AUTO_NOTIFY_IGNORE+=(
-  vv
-  lazygit
-)
-
 sauce $ZSH/oh-my-zsh.sh
+
+AUTO_NOTIFY_IGNORE+=(
+  "cd"
+  "lazygit"
+)
 
 ### SETTINGS ##
 bindkey -v

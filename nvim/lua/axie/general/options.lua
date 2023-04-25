@@ -14,9 +14,11 @@ vim_apply(vim.opt, {
   -- 4 displaying text
   scrolloff = 1,
   sidescrolloff = 2,
+  -- NOTE: pretty-fold configures the `fold` fillchar
+  fillchars = { foldclose = "", foldopen = "", foldsep = " " },
   list = true,
   -- NOTE: indent-blankline covers first tab character so not visible
-  listchars = "tab:→ ,trail:·,extends:▶,precedes:◀,nbsp:␣",
+  listchars = { tab = "→ ", trail = "·", extends = "▶", precedes = "◀", nbsp = "␣" },
   number = true,
   relativenumber = true,
   numberwidth = 1,
@@ -39,6 +41,7 @@ vim_apply(vim.opt, {
 
   -- 9 using the mouse
   mouse = "a",
+  mousemodel = "extend",
 
   -- 11 messages and info
   showmode = false,
@@ -66,6 +69,7 @@ vim_apply(vim.opt, {
   foldenable = default_folds,
   foldlevel = 0, -- default levels folded
   foldlevelstart = 0, -- default for functional languages
+  foldcolumn = "auto",
   foldmethod = "expr",
   foldexpr = "v:lua.vim.treesitter.foldexpr()",
   -- foldminlines = 1, -- min lines required for a fold (default)

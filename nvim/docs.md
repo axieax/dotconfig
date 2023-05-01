@@ -161,7 +161,7 @@
 
 ## Notes / issues
 
-- `rust_analyzer` won't startup
+- `rust_analyzer` won't startup due to custom options
 - leap `s` bind cleared after buffer switched from alpha.nvim
   - https://github.com/goolord/alpha-nvim/issues/153 ?
 - lsp-signature delay (mainly sumneko_lua)
@@ -174,7 +174,7 @@
 
 ## Current PRs / Issues
 
-- https://github.com/luukvbaal/statuscol.nvim/issues/60
+- https://github.com/lewis6991/gitsigns.nvim/issues/788
 - https://github.com/SmiteshP/nvim-navic/issues/104
 - https://github.com/booperlv/nvim-gomove/issues/13
 - https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133

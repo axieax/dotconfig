@@ -62,9 +62,9 @@ M.keys = {
   },
 
   {
-    "<Space>gd",
+    "<Space>gD",
     function()
-      require("gitsigns").toggle_deleted()
+      require("gitsigns").preview_hunk_inline()
     end,
     desc = "Git toggle deleted lines",
   },
@@ -88,6 +88,8 @@ M.opts = {
   numhl = true,
   signcolumn = false,
   current_line_blame = false,
+  -- TEMP: preview_hunk_inline with syntax highlighting
+  _inline2 = true,
 }
 
 return M

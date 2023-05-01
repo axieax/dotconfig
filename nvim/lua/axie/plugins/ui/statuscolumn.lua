@@ -33,6 +33,7 @@ function M.config()
     end
   end
 
+  local clickmod = "c"
   require("statuscol").setup({
     relculright = true,
     segments = {
@@ -59,7 +60,7 @@ function M.config()
         click = "v:lua.ScSa",
       },
     },
-    clickmod = "c",
+    clickmod = clickmod,
     clickhandlers = {
       Lnum = function(args)
         if args.button == "l" then
@@ -69,6 +70,17 @@ function M.config()
           git_hunk_actions()
         elseif args.button == "r" then
           require("axie.plugins.lsp.code_actions").native()
+        end
+      end,
+      FoldClose = function(args)
+        if args.button == "l" then
+          vim.api.nvim_cmd({
+            cmd = "normal",
+            bang = true,
+            args = { "z" .. (args.mods:find(clickmod) and "O" or "o") },
+          })
+        elseif args.button == "r" then
+          require("fold-preview").toggle_preview()
         end
       end,
     },

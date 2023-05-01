@@ -4,3 +4,11 @@ customCommands:
     context: "files"
     loadingText: "opening commitizen commit tool"
     subprocess: true
+  - key: "<C-p>"
+    command: "git push --force"
+    context: "files"
+    loadingText: "push (force, without --force-with-lease)"
+    prompts:
+      - type: "confirm"
+        title: "Confirm:"
+        body: "Are you sure you want to force push to {{.CheckedOutBranch.Name}}?"

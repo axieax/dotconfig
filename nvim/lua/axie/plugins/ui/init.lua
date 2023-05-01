@@ -13,7 +13,7 @@ local spec = {
       {
         "<Space>;",
         function()
-          require("oil").open_float()
+          require("oil").toggle_float()
         end,
         desc = "Edit filesystem",
       },

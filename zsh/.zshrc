@@ -101,7 +101,10 @@ function gch() { git checkout "${1:-$(git branch --all | fzf | awk '{print $1}')
 function ggf() { git fetch origin "$1" }
 function ggr() { git reset --soft "${1:-$(git log --oneline -100 | fzf | awk '{print $1}')}" }
 function ggR() { git reset --hard "${1:-$(git log --oneline -100 | fzf | awk '{print $1}')}" }
-function ggRb() { git fetch origin "$1" && git reset --hard origin/"$1" }
+function ggN() {
+  local branch="${1:-$(git branch --show-current)}";
+  git fetch origin "$branch" && git reset --hard "origin/$branch"
+}
 
 # lf with cd behaviour
 function lf() {

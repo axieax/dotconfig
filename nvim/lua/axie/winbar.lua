@@ -43,37 +43,35 @@ function M.file_name()
   return vim.fn.expand("%:p:t")
 end
 
--- REFERENCE: nvim-navic
--- NOTE: obsolete icons (https://github.com/SmiteshP/nvim-navic/issues/104)
 local kind_icons = {
-  File = " ",
+  File = "󰈙 ",
   Module = " ",
-  Namespace = " ",
+  Namespace = "󰌗 ", -- 󰦮 
   Package = " ",
-  Class = " ",
-  Method = " ",
+  Class = " ",
+  Method = "󰊕 ", -- 󰆧
   Property = " ",
   Field = " ",
   Constructor = " ",
-  Enum = "練",
-  Interface = "練",
-  Function = " ",
+  Enum = " ",
+  Interface = "󰕘 ", -- 
+  Function = "󰊕 ",
   Lambda = "λ",
-  Variable = " ",
-  Constant = " ",
+  Variable = "󰀫 ",
+  Constant = "󰏿 ",
   String = " ",
-  Number = " ",
+  Number = "󰎠 ", -- 
   Boolean = "◩ ",
-  Array = " ",
-  Object = " ",
-  Key = " ",
-  Null = "ﳠ ",
+  Array = " ", -- 󰅪
+  Object = "󰅩 ",
+  Key = "󰌋 ",
+  Null = "󰟢 ",
   EnumMember = " ",
-  Struct = " ",
+  Struct = "󰌗 ", -- 
   Event = " ",
-  Operator = " ",
-  TypeParameter = " ",
-  Macro = " ",
+  Operator = "󰆕 ", --  󰿈 󰘧
+  TypeParameter = "󰊄 ", -- 󰗴
+  Macro = "󰉨 ",
 }
 
 local show_context = true

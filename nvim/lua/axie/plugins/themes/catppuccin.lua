@@ -7,12 +7,10 @@ function M.config()
   vim.g.catppuccin_flavour = "mocha"
   local catppuccin = require("catppuccin")
   local cp = require("catppuccin.palettes").get_palette()
-  local ucolors = require("catppuccin.utils.colors")
 
   local float_bg = cp.base
   local remaps = {
     NormalFloat = { bg = float_bg }, -- NOTE: catppuccin needs a bg colour
-    CursorLine = { bg = ucolors.darken(cp.surface0, 0.64, cp.base) },
     ColorColumn = { link = "CursorLine" },
     SpellBad = { fg = cp.red, style = { "italic", "undercurl" } },
     SpellCap = { fg = cp.red, style = { "italic", "undercurl" } },

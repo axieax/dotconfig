@@ -22,4 +22,43 @@ M.fileformat_icons = {
   dos = "",
 }
 
+M.symbol_icons = {
+  File = "󰈙",
+  Folder = "󰉋",
+  Module = "",
+  Package = "",
+  Namespace = "", -- 󰌗
+  Struct = "",
+  Class = "󰠱", --  
+  Function = "󰊕", -- 
+  Lambda = "λ",
+  Method = "󰊕",
+  Constructor = "",
+  Interface = "",
+  Enum = "",
+  EnumMember = "",
+  Property = "",
+  Field = "󰜢", -- 󰇽
+  Object = "󰅩",
+  Key = "󰌋",
+  Value = "󰎠", -- 󰕘
+  Array = "",
+  Variable = "󰀫",
+  Constant = "󰏿", -- 
+  String = "",
+  Number = "󰎠",
+  Boolean = "",
+  Unit = "",
+  Null = "󰟢",
+  Operator = "󰆕",
+  TypeParameter = "󰉿", -- 󰅲
+  Text = "",
+  Event = "",
+  Macro = "",
+  Reference = "", -- 
+  Snippet = "", -- 
+  Color = "",
+  Keyword = "󰌋",
+}
+
 return M

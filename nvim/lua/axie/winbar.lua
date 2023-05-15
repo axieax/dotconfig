@@ -1,5 +1,8 @@
 local M = {}
 
+local utils = require("axie.utils")
+local symbol_icons = require("axie.utils.config").symbol_icons
+
 local ignored_filetypes = {
   "",
   "alpha",
@@ -43,37 +46,6 @@ function M.file_name()
   return vim.fn.expand("%:p:t")
 end
 
-local kind_icons = {
-  File = "󰈙 ",
-  Module = " ",
-  Namespace = "󰌗 ", -- 󰦮 
-  Package = " ",
-  Class = " ",
-  Method = "󰊕 ", -- 󰆧
-  Property = " ",
-  Field = " ",
-  Constructor = " ",
-  Enum = " ",
-  Interface = "󰕘 ", -- 
-  Function = "󰊕 ",
-  Lambda = "λ",
-  Variable = "󰀫 ",
-  Constant = "󰏿 ",
-  String = " ",
-  Number = "󰎠 ", -- 
-  Boolean = "◩ ",
-  Array = " ", -- 󰅪
-  Object = "󰅩 ",
-  Key = "󰌋 ",
-  Null = "󰟢 ",
-  EnumMember = " ",
-  Struct = "󰌗 ", -- 
-  Event = " ",
-  Operator = "󰆕 ", --  󰿈 󰘧
-  TypeParameter = "󰊄 ", -- 󰗴
-  Macro = "󰉨 ",
-}
-
 local show_context = true
 
 function M.toggle_context()
@@ -95,7 +67,7 @@ function M.context()
     vim.tbl_map(function(symbol)
       -- anonymous function
       if symbol.kind == "Function" and symbol.name == "<Anonymous>" then
-        return highlight(kind_icons.Lambda, "NavicIconsFunction")
+        return highlight(symbol_icons.Lambda, "NavicIconsFunction")
       end
 
       -- highlight function parameters
@@ -116,7 +88,13 @@ function M.context()
         end
       end
 
-      return highlight(kind_icons[symbol.kind], "NavicIcons" .. symbol.kind) .. text
+      local icon = symbol_icons[symbol.kind]
+      if not icon then
+        utils.notify("[winbar] Missing icon for " .. symbol.kind, vim.log.levels.WARN)
+        icon = " "
+      end
+
+      return highlight(icon .. " ", "NavicIcons" .. symbol.kind) .. text
     end, symbols),
     "  "
   )

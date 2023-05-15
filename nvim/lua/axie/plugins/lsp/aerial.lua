@@ -22,6 +22,7 @@ function M.config()
       last_item = "└ ",
     },
     filter_kind = false,
+    icons = require("axie.utils.config").symbol_icons,
     -- fall back to treesitter if LSP not available
     backends = { "lsp", "treesitter", "markdown", "man" },
     keymaps = {

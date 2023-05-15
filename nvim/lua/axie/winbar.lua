@@ -88,13 +88,7 @@ function M.context()
         end
       end
 
-      local icon = symbol_icons[symbol.kind]
-      if not icon then
-        utils.notify("[winbar] Missing icon for " .. symbol.kind, vim.log.levels.WARN)
-        icon = " "
-      end
-
-      return highlight(icon .. " ", "NavicIcons" .. symbol.kind) .. text
+      return highlight(symbol.icon .. " ", "NavicIcons" .. symbol.kind) .. text
     end, symbols),
     "  "
   )

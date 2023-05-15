@@ -5,7 +5,7 @@ local vim_apply = require("axie.utils").vim_apply
 -- Grouped by :options
 vim_apply(vim.opt, {
   -- 2 moving around, searching and patterns
-  whichwrap = "bs<>[]hl",
+  whichwrap = "bs<>",
   incsearch = true, -- live search preview
   inccommand = "split", -- live substitution preview
   ignorecase = true,

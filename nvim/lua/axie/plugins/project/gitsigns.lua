@@ -39,6 +39,7 @@ M.keys = {
   },
 
   -- TODO: toggle stage hunk containing cursor with <Space>gh
+  -- TODO: visual selection for partial range
   {
     "<Space>gh",
     function()

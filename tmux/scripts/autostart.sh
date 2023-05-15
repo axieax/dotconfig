@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sauce "$HOME/dotconfig/tmux/scripts/aliases.sh"
+
 # Autostart tmux
 function _tmux_autostart() {
   [[ $- != *i* ]] && return  # return if non-interactive

@@ -51,6 +51,7 @@ end
 function M.config()
   require("toggleterm").setup({
     persist_mode = false,
+    close_on_exit = false,
     size = function(term)
       if term.direction == "horizontal" then
         return 15
@@ -72,11 +73,18 @@ function M.config()
     pattern = "term://*",
     callback = require("axie.plugins.ui.toggleterm").attach,
   })
+  vim.api.nvim_create_autocmd("TermClose", {
+    desc = "Close terminal buffers on success",
+    callback = function()
+      if vim.v.event.status == 0 then
+        vim.api.nvim_buf_delete(0, {})
+      end
+    end,
+  })
 end
 
 function M.lazygit()
   local lazygit = require("toggleterm.terminal").Terminal:new({
-    -- INSTALL: sudo pacman -S lazygit
     cmd = "lazygit",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },
@@ -88,7 +96,6 @@ end
 
 function M.lazydocker()
   local lazydocker = require("toggleterm.terminal").Terminal:new({
-    -- INSTALL: sudo pacman -S lazydocker
     cmd = "lazydocker",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },

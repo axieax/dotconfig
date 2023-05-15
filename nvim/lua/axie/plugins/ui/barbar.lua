@@ -41,7 +41,7 @@ M.keys = {
 M.opts = {
   maximum_padding = 1,
   -- highlight_inactive_file_icons = true,
-  icons = { button = "" },
+  icons = { button = "" },
 }
 
 return M

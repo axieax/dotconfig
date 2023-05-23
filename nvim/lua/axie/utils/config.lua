@@ -23,19 +23,20 @@ M.fileformat_icons = {
 }
 
 M.symbol_icons = {
+  Root = "",
   File = "󰈙",
   Folder = "󰉋",
   Module = "",
-  Package = "",
+  Package = "", -- 󰏖
   Namespace = "", -- 󰌗
   Struct = "",
   Class = "󰠱", --  
   Function = "󰊕", -- 
   Lambda = "λ",
   Method = "󰊕",
-  Constructor = "",
+  Constructor = "", -- 
   Interface = "",
-  Enum = "",
+  Enum = "", -- 󰒻
   EnumMember = "",
   Property = "",
   Field = "󰜢", -- 󰇽
@@ -45,13 +46,13 @@ M.symbol_icons = {
   Array = "",
   Variable = "󰀫",
   Constant = "󰏿", -- 
-  String = "",
+  String = "󰀬",
   Number = "󰎠",
   Boolean = "󰨙", -- 
   Unit = "",
   Null = "󰟢",
   Operator = "󰆕",
-  TypeParameter = "󰉿", -- 󰅲
+  TypeParameter = "󰉿", -- 󰊄 󰅲
   Text = "",
   Event = "",
   Macro = "",
@@ -59,6 +60,7 @@ M.symbol_icons = {
   Snippet = "", -- 
   Color = "",
   Keyword = "󰌋",
+  StaticMethod = "󰊕", -- ccls
 }
 
 return M

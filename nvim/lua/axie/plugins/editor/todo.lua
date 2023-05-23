@@ -40,7 +40,7 @@ M.opts = {
       alt = { "NEW", "ACTION", "ACTIONABLE", "OPTIONAL", "MAYBE" },
     },
     HACK = {
-      icon = " ",
+      icon = "󰈸 ",
       color = "warning",
       alt = { "TEMP", "TEMPORARY", "CHANGE", "UPDATE", "CONFIRM", "CHECK" },
     },

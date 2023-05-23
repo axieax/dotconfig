@@ -92,7 +92,7 @@ function M.mode()
         vim.notify("Unknown mode: " .. self.mode, vim.log.levels.ERROR)
         name = "Invalid"
       end
-      return " " .. name
+      return "󰈸 " .. name
     end,
     hl = function(self)
       local mode_char = self.mode:sub(1, 1)

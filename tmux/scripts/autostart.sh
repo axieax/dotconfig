@@ -19,6 +19,8 @@ function _tmux_autostart() {
       tn
     fi
 
-    tmux has-session -t "$SESSION" 2>/dev/null || exit
+    if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+      exit;
+    fi
   fi
 }

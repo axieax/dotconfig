@@ -12,6 +12,7 @@ M.keys = {
 function M.config()
   require("urlview").setup({
     default_title = "Links",
+    default_include_branch = true,
     log_level_min = vim.log.levels.TRACE,
     jump = {
       prev = "[U",

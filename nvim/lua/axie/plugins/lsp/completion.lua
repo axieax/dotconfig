@@ -17,7 +17,7 @@ function M.config()
     emoji = { label = "Emoji" },
     spell = { label = "Spell", priority = 1 },
     latex_symbols = { label = "LaTeX" },
-    npm = { label = "NPM" },
+    npm = { label = "npm" },
     git = { label = "Git" },
     -- cmdline = { label = "[Cmd]" },
     orgmode = { label = "Org" },

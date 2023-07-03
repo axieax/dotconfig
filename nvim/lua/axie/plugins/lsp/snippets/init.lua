@@ -12,6 +12,7 @@ M.keys = {
       end
     end,
     mode = { "n", "i", "s" },
+    desc = "Snippet jump next",
   },
   {
     "<C-h>",
@@ -22,6 +23,7 @@ M.keys = {
       end
     end,
     mode = { "n", "i", "s" },
+    desc = "Snippet jump previous",
   },
   {
     "<C-j>",
@@ -32,6 +34,7 @@ M.keys = {
       end
     end,
     mode = { "n", "i" },
+    desc = "Snippet choice previous",
   },
   {
     "<C-k>",
@@ -42,12 +45,14 @@ M.keys = {
       end
     end,
     mode = { "n", "i" },
+    desc = "Snippet choice next",
   },
   {
     "\\S",
     function()
       require("luasnip.loaders.from_lua").edit_snippet_files()
     end,
+    desc = "Snippet edit",
   },
 }
 

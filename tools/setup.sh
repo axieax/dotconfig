@@ -111,3 +111,8 @@ if ! check_dependency neofetch && confirm "$action"; then
     echo "Failed to $action: unsupported OS"
   fi
 fi
+
+action="install gnu-sed"
+if is_mac && ! check_dependency gsed && confirm "$action"; then
+  brew install gnu-sed
+fi

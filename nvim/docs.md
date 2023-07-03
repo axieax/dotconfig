@@ -7,6 +7,7 @@
 
 ## TODO
 
+- Lazy reload
 - `zx` compute folds when I open a new buffer
   - https://stackoverflow.com/questions/61795798/recalculating-folds-in-vim-without-applying-foldlevel
   - https://vi.stackexchange.com/questions/40382/is-there-a-recommended-way-to-recompute-folds-every-time-a-buffer-is-changed-in
@@ -91,6 +92,8 @@
 
 ## Features/plugins
 
+- mini.nvim
+- jmbuhr/otter.nvim but more minimal
 - https://github.com/cshuaimin/ssr.nvim/
 - `cppcheck` null-ls diagnostics source install with mason instead of OS package manager
   - https://github.com/williamboman/mason.nvim/pull/559
@@ -174,6 +177,7 @@
 
 ## Current PRs / Issues
 
+- https://github.com/wbthomason/packer.nvim/pull/1236
 - https://github.com/lewis6991/gitsigns.nvim/issues/788
 - https://github.com/booperlv/nvim-gomove/issues/13
 - https://github.com/nvim-treesitter/nvim-treesitter/pull/4524#issuecomment-1483175133

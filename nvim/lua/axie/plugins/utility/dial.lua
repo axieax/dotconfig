@@ -17,6 +17,7 @@ function M.config()
   local augend = require("dial.augend")
   require("dial.config").augends:register_group({
     default = {
+      augend.decimal_fraction.new({}),
       augend.integer.alias.decimal_int,
       augend.integer.alias.hex,
       augend.integer.alias.octal,

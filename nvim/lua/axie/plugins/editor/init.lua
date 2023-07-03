@@ -120,6 +120,7 @@ local spec = {
 
   {
     "nvim-neotest/neotest",
+    cmd = "Neotest",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-neotest/neotest-go",

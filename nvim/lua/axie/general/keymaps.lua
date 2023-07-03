@@ -164,6 +164,7 @@ filetype_map("json", "n", ",c", function()
   local buf = vim.api.nvim_get_current_buf()
   local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
   vim.api.nvim_buf_set_option(buf, "filetype", filetype == "json" and "jsonc" or "json")
+  vim.api.nvim_cmd({ cmd = "LspRestart", args = { "jsonls" } }, {})
 end, { desc = "Toggle jsonc filetype" })
 filetype_map("sh", "n", ",x", "<Cmd>!chmod +x %<CR>", { desc = "Make file executable" })
 

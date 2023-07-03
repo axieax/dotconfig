@@ -69,6 +69,10 @@ function M.config()
         enable_ui = true,
       },
       dashboard = false, -- startify?
+      dropbar = {
+        enabled = true,
+        color_mode = false,
+      },
       feline = false,
       fern = false,
       fidget = false, -- prefer default colours

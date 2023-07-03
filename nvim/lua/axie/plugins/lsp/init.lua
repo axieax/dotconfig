@@ -55,7 +55,7 @@ local spec = {
       -- "hrsh7th/cmp-cmdline",
       "f3fora/cmp-spell",
       "kdheepak/cmp-latex-symbols",
-      { "David-Kunz/cmp-npm", config = true },
+      { "David-Kunz/cmp-npm", ft = "json", config = true },
       { "petertriho/cmp-git", opts = { filetypes = { "*" } } },
       -- "quangnguyen30192/cmp-nvim-tags",
       -- "tpope/vim-dadbod",
@@ -83,6 +83,7 @@ local spec = {
   { "stevearc/aerial.nvim", settings = "aerial" },
   {
     "j-hui/fidget.nvim",
+    tag = "legacy",
     event = "LspAttach",
     opts = { window = { relative = "editor", blend = 0 } },
   },

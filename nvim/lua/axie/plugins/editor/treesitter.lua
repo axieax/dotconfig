@@ -1,5 +1,25 @@
 local M = {}
 
+M.cmd = {
+  "TSInstall",
+  "TSInstallFromGrammar",
+  "TSInstallSync",
+  "TSInstallUpdate",
+  "TSInstallUpdateSync",
+  "TSInstallUninstall",
+  "TSInstallInfo",
+  "TSModuleInfo",
+  "TSBufEnable",
+  "TSBufDisable",
+  "TSBufToggle",
+  "TSEnable",
+  "TSDisable",
+  "TSToggle",
+  "TSConfigInfo",
+  "TSEditQuery",
+  "TSEditQueryUserAfter",
+}
+
 M.ensure_installed = {
   "bash",
   "c",

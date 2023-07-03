@@ -2,7 +2,7 @@ local M = {}
 
 function M.config()
   local onedarkpro = require("onedarkpro")
-  local onedarkpro_utils = require("onedarkpro.lib.color")
+  local color = require("onedarkpro.helpers")
   onedarkpro.setup({
     theme = "onedark_vivid",
     caching = true,
@@ -10,12 +10,12 @@ function M.config()
     colors = {
       -- NvChad Telescope theme (https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)
       onedark = {
-        telescope_prompt = onedarkpro_utils.lighten(onedarkpro.get_colors("onedark").bg, 0.97),
-        telescope_results = onedarkpro_utils.darken(onedarkpro.get_colors("onedark").bg, 0.85),
+        telescope_prompt = color.lighten(color.get_colors("onedark").bg, 0.97),
+        telescope_results = color.darken(color.get_colors("onedark").bg, 0.85),
       },
       onelight = {
-        telescope_prompt = onedarkpro_utils.darken(onedarkpro.get_colors("onelight").bg, 0.98),
-        telescope_results = onedarkpro_utils.darken(onedarkpro.get_colors("onelight").bg, 0.95),
+        telescope_prompt = color.darken(color.get_colors("onelight").bg, 0.98),
+        telescope_results = color.darken(color.get_colors("onelight").bg, 0.95),
       },
     },
     highlights = {

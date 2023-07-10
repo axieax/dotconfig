@@ -87,30 +87,6 @@ local spec = {
     event = "LspAttach",
     opts = { window = { relative = "editor", blend = 0 } },
   },
-  {
-    "kosayoda/nvim-lightbulb",
-    event = "LspAttach",
-    opts = {
-      ignore = { "null-ls" },
-      sign = { enabled = false },
-      status_text = { enabled = true, text = " Code Action Available" },
-    },
-    config = function(_, opts)
-      require("nvim-lightbulb").setup(opts)
-      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-        desc = "Check for available code actions",
-        group = vim.api.nvim_create_augroup("LightBulb", {}),
-        callback = function()
-          -- update status
-          local lightbulb = require("nvim-lightbulb")
-          lightbulb.update_lightbulb()
-          -- display status
-          local status = lightbulb.get_status_text()
-          vim.api.nvim_echo({ { status, "WarningMsg" } }, false, {})
-        end,
-      })
-    end,
-  },
 }
 
 return require("axie.lazy").transform_spec(spec, "lsp")

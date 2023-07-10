@@ -3,63 +3,15 @@ local M = {}
 M.cmd = { "Catppuccin", "CatppuccinCompile" }
 
 function M.config()
-  -- highlight group overrides
-  vim.g.catppuccin_flavour = "mocha"
-  local catppuccin = require("catppuccin")
-  local cp = require("catppuccin.palettes").get_palette()
-
-  local float_bg = cp.base
-  local remaps = {
-    NormalFloat = { bg = float_bg }, -- NOTE: catppuccin needs a bg colour
-    ColorColumn = { link = "CursorLine" },
-    SpellBad = { fg = cp.red, style = { "italic", "undercurl" } },
-    SpellCap = { fg = cp.red, style = { "italic", "undercurl" } },
-    SpellLocal = { fg = cp.red, style = { "italic", "undercurl" } },
-    SpellRare = { fg = cp.red, style = { "italic", "undercurl" } },
-    CmpItemMenu = { fg = cp.surface2 },
-    Pmenu = { bg = cp.surface0 },
-    WinBar = { bg = float_bg },
-    WinBarNC = { bg = float_bg },
-    WinBarModified = { fg = cp.yellow, bg = float_bg }, -- same as BufferCurrentMod
-    NavicIconsFileNC = { fg = cp.flamingo, bg = float_bg },
-    ["@parameter"] = { fg = cp.flamingo },
-    -- VertSplit = { fg = cp.overlay1 },
-    -- SpellBad = { fg = cp.maroon },
-    -- SpellCap = { fg = cp.peach },
-    -- SpellLocal = { fg = cp.lavender },
-    -- SpellRare = { fg = cp.teal },
-  }
-
-  -- NvChad Telescope theme (adapted from https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)
-  if require("axie.utils.config").nvchad_theme then
-    local telescope_results = cp.base
-    -- local telescope_prompt = cp.surface0
-    local telescope_prompt = "#302D41" -- black3 from original palette
-    local fg = cp.surface2
-    local purple = cp.green -- or mauve
-    remaps = vim.tbl_extend("force", remaps, {
-      TelescopeBorder = { fg = telescope_results, bg = telescope_results },
-      TelescopePromptBorder = { fg = telescope_prompt, bg = telescope_prompt },
-      TelescopePromptCounter = { fg = fg },
-      TelescopePromptNormal = { fg = fg, bg = telescope_prompt },
-      TelescopePromptPrefix = { fg = purple, bg = telescope_prompt },
-      TelescopePromptTitle = { fg = telescope_prompt, bg = purple },
-      TelescopePreviewTitle = { fg = telescope_prompt, bg = purple },
-      TelescopeResultsTitle = { fg = telescope_results, bg = telescope_results },
-      TelescopeMatching = { fg = purple },
-      TelescopeNormal = { bg = telescope_results },
-      TelescopeSelection = { bg = telescope_prompt },
-    })
-  end
-
-  catppuccin.setup({
+  require("catppuccin").setup({
+    flavour = "mocha",
     compile = { enabled = true },
     dim_inactive = { enabled = false },
     transparent_background = true,
     integrations = {
       aerial = true,
       barbar = true,
-      barbecue = false,
+      -- barbecue = false,
       beacon = true,
       bufferline = false,
       cmp = true,
@@ -104,7 +56,8 @@ function M.config()
       },
       navic = {
         enabled = true,
-        custom_bg = float_bg,
+        -- cp.base
+        custom_bg = "#1E1E2E",
       },
       neogit = true,
       neotest = true,
@@ -119,11 +72,12 @@ function M.config()
       octo = false,
       overseer = false,
       pounce = false,
+      rainbow_delimiters = false,
       sandwich = false,
       semantic_tokens = true,
       symbols_outline = false,
       telekasten = false,
-      telescope = true,
+      telescope = { enabled = true },
       treesitter = true,
       treesitter_context = false,
       ts_rainbow = true,
@@ -132,7 +86,52 @@ function M.config()
       vimwiki = true,
       which_key = true,
     },
-    custom_highlights = remaps,
+    custom_highlights = function(colours)
+      local float_bg = colours.base
+      local remaps = {
+        NormalFloat = { bg = float_bg }, -- NOTE: catppuccin needs a bg colour
+        ColorColumn = { link = "CursorLine" },
+        SpellBad = { fg = colours.red, style = { "italic", "undercurl" } },
+        SpellCap = { fg = colours.red, style = { "italic", "undercurl" } },
+        SpellLocal = { fg = colours.red, style = { "italic", "undercurl" } },
+        SpellRare = { fg = colours.red, style = { "italic", "undercurl" } },
+        CmpItemMenu = { fg = colours.surface2 },
+        Pmenu = { bg = colours.surface0 },
+        WinBar = { bg = float_bg },
+        WinBarNC = { bg = float_bg },
+        WinBarModified = { fg = colours.yellow, bg = float_bg }, -- same as BufferCurrentMod
+        NavicIconsFileNC = { fg = colours.flamingo, bg = float_bg },
+        ["@parameter"] = { fg = colours.flamingo },
+        -- VertSplit = { fg = cp.overlay1 },
+        -- SpellBad = { fg = cp.maroon },
+        -- SpellCap = { fg = cp.peach },
+        -- SpellLocal = { fg = cp.lavender },
+        -- SpellRare = { fg = cp.teal },
+      }
+
+      -- NvChad Telescope theme (adapted from https://github.com/olimorris/onedarkpro.nvim/issues/31#issue-1160545258)
+      if require("axie.utils.config").nvchad_theme then
+        local telescope_results = colours.base
+        -- local telescope_prompt = cp.surface0
+        local telescope_prompt = "#302D41" -- black3 from original palette
+        local fg = colours.surface2
+        local purple = colours.green -- or mauve
+        remaps = vim.tbl_extend("force", remaps, {
+          TelescopeBorder = { fg = telescope_results, bg = telescope_results },
+          TelescopePromptBorder = { fg = telescope_prompt, bg = telescope_prompt },
+          TelescopePromptCounter = { fg = fg },
+          TelescopePromptNormal = { fg = fg, bg = telescope_prompt },
+          TelescopePromptPrefix = { fg = purple, bg = telescope_prompt },
+          TelescopePromptTitle = { fg = telescope_prompt, bg = purple },
+          TelescopePreviewTitle = { fg = telescope_prompt, bg = purple },
+          TelescopeResultsTitle = { fg = telescope_results, bg = telescope_results },
+          TelescopeMatching = { fg = purple },
+          TelescopeNormal = { bg = telescope_results },
+          TelescopeSelection = { bg = telescope_prompt },
+        })
+      end
+      return remaps
+    end,
   })
 
   vim.api.nvim_cmd({ cmd = "colorscheme", args = { "catppuccin" } }, {})

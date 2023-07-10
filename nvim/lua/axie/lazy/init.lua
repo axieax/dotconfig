@@ -20,7 +20,7 @@ end
 function M.report_startuptime()
   vim.api.nvim_create_autocmd("User", {
     pattern = "LazyVimStarted",
-    group = vim.api.nvim_create_augroup("Lazy Startuptime", {}),
+    group = vim.api.nvim_create_augroup("LazyStartuptime", {}),
     callback = function()
       local stats = require("lazy").stats()
       vim.notify(string.format(" Startup Time: %.3f ms", stats.startuptime), vim.log.levels.WARN)

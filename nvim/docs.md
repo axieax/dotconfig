@@ -7,6 +7,9 @@
 
 ## TODO
 
+- `<Space>fn` not working if notify hasn't been loaded yet
+- Autolist setup migrate
+- Fix code action override wrong client name sometimes
 - Lazy reload
 - `zx` compute folds when I open a new buffer
   - https://stackoverflow.com/questions/61795798/recalculating-folds-in-vim-without-applying-foldlevel

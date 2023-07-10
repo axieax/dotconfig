@@ -1,5 +1,21 @@
 source "$ZDOTDIR/utilities.sh"
 
+### SETTINGS ##
+bindkey -v
+setopt glob_dots
+# setopt share_history
+
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+  export VISUAL='vim'
+else
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+fi
+
+# use bat as default pager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 ### TMUX AUTOSTART ###
 sauce "$HOME/dotconfig/tmux/scripts/aliases.sh"
 sauce "$HOME/dotconfig/tmux/scripts/autostart.sh"
@@ -15,7 +31,7 @@ plugins=(
   git
   zoxide
   npm
-  nvm
+  # nvm
   pyenv
   bazel
   terraform
@@ -35,23 +51,8 @@ sauce $ZSH/oh-my-zsh.sh
 AUTO_NOTIFY_IGNORE+=(
   "cd"
   "lazygit"
+  "lf"
 )
-
-### SETTINGS ##
-bindkey -v
-setopt glob_dots
-# setopt share_history
-
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-  export VISUAL='vim'
-else
-  export EDITOR='nvim'
-  export VISUAL='nvim'
-fi
-
-# use bat as default pager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 ### ALIASES ###
 alias ls='lsd'

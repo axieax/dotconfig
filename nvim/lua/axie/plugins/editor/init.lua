@@ -27,6 +27,7 @@ local spec = {
   },
   { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPost" },
   -- TODO: use fork https://github.com/HiPhish/nvim-ts-rainbow2 instead?
+  -- https://github.com/HiPhish/rainbow-delimiters.nvim
   { "p00f/nvim-ts-rainbow", event = "BufReadPost" },
   { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", settings = "indentline" },
   { "code-biscuits/nvim-biscuits", event = "BufReadPost", settings = "biscuits" },
@@ -163,7 +164,7 @@ local spec = {
   {
     -- NOTE: <C-t> (tab) to indent after auto continue, <C-d> (dedent) to unindent
     "gaoDean/autolist.nvim",
-    ft = { "markdown", "txt", "tex", "plaintex" },
+    ft = { "markdown", "text", "txt", "tex", "plaintex" },
     dependencies = { "hrsh7th/nvim-cmp", "windwp/nvim-autopairs" },
     settings = "autolist",
   },

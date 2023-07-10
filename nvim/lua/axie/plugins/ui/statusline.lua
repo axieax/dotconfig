@@ -437,13 +437,12 @@ function M.config()
   local heirline = require("heirline")
   heirline.load_colors(this.setup_colours())
 
-  local augroup = vim.api.nvim_create_augroup("Heirline", {})
   vim.api.nvim_create_autocmd("ColorScheme", {
+    group = vim.api.nvim_create_augroup("Heirline", {}),
     callback = function()
       local colours = require("axie.plugins.ui.statusline").setup_colours()
       require("heirline.utils").on_colorscheme(colours)
     end,
-    group = augroup,
   })
 
   -- TODO: dap controls (in a winbar??)

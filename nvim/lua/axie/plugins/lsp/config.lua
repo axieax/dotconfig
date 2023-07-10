@@ -3,7 +3,7 @@ local M = {}
 -- TODO: filter/sort severity?
 -- Highlight line number instead of icons (https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#highlight-line-number-instead-of-having-icons-in-sign-column)
 
-M.keys = { { "<Space>l?", "<Cmd>LspInfo<CR>" }, }
+M.keys = { { "<Space>l?", "<Cmd>LspInfo<CR>" } }
 
 function M.config()
   local diagnostics_icons = require("axie.utils.config").diagnostics_icons
@@ -51,6 +51,12 @@ function M.config()
   -- LspInfo rounded borders
   require("lspconfig.ui.windows").default_options.border = "rounded"
   vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
+
+  -- Code actions lightbulb
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("LightbulbSetup", {}),
+    callback = require("axie.plugins.lsp.code_actions").setup_lightbulb,
+  })
 end
 
 return M

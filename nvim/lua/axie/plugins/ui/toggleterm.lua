@@ -14,6 +14,7 @@ M.cmd = {
 }
 
 function M.attach()
+  vim.opt_local.spell = false
   vim.keymap.set("n", "<Esc>", "<Nop>", { silent = true, buffer = 0 })
   vim.keymap.set("t", "<C-]>", [[<C-\><C-n>]], { desc = "Toggle mode", buffer = 0 })
   vim.keymap.set("n", "<C-]>", "<Cmd>startinsert<CR>", { desc = "Toggle mode", buffer = 0 })
@@ -85,6 +86,7 @@ end
 
 function M.lazygit()
   local lazygit = require("toggleterm.terminal").Terminal:new({
+    display_name = "lazygit",
     cmd = "lazygit",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },
@@ -96,6 +98,7 @@ end
 
 function M.lazydocker()
   local lazydocker = require("toggleterm.terminal").Terminal:new({
+    display_name = "lazydocker",
     cmd = "lazydocker",
     direction = "float",
     -- float_opts = { highlights = { border = "Normal" } },

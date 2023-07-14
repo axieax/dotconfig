@@ -159,14 +159,29 @@ map({ "n", "v" }, "\\p", '"0p', { desc = "Paste last yanked" })
 map("i", "<A-t>", "<C-v><Tab>", { desc = "Insert tab" })
 
 -- Filetype-specific
-filetype_map("markdown", "v", ",*", "S*gvS*", { remap = true, desc = "Bold selection" })
-filetype_map("json", "n", ",c", function()
+local filetype_switches = {
+  json = { "jsonc", restart_lsps = { "jsonls" } },
+  sql = { "mysql" },
+}
+
+map("n", ",f", function()
   local buf = vim.api.nvim_get_current_buf()
-  local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
-  vim.api.nvim_buf_set_option(buf, "filetype", filetype == "json" and "jsonc" or "json")
-  vim.api.nvim_cmd({ cmd = "LspRestart", args = { "jsonls" } }, {})
-end, { desc = "Toggle jsonc filetype" })
+  local filetype_from = vim.api.nvim_buf_get_option(buf, "filetype")
+  local filetype_switch = filetype_switches[filetype_from]
+  if not filetype_switch then
+    print("No filetype switch defined for", filetype_from)
+    return end
+
+  local filetype_to = filetype_switch[1]
+  local restart_lsp = filetype_switch.restart_lsps
+  vim.api.nvim_buf_set_option(buf, "filetype", filetype_to)
+  if restart_lsp ~= nil then
+    vim.api.nvim_cmd({ cmd = "LspRestart", args = restart_lsp }, {})
+  end
+end, { desc = "Filetype switch" })
+
 filetype_map("sh", "n", ",x", "<Cmd>!chmod +x %<CR>", { desc = "Make file executable" })
+filetype_map("markdown", "v", ",*", "S*gvS*", { remap = true, desc = "Bold selection" })
 
 -- CHECK: https://github.com/neovim/neovim/issues/14090#issuecomment-1113090354
 map("n", "<C-i>", "<C-i>")

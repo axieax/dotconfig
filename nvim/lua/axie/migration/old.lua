@@ -176,6 +176,7 @@ local lsp_utilities = function(use)
   })
 
   -- Code action menu with diff preview
+  -- NOTE: seems like lspsaga has this https://dev.neovim.pro/lspsaga/codeaction/
   use({
     "weilbith/nvim-code-action-menu",
     disable = true,

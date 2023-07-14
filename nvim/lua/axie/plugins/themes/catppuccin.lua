@@ -115,17 +115,16 @@ function M.config()
         -- local telescope_prompt = cp.surface0
         local telescope_prompt = "#302D41" -- black3 from original palette
         local fg = colours.surface2
-        local purple = colours.green -- or mauve
         remaps = vim.tbl_extend("force", remaps, {
           TelescopeBorder = { fg = telescope_results, bg = telescope_results },
           TelescopePromptBorder = { fg = telescope_prompt, bg = telescope_prompt },
           TelescopePromptCounter = { fg = fg },
           TelescopePromptNormal = { fg = fg, bg = telescope_prompt },
-          TelescopePromptPrefix = { fg = purple, bg = telescope_prompt },
-          TelescopePromptTitle = { fg = telescope_prompt, bg = purple },
-          TelescopePreviewTitle = { fg = telescope_prompt, bg = purple },
+          TelescopePromptPrefix = { fg = colours.green, bg = telescope_prompt },
+          TelescopePromptTitle = { fg = telescope_prompt, bg = colours.green },
+          TelescopePreviewTitle = { fg = telescope_prompt, bg = colours.maroon },
           TelescopeResultsTitle = { fg = telescope_results, bg = telescope_results },
-          TelescopeMatching = { fg = purple },
+          TelescopeMatching = { fg = colours.green },
           TelescopeNormal = { bg = telescope_results },
           TelescopeSelection = { bg = telescope_prompt },
         })

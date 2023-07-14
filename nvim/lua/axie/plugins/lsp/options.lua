@@ -123,25 +123,6 @@ function M.clangd()
   }
 end
 
-function M.emmet_ls()
-  return {
-    filetypes = {
-      "html",
-      "javascriptreact",
-      "typescriptreact",
-      "css",
-      "sass",
-      "scss",
-      "less",
-      -- "ruby",
-      -- "typescript",
-      -- "javascript",
-      -- "svelte",
-      -- "vue",
-    },
-  }
-end
-
 function M.eslint()
   -- local eslint_config = require("lspconfig.server_configurations.eslint")
   return {
@@ -222,7 +203,7 @@ function M.jdtls()
       "-Declipse.product=org.eclipse.jdt.ls.core.product",
       "-Dlog.protocol=true",
       "-Dlog.level=ALL",
-      "-Xmx1g",
+      "-Xmx32g",
       "--add-modules=ALL-SYSTEM",
       "--add-opens",
       "java.base/java.util=ALL-UNNAMED",
@@ -235,11 +216,12 @@ function M.jdtls()
       "-data",
       jdtls_workspaces .. workspace_dir,
     },
+    -- root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
     settings = {
       java = {
         configuration = {
           -- NOTE: for changing java runtime dynamically with :JdtSetRuntime
-          runtimes = java_runtimes,
+          -- runtimes = java_runtimes,
         },
       },
     },

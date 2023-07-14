@@ -7,6 +7,7 @@
 
 ## TODO
 
+- jdtls `require("jdtls.tests").generate()` and `require("jdtls.tests").goto_subjects()`
 - `<Space>fn` not working if notify hasn't been loaded yet
 - Autolist setup migrate
 - Fix code action override wrong client name sometimes

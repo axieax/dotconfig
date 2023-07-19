@@ -11,7 +11,6 @@ M.keys = { { ";", "<Cmd>Neotree toggle<CR>", { desc = "File explorer" } } }
 
 --[[ NOTE: slow startup + hijack if opening to a directory
 function M.init()
-  vim.g.neo_tree_remove_legacy_commands = 1
   for _, arg in ipairs(vim.fn.argv()) do
     local stat = vim.loop.fs_stat(arg)
     if stat and stat.type == "directory" then

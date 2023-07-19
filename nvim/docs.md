@@ -7,6 +7,8 @@
 
 ## TODO
 
+- Setup venv
+- Finish setting up nvim-spectre
 - jdtls `require("jdtls.tests").generate()` and `require("jdtls.tests").goto_subjects()`
 - `<Space>fn` not working if notify hasn't been loaded yet
 - Autolist setup migrate

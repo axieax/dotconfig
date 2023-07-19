@@ -10,6 +10,7 @@ Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 Plug 'machakann/vim-highlightedyank'
 
+" TODO: find a better-escape plugin (jk)
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'mg979/vim-visual-multi'
 " Plug 'junegunn/fzf.vim'
@@ -57,7 +58,5 @@ nnoremap \C "_C
 nnoremap <C-l> :noh<CR>
 nnoremap <A-j> :m +1<CR>
 nnoremap <A-k> :m -2<CR>
-inoremap jk <Esc>
-inoremap kj <Esc>
 
 nnoremap ; :NERDTreeToggle<CR>

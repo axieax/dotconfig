@@ -126,6 +126,37 @@ local spec = {
     },
   },
   {
+    "nvim-pack/nvim-spectre",
+    cmd = "Spectre",
+    keys = {
+      {
+        ",s",
+        function()
+          require("spectre").open_file_search({ select_word = true })
+        end,
+        desc = "Spectre file",
+      },
+      {
+        ",S",
+        function()
+          require("spectre").toggle({ select_word = true })
+        end,
+        desc = "Spectre global",
+      },
+      {
+        ",S",
+        function()
+          -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+          require("spectre").open_visual()
+        end,
+        mode = "v",
+        desc = "Spectre global word",
+      },
+    },
+    -- TODO: fix visual keymap, disable spell checker, opts
+    config = true,
+  },
+  {
     "ThePrimeagen/harpoon",
     keys = {
       {

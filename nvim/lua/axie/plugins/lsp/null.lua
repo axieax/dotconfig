@@ -35,6 +35,7 @@ function M.formatting_sources()
   return {
     -- NOTE: sumneko_lua has builtin EmmyLuaCodeStyle support
     formatting.stylua, -- lua
+    -- TODO: use blackd instead?
     formatting.black, -- python
     formatting.isort, -- python
     -- NOTE: this superset of gofmt is preferred if installed

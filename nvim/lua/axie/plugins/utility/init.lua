@@ -62,7 +62,7 @@ local spec = {
   },
   -- ALT: https://github.com/rmagatti/auto-session with https://github.com/rmagatti/session-lens
   { "Shatur/neovim-session-manager", event = "VimLeavePre", settings = "sessions" },
-  { "ethanholz/nvim-lastplace", event = "BufReadPre", config = true },
+  { "vladdoster/remember.nvim", event = "BufReadPre", config = true },
   -- Keep cursor on shift (`>` or `<`) and filter (`=`)
   {
     "gbprod/stay-in-place.nvim",

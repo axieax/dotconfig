@@ -3,7 +3,7 @@ local M = {}
 -- TODO: file nesting
 -- TODO: group empty https://github.com/nvim-neo-tree/neo-tree.nvim/issues/552
 -- TODO: highlight open buffers
--- TODO: file info (size, perms, time etc.)
+-- TODO: file info (missing perms)
 
 M.cmd = "Neotree"
 

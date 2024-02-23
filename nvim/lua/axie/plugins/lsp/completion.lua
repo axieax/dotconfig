@@ -109,6 +109,13 @@ function M.config()
         end
       end,
     },
+    ["<A-k>"] = cmp_map(function()
+      if cmp.visible_docs() then
+        cmp.close_docs()
+      else
+        cmp.open_docs()
+      end
+    end),
   }
 
   cmp.setup({

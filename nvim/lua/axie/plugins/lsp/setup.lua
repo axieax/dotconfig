@@ -14,7 +14,7 @@ M.ensure_installed = {
   "typescript-language-server",
   "emmet-ls",
   "json-lsp",
-  -- "eslint_d",
+  "eslint-lsp",
   -- "css-lsp",
   -- "html-lsp",
   -------------------

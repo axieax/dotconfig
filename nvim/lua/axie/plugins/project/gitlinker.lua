@@ -1,6 +1,7 @@
 local M = {}
 
 M.keys = {
+  -- NOTE: visual mode doesn't select range
   { "<Space>gy", mode = { "n", "v" }, desc = "Copy Git line reference URL to clipboard" },
   {
     "<Space>gY",

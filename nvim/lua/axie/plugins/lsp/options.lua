@@ -123,15 +123,6 @@ function M.clangd()
   }
 end
 
-function M.eslint()
-  -- local eslint_config = require("lspconfig.server_configurations.eslint")
-  return {
-    -- uncomment for yarn 2/pnp project support
-    -- https://github.com/williamboman/nvim-lsp-installer/tree/main/lua/nvim-lsp-installer/servers/eslint
-    -- cmd = { "yarn", "exec", unpack(eslint_config.default_config.cmd) },
-  }
-end
-
 function M.grammarly()
   return {
     autostart = false,
@@ -140,7 +131,7 @@ function M.grammarly()
 end
 
 function M.hls()
-  local root_pattern = require("lspconfig.util").root_pattern
+  -- local root_pattern = require("lspconfig.util").root_pattern
   return {
     -- Modified from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/hls.lua
     -- root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
@@ -178,15 +169,15 @@ function M.jdtls()
         path = rtp,
       })
     end
-  elseif operating_system == "mac" then
-    local runtime_base_path = "/Library/Java/JavaVirtualMachines/"
-    local jdks = vim.fn.globpath(runtime_base_path, "*", 0, 1)
-    for _, jdk in ipairs(jdks) do
-      table.insert(java_runtimes, {
-        name = jdk:match(runtime_base_path .. "(.*)"),
-        path = jdk .. "/Contents/Home",
-      })
-    end
+    -- elseif operating_system == "mac" then
+    --   local runtime_base_path = "/Library/Java/JavaVirtualMachines/"
+    --   local jdks = vim.fn.globpath(runtime_base_path, "*", 0, 1)
+    --   for _, jdk in ipairs(jdks) do
+    --     table.insert(java_runtimes, {
+    --       name = jdk:match(runtime_base_path .. "(.*)"),
+    --       path = jdk .. "/Contents/Home",
+    --     })
+    --   end
   end
 
   return {
@@ -221,7 +212,7 @@ function M.jdtls()
       java = {
         configuration = {
           -- NOTE: for changing java runtime dynamically with :JdtSetRuntime
-          -- runtimes = java_runtimes,
+          runtimes = java_runtimes,
         },
       },
     },

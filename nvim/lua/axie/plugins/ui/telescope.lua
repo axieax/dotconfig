@@ -226,6 +226,12 @@ function M.config()
               vim.fn.setreg('"', symbol)
               actions.close(prompt_bufnr)
             end,
+            ["<C-h>"] = function(prompt_bufnr)
+              require("telescope").extensions.file_browser.actions.toggle_hidden(prompt_bufnr)
+            end,
+            ["<C-g>"] = function(prompt_bufnr)
+              require("telescope").extensions.file_browser.actions.toggle_respect_gitignore(prompt_bufnr)
+            end,
           },
         },
       },

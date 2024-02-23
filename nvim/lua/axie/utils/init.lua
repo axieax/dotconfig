@@ -133,4 +133,13 @@ function M.toggle_diagnostics()
   end
 end
 
+--- Executes the specified @key press in @mode
+---@param key string @key to replace termcode and send
+---@param mode string @mode to send keys in
+---@param replace_termcodes boolean @whether to replace termcodes
+function M.send_key(key, mode, replace_termcodes)
+  local k = replace_termcodes and vim.api.nvim_replace_termcodes(key, true, false, true) or key
+  vim.api.nvim_feedkeys(k, mode, not replace_termcodes)
+end
+
 return M

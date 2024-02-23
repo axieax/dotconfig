@@ -29,7 +29,7 @@ local spec = {
   -- TODO: use fork https://github.com/HiPhish/nvim-ts-rainbow2 instead?
   -- https://github.com/HiPhish/rainbow-delimiters.nvim
   { "p00f/nvim-ts-rainbow", event = "BufReadPost" },
-  { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", settings = "indentline" },
+  { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", main = "ibl", settings = "indentline" },
   { "code-biscuits/nvim-biscuits", event = "BufReadPost", settings = "biscuits" },
   { "zbirenbaum/neodim", branch = "v2", event = "LspAttach", config = true },
   {
@@ -41,7 +41,19 @@ local spec = {
   {
     "numToStr/Comment.nvim",
     -- language-aware commentstring
-    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+    dependencies = {
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        config = function()
+          -- TEMP: skip compatability checks
+          vim.g.skip_ts_context_commentstring_module = true
+          require("ts_context_commentstring").setup({
+            -- not sure what this does
+            enable_autocmd = false,
+          })
+        end,
+      },
+    },
     settings = "comment",
   },
   { "tpope/vim-surround", event = "VeryLazy" },

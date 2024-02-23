@@ -68,6 +68,7 @@ alias ggm="git mergetool"
 alias ggd="git diff"
 alias ggl="git log"
 alias ggl="git log"
+alias ggC="git clean -f -d -x"
 
 alias cd..='cd ..'
 alias pdw='pwd'

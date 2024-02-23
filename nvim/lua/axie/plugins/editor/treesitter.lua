@@ -202,13 +202,6 @@ function M.config()
       max_file_lines = 1000,
     },
 
-    -- Comment String
-    -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false, -- for Comment.nvim integration
-    },
-
     -- Matching Text Navigation
     -- https://github.com/andymass/vim-matchup
     matchup = {

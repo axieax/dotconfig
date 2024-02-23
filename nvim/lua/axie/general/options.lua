@@ -60,7 +60,7 @@ vim_apply(vim.opt, {
   softtabstop = 2,
   autoindent = true,
   smartindent = true,
-  -- cindent = true, -- fix markdown code block indents, but may randomly indent sometimes
+  cindent = true,
   -- cinoptions
 
   -- 15 folding (zopen/zclose, zReveal/zMinimise)

@@ -7,18 +7,23 @@
 
 ## TODO
 
+- python black --> ruff
+- eslint_d vs eslint-lsp
+- remove anonymous function from aerial winbar (https://github.com/stevearc/aerial.nvim/commit/1a9896a)
+- https://github.com/vigoux/notifier.nvim
+  - replace fidget
+  - use this for code action available
+- Builtin `:%s` doesn't work, have to use Subvert `:S`
 - Setup venv
 - Finish setting up nvim-spectre
 - jdtls `require("jdtls.tests").generate()` and `require("jdtls.tests").goto_subjects()`
 - `<Space>fn` not working if notify hasn't been loaded yet
-- Autolist setup migrate
 - Fix code action override wrong client name sometimes
 - Lazy reload
 - `zx` compute folds when I open a new buffer
   - https://stackoverflow.com/questions/61795798/recalculating-folds-in-vim-without-applying-foldlevel
   - https://vi.stackexchange.com/questions/40382/is-there-a-recommended-way-to-recompute-folds-every-time-a-buffer-is-changed-in
 - Find a way to traverse through history for zsh-autosuggestions
-- proto ts parser?
 - Use `workspace/didChangeWatchedFiles`?
 - revert formatting
 - Telescope search `ripgrep` with arguments for file patterns

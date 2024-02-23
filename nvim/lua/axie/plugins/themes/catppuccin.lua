@@ -59,7 +59,7 @@ function M.config()
         -- cp.base
         custom_bg = "#1E1E2E",
       },
-      neogit = true,
+      neogit = false,
       neotest = true,
       neotree = {
         enabled = true,
@@ -67,6 +67,7 @@ function M.config()
         transparent_panel = true,
       },
       noice = false,
+      notifier = false,
       notify = true,
       nvimtree = false,
       octo = false,
@@ -85,6 +86,7 @@ function M.config()
       vim_sneak = false,
       vimwiki = true,
       which_key = true,
+      window_picker = false,
     },
     custom_highlights = function(colours)
       local float_bg = colours.base

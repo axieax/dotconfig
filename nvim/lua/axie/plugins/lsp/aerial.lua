@@ -25,6 +25,8 @@ function M.config()
     icons = require("axie.utils.config").symbol_icons,
     -- fall back to treesitter if LSP not available
     backends = { "lsp", "treesitter", "markdown", "man" },
+    -- jump to start of symbol name
+    treesitter = { experimental_selection_range = true },
     keymaps = {
       ["<"] = {
         callback = aerial.tree_decrease_fold_level,

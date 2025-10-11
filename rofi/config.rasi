@@ -2,13 +2,14 @@
 /* keys: control (shift) tab to navigate modes */
 
 configuration {
-modi: "run,ssh,filebrowser,windowcd";
+modi: "run,ssh,filebrowser,windowcd,scripts:~/dotconfig/rofi/scripts/custom.sh";
 display-run: " ";
 display-filebrowser: "";
-display-windowcd: "";
+display-windowcd: "";
 display-ssh: " ";
 display-emoji: "";
 display-nerdy: "";
+display-scripts: " ";
 
 color-enabled: true;
 color-window: "#4d32302f, #4d32302f, #0032302f";
@@ -27,7 +28,7 @@ line-margin:     0;
 lines: 10;
 /* terminal: "alacritty"; */
 /* run-command: "{terminal} -e {cmd}"; */
-run-command: "/home/axie/.config/rofi/scripts/run.sh {cmd}";
+run-command: "/home/axie/dotconfig/rofi/scripts/run.sh {cmd}";
 case-sensitive: false;
 
 /* NOTE: doesn't work, run rofi with -matching fuzzy -sort-method fzf -sort */

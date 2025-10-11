@@ -2,8 +2,13 @@
 source "$HOME/dotconfig/setup-utilities.sh"
 
 action="install rofi emoji"
-if ! check_dependency "rofi-emoji" && confirm "$action"; then
+if is_linux && confirm "$action"; then
   sudo pacman -S rofi-emoji
+fi
+
+action="install rofi nerdy"
+if is_linux && confirm "$action"; then
+  yay -S rofi-nerdy
 fi
 
 action="link config"

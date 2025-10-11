@@ -275,7 +275,7 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_F11), spawn $ "rofi -show drun -fullscreen")
        , ((modMask, xK_F12), spawn $ "rofi -show drun")
        -- requires: https://github.com/Mange/rofi-emoji
-       , ((modMask, xK_period), spawn $ "rofi -show emoji")
+       , ((modMask, xK_period), spawn $ "rofi -show emoji -modi 'emoji,nerdy'")
        , ((modMask, xK_bracketleft), increaseGaps)
        , ((modMask, xK_bracketright), decreaseGaps)
        , ((modMask, xK_backslash), sendMessage $ ToggleGaps)

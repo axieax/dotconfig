@@ -24,3 +24,5 @@ if confirm "$action"; then
   # update config for arcolinux-sugar-candy theme
   link_config "$HOME/dotconfig/sddm/theme.conf" "$candy_path/theme.conf" true true
 fi
+
+# TODO: edit /etc/sddm.conf and /etc/sddm.conf.d/kde_settings.conf

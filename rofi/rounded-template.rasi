@@ -1,0 +1,138 @@
+/* ROUNDED THEME FOR ROFI */
+/* Author: Newman Sanchez (https://github.com/newmanls) */
+/* Adapted from https://github.com/newmanls/rofi-themes-collection/blob/master/themes/template/rounded-template.rasi */
+
+/* https://davatorium.github.io/rofi/1.7.1/rofi-theme.5/#supported-element-path */
+/* http://manpages.ubuntu.com/manpages/bionic/man5/rofi-theme.5.html */
+
+* {
+    font:   "Roboto 12";
+
+    background-color:   transparent;
+    text-color:         @fg0;
+
+    margin:     0px;
+    padding:    0px;
+    spacing:    0px;
+}
+
+window {
+    location:       north;
+    y-offset:       calc(50% - 176px);
+    width:          480;
+    border-radius:  24px;
+
+    background-color:   @bg0;
+}
+
+mainbox {
+    padding:    12px;
+}
+
+inputbar {
+    background-color:   @bg1;
+    border-color:       @bg3;
+
+    border:         2px;
+    border-radius:  16px;
+
+    padding:    8px 16px;
+    spacing:    8px;
+    children: [ prompt, entry, num-filtered-rows, case-indicator ];
+}
+
+prompt {
+    text-color: @fg2;
+}
+
+entry {
+    placeholder:        "Search";
+    placeholder-color:  @fg3;
+    text-color: @fg1;
+}
+
+case-indicator {
+  text-color: @fg2;
+}
+
+message {
+  border: 4px;
+    margin:             12px 0 0;
+    border-radius:      16px;
+    border-color:       @bg2;
+    background-color:   @bg2;
+}
+
+textbox {
+    padding:    8px 24px;
+    text-color: @fg2;
+}
+
+listview {
+    background-color:   transparent;
+    border: 0;
+
+    scrollbar: false;
+    margin:     12px 6px 0;
+    lines:      10;
+    columns:    1;
+    spacing:    6px;
+
+    fixed-height: false;
+}
+
+element {
+    padding:        8px 16px;
+    spacing:        8px;
+    border-radius:  16px;
+}
+
+element normal normal {
+  text-color: @fg1;
+    background-color: @bg1;
+}
+
+element normal active {
+    text-color: @bg3;
+}
+
+element alternate normal {
+  text-color: @fg1;
+    background-color: @bg2;
+}
+
+element alternate active {
+    text-color: @bg3;
+}
+
+element selected normal, element selected active {
+  text-color: @bg1;
+    background-color:   @bg3;
+}
+
+element-icon {
+    size:           1em;
+    vertical-align: 0.5;
+}
+
+element-text {
+    text-color: inherit;
+}
+
+mode {
+  background-color: @fg1;
+}
+
+button {
+  margin: 0.5em 0 0 0;
+  padding: 8px;
+  horizontal-align: 0.5;
+  background-color: @bg1;
+  text-color: @fg2;
+  border-radius:  16px;
+}
+
+mode-switcher {
+  margin: 6px;
+  spacing: 10px;
+}

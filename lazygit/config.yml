@@ -2,7 +2,9 @@ keybinding:
   universal:
     openRecentRepos: "<c-y>"
     createPatchOptionsMenu: "<c-t>"
-
+git:
+  log:
+    order: default
 customCommands:
   - key: "Z"
     context: "files"
@@ -19,6 +21,15 @@ customCommands:
       - type: "confirm"
         title: "Confirm:"
         body: "Are you sure you want to force push to {{.CheckedOutBranch.Name}}?"
+  - key: "<c-l>"
+    context: "global"
+    command: "git pull --rebase --autostash"
+    description: "git pull autostash"
+    loadingText: "pull (autostash, rebase)"
+    prompts:
+      - type: "confirm"
+        title: "Confirm:"
+        body: "Are you sure you want to pull from {{.CheckedOutBranch.Name}} (autostash, rebase)?"
   - key: "G"
     context: "localBranches"
     command: "gh pr checkout {{index .PromptResponses 0}}"

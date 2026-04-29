@@ -51,7 +51,7 @@ function M.setup_custom(name, cb, key)
   local opts = require("axie.plugins.lsp.options").get(name)
   local pattern = opts.filetypes
   if not pattern then
-    pattern = require("lspconfig.server_configurations." .. name).default_config.filetypes
+    pattern = require("lspconfig.configs." .. name).default_config.filetypes
   end
   vim.api.nvim_create_autocmd("FileType", {
     pattern = pattern,

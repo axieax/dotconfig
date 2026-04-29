@@ -4,44 +4,6 @@
   Total: 140 plugins
 
   Breaking Changes (15)
-    ● flatten.nvim 1.37ms  start
-        92c59ae chore(docs): autogenerate vimdoc (4 weeks ago)
-        fc1db37 docs: fix typo in readme (4 weeks ago)
-        6ac711c docs: move Luarocks badge to top of readme (4 weeks ago)
-        c825090 chore(docs): autogenerate vimdoc (4 weeks ago)
-        736b264 docs: add Luarocks/rocks.nvim install guide (4 weeks ago)
-        9f0ce3c chore(main): release 0.5.1 (4 weeks ago)
-        eba91b7 ci: add luarocks release workflow (#93) (4 weeks ago)
-        1153797 fix(lint): remove unused initializer for is_absolute (4 weeks ago)
-        b275b46 chore(docs): autogenerate vimdoc (4 weeks ago)
-        0338960 fix: check int return value of `vim.fn.has` (#92) (4 weeks ago)
-        b6b9323 chore(docs): autogenerate vimdoc (4 weeks ago)
-        d1fff3c fix: handle absolute paths on windows (#90) (4 weeks ago)
-        a999f1a chore(docs): autogenerate vimdoc (4 weeks ago)
-        7c85e21 docs: add 1.0.0 breaking change notice to README.md (4 weeks ago)
-        c78c520 chore(docs): autogenerate vimdoc (3 months ago)
-        36edbcb refactor: unify function decl style, silence some warnings (3 months ago)
-        51dd9a0 chore(main): release 0.5.0 (#79) (3 months ago)
-        a34ecf7 chore(docs): autogenerate vimdoc (3 months ago)
-        8a88333 feat: smart open should prefer alternative window (#83) (3 months ago)
-        f75bd1e refactor: early return in default_should_nest (4 months ago)
-        b7106d2 chore(docs): autogenerate vimdoc (4 months ago)
-        797b02a refactor!: make wezterm/kitty feature opt-in, disabled by default (4 months ago)
-        6386dce chore(docs): autogenerate vimdoc (5 months ago)
-        a828db8 docs: add `gitrebase` to block_for defaults (5 months ago)
-        67c70f0 chore(main): release 0.4.1 (#73) (5 months ago)
-        549963e chore: add CHANGELOG.md (5 months ago)
-        aa76a9f chore(docs): autogenerate vimdoc (5 months ago)
-        a7cb750 ci: add release workflow (5 months ago)
-        fcedccd chore(docs): autogenerate vimdoc (5 months ago)
-        6ffed89 docs: simplify installation section (5 months ago)
-        98633e0 ci: update vimdoc commit message (5 months ago)
-        72282fb Auto generate docs (5 months ago)
-        fde199f ci: autogenerate vimdoc (5 months ago)
-        2194ee4 docs: update readme (5 months ago)
-        9d0fa99 refactor: use vim.rpc* instead of vim.fn.rpc* (5 months ago)
-        6236aa9 fix: don't escape filenames (5 months ago)
-
     ○ fzf-lua   FzfLua   <Space>fzf <Space>fzg <Space>fzG <Space>fzl <Space>fz. <Space>fz/
         3b3cc17 fix(codeaction preview): `create` file action diff (48 minutes ago)
         3e481c9 fix: set `--color` via `fzf_opts` directly (closes #1052) (31 hours ago)
@@ -1752,40 +1714,9 @@
         d3da439 feat: add kitty detection (6 months ago)
         f36fa5c feat: add workaround for kitty transparent issue (#579) (6 months ago)
 
-    ○ cmp-git   nvim-cmp
-        8d89936 fix: replace get_config() with .values due to octo changing api (8 weeks ago)
-        1a101a8 fix: fallback to github.com when host returns nil (8 weeks ago)
-
     ● cmp-nvim-lsp 1.64ms   axie.plugins.lsp.options
         5af77f5 Revert unneeded README.md changes (3 months ago)
         e6a5e75 docs: Suggest better ways to configure LSP capabilities (#64) (3 months ago)
-
-    ○ cmp-spell   nvim-cmp
-        32a0867 Call enable_in_context with params (#9) (5 months ago)
-
-    ○ cmp_luasnip   nvim-cmp
-        05a9ab2 Merge pull request #61 from woodgear/fix/expand_params (5 months ago)
-        dea7813 fix expand_params (5 months ago)
-
-    ○ copilot.vim   Copilot  InsertEnter   <C-a> <C-x> <A-[> <A-]> <A-\>
-        1a28401 Copilot.vim 1.19.2 (3 days ago)
-        79e1a89 Copilot.vim 1.19.1 (6 days ago)
-        a90fb6d Copilot.vim 1.19.0 (6 days ago)
-        315c6d2 Copilot.vim 1.18.0 (2 weeks ago)
-        22fd954 Copilot.vim 1.17.0 (4 weeks ago)
-        a8142d4 Copilot.vim 1.16.0 (4 weeks ago)
-        49e0348 Copilot.vim 1.15.0 (5 weeks ago)
-        1a55183 Copilot.vim 1.14.0 (6 weeks ago)
-        5b19fb0 Copilot.vim 1.13.0 (2 months ago)
-        2c31989 Copilot.vim 1.12.1 (3 months ago)
-        9bfa856 Copilot.vim 1.12.0 (3 months ago)
-        309b3c8 Copilot.vim 1.11.4 (4 months ago)
-        f6d1124 Copilot.vim 1.11.3 (4 months ago)
-        0322dcf Copilot.vim 1.11.2 (4 months ago)
-        c1d9ea4 Copilot.vim 1.11.1 (4 months ago)
-        59c0239 Copilot.vim 1.11.0 (4 months ago)
-        998cf5a Copilot.vim 1.10.3 (5 months ago)
-        719dd8d Copilot.vim 1.10.2 (6 months ago)
 
     ○ dial.nvim   <C-a> <C-x> g<C-a> g<C-x>
         27eb570 Merge pull request #85 from monaqa/fix-delimited_prefix_integer (3 months ago)

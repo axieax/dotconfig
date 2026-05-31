@@ -3,12 +3,12 @@ source "$HOME/dotconfig/setup-utilities.sh"
 
 action="install arcolinux-sugar-candy theme"
 candy_path=/usr/share/sddm/themes/arcolinux-sugar-candy
-if [ ! -d $candy_path ] && confirm "$action"; then
+if is_linux && [ ! -d $candy_path ] && confirm "$action"; then
   sudo pacman -S arcolinux-sddm-sugar-candy-git
 fi
 
 action="setup display settings"
-if confirm "$action"; then
+if is_linux && confirm "$action"; then
   # ensure the following is in /etc/sddm.conf:
   # [X11]
   # DisplayCommand=/usr/share/sddm/scripts/Xsetup
@@ -18,7 +18,7 @@ if confirm "$action"; then
 fi
 
 action="setup preferred config"
-if confirm "$action"; then
+if is_linux && confirm "$action"; then
   # copy preferred arco-login background
   link_config /usr/share/backgrounds/arcolinux/arco-login.jpg "$candy_path/Backgrounds/arco-login.jpg" true
   # update config for arcolinux-sugar-candy theme

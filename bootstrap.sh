@@ -137,19 +137,36 @@ step_hooks() {
   for m in "${modules[@]}"; do
     if [[ -f $DOTCONFIG/$m/setup.sh ]]; then
       dot_log "[$m]"
-      bash "$DOTCONFIG/$m/setup.sh"
+      bash "$DOTCONFIG/$m/setup.sh" || failed+=("$m")
     fi
   done
   # Machine-local extras (things this machine needs that the repo should not carry).
   for h in "$DOT_LOCAL"/hooks/*.sh; do
     [[ -f $h ]] || continue
     dot_log "[local] ${h/#$HOME/~}"
-    bash "$h"
+    bash "$h" || failed+=("local:$(basename "$h")")
   done
 }
 
+# Hooks run the tools a shell would: mise's shims ahead of the system's (Arch's own python3
+# refuses pip installs, for one).
+use_mise_shims() {
+  local shims="${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims"
+  [[ -d $shims ]] && export PATH="$shims:$PATH"
+  return 0
+}
+
+failed=()
 dot_log "modules: ${modules[*]}"
+use_mise_shims
 for s in prereqs packages mise links hooks; do
-  want "$s" && "step_$s"
+  if want "$s"; then
+    "step_$s"
+    [[ $s == prereqs ]] && use_mise_shims
+  fi
 done
+if [[ ${#failed[@]} -gt 0 ]]; then
+  dot_warn "setup failed for: ${failed[*]}"
+  exit 1
+fi
 dot_step "done"

@@ -1,0 +1,3 @@
+# Named global.toml, not config.toml: mise would also read mise/config.toml as ~/dotconfig's own
+# project config. Modules add their own tools as ~/.config/mise/conf.d/<module>.toml.
+global.toml | ~/.config/mise/config.toml

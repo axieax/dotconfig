@@ -1,0 +1,4 @@
+brew:neovim
+# pacman:neovim  # arco runs a self-built nvim in /usr/local/bin; revisit with the Neovim upgrade
+brew:sqlite    # neoclip persistence; macOS's built-in one is not enough
+pacman:sqlite

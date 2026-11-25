@@ -1,0 +1,4 @@
+# Core tools the OS package manager owns. Runtimes and portable CLI tools come from mise.
+brew:gnu-sed
+brew:neofetch
+pacman:neofetch

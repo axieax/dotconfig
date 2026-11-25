@@ -1,0 +1,3 @@
+.czrc      | ~/.czrc
+config.yml | ~/.config/lazygit/config.yml                      | linux
+config.yml | ~/Library/Application Support/lazygit/config.yml  | mac

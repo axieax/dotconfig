@@ -1,0 +1,4 @@
+.               | ~/.config/nvim
+../stylua.toml  | ~/.config/stylua.toml
+../selene.toml  | ~/.config/selene.toml
+../vim.toml     | ~/.config/vim.toml

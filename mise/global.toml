@@ -1,5 +1,6 @@
-# Global tools, linked to ~/.config/mise/config.toml by mise/setup.sh. A project's own mise.toml
-# (or .nvmrc) pins its versions over these. Update within each line with `mise upgrade`.
+# Global tools, linked to ~/.config/mise/config.toml (mise/links); modules add their own in
+# <module>/mise.toml. A project's own mise.toml (or .nvmrc) pins its versions over these.
+# Update within each line with `mise upgrade`.
 [tools]
 node = "24"
 python = "3.14"
@@ -12,7 +13,6 @@ bat = "latest"
 fzf = "latest"
 zoxide = "latest"
 lsd = "latest"
-lazygit = "latest"
 
 [settings]
 # Fetch checkouts: T3 and agents create worktrees under these roots, each a new path mise would

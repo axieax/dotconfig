@@ -1,0 +1,2 @@
+.zshenv       | ~/.zshenv
+starship.toml | ~/.config/starship.toml

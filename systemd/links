@@ -1,0 +1,2 @@
+# root-copy: /etc is root's, so a copy rather than a link into $HOME
+tmpfiles.d/chromium.conf | /etc/tmpfiles.d/chromium.conf | linux | root-copy

@@ -1,0 +1,4 @@
+# Login shells, after .zshrc and the machine-local stubs: mise's shims first once more, past
+# whatever an installer appended to a stub.
+source "$DOTCONFIG/zsh/utilities.sh"
+dot_shims_first

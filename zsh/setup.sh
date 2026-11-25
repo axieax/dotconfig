@@ -1,74 +1,64 @@
-#!/bin/bash
-source "$HOME/dotconfig/setup-utilities.sh"
+#!/usr/bin/env bash
+# oh-my-zsh and its plugins, the machine-local ZDOTDIR stubs, and moving old history to XDG state.
+source "${DOTCONFIG:-$HOME/dotconfig}/lib/dot.sh"
 
-action="install zsh"
-if ! check_dependency zsh && confirm "$action"; then
-  if is_linux; then
-    sudo pacman -S zsh
-  elif is_mac; then
-    brew install zsh
+zdotdir="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+state="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
+
+if [[ ! -d $HOME/.oh-my-zsh ]]; then
+  dot_log "install oh-my-zsh"
+  dot_run env RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# oh-my-zsh custom plugin name -> repository
+plugins=(
+  "auto-notify https://github.com/MichaelAquilina/zsh-auto-notify.git"
+  "zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git"
+  "zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git"
+  "zsh-completions https://github.com/zsh-users/zsh-completions.git"
+  # Alternative highlighter (enable one, never both):
+  # "fast-syntax-highlighting https://github.com/zdharma-continuum/fast-syntax-highlighting.git"
+)
+custom="$HOME/.oh-my-zsh/custom/plugins"
+for entry in "${plugins[@]}"; do
+  read -r name url <<<"$entry"
+  if [[ -d $custom/$name/.git ]]; then
+    dot_run git -C "$custom/$name" pull --quiet --ff-only
   else
-    echo "Failed to $action: unsupported OS"
+    dot_log "clone $name"
+    dot_run git clone --quiet --depth 1 "$url" "$custom/$name"
+  fi
+done
+
+# Local stubs: created once, never overwritten, since they hold this machine's own lines.
+for f in .zprofile .zshrc .zlogin; do
+  if [[ ! -f $zdotdir/$f ]]; then
+    dot_log "create ${zdotdir/#$HOME/~}/$f"
+    dot_run mkdir -p "$zdotdir"
+    dot_run cp "$DOTCONFIG/zsh/stub/$f" "$zdotdir/$f"
+  fi
+done
+if [[ ! -f $zdotdir/secrets.zsh ]]; then
+  dot_run install -m 600 /dev/null "$zdotdir/secrets.zsh"
+fi
+
+# History used to live in the repo (macOS) or ~/.zsh_history; keep the larger one.
+if [[ ! -s $state/history ]]; then
+  old=""
+  for candidate in "$DOTCONFIG/zsh/.zsh_history" "$HOME/.zsh_history"; do
+    [[ -s $candidate ]] || continue
+    if [[ -z $old ]] || (( $(wc -c <"$candidate") > $(wc -c <"$old") )); then
+      old=$candidate
+    fi
+  done
+  if [[ -n $old ]]; then
+    dot_log "move history ${old/#$HOME/~} -> ${state/#$HOME/~}/history"
+    dot_run mkdir -p "$state"
+    dot_run cp -p "$old" "$state/history"
   fi
 fi
 
-action="install oh-my-zsh"
-if [ ! -d "$HOME/.oh-my-zsh" ] && confirm "$action"; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
-
-action="change default shell to zsh"
-if confirm "$action"; then
-  chsh -s "$(which zsh)"
-fi
-
-action="install zsh plugins"
-if confirm "$action"; then
-  ZSH_CUSTOM="$HOME/.oh-my-zsh/custom/plugins"
-  # git clone https://github.com/marzocchi/zsh-notify.git "$ZSH_CUSTOM/notify"
-  git clone https://github.com/MichaelAquilina/zsh-auto-notify.git "$ZSH_CUSTOM/auto-notify"
-  git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/zsh-autosuggestions"
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/zsh-syntax-highlighting"
-  git clone https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/zsh-completions"
-  # Alternative highlighter (enable one, never both): fast-syntax-highlighting
-  # git clone https://github.com/zdharma-continuum/fast-syntax-highlighting "$ZSH_CUSTOM/fast-syntax-highlighting"
-fi
-
-action="link zsh config"
-if confirm "$action"; then
-  link_config "$HOME/dotconfig/zsh/.zshenv" "$HOME/.zshenv"
-fi
-
-action="install starship prompt"
-if ! check_dependency starship && confirm "$action"; then
-  if is_linux; then
-    sudo pacman -S starship
-  elif is_mac; then
-    brew install starship
-  else
-    echo "Failed to $action: unsupported OS"
-  fi
-fi
-
-action="link starship config"
-if confirm "$action"; then
-  link_config "$HOME/dotconfig/zsh/starship.toml" "$HOME/.config/starship.toml"
-fi
-
-# NOTE: starship missing async functionality from spaceship-prompt
-# spaceship issues:
-# - https://github.com/spaceship-prompt/spaceship-prompt/issues/1193 on linux
-# - vi-mode not updating, jeffreytse/zsh-vi-mode has tradeoffs and can't update RS2
-# - slow, no hot config refresh
-
-action="install spaceship prompt"
-if confirm "$action"; then
-  ZSH_CUSTOM="$HOME/.oh-my-zsh/custom/themes"
-  git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/spaceship-prompt" --depth=1
-  ln -s "$ZSH_CUSTOM/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/spaceship.zsh-theme"
-fi
-
-action="link spaceship config"
-if confirm "$action"; then
-  link_config "$HOME/dotconfig/zsh/spaceship.zsh" "$HOME/.config/spaceship.zsh"
+if [[ $(basename "${SHELL:-}") != zsh ]]; then
+  dot_warn "login shell is ${SHELL:-unknown}; switch with: chsh -s \"$(command -v zsh)\""
 fi

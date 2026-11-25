@@ -1,0 +1,27 @@
+# Login shells: PATH and environment. Loaded by the machine-local $ZDOTDIR/.zprofile stub.
+# PATH belongs here, not in .zshenv: macOS's /etc/zprofile (path_helper) would reorder it.
+source "$DOTCONFIG/zsh/utilities.sh"
+
+pathadd "$HOME/.bin"
+pathadd "$HOME/.local/bin"
+pathadd "$HOME/bin/path"
+pathadd "$HOME/.yarn/bin"
+pathadd "$HOME/.local/share/gem/ruby/3.0.0/bin"
+pathadd "$HOME/.cargo/bin"
+pathadd "$HOME/go/bin"
+pathadd "$HOME/.ghcup/bin"
+pathadd "$HOME/.bun/bin"
+pathadd "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+sauce "$HOME/.ghcup/env"
+sauce "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
+# Runtimes and CLI tools come from mise (mise/global.toml, <module>/mise.toml), activated last so
+# its shims lead PATH; agents, git hooks and GUI apps inherit this login PATH. Homebrew puts mise
+# on PATH (Mac); the standalone installer leaves it in ~/.local/bin (Linux).
+_mise=$(command -v mise || print -r -- "$HOME/.local/bin/mise")
+[[ -x "$_mise" ]] && eval "$("$_mise" activate zsh --shims)"
+unset _mise
+
+# Secrets (API tokens) live in a machine-local file only you can read: chmod 600.
+sauce "$ZDOTDIR/secrets.zsh"

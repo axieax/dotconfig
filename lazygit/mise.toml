@@ -1,0 +1,4 @@
+[tools]
+lazygit = "latest"
+# git cz, run from lazygit's "Z" custom command; it ships the conventional-changelog adapter.
+"npm:commitizen" = "latest"

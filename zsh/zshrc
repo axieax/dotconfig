@@ -1,0 +1,13 @@
+# Interactive shells. Loaded by the machine-local $ZDOTDIR/.zshrc stub; machine-local lines go in
+# that stub, below the line that loads this file. Pieces live in rc.d/, loaded in name order.
+source "$DOTCONFIG/zsh/utilities.sh"
+
+for _rc in "$DOTCONFIG"/zsh/rc.d/*.zsh(N); do
+  source "$_rc"
+done
+unset _rc
+sauce "$DOTCONFIG/zsh/os/$(dot_os_name).zsh"
+
+# Installers that ignore ZDOTDIR (LM Studio, gcloud, Antigravity) append to ~/.zshrc.
+sauce "$HOME/.zshrc"
+dot_shims_first

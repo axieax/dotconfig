@@ -1,0 +1,4 @@
+cask:alacritty
+cask:font-jetbrains-mono-nerd-font
+pacman:alacritty
+pacman:ttf-jetbrains-mono-nerd

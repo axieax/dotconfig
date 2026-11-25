@@ -1,0 +1,18 @@
+# Modules bootstrap.sh sets up, in order, and the OS each applies to (any, mac, linux).
+# A machine-local ~/.config/dotconfig/modules adds ("+name") or skips ("-name") modules.
+tools     any
+mise      any
+zsh       any
+tmux      any
+nvim      any
+vim       any
+lazygit   any
+lf        any
+alacritty any
+intellij  any
+systemd   linux
+xmonad    linux
+polybar   linux
+rofi      linux
+picom     linux
+sddm      linux

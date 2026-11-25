@@ -131,3 +131,8 @@ sauce "$HOME/.nix-profile/etc/profile.d/nix.sh"
 # sauce /usr/share/nvm/init-nvm.sh --no-use
 # TODO: add default node to path https://www.ioannispoulakas.com/2020/02/22/how-to-speed-up-shell-load-while-using-nvm/
 # nvm alias default node > /dev/null
+
+# Node and other runtimes: mise, replacing nvm. Shims pick each directory's pin (mise.toml, .nvmrc)
+# per call, so agents, git hooks and GUI apps follow a repo's bump; ~/.config/mise/config.toml holds
+# the global default.
+[[ -x "$HOME/.local/bin/mise" ]] && eval "$("$HOME/.local/bin/mise" activate zsh --shims)"

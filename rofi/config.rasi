@@ -2,10 +2,10 @@
 /* keys: control (shift) tab to navigate modes */
 
 configuration {
-modi: "run,ssh,filebrowser,windowcd,scripts:~/dotconfig/rofi/scripts/custom.sh";
+modi: "run,ssh,filebrowser,window,scripts:~/dotconfig/rofi/scripts/custom.sh";
 display-run: " ";
 display-filebrowser: "";
-display-windowcd: "";
+display-window: "";
 display-ssh: " ";
 display-emoji: "";
 display-nerdy: "";
@@ -34,7 +34,7 @@ case-sensitive: false;
 /* NOTE: doesn't work, run rofi with -matching fuzzy -sort-method fzf -sort */
 matching: "fuzzy";
 sort: true;
-sorting-method: "fzf";
+sorting-method: "normal";
 
 kb-element-next: "";
 kb-element-prev: "";

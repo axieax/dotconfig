@@ -10,7 +10,7 @@ function t() {
 
 # Delete tmux session
 function td() {
-  tmux delete-session -t "$(tmux list-sessions 2> /dev/null | fzf | cut -d ':' -f1)"
+  tmux kill-session -t "$(tmux list-sessions 2> /dev/null | fzf | cut -d ':' -f1)"
 }
 
 # New tmux session

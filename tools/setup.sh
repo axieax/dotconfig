@@ -8,6 +8,7 @@ if is_mac && ! check_dependency brew && confirm "$action"; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+  # TODO: use uv or mise
 action="install python3"
 if ! check_dependency python3 && confirm "$action"; then
   if is_linux; then

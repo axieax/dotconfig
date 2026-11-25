@@ -24,6 +24,7 @@ setup_app lf
 setup_app vim
 setup_app intellij
 
+setup_app systemd
 setup_app xmonad
 setup_app polybar
 setup_app rofi

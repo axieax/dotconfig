@@ -77,3 +77,8 @@ run discord &
 
 # Set keyboard repeat delay
 xset r rate 200 25
+
+# Disable screen blanking
+xset s off
+xset s noblank
+xset -dpms

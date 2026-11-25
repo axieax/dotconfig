@@ -27,3 +27,9 @@ cabal.project.local~
 .ghc.environment.*
 
 # End of https://www.toptal.com/developers/gitignore/api/haskell
+xmonad.errors
+
+# Build output and upstream source clones (rebuild with .build)
+xmonad-x86_64-linux
+xmonad/
+xmonad-contrib/

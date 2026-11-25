@@ -86,7 +86,7 @@ myWorkspaces =
   , "\61443"
   , "\61642"
   ]
---myWorkspaces    = ["1","2","3","4","5","6","7","8","9","10"]
+-- myWorkspaces    = ["1","2","3","4","5","6","7","8","9","10"]
 --myWorkspaces    = ["I","II","III","IV","V","VI","VII","VIII","IX","X"]
 
 myBaseConfig = desktopConfig
@@ -169,7 +169,7 @@ myManageHook =
     , "openboard"
     , "OpenBoard"
     ]
-  myTFloats  = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar"]
+  myTFloats  = ["Downloads", "Save As...", "as_toolbar", "annotate_toolbar", ""]
   myRFloats  = []
   myIgnores  = ["desktop_window"]
   my1Shifts  = []
@@ -277,7 +277,7 @@ myKeys conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_F11), spawn $ "rofi -show drun -fullscreen")
        , ((modMask, xK_F12), spawn $ "rofi -show drun")
        -- requires: https://github.com/Mange/rofi-emoji
-       , ((modMask, xK_period), spawn $ "rofi -show emoji -modi 'emoji,nerdy'")
+       , ((modMask, xK_period), spawn $ "rofi -show emoji -modi 'emoji,nerdy' -sorting-method normal")
        , ((modMask, xK_bracketleft), increaseGaps)
        , ((modMask, xK_bracketright), decreaseGaps)
        , ((modMask, xK_backslash), sendMessage $ ToggleGaps)

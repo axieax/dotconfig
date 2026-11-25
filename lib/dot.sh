@@ -59,7 +59,11 @@ dot_link() {
   if [[ $verb == copy && -f $dst ]] && cmp -s "$src" "$dst"; then
     return 0
   fi
-  if [[ -e $dst || -L $dst ]]; then
+  if [[ -L $dst ]]; then
+    # A link holds no data, so a wrong one is replaced, not backed up.
+    dot_log "replace link ${dst/#$HOME/~} (was -> $(readlink "$dst"))"
+    dot_run "${as[@]}" rm "$dst"
+  elif [[ -e $dst ]]; then
     local backup
     backup="$dst.bak-$(date +%Y%m%d%H%M%S)"
     dot_log "back up ${dst/#$HOME/~} -> ${backup/#$HOME/~}"

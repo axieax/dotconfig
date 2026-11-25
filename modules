@@ -1,5 +1,6 @@
 # Modules bootstrap.sh sets up, in order, and the OS each applies to (any, mac, linux).
 # A machine-local ~/.config/dotconfig/modules adds ("+name") or skips ("-name") modules.
+# Opt-in modules, not listed below: ai-host (an environment other machines use; see ai/README.md).
 tools     any
 mise      any
 zsh       any
@@ -10,7 +11,7 @@ lazygit   any
 lf        any
 alacritty any
 intellij  any
-t3        any
+ai        any
 systemd   linux
 xmonad    linux
 polybar   linux

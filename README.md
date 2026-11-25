@@ -40,7 +40,7 @@ Nothing machine-specific is committed. Each machine keeps it in files outside th
 | --- | --- |
 | `~/.config/zsh/.zprofile`, `.zshrc`, `.zlogin` | This machine's shell lines; installers append here too. See [zsh/README.md](zsh/README.md). |
 | `~/.config/zsh/secrets.zsh` | API tokens and other secrets, mode 600. |
-| `~/.config/dotconfig/modules` | `+name` adds a module, `-name` skips one (e.g. `-sddm` on a headless box). |
+| `~/.config/dotconfig/modules` | `+name` adds a module, `-name` skips one: `+ai-host` makes a machine an environment others use ([ai/README.md](ai/README.md)), `-sddm` suits a headless box. |
 | `~/.config/dotconfig/hooks/*.sh` | Extra setup only this machine needs; run after the module hooks. |
 
 ## Notes

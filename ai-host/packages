@@ -1,0 +1,3 @@
+# CLIProxyAPI, which gives the agents a pool of accounts. The AUR package supplies the systemd
+# user unit; ai-host/setup.sh then runs the latest upstream release through cpa-update.
+aur:cli-proxy-api-bin

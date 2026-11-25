@@ -161,10 +161,11 @@ step_hooks() {
   done
 }
 
-# Hooks run the tools a shell would: mise's shims ahead of the system's (Arch's own python3
-# refuses pip installs, for one).
+# Hooks run the tools a login shell would: ~/.local/bin, where mise, t3, Claude Code and Codex
+# install their commands, then mise's shims first (Arch's own python3 refuses pip installs).
 use_mise_shims() {
   local shims="${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims"
+  [[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
   [[ -d $shims ]] && export PATH="$shims:$PATH"
   return 0
 }

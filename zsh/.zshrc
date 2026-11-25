@@ -43,7 +43,7 @@ plugins=(
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting # NOTE: this has to be the last plugin
-  fast-syntax-highlighting
+  # fast-syntax-highlighting # alternative with richer colours: use instead of zsh-syntax-highlighting, never both
 )
 fpath+="$ZSH/custom/plugins/zsh-completions/src"
 

@@ -30,6 +30,8 @@ if confirm "$action"; then
   git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/zsh-autosuggestions"
   git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/zsh-syntax-highlighting"
   git clone https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/zsh-completions"
+  # Alternative highlighter (enable one, never both): fast-syntax-highlighting
+  # git clone https://github.com/zdharma-continuum/fast-syntax-highlighting "$ZSH_CUSTOM/fast-syntax-highlighting"
 fi
 
 action="link zsh config"

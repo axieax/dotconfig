@@ -1,0 +1,27 @@
+# Global tools, linked to ~/.config/mise/config.toml by mise/setup.sh. A project's own mise.toml
+# (or .nvmrc) pins its versions over these. Update within each line with `mise upgrade`.
+[tools]
+node = "24"
+python = "3.14"
+go = "1.26"
+bun = "latest"
+uv = "latest"
+ripgrep = "latest"
+fd = "latest"
+bat = "latest"
+fzf = "latest"
+zoxide = "latest"
+lsd = "latest"
+lazygit = "latest"
+
+[settings]
+# Fetch checkouts: T3 and agents create worktrees under these roots, each a new path mise would
+# otherwise refuse to read until trusted by hand.
+trusted_config_paths = [
+  "~/work/fetch",
+  "~/work/fetch-worktrees",
+  "~/.t3/worktrees/fetch",
+]
+idiomatic_version_file_enable_tools = ["node"]
+# pnpm and yarn come from corepack, which ships with node.
+node.corepack = true

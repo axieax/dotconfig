@@ -14,6 +14,7 @@ setup_app() {
 }
 
 setup_app tools
+setup_app mise
 setup_app zsh
 setup_app alacritty
 setup_app nvim

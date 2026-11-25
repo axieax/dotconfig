@@ -1,5 +1,13 @@
 source "$ZDOTDIR/utilities.sh"
 
+# Runtimes and CLI tools come from mise (dotconfig/mise/global.toml). Activated first: tmux
+# autostart needs fzf and the oh-my-zsh zoxide plugin needs zoxide. Shims pick each directory's
+# pin (mise.toml, .nvmrc) per call, so agents, git hooks and GUI apps follow a repo's bump.
+# Homebrew puts mise on PATH (Mac); the standalone installer leaves it in ~/.local/bin (Linux).
+_mise=$(command -v mise || print -r -- "$HOME/.local/bin/mise")
+[[ -x "$_mise" ]] && eval "$("$_mise" activate zsh --shims)"
+unset _mise
+
 ### SETTINGS ##
 bindkey -v
 setopt glob_dots
@@ -32,8 +40,6 @@ plugins=(
   git
   zoxide
   npm
-  # nvm
-  pyenv
   bazel
   terraform
   starship
@@ -129,10 +135,5 @@ function lf() {
 sauce "$HOME/.ghcup/env"
 sauce "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
-# Node and other runtimes: mise, replacing nvm. Shims pick each directory's pin (mise.toml, .nvmrc)
-# per call, so agents, git hooks and GUI apps follow a repo's bump; ~/.config/mise/config.toml holds
-# the global default.
-# Homebrew puts mise on PATH (Mac); the standalone installer leaves it in ~/.local/bin (Linux).
-_mise=$(command -v mise || print -r -- "$HOME/.local/bin/mise")
-[[ -x "$_mise" ]] && eval "$("$_mise" activate zsh --shims)"
-unset _mise
+# Installers append PATH lines to ~/.zshrc (sourced above); keep mise's shims first.
+[[ -d "$HOME/.local/share/mise/shims" ]] && path=("$HOME/.local/share/mise/shims" ${path:#$HOME/.local/share/mise/shims})

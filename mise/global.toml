@@ -25,3 +25,7 @@ trusted_config_paths = [
 idiomatic_version_file_enable_tools = ["node"]
 # pnpm and yarn come from corepack, which ships with node.
 node.corepack = true
+
+[env]
+# Outside a project corepack would otherwise stop to ask before fetching pnpm or yarn.
+COREPACK_ENABLE_DOWNLOAD_PROMPT = "0"

@@ -1,0 +1,3 @@
+# The desktop app, which also writes the t3 command to ~/.t3/bin. Linux: t3/setup.sh installs the
+# t3 command (server) with T3's own installer instead.
+cask:t3-code

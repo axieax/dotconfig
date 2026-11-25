@@ -61,10 +61,23 @@ step_packages() {
   dot_step "packages"
   local m p
   if [[ $(dot_os) == mac ]]; then
-    local brewfile=""
+    local brewfile="" casks=() app
     for m in "${modules[@]}"; do
       while read -r p; do brewfile+="brew \"$p\""$'\n'; done < <(dot_module_packages "$m" brew)
-      while read -r p; do brewfile+="cask \"$p\""$'\n'; done < <(dot_module_packages "$m" cask)
+      while read -r p; do casks+=("$p"); done < <(dot_module_packages "$m" cask)
+    done
+    # brew refuses to install a cask over an app installed by hand, so such an app counts as
+    # installed; --adopt brings it under brew without reinstalling it.
+    for p in "${casks[@]}"; do
+      if ! brew list --cask "$p" >/dev/null 2>&1; then
+        app=$(brew info --cask --json=v2 "$p" 2>/dev/null | tr -d '\n' |
+          grep -o '"app": *\[ *"[^"]*' | head -1 | sed 's/.*"//')
+        if [[ -n $app && -d /Applications/$app ]]; then
+          dot_log "$app was installed by hand; to let brew manage it: brew install --cask --adopt $p"
+          continue
+        fi
+      fi
+      brewfile+="cask \"$p\""$'\n'
     done
     [[ -z $brewfile ]] && return 0
     if brew bundle check --no-upgrade --file=- <<<"$brewfile" >/dev/null 2>&1; then

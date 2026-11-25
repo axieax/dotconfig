@@ -10,6 +10,7 @@ lazygit   any
 lf        any
 alacritty any
 intellij  any
+t3        any
 systemd   linux
 xmonad    linux
 polybar   linux

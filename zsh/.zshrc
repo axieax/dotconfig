@@ -27,6 +27,7 @@ zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 13
 
 ENABLE_CORRECTION="true"
+
 plugins=(
   git
   zoxide
@@ -42,6 +43,7 @@ plugins=(
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting # NOTE: this has to be the last plugin
+  fast-syntax-highlighting
 )
 fpath+="$ZSH/custom/plugins/zsh-completions/src"
 
@@ -122,7 +124,7 @@ function lf() {
 }
 
 ### Start Services ###
-neofetch
+# neofetch
 
 sauce "$HOME/.ghcup/env"
 sauce "$HOME/.nix-profile/etc/profile.d/nix.sh"
